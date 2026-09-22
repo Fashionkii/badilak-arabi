@@ -4,21 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#EFE7DA">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>بديلك عربي — اكتشاف ومقارنة واختيار</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@700&family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=account_tree,code,description,headphones,language,menu_book,mic,movie,school,shield,slideshow,sports_esports,work&display=block" rel="stylesheet">
 <style>
-
-:root{
-  --paper:#EFE7DA;--paper2:#faf6ed;--ink:#28322f;--deep:#234B48;--heading:#234B48;
-  --sage:#234B48;--sage2:#e3e8e5;--sage3:#f4efe5;--sunrise:#C39543;
-  --sunrise-dark:#7a5b25;--sand:#d8d4c9;--muted:#727971;--white:#fffefa;
-  --line:#d8cfc1;--shadow:0 13px 34px rgba(48,63,55,.08);
+:root{--sunrise:#C39543;--sunrise-dark:#7A5B25;
+  --paper:#EFE7DA;--paper2:#FAF6ED;--ink:#28322f;--deep:#234B48;
+  --sage:#234B48;--sage2:#E3E8E5;--sage3:#F4EFE5;
+  --sand:#d8cfbf;--muted:#727971;--white:#fffdf8;
+  --line:#d9d1c4;--shadow:0 13px 34px rgba(48,63,55,.08);
   --display:"Aref Ruqaa Ink",serif;--ui:"Noto Kufi Arabic","IBM Plex Sans Arabic",sans-serif;
   --text:"IBM Plex Sans Arabic",Tahoma,sans-serif
 }
@@ -33,88 +29,82 @@ button{color:inherit}
 .skip{position:absolute;right:-9999px;top:10px;background:var(--deep);color:#fff;padding:8px 12px;border-radius:8px;z-index:999}
 .skip:focus{right:12px}
 
-/* header */
-.site-header{position:sticky;top:0;z-index:60;background:rgba(239,231,218,.96);backdrop-filter:blur(13px);border-bottom:1px solid rgba(216,207,193,.92)}
+.site-header{position:sticky;top:0;z-index:60;background:rgba(243,239,230,.94);backdrop-filter:blur(13px);border-bottom:1px solid rgba(217,209,196,.82)}
 .header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:28px}
 .brand-lockup{display:flex;align-items:baseline;gap:11px}
-.brand-name{font-family:var(--display);font-size:1.78rem;line-height:1;color:var(--deep);white-space:nowrap}
-.brand-tagline{font-family:var(--ui);font-size:.72rem;font-weight:700;color:var(--sage)}
+.brand-name{font-family:var(--display);font-size:2.05rem;line-height:1;color:var(--deep)}
+.brand-tagline{font-family:var(--ui);font-size:.72rem;font-weight:700;color:var(--deep)}
 .navigation{display:flex;align-items:center;gap:21px;font-family:var(--ui);font-size:.72rem}
 .navigation a,.text-button{opacity:.82;transition:.18s}
-.navigation a:hover,.text-button:hover{opacity:1;color:var(--sunrise)}
+.navigation a:hover,.text-button:hover{opacity:1;color:var(--deep)}
 .text-button{border:0;background:none;cursor:pointer;padding:0}
 
-/* hero */
-.intro{display:grid;grid-template-columns:minmax(290px,.82fr) minmax(0,1.5fr);gap:34px;padding-top:48px;padding-bottom:30px;align-items:center}
-.intro-copy{padding:0;display:flex;flex-direction:column;justify-content:center}
-.intro-heading{margin:0 0 17px;text-align:center}
-.intro h1{font-family:var(--display);font-size:clamp(5.7rem,7.1vw,7.7rem);line-height:.95;color:#234B48;margin:0;letter-spacing:-.028em;background:transparent;padding:0;border-radius:0;white-space:nowrap;transform:translate(-10px,-8px)}
-.intro-promise{font-family:var(--ui);font-weight:700;color:#234B48;font-size:1.08rem;margin:14px 0 0}
-.intro-support{max-width:420px;margin-inline:auto;border-right:3px solid #C39543;padding-right:18px}
+.intro{display:grid;grid-template-columns:minmax(270px,.75fr) minmax(0,1.55fr);gap:36px;padding-top:60px;padding-bottom:40px;align-items:stretch}
+.intro-copy{padding:10px 0;display:flex;flex-direction:column;justify-content:center}
+.intro-heading{margin-bottom:21px}
+.intro h1{font-family:var(--display);font-size:8.1rem;line-height:.88;color:var(--deep);margin:0;letter-spacing:-.05em}
+.intro-promise{font-family:var(--ui);font-weight:700;color:var(--deep);font-size:1.08rem;margin:10px 9px 0 0}
+.intro-support{max-width:420px;border-right:3px solid var(--sage);padding-right:18px}
 .intro-description{font-size:1.02rem;margin:0 0 9px;color:#505b55}
 .intro-link{font-family:var(--ui);font-size:.72rem;font-weight:700;color:var(--deep)}
-.origin-explorer{border:1px solid var(--line);background:rgba(255,253,248,.68);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.origin-explorer{border:1px solid var(--line);background:rgba(255,253,248,.68);border-radius:28px;padding:24px;box-shadow:var(--shadow)}
 .origin-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;gap:15px}
-.origin-heading h2{font-family:var(--ui);font-size:1rem;margin:0;color:#234B48!important;-webkit-text-fill-color:#234B48!important;}
+.origin-heading h2{font-family:var(--ui);font-size:1rem;margin:0;color:var(--deep)}
 .origin-hint{font-size:.7rem;color:var(--muted)}
 .origin-options{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
-.origin-option{border:1px solid var(--line);background:var(--white);min-height:108px;border-radius:13px;padding:12px 7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;cursor:pointer;transition:.18s}
+.origin-option{border:1px solid var(--line);background:var(--white);min-height:108px;border-radius:17px;padding:12px 7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;cursor:pointer;transition:.18s}
 .origin-option:hover,.origin-option[aria-pressed="true"]{border-color:#8ea793;background:var(--sage3);transform:translateY(-2px);box-shadow:0 7px 18px rgba(75,96,78,.07)}
 .origin-logo{width:41px;height:41px;border-radius:11px;display:grid;place-items:center;background:#fff;border:1px solid #ece7df;overflow:hidden}
 .origin-logo img{max-width:29px;max-height:29px;display:block}
 .origin-name{font-family:Tahoma,Arial,sans-serif;font-size:.72rem;font-weight:700;direction:ltr;unicode-bidi:isolate}
 
-/* section portal */
-.portal{padding:12px 0 12px}
+.portal{padding:14px 0 50px}
 .portal-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;border-top:1px solid var(--line);padding-top:18px}
 .portal-btn{border:0;background:transparent;border-radius:13px;padding:10px 8px;cursor:pointer;text-align:center;transition:.18s}
 .portal-btn:hover{background:rgba(255,255,255,.52)}
-.portal-btn small{display:block;color:var(--sunrise);font-family:var(--ui);font-size:.55rem}
+.portal-btn small{display:block;color:var(--deep);font-family:var(--ui);font-size:.55rem}
 .portal-btn strong{display:block;font-family:var(--ui);font-size:.66rem;color:var(--deep);margin-top:2px}
 
-/* shared section */
-.section{padding:44px 0;scroll-margin-top:76px}
-.section.alt{background:#E8DDCC;border-block:1px solid #D9CDBB}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:16px}
-.eyebrow{font-family:var(--ui);font-size:.64rem;color:var(--sunrise);font-weight:700;margin-bottom:3px}
-h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;margin:0}
+.section{padding:58px 0;scroll-margin-top:76px}
+.section.alt{background:#ebe6db;border-block:1px solid #ddd5c8}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:22px}
+.eyebrow{font-family:var(--ui);font-size:.64rem;color:var(--deep);font-weight:700;margin-bottom:3px}
+h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:var(--deep);margin:0}
 .section-copy{max-width:550px;margin:0;color:var(--muted);font-size:.88rem}
 
-/* local nav */
-.local-nav{position:static;background:rgba(239,231,218,.97);backdrop-filter:blur(10px);border-block:1px solid var(--line);margin-bottom:21px}
-.alt .local-nav{background:rgba(239,231,218,.97)}
+.local-nav{position:static;background:rgba(243,239,230,.95);backdrop-filter:blur(10px);border-block:1px solid var(--line);margin-bottom:21px}
+.alt .local-nav{background:rgba(235,230,219,.95)}
 .local-nav-inner{min-height:54px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .crumbs{display:flex;align-items:center;gap:7px;font-size:.69rem;color:var(--muted);min-width:0}
 .crumbs button{border:0;background:none;padding:0;cursor:pointer;color:var(--deep);font-weight:600}
-.crumbs .current{color:var(--sunrise);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crumbs .current{color:var(--deep);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .return-actions{display:flex;gap:7px;flex-wrap:wrap}
 .return-actions button{border:1px solid var(--line);background:var(--white);border-radius:10px;padding:7px 10px;font-family:var(--ui);font-size:.58rem;cursor:pointer}
 .return-actions button.primary{background:var(--deep);color:#fff;border-color:var(--deep)}
 
-/* directory */
 .catalog-shell{border-top:1px solid var(--line);padding-top:22px}
 .directory-top{display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:13px}
 .search{position:relative}
 .search input{width:100%;background:var(--white);border:1px solid var(--line);border-radius:13px;padding:13px 43px 13px 14px;outline:none}
-.search input:focus{border-color:#8ca08c;box-shadow:0 0 0 3px rgba(88,120,109,.10)}
+.search input:focus{border-color:#8ca08c;box-shadow:0 0 0 3px rgba(120,144,122,.10)}
 .search-mark{position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:1.2rem;color:var(--sage)}
 .filters,.subfilters{display:flex;gap:7px;flex-wrap:wrap}
 .filter,.subfilter{border:1px solid var(--line);background:var(--white);border-radius:12px;padding:9px 12px;cursor:pointer;font-family:var(--ui);font-size:.61rem}
 .filter.active{background:var(--deep);color:#fff;border-color:var(--deep)}
-.subfilter{padding:7px 10px;background:#f6efe4}
+.subfilter{padding:7px 10px;background:#f7f3ec}
 .subfilter.active{background:var(--sage);color:#fff;border-color:var(--sage)}
 .subfilter-row{display:flex;align-items:center;gap:9px;min-height:38px;margin:1px 0 9px}
 .subfilter-label{font-family:var(--ui);font-size:.57rem;color:var(--muted);white-space:nowrap}
 .directory-state{font-size:.69rem;color:var(--muted);margin:7px 0 14px}
 .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
-.item{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;min-width:0;transition:.18s}
+.item{background:var(--white);border:1px solid var(--line);border-radius:19px;padding:17px;display:flex;flex-direction:column;min-width:0;transition:.18s}
 .item:hover{border-color:#b9b0a3;box-shadow:var(--shadow);transform:translateY(-2px)}
 .item-identity{display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;border:0;background:none;width:100%;padding:0 0 11px}
 .item-logo{height:56px;width:56px;border-radius:13px;border:1px solid #e7e0d6;background:#fff;display:grid;place-items:center;overflow:hidden;margin-bottom:9px}
 .item-logo img{max-width:35px;max-height:35px}
 .item-fallback{font-family:var(--ui);font-weight:700;color:var(--deep);font-size:1rem}
 .item-name{font-family:var(--ui);font-size:.88rem;font-weight:700;color:var(--deep)}
-.item-type{font-family:var(--ui);font-size:.55rem;color:var(--sunrise);margin-top:2px}
+.item-type{font-family:var(--ui);font-size:.55rem;color:var(--deep);margin-top:2px}
 .comparison-strip{display:flex;align-items:center;justify-content:center;gap:7px;margin:1px 0 10px;min-height:23px;color:var(--muted);font-size:.61rem}
 .origin-mini{display:inline-flex;align-items:center;gap:5px;background:#f4f0e8;border:1px solid #e1d9cc;padding:3px 7px;border-radius:999px}
 .card-purpose{margin:0 0 11px;font-size:.82rem;color:#4f5a54;text-align:center;min-height:48px}
@@ -123,7 +113,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .meta small{display:block;color:var(--muted);font-size:.58rem;margin-bottom:1px}
 .meta strong{font-size:.71rem;color:var(--deep)}
 .item-spacer{flex:1}
-.more-btn{border:0;background:none;font-family:var(--ui);font-size:.57rem;color:var(--sunrise);font-weight:700;cursor:pointer;margin-bottom:6px}
+.more-btn{border:0;background:none;font-family:var(--ui);font-size:.57rem;color:var(--deep);font-weight:700;cursor:pointer;margin-bottom:6px}
 .destination-link{margin-top:4px;background:var(--sage3);border:1px solid #a5b8a8;border-radius:12px;min-height:57px;display:flex;align-items:center;gap:10px;padding:9px 11px;cursor:pointer;width:100%;text-align:right}
 .destination-link:hover{background:#e2ebde;border-color:#8ea793}
 .destination-label{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1;line-height:1.42}
@@ -136,7 +126,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .load-more-btn:hover{background:#e2ebde;border-color:#8ea793}
 .load-more-btn small{font-family:var(--text);font-size:.58rem;color:var(--muted);margin-right:5px;font-weight:500}
 
-/* learning */
 .learning-toolbar{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
 .learning-types{display:flex;gap:7px;flex-wrap:wrap}
 .learning-types button{border:1px solid #cfc6b8;background:var(--paper2);border-radius:12px;padding:8px 11px;font-family:var(--ui);font-size:.6rem;cursor:pointer}
@@ -147,8 +136,8 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .learning-group{margin-top:21px}
 .learning-group-title{font-family:var(--ui);font-size:.78rem;color:var(--deep);margin:0 0 10px}
 .learning-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-.learning-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:15px;display:flex;flex-direction:column;min-height:245px}
-.learning-kind{font-family:var(--ui);font-size:.54rem;color:var(--sunrise);font-weight:700}
+.learning-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;min-height:245px}
+.learning-kind{font-family:var(--ui);font-size:.54rem;color:var(--deep);font-weight:700}
 .learning-card h3{font-family:var(--ui);font-size:.84rem;color:var(--deep);margin:7px 0}
 .learning-focus{font-size:.73rem;color:#58625c;margin:0 0 12px}
 .learning-facts{display:grid;gap:5px;margin:0}
@@ -158,15 +147,14 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .learning-spacer{flex:1}
 .learning-actions{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:14px}
 .learning-actions button{border:0;background:none;color:var(--deep);font-family:var(--ui);font-size:.58rem;font-weight:700;cursor:pointer}
-.learning-actions a{font-family:var(--ui);font-size:.58rem;font-weight:700;color:var(--sunrise)}
+.learning-actions a{font-family:var(--ui);font-size:.58rem;font-weight:700;color:var(--deep)}
 
-/* guides / knowledge / updates */
 .guides{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .guide-icon,.knowledge-icon,.update-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;font-family:var(--ui);font-weight:700}
-.guide-icon{background:#e8efea;border:1px solid #cbd7c9;color:var(--deep);font-size:1.05rem;margin-bottom:12px}
+.guide-icon{background:#edf2ea;border:1px solid #cbd7c9;color:var(--deep);font-size:1.05rem;margin-bottom:12px}
 .guide-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:3px}
-.guide-intent{font-family:var(--ui);font-size:.53rem;color:var(--sunrise-dark);border:1px solid #ddc49a;background:#F4E5C6;border-radius:999px;padding:4px 7px}
-.knowledge-icon{background:#f4eee4;border:1px solid #dcc8aa;color:var(--sunrise);font-size:1rem;margin-bottom:12px}
+.guide-intent{font-family:var(--ui);font-size:.53rem;color:var(--muted);border:1px solid var(--line);background:#f7f3ec;border-radius:999px;padding:4px 7px}
+.knowledge-icon{background:#f3e6e1;border:1px solid #dfc7bf;color:var(--deep);font-size:1rem;margin-bottom:12px}
 .knowledge:first-child .knowledge-icon{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);color:#fff}
 .update{position:relative}
 .update-icon{width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);font-size:.9rem}
@@ -176,45 +164,44 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .section-note{display:inline-flex;align-items:center;gap:7px;margin-top:9px;font-family:var(--ui);font-size:.58rem;color:var(--muted)}
 .section-note b{color:var(--deep)}
 .discovery-shelf{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:15px}
-.discovery-card{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--white);border-radius:18px;padding:0;min-height:235px;text-align:right;cursor:pointer;display:flex;flex-direction:column}
+.discovery-card{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--white);border-radius:20px;padding:0;min-height:235px;text-align:right;cursor:pointer;display:flex;flex-direction:column}
 .discovery-card:first-child{background:var(--deep);color:#fff;border-color:var(--deep)}
 .discovery-visual{height:108px;display:grid;place-items:center;background:#f4f0e8;border-bottom:1px solid var(--line);overflow:hidden}
 .discovery-card:first-child .discovery-visual{background:#182e2c;border-color:rgba(255,255,255,.12)}
 .discovery-visual img{max-width:78px;max-height:78px;object-fit:contain}
 .discovery-visual.photo img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
 .discovery-body{padding:16px 17px}
-.discovery-kind{font-family:var(--ui);font-size:.54rem;color:var(--sunrise);font-weight:700}
-.discovery-card:first-child .discovery-kind{color:#d7b37c}
+.discovery-kind{font-family:var(--ui);font-size:.54rem;color:var(--deep);font-weight:700}
+.discovery-card:first-child .discovery-kind{color:#E2C78F}
 .discovery-card h3{font-family:var(--ui);font-size:.92rem;line-height:1.55;margin:5px 0 7px;color:var(--deep)}
 .discovery-card:first-child h3{color:#fff}
 .discovery-card p{font-size:.72rem;color:var(--muted);margin:0}
 .discovery-card:first-child p{color:#c8d4d0}
 .monitor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-.monitor-card{border:1px solid var(--line);background:var(--white);border-radius:12px;padding:15px;text-align:right;cursor:pointer}
+.monitor-card{border:1px solid var(--line);background:var(--white);border-radius:18px;padding:16px;text-align:right;cursor:pointer}
 .monitor-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
 .monitor-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--sage3);border:1px solid #cbd7c9;color:var(--deep);font-weight:700}
-.monitor-status{font-family:var(--ui);font-size:.52rem;border:1px solid #ddc49a;border-radius:999px;padding:4px 7px;color:var(--sunrise-dark);background:#F4E5C6}
+.monitor-status{font-family:var(--ui);font-size:.52rem;border:1px solid var(--line);border-radius:999px;padding:4px 7px;color:var(--muted);background:#f7f3ec}
 .monitor-card h3{font-family:var(--ui);font-size:.84rem;line-height:1.55;margin:0 0 7px;color:var(--deep)}
 .monitor-card p{font-size:.69rem;color:var(--muted);margin:0 0 12px}
-.monitor-card time{font-size:.58rem;color:var(--sunrise)}
+.monitor-card time{font-size:.58rem;color:var(--deep)}
 .nominate-actions{display:flex;gap:8px;flex-wrap:wrap}
 .nominate .secondary{background:var(--white);border-color:var(--line)}
 @media(max-width:900px){.discovery-shelf,.monitor-grid{grid-template-columns:1fr 1fr}.discovery-card:first-child{grid-column:1/-1}}
 @media(max-width:650px){.discovery-shelf,.monitor-grid{grid-template-columns:1fr}.discovery-card:first-child{grid-column:auto}}
 
-
-.guide{border:1px solid var(--line);background:var(--white);border-radius:12px;padding:19px;display:flex;flex-direction:column}
-.guide-tag{font-family:var(--ui);font-size:.58rem;color:var(--sunrise);font-weight:700}
-.guide h3{font-family:var(--display);font-size:1.95rem;line-height:1.2;margin:9px 0 11px;-webkit-text-fill-color:#234B48!important;}
+.guide{border:1px solid var(--line);background:var(--white);border-radius:19px;padding:21px;display:flex;flex-direction:column}
+.guide-tag{font-family:var(--ui);font-size:.58rem;color:var(--deep);font-weight:700}
+.guide h3{font-family:var(--display);font-size:1.95rem;line-height:1.2;color:var(--deep);margin:9px 0 11px}
 .guide p{font-size:.78rem;color:var(--muted);margin:0 0 18px}
 .guide a{margin-top:auto;font-family:var(--ui);font-size:.63rem;font-weight:700;color:var(--deep)}
 .knowledge-grid{display:grid;grid-template-columns:1.12fr .88fr .88fr;gap:15px}
 .knowledge{border-radius:19px;padding:20px;min-height:210px;background:var(--white);border:1px solid var(--line)}
 .knowledge:first-child{background:var(--deep);color:#fff;border-color:var(--deep)}
-.knowledge small{font-family:var(--ui);font-size:.58rem;color:var(--sunrise);font-weight:700}
-.knowledge:first-child small{color:#d7b37c}
-.knowledge h3{font-family:var(--display);font-size:2rem;line-height:1.23;margin:11px 0;-webkit-text-fill-color:#234B48!important;}
-.knowledge:first-child h3{color:#fff!important;-webkit-text-fill-color:#fff!important}
+.knowledge small{font-family:var(--ui);font-size:.58rem;color:var(--deep);font-weight:700}
+.knowledge:first-child small{color:#E2C78F}
+.knowledge h3{font-family:var(--display);font-size:2rem;line-height:1.23;margin:11px 0;color:var(--deep)}
+.knowledge:first-child h3{color:#fff}
 .knowledge p{font-size:.76rem;color:var(--muted);margin:0}
 .knowledge:first-child p{color:#c7d3cf}
 .update-list{display:grid;gap:0;border-top:1px solid var(--line)}
@@ -224,14 +211,12 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .update p{font-size:.68rem;color:var(--muted);margin:2px 0 0}
 .update span{font-family:var(--ui);font-size:.54rem;border:1px solid var(--line);background:var(--white);border-radius:999px;padding:4px 8px}
 
-/* nominate/footer */
 .nominate{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
 .nominate button{border:1px solid var(--deep);background:transparent;color:var(--deep);border-radius:12px;padding:11px 16px;cursor:pointer;font-family:var(--ui);font-size:.66rem;font-weight:700}
 .footer{border-top:1px solid var(--line);padding:30px 0 48px;color:var(--muted);font-size:.68rem}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
 .footer strong{font-family:var(--display);font-size:1.8rem;color:var(--deep)}
-.prototype{position:fixed;left:12px;bottom:12px;background:#fff7e8;border:1px solid #e2d3b5;color:#7a6236;padding:7px 10px;border-radius:9px;font-size:.58rem;z-index:40}
-
+.prototype{position:fixed;left:12px;bottom:12px;background:#fff7e8;border:1px solid #e2d3b5;color:#7A5B25;padding:7px 10px;border-radius:9px;font-size:.58rem;z-index:40}
 
 .detail-discovery{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;text-align:right}
 .detail-discovery-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:9px}
@@ -242,10 +227,9 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .detail-related:hover{border-color:#a9b9aa;background:var(--sage3);transform:translateY(-1px)}
 .detail-related strong{font-family:var(--ui);font-size:.67rem;color:var(--deep)}
 .detail-related small{font-size:.58rem;color:var(--muted)}
-.detail-collection{width:100%;margin-top:8px;border:1px solid var(--line);background:#f6efe4;border-radius:11px;padding:8px 10px;font-family:var(--ui);font-size:.58rem;font-weight:700;color:var(--deep);cursor:pointer}
+.detail-collection{width:100%;margin-top:8px;border:1px solid var(--line);background:#f7f3ec;border-radius:11px;padding:8px 10px;font-family:var(--ui);font-size:.58rem;font-weight:700;color:var(--deep);cursor:pointer}
 .detail-collection:hover{background:var(--sage3);border-color:#a5b8a8}
 @media(max-width:600px){.detail-related-grid{grid-template-columns:1fr}.detail-discovery-head{align-items:start;flex-direction:column;gap:3px}}
-
 
 .section-continue{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .section-continue-copy{display:flex;flex-direction:column;gap:1px}
@@ -257,47 +241,45 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .section-continue-actions .accent{background:var(--sage3);border-color:#b7c7b8}
 @media(max-width:650px){.section-continue{align-items:flex-start;flex-direction:column}.section-continue-actions{width:100%}.section-continue-actions button,.section-continue-actions a{flex:1 1 auto;text-align:center}}
 
-
 .card-decision-note{
-  margin:2px 0 9px;padding:8px 9px;border:1px solid #dcc8aa;border-radius:10px;
-  background:#f4eee4;display:flex;align-items:flex-start;gap:7px;text-align:right
+  margin:2px 0 9px;padding:8px 9px;border:1px solid #dfc7bf;border-radius:10px;
+  background:#f7ebe6;display:flex;align-items:flex-start;gap:7px;text-align:right
 }
 .card-decision-note .decision-tag{
-  flex:0 0 auto;font-family:var(--ui);font-size:.51rem;font-weight:700;color:#775821;
-  border:1px solid #dcc8aa;background:#fff9ef;border-radius:999px;padding:2px 6px
+  flex:0 0 auto;font-family:var(--ui);font-size:.51rem;font-weight:700;color:#234B48;
+  border:1px solid #dfc7bf;background:#fff8f4;border-radius:999px;padding:2px 6px
 }
 .card-decision-note b{
-  font-size:.59rem;line-height:1.55;color:#4b514d;font-weight:600
+  font-size:.59rem;line-height:1.55;color:#4F5A55;font-weight:600
 }
 .decision-panel{
-  margin:14px 0 16px;padding:14px 15px;border:1px solid #d8c6a9;border-radius:12px;
-  background:linear-gradient(135deg,#f2ece2,#faf7f0);text-align:right
+  margin:14px 0 16px;padding:14px 15px;border:1px solid #d9b9ae;border-radius:14px;
+  background:linear-gradient(135deg,#f7e8e2,#fbf5ee);text-align:right
 }
 .decision-panel-head{display:flex;align-items:center;gap:8px;margin-bottom:7px}
 .decision-panel-head .decision-mark{
   width:25px;height:25px;border-radius:8px;display:grid;place-items:center;
-  background:#fff7f2;border:1px solid #dcc8aa;color:#775821;font-weight:800
+  background:#fff7f2;border:1px solid #dfc7bf;color:#775821;font-weight:800
 }
 .decision-panel-head strong{font-family:var(--ui);font-size:.69rem;color:var(--deep)}
 .decision-panel-head em{
   margin-inline-start:auto;font-style:normal;font-family:var(--ui);font-size:.5rem;
-  color:#775821;border:1px solid #dcc8aa;background:#fff9ef;border-radius:999px;padding:3px 7px
+  color:#234B48;border:1px solid #dfc7bf;background:#fff8f4;border-radius:999px;padding:3px 7px
 }
-.decision-alert-text{margin:0 0 10px;color:#4f544f;font-size:.72rem;line-height:1.75}
+.decision-alert-text{margin:0 0 10px;color:#4F5A55;font-size:.72rem;line-height:1.75}
 .decision-action{
-  border-top:1px solid rgba(125,74,30,.15);padding-top:9px;display:grid;gap:3px
+  border-top:1px solid rgba(195,149,67,.15);padding-top:9px;display:grid;gap:3px
 }
 .decision-action b{font-family:var(--ui);font-size:.58rem;color:var(--deep)}
 .decision-action span{font-size:.69rem;color:#53605a;line-height:1.75}
 .decision-source{margin-top:8px;font-size:.55rem;color:var(--muted)}
-.decision-source a{color:var(--sunrise);text-decoration:underline;text-underline-offset:2px}
+.decision-source a{color:var(--deep);text-decoration:underline;text-underline-offset:2px}
 @media(max-width:600px){
   .card-decision-note{align-items:flex-start}
   .decision-panel-head{flex-wrap:wrap}
   .decision-panel-head em{margin-inline-start:0}
 }
 
-/* modal / fixed core template */
 .modal{display:none;position:fixed;inset:0;background:rgba(25,37,34,.66);z-index:100;padding:20px;align-items:center;justify-content:center}
 .modal.show{display:flex}
 .modal-card{width:min(800px,100%);max-height:90vh;overflow:auto;background:var(--paper2);border-radius:23px;border:1px solid var(--line);box-shadow:0 28px 80px rgba(0,0,0,.22)}
@@ -307,8 +289,8 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .modal-body{padding:22px}
 .quick-panel{text-align:center}
 .detail-identity{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
-.detail-logo{width:64px;height:64px;border:1px solid var(--line);background:#fff;border-radius:13px;display:grid;place-items:center;overflow:hidden}
-.quick-title{font-family:var(--display);font-size:3rem;margin:3px 0 0;-webkit-text-fill-color:#234B48!important;}
+.detail-logo{width:64px;height:64px;border:1px solid var(--line);background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
+.quick-title{font-family:var(--display);font-size:3rem;color:var(--deep);margin:3px 0 0}
 .quick-purpose{max-width:590px;margin:6px auto 13px;color:#56615a}
 .core-label{display:flex;align-items:center;justify-content:space-between;margin:20px 0 8px}
 .core-label strong{font-family:var(--ui);font-size:.7rem;color:var(--deep)}
@@ -317,7 +299,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .core-box{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;text-align:right;min-height:72px}
 .core-box small{display:block;color:var(--muted);font-size:.56rem;margin-bottom:2px}
 .core-box strong{font-size:.7rem;color:var(--deep);line-height:1.5}
-.critical{background:#f4eee4;border:1px solid #dcc8aa;border-radius:13px;padding:12px 14px;color:#5d5143;text-align:right;font-size:.75rem}
+.critical{background:#f3e6e1;border:1px solid #dfc7bf;border-radius:13px;padding:12px 14px;color:#4F5A55;text-align:right;font-size:.75rem}
 .module{border-top:1px solid var(--line);padding:16px 0;text-align:right}
 .module h4{font-family:var(--ui);font-size:.72rem;color:var(--deep);margin:0 0 7px}
 .module p{font-size:.75rem;color:#56615a;margin:0}
@@ -331,18 +313,17 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .detail-section{border-top:1px solid var(--line);padding:16px 0}
 .detail-section h4{font-family:var(--ui);font-size:.7rem;color:var(--deep);margin:0 0 7px}
 .detail-section div{font-size:.75rem;color:#56615a}
-.detail-section a{color:var(--sunrise);font-weight:600}
+.detail-section a{color:var(--deep);font-weight:600}
 .detail-source-line{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:.58rem}
 @media(max-width:620px){.detail-facts{grid-template-columns:1fr}}
 
-
 @media(max-width:1020px){
- .intro{grid-template-columns:1fr}.intro h1{font-size:6.5rem;color:var(--deep)!important;-webkit-text-fill-color:var(--deep)!important;background:transparent!important;padding:0!important;border-radius:0!important;width:auto!important;max-width:none!important;display:block!important;white-space:normal!important;}.catalog-grid{grid-template-columns:repeat(2,1fr)}
+ .intro{grid-template-columns:1fr}.intro h1{font-size:6.5rem}.catalog-grid{grid-template-columns:repeat(2,1fr)}
  .learning-grid{grid-template-columns:repeat(2,1fr)}.portal-bar{grid-template-columns:repeat(3,1fr)}
  .knowledge-grid{grid-template-columns:1fr 1fr}.knowledge:first-child{grid-column:1/-1}.core-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:760px){
- .navigation{display:none}.intro{padding-top:35px}.intro h1{font-size:5rem;color:var(--deep)!important;-webkit-text-fill-color:var(--deep)!important;background:transparent!important;padding:0!important;border-radius:0!important;width:auto!important;max-width:none!important;display:block!important;white-space:normal!important;}.origin-options{grid-template-columns:repeat(2,1fr)}
+ .navigation{display:none}.intro{padding-top:35px}.intro h1{font-size:5rem}.origin-options{grid-template-columns:repeat(2,1fr)}
  .portal-bar{grid-template-columns:repeat(2,1fr)}.directory-top,.learning-toolbar{grid-template-columns:1fr}
  .catalog-grid,.guides,.learning-grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}
  .knowledge-grid{grid-template-columns:1fr}.knowledge:first-child{grid-column:auto}.nominate{grid-template-columns:1fr}
@@ -359,13 +340,12 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .logo-photo img{object-fit:cover!important;padding:0!important}
 .logo-fanar{background:#153d67!important;border-color:#153d67!important}
 .logo-fanar img{padding:0!important;object-fit:cover!important;transform:none!important}
-.logo-fallback,.logo-broken{background:linear-gradient(145deg,#e8efea,#fbfaf5)!important;color:var(--deep)}
+.logo-fallback,.logo-broken{background:linear-gradient(145deg,#edf2ea,#f8f4ec)!important;color:var(--deep)}
 .logo-fallback::after,.logo-broken::after{
   content:attr(data-fallback);font-family:var(--ui);font-size:.82rem;font-weight:700;color:var(--deep)
 }
 .logo-broken img{display:none!important}
 
-/* Editorial icon system — Material Symbols, Apache 2.0 */
 .material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;font-feature-settings:'liga';-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased}
 .editorial-vector{background:linear-gradient(145deg,var(--sage3),var(--paper2))!important;color:var(--deep)!important}
 .editorial-vector>.material-symbols-outlined{font-size:29px}
@@ -378,111 +358,11 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .guide-icon.editorial-static-icon>.material-symbols-outlined{font-size:25px}
 .monitor-icon.editorial-static-icon>.material-symbols-outlined{font-size:21px}
 
-/* approved clean interaction system */
-.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.more-btn::before{content:none!important}
-.card-more-panel,.learning-more-panel{margin:0 0 9px;padding:10px 11px;border:1px solid var(--line);border-radius:12px;background:rgba(250,246,237,.90)}
-.card-more-panel[hidden],.learning-more-panel[hidden],.section-fold-body[hidden]{display:none!important}
-.card-more-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-.learning-more-panel .card-more-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
-.card-more-facts>div{min-width:0;padding:7px 8px;border:1px solid var(--line);border-radius:10px;background:var(--white);text-align:center}
-.card-more-facts small{display:block;color:var(--muted);font-size:.58rem;margin-bottom:2px}
-.card-more-facts strong{display:block;color:var(--deep);font-size:.68rem;line-height:1.55}
-.card-more-source{display:block;width:100%;margin-top:8px;padding:7px 9px;border:0;background:transparent;color:var(--sunrise-dark);font-family:var(--ui);font-size:.61rem;font-weight:700;cursor:pointer}
-.learning-spacer{display:none!important}
-.learning-focus{min-height:0!important;max-height:none!important;height:auto!important;margin-bottom:9px!important;-webkit-line-clamp:unset!important;overflow:visible!important}
-.learning-card{min-height:0!important}
-.learning-actions{margin-top:8px!important}
-.competition-tab.active,.competition-tab[aria-selected="true"]{color:#fff!important}
-
-.learning-carousel-shell{position:relative;max-width:930px;margin-inline:auto}
-.learning-carousel-viewport{overflow:hidden;width:100%}
-.learning-carousel-track{display:flex!important;gap:13px!important;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:1px}
-.learning-carousel-track::-webkit-scrollbar{display:none}
-.learning-carousel-track .learning-card{flex:0 0 calc((100% - 39px)/4);scroll-snap-align:start;min-width:0}
-.learning-carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--deep);font-family:Arial,sans-serif;font-size:1.35rem;line-height:1;display:none;place-items:center;cursor:pointer;box-shadow:0 5px 14px rgba(33,74,72,.08)}
-.learning-carousel-group.is-browsing .learning-carousel-arrow{display:grid}
-.learning-carousel-prev{right:-17px}.learning-carousel-next{left:-17px}
-
-.fold-card:not(.is-open){display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:18px;min-height:0!important;padding:14px 16px!important;margin-top:12px!important;margin-bottom:12px!important;border:1px solid var(--line);border-radius:18px;background:rgba(250,246,237,.90);box-shadow:0 5px 16px rgba(33,74,72,.035)}
-.fold-card:not(.is-open)>.section-head,.fold-card:not(.is-open)>.competition-head{grid-column:1;margin:0!important;min-width:0;display:block!important;text-align:right!important;border:0!important;padding:0!important}
-.fold-card:not(.is-open)>.section-head>div,.fold-card:not(.is-open)>.competition-head>div{margin:0!important}
-.fold-card:not(.is-open)>.section-head h2,.fold-card:not(.is-open)>.competition-head h2{margin:0!important;font-family:var(--ui)!important;font-size:.88rem!important;line-height:1.55!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#competitionIndex.fold-card:not(.is-open)>.competition-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#guides.fold-card:not(.is-open)>.section-head h2,#knowledge.fold-card:not(.is-open)>.section-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-.fold-card:not(.is-open)>.section-head .section-copy,.fold-card:not(.is-open)>.competition-head>p{margin:3px 0 0!important;max-width:none!important;font-size:.62rem!important;line-height:1.65!important;color:var(--muted)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right!important}
-.fold-card:not(.is-open)>.competition-head .competition-kicker{display:inline-block!important;margin:0 0 3px!important;font-size:.51rem!important}
-.fold-card:not(.is-open)>.competition-head .competition-lenses{display:none!important}
-.section-fold-toggle{width:36px;height:36px;border:1px solid #b8c9bf;border-radius:50%;background:var(--sage3);color:var(--deep);display:grid;place-items:center;margin:10px auto 0;font-family:var(--ui);font-size:1.15rem;font-weight:600;cursor:pointer;box-shadow:none}
-.section-fold-toggle.compact{width:32px;height:32px;margin:0;font-size:1rem;flex:0 0 auto}
-.fold-card:not(.is-open)>.section-fold-toggle{grid-column:2;margin:0!important;width:auto!important;min-width:82px;height:34px!important;padding:0 11px!important;border-radius:999px!important;display:flex!important;align-items:center;justify-content:center;gap:6px}
-.fold-card:not(.is-open)>.section-fold-toggle::after{content:'استكشف';font-family:var(--ui);font-size:.55rem;font-weight:700}
-
-#learningGroups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px}
-#learningGroups>.learning-carousel-group{grid-column:1/-1}
-#learningGroups>.learning-folded{grid-column:auto;margin:12px 0 0!important;padding:0!important;border:0!important}
-.learning-folded .learning-folded-head{min-height:64px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:rgba(250,246,237,.90);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.learning-folded .learning-group-title{font-size:.72rem!important;line-height:1.5!important;margin:0!important;padding:0!important;min-width:0!important;text-align:right!important}
-.learning-folded .learning-group-title::after{content:none!important}
-.learning-folded .learning-folded-head small{display:block;margin-top:2px;color:var(--muted);font-size:.52rem}
-.learning-group-title-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.learning-group-title-row .learning-group-title{margin:18px 0 12px!important}
-
-.decision-slot.is-empty{display:none!important;min-height:0!important;height:0!important;margin:0!important}
-.item>.decision-slot{min-height:0!important;height:auto!important;margin:5px 0 8px!important;display:block!important}
-.item>.decision-slot .card-decision-note{min-height:0!important;padding:6px 8px!important;border-radius:9px!important;justify-content:center!important;text-align:center!important;background:#f4eee4!important;border-color:#dcc8aa!important}
-.item>.decision-slot .card-decision-note b{font-size:.62rem!important;line-height:1.45!important;color:#4b514d!important}
-.decision-panel{border-right:3px solid var(--sunrise)!important;background:#f7f3ea!important;border-color:#d8c6a9!important}
-.decision-panel-head{display:flex!important;align-items:center!important;gap:8px!important;margin-bottom:7px!important}
-.decision-panel-head strong{font-family:var(--ui)!important;font-size:.69rem!important;color:var(--deep)!important}
-.decision-panel-head em{margin-inline-start:auto!important;font-style:normal!important;font-family:var(--ui)!important;font-size:.5rem!important;color:#7A5B25!important;border:1px solid #d8c6a9!important;background:#fff9ef!important;border-radius:999px!important;padding:3px 7px!important}
-
-.back-to-top{position:fixed;left:14px;bottom:14px;z-index:55;border:1px solid var(--line);background:rgba(255,254,250,.94);color:var(--deep);border-radius:999px;padding:7px 11px;font-family:var(--ui);font-size:.62rem;font-weight:700;box-shadow:0 5px 16px rgba(33,74,72,.08);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(6px);transition:.18s}
-.back-to-top.show{opacity:1;pointer-events:auto;transform:none}
-
-@media(max-width:760px){
- .card-more-facts,.learning-more-panel .card-more-facts{grid-template-columns:1fr}
- .learning-carousel-track .learning-card{flex-basis:88%}
- .learning-carousel-prev{right:4px}.learning-carousel-next{left:4px}
- .fold-card:not(.is-open){grid-template-columns:minmax(0,1fr) auto;padding:12px 13px!important;column-gap:10px}
- .fold-card:not(.is-open)>.section-head .section-copy,.fold-card:not(.is-open)>.competition-head>p{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
- .fold-card:not(.is-open)>.section-fold-toggle{min-width:36px;width:36px!important;padding:0!important}
- .fold-card:not(.is-open)>.section-fold-toggle::after{display:none}
- #learningGroups{grid-template-columns:1fr}
- #learningGroups>.learning-folded{grid-column:1}
-}
-
-.updates-warm{background:#E9DCC8!important;border-block-color:#d8c8b1!important}
-.origin-heading h2{background:none!important;padding:0!important;border-radius:0!important;-webkit-text-fill-color:#234B48!important;}
-.quick-title{background:none!important;-webkit-text-fill-color:#234B48!important;}
-.footer strong{color:var(--deep)!important;-webkit-text-fill-color:var(--deep)!important}
-.competition-head h2,.section-head h2,#nominate h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#updates .monitor-status,.eyebrow,.crumbs .current,.portal-btn small{color:#7A5B25!important}
-#updates .monitor-icon{background:#f4e8d6!important;border-color:#dfc9a8!important;color:#7A5B25!important}
-.nominate-actions button:not(.secondary){background:#f1dfc4!important;border-color:#d3b382!important;color:#7A5B25!important}
-@media(max-width:980px){
- .intro h1{font-size:clamp(4rem,12vw,5.5rem)!important;color:var(--deep)!important;-webkit-text-fill-color:var(--deep)!important;background:transparent!important;padding:0!important;border-radius:0!important;width:auto!important;max-width:none!important;display:block!important;white-space:normal!important;}
-}
-
-.intro-heading{min-height:0!important}
-.brand-name{font-size:2.05rem!important;color:var(--deep)!important}
-.brand-tagline{color:#64736f!important}
-@media(max-width:980px){
- }
-@media(max-width:760px){
- }
-
-#knowledge.fold-card:not(.is-open){margin-bottom:4px!important}
-#updates{padding-top:16px!important}
-
-
-
-/* v0.4 hierarchy corrections */
 .navigation a:hover,.text-button:hover{color:var(--deep)}
 .portal-btn small,.eyebrow,.item-type,.learning-kind,.guide-tag{display:none!important}
 .portal-btn strong{font-size:.68rem;color:var(--deep);margin-top:0}
 .portal-btn:hover strong{color:var(--sage)}
-.section-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
+.section-head h2{color:var(--deep)}
 .item-name{font-size:.91rem;color:var(--deep)}
 .more-btn{color:var(--deep)}
 .learning-actions a{color:var(--deep)}
@@ -491,18 +371,18 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   margin:5px 0 8px;font-weight:700
 }
 .guide h3{
-  font-family:var(--ui);font-size:1.02rem;line-height:1.75;
-  margin:4px 0 10px;font-weight:700;
--webkit-text-fill-color:#234B48!important;}
+  font-family:var(--ui);font-size:1.02rem;line-height:1.75;color:var(--deep);
+  margin:4px 0 10px;font-weight:700
+}
 .knowledge h3{
-  font-family:var(--ui);font-size:1.05rem;line-height:1.75;
-  margin:3px 0 9px;font-weight:700;
--webkit-text-fill-color:#234B48!important;}
-.knowledge:first-child h3{color:#fff!important}
+  font-family:var(--ui);font-size:1.05rem;line-height:1.75;color:var(--deep);
+  margin:3px 0 9px;font-weight:700
+}
+.knowledge:first-child h3{color:#fff}
 .quick-title{
-  font-family:var(--ui);font-size:1.65rem;line-height:1.5;
-  margin:4px 0 0;font-weight:700;
--webkit-text-fill-color:#234B48!important;}
+  font-family:var(--ui);font-size:1.65rem;line-height:1.5;color:var(--deep);
+  margin:4px 0 0;font-weight:700
+}
 .item-logo,.detail-logo,.learning-logo{
   background:#fff;border:1px solid #e6dfd4;box-shadow:0 4px 12px rgba(35,58,56,.05)
 }
@@ -510,7 +390,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   width:100%;height:100%;object-fit:contain;padding:7px
 }
 .learning-logo{
-  width:64px;height:64px;border-radius:12px;display:grid;place-items:center;
+  width:64px;height:64px;border-radius:14px;display:grid;place-items:center;
   overflow:hidden;margin:0 auto 9px
 }
 .item-identity.no-logo{padding-top:12px}
@@ -518,13 +398,10 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .origin-logo img{filter:none}
 .origin-name{color:var(--deep)}
 
-
-
-/* v0.5 — subtle artistic framing */
 :root{
   --frame-ink: rgba(35,58,56,.11);
-  --frame-warm: rgba(143,100,47,.13);
-  --frame-cool: rgba(88,120,109,.13);
+  --frame-warm: rgba(195,149,67,.13);
+  --frame-cool: rgba(120,144,122,.13);
   --frame-soft: rgba(255,255,255,.55);
 }
 
@@ -601,7 +478,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   position:absolute;
   inset:5px;
   border:1px solid rgba(35,58,56,.08);
-  border-radius:12px;
+  border-radius:14px;
   pointer-events:none;
   z-index:0;
 }
@@ -619,8 +496,8 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   pointer-events:none;
   z-index:0;
   background:
-    radial-gradient(circle at top right, rgba(143,100,47,.07) 0 8px, transparent 9px),
-    radial-gradient(circle at bottom left, rgba(88,120,109,.07) 0 8px, transparent 9px);
+    radial-gradient(circle at top right, rgba(195,149,67,.07) 0 8px, transparent 9px),
+    radial-gradient(circle at bottom left, rgba(120,144,122,.07) 0 8px, transparent 9px);
 }
 
 .item > *,
@@ -649,7 +526,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   content:"";
   position:absolute;
   inset:-4px;
-  border:1px solid rgba(143,100,47,.10);
+  border:1px solid rgba(195,149,67,.10);
   border-radius:inherit;
   pointer-events:none;
 }
@@ -661,7 +538,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   content:"";
   position:absolute;
   inset:-7px;
-  border:1px solid rgba(88,120,109,.10);
+  border:1px solid rgba(120,144,122,.10);
   border-radius:calc(inherit + 2px);
   pointer-events:none;
 }
@@ -676,7 +553,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   display:block;
   width:72px;
   height:2px;
-  background:linear-gradient(90deg, rgba(143,100,47,.92), rgba(95,122,112,.55));
+  background:linear-gradient(90deg, rgba(35,75,72,.90), rgba(120,144,122,.45));
   margin-top:10px;
   border-radius:99px;
 }
@@ -714,13 +591,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   }
 }
 
-
-
-/* v0.6 — unified clean frame system
-   Future customization hooks:
-   - edit section-specific variables on #directory, #learning, #guides, #knowledge, #updates, #nominate
-   - or add class names later such as .frame-plain / .frame-accent / .frame-soft
-*/
 :root{
   --ui-frame-bg: rgba(255,253,248,.76);
   --ui-frame-bg-soft: rgba(255,253,248,.58);
@@ -735,7 +605,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   --ui-radius-sm: 12px;
 }
 
-/* cancel decorative frame layers that caused distortion */
 .origin-explorer::before,
 .origin-explorer::after,
 .portal-bar::before,
@@ -776,9 +645,10 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .learning-logo::after,
 .detail-logo::before,
 .detail-logo::after,
-.section-head::after{content:none!important}
+.section-head::after{
+  content:none !important;
+}
 
-/* unified framed surfaces */
 .origin-explorer,
 .portal-bar,
 .catalog-shell,
@@ -810,7 +680,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .nominate{ padding:26px 22px; }
 .modal-card{ background:rgba(250,247,240,.95); }
 
-/* small framed elements inside sections */
 .portal-btn,
 .origin-option,
 .item,
@@ -895,7 +764,7 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 .learning-search input:focus,
 .learning-field:focus{
   border-color:rgba(140,160,140,.95) !important;
-  box-shadow:0 0 0 3px rgba(88,120,109,.10), inset 0 0 0 1px rgba(255,255,255,.42);
+  box-shadow:0 0 0 3px rgba(120,144,122,.10), inset 0 0 0 1px rgba(255,255,255,.42);
 }
 
 .filter.active,
@@ -939,7 +808,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   background:rgba(255,253,248,.70);
 }
 
-/* keep hierarchy calm */
 .section-head{
   padding-bottom:10px;
   border-bottom:1px solid rgba(35,58,56,.09);
@@ -950,26 +818,23 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
 }
 .knowledge:first-child p{ color:#d5dfdc; }
 
-/* logo boxes unified */
 .item-logo,
 .origin-logo,
 .learning-logo,
 .detail-logo{
   background:#fff;
   border:1px solid rgba(213,203,189,.98) !important;
-  border-radius:12px !important;
+  border-radius:14px !important;
   box-shadow:0 4px 12px rgba(35,58,56,.04);
 }
 .item-logo img,.origin-logo img,.learning-logo img,.detail-logo img{
   object-fit:contain;
 }
 
-/* optional future frame variants */
 .frame-plain{ --ui-frame-bg: rgba(255,253,248,.72); }
 .frame-soft{ --ui-frame-bg: rgba(255,253,248,.58); }
 .frame-accent{ --ui-frame-stroke-strong: rgba(153,181,161,.96); }
 
-/* mobile corrections */
 @media(max-width:760px){
   .portal-bar,
   .catalog-shell,
@@ -983,12 +848,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   .local-nav{ padding:8px 12px; }
 }
 
-
-
-/* v0.7 — interaction, typography and alignment pass */
-
-/* Free production font families for the UI/body */
-
 :root{
   --ui:"Cairo","IBM Plex Sans Arabic",sans-serif;
   --text:"IBM Plex Sans Arabic","Cairo",Tahoma,sans-serif;
@@ -1001,7 +860,6 @@ h2{font-family:var(--display);font-size:3rem;line-height:1.12;color:#234B48;marg
   --press-highlight:rgba(255,255,255,.86);
 }
 
-/* typography */
 body{font-family:var(--text)}
 .navigation,.brand-tagline,.item-name,.guide h3,.learning-card h3,
 .filter,.subfilter,.learning-types button,.return-actions button,.portal-btn,
@@ -1014,17 +872,15 @@ body{font-family:var(--text)}
   font-family:var(--meta)!important;
 }
 
-/* Keep the display-heading font system; colour is controlled by the three-colour palette. */
-.intro h1,.section-head h2{font-family:var(--display)!important;-webkit-text-fill-color:#234B48!important;}
+.intro h1,.section-head h2{font-family:var(--display)!important}
 
-/* center section titles and section-copy */
 .section-head{
   display:block!important;
   text-align:center!important;
-  margin-bottom:18px!important;
+  margin-bottom:26px!important;
 }
 .section-head > div{display:block}
-.section-head h2{margin-inline:auto;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
+.section-head h2{margin-inline:auto}
 .section-copy{
   margin:9px auto 0!important;
   max-width:660px!important;
@@ -1037,7 +893,7 @@ body{font-family:var(--text)}
   text-align:center;
   gap:3px!important;
 }
-.origin-heading h2{width:100%;text-align:center;color:#234B48!important;-webkit-text-fill-color:#234B48!important;}
+.origin-heading h2{width:100%;text-align:center}
 .learning-group-title{
   text-align:center;
   margin:28px auto 15px!important;
@@ -1060,7 +916,6 @@ body{font-family:var(--text)}
 }
 .nominate .section-copy{margin-inline:auto!important}
 
-/* fix overlapping / broken section toolbars */
 .local-nav{
   position:relative!important;
   top:auto!important;
@@ -1081,7 +936,7 @@ body{font-family:var(--text)}
   min-height:auto!important;
   padding:10px 12px!important;
   border:1px solid var(--ui-frame-stroke-strong);
-  border-radius:13px;
+  border-radius:16px;
   background:rgba(255,253,248,.78);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
 }
@@ -1099,7 +954,7 @@ body{font-family:var(--text)}
   width:100%;
   padding:8px;
   border:1px solid var(--ui-frame-stroke);
-  border-radius:13px;
+  border-radius:16px;
   background:rgba(255,253,248,.62);
 }
 .subfilter-row{
@@ -1109,7 +964,7 @@ body{font-family:var(--text)}
   gap:8px;
   padding:8px 10px;
   border:1px solid var(--ui-frame-stroke);
-  border-radius:12px;
+  border-radius:14px;
   background:rgba(255,253,248,.56);
 }
 .subfilters{flex:1}
@@ -1126,7 +981,6 @@ body{font-family:var(--text)}
 }
 .learning-search input,.learning-field{width:100%}
 
-/* Raised/clickable affordance: obvious as controls, with calm contrast */
 .portal-btn,.filter,.subfilter,.learning-types button,.return-actions button,
 .more-btn,.learning-actions button,.nominate button{
   background:linear-gradient(180deg,var(--press-bg-top),var(--press-bg-bottom))!important;
@@ -1152,8 +1006,8 @@ body{font-family:var(--text)}
   box-shadow:inset 0 1px 2px rgba(35,58,56,.08),0 1px 0 #ad9b84!important;
 }
 .filter.active,.learning-types button.active,.return-actions button.primary{
-  background:linear-gradient(180deg,#2C5A56,#234B48)!important;
-  border-color:#234B48!important;
+  background:linear-gradient(180deg,#2d4845,#203a37)!important;
+  border-color:#203a37!important;
   color:white!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 0 #172d2a!important;
 }
@@ -1164,7 +1018,6 @@ body{font-family:var(--text)}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 2px 0 #627863!important;
 }
 
-/* The smaller information control above the big destination control */
 .more-btn{
   display:flex!important;
   align-items:center;
@@ -1173,13 +1026,11 @@ body{font-family:var(--text)}
   min-height:38px;
   margin:0 0 8px!important;
   padding:8px 12px!important;
-  border:1px solid #D4B36F!important;
   border-radius:11px!important;
-  background:#F4E5C6!important;
-  color:#7A5B25!important;
+  color:var(--deep)!important;
   font-size:.61rem!important;
 }
-.more-btn::before{content:"ⓘ";font-size:.78rem;margin-left:7px;color:var(--sunrise)}
+.more-btn::before{content:"ⓘ";font-size:.78rem;margin-left:7px;color:var(--sage)}
 .destination-link{
   min-height:61px!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 2px 0 rgba(134,162,143,.48),0 5px 12px rgba(35,58,56,.035)!important;
@@ -1187,7 +1038,6 @@ body{font-family:var(--text)}
 .destination-link:hover{transform:translateY(-1px)}
 .destination-link:active{transform:translateY(1px);box-shadow:inset 0 1px 2px rgba(35,58,56,.08)!important}
 
-/* learning cards: logo / name / text / line / two compact facts / two stacked actions */
 .learning-card{
   text-align:center;
 }
@@ -1214,10 +1064,7 @@ body{font-family:var(--text)}
 }
 .learning-actions button{
   min-height:38px;
-  border:1px solid #D4B36F!important;
   border-radius:11px!important;
-  background:#F4E5C6!important;
-  color:#7A5B25!important;
 }
 .learning-actions a{
   min-height:54px;
@@ -1233,7 +1080,6 @@ body{font-family:var(--text)}
 }
 .learning-actions a:hover{background:#f3f7f2;transform:translateY(-1px)}
 
-/* cards: centered identity and restrained framed interior */
 .item-identity{justify-content:center}
 .item-logo{margin-inline:auto!important}
 .core-preview{gap:8px!important}
@@ -1243,10 +1089,8 @@ body{font-family:var(--text)}
 }
 .card-purpose{margin-inline:auto;max-width:92%}
 
-/* preserve the two expressive text lines in learning cards */
 .learning-facts dt,.learning-facts dd{line-height:1.65}
 
-/* responsive */
 @media(max-width:980px){
   .filters{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
@@ -1258,26 +1102,19 @@ body{font-family:var(--text)}
   .return-actions button{flex:1}
 }
 
-
-
-/* v0.7.3 — spacing-only refinement */
-
-/* General major-section rhythm: clear separation, without empty deserts */
 .section{
   padding-top:50px;
   padding-bottom:50px;
 }
 
-/* The portal and directory are one journey, so keep them visually connected */
 .portal{
   padding-top:12px;
-  padding-bottom:4px;
+  padding-bottom:18px;
 }
 #directory{
-  padding-top:6px;
+  padding-top:26px;
 }
 
-/* Headline + explanation are one information cluster */
 .section-head{
   margin-bottom:17px!important;
   padding-bottom:8px!important;
@@ -1286,7 +1123,6 @@ body{font-family:var(--text)}
   margin-top:5px!important;
 }
 
-/* Local navigation belongs directly to the section it controls */
 .local-nav{
   margin-bottom:10px!important;
 }
@@ -1295,7 +1131,6 @@ body{font-family:var(--text)}
   padding-bottom:8px!important;
 }
 
-/* Search, filters and result count are one control cluster */
 .catalog-shell{
   padding-top:14px!important;
 }
@@ -1311,12 +1146,10 @@ body{font-family:var(--text)}
   margin-bottom:10px!important;
 }
 
-/* Keep cards visually close to their controls, but not cramped */
 .catalog-grid{
   margin-top:0;
 }
 
-/* Learning heading and its controls are one unit */
 #learning .section-head{
   margin-bottom:14px!important;
 }
@@ -1334,14 +1167,12 @@ body{font-family:var(--text)}
   margin-bottom:12px!important;
 }
 
-/* Guides / knowledge: title cluster close to content */
 #guides .section-head,
 #knowledge .section-head,
 #updates .section-head{
   margin-bottom:16px!important;
 }
 
-/* Preserve larger breathing room only between truly different topics */
 #guides,
 #knowledge,
 #updates{
@@ -1349,7 +1180,6 @@ body{font-family:var(--text)}
   padding-bottom:54px;
 }
 
-/* Nomination is a closing call-to-action: compact internally, separated externally */
 #nominate{
   padding-top:48px;
   padding-bottom:48px;
@@ -1358,7 +1188,6 @@ body{font-family:var(--text)}
   margin-top:4px!important;
 }
 
-/* Mobile: avoid exaggerated gaps on short screens */
 @media(max-width:760px){
   .section{
     padding-top:38px;
@@ -1378,34 +1207,27 @@ body{font-family:var(--text)}
   }
 }
 
-
-
-/* v0.7.4 — restore the approved v0.7.2 hero balance only */
 .intro{
   gap:26px;
 }
 .intro-copy{
-  transform:none;
+  transform:translateX(-24px);
 }
-.intro h1{font-size:6.4rem;color:var(--deep)!important;-webkit-text-fill-color:var(--deep)!important;background:transparent!important;padding:0!important;border-radius:0!important;width:auto!important;max-width:none!important;display:block!important;white-space:normal!important;}
+.intro h1{
+  font-size:8.65rem;
+}
 @media(max-width:980px){
   .intro-copy{transform:none}
 }
 @media(max-width:760px){
-  .intro h1{font-size:5rem;color:var(--deep)!important;-webkit-text-fill-color:var(--deep)!important;background:transparent!important;padding:0!important;border-radius:0!important;width:auto!important;max-width:none!important;display:block!important;white-space:normal!important;}
+  .intro h1{font-size:5rem}
 }
-
-
 
 .learning-group-title,.core-label strong,.detail-section h4,.module h4{color:var(--deep)!important}
 .core-box small,.meta small{display:block!important;color:var(--muted)!important}
 .core-box strong,.meta strong{color:var(--deep)!important}
-.learning-card h3,.guide h3,.knowledge h3,.quick-title{letter-spacing:0;-webkit-text-fill-color:#234B48!important;}
+.learning-card h3,.guide h3,.knowledge h3,.quick-title{letter-spacing:0}
 
-
-
-/* Production system: three free font families, three size tiers, and a three-colour identity: parchment + Petrol + Sunrise Gold.
-   Existing main-page vertical rhythm is intentionally left untouched. */
 :root{
   --display:"Aref Ruqaa Ink","Aref Ruqaa",serif;
   --ui:"Cairo","IBM Plex Sans Arabic",sans-serif;
@@ -1425,36 +1247,25 @@ body{font-family:var(--text)}
   --text-sm:.68rem;
 
   --paper:#EFE7DA;
-  --paper2:#faf6ed;
-  --white:#fffefa;
-  --deep:#234B48;--heading:#234B48;
+  --paper2:#FAF6ED;
+  --white:#fffdf8;
+  --deep:#234B48;
   --sage:#234B48;
-  --sage2:#e3e8e5;
-  --sage3:#f4efe5;
-  --sunrise:#C39543;
-  --sunrise-dark:#7a5b25;
+  --sage2:#E3E8E5;
+  --sage3:#F4EFE5;
+
   --ink:#29322f;
   --muted:#626c66;
-  --line:#d8cfc1;
+  --line:#d8d0c3;
 }
 
-/* Badiilak Arabi wordmark */
 .intro h1{
   font-family:var(--display)!important;
-  font-size:clamp(5.7rem,7.1vw,7.7rem)!important;
+  font-size:var(--display-xl)!important;
   font-weight:700!important;
-  line-height:.95!important;
-  letter-spacing:-.028em!important;
-  color:#234B48!important;
-  -webkit-text-fill-color:#234B48!important;
-  background:transparent!important;
-  display:block!important;
-  width:auto!important;
-  max-width:100%!important;
-  padding:0!important;
-  border-radius:0!important;
-  white-space:nowrap!important;
-  transform:translate(-10px,-8px)!important;
+  line-height:.86!important;
+  letter-spacing:-.035em!important;
+  color:var(--deep)!important;
 }
 .intro-promise{
   font-family:var(--ui)!important;
@@ -1462,24 +1273,18 @@ body{font-family:var(--text)}
   margin-top:14px!important;
   line-height:1.5!important;
 }
-.section-head h2{font-family:var(--display)!important;
+.section-head h2{
+  font-family:var(--display)!important;
   font-size:var(--display-lg)!important;
   line-height:1.08!important;
   letter-spacing:-.02em!important;
-  display:inline-block!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-.quick-title,#nominate h2{font-family:var(--display)!important;
-  font-size:var(--display-md)!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
+  color:var(--deep)!important;
+}
+.quick-title,#nominate h2{
+  font-family:var(--display)!important;
+  font-size:var(--display-md)!important;
+}
 
-/* Three-colour heading distribution */
-#directory .section-head h2,.competition-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#learning .section-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#guides .section-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#knowledge .section-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#updates .section-head h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-#nominate h2{background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
-.competition-tab.active,.competition-tab[aria-selected="true"]{color:#fff!important}
-
-/* Cairo for interface */
 .navigation,.brand-tagline,.item-name,.learning-card h3,.guide h3,
 .origin-heading h2,.learning-group-title,.filter,.subfilter,
 .learning-types button,.return-actions button,.portal-btn strong,
@@ -1502,7 +1307,6 @@ body{font-family:var(--text)}
   font-size:var(--ui-sm)!important;
 }
 
-/* IBM Plex Sans Arabic for reading */
 body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .guide p,.knowledge p,.discovery-card p,.monitor-card p,
 .decision-alert-text,.decision-action span,.detail-section div,
@@ -1525,7 +1329,6 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   line-height:1.65!important;
 }
 
-/* Fixed directory-card template */
 .catalog-grid{align-items:stretch!important}
 .item{
   display:flex!important;
@@ -1557,9 +1360,9 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   min-height:54px!important;
   margin:0!important;
   padding:9px 11px!important;
-  border:1px solid #dcc8aa!important;
+  border:1px solid #e3cfc7!important;
   border-radius:11px!important;
-  background:#f4eee4!important;
+  background:#fbf2ee!important;
   display:flex!important;
   align-items:center!important;
 }
@@ -1568,7 +1371,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   font-size:var(--text-sm)!important;
   line-height:1.55!important;
   font-weight:500!important;
-  color:#4f5a55!important;
+  color:#4F5A55!important;
   display:-webkit-box!important;
   -webkit-box-orient:vertical!important;
   -webkit-line-clamp:2!important;
@@ -1577,7 +1380,6 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .more-btn{min-height:28px!important}
 .destination-link{min-height:57px!important}
 
-/* Fixed learning-card template */
 .learning-grid{align-items:stretch!important}
 .learning-card{
   min-height:460px!important;
@@ -1602,7 +1404,6 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .learning-card .decision-slot{min-height:64px!important}
 .learning-actions{min-height:38px!important;margin-top:12px!important}
 
-/* Fixed rhythm for the remaining homepage card families */
 .guides{align-items:stretch!important}
 .guide{
   min-height:285px!important;
@@ -1615,7 +1416,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   display:flex!important;
   align-items:center!important;
   justify-content:center!important;
--webkit-text-fill-color:#234B48!important;}
+}
 .guide p{
   min-height:92px!important;
   display:-webkit-box!important;
@@ -1657,10 +1458,9 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .update{min-height:82px!important}
 .section-continue{min-height:72px!important}
 
-/* Information-first note: emphasize the useful fact, not the warning label */
 .decision-panel{
   border:1px solid #dfd3c9!important;
-  border-right:3px solid var(--sunrise)!important;
+  border-right:3px solid var(--deep)!important;
   background:#fbf7f1!important;
   padding:13px 15px!important;
 }
@@ -1681,7 +1481,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .decision-source{margin-top:7px!important}
 
 .more-btn,.learning-actions a,.decision-source a,.update time{
-  color:#7A5B25!important;
+  color:var(--sunrise-dark)!important;
 }
 
 @media(max-width:760px){
@@ -1706,23 +1506,6 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   .section-continue{min-height:auto!important}
 }
 
-@media(max-width:980px){
- .intro h1{font-size:clamp(4.8rem,10vw,6.2rem)!important;white-space:nowrap!important}
-}
-@media(max-width:760px){
- .intro h1{font-size:clamp(3.7rem,14vw,5rem)!important;line-height:1!important;white-space:nowrap!important}
-}
-
-
-@media(max-width:980px){
- .intro h1{transform:translate(-6px,-5px)!important}
-}
-@media(max-width:760px){
- .intro h1{transform:none!important}
-}
-
-
-
 .section-note{display:none!important}
 .catalog-grid,.learning-grid,.guides,.discovery-shelf,.monitor-grid{align-items:stretch!important}
 
@@ -1738,7 +1521,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .meta{min-height:68px!important;padding:7px 8px!important}
 .card-decision-note{
   min-height:42px!important;margin:0 0 8px!important;padding:7px 9px!important;
-  background:#f4eee4!important;border-color:#dcc8aa!important;
+  background:#fbf4ef!important;border-color:#e5d5ce!important;
 }
 .card-decision-note b{
   font-size:.66rem!important;line-height:1.48!important;font-weight:500!important;
@@ -1760,7 +1543,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 
 .guide{min-height:238px!important;padding:18px!important}
 .guide-topline{min-height:42px!important}
-.guide h3{min-height:56px!important;-webkit-text-fill-color:#234B48!important;}
+.guide h3{min-height:56px!important}
 .guide p{min-height:76px!important;margin-bottom:12px!important}
 
 .discovery-card{min-height:260px!important}
@@ -1786,9 +1569,6 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   }
 }
 
-
-
-/* Only the requested template rules; existing visual style and buttons remain unchanged. */
 .comparison-strip{margin-top:4px!important;margin-bottom:9px!important;text-align:center!important}
 .comparison-strip.is-empty{visibility:hidden!important}
 .card-purpose,.meta,.meta small,.meta strong,.card-decision-note,.card-decision-note b{text-align:center!important}
@@ -1812,15 +1592,12 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   .decision-slot.is-empty{visibility:hidden!important}
 }
 
-
-
 .origin-options{grid-template-columns:repeat(6,1fr)!important}
 .portal-bar{grid-template-columns:repeat(7,1fr)!important}
 
-/* Noubou Comparison Board */
 .competition-feature{
   margin-top:20px;margin-bottom:36px;padding:32px 34px 28px;
-  border:1px solid var(--line);border-radius:24px;background:#fbfaf5;
+  border:1px solid var(--line);border-radius:24px;background:#f8f4ec;
   box-shadow:0 14px 38px rgba(35,58,56,.055)
 }
 .competition-head{text-align:right;max-width:none;margin:0 0 18px}
@@ -1828,7 +1605,9 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   display:block;font-family:var(--ui);font-size:.54rem;font-weight:700;
   color:var(--sage);margin-bottom:5px
 }
-.competition-head h2{font-family:var(--display);font-size:3rem;line-height:1.08;display:inline-block;margin:0;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
+.competition-head h2{
+  font-family:var(--display);font-size:3rem;line-height:1.08;color:var(--deep);margin:0
+}
 .competition-head p{
   max-width:760px;margin:8px 0 0;color:var(--muted);font-size:.71rem;line-height:1.85;text-align:right
 }
@@ -1837,7 +1616,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   margin:0 0 18px;padding:0;border:0;background:transparent
 }
 .competition-tab{
-  min-width:0;border:1px solid var(--line);background:#fffefa;color:var(--muted);
+  min-width:0;border:1px solid var(--line);background:#fffaf3;color:var(--muted);
   border-radius:12px;padding:9px 10px;cursor:pointer;text-align:right;transition:.18s
 }
 .competition-tab small{
@@ -1891,14 +1670,14 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 }
 .bar-brand-text small{display:block;font-size:.48rem;color:var(--muted);margin-top:1px}
 .bar-track{
-  position:relative;height:28px;border-radius:8px;background:#e1e7e2;overflow:hidden
+  position:relative;height:28px;border-radius:8px;background:#e7e2d8;overflow:hidden
 }
 .bar-fill{
   position:absolute;right:0;top:0;bottom:0;width:var(--w);min-width:8px;border-radius:8px;
   display:flex;align-items:center;justify-content:flex-start;padding:0 9px;
   transition:width .28s ease
 }
-.bar-fill.regional{background:linear-gradient(90deg,#c39543,#c79558)}
+.bar-fill.regional{background:linear-gradient(90deg,#234B48,#C39543)}
 .bar-fill.global{background:linear-gradient(90deg,#254540,#355c55)}
 .bar-fill.context{background:#9ba49e}
 .bar-fill span{
@@ -1908,7 +1687,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .bar-value strong{
   display:block;font-family:var(--ui);font-size:1.05rem;line-height:1.1;color:var(--deep)
 }
-.bar-row.regional .bar-value strong{color:var(--sunrise)}
+.bar-row.regional .bar-value strong{color:var(--deep)}
 .bar-value small{display:block;font-size:.47rem;color:var(--muted);margin-top:2px;direction:rtl}
 .chart-axis{
   display:grid;grid-template-columns:168px minmax(0,1fr) 95px;gap:14px;margin-top:2px
@@ -1928,21 +1707,21 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
   font-family:var(--ui);font-size:.51rem;font-weight:700;color:var(--deep);
   text-decoration:none;border-bottom:1px solid rgba(35,58,56,.22)
 }
-.chart-source a:hover{color:var(--sunrise)}
+.chart-source a:hover{color:var(--deep)}
 .chart-extra{
   margin-top:7px;font-family:var(--ui);font-size:.5rem;color:var(--muted);text-align:center
 }
 .competition-lenses{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
-.competition-lenses span{border:1px solid var(--line);background:#fffefa;border-radius:999px;padding:5px 8px;font-family:var(--ui);font-size:.47rem;font-weight:700;color:var(--deep)}
+.competition-lenses span{border:1px solid var(--line);background:#fffaf3;border-radius:999px;padding:5px 8px;font-family:var(--ui);font-size:.47rem;font-weight:700;color:var(--deep)}
 .story-badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.evidence-badge{align-self:center;border:1px solid var(--line);background:#fffefa;color:var(--muted);border-radius:999px;padding:7px 10px;font-family:var(--ui);font-size:.47rem;font-weight:700;white-space:nowrap}
+.evidence-badge{align-self:center;border:1px solid var(--line);background:#fffaf3;color:var(--muted);border-radius:999px;padding:7px 10px;font-family:var(--ui);font-size:.47rem;font-weight:700;white-space:nowrap}
 .decision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:15px}
-.decision-card{border:1px solid var(--line);background:#fffefa;border-radius:13px;padding:11px 12px}
-.decision-card>b{display:block;font-family:var(--ui);font-size:.54rem;color:var(--sunrise);margin-bottom:8px}
+.decision-card{border:1px solid var(--line);background:#fffaf3;border-radius:13px;padding:11px 12px}
+.decision-card>b{display:block;font-family:var(--ui);font-size:.54rem;color:var(--deep);margin-bottom:8px}
 .decision-card>div{display:grid;grid-template-columns:58px minmax(0,1fr);gap:7px;align-items:start;padding:6px 0;border-top:1px solid rgba(35,58,56,.07)}
 .decision-card>div:first-of-type{border-top:0;padding-top:0}
 .decision-side{font-family:var(--ui);font-size:.45rem;font-weight:700;border-radius:999px;padding:3px 5px;text-align:center;white-space:nowrap}
-.regional-side{background:rgba(143,100,47,.09);color:var(--sunrise)}
+.regional-side{background:rgba(195,149,67,.09);color:var(--deep)}
 .global-side{background:var(--sage3);color:var(--deep)}
 .decision-card p{margin:0;color:var(--muted);font-size:.56rem;line-height:1.7}
 
@@ -1955,7 +1734,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 @media(max-width:760px){
  .origin-options,.portal-bar{grid-template-columns:repeat(2,1fr)!important}
  .competition-feature{margin-top:10px;margin-bottom:28px;padding:24px 14px 20px;border-radius:19px}
- .competition-head h2{font-size:2.35rem;background:transparent!important;box-shadow:none!important;text-shadow:none!important;border-radius:0!important;padding:0 0 5px!important;width:auto!important;max-width:100%!important;display:inline-block!important;border-bottom:3px solid #C39543!important;-webkit-text-fill-color:#234B48!important;}
+ .competition-head h2{font-size:2.35rem}
  .competition-head p{font-size:.66rem}
  .competition-tabs{grid-template-columns:repeat(5,145px);margin-bottom:15px}
  .chart-story-head{grid-template-columns:1fr;gap:8px}
@@ -1973,20 +1752,15 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
  .chart-context{align-items:flex-start;flex-direction:column;gap:6px}
 }
 
-
-
-/* Close the empty bands marked in the review screenshot. */
 .section{padding-block:42px!important}
 .portal{padding-top:8px!important;padding-bottom:32px!important}
 .intro{padding-bottom:28px!important}
-.competition-feature{margin-top:10px!important;margin-bottom:18px!important}
+.competition-feature{margin-top:10px!important;margin-bottom:26px!important}
 #learning,#guides,#knowledge,#updates,#nominate{margin-block:0!important}
 #nominate{padding-block:38px!important}
 
-/* Origin grid: 18 entries = three complete rows at six columns. */
 .origin-options{grid-template-columns:repeat(6,minmax(0,1fr))!important}
 
-/* The index title and filters are intentionally centered. */
 .competition-head{text-align:center!important;max-width:900px!important;margin:0 auto 18px!important}
 .competition-head p{margin:8px auto 0!important;text-align:center!important;max-width:760px!important}
 .competition-lenses{justify-content:center!important}
@@ -1994,31 +1768,29 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 .competition-tab{text-align:center!important;display:grid!important;place-items:center!important;min-height:42px!important}
 .competition-tab small,.competition-tab b{display:none!important}
 
-/* Specialist comparison: one fixed template for every discipline. */
 .specialist-heads{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);gap:12px;align-items:stretch;margin-bottom:12px}
-.specialist-brand{border:1px solid var(--line);background:#fffefa;border-radius:12px;padding:13px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;grid-template-areas:"logo name signal" "logo tag signalLabel";column-gap:10px;align-items:center;text-align:center}
-.specialist-brand.regional{background:linear-gradient(145deg,#fff9ef,#f4eee4);border-color:rgba(143,100,47,.25)}
+.specialist-brand{border:1px solid var(--line);background:#fffaf3;border-radius:15px;padding:13px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;grid-template-areas:"logo name signal" "logo tag signalLabel";column-gap:10px;align-items:center;text-align:center}
+.specialist-brand.regional{background:linear-gradient(145deg,#fff8f1,#f7eee8);border-color:rgba(195,149,67,.25)}
 .specialist-logo{grid-area:logo;width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid #e3ddd2;display:grid;place-items:center;overflow:hidden}
 .specialist-logo img{width:29px;height:29px;object-fit:contain}
 .specialist-brand>div{grid-area:name;min-width:0;text-align:center}
 .specialist-brand bdi{display:block;font-family:var(--ui);font-size:.72rem;font-weight:700;color:var(--deep);text-align:center}
 .specialist-brand small{display:block;font-size:.48rem;color:var(--muted);margin-top:1px;text-align:center}
 .specialist-brand>strong{grid-area:signal;font-family:var(--ui);font-size:1.18rem;color:var(--deep);direction:ltr;text-align:center}
-.specialist-brand.regional>strong{color:var(--sunrise)}
+.specialist-brand.regional>strong{color:var(--deep)}
 .signal-label{grid-area:signalLabel;font-size:.44rem;color:var(--muted);text-align:center}
 .specialist-vs{align-self:center;justify-self:center;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 8px;font-family:var(--ui);font-size:.48rem;color:var(--muted)}
-.specialist-matrix{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.55)}
+.specialist-matrix{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:rgba(255,255,255,.55)}
 .specialist-row{display:grid;grid-template-columns:minmax(0,1fr) 118px minmax(0,1fr);border-top:1px solid var(--line)}
 .specialist-row:first-child{border-top:0}
 .specialist-cell{padding:11px 13px;font-size:.57rem;line-height:1.72;color:var(--muted);text-align:center;display:flex;align-items:center;justify-content:center}
-.regional-cell{background:rgba(143,100,47,.035)}
+.regional-cell{background:rgba(195,149,67,.035)}
 .global-cell{background:rgba(80,106,91,.035)}
-.specialist-label{display:flex;align-items:center;justify-content:center;padding:10px 7px;border-inline:1px solid var(--line);background:#eef2ee;font-family:var(--ui);font-size:.5rem;font-weight:700;color:var(--deep);text-align:center}
+.specialist-label{display:flex;align-items:center;justify-content:center;padding:10px 7px;border-inline:1px solid var(--line);background:#f4efe6;font-family:var(--ui);font-size:.5rem;font-weight:700;color:var(--deep);text-align:center}
 .chart-story-copy{text-align:right}
 .chart-story-copy h3,.chart-story-copy p{text-align:right}
 .story-badges{justify-content:flex-end!important}
 
-/* Make the transitions between content sections intentional, not empty. */
 .section-head{margin-bottom:18px!important}
 .local-nav{margin-bottom:16px!important}
 .section-continue{margin-top:12px!important}
@@ -2041,67 +1813,94 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
  .chart-story-copy,.chart-story-copy h3,.chart-story-copy p{text-align:right}
 }
 
-
-
 .specialist-brand>strong[dir="rtl"]{direction:rtl!important;unicode-bidi:isolate;text-align:center!important}
 .specialist-brand>strong[dir="ltr"]{direction:ltr!important;unicode-bidi:isolate;text-align:center!important}
 .chart-note{font-size:.62rem!important;font-weight:500!important;line-height:1.9!important;color:#59635d!important;max-width:780px!important}
 .chart-source a{font-size:.54rem!important}
 @media(max-width:760px){.chart-note{font-size:.58rem!important;line-height:1.85!important}}
 
-
-
-
-/* Badilak Arabi heading color normalization */
-.brand-name,
-.intro h1,
-.section-head h2,
-.competition-head h2,
-#nominate h2,
-.quick-title{
-  color:#234B48!important;
-  -webkit-text-fill-color:#234B48!important;
-  background:transparent!important;
-  background-image:none!important;
-  text-shadow:none!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-
-/* === BADEELAK ARABI — CANONICAL VISUAL SYSTEM === */
 :root{
-  --paper:#EFE7DA;
-  --deep:#234B48;
-  --heading:#234B48;
-  --sunrise:#C39543;
+ --paper:#EFE7DA;
+ --paper2:#FAF6ED;
+ --deep:#234B48;
+ --sage:#234B48;
+ --sage2:#E3E8E5;
+ --sage3:#F4EFE5;
+ --sunrise:#C39543;
+ --sunrise-dark:#7A5B25;
+}
+.site-header{background:rgba(239,231,218,.96)!important}
+.intro{
+ grid-template-columns:minmax(290px,.82fr) minmax(0,1.5fr);
+ gap:34px;
+ padding-top:48px;
+ padding-bottom:30px;
+ align-items:center;
+}
+.intro-copy{padding:0;transform:none!important}
+.intro-heading{margin:0 0 17px;text-align:center;min-height:0!important}
+.intro h1{
+ font-family:var(--display)!important;
+ font-size:clamp(5.7rem,7.1vw,7.7rem)!important;
+ font-weight:700!important;
+ line-height:.95!important;
+ letter-spacing:-.028em!important;
+ color:#234B48!important;
+ -webkit-text-fill-color:#234B48!important;
+ background:transparent!important;
+ background-image:none!important;
+ margin:0!important;
+ padding:0!important;
+ border-radius:0!important;
+ white-space:nowrap!important;
+ transform:none!important;
+ text-shadow:none!important;
+ box-shadow:none!important;
+ filter:none!important;
+}
+.intro-promise{
+ font-family:var(--ui)!important;
+ font-weight:700!important;
+ color:#234B48!important;
+ font-size:1.08rem!important;
+ margin:14px 0 0!important;
+}
+.intro-support{
+ max-width:420px;
+ margin-inline:auto;
+ border-right:3px solid #C39543!important;
+ padding-right:18px;
 }
 .brand-name,
-.intro h1,
 .section-head h2,
 .competition-head h2,
 #nominate h2,
 .quick-title,
 .origin-heading h2{
-  color:#234B48!important;
-  -webkit-text-fill-color:#234B48!important;
-  background:transparent!important;
-  background-image:none!important;
-  text-shadow:none!important;
-  box-shadow:none!important;
-  filter:none!important;
+ color:#234B48!important;
+ -webkit-text-fill-color:#234B48!important;
+ background:transparent!important;
+ background-image:none!important;
+ text-shadow:none!important;
+ box-shadow:none!important;
+ filter:none!important;
 }
 .section-head h2,
 .competition-head h2,
-#nominate h2{
-  border-bottom:3px solid #C39543!important;
-}
+#nominate h2{border-bottom:3px solid #C39543!important}
 .knowledge:first-child h3{
-  color:#fff!important;
-  -webkit-text-fill-color:#fff!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
 }
-
+@media(max-width:980px){
+ .intro{grid-template-columns:1fr}
+ .intro h1{font-size:clamp(4.8rem,10vw,6.2rem)!important}
+}
+@media(max-width:760px){
+ .intro{padding-top:34px}
+ .intro h1{font-size:clamp(3.7rem,14vw,5rem)!important;line-height:1!important;white-space:nowrap!important}
+}
 </style>
-
 
 
 
@@ -2135,8 +1934,8 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 
 <header class="site-header">
  <div class="wrap header-inner">
-  <a href="#top" class="brand-lockup" aria-label="بديلك عربي — الرئيسية" onclick="resetAllAndHome();return false;">
-   <span class="brand-name" style="color:#234B48!important;-webkit-text-fill-color:#234B48!important">بديلك عربي</span><span class="brand-tagline">اكتشاف · مقارنة · اختيار</span>
+  <a href="#top" class="brand-lockup" aria-label="بديلك الرئيسية" onclick="resetAllAndHome();return false;">
+   <span class="brand-name">بديلك عربي</span><span class="brand-tagline">اكتشاف · مقارنة · اختيار</span>
   </a>
   <nav class="navigation">
    <a href="#top" onclick="resetAllAndHome();return false;">الرئيسية</a><a href="#directory" onclick="resetDirectory();return false;">الدليل</a><a href="#learning" onclick="resetLearning();return false;">التعلّم</a>
@@ -2150,7 +1949,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 
 <section class="intro wrap">
  <div class="intro-copy">
-  <div class="intro-heading"><h1 aria-label="بديلك عربي" style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important">بديلك عربي</h1><p class="intro-promise">اكتشف العربي. قارن بوعي. واختر ما يناسبك.</p></div>
+  <div class="intro-heading"><h1 aria-label="بديلك عربي">بديلك عربي</h1><p class="intro-promise">اكتشف العربي. قارن بوعي. واختر ما يناسبك.</p></div>
   <div class="intro-support">
    <p class="intro-description">اكتشف أدوات وخدمات ومصادر عربية للعمل والتعلّم والمعرفة. اعرف ما يناسبك وحدوده، قبل أن تختار أو تدفع.</p>
    <a class="intro-link" href="#directory">تصفّح الدليل ←</a>
@@ -2181,18 +1980,16 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
  </aside>
 </section>
 
-<section class="competition-feature wrap fold-card" id="competitionIndex" aria-labelledby="competitionTitle">
+<section class="competition-feature wrap" id="competitionIndex" aria-labelledby="competitionTitle">
  <div class="competition-head">
   <div>
    <span class="competition-kicker">مؤشر بديلك · 6 مقارنات بمصادرها</span>
-   <h2 id="competitionTitle" style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">إلى أين وصلت منتجاتنا العربية والإقليمية؟</h2>
+   <h2 id="competitionTitle">إلى أين وصلت منتجاتنا العربية والإقليمية؟</h2>
   </div>
   <p>مقارنات عملية حسب طريقة تفكير كل مجال: ما الذي يهم الباحث، المصمم، المبرمج، المتسوّق أو القارئ قبل أن يختار؟</p><div class="competition-lenses"><span>السياق العربي</span><span>احتياج المتخصص</span><span>القيد العملي</span><span>نوع الدليل</span></div>
  </div>
 
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="competitionIndexBody" onclick="toggleStaticDisclosure('competitionIndexBody',this,'competition')"><span aria-hidden="true">+</span><span class="sr-only">فتح القسم</span></button>
- <div class="section-fold-body" id="competitionIndexBody" hidden>
-<div class="competition-local-nav">
+ <div class="competition-local-nav">
   <div class="crumbs"><button type="button" onclick="resetCompetition()">مؤشر بديلك</button><span id="competitionCrumbWrap" style="display:none">‹ <span class="current" id="competitionCrumb"></span></span></div>
   <div class="return-actions"><button type="button" onclick="resetCompetition()" title="العودة إلى بداية مؤشر بديلك">رئيسية المؤشر</button><button type="button" class="primary" onclick="go('directory')">كل الدليل</button></div>
  </div>
@@ -2207,10 +2004,9 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
  </div>
 
  <div class="competition-story" id="competitionStory" aria-live="polite"></div>
-</div>
 </section>
 
-<section class="portal wrap" aria-label="أقسام بديلك عربي">
+<section class="portal wrap" aria-label="أقسام بديلك">
  <div class="portal-bar">
   <button class="portal-btn" onclick="openDirectory('all')"><strong>كل الاكتشافات</strong></button>
 <button class="portal-btn" onclick="openDirectory('tech')"><strong>تقنيات وابتكارات</strong></button>
@@ -2224,7 +2020,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 
 <section class="section wrap" id="directory">
  <div class="section-head">
-  <div><h2 style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">اكتشف حسب حاجتك</h2></div>
+  <div><h2>اكتشف حسب حاجتك</h2></div>
   <p class="section-copy">اختر حاجتك، ثم تعرّف على فائدة كل خيار وتكلفته وحدوده ومصدر معلوماته؛ لتعرف هل يناسبك قبل الانتقال إليه.</p>
  </div>
  <div class="local-nav">
@@ -2257,7 +2053,7 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 <section class="section alt" id="learning">
  <div class="wrap">
   <div class="section-head">
-   <div><h2 style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">مصادر تعلّم وقنوات مختارة</h2></div>
+   <div><h2>مصادر تعلّم وقنوات مختارة</h2></div>
    <p class="section-copy">منصات وقنوات عربية نافعة حسب المجال، ومعها قنوات رسمية موثقة لقراء القرآن بدل الاعتماد على النسخ المعاد رفعها والمصادر المجهولة.</p>
   </div>
  </div>
@@ -2286,11 +2082,9 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
  </div>
 </section>
 
-<section class="section wrap fold-card" id="guides">
- <div class="section-head"><div><h2 style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">قبل ما تدفع</h2></div><p class="section-copy">مسارات قصيرة تساعدك تعرف ماذا تقارن، ومتى يستحق المنتج أو الاشتراك المال، قبل أن تنتقل للرابط.</p></div>
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="guidesBody" onclick="toggleStaticDisclosure('guidesBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">فتح القسم</span></button>
- <div class="section-fold-body" id="guidesBody" hidden>
-<div class="guides frame-soft">
+<section class="section wrap" id="guides">
+ <div class="section-head"><div><h2>قبل ما تدفع</h2></div><p class="section-copy">مسارات قصيرة تساعدك تعرف ماذا تقارن، ومتى يستحق المنتج أو الاشتراك المال، قبل أن تنتقل للرابط.</p></div>
+ <div class="guides frame-soft">
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">school</span></span><span class="guide-intent">اشتراك تعليمي</span></div><h3>دورة مدفوعة أم مصدر مجاني؟</h3><p>ادفع عندما تحتاج مسارًا منظمًا، تطبيقًا ومتابعة؛ لا لمجرد أن المحتوى مجمّع في مكان واحد.</p><a href="#learning">قارن مصادر التعلّم ←</a></article>
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">work</span></span><span class="guide-intent">شراء خدمة</span></div><h3>قبل أن تطلب مصممًا أو كاتبًا</h3><p>حدد المطلوب والميزانية ومعيار القبول أولًا؛ بعدها قارن مقدمي الخدمة بدل شراء عرض غير واضح.</p><a href="#directory" onclick="setDirectoryFilter('work')">استكشف خدمات العمل ←</a></article>
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">account_tree</span></span><span class="guide-intent">اشتراك أعمال</span></div><h3>هل أداة الإدارة تستحق الاشتراك؟</h3><p>اختبر سير العمل الذي تحتاجه فعلًا: فواتير، مخزون، فريق أو متجر، ثم قارن الخطة والتكاملات.</p><a href="#directory" onclick="setDirectoryFilter('work')">قارن أدوات الأعمال ←</a></article>
@@ -2303,17 +2097,14 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
    <button onclick="openDiscoveryGroup('work','management')">إدارة وتشغيل</button>
   </div>
  </div>
-</div>
 </section>
 
-<section class="section wrap fold-card" id="knowledge">
- <div class="section-head"><div><h2 style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">مش بس أدوات</h2></div><p class="section-copy">بديلك عربي مش دليل برامج فقط. أحيانًا أفضل اكتشاف عربي يكون لعبة، منصة قراءة أو محتوى صوتيًا يستحق وقتك.</p></div>
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="knowledgeBody" onclick="toggleStaticDisclosure('knowledgeBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">فتح القسم</span></button>
- <div class="section-fold-body" id="knowledgeBody" hidden>
-<div class="discovery-shelf">
+<section class="section wrap" id="knowledge">
+ <div class="section-head"><div><h2>مش بس أدوات</h2></div><p class="section-copy">بديلك مش دليل برامج فقط. أحيانًا أفضل اكتشاف عربي يكون لعبة، منصة قراءة أو محتوى صوتيًا يستحق وقتك.</p></div>
+ <div class="discovery-shelf">
   <button class="discovery-card" onclick="openDetail('gravity')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">sports_esports</span></span></div><div class="discovery-body"><span class="discovery-kind">لعبة عربية</span><h3>Gravity Error</h3><p>لعبة ألغاز ومنصات من استوديو سعودي؛ مثال على اكتشاف لا يحتاج أن يكون أداة إنتاجية.</p></div></button>
   <button class="discovery-card" onclick="openDetail('abjjad')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">menu_book</span></span></div><div class="discovery-body"><span class="discovery-kind">قراءة عربية</span><h3>أبجد</h3><p>منصة للكتب والقراءة العربية؛ قيمة مستقلة عن فكرة «البديل» نفسها.</p></div></button>
-  <button class="discovery-card" onclick="openDetail('sowt')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">headphones</span></span></div><div class="discovery-body"><span class="discovery-kind">محتوى صوتي</span><h3>صوت</h3><p>اكتشاف صوتي عربي يوسّع بديلك عربي من الأدوات إلى الثقافة والمعرفة اليومية.</p></div></button>
+  <button class="discovery-card" onclick="openDetail('sowt')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">headphones</span></span></div><div class="discovery-body"><span class="discovery-kind">محتوى صوتي</span><h3>صوت</h3><p>اكتشاف صوتي عربي يوسّع بديلك من الأدوات إلى الثقافة والمعرفة اليومية.</p></div></button>
  </div>
  <div class="section-continue">
   <div class="section-continue-copy"><strong>اكتشف من نفس النوع</strong><span>لو واحد من الأمثلة شدك، افتح المجال كله بدل الوقوف عند بطاقة واحدة.</span></div>
@@ -2323,16 +2114,15 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
    <button onclick="openDiscoveryGroup('culture','games')">ألعاب</button>
   </div>
  </div>
-</div>
 </section>
 
-<section class="section alt updates-warm" id="updates">
+<section class="section alt" id="updates">
  <div class="wrap">
-  <div class="section-head"><div><h2 style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">مرصد بديلك</h2></div><p class="section-copy">بدل أخبار عامة أو أمثلة وهمية: هنا نعرض مراجعات فعلية، وما ثبت، وما ما زال يحتاج اختبارًا أو تحققًا.</p></div>
+  <div class="section-head"><div><h2>مرصد بديلك</h2></div><p class="section-copy">بدل أخبار عامة أو أمثلة وهمية: هنا نعرض مراجعات فعلية، وما ثبت، وما ما زال يحتاج اختبارًا أو تحققًا.</p></div>
   <div class="monitor-grid">
-   <button class="monitor-card" onclick="openDetail('midaad')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">description</span></span><span class="monitor-status">مراجعة حديثة</span></div><h3>مِداد: تحرير PDF وOCR بالعربية</h3><p>يدعم الموقع تحرير النص العربي والتحويل وOCR؛ اختبر ملفك الفعلي وراجع حدود الخطة قبل الاعتماد.</p><time>17 سبتمبر 2026</time></button>
-   <button class="monitor-card" onclick="openDetail('taqreer')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">slideshow</span></span><span class="monitor-status">ادعاء يحتاج سياق</span></div><h3>taqreer.ai: عروض عربية بالذكاء الاصطناعي</h3><p>ينشئ عروضًا بالعربية بالذكاء الاصطناعي؛ راجع حدود الخطة المجانية والتصدير قبل الاعتماد.</p><time>17 سبتمبر 2026</time></button>
-   <button class="monitor-card" onclick="openDetail('aamenn')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">shield</span></span><span class="monitor-status">قيد التحقق</span></div><h3>Aamenn: راجع الشروط قبل الشراء</h3><p>تحقق من السعر وسياسة الاسترجاع والتفاصيل الفنية من المصدر قبل اتخاذ قرار الشراء.</p><time>14 سبتمبر 2026</time></button>
+   <button class="monitor-card" onclick="openDetail('midaad')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">description</span></span><span class="monitor-status">مراجعة حديثة</span></div><h3>مِداد: وعود قوية في PDF وOCR</h3><p>الموقع يعلن تحرير النص العربي والتحويل وOCR، لكن جودة التحويل لم تُختبر مستقلًا عندنا.</p><time>17 سبتمبر 2026</time></button>
+   <button class="monitor-card" onclick="openDetail('taqreer')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">slideshow</span></span><span class="monitor-status">ادعاء يحتاج سياق</span></div><h3>taqreer.ai: رقم الاستخدام ليس تقييم جودة</h3><p>رقم «أكثر من 20 ألف عرض» صادر من الجهة نفسها؛ نعرضه كسياق لا كدليل جودة مستقل.</p><time>17 سبتمبر 2026</time></button>
+   <button class="monitor-card" onclick="openDetail('aamenn')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">shield</span></span><span class="monitor-status">قيد التحقق</span></div><h3>Aamenn: مرشح، وليس توصية</h3><p>الرابط يثبت وجود الشركة، لكنه لا يكفي وحده للتحقق من التشفير والسعر والاسترجاع أو جودة المنتج.</p><time>14 سبتمبر 2026</time></button>
   </div>
   <div class="section-continue">
    <div class="section-continue-copy"><strong>بعد المراجعة</strong><span>ارجع للاكتشاف، أو ساعدنا نضيف ونصحح.</span></div>
@@ -2346,15 +2136,13 @@ body,.intro-description,.section-copy,.card-purpose,.learning-focus,
 </section>
 
 <section class="section wrap nominate" id="nominate">
- <div><h2 style="color:#234B48!important;-webkit-text-fill-color:#234B48!important;background:transparent!important;border-bottom:3px solid #C39543!important">ساعدنا نكمّل الدليل.</h2><p class="section-copy">تعرف أداة أو مشروعًا عربيًا يستحق الظهور؟ أو لقيت معلومة تحتاج تصحيحًا؟ دي من أهم طرق نمو بديلك عربي.</p></div>
+ <div><h2>ساعدنا نكمّل الدليل.</h2><p class="section-copy">تعرف أداة أو مشروعًا عربيًا يستحق الظهور؟ أو لقيت معلومة تحتاج تصحيحًا؟ دي من أهم طرق نمو بديلك.</p></div>
  <div class="nominate-actions"><button onclick="alert('قناة الترشيحات ستُفعّل في النسخة التالية.')">رشّح اكتشافًا</button><button class="secondary" onclick="alert('قناة التصحيحات ستُفعّل في النسخة التالية.')">صحّح معلومة</button></div>
 </section>
 </main>
 
-<footer class="footer"><div class="wrap footer-inner"><div><strong style="color:#234B48!important;-webkit-text-fill-color:#234B48!important">بديلك عربي</strong> — اكتشاف · مقارنة · اختيار</div><div><a href="#methodology" onclick="openMethodology();return false" style="text-decoration:underline;text-underline-offset:4px">منهج الاختيار</a> · التصحيح · التعاون · الإفصاحات التجارية</div></div></footer>
+<footer class="footer"><div class="wrap footer-inner"><div><strong>بديلك</strong> — بديلك عربي</div><div><a href="#methodology" onclick="openMethodology();return false" style="text-decoration:underline;text-underline-offset:4px">منهج الاختيار</a> · التصحيح · التعاون · الإفصاحات التجارية</div></div></footer>
 
-
-<button class="back-to-top" id="backToTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ أعلى</button>
 
 <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-label="التفاصيل والمصادر" onclick="if(event.target===this)closeModal()">
  <div class="modal-card">
@@ -2485,8 +2273,6 @@ const learning=[
 let filter='all',subfilter='all',originFilter=null,learningType='all';
 let directoryVisible=window.matchMedia('(max-width:760px)').matches?3:6;
 let learningVisible={platform:4,channel:4,reciter:4};
-const learningSectionOpen={channel:false,reciter:false};
-const learningCarouselIndex={platform:0,channel:0,reciter:0};
 
 function directoryBatchSize(){
  const mobile=window.matchMedia('(max-width:760px)').matches;
@@ -2497,7 +2283,7 @@ function directoryBatchSize(){
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
 function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
 function resetLearningLimit(){learningVisible={platform:4,channel:4,reciter:4}}
-function showMoreLearning(type){enableLearningCarousel(type)}
+function showMoreLearning(type){learningVisible[type]=(learningVisible[type]||4)+4;renderLearning()}
 
 function norm(s=''){return s.toLowerCase().replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/ة/g,'ه').replace(/[ً-ٰٟ]/g,'').trim()}
 function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
@@ -2660,7 +2446,7 @@ function originName(id){return ({chatgpt:'ChatGPT',canva:'Canva',drive:'Google D
 
 
 function setLearningPath(type='all',field='all'){
- learningType=type;if(type==='channel'||type==='reciter')learningSectionOpen[type]=true;
+ learningType=type;
  const search=document.getElementById('learningSearch'),select=document.getElementById('learningField');
  if(search)search.value='';
  if(select)select.value=field;
@@ -2743,38 +2529,23 @@ function renderCards(){
    </div>
    ${decisionCardMarkup(x)}
    <div class="item-spacer"></div>
-   <button class="more-btn" aria-expanded="false" aria-controls="card-more-${x.id}" onclick="toggleCardMore('${x.id}',this)">المزيد +</button>
-   <div class="card-more-panel" id="card-more-${x.id}" hidden>
-    <div class="card-more-facts">
-     <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
-     <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
-     <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
-    </div>
-    <button class="card-more-source" onclick="openDetail('${x.id}')">التفاصيل والمصادر ←</button>
-   </div>
+   <button class="more-btn" onclick="openDetail('${x.id}')">التفاصيل والمصادر +</button>
    <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
   </article>`).join('');
  if(more){
    const remaining=list.length-shown.length;
-   const moreLabel=originFilter
-     ? 'بدائل أكثر لهذا الاختيار +'
-     : subfilter!=='all'
-       ? 'المزيد من '+subcategoryLabel(filter,subfilter)+' +'
-       : filter!=='all'
-         ? 'المزيد من '+categoryLabel(filter)+' +'
-         : 'اكتشافات أكثر +';
    more.innerHTML=remaining>0
-     ? `<button class="load-more-btn" onclick="showMoreDirectory()">${moreLabel} <small>${remaining} متبقية</small></button>`
+     ? `<button class="load-more-btn" onclick="showMoreDirectory()">عرض المزيد <small>${remaining} متبقية</small></button>`
      : '';
  }
  updateDirectoryContinue();
 }
 
 function setLearningType(v,el){
- learningType=v;if(v==='channel'||v==='reciter')learningSectionOpen[v]=true;resetLearningLimit();document.querySelectorAll('[data-learning-type]').forEach(b=>b.classList.remove('active'));el.classList.add('active');updateLearningCrumb();updateLearningActionLabel();renderLearning()
+ learningType=v;resetLearningLimit();document.querySelectorAll('[data-learning-type]').forEach(b=>b.classList.remove('active'));el.classList.add('active');updateLearningCrumb();updateLearningActionLabel();renderLearning()
 }
 function resetLearning(){
- learningType='all';learningSectionOpen.channel=false;learningSectionOpen.reciter=false;
+ learningType='all';
  document.getElementById('learningSearch').value='';
  document.getElementById('learningField').value='all';
  document.querySelectorAll('[data-learning-type]').forEach(b=>b.classList.toggle('active',b.dataset.learningType==='all'));
@@ -2782,7 +2553,7 @@ function resetLearning(){
 }
 function showAllLearning(){
  // Show ALL learning sources, regardless of platform/channel or field.
- learningType='all';learningSectionOpen.channel=false;learningSectionOpen.reciter=false;
+ learningType='all';
  document.getElementById('learningField').value='all';
  document.getElementById('learningSearch').value='';
  document.querySelectorAll('[data-learning-type]').forEach(
@@ -2815,30 +2586,6 @@ function updateLearningCrumb(){
  const wrap=document.getElementById('learningCrumbWrap'),el=document.getElementById('learningCrumb');
  if(!bits.length){wrap.style.display='none'}else{el.textContent=bits.join(' / ');wrap.style.display='inline'}
 }
-function toggleLearningSection(type){
- if(type!=='channel'&&type!=='reciter')return;
- learningSectionOpen[type]=!learningSectionOpen[type];
- learningCarouselIndex[type]=0;
- renderLearning();
-}
-function enableLearningCarousel(type,btn){
- const group=document.getElementById('learning-group-'+type);
- if(!group)return;
- group.classList.add('is-browsing');
- if(btn&&btn.parentElement)btn.parentElement.hidden=true;
- scrollLearningCarousel(type,1);
-}
-function scrollLearningCarousel(type,dir){
- const group=document.getElementById('learning-group-'+type);if(!group)return;
- const track=group.querySelector('.learning-carousel-track');if(!track)return;
- const cards=[...track.querySelectorAll('.learning-card')];if(!cards.length)return;
- const perView=window.matchMedia('(max-width:760px)').matches?1:4;
- const maxStart=Math.max(0,cards.length-perView);
- let current=Number.isFinite(learningCarouselIndex[type])?learningCarouselIndex[type]:0;
- current=Math.max(0,Math.min(maxStart,current+(dir>0?perView:-perView)));
- learningCarouselIndex[type]=current;
- cards[current].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
-}
 function renderLearning(){
  updateLearningCrumb();updateLearningActionLabel();
  const q=norm(document.getElementById('learningSearch').value),field=document.getElementById('learningField').value;
@@ -2846,30 +2593,15 @@ function renderLearning(){
  const groups=[['platform','منصات الكورسات'],['channel','قنوات يوتيوب مفيدة'],['reciter','قنوات رسمية لقراء القرآن']];
  document.getElementById('learningGroups').innerHTML=groups.map(([type,label])=>{
   const g=list.filter(x=>x.type===type);if(!g.length)return '';
-  const foldable=type==='channel'||type==='reciter';
-  if(foldable&&!learningSectionOpen[type]){
-   return `<section class="learning-group learning-folded" id="learning-group-${type}">
-    <div class="learning-folded-head"><div><h3 class="learning-group-title">${label}</h3><small>${g.length} مصدرًا متاحًا</small></div><button class="section-fold-toggle compact" type="button" aria-expanded="false" onclick="toggleLearningSection('${type}')"><span aria-hidden="true">+</span><span class="sr-only">فتح ${label}</span></button></div>
-   </section>`;
-  }
-  const moreLabel=type==='platform'?'منصات كورسات أكثر +':type==='channel'?'قنوات يوتيوب أكثر +':'قراء رسميون أكثر +';
-  const titleMarkup=foldable
-   ? `<div class="learning-group-title-row"><h3 class="learning-group-title">${label}</h3><button class="section-fold-toggle compact" type="button" aria-expanded="true" onclick="toggleLearningSection('${type}')"><span aria-hidden="true">−</span><span class="sr-only">طي ${label}</span></button></div>`
-   : `<h3 class="learning-group-title">${label}</h3>`;
-  return `<section class="learning-group learning-carousel-group" id="learning-group-${type}">${titleMarkup}
-   <div class="learning-carousel-shell">
-    <button class="learning-carousel-arrow learning-carousel-prev" type="button" aria-label="السابق" onclick="scrollLearningCarousel('${type}',-1)">›</button>
-    <div class="learning-carousel-viewport"><div class="learning-grid learning-carousel-track">${g.map(x=>`
-     <article class="learning-card">
-      ${logoMarkup(x.logo,'learning-logo',x.name)}
-      <h3>${x.name}</h3><p class="learning-focus">${x.focus}</p>
-      <div class="learning-actions"><button aria-expanded="false" aria-controls="learning-more-${x.id}" onclick="toggleLearningMore('${x.id}',this)">المزيد +</button><a href="${x.url}" target="_blank" rel="noopener noreferrer">${type==='platform'?'المنصة ↗':type==='reciter'?'القناة الرسمية ↗':'الدروس ↗'}</a></div>
-      <div class="learning-more-panel" id="learning-more-${x.id}" hidden><div class="card-more-facts"><div><small>الجهة / المقدم</small><strong>${x.teacher||'—'}</strong></div><div><small>التوثيق</small><strong>${x.reference||'—'}</strong></div></div><button class="card-more-source" onclick="showLearningNote('${x.id}')">التفاصيل والمصادر ←</button></div>
-     </article>`).join('')}</div></div>
-    <button class="learning-carousel-arrow learning-carousel-next" type="button" aria-label="التالي" onclick="scrollLearningCarousel('${type}',1)">‹</button>
-   </div>
-   ${g.length>4?`<div class="load-more-wrap learning-carousel-more-wrap"><button class="load-more-btn" onclick="enableLearningCarousel('${type}',this)">${moreLabel} <small>${g.length-4} أخرى</small></button></div>`:''}
-  </section>`;
+  const shown=g.slice(0,learningVisible[type]||4);
+  const remaining=g.length-shown.length;
+  return `<section class="learning-group"><h3 class="learning-group-title">${label}</h3><div class="learning-grid">${shown.map(x=>`
+   <article class="learning-card">
+    ${logoMarkup(x.logo,'learning-logo',x.name)}
+    <h3>${x.name}</h3><p class="learning-focus">${x.focus}</p>
+    <div class="learning-spacer"></div>
+    <div class="learning-actions"><button onclick="showLearningNote('${x.id}')">التفاصيل والمصادر</button><a href="${x.url}" target="_blank" rel="noopener noreferrer">${type==='platform'?'المنصة ↗':type==='reciter'?'القناة الرسمية ↗':'الدروس ↗'}</a></div>
+   </article>`).join('')}</div>${remaining>0?`<div class="load-more-wrap"><button class="load-more-btn" onclick="showMoreLearning('${type}')">عرض المزيد <small>${remaining} متبقية</small></button></div>`:''}</section>`
  }).join('') || '<div class="empty">لا توجد مصادر مطابقة. <button class="more-btn" onclick="resetLearning()">كل المصادر</button></div>';
  updateLearningContinue();
 }
@@ -2982,16 +2714,10 @@ function genericDecisionAction(x){
 }
 function decisionNoteFor(x){
  if(!x)return null;
- if(x.id==='karnak') return {
-   type:'حالة المنتج',
-   alert:'الإطلاق ما زال في مرحلة تجريبية بحسب المصدر الرسمي.',
-   action:'جرّبه أولًا على مهمة غير حساسة، ثم احكم على ملاءمته لسياقك قبل الاعتماد عليه في عمل مهم.',
-   source:'<a href="https://www.aic.gov.eg/news/43/" target="_blank" rel="noopener noreferrer">المصدر الرسمي لحالة الإطلاق</a>'
- };
  if(x.id==='mandumah') return {
-   type:'قيد وصول',
+   type:'الوصول',
    alert:'الوصول الكامل لبعض مواد دار المنظومة قد يعتمد على بنك المعرفة المصري أو اشتراك مؤسسي، ووجود المستخلص لا يعني أن النص الكامل متاح.',
-   action:'لو أنت في مصر، ابدأ من حساب بنك المعرفة المصري. ولو لم تتوفر الصلاحية، استخدم المستخلص للاكتشاف ثم ابحث عن المصدر الأصلي أو نسخة مفتوحة موثوقة.',
+   action:'لو أنت في مصر، ابدأ من حساب بنك المعرفة المصري. حساب الباحثين قد يحتاج تفعيلًا أو ترقية عبر شبكة الجامعة أو مكتبتها وفق ترتيبات الجهة. ولو ماعندكش صلاحية، استخدم المستخلص للاكتشاف ثم جرّب الوصول المؤسسي أو ابحث عن المصدر الأصلي أو نسخة مفتوحة موثوقة.',
    source:'<a href="https://www.mandumah.com/ekb/" target="_blank" rel="noopener noreferrer">اتفاق دار المنظومة مع بنك المعرفة</a> · <a href="https://www.ekb.eg/" target="_blank" rel="noopener noreferrer">بنك المعرفة المصري</a>'
  };
  const alert=(x.limit||'').trim();
@@ -3003,25 +2729,43 @@ function shortDecisionText(text='',max=112){
  return t.length>max?t.slice(0,max-1).trim()+'…':t;
 }
 const cardCautionOverrides={
- karnak:'تجريبي',
- dhawwi:'بيانات الاستخدام من الجهة',
+ karnak:'إطلاق تجريبي؛ الدقة لم تُختبر مستقلًا.',
+ dhawwi:'أرقام الاستخدام معلنة من الجهة نفسها.',
  midaad:'المجاني يضيف ختمًا خفيفًا للتصدير.',
- taqreer:'المجاني: 5 شرائح وPNG بعلامة مائية.',
- shamaa:'إتاحة النص الكامل تختلف حسب السجل والحقوق.',
+ taqreer:'المجاني: 5 شرائح وتصدير PNG بعلامة مائية.',
+ daftra:'التقييمات المستقلة المتاحة محدودة.',
+ gravity:'لم نجمع بعد مراجعات لاعبين مستقلة.',
+ shamaa:'توفر النص الكامل يختلف حسب حقوق النشر.',
+ faseeh:'جودة اللهجات لم تُختبر بما يكفي.',
  arabicdesign:'التجربة المجانية 7 أيام وبرصيد محدود.',
- mandumah:'قد يتطلب وصولًا مؤسسيًا.',
+ qriib:'لم ننفذ تجربة استخدام مستقلة.',
+ vconnct:'البيانات المستقلة المتاحة محدودة.',
+ mandumah:'الوصول الكامل قد يحتاج اشتراكًا مؤسسيًا.',
+ zotero:'راجع بيانات المصدر قبل اعتماد التوثيق.',
  salla:'الباقات والتكاملات تختلف حسب السوق.',
  edraak:'إتاحة الشهادة وشروطها تختلف حسب الدورة.',
+ openalex:'استخدمه للاكتشاف، وراجع المصدر الأصلي.',
  paymob:'الرسوم ووسائل الدفع تختلف حسب السوق.',
- anghami:'المكتبة والأسعار تختلف حسب البلد.',
- hudhud:'الإتاحة الجغرافية تؤثر على المقارنة.',
+ munsit:'القياس المنشور لا يقيّم الخدمة الحالية.',
+ arabybot:'الأتمتة والتكاملات لم تُختبر مستقلًا.',
+ arabicai:'الأداء يختلف بين منتجات المنظومة.',
+ wuzzuf:'لم ننفذ تجربة استخدام مستقلة.',
+ falcon:'لم ننفذ تجربة استخدام مستقلة.',
+ anghami:'لم نراجع كل المحتوى وإصدارات التطبيق.',
+ hudhud:'نطاق الإتاحة الجغرافي مهم عند المقارنة.',
+ khamsat:'راجع الأعمال السابقة وحدد طلبك بوضوح.',
+ fanar:'التغطية اللغوية لا تعني دقة كل مهمة.',
+ hsoub:'قارن المجاني والمدفوع حسب هدفك ووقتك.',
  noon:'الشحن والسعر يختلفان حسب البلد والمنتج.',
  opensooq:'تحقق من البائع والدفع قبل إتمام الصفقة.',
- mumzworld:'متخصص للأم والطفل، وليس سوقًا عامًا.',
+ mumzworld:'متجر متخصص للأم والطفل، لا سوق عام.',
  spacetoonyt:'راجع ملاءمة الحلقة لعمر الطفل.',
  majidkids:'راجع ملاءمة الحلقة لعمر الطفل.',
+ marefa:'راجع المراجع الأصلية قبل الاعتماد.',
+ arabency:'حداثة المواد تختلف حسب الموضوع.',
  dorar:'لا تختزل المسألة في نتيجة بحث واحدة.',
- tafsircenter:'مصدر قرآني متخصص، وليس مرجعًا لكل العلوم الشرعية.',
+ tafsircenter:'مصدر قرآني متخصص، لا يغطي كل العلوم الشرعية.',
+ shamela:'وجود الكتاب لا يعني اعتماد كل محتواه.',
  hindawi:'التوافر يتغير حسب حقوق النشر.',
  shahid:'المكتبة والإتاحة تختلف حسب البلد.',
  watchit:'الأسعار والمكتبة قد تتغير.',
@@ -3029,19 +2773,18 @@ const cardCautionOverrides={
  almaany:'المعنى الصحيح يعتمد على السياق.'
 };
 function cardCautionText(x,n){
- if(Object.prototype.hasOwnProperty.call(cardCautionOverrides,x.id))return cardCautionOverrides[x.id];
- return '';
+ if(cardCautionOverrides[x.id])return cardCautionOverrides[x.id];
+ const first=String(n?.alert||x?.limit||'').split(/[.!؟]/)[0].trim();
+ return shortDecisionText(first||n?.alert||'',74);
 }
 function decisionCardMarkup(x){
  const n=decisionNoteFor(x);
  const note=n?cardCautionText(x,n):'';
- if(!note)return '';
- return `<div class="decision-slot has-note"><div class="card-decision-note"><b>${note}</b></div></div>`;
+ return `<div class="decision-slot ${note?'has-note':'is-empty'}">${note?`<div class="card-decision-note"><b>${note}</b></div>`:''}</div>`;
 }
 function decisionPanelMarkup(x){
  const n=decisionNoteFor(x);if(!n)return '';
  return `<section class="decision-panel">
-  <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong><em>${n.type||'معلومة قرار'}</em></div>
   <p class="decision-alert-text">${n.alert}</p>
   <div class="decision-action"><b>ما الذي يمكنك فعله؟</b><span>${n.action}</span></div>
   ${n.source?`<div class="decision-source">${n.source}</div>`:''}
@@ -3111,7 +2854,7 @@ function directoryDiscoveryMarkup(x){
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
  if(!related.length)return '';
  return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>خيارات قريبة</h4><p>مسارات قريبة داخل بديلك عربي إذا أردت المقارنة قبل المغادرة.</p></div>
+  <div class="detail-discovery-head"><h4>خيارات قريبة</h4><p>مسارات قريبة داخل بديلك إذا أردت المقارنة قبل المغادرة.</p></div>
   <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="openDetail('${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></button>`).join('')}</div>
   <button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>
  </section>`;
@@ -3200,33 +2943,6 @@ function openMethodology(){
  document.querySelector('#detailModal .modal-card').scrollTop=0;
  document.querySelector('#detailModal .close').focus();
 }
-function toggleCardMore(id,btn){
- const panel=document.getElementById('card-more-'+id);if(!panel)return;
- const open=panel.hasAttribute('hidden');
- if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
- btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'المزيد +';
-}
-function toggleLearningMore(id,btn){
- const panel=document.getElementById('learning-more-'+id);if(!panel)return;
- const open=panel.hasAttribute('hidden');
- if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
- btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'المزيد +';
-}
-function toggleStaticDisclosure(bodyId,btn,kind){
- const body=document.getElementById(bodyId);if(!body)return;
- const opening=body.hasAttribute('hidden');
- if(opening)body.removeAttribute('hidden');else body.setAttribute('hidden','');
- const section=btn.closest('.fold-card');if(section)section.classList.toggle('is-open',opening);
- btn.setAttribute('aria-expanded',opening?'true':'false');
- const mark=btn.querySelector('[aria-hidden="true"]');if(mark)mark.textContent=opening?'−':'+';
- if(opening&&kind==='competition'&&!body.dataset.loaded){
-  body.dataset.loaded='1';
-  setCompetitionStory('shopping',document.querySelector('.competition-tab[data-story="shopping"]'));
- }
-}
-
 function closeModal(){
  document.getElementById('detailModal').classList.remove('show');
  document.body.classList.remove('lock');
@@ -3234,7 +2950,6 @@ function closeModal(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()})
 buildSubfilters();renderCards();renderLearning();updateDirectoryCrumb();updateLearningCrumb();updateDirectoryActionLabel();updateLearningActionLabel();
-const backToTop=document.getElementById('backToTop');if(backToTop){const syncBackTop=()=>backToTop.classList.toggle('show',window.scrollY>700);window.addEventListener('scroll',syncBackTop,{passive:true});syncBackTop();}
 </script>
 <script id="nubou-competition-spotlight-data-v40">
 const competitionStories={
@@ -3370,9 +3085,8 @@ function setCompetitionStory(id,btn){
   '<div class="specialist-matrix">'+story.rows.map(r=>'<div class="specialist-row"><div class="specialist-cell regional-cell">'+r.regional+'</div><div class="specialist-label">'+r.label+'</div><div class="specialist-cell global-cell">'+r.global+'</div></div>').join('')+'</div>'+
   '<div class="chart-context"><span class="chart-note">'+story.note+'</span><span class="chart-source">'+story.sources.map(s=>'<a href="'+s[1]+'" target="_blank" rel="noopener noreferrer">'+s[0]+' ↗</a>').join('')+'</span></div>';
 }
-// Competition renders lazily when its folded section is opened.
+document.addEventListener('DOMContentLoaded',()=>setCompetitionStory('shopping',document.querySelector('.competition-tab[data-story="shopping"]')));
 </script>
 
 </body>
 </html>
-<!-- pages-redeploy-2026-09-22 -->
