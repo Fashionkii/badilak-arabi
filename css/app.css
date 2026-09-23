@@ -5905,3 +5905,196 @@ body:has(main#top) .card .tag{
     max-height:108px!important;
   }
 }
+
+
+/* monetization-preview-v1
+   Lab-only preview of restrained monetization placements.
+   Real AdSense code must replace the demo creative, not be layered on top of it. */
+.ad-demo-wrap,
+.commercial-demo-wrap{
+  padding:18px 0;
+}
+.ad-demo-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:0 0 7px;
+  padding-inline:3px;
+}
+.ad-demo-label{
+  font-family:var(--ui);
+  font-size:.5rem;
+  font-weight:800;
+  color:#7b6d5c;
+  letter-spacing:.02em;
+}
+.ad-demo-lab{
+  font-family:var(--ui);
+  font-size:.46rem;
+  color:#9a8b78;
+  border:1px dashed rgba(122,91,37,.28);
+  border-radius:999px;
+  padding:2px 7px;
+}
+.ad-demo{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:16px;
+  min-height:108px;
+  padding:16px 18px;
+  border:1px solid rgba(23,63,61,.15);
+  border-radius:14px;
+  background:rgba(255,253,248,.86);
+  color:inherit;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(23,63,61,.035);
+}
+.ad-demo:hover{
+  border-color:rgba(184,108,67,.42);
+}
+.ad-demo-brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:105px;
+  font-family:var(--ui);
+  font-weight:800;
+  color:var(--deep);
+}
+.ad-demo-brand img{
+  width:32px;height:32px;border-radius:8px;object-fit:contain;background:#fff;
+}
+.ad-demo-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.ad-demo-copy strong{
+  font-family:var(--ui);
+  font-size:.76rem;
+  color:var(--deep);
+}
+.ad-demo-copy small{
+  font-size:.62rem;
+  color:var(--muted);
+  line-height:1.55;
+}
+.ad-demo-cta,
+.commercial-demo-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:6px 11px;
+  border-radius:9px;
+  background:var(--deep);
+  color:#fff;
+  font-family:var(--ui);
+  font-size:.54rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+.ad-demo-foot{
+  margin-top:5px;
+  padding-inline:3px;
+  font-size:.48rem;
+  color:#918577;
+  line-height:1.5;
+}
+
+/* Direct sponsor / affiliate preview: deliberately different from editorial cards. */
+.commercial-demo-card{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:15px;
+  padding:15px 17px;
+  border:1px solid #d7c5a7;
+  border-radius:14px;
+  background:#fff8e9;
+  color:inherit;
+  text-decoration:none;
+}
+.commercial-demo-logo{
+  width:44px;height:44px;border-radius:11px;background:#fff;border:1px solid #e5d8c5;
+  display:grid;place-items:center;
+}
+.commercial-demo-logo img{width:28px;height:28px;object-fit:contain}
+.commercial-demo-copy{
+  min-width:0;
+  display:flex;flex-direction:column;gap:2px;
+}
+.commercial-demo-copy>small{
+  font-family:var(--ui);
+  font-size:.48rem;
+  color:#9a6a38;
+  font-weight:800;
+}
+.commercial-demo-copy>strong{
+  font-family:var(--ui);
+  font-size:.7rem;
+  color:var(--deep);
+}
+.commercial-demo-copy>span{
+  font-size:.58rem;
+  color:#675c4e;
+  line-height:1.6;
+}
+
+/* End-of-page Multiplex-style preview. */
+.ad-demo-end{padding-top:24px;padding-bottom:26px}
+.multiplex-demo{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+.multiplex-demo>a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:82px;
+  padding:12px;
+  border:1px solid rgba(23,63,61,.14);
+  border-radius:12px;
+  background:#fffdf8;
+  text-decoration:none;
+  color:inherit;
+}
+.multiplex-demo>a:hover{border-color:rgba(184,108,67,.4)}
+.multiplex-demo img{
+  width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;
+  flex:0 0 34px;
+}
+.multiplex-demo span{display:flex;flex-direction:column;min-width:0}
+.multiplex-demo strong{font-family:var(--ui);font-size:.64rem;color:var(--deep)}
+.multiplex-demo small{font-size:.53rem;color:var(--muted);line-height:1.45}
+
+/* Keep ads out of the visual competition with the brand and first discovery. */
+.ad-demo-wrap:not(.ad-demo-end),
+.commercial-demo-wrap{
+  border-block:0;
+}
+
+@media(max-width:760px){
+  .ad-demo,
+  .commercial-demo-card{
+    grid-template-columns:auto 1fr;
+    gap:10px 12px;
+    padding:13px;
+  }
+  .ad-demo-brand{min-width:0}
+  .ad-demo-cta,
+  .commercial-demo-cta{
+    grid-column:1 / -1;
+    justify-self:stretch;
+    min-height:32px;
+  }
+  .ad-demo-copy strong{font-size:.69rem}
+  .ad-demo-copy small,
+  .commercial-demo-copy>span{font-size:.56rem}
+  .multiplex-demo{grid-template-columns:1fr}
+  .multiplex-demo>a{min-height:70px}
+}
