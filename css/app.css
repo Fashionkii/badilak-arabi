@@ -5800,3 +5800,53 @@ main#top>section{position:relative;z-index:1}
 
 /* badilak-correction-v158: keep color correction only */
 :root{--deep:#2F5B57;--heading:#2F5B57;--sage:#2F5B57}
+
+/* hero-entry-v1 — Arabic-first need paths + restored 12 familiar services */
+.entry-explorer{padding:20px!important}
+.entry-heading{margin-bottom:12px!important}
+.need-options{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;
+}
+.need-option{
+  min-height:74px;border:1px solid rgba(47,91,87,.18);background:rgba(238,243,239,.78);
+  border-radius:13px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:5px;cursor:pointer;text-align:center;transition:.18s;
+}
+.need-option:hover{
+  background:#fffdf8;border-color:#9eb6ad;transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(47,91,87,.07);
+}
+.need-icon{
+  font-size:1.45rem!important;line-height:1!important;color:var(--sunrise);
+  font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+}
+.need-option strong{
+  font-family:var(--ui);font-size:.61rem;line-height:1.4;color:var(--deep);
+}
+.familiar-heading{
+  margin:16px 0 9px;padding-top:12px;border-top:1px solid rgba(47,91,87,.16);
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+}
+.familiar-heading strong{font-family:var(--ui);font-size:.72rem;color:var(--deep)}
+.familiar-heading span{font-size:.56rem;color:var(--muted)}
+.familiar-options.origin-options{
+  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  grid-auto-rows:auto!important;gap:8px!important;width:100%!important;
+}
+.familiar-options .origin-option{
+  display:flex!important;min-height:86px!important;height:auto!important;padding:8px 5px!important;gap:6px!important;
+}
+.familiar-options .origin-logo{width:36px!important;height:36px!important}
+.familiar-options .origin-logo img{max-width:26px!important;max-height:26px!important}
+.familiar-options .origin-name{font-size:.6rem!important;min-height:17px}
+.familiar-options .origin-option::after{
+  margin-top:-3px!important;font-size:.42rem!important;padding:2px 5px!important;
+}
+@media(max-width:900px){
+  .familiar-options.origin-options{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(max-width:650px){
+  .need-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .familiar-heading{align-items:flex-start;flex-direction:column;gap:2px}
+  .familiar-options.origin-options{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
