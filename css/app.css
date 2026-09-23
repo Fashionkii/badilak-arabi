@@ -6081,3 +6081,83 @@ body:has(main#top) .card .tag{
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* directory-card-template-human-v2
+   Visible face = identity, country, familiar reference, exceptional identity note,
+   short purpose, reading center, sources, destination. No buyer-first pricing blocks. */
+.catalog-grid>.item{
+  padding:14px!important;
+}
+.catalog-grid .item-identity{
+  height:100px!important;
+  min-height:100px!important;
+  max-height:100px!important;
+  padding:6px 6px 4px!important;
+}
+.catalog-grid .item>.country-badge-slot{
+  margin:3px 0 5px!important;
+}
+.catalog-grid .item>.comparison-strip{
+  margin:0 0 6px!important;
+}
+.card-front-note{
+  align-self:center;
+  margin:0 0 6px;
+  padding:2px 8px;
+  border-radius:999px;
+  background:rgba(232,214,188,.48);
+  color:#70572f;
+  font-family:var(--ui);
+  font-size:.5rem;
+  font-weight:700;
+  line-height:1.45;
+}
+.catalog-grid .card-purpose{
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  margin:0 0 7px!important;
+  line-height:1.6!important;
+  -webkit-line-clamp:2!important;
+  text-align:center!important;
+}
+.catalog-grid .card-guide-slot{
+  display:flex!important;
+  height:32px!important;
+  min-height:32px!important;
+  max-height:32px!important;
+  margin:0 0 5px!important;
+  align-items:center!important;
+}
+.catalog-grid .card-guide-slot .card-read-link{
+  display:flex!important;
+  width:100%!important;
+  min-height:30px!important;
+  height:30px!important;
+  margin:0!important;
+}
+.card-primary-actions{gap:5px!important}
+.card-primary-actions>.more-btn{
+  min-height:31px!important;
+  height:31px!important;
+}
+.card-primary-actions>.destination-link{
+  min-height:49px!important;
+  height:49px!important;
+  max-height:49px!important;
+}
+.card-shelf-guide{display:none!important}
+
+@media(max-width:760px){
+  .catalog-grid .item-identity{
+    height:98px!important;
+    min-height:98px!important;
+    max-height:98px!important;
+  }
+  .catalog-grid .card-purpose{
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+  }
+}

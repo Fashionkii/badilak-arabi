@@ -636,6 +636,34 @@ function learningGuideLinkMarkup(id,detail=false){
  return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ قبل الاختيار':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
 }
 
+function compactCardPurpose(x){
+ const manual={
+  gravity:'لعبة منصات من استوديو سعودي.',
+  dhawwi:'محرر تصميم عربي للنص والخطوط والقوالب.',
+  fanar:'منصة ذكاء توليدي قطرية للنص والصوت والصورة.',
+  daftra:'إدارة أعمال وفواتير ومحاسبة ومخزون في مكان واحد.',
+  abjjad:'كتب عربية رقمية وصوتية للقراءة والاستماع.',
+  sowt:'بودكاست وقصص صوتية عربية.'
+ };
+ if(manual[x.id])return manual[x.id];
+ const raw=String(x.value||'').trim();
+ if(!raw)return '';
+ const sentence=(raw.match(/^.*?[.!؟](?:\s|$)/)||[])[0]?.trim()||raw;
+ if([...sentence].length<=105)return sentence;
+ const head=sentence.slice(0,105);
+ const cuts=[head.lastIndexOf('،'),head.lastIndexOf('؛'),head.lastIndexOf(':')].filter(i=>i>=42);
+ const cut=cuts.length?Math.max(...cuts):-1;
+ if(cut>0)return sentence.slice(0,cut).replace(/[،؛:]\s*$/,'').trim()+'.';
+ return sentence.slice(0,92).replace(/\s+\S*$/,'').trim()+'…';
+}
+function cardFrontNote(x){
+ const note=String(x.arabRelation||'').trim();
+ if(!note)return '';
+ const generic=new Set(['منصة عربية','تعلّم بالعربية','منصة/محتوى عربي','نموذج موجه للعربية']);
+ if(generic.has(note))return '';
+ return [...note].length<=20?note:'';
+}
+
 function renderCards(){
  closeCardShelf();
  updateDirectoryRefineUI();
@@ -670,9 +698,11 @@ function renderCards(){
    </button>
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${x.origin[0]?'':'is-empty'}">${x.origin[0]?`<span>إذا كنت تستخدم</span><span class="origin-mini">${originName(x.origin[0])}</span>`:''}</div>
-   <p class="card-purpose">${x.value}</p>
+   ${cardFrontNote(x)?`<div class="card-front-note">${cardFrontNote(x)}</div>`:''}
+   <p class="card-purpose">${compactCardPurpose(x)}</p>
+   <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
-    <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">اقرأ +</button>
+    <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">المصادر +</button>
     <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`).join('');
@@ -1250,11 +1280,11 @@ function openCardShelf(id,btn){
  const shelf=document.createElement('section');
  shelf.id='cardDetailShelf';
  shelf.className='card-detail-shelf';
- shelf.setAttribute('aria-label','تفاصيل سريعة عن '+x.name);
+ shelf.setAttribute('aria-label','مصادر ومعلومات عن '+x.name);
  shelf.innerHTML=`
   <div class="card-shelf-pointer" aria-hidden="true"></div>
   <div class="card-shelf-head">
-   <div><small>تفاصيل سريعة</small><strong>${x.name}</strong></div>
+   <div><small>المصادر والمعلومات</small><strong>${x.name}</strong></div>
    <button type="button" aria-label="إغلاق التفاصيل" onclick="closeCardShelf()">×</button>
   </div>
   ${note?`<div class="card-shelf-caution"><small>قبل الاختيار</small><strong>${cardCautionText(x,note)}</strong></div>`:''}
@@ -1264,9 +1294,8 @@ function openCardShelf(id,btn){
    <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
    <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
   </div>
-  <div class="card-shelf-guide">${editorialGuideLinkMarkup(x.id,true)}</div>
   <div class="card-shelf-actions">
-   <button type="button" onclick="closeCardShelf();openDetail('${x.id}')">التفاصيل والمصادر</button>
+   <button type="button" onclick="closeCardShelf();openDetail('${x.id}')">كل التفاصيل والمصادر</button>
   </div>`;
 
  anchor.insertAdjacentElement('afterend',shelf);
@@ -1332,14 +1361,14 @@ function toggleCardMore(id,btn){
  const open=panel.hasAttribute('hidden');
  if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
  btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'تفاصيل +';
+ btn.textContent=open?'أقل −':'المصادر +';
 }
 function toggleLearningMore(id,btn){
  const panel=document.getElementById('learning-more-'+id);if(!panel)return;
  const open=panel.hasAttribute('hidden');
  if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
  btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'تفاصيل +';
+ btn.textContent=open?'أقل −':'المصادر +';
 }
 function toggleStaticDisclosure(bodyId,btn,kind){
  const body=document.getElementById(bodyId);if(!body)return;
