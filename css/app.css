@@ -6161,3 +6161,105 @@ body:has(main#top) .card .tag{
     max-height:46px!important;
   }
 }
+
+
+/* familiar-services-polish-v1
+   Keep the agreed 12 services only. Borrow the stronger stable-main logo proportion,
+   remove dead air, and turn the field into a quiet second line rather than a badge. */
+.origin-options{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-auto-rows:104px!important;
+  gap:10px!important;
+}
+.origin-option{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:104px!important;
+  min-height:104px!important;
+  max-height:104px!important;
+  padding:8px 7px 7px!important;
+  gap:4px!important;
+  justify-content:center!important;
+}
+.origin-logo{
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  border-radius:12px!important;
+  margin:0 0 1px!important;
+}
+.origin-logo img{
+  width:auto!important;
+  height:auto!important;
+  max-width:36px!important;
+  max-height:36px!important;
+  object-fit:contain!important;
+  image-rendering:auto!important;
+}
+.origin-name{
+  font-size:.69rem!important;
+  line-height:1.18!important;
+  min-height:15px!important;
+  margin:0!important;
+}
+.origin-option::after{
+  display:block!important;
+  order:3!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#8a7253!important;
+  font-family:var(--ui)!important;
+  font-size:.44rem!important;
+  font-weight:700!important;
+  line-height:1.15!important;
+  letter-spacing:0!important;
+  pointer-events:none!important;
+  opacity:.92;
+}
+.origin-option[data-origin="chatgpt"]::after{content:"AI"!important}
+.origin-option[data-origin="canva"]::after{content:"تصميم"!important}
+.origin-option[data-origin="drive"]::after{content:"ملفات"!important}
+.origin-option[data-origin="coursera"]::after{content:"تعلّم"!important}
+.origin-option[data-origin="fiverr"]::after{content:"عمل حر"!important}
+.origin-option[data-origin="shopify"]::after{content:"متاجر"!important}
+.origin-option[data-origin="acrobat"]::after{content:"PDF"!important}
+.origin-option[data-origin="teams"]::after{content:"اجتماعات"!important}
+.origin-option[data-origin="spotify"]::after{content:"صوت"!important}
+.origin-option[data-origin="udemy"]::after{content:"تعلّم"!important}
+.origin-option[data-origin="amazon"]::after{content:"تسوّق"!important}
+.origin-option[data-origin="jumia"]::after{content:"تسوّق"!important}
+
+@media(max-width:980px){
+  .origin-options{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-auto-rows:104px!important;
+  }
+}
+@media(max-width:760px){
+  .origin-options{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:100px!important;
+    gap:9px!important;
+  }
+  .origin-option{
+    height:100px!important;
+    min-height:100px!important;
+    max-height:100px!important;
+    padding:7px 6px!important;
+  }
+  .origin-logo{
+    width:46px!important;
+    height:46px!important;
+    min-width:46px!important;
+    min-height:46px!important;
+  }
+  .origin-logo img{
+    max-width:35px!important;
+    max-height:35px!important;
+  }
+}
