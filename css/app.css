@@ -5850,3 +5850,125 @@ main#top>section{position:relative;z-index:1}
   .familiar-heading{align-items:flex-start;flex-direction:column;gap:2px}
   .familiar-options.origin-options{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+
+/* hero-entry-v2 — compact the entry block without changing its content or behavior */
+.entry-explorer{
+  padding:14px 16px!important;
+  border-radius:16px!important;
+}
+.entry-heading{
+  margin-bottom:8px!important;
+}
+.entry-heading h2{
+  font-size:.88rem!important;
+}
+.entry-heading .origin-hint{
+  font-size:.58rem!important;
+}
+
+/* Need-first routes: one compact row on desktop */
+.need-options{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:6px!important;
+}
+.need-option{
+  min-height:52px!important;
+  padding:6px 5px!important;
+  border-radius:10px!important;
+  gap:3px!important;
+}
+.need-icon{
+  font-size:1.08rem!important;
+}
+.need-option strong{
+  font-size:.53rem!important;
+  line-height:1.3!important;
+}
+
+/* Familiar services: keep all 12, but reduce their visual weight */
+.familiar-heading{
+  margin:10px 0 6px!important;
+  padding-top:8px!important;
+}
+.familiar-heading strong{font-size:.64rem!important}
+.familiar-heading span{font-size:.5rem!important}
+.familiar-options.origin-options{
+  gap:6px!important;
+}
+.familiar-options .origin-option{
+  min-height:66px!important;
+  padding:5px 4px!important;
+  gap:3px!important;
+  border-radius:10px!important;
+}
+.familiar-options .origin-logo{
+  width:29px!important;
+  height:29px!important;
+  border-radius:8px!important;
+}
+.familiar-options .origin-logo img{
+  max-width:21px!important;
+  max-height:21px!important;
+}
+.familiar-options .origin-name{
+  font-size:.53rem!important;
+  min-height:14px!important;
+  line-height:1.2!important;
+}
+.familiar-options .origin-option::after{
+  margin-top:-1px!important;
+  padding:1px 4px!important;
+  font-size:.38rem!important;
+  line-height:1.15!important;
+}
+
+/* Tablet: 3 compact need routes per row, familiar services remain dense */
+@media(max-width:900px){
+  .need-options{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .familiar-options.origin-options{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+}
+
+/* Mobile: keep the block shallow by scrolling the familiar icons horizontally */
+@media(max-width:650px){
+  .entry-explorer{padding:12px!important}
+  .entry-heading{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:2px!important;
+    margin-bottom:7px!important;
+  }
+  .need-options{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .need-option{
+    min-height:48px!important;
+    padding:5px 3px!important;
+  }
+  .need-option strong{font-size:.48rem!important}
+  .familiar-heading{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:1px!important;
+    margin:8px 0 5px!important;
+    padding-top:7px!important;
+  }
+  .familiar-options.origin-options{
+    display:flex!important;
+    gap:6px!important;
+    overflow-x:auto!important;
+    overscroll-behavior-inline:contain;
+    scroll-snap-type:x proximity;
+    padding-bottom:3px!important;
+    scrollbar-width:none;
+  }
+  .familiar-options.origin-options::-webkit-scrollbar{display:none}
+  .familiar-options .origin-option{
+    flex:0 0 76px!important;
+    width:76px!important;
+    min-width:76px!important;
+    min-height:64px!important;
+    scroll-snap-align:start;
+  }
+}
