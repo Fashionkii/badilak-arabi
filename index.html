@@ -52,18 +52,30 @@
   </div>
  </div>
  <aside class="origin-explorer entry-explorer">
-  <div class="origin-heading entry-heading"><h2>ابدأ بما تحتاجه</h2><span class="origin-hint">اختر المجال وسننقلك مباشرة إلى قسمه</span></div>
-  <div class="need-options" aria-label="ابدأ حسب حاجتك">
-   <button class="need-option" type="button" onclick="openDirectory('tech')"><span class="need-icon material-symbols-outlined" aria-hidden="true">code</span><strong>تقنيات وابتكارات</strong></button>
-   <button class="need-option" type="button" onclick="openDirectory('work')"><span class="need-icon material-symbols-outlined" aria-hidden="true">work</span><strong>عمل ومشاريع</strong></button>
-   <button class="need-option" type="button" onclick="openDirectory('learn')"><span class="need-icon material-symbols-outlined" aria-hidden="true">school</span><strong>تعلّم وبحث</strong></button>
-   <button class="need-option" type="button" onclick="openDirectory('create')"><span class="need-icon material-symbols-outlined" aria-hidden="true">slideshow</span><strong>محتوى وإبداع</strong></button>
-   <button class="need-option" type="button" onclick="openDirectory('shopping')"><span class="need-icon material-symbols-outlined" aria-hidden="true">shopping_bag</span><strong>تسوّق وأسواق</strong></button>
-   <button class="need-option" type="button" onclick="openDirectory('culture')"><span class="need-icon material-symbols-outlined" aria-hidden="true">menu_book</span><strong>ثقافة وترفيه</strong></button>
+  <div class="entry-switch-head">
+    <div>
+      <h2>ابدأ من الأقرب لك</h2>
+      <span>طريقتان للدخول لنفس الدليل — من حاجتك أو من خدمة تعرفها</span>
+    </div>
+    <div class="entry-tabs" role="tablist" aria-label="طريقة بدء الاكتشاف">
+      <button class="entry-tab active" type="button" role="tab" aria-selected="true" aria-controls="entryNeedPanel" onclick="switchEntryMode('need',this)">حسب حاجتك</button>
+      <button class="entry-tab" type="button" role="tab" aria-selected="false" aria-controls="entryFamiliarPanel" onclick="switchEntryMode('familiar',this)">بما تعرفه</button>
+    </div>
   </div>
 
-  <div class="familiar-heading"><strong>أو ابدأ بما تعرفه</strong><span>12 خدمة مألوفة توصلك للمسار العربي المقابل</span></div>
-  <div class="origin-options familiar-options">
+  <div class="entry-panel need-panel" id="entryNeedPanel" role="tabpanel">
+    <div class="need-options" aria-label="ابدأ حسب حاجتك">
+      <button class="need-option" type="button" onclick="openDirectory('tech')"><span class="need-icon material-symbols-outlined" aria-hidden="true">code</span><strong>تقنيات وابتكارات</strong></button>
+      <button class="need-option" type="button" onclick="openDirectory('work')"><span class="need-icon material-symbols-outlined" aria-hidden="true">work</span><strong>عمل ومشاريع</strong></button>
+      <button class="need-option" type="button" onclick="openDirectory('learn')"><span class="need-icon material-symbols-outlined" aria-hidden="true">school</span><strong>تعلّم وبحث</strong></button>
+      <button class="need-option" type="button" onclick="openDirectory('create')"><span class="need-icon material-symbols-outlined" aria-hidden="true">slideshow</span><strong>محتوى وإبداع</strong></button>
+      <button class="need-option" type="button" onclick="openDirectory('shopping')"><span class="need-icon material-symbols-outlined" aria-hidden="true">shopping_bag</span><strong>تسوّق وأسواق</strong></button>
+      <button class="need-option" type="button" onclick="openDirectory('culture')"><span class="need-icon material-symbols-outlined" aria-hidden="true">menu_book</span><strong>ثقافة وترفيه</strong></button>
+    </div>
+  </div>
+
+  <div class="entry-panel familiar-panel" id="entryFamiliarPanel" role="tabpanel" hidden>
+    <div class="origin-options familiar-options">
    <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi></button>
    <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi></button>
    <button class="origin-option" data-origin="drive" aria-pressed="false" onclick="chooseOrigin('drive',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://drive.google.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Google Drive</bdi></button>
@@ -76,6 +88,7 @@
    <button class="origin-option" data-origin="udemy" aria-pressed="false" onclick="chooseOrigin('udemy',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.udemy.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Udemy</bdi></button>
    <button class="origin-option" data-origin="amazon" aria-pressed="false" onclick="chooseOrigin('amazon',this)" title="يشمل المسار من كان يستخدم Souq سابقًا"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.amazon.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Amazon / Souq</bdi></button>
    <button class="origin-option" data-origin="jumia" aria-pressed="false" onclick="chooseOrigin('jumia',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.jumia.com.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Jumia</bdi></button>
+  </div>
   </div>
  </aside>
 </section>

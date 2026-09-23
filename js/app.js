@@ -1803,3 +1803,16 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
  }
 }
 renderArabProgress('innovation');
+
+function switchEntryMode(mode,btn){
+ const need=document.getElementById('entryNeedPanel');
+ const familiar=document.getElementById('entryFamiliarPanel');
+ const showFamiliar=mode==='familiar';
+ if(need)need.hidden=showFamiliar;
+ if(familiar)familiar.hidden=!showFamiliar;
+ document.querySelectorAll('.entry-tab').forEach(tab=>{
+  const active=tab===btn;
+  tab.classList.toggle('active',active);
+  tab.setAttribute('aria-selected',active?'true':'false');
+ });
+}
