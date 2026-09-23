@@ -555,7 +555,7 @@ function updateDirectoryContinue(){
  }else if(q){
    actions=[['كل الدليل',"resetDirectory()"],['آخر المراجعات',"go('updates')"],['مصادر التعلّم',"go('learning')"]];
  }else{
-   actions=[['تقنيات وابتكارات',"openDiscoveryGroup('tech','all')"],['العمل والمشاريع',"openDiscoveryGroup('work','all')"],['التعلّم والبحث',"openDiscoveryGroup('learn','all')"]];
+   actions=[['تقنية وذكاء اصطناعي',"openDiscoveryGroup('tech','all')"],['شغلك ومشروعك',"openDiscoveryGroup('work','all')"],['تعلّم وبحث',"openDiscoveryGroup('learn','all')"]];
  }
  root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتدور، جرّب واحدًا من المسارات القريبة.',actions.slice(0,3));
 }
