@@ -557,7 +557,7 @@ function updateDirectoryContinue(){
  }else{
    actions=[['تقنيات وابتكارات',"openDiscoveryGroup('tech','all')"],['العمل والمشاريع',"openDiscoveryGroup('work','all')"],['التعلّم والبحث',"openDiscoveryGroup('learn','all')"]];
  }
- root.innerHTML=sectionContinueMarkup('استكشف مسارًا قريبًا','مسارات قريبة بدل نهاية تصفّح مغلقة.',actions.slice(0,3));
+ root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتدور، جرّب واحدًا من المسارات القريبة.',actions.slice(0,3));
 }
 function updateLearningContinue(){
  const root=document.getElementById('learningContinue');if(!root)return;
@@ -576,7 +576,7 @@ function updateLearningContinue(){
  }else{
    actions=[['منصات الكورسات',"setLearningPath('platform','all')"],['قنوات يوتيوب',"setLearningPath('channel','all')"],['قنوات القراء الرسمية',"setLearningPath('reciter','quran')"]];
  }
- root.innerHTML=sectionContinueMarkup('استكشف مسارًا قريبًا','لو لسه بتقارن، انتقل لمسار قريب من نفس نيتك.',actions);
+ root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتقارن، جرّب مصدرًا قريبًا من نفس هدفك.',actions);
 }
 
 const relatedGuideMap={
@@ -653,11 +653,11 @@ function renderCards(){
  if(originFilter) context.push(originContextLabel(originFilter));
  if(countryFilter) context.push(arabProgressCountryNames[countryFilter]||countryFilter);
  const shown=list.slice(0,directoryVisible);
- document.getElementById('stateLine').textContent=`${list.length} نتيجة${context.length?' · '+context.join(' · '):' · كل الدليل'} · ظاهر ${Math.min(shown.length,list.length)}`;
+ document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length}${context.length?' · '+context.join(' · '):' · كل الدليل'}`;
  const root=document.getElementById('catalogGrid');
  const more=document.getElementById('directoryMore');
  if(!list.length){
-   root.innerHTML='<div class="empty">لا توجد نتائج موثقة مطابقة الآن. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
+   root.innerHTML='<div class="empty">لم نجد نتيجة موثقة مطابقة الآن. جرّب توسيع البحث. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
    if(more)more.innerHTML='';
    updateDirectoryContinue();
    return;
@@ -677,7 +677,7 @@ function renderCards(){
    </div>
    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="item-spacer"></div>
-   <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">تفاصيل +</button>
+   <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">اقرأ +</button>
    <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
   </article>`).join('');
  if(more){
@@ -1043,7 +1043,7 @@ function directoryDiscoveryMarkup(x){
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
  if(!related.length)return '';
  return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>خيارات قريبة</h4><p>مسارات قريبة داخل بديلك عربي إذا أردت المقارنة قبل المغادرة.</p></div>
+  <div class="detail-discovery-head"><h4>قبل ما تخرج</h4><p>لو حابب تقارن، دي خيارات قريبة من نفس الاستخدام.</p></div>
   <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="openDetail('${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></button>`).join('')}</div>
   <button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>
  </section>`;
@@ -1065,7 +1065,7 @@ function learningDiscoveryMarkup(x){
  const related=relatedLearningItems(x);
  if(!related.length)return '';
  return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>خيارات قريبة</h4><p>${x.type==='reciter'?'قنوات تلاوة أخرى للاكتشاف.':'مصادر تعلم قريبة من نفس الاهتمام.'}</p></div>
+  <div class="detail-discovery-head"><h4>خيارات قريبة</h4><p>${x.type==='reciter'?'قنوات تلاوة أخرى قريبة من اختيارك.':'مصادر تعلم قريبة من نفس الهدف.'}</p></div>
   <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="showLearningNote('${a.id}')"><strong>${a.name}</strong><small>${a.focus}</small></button>`).join('')}</div>
   <button type="button" class="detail-collection" onclick="closeModal();showAllLearning()">عرض كل مصادر التعلّم</button>
  </section>`;

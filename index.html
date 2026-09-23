@@ -52,7 +52,7 @@
   </div>
  </div>
  <aside class="origin-explorer">
-  <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">اختر خدمة لاكتشاف بدائل أو مصادر عربية في مجالها</span></div>
+  <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">لو تعرف خدمة مألوفة، ابدأ منها. نوصلك للمجال وما يقابله عربيًا.</span></div>
   <div class="origin-options">
    <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi></button>
    <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi></button>
@@ -68,65 +68,25 @@
    <button class="origin-option" data-origin="jumia" aria-pressed="false" onclick="chooseOrigin('jumia',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.jumia.com.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Jumia</bdi></button>
   </div>
  </aside>
-</section>
-
-<section class="competition-feature wrap arab-progress-index arab-progress-editorial" id="competitionIndex" aria-labelledby="competitionTitle">
- <div class="competition-head arab-observer-head">
-  <div><h2 id="competitionTitle">مرصد التقدم العربي</h2></div>
-  <p>نرصد أين تظهر نقاط القوة العربية في الابتكار والبراءات والأبحاث والتحول الرقمي، بأرقام قابلة للمراجعة والتحديث.</p>
- </div>
-
- <div class="arab-progress-tabbar arab-progress-cards">
-  <div class="arab-progress-tabs" role="tablist" aria-label="المؤشرات الأساسية">
-   <button class="active" type="button" data-arab-metric="innovation" onclick="selectArabMetric('innovation',this)">
-    <span class="arab-tab-icon material-symbols-outlined" aria-hidden="true">account_tree</span>
-    <span class="arab-tab-copy"><b>الابتكار</b><small>أفكار تتحول إلى واقع</small></span>
-   </button>
-   <button type="button" data-arab-metric="patents" onclick="selectArabMetric('patents',this)">
-    <span class="arab-tab-icon material-symbols-outlined" aria-hidden="true">description</span>
-    <span class="arab-tab-copy"><b>البراءات</b><small>حماية الابتكارات</small></span>
-   </button>
-   <button type="button" data-arab-metric="research" onclick="selectArabMetric('research',this)">
-    <span class="arab-tab-icon material-symbols-outlined" aria-hidden="true">school</span>
-    <span class="arab-tab-copy"><b>الأبحاث</b><small>معرفة تُبنى للمستقبل</small></span>
-   </button>
-  </div>
-  <button class="arab-more-metrics-btn arab-more-card" id="arabMoreMetricsBtn" type="button" aria-expanded="false" aria-controls="arabExtraMetrics" onclick="toggleArabExtraMetrics(this)">
-   <span class="arab-more-plus" aria-hidden="true">+</span>
-   <span><b>المزيد</b><small>مؤشرات إضافية</small></span>
-  </button>
- </div>
-
- <div class="arab-extra-metrics" id="arabExtraMetrics" hidden>
-  <button type="button" data-arab-metric="ai" onclick="selectArabMetric('ai',this);closeArabExtraMetrics()">ذكاء اصطناعي <small>IMF 2023</small></button>
-  <button type="button" data-arab-metric="digital" onclick="selectArabMetric('digital',this);closeArabExtraMetrics()">اتصال رقمي <small>ITU 2026</small></button>
-  <button type="button" data-arab-metric="services" onclick="selectArabMetric('services',this);closeArabExtraMetrics()">خدمات إلكترونية <small>UN 2024</small></button>
-  <button type="button" data-arab-metric="cyber" onclick="selectArabMetric('cyber',this);closeArabExtraMetrics()">أمن سيبراني <small>ITU 2024</small></button>
-  <button type="button" data-arab-metric="govtech" onclick="selectArabMetric('govtech',this);closeArabExtraMetrics()">GovTech <small>World Bank 2025</small></button>
-  <button type="button" class="is-pending" disabled title="نحتاج مصدرًا موحدًا يقيس التعليم التقني بنفس التعريف بين الدول">تعليم تقني <small>قيد المنهجية</small></button>
-  <button type="button" class="is-pending" disabled title="لا يوجد حاليًا مصدر موحد يحصر المواقع العربية التقنية والخدمية بنفس المنهج بين الدول">ويب عربي موثّق <small>نبني المعيار</small></button>
- </div>
-
- <div class="arab-observer-layout">
-  <div class="arab-observer-main">
-   <div class="arab-progress-chart" id="arabProgressChart" aria-live="polite"></div>
-   <div class="arab-progress-source" id="arabProgressSource"></div>
-  </div>
-  <aside class="arab-observer-insight" id="arabProgressInsight" aria-live="polite"></aside>
- </div>
-</section>
 
 <section class="portal wrap" aria-label="أقسام بديلك عربي">
  <div class="portal-bar">
   <button class="portal-btn" onclick="openDirectory('all')"><strong>كل الاكتشافات</strong></button>
   <button class="portal-btn" onclick="openDirectory('tech')"><strong>تقنيات وابتكارات</strong></button>
-  <button class="portal-btn" onclick="openDirectory('work')"><strong>للعمل والمشاريع</strong></button>
-  <button class="portal-btn" onclick="openDirectory('shopping')"><strong>للتسوّق والأسواق</strong></button>
-  <button class="portal-btn" onclick="openDirectory('learn')"><strong>للتعلّم والبحث</strong></button>
-  <button class="portal-btn" onclick="openDirectory('create')"><strong>للمحتوى والإبداع</strong></button>
-  <button class="portal-btn" onclick="openDirectory('culture')"><strong>للثقافة والترفيه</strong></button>
+  <button class="portal-btn" onclick="openDirectory('work')"><strong>عمل ومشاريع</strong></button>
+  <button class="portal-btn" onclick="openDirectory('shopping')"><strong>تسوّق وأسواق</strong></button>
+  <button class="portal-btn" onclick="openDirectory('learn')"><strong>تعلّم وبحث</strong></button>
+  <button class="portal-btn" onclick="openDirectory('create')"><strong>محتوى وإبداع</strong></button>
+  <button class="portal-btn" onclick="openDirectory('culture')"><strong>ثقافة وترفيه</strong></button>
  </div>
 </section>
+
+
+</section>
+
+
+
+
 
 
 
@@ -135,6 +95,7 @@
 <section class="section wrap" id="directory">
  <div class="section-head">
   <div><h2 class="art-title art-title--section art-title--discover"><span class="sr-only">اكتشف حسب حاجتك</span><img class="art-title-img art-img-discover" src="/images/titles/discover.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div>
+  <p class="section-human-note">مش لازم تعرف اسم الأداة. ابحث بالمهمة، أو اختر المجال، ثم ضيّق النتائج لو احتجت.</p>
  </div>
  <div class="local-nav">
   <div class="wrap local-nav-inner">
@@ -183,10 +144,58 @@
  </div>
 </section>
 
+<section class="competition-feature wrap arab-progress-index arab-progress-editorial" id="competitionIndex" aria-labelledby="competitionTitle">
+ <div class="competition-head arab-observer-head">
+  <div><h2 id="competitionTitle">مرصد التقدم العربي</h2><p class="section-human-note observer-note">الأرقام هنا سياق لا حكم؛ مؤشر واحد لا يحكي قصة بلد كاملة.</p></div>
+  <p>نرصد أين تظهر نقاط القوة العربية في الابتكار والبراءات والأبحاث والتحول الرقمي، بأرقام قابلة للمراجعة والتحديث.</p>
+ </div>
+
+ <div class="arab-progress-tabbar arab-progress-cards">
+  <div class="arab-progress-tabs" role="tablist" aria-label="المؤشرات الأساسية">
+   <button class="active" type="button" data-arab-metric="innovation" onclick="selectArabMetric('innovation',this)">
+    <span class="arab-tab-icon material-symbols-outlined" aria-hidden="true">account_tree</span>
+    <span class="arab-tab-copy"><b>الابتكار</b><small>أفكار تتحول إلى واقع</small></span>
+   </button>
+   <button type="button" data-arab-metric="patents" onclick="selectArabMetric('patents',this)">
+    <span class="arab-tab-icon material-symbols-outlined" aria-hidden="true">description</span>
+    <span class="arab-tab-copy"><b>البراءات</b><small>حماية الابتكارات</small></span>
+   </button>
+   <button type="button" data-arab-metric="research" onclick="selectArabMetric('research',this)">
+    <span class="arab-tab-icon material-symbols-outlined" aria-hidden="true">school</span>
+    <span class="arab-tab-copy"><b>الأبحاث</b><small>معرفة تُبنى للمستقبل</small></span>
+   </button>
+  </div>
+  <button class="arab-more-metrics-btn arab-more-card" id="arabMoreMetricsBtn" type="button" aria-expanded="false" aria-controls="arabExtraMetrics" onclick="toggleArabExtraMetrics(this)">
+   <span class="arab-more-plus" aria-hidden="true">+</span>
+   <span><b>المزيد</b><small>مؤشرات إضافية</small></span>
+  </button>
+ </div>
+
+ <div class="arab-extra-metrics" id="arabExtraMetrics" hidden>
+  <button type="button" data-arab-metric="ai" onclick="selectArabMetric('ai',this);closeArabExtraMetrics()">ذكاء اصطناعي <small>IMF 2023</small></button>
+  <button type="button" data-arab-metric="digital" onclick="selectArabMetric('digital',this);closeArabExtraMetrics()">اتصال رقمي <small>ITU 2026</small></button>
+  <button type="button" data-arab-metric="services" onclick="selectArabMetric('services',this);closeArabExtraMetrics()">خدمات إلكترونية <small>UN 2024</small></button>
+  <button type="button" data-arab-metric="cyber" onclick="selectArabMetric('cyber',this);closeArabExtraMetrics()">أمن سيبراني <small>ITU 2024</small></button>
+  <button type="button" data-arab-metric="govtech" onclick="selectArabMetric('govtech',this);closeArabExtraMetrics()">GovTech <small>World Bank 2025</small></button>
+  <button type="button" class="is-pending" disabled title="نحتاج مصدرًا موحدًا يقيس التعليم التقني بنفس التعريف بين الدول">تعليم تقني <small>قيد المنهجية</small></button>
+  <button type="button" class="is-pending" disabled title="لا يوجد حاليًا مصدر موحد يحصر المواقع العربية التقنية والخدمية بنفس المنهج بين الدول">ويب عربي موثّق <small>نبني المعيار</small></button>
+ </div>
+
+ <div class="arab-observer-layout">
+  <div class="arab-observer-main">
+   <div class="arab-progress-chart" id="arabProgressChart" aria-live="polite"></div>
+   <div class="arab-progress-source" id="arabProgressSource"></div>
+  </div>
+  <aside class="arab-observer-insight" id="arabProgressInsight" aria-live="polite"></aside>
+ </div>
+</section>
+
+
+
 <section class="section alt" id="learning">
  <div class="wrap">
   <div class="section-head">
-   <div><h2 class="art-title art-title--section art-title--sources"><span class="sr-only">مصادر تعلّم وقنوات مختارة</span><img class="art-title-img art-img-sources" src="/images/titles/sources.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div>
+   <div><h2 class="art-title art-title--section art-title--sources"><span class="sr-only">مصادر تعلّم وقنوات مختارة</span><img class="art-title-img art-img-sources" src="/images/titles/sources.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">اختَر المصدر الذي يخدم هدفك، لا القائمة الأطول.</p></div>
   </div>
  </div>
  <div class="local-nav">
@@ -216,7 +225,7 @@
 </section>
 
 <section class="section wrap fold-card" id="guides">
- <div class="section-head"><div><h2 class="art-title art-title--section art-title--beforepay"><span class="sr-only">قبل ما تدفع</span><img class="art-title-img art-img-beforepay" src="/images/titles/beforepay.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div></div>
+ <div class="section-head"><div><h2 class="art-title art-title--section art-title--beforepay"><span class="sr-only">قبل ما تدفع</span><img class="art-title-img art-img-beforepay" src="/images/titles/beforepay.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">قبل الاشتراك أو نقل شغلك، راجع ما قد يغيّر القرار فعلًا.</p></div></div>
  <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="guidesBody" onclick="toggleStaticDisclosure('guidesBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">اقرأ</span></button>
  <div class="section-fold-body" id="guidesBody" hidden>
 <div class="guides frame-soft">
@@ -236,7 +245,7 @@
 </section>
 
 <section class="section wrap fold-card" id="knowledge">
- <div class="section-head"><div><h2 class="art-title art-title--section art-title--nottools"><span class="sr-only">مش بس أدوات</span><img class="art-title-img art-img-nottools" src="/images/titles/nottools.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div></div>
+ <div class="section-head"><div><h2 class="art-title art-title--section art-title--nottools"><span class="sr-only">مش بس أدوات</span><img class="art-title-img art-img-nottools" src="/images/titles/nottools.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">كتب وألعاب وصوت وتجارب عربية لها قيمة حتى من غير مقارنة بمنتج عالمي.</p></div></div>
  <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="knowledgeBody" onclick="toggleStaticDisclosure('knowledgeBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">اقرأ</span></button>
  <div class="section-fold-body" id="knowledgeBody" hidden>
 <div class="discovery-shelf">
@@ -257,7 +266,7 @@
 
 <section class="section alt updates-warm" id="updates">
  <div class="wrap">
-  <div class="section-head"><div><h2 class="art-title art-title--section art-title--monitor"><span class="sr-only">مرصد بديلك</span><img class="art-title-img art-img-monitor" src="/images/titles/monitor.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div></div>
+  <div class="section-head"><div><h2 class="art-title art-title--section art-title--monitor"><span class="sr-only">مرصد بديلك</span><img class="art-title-img art-img-monitor" src="/images/titles/monitor.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">سعر، إتاحة، قيد أو معلومة جديدة — نراجع ما قد يغيّر اختيارك.</p></div></div>
   <div class="monitor-grid">
    <button class="monitor-card" onclick="openDetail('midaad')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">description</span></span><span class="monitor-status">مراجعة حديثة</span></div><h3>مِداد: تحرير PDF وOCR بالعربية</h3><span class="monitor-country"><img src="/images/flags/sa.png" alt="">السعودية · السوق/التسعير</span><p>يدعم الموقع تحرير النص العربي والتحويل وOCR؛ اختبر ملفك الفعلي وراجع حدود الخطة قبل الاعتماد.</p><time>17 سبتمبر 2026</time></button>
    <button class="monitor-card" onclick="openDetail('taqreer')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">slideshow</span></span><span class="monitor-status">ادعاء يحتاج سياق</span></div><h3>taqreer.ai: عروض عربية بالذكاء الاصطناعي</h3><span class="monitor-country"><img src="/images/flags/us.png" alt="">الولايات المتحدة</span><p>ينشئ عروضًا بالعربية بالذكاء الاصطناعي؛ راجع حدود الخطة المجانية والتصدير قبل الاعتماد.</p><time>17 سبتمبر 2026</time></button>

@@ -5777,3 +5777,29 @@ main#top>section{position:relative;z-index:1}
 
 /* badilak-correction-v158: keep color correction only */
 :root{--deep:#2F5B57;--heading:#2F5B57;--sage:#2F5B57}
+
+
+/* human-journey-copy-v1 — quiet copy that supports the user's next decision */
+.section-human-note{
+  margin:.35rem 0 0;
+  max-width:720px;
+  color:var(--muted);
+  font-family:var(--ui);
+  font-size:.66rem;
+  line-height:1.75;
+  font-weight:500;
+}
+.section-head .section-human-note{
+  margin-inline:auto;
+  text-align:center;
+}
+.observer-note{
+  margin-top:.45rem;
+  max-width:620px;
+}
+@media(max-width:760px){
+  .section-human-note{
+    font-size:.61rem;
+    line-height:1.7;
+  }
+}
