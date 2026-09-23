@@ -2,7 +2,7 @@
  const BACK='badilak_nav_stack_v1', FORWARD='badilak_nav_forward_v2', RESTORE='badilak_nav_restore_v1';
  const MAX=8, TTL=4*60*60*1000;
  const samePage=(a,b)=>{try{const x=new URL(a,location.href),y=new URL(b,location.href);return x.origin===y.origin&&x.pathname===y.pathname&&x.search===y.search&&x.hash===y.hash}catch{return a===b}};
- const isInternal=u=>{try{const x=new URL(u,location.href);if(x.origin!==location.origin)return false;return /\/(?:index\.html|lab-guides\.html|lab-guide-[^/]+\.html)$/.test(x.pathname)||x.pathname==='/'}catch{return false}};
+ const isInternal=u=>{try{const x=new URL(u,location.href);if(x.origin!==location.origin)return false;return x.pathname==='/'||x.pathname==='/guides'||/^\/guides\/[^/]+$/.test(x.pathname)}catch{return false}};
  const read=(k,fallback)=>{try{return JSON.parse(sessionStorage.getItem(k)||'')||fallback}catch{return fallback}};
  const write=(k,v)=>{try{sessionStorage.setItem(k,JSON.stringify(v))}catch{}};
  const cleanStack=k=>{const now=Date.now();return (read(k,[])||[]).filter(x=>x&&x.url&&now-(x.ts||0)<TTL).slice(-MAX)};

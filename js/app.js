@@ -580,48 +580,48 @@ function updateLearningContinue(){
 }
 
 const relatedGuideMap={
- khamsat:['lab-guide-khamsat-fiverr.html','خمسات أم Fiverr؟'],
- wuzzuf:['lab-guide-wuzzuf-linkedin.html','WUZZUF أم LinkedIn؟'],
- faseeh:['lab-guide-arabic-voice-ai.html','فصيح أم ElevenLabs؟'],
- munsit:['lab-guide-munsit-otter.html','منصت أم Otter؟'],
- anghami:['lab-guide-anghami-spotify.html','أنغامي أم Spotify؟'],
- hudhud:['lab-guide-hudhud-googlemaps.html','هدهد أم Google Maps؟'],
- almaany:['lab-guide-almaany-translate.html','المعاني أم Google Translate؟'],
- dorar:['lab-guide-islamic-sources.html','أين تتحقق من الحديث؟'],
- tafsircenter:['lab-guide-islamic-sources.html','كيف تتحقق من مصدر التفسير؟'],
- shamela:['lab-guide-islamic-sources.html','كيف ترجع إلى النص والمصدر؟'],
- fanar:['lab-guide-arabic-ai.html','متى تختار مساعدًا عربيًا؟'],
- karnak:['lab-guide-arabic-ai.html','كيف تختبر مساعدًا عربيًا؟'],
- arabicai:['lab-guide-arabic-ai.html','كيف تقارن أدوات الذكاء العربي؟'],
- midaad:['lab-guide-arabic-pdf.html','كيف تختبر OCR العربي قبل الاشتراك؟'],
- dhawwi:['lab-guide-arabic-design.html','أداة تصميم عربية أم Canva؟'],
- arabicdesign:['lab-guide-arabic-design.html','كيف تختبر أداة تصميم عربية؟'],
- taqreer:['lab-guide-arabic-design.html','ما الذي تختبره في التصميم العربي؟'],
- shamaa:['lab-guide-arabic-research.html','من أين تبدأ البحث الأكاديمي العربي؟'],
- mandumah:['lab-guide-arabic-research.html','قاعدة عربية أم بحث عالمي؟'],
- qdl:['lab-guide-arabic-research.html','كيف تستخدم المصادر العربية والأولية؟'],
- openalex:['lab-guide-arabic-research.html','وسّع البحث ثم ارجع للمصدر الأصلي'],
- zotero:['lab-guide-arabic-research.html','مسار بحث عربي أكثر تنظيمًا'],
- salla:['lab-guide-ecommerce-platform.html','سلة أم Shopify؟'],
- paymob:['lab-guide-payment-gateway.html','كيف تختار بوابة الدفع؟'],
- myfatoorah:['lab-guide-payment-gateway.html','ماذا تفحص قبل ربط بوابة الدفع؟'],
- thawani:['lab-guide-payment-gateway.html','بوابة الدفع: الرسوم والتسوية والربط'],
- benefit:['lab-guide-payment-gateway.html','كيف تقرأ بنية المدفوعات المحلية؟'],
- daftra:['lab-guide-business-software.html','دفترة أم QuickBooks؟'],
- abjjad:['lab-guide-reading.html','أبجد أم Kindle؟'],
- noon:['lab-guide-shopping.html','نون أم Amazon؟ قارن العرض نفسه']
+ khamsat:['/guides/khamsat-fiverr','خمسات أم Fiverr؟'],
+ wuzzuf:['/guides/wuzzuf-linkedin','WUZZUF أم LinkedIn؟'],
+ faseeh:['/guides/arabic-voice-ai','فصيح أم ElevenLabs؟'],
+ munsit:['/guides/munsit-otter','منصت أم Otter؟'],
+ anghami:['/guides/anghami-spotify','أنغامي أم Spotify؟'],
+ hudhud:['/guides/hudhud-googlemaps','هدهد أم Google Maps؟'],
+ almaany:['/guides/almaany-translate','المعاني أم Google Translate؟'],
+ dorar:['/guides/islamic-sources','أين تتحقق من الحديث؟'],
+ tafsircenter:['/guides/islamic-sources','كيف تتحقق من مصدر التفسير؟'],
+ shamela:['/guides/islamic-sources','كيف ترجع إلى النص والمصدر؟'],
+ fanar:['/guides/arabic-ai','متى تختار مساعدًا عربيًا؟'],
+ karnak:['/guides/arabic-ai','كيف تختبر مساعدًا عربيًا؟'],
+ arabicai:['/guides/arabic-ai','كيف تقارن أدوات الذكاء العربي؟'],
+ midaad:['/guides/arabic-pdf','كيف تختبر OCR العربي قبل الاشتراك؟'],
+ dhawwi:['/guides/arabic-design','أداة تصميم عربية أم Canva؟'],
+ arabicdesign:['/guides/arabic-design','كيف تختبر أداة تصميم عربية؟'],
+ taqreer:['/guides/arabic-design','ما الذي تختبره في التصميم العربي؟'],
+ shamaa:['/guides/arabic-research','من أين تبدأ البحث الأكاديمي العربي؟'],
+ mandumah:['/guides/arabic-research','قاعدة عربية أم بحث عالمي؟'],
+ qdl:['/guides/arabic-research','كيف تستخدم المصادر العربية والأولية؟'],
+ openalex:['/guides/arabic-research','وسّع البحث ثم ارجع للمصدر الأصلي'],
+ zotero:['/guides/arabic-research','مسار بحث عربي أكثر تنظيمًا'],
+ salla:['/guides/ecommerce-platform','سلة أم Shopify؟'],
+ paymob:['/guides/payment-gateway','كيف تختار بوابة الدفع؟'],
+ myfatoorah:['/guides/payment-gateway','ماذا تفحص قبل ربط بوابة الدفع؟'],
+ thawani:['/guides/payment-gateway','بوابة الدفع: الرسوم والتسوية والربط'],
+ benefit:['/guides/payment-gateway','كيف تقرأ بنية المدفوعات المحلية؟'],
+ daftra:['/guides/business-software','دفترة أم QuickBooks؟'],
+ abjjad:['/guides/reading','أبجد أم Kindle؟'],
+ noon:['/guides/shopping','نون أم Amazon؟ قارن العرض نفسه']
 };
 const learningGuideMap={
- yanfaa:['lab-guide-learning-platform.html','كيف تختار منصة تعلم عربية؟'],
- 'edraak-learning':['lab-guide-learning-platform.html','متى يكفي المجاني ومتى تدفع؟'],
- rwaq:['lab-guide-learning-platform.html','اختر النتيجة لا عدد الدورات'],
- almentor:['lab-guide-learning-platform.html','هل الاشتراك التعليمي يستحق؟'],
- 'tadarab-learning':['lab-guide-learning-platform.html','كيف تقيّم المنصة قبل الاشتراك؟'],
- 'gomycode-learning':['lab-guide-learning-platform.html','مسار تقني أم مكتبة دورات؟']
+ yanfaa:['/guides/learning-platform','كيف تختار منصة تعلم عربية؟'],
+ 'edraak-learning':['/guides/learning-platform','متى يكفي المجاني ومتى تدفع؟'],
+ rwaq:['/guides/learning-platform','اختر النتيجة لا عدد الدورات'],
+ almentor:['/guides/learning-platform','هل الاشتراك التعليمي يستحق؟'],
+ 'tadarab-learning':['/guides/learning-platform','كيف تقيّم المنصة قبل الاشتراك؟'],
+ 'gomycode-learning':['/guides/learning-platform','مسار تقني أم مكتبة دورات؟']
 };
 function editorialGuideLinkMarkup(id,detail=false){
  const g=relatedGuideMap[id];
- const href=g?g[0]:'lab-guides.html';
+ const href=g?g[0]:'/guides';
  if(detail){
   return `<a class="editorial-guide-link is-detail" href="${href}" onclick="event.stopPropagation()"><span>اقرأ</span><strong>${g?g[1]:'اقرأ حسب حاجتك'}</strong><b aria-hidden="true">←</b></a>`;
  }
@@ -629,7 +629,7 @@ function editorialGuideLinkMarkup(id,detail=false){
 }
 function learningGuideLinkMarkup(id,detail=false){
  const g=learningGuideMap[id];
- const href=g?g[0]:'lab-guides.html';
+ const href=g?g[0]:'/guides';
  if(detail){
   return `<a class="editorial-guide-link is-detail" href="${href}" onclick="event.stopPropagation()"><span>اقرأ</span><strong>${g?g[1]:'اقرأ حسب حاجتك'}</strong><b aria-hidden="true">←</b></a>`;
  }

@@ -1,0 +1,221 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guides.html",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guides",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-reading.html",
+      "destination": "/guides/reading",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-reading",
+      "destination": "/guides/reading",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-islamic-sources.html",
+      "destination": "/guides/islamic-sources",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-islamic-sources",
+      "destination": "/guides/islamic-sources",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-almaany-translate.html",
+      "destination": "/guides/almaany-translate",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-almaany-translate",
+      "destination": "/guides/almaany-translate",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-hudhud-googlemaps.html",
+      "destination": "/guides/hudhud-googlemaps",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-hudhud-googlemaps",
+      "destination": "/guides/hudhud-googlemaps",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-munsit-otter.html",
+      "destination": "/guides/munsit-otter",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-munsit-otter",
+      "destination": "/guides/munsit-otter",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-voice-ai.html",
+      "destination": "/guides/arabic-voice-ai",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-voice-ai",
+      "destination": "/guides/arabic-voice-ai",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-anghami-spotify.html",
+      "destination": "/guides/anghami-spotify",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-anghami-spotify",
+      "destination": "/guides/anghami-spotify",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-wuzzuf-linkedin.html",
+      "destination": "/guides/wuzzuf-linkedin",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-wuzzuf-linkedin",
+      "destination": "/guides/wuzzuf-linkedin",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-mostaql-upwork.html",
+      "destination": "/guides/mostaql-upwork",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-mostaql-upwork",
+      "destination": "/guides/mostaql-upwork",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-khamsat-fiverr.html",
+      "destination": "/guides/khamsat-fiverr",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-khamsat-fiverr",
+      "destination": "/guides/khamsat-fiverr",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-shopping.html",
+      "destination": "/guides/shopping",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-shopping",
+      "destination": "/guides/shopping",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-learning-platform.html",
+      "destination": "/guides/learning-platform",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-learning-platform",
+      "destination": "/guides/learning-platform",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-business-software.html",
+      "destination": "/guides/business-software",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-business-software",
+      "destination": "/guides/business-software",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-payment-gateway.html",
+      "destination": "/guides/payment-gateway",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-payment-gateway",
+      "destination": "/guides/payment-gateway",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-ecommerce-platform.html",
+      "destination": "/guides/ecommerce-platform",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-ecommerce-platform",
+      "destination": "/guides/ecommerce-platform",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arab-progress.html",
+      "destination": "/guides/arab-progress",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arab-progress",
+      "destination": "/guides/arab-progress",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-design.html",
+      "destination": "/guides/arabic-design",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-design",
+      "destination": "/guides/arabic-design",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-research.html",
+      "destination": "/guides/arabic-research",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-research",
+      "destination": "/guides/arabic-research",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-pdf.html",
+      "destination": "/guides/arabic-pdf",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-pdf",
+      "destination": "/guides/arabic-pdf",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-ai.html",
+      "destination": "/guides/arabic-ai",
+      "permanent": true
+    },
+    {
+      "source": "/lab-guide-arabic-ai",
+      "destination": "/guides/arabic-ai",
+      "permanent": true
+    }
+  ]
+}
