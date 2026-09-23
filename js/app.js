@@ -671,14 +671,10 @@ function renderCards(){
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${x.origin[0]?'':'is-empty'}">${x.origin[0]?`<span>إذا كنت تستخدم</span><span class="origin-mini">${originName(x.origin[0])}</span>`:''}</div>
    <p class="card-purpose">${x.value}</p>
-   <div class="core-preview">
-    <div class="meta"><small>صلته بالعربية</small><strong>${x.arabRelation}</strong></div>
-    <div class="meta"><small>نموذج السعر</small><strong>${x.price}</strong></div>
+   <div class="card-primary-actions">
+    <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">اقرأ +</button>
+    <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
-   <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
-   <div class="item-spacer"></div>
-   <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">اقرأ +</button>
-   <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
   </article>`).join('');
  if(more){
    const remaining=list.length-shown.length;
@@ -1263,10 +1259,12 @@ function openCardShelf(id,btn){
   </div>
   ${note?`<div class="card-shelf-caution"><small>قبل الاختيار</small><strong>${cardCautionText(x,note)}</strong></div>`:''}
   <div class="card-shelf-facts">
-   <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
+   <div><small>السعر</small><strong>${x.price||'راجع الموقع'}</strong></div>
    <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
+   <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
    <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
   </div>
+  <div class="card-shelf-guide">${editorialGuideLinkMarkup(x.id,true)}</div>
   <div class="card-shelf-actions">
    <button type="button" onclick="closeCardShelf();openDetail('${x.id}')">التفاصيل والمصادر</button>
   </div>`;

@@ -4151,148 +4151,6 @@ h3,
   }
 }
 
-/* badilak-directory-fixed-template-v104 */
-/* Fixed internal template for directory cards.
-   Content may be 1–3 lines, but every following slot starts at the same position. */
-.catalog-grid{
-  align-items:stretch!important;
-}
-.catalog-grid > .item{
-  align-self:stretch!important;
-}
-
-/* Identity/logo/name slot */
-.item-identity{
-  height:82px!important;
-  min-height:82px!important;
-  max-height:82px!important;
-  overflow:hidden!important;
-}
-
-/* Familiar-tool context slot: always reserved, even when visually empty */
-.comparison-strip{
-  height:22px!important;
-  min-height:22px!important;
-  max-height:22px!important;
-  margin:2px 0 7px!important;
-  overflow:hidden!important;
-}
-.comparison-strip.is-empty{
-  display:flex!important;
-  visibility:hidden!important;
-}
-
-/* Description slot: exactly three available lines.
-   Short descriptions leave quiet space inside this slot instead of moving the rows below. */
-.card-purpose{
-  height:68px!important;
-  min-height:68px!important;
-  max-height:68px!important;
-  margin:0 auto 9px!important;
-  overflow:hidden!important;
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:3!important;
-  line-height:1.72!important;
-}
-
-/* Two comparison/meta cells are one fixed row */
-.core-preview{
-  height:68px!important;
-  min-height:68px!important;
-  max-height:68px!important;
-  margin-bottom:8px!important;
-  align-items:stretch!important;
-}
-.core-preview .meta{
-  height:68px!important;
-  min-height:68px!important;
-  max-height:68px!important;
-  overflow:hidden!important;
-  display:flex!important;
-  flex-direction:column!important;
-  justify-content:center!important;
-}
-.core-preview .meta strong{
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:2!important;
-  overflow:hidden!important;
-}
-
-/* Decision/caution slot is always present and always the same height */
-.decision-slot,
-.decision-slot.is-empty{
-  display:flex!important;
-  visibility:visible!important;
-  height:50px!important;
-  min-height:50px!important;
-  max-height:50px!important;
-  margin:0 0 5px!important;
-  align-items:center!important;
-  justify-content:center!important;
-  overflow:hidden!important;
-}
-.decision-slot.is-empty{
-  visibility:hidden!important;
-}
-.decision-slot .card-decision-note{
-  width:100%!important;
-  height:50px!important;
-  min-height:50px!important;
-  max-height:50px!important;
-  margin:0!important;
-  padding:7px 9px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  overflow:hidden!important;
-}
-.decision-slot .card-decision-note b{
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:2!important;
-  overflow:hidden!important;
-}
-
-/* No elastic gap: actions now start from one shared baseline */
-.item-spacer{
-  display:none!important;
-  flex:none!important;
-  width:0!important;
-  height:0!important;
-  min-height:0!important;
-  margin:0!important;
-}
-.more-btn{
-  min-height:25px!important;
-  margin-top:0!important;
-  margin-bottom:5px!important;
-}
-.destination-link{
-  height:57px!important;
-  min-height:57px!important;
-  max-height:57px!important;
-  margin-top:2px!important;
-}
-
-/* The expanded panel can grow naturally; only the closed card template is fixed. */
-.card-more-panel:not([hidden]){
-  height:auto!important;
-  max-height:none!important;
-}
-
-/* Keep the same template on narrow screens; text is clamped because full details remain available inside. */
-@media(max-width:760px){
-  .item-identity{height:82px!important;min-height:82px!important;max-height:82px!important}
-  .comparison-strip{height:22px!important;min-height:22px!important;max-height:22px!important}
-  .card-purpose{height:68px!important;min-height:68px!important;max-height:68px!important;-webkit-line-clamp:3!important}
-  .core-preview,.core-preview .meta{height:68px!important;min-height:68px!important;max-height:68px!important}
-  .decision-slot,.decision-slot.is-empty{height:50px!important;min-height:50px!important;max-height:50px!important}
-  .decision-slot .card-decision-note{height:50px!important;min-height:50px!important;max-height:50px!important}
-  .destination-link{height:57px!important;min-height:57px!important;max-height:57px!important}
-}
-
 /* badilak-learning-fixed-template-v112 */
 /* Fixed internal geometry for learning cards only.
    Short titles/descriptions keep their reserved slot instead of pulling actions upward. */
@@ -6097,4 +5955,129 @@ body:has(main#top) .card .tag{
   .commercial-demo-copy>span{font-size:.56rem}
   .multiplex-demo{grid-template-columns:1fr}
   .multiplex-demo>a{min-height:70px}
+}
+
+
+/* directory-card-template-human-v1
+   The outside answers only: what is it, where is it from, what familiar thing is it near,
+   what does it do, and where do I go next. Decision details live under "اقرأ +". */
+.catalog-grid{
+  align-items:stretch!important;
+}
+.catalog-grid>.item{
+  align-self:stretch!important;
+  display:flex!important;
+  flex-direction:column!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:15px!important;
+  overflow:hidden!important;
+}
+.catalog-grid .item-identity{
+  height:106px!important;
+  min-height:106px!important;
+  max-height:106px!important;
+  padding:7px 7px 5px!important;
+  overflow:hidden!important;
+}
+.catalog-grid .item-logo{
+  width:52px!important;
+  height:52px!important;
+  margin:0 auto 7px!important;
+}
+.catalog-grid .item-name{
+  min-height:34px!important;
+  max-height:38px!important;
+  margin:0!important;
+  line-height:1.45!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+}
+.catalog-grid .item>.country-badge-slot{
+  height:25px!important;
+  min-height:25px!important;
+  max-height:25px!important;
+  flex:0 0 25px!important;
+  margin:4px 0 6px!important;
+  justify-content:center!important;
+}
+.catalog-grid .item>.comparison-strip{
+  height:24px!important;
+  min-height:24px!important;
+  max-height:24px!important;
+  margin:0 0 8px!important;
+}
+.catalog-grid .item>.comparison-strip.is-empty{
+  display:flex!important;
+  visibility:hidden!important;
+}
+.catalog-grid .card-purpose{
+  height:76px!important;
+  min-height:76px!important;
+  max-height:76px!important;
+  margin:0 0 11px!important;
+  line-height:1.7!important;
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:3!important;
+  overflow:hidden!important;
+}
+
+/* Removed from the card face in the renderer; these stay defensive in case old cached markup appears. */
+.catalog-grid .core-preview,
+.catalog-grid .card-guide-slot,
+.catalog-grid .item-spacer{
+  display:none!important;
+}
+
+.card-primary-actions{
+  margin-top:auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:6px!important;
+}
+.card-primary-actions>.more-btn{
+  width:100%!important;
+  min-height:33px!important;
+  margin:0!important;
+  border-radius:10px!important;
+}
+.card-primary-actions>.destination-link{
+  width:100%!important;
+  min-height:52px!important;
+  height:52px!important;
+  max-height:52px!important;
+  margin:0!important;
+}
+
+/* The shelf is where decision detail belongs. */
+.card-shelf-facts{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+.card-shelf-guide{
+  margin:9px 0 7px;
+}
+.card-shelf-guide .editorial-guide-link{
+  margin:0!important;
+}
+.card-shelf-actions{
+  margin-top:5px;
+}
+
+@media(max-width:760px){
+  .catalog-grid .item-identity{
+    height:102px!important;
+    min-height:102px!important;
+    max-height:102px!important;
+  }
+  .catalog-grid .card-purpose{
+    height:72px!important;
+    min-height:72px!important;
+    max-height:72px!important;
+  }
+  .card-shelf-facts{
+    grid-template-columns:1fr!important;
+  }
 }
