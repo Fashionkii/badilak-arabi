@@ -5803,3 +5803,105 @@ main#top>section{position:relative;z-index:1}
     line-height:1.7;
   }
 }
+
+
+/* human-filter-and-flag-fix-v2
+   The category chooser should look like a real chooser, not tiny metadata.
+   Country badges always sit in their own row below a complete identity block. */
+.directory-refine-triggers [data-refine-trigger="category"]{
+  min-height:36px!important;
+  padding:8px 13px!important;
+  border-color:rgba(47,91,87,.34)!important;
+  background:#F7F1E7!important;
+  color:var(--deep)!important;
+  font-size:.63rem!important;
+  font-weight:800!important;
+  letter-spacing:0!important;
+}
+.directory-refine-triggers [data-refine-trigger="category"][aria-expanded="true"]{
+  background:var(--deep)!important;
+  color:#fff!important;
+  border-color:var(--deep)!important;
+}
+.directory-refine-triggers [data-refine-trigger="sub"]{
+  min-height:34px!important;
+  padding:7px 11px!important;
+  font-size:.58rem!important;
+}
+.refine-caret{
+  display:inline-block;
+  margin-inline-start:5px;
+  font-size:.72rem;
+  line-height:1;
+  transform:translateY(-1px);
+}
+.directory-refine-triggers button[aria-expanded="true"] .refine-caret{
+  transform:rotate(180deg) translateY(1px);
+}
+
+/* 52px logo + name can exceed the old 82px identity slot.
+   Reserve enough room once, for all cards, so the flag can never cover the name. */
+.catalog-grid .item-identity{
+  height:112px!important;
+  min-height:112px!important;
+  max-height:112px!important;
+  padding:8px 8px 6px!important;
+  overflow:hidden!important;
+}
+.catalog-grid .item-name{
+  min-height:38px!important;
+  max-height:40px!important;
+  margin-top:2px!important;
+  line-height:1.45!important;
+  overflow:hidden!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.catalog-grid .item>.country-badge-slot{
+  position:relative!important;
+  z-index:0!important;
+  height:26px!important;
+  min-height:26px!important;
+  max-height:26px!important;
+  margin:5px 0 7px!important;
+  flex:0 0 26px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:visible!important;
+}
+.catalog-grid .item>.country-badge-slot .country-badge{
+  position:static!important;
+  max-width:calc(100% - 12px)!important;
+}
+.catalog-grid .item>.country-badge-slot .country-badge bdi{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* Guide tags are now human prompts; let them breathe naturally. */
+body:has(main#top) .card .tag{
+  display:inline-block;
+  max-width:100%;
+  line-height:1.5;
+  white-space:normal;
+}
+
+@media(max-width:760px){
+  .directory-refine-triggers [data-refine-trigger="category"]{
+    min-height:36px!important;
+    padding:8px 12px!important;
+    font-size:.61rem!important;
+  }
+  .directory-refine-triggers [data-refine-trigger="sub"]{
+    min-height:34px!important;
+    padding:7px 10px!important;
+    font-size:.56rem!important;
+  }
+  .catalog-grid .item-identity{
+    height:108px!important;
+    min-height:108px!important;
+    max-height:108px!important;
+  }
+}

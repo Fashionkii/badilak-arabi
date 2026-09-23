@@ -91,14 +91,14 @@ const originRouteMap={
   scholar:{cat:'learn',sub:'research'},
   jstor:{cat:'learn',sub:'research'}
 };
-const categoryNames={all:'كل الاكتشافات',work:'العمل والمشاريع',shopping:'التسوّق والأسواق',learn:'التعلّم والبحث',create:'المحتوى والإبداع',culture:'الثقافة والترفيه',tech:'تقنيات وابتكارات'};
+const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
 const subfilterMap={
- work:[['all','الكل'],['management','إدارة وتشغيل'],['services','خدمات وعمل حر'],['commerce','تجارة وبيع']],
- shopping:[['all','الكل'],['marketplaces','أسواق عامة'],['classifieds','بيع وشراء مباشر'],['specialized','متاجر متخصصة']],
- learn:[['all','الكل'],['courses','تعلم ومهارات'],['research','بحث ومصادر'],['encyclopedias','موسوعات'],['islamic','مصادر إسلامية'],['language','لغة ومعاجم']],
- create:[['all','الكل'],['writing','كتابة'],['design','تصميم'],['audio','صوت']],
- culture:[['all','الكل'],['books','كتب'],['drama','دراما ومشاهدة'],['kids','أطفال'],['games','ألعاب'],['podcasts','بودكاست']],
- tech:[['all','الكل'],['ai','ذكاء اصطناعي'],['infra','بنية رقمية'],['software','برمجيات']]
+ work:[['all','الكل'],['management','إدارة شغلك'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
+ shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','بيع وشراء بين الناس'],['specialized','متاجر متخصصة']],
+ learn:[['all','الكل'],['courses','كورس أو مهارة'],['research','بحث ومصادر'],['encyclopedias','موسوعات ومعرفة'],['islamic','مصادر إسلامية'],['language','لغة ومعاجم']],
+ create:[['all','الكل'],['writing','كتابة ومحتوى'],['design','تصميم'],['audio','صوت']],
+ culture:[['all','الكل'],['books','كتب وقراءة'],['drama','أفلام ودراما'],['kids','للأطفال'],['games','ألعاب'],['podcasts','بودكاست وصوت']],
+ tech:[['all','الكل'],['ai','ذكاء اصطناعي'],['infra','بنية وخدمات رقمية'],['software','برامج وأدوات']]
 };
 
 const items=[
@@ -566,7 +566,7 @@ function updateLearningContinue(){
  if(field==='quran'){
    actions=[['قنوات القراء الرسمية',"setLearningPath('reciter','quran')"],['قنوات يوتيوب',"setLearningPath('channel','all')"],['كل مصادر التعلّم',"setLearningPath('all','all')"]];
  }else if(field!=='all'){
-   actions=[['منصات هذا المجال',`setLearningPath('platform','${field}')`],['قنوات هذا المجال',`setLearningPath('channel','${field}')`],['قبل ما تدفع',"go('guides')"]];
+   actions=[['منصات لنفس الهدف',`setLearningPath('platform','${field}')`],['قنوات لنفس الهدف',`setLearningPath('channel','${field}')`],['قبل ما تدفع',"go('guides')"]];
  }else if(learningType==='platform'){
    actions=[['قنوات يوتيوب',"setLearningPath('channel','all')"],['كل مصادر التعلّم',"setLearningPath('all','all')"],['قبل ما تدفع',"go('guides')"]];
  }else if(learningType==='channel'){

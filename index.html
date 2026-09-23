@@ -52,7 +52,7 @@
   </div>
  </div>
  <aside class="origin-explorer">
-  <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">لو تعرف خدمة مألوفة، ابدأ منها. نوصلك للمجال وما يقابله عربيًا.</span></div>
+  <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">اختَر خدمة تعرفها، وابدأ منها.</span></div>
   <div class="origin-options">
    <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi></button>
    <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi></button>
@@ -72,12 +72,12 @@
 <section class="portal wrap" aria-label="أقسام بديلك عربي">
  <div class="portal-bar">
   <button class="portal-btn" onclick="openDirectory('all')"><strong>كل الاكتشافات</strong></button>
-  <button class="portal-btn" onclick="openDirectory('tech')"><strong>تقنيات وابتكارات</strong></button>
-  <button class="portal-btn" onclick="openDirectory('work')"><strong>عمل ومشاريع</strong></button>
-  <button class="portal-btn" onclick="openDirectory('shopping')"><strong>تسوّق وأسواق</strong></button>
-  <button class="portal-btn" onclick="openDirectory('learn')"><strong>تعلّم وبحث</strong></button>
-  <button class="portal-btn" onclick="openDirectory('create')"><strong>محتوى وإبداع</strong></button>
-  <button class="portal-btn" onclick="openDirectory('culture')"><strong>ثقافة وترفيه</strong></button>
+  <button class="portal-btn" onclick="openDirectory('tech')"><strong>تقنية وذكاء اصطناعي</strong></button>
+  <button class="portal-btn" onclick="openDirectory('work')"><strong>لشغلك ومشروعك</strong></button>
+  <button class="portal-btn" onclick="openDirectory('shopping')"><strong>تسوّق وشراء</strong></button>
+  <button class="portal-btn" onclick="openDirectory('learn')"><strong>تعلّم وابحث</strong></button>
+  <button class="portal-btn" onclick="openDirectory('create')"><strong>تصميم ومحتوى</strong></button>
+  <button class="portal-btn" onclick="openDirectory('culture')"><strong>كتب وصوت وترفيه</strong></button>
  </div>
 </section>
 
@@ -95,7 +95,7 @@
 <section class="section wrap" id="directory">
  <div class="section-head">
   <div><h2 class="art-title art-title--section art-title--discover"><span class="sr-only">اكتشف حسب حاجتك</span><img class="art-title-img art-img-discover" src="/images/titles/discover.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div>
-  <p class="section-human-note">مش لازم تعرف اسم الأداة. ابحث بالمهمة، أو اختر المجال، ثم ضيّق النتائج لو احتجت.</p>
+  
  </div>
  <div class="local-nav">
   <div class="wrap local-nav-inner">
@@ -106,13 +106,13 @@
  <div class="catalog-shell frame-plain">
   <div class="directory-refine-bar" id="directoryRefineBar">
    <div class="directory-active-context">
-    <span class="directory-refine-label">النتائج الحالية</span>
+    <span class="directory-refine-label">المعروض الآن</span>
     <div class="active-filter-pills" id="directoryActiveFilters"><span class="active-filter-pill is-muted">كل الاكتشافات</span></div>
    </div>
    <div class="directory-refine-triggers" aria-label="تصفية النتائج">
-    <button type="button" data-refine-trigger="search" aria-expanded="false" aria-controls="directoryRefineSearch" onclick="toggleDirectoryRefine('search',this)">⌕ بحث</button>
-    <button type="button" data-refine-trigger="category" aria-expanded="false" aria-controls="directoryRefineCategory" onclick="toggleDirectoryRefine('category',this)">المجال</button>
-    <button type="button" id="subfilterTrigger" data-refine-trigger="sub" aria-expanded="false" aria-controls="directoryRefineSub" onclick="toggleDirectoryRefine('sub',this)" hidden>أدق</button>
+    <button type="button" data-refine-trigger="search" aria-expanded="false" aria-controls="directoryRefineSearch" onclick="toggleDirectoryRefine('search',this)">⌕ ابحث</button>
+    <button type="button" data-refine-trigger="category" aria-expanded="false" aria-controls="directoryRefineCategory" onclick="toggleDirectoryRefine('category',this)">بتدور على إيه؟ <span class="refine-caret" aria-hidden="true">⌄</span></button>
+    <button type="button" id="subfilterTrigger" data-refine-trigger="sub" aria-expanded="false" aria-controls="directoryRefineSub" onclick="toggleDirectoryRefine('sub',this)" hidden>اختيار أدق <span class="refine-caret" aria-hidden="true">⌄</span></button>
    </div>
   </div>
 
