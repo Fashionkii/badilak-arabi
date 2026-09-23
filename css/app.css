@@ -6263,3 +6263,94 @@ body:has(main#top) .card .tag{
     max-height:35px!important;
   }
 }
+
+
+/* familiar-entry-and-nav-polish-v2 */
+.navigation a[href="/guides"]{
+  color:#fff!important;
+  font-size:.79rem!important;
+  font-weight:900!important;
+  opacity:1!important;
+  text-shadow:0 0 1px rgba(255,255,255,.20);
+}
+
+/* The service field must sit UNDER the service name, never above the logo. */
+.origin-option>.origin-logo{order:1!important}
+.origin-option>.origin-name{order:2!important}
+.origin-option::after{
+  order:3!important;
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+}
+
+/* Six quiet visual shortcuts: icon + familiar downward jump cue, no visible labels. */
+.portal{padding:8px 0 11px!important}
+.portal-bar{
+  display:grid!important;
+  grid-template-columns:repeat(6,58px)!important;
+  justify-content:center!important;
+  gap:11px!important;
+  border-top:1px solid rgba(23,63,61,.14)!important;
+  padding-top:12px!important;
+}
+.portal-icon-btn{
+  width:58px!important;
+  height:58px!important;
+  min-height:58px!important;
+  padding:0!important;
+  border:1px solid rgba(23,63,61,.16)!important;
+  border-radius:16px!important;
+  background:rgba(255,253,248,.84)!important;
+  display:grid!important;
+  grid-template-rows:1fr auto!important;
+  place-items:center!important;
+  align-content:center!important;
+  gap:0!important;
+  box-shadow:0 4px 12px rgba(23,63,61,.035)!important;
+  position:relative!important;
+}
+.portal-icon-btn:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(184,108,67,.50)!important;
+  background:#fffaf1!important;
+  box-shadow:0 9px 18px rgba(23,63,61,.075)!important;
+}
+.portal-field-icon{
+  font-size:1.62rem!important;
+  line-height:1!important;
+  color:var(--deep)!important;
+  font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+  align-self:end!important;
+  margin-bottom:2px!important;
+}
+.portal-jump{
+  font-family:Tahoma,Arial,sans-serif!important;
+  font-size:.68rem!important;
+  line-height:1!important;
+  color:var(--sunrise)!important;
+  font-weight:900!important;
+  align-self:start!important;
+}
+.portal-icon-btn::before,.portal-icon-btn::after{content:none!important;display:none!important}
+
+@media(max-width:650px){
+  .portal-bar{
+    grid-template-columns:repeat(6,48px)!important;
+    gap:7px!important;
+    overflow-x:auto!important;
+    justify-content:start!important;
+    padding-inline:3px!important;
+    scrollbar-width:none;
+  }
+  .portal-bar::-webkit-scrollbar{display:none}
+  .portal-icon-btn{
+    width:48px!important;
+    min-width:48px!important;
+    height:48px!important;
+    min-height:48px!important;
+    border-radius:13px!important;
+  }
+  .portal-field-icon{font-size:1.38rem!important}
+  .portal-jump{font-size:.62rem!important}
+}

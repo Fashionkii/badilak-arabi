@@ -702,7 +702,7 @@ function renderCards(){
    <p class="card-purpose">${compactCardPurpose(x)}</p>
    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
-    <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">المصادر +</button>
+    <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">تفاصيل +</button>
     <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`).join('');
@@ -1361,14 +1361,14 @@ function toggleCardMore(id,btn){
  const open=panel.hasAttribute('hidden');
  if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
  btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'المصادر +';
+ btn.textContent=open?'أقل −':'تفاصيل +';
 }
 function toggleLearningMore(id,btn){
  const panel=document.getElementById('learning-more-'+id);if(!panel)return;
  const open=panel.hasAttribute('hidden');
  if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
  btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'المصادر +';
+ btn.textContent=open?'أقل −':'تفاصيل +';
 }
 function toggleStaticDisclosure(bodyId,btn,kind){
  const body=document.getElementById(bodyId);if(!body)return;
