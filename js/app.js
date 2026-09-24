@@ -91,7 +91,7 @@ const originRouteMap={
   scholar:{cat:'learn',sub:'research'},
   jstor:{cat:'learn',sub:'research'}
 };
-const categoryNames={all:'كل الاكتشافات',work:'للعمل والمشاريع',shopping:'للتسوّق والأسواق',learn:'للتعلّم والبحث',create:'للمحتوى والإبداع',culture:'للثقافة والترفيه',tech:'تقنيات وابتكارات'};
+const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
 const subfilterMap={
  work:[['all','الكل'],['management','إدارة العمل'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
  shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','بيع وشراء بين الناس'],['specialized','متاجر متخصصة']],
