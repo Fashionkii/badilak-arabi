@@ -200,3 +200,42 @@
   .modal-body{padding:16px 14px 20px!important}
   .quick-title{font-size:1.9rem!important}
 }
+
+
+/* ACCESSIBILITY + COMFORT PASS — v3
+   Complete the visual-review item that was only partially applied:
+   compact controls remain compact, but text/targets are easier to read and hit. */
+.directory-refine-triggers button{
+  min-height:34px!important;
+  font-size:.62rem!important;
+  padding-inline:10px!important;
+}
+.directory-refine-panel .filter,
+.directory-refine-panel .subfilter{
+  min-height:34px!important;
+  font-size:.62rem!important;
+  line-height:1.45!important;
+}
+.return-actions button{
+  min-height:34px!important;
+  font-size:.6rem!important;
+}
+#learning .learning-types button,
+#learning .learning-actions button,
+.more-btn,
+.load-more-btn,
+.origin-more-btn,
+.section-fold-toggle,
+.feedback-actions button,
+.modal .close{
+  min-height:32px!important;
+}
+#learning .learning-types button{font-size:.62rem!important}
+@media(max-width:760px){
+  .directory-refine-triggers button,
+  .directory-refine-panel .filter,
+  .directory-refine-panel .subfilter{
+    min-height:36px!important;
+    font-size:.64rem!important;
+  }
+}
