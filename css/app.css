@@ -5481,66 +5481,21 @@ main#top>section{position:relative;z-index:1}
 }
 
 /* read-label-v148 */
-.navigation a[href="lab-guides.html"]{font-size:.72rem!important;font-weight:800!important;line-height:1.2!important}
-.footer-links a[href="lab-guides.html"]{font-weight:800!important}
+.navigation a[href="/guides"]{font-size:.72rem!important;font-weight:800!important;line-height:1.2!important}
+.footer-links a[href="/guides"]{font-weight:800!important}
 .card-read-link strong{font-weight:800!important}
-@media(max-width:760px){.navigation a[href="lab-guides.html"]{font-size:.7rem!important}}
+@media(max-width:760px){.navigation a[href="/guides"]{font-size:.7rem!important}}
 
-/* quick-peek-and-read-nav-v151 */
-.navigation a[href="lab-guides.html"]{
+/* read-nav-current — keep the active /guides route prominent. */
+.navigation a[href="/guides"]{
  color:#fff!important;
  font-size:.79rem!important;
  font-weight:900!important;
  opacity:1!important;
  text-shadow:0 0 1px rgba(255,255,255,.2);
 }
-.quick-peek-layer[hidden]{display:none!important}
-.quick-peek-layer{
- position:fixed;inset:0;z-index:85;
- background:rgba(20,47,45,.12);
- backdrop-filter:blur(1.5px);
-}
-.quick-peek-panel{
- position:fixed;z-index:86;
- width:min(430px,calc(100vw - 32px));
- max-height:min(620px,calc(100vh - 32px));
- overflow:auto;
- background:#FFFDF8;
- border:1px solid #cdbfa9;
- border-radius:18px;
- box-shadow:0 22px 60px rgba(23,63,61,.24);
- padding:18px;
- color:#243b38;
-}
-.quick-peek-close{
- position:absolute;left:10px;top:10px;width:31px;height:31px;border-radius:9px;
- border:1px solid #d9cdbb;background:#fff;color:#173F3D;font-size:1rem;cursor:pointer;
-}
-.quick-peek-kicker{font-family:var(--ui);font-size:.54rem;font-weight:800;color:#B86C43;margin-bottom:8px}
-.quick-peek-head{display:flex;align-items:center;gap:11px;padding-left:34px;margin-bottom:12px}
-.quick-peek-logo{width:46px;height:46px;border-radius:11px;border:1px solid #ddd1bf;object-fit:contain;background:#fff;padding:5px}
-.quick-peek-head h3{margin:0 0 4px;font-family:var(--display);font-size:1.05rem;color:#173F3D}
-.quick-peek-head .country-badge-slot{justify-content:flex-start!important;margin:0!important;height:auto!important;min-height:0!important}
-.quick-peek-caution{padding:9px 10px;margin:0 0 10px;border-radius:11px;background:#f7f1e7;border:1px solid #ddc9ab}
-.quick-peek-caution small{display:block;font-family:var(--ui);font-size:.52rem;color:#8a642a;margin-bottom:2px}
-.quick-peek-caution strong{display:block;font-size:.68rem;line-height:1.65}
-.quick-peek-facts{display:grid;gap:6px}
-.quick-peek-facts>div{display:grid;grid-template-columns:92px 1fr;gap:9px;padding:8px 9px;border:1px solid #dfd7cb;border-radius:10px;background:#fff}
-.quick-peek-facts small{font-family:var(--ui);font-size:.52rem;color:#7a766e}
-.quick-peek-facts strong{font-size:.66rem;line-height:1.55}
-.quick-peek-actions{display:grid;grid-template-columns:1.2fr 1fr;gap:7px;margin-top:12px}
-.quick-peek-actions button{min-height:38px;border-radius:10px;font-family:var(--ui);font-size:.59rem;font-weight:800;cursor:pointer}
-.peek-primary{background:#173F3D;color:#fff;border:1px solid #173F3D}
-.peek-secondary{background:#fff8ed;color:#173F3D;border:1px solid #ddc7a7}
-@media(max-width:760px){
- .navigation a[href="lab-guides.html"]{font-size:.76rem!important}
- .quick-peek-layer{background:rgba(20,47,45,.18);backdrop-filter:blur(2px)}
- .quick-peek-panel{
-  left:8px!important;right:8px!important;bottom:8px!important;top:auto!important;
-  width:auto!important;max-height:72vh;border-radius:20px 20px 14px 14px;padding:17px;
- }
- .quick-peek-actions{grid-template-columns:1fr}
-}
+.footer-links a[href="/guides"]{font-weight:800!important}
+@media(max-width:760px){.navigation a[href="/guides"]{font-size:.76rem!important}}
 
 /* card-row-shelf-v152 */
 .catalog-grid{align-items:start!important}
@@ -5958,210 +5913,73 @@ body:has(main#top) .card .tag{
 }
 
 
-/* directory-card-template-human-v1
-   The outside answers only: what is it, where is it from, what familiar thing is it near,
-   what does it do, and where do I go next. Decision details live under "اقرأ +". */
-.catalog-grid{
-  align-items:stretch!important;
-}
+/* Directory cards: one compact template. Identity and actions remain aligned
+   across all records. Provenance detail stays inside details. Legacy rules above are
+   overridden here; edit this block rather than appending another template. */
+.catalog-grid{align-items:stretch!important}
 .catalog-grid>.item{
-  align-self:stretch!important;
-  display:flex!important;
-  flex-direction:column!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:15px!important;
-  overflow:hidden!important;
+  align-self:stretch!important;display:flex!important;flex-direction:column!important;
+  height:auto!important;min-height:0!important;padding:14px!important;overflow:hidden!important;
 }
 .catalog-grid .item-identity{
-  height:106px!important;
-  min-height:106px!important;
-  max-height:106px!important;
-  padding:7px 7px 5px!important;
-  overflow:hidden!important;
+  height:100px!important;min-height:100px!important;max-height:100px!important;
+  padding:6px 6px 4px!important;overflow:hidden!important;
 }
-.catalog-grid .item-logo{
-  width:52px!important;
-  height:52px!important;
-  margin:0 auto 7px!important;
-}
+.catalog-grid .item-logo{width:52px!important;height:52px!important;margin:0 auto 7px!important}
 .catalog-grid .item-name{
-  min-height:34px!important;
-  max-height:38px!important;
-  margin:0!important;
-  line-height:1.45!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  overflow:hidden!important;
+  min-height:34px!important;max-height:38px!important;margin:0!important;line-height:1.45!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;
 }
 .catalog-grid .item>.country-badge-slot{
-  height:25px!important;
-  min-height:25px!important;
-  max-height:25px!important;
-  flex:0 0 25px!important;
-  margin:4px 0 6px!important;
-  justify-content:center!important;
+  height:25px!important;min-height:25px!important;max-height:25px!important;flex:0 0 25px!important;
+  margin:3px 0 5px!important;justify-content:center!important;
 }
+.catalog-grid .country-badge{font-size:.6875rem!important;line-height:1.25!important}
 .catalog-grid .item>.comparison-strip{
-  height:24px!important;
-  min-height:24px!important;
-  max-height:24px!important;
-  margin:0 0 8px!important;
+  height:24px!important;min-height:24px!important;max-height:24px!important;margin:0 0 6px!important;
 }
-.catalog-grid .item>.comparison-strip.is-empty{
-  display:flex!important;
-  visibility:hidden!important;
+.catalog-grid .item>.comparison-strip.is-empty{display:flex!important;visibility:hidden!important}
+.catalog-grid .comparison-strip{font-size:.6875rem!important}
+.catalog-grid .card-summary{
+  height:66px;flex:0 0 66px;min-width:0;margin:0 0 7px;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
 }
 .catalog-grid .card-purpose{
-  height:76px!important;
-  min-height:76px!important;
-  max-height:76px!important;
-  margin:0 0 11px!important;
-  line-height:1.7!important;
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:3!important;
-  overflow:hidden!important;
+  height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;
+  font-size:.875rem!important;line-height:1.5!important;text-align:center!important;
+  display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important;
 }
-
-/* Removed from the card face in the renderer; these stay defensive in case old cached markup appears. */
-.catalog-grid .core-preview,
-.catalog-grid .card-guide-slot,
-.catalog-grid .item-spacer{
-  display:none!important;
-}
-
-.card-primary-actions{
-  margin-top:auto!important;
-  display:flex!important;
-  flex-direction:column!important;
-  gap:6px!important;
-}
-.card-primary-actions>.more-btn{
-  width:100%!important;
-  min-height:33px!important;
-  margin:0!important;
-  border-radius:10px!important;
-}
-.card-primary-actions>.destination-link{
-  width:100%!important;
-  min-height:52px!important;
-  height:52px!important;
-  max-height:52px!important;
-  margin:0!important;
-}
-
-/* The shelf is where decision detail belongs. */
-.card-shelf-facts{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-}
-.card-shelf-guide{
-  margin:9px 0 7px;
-}
-.card-shelf-guide .editorial-guide-link{
-  margin:0!important;
-}
-.card-shelf-actions{
-  margin-top:5px;
-}
-
-@media(max-width:760px){
-  .catalog-grid .item-identity{
-    height:102px!important;
-    min-height:102px!important;
-    max-height:102px!important;
-  }
-  .catalog-grid .card-purpose{
-    height:72px!important;
-    min-height:72px!important;
-    max-height:72px!important;
-  }
-  .card-shelf-facts{
-    grid-template-columns:1fr!important;
-  }
-}
-
-
-/* directory-card-template-human-v2
-   Visible face = identity, country, familiar reference, exceptional identity note,
-   short purpose, reading center, sources, destination. No buyer-first pricing blocks. */
-.catalog-grid>.item{
-  padding:14px!important;
-}
-.catalog-grid .item-identity{
-  height:100px!important;
-  min-height:100px!important;
-  max-height:100px!important;
-  padding:6px 6px 4px!important;
-}
-.catalog-grid .item>.country-badge-slot{
-  margin:3px 0 5px!important;
-}
-.catalog-grid .item>.comparison-strip{
-  margin:0 0 6px!important;
-}
-.card-front-note{
-  align-self:center;
-  margin:0 0 6px;
-  padding:2px 8px;
-  border-radius:999px;
-  background:rgba(232,214,188,.48);
-  color:#70572f;
-  font-family:var(--ui);
-  font-size:.5rem;
-  font-weight:700;
-  line-height:1.45;
-}
-.catalog-grid .card-purpose{
-  height:48px!important;
-  min-height:48px!important;
-  max-height:48px!important;
-  margin:0 0 7px!important;
-  line-height:1.6!important;
-  -webkit-line-clamp:2!important;
-  text-align:center!important;
-}
+.catalog-grid .core-preview,.catalog-grid .item-spacer{display:none!important}
 .catalog-grid .card-guide-slot{
-  display:flex!important;
-  height:32px!important;
-  min-height:32px!important;
-  max-height:32px!important;
-  margin:0 0 5px!important;
-  align-items:center!important;
+  display:flex!important;height:40px!important;min-height:40px!important;max-height:40px!important;
+  margin:0 0 5px!important;align-items:center!important;
 }
 .catalog-grid .card-guide-slot .card-read-link{
-  display:flex!important;
-  width:100%!important;
-  min-height:30px!important;
-  height:30px!important;
-  margin:0!important;
+  display:flex!important;width:100%!important;min-height:40px!important;height:40px!important;
+  margin:0!important;font-size:.75rem!important;
 }
-.card-primary-actions{gap:5px!important}
+.card-primary-actions{margin-top:auto!important;display:flex!important;flex-direction:column!important;gap:5px!important}
 .card-primary-actions>.more-btn{
-  min-height:31px!important;
-  height:31px!important;
+  width:100%!important;min-height:44px!important;height:44px!important;margin:0!important;border-radius:10px!important;
 }
 .card-primary-actions>.destination-link{
-  min-height:49px!important;
-  height:49px!important;
-  max-height:49px!important;
+  width:100%!important;min-height:52px!important;height:52px!important;max-height:52px!important;margin:0!important;
 }
+.catalog-grid .destination-label{min-width:0}
+.catalog-grid .destination-label small{
+  font-size:.75rem!important;line-height:1.4!important;direction:ltr;unicode-bidi:isolate;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;
+}
+.catalog-grid button:focus-visible,.catalog-grid a:focus-visible{
+  outline:3px solid var(--deep);outline-offset:2px;
+}
+.card-shelf-facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .card-shelf-guide{display:none!important}
-
+.card-shelf-actions{margin-top:5px}
 @media(max-width:760px){
-  .catalog-grid .item-identity{
-    height:98px!important;
-    min-height:98px!important;
-    max-height:98px!important;
-  }
-  .catalog-grid .card-purpose{
-    height:46px!important;
-    min-height:46px!important;
-    max-height:46px!important;
-  }
+  .catalog-grid .item-identity{height:98px!important;min-height:98px!important;max-height:98px!important}
+  .card-shelf-facts{grid-template-columns:1fr!important}
 }
-
 
 /* familiar-services-polish-v1
    Keep the agreed 12 services only. Borrow the stronger stable-main logo proportion,

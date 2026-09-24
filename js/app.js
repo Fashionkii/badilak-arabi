@@ -1,7 +1,4 @@
 /* main-runtime */
-function officialFavicon(domain){
- return `https://www.google.com/s2/favicons?sz=256&domain_url=${encodeURIComponent('https://'+domain)}`;
-}
 function logoInitials(label=''){
  const parts=String(label).replace(/[^\p{L}\p{N}\s]/gu,' ').trim().split(/\s+/).filter(Boolean);
  return (parts.slice(0,2).map(x=>x[0]).join('')||'•').toUpperCase();
@@ -15,43 +12,6 @@ function logoMarkup(url, cls='item-logo', label=''){
  return `<span class="${cls}${special}" data-fallback="${fallback}"><img src="${raw}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('logo-broken')"></span>`;
 }
 
-const itemCountryMap={
- karnak:['eg','مصر'],qriib:['eg','مصر'],vconnct:['eg','مصر'],paymob:['eg','مصر'],wuzzuf:['eg','مصر'],fresh:['eg','مصر'],arabybot:['eg','مصر'],watchit:['eg','مصر'],aamenn:['eg','مصر · فريق/إطلاق'],
- daftra:[['eg','مصر'],['us','الولايات المتحدة']],
- gravity:['sa','السعودية'],dhawwi:['sa','السعودية'],midaad:['sa','السعودية · السوق/التسعير'],salla:['sa','السعودية'],mandumah:['sa','السعودية'],hudhud:['sa','السعودية'],tafsircenter:['sa','السعودية'],dorar:['sa','السعودية'],shahid:['sa','السعودية'],unifonic:['sa','السعودية'],ithra:['sa','السعودية'],thmanyah:['sa','السعودية'],shamela:['eg','مصر · مطوّر التطبيق الرسمي'],
- faseeh:['ae','الإمارات'],munsit:['ae','الإمارات'],falcon:['ae','الإمارات'],arabicdesign:['ae','الإمارات · تسجيل ومقر'],noon:['ae','الإمارات'],mumzworld:['ae','الإمارات'],spacetoonyt:['ae','الإمارات'],majidkids:['ae','الإمارات'],dubaiplus:['ae','الإمارات'],alef:['ae','الإمارات'],bayut:['ae','الإمارات'],dubaifuture:['ae','الإمارات'],marefa:['us','الولايات المتحدة · المؤسسة'],
- edraak:['jo','الأردن'],arabicai:['jo','الأردن'],opensooq:['jo','الأردن'],abjjad:['jo','الأردن'],sowt:['jo','الأردن'],almaany:['jo','الأردن'],mawdoo3:['jo','الأردن'],
- shamaa:['lb','لبنان'],anghami:['lb','لبنان'],podeo:['lb','لبنان · تأسيس وحضور'],
- fanar:['qa','قطر'],qdl:['qa','قطر'],snoonu:['qa','قطر'],
- kezakoo:['ma','المغرب'],telmidtice:['ma','المغرب'],chari:['ma','المغرب'],
- benefit:['bh','البحرين'],tarabut:['bh','البحرين'],bibf:['bh','البحرين'],
- thawani:['om','عُمان'],emushrif:['om','عُمان'],edlal:['om','عُمان'],
- tadarab:['kw','الكويت'],myfatoorah:['kw','الكويت'],boutiqaat:['kw','الكويت'],
- gomycode:['tn','تونس'],expensya:['tn','تونس · تأسيس'],dabchy:['tn','تونس'],
- yassir:['dz','الجزائر'],ouedkniss:['dz','الجزائر'],baridimob:['dz','الجزائر'],
- miswag:['iq','العراق'],lezzoo:['iq','العراق'],superqi:['iq','العراق'],
- arabency:['sy','سوريا'],
- taqreer:['us','الولايات المتحدة · تسجيل المشغّل'],openalex:['us','الولايات المتحدة'],zotero:['us','الولايات المتحدة'],
- khamsat:['gb','بريطانيا · تسجيل حسوب'],hsoub:['gb','بريطانيا · تأسيس/تسجيل'],
- hindawi:[['gb','بريطانيا · تسجيل المؤسسة'],['eg','مصر · مقر القاهرة']]
-};
-const learningCountryMap={
- yanfaa:['eg','مصر'],'edraak-learning':['jo','الأردن'],rwaq:['sa','السعودية'],almentor:['ae','الإمارات'],
- 'salla-academy':['sa','السعودية'],'qoyod-academy':['sa','السعودية'],'daftra-hub':[['eg','مصر'],['us','الولايات المتحدة']],
- 'khamsat-blog':['gb','بريطانيا · تسجيل حسوب'],'hsoub-library':['gb','بريطانيا · تسجيل حسوب'],
- zamerican:['eg','مصر'],droosonline:['eg','مصر'],elzero:['eg','مصر'],makram:['eg','مصر'],
- 'hsoub-youtube':['gb','بريطانيا · تسجيل حسوب'],'akhdar-youtube':['eg','مصر'],'khan-arabi':['us','الولايات المتحدة'],
- 'abdulbasit-official':['eg','مصر'],'hussary-official':['eg','مصر'],'mostafa-ismail-official':['eg','مصر'],
- 'maher-official':['sa','السعودية'],'saad-ghamdi-official':['sa','السعودية'],'alafasy-official':['kw','الكويت'],
- 'misk-skills':['sa','السعودية'],'thmanyah-youtube':['sa','السعودية'],
- 'alef-learning':['ae','الإمارات'],'dff-academy':['ae','الإمارات'],
- 'qdl-youtube':['qa','قطر'],
- 'kezakoo-learning':['ma','المغرب'],'telmidtice-learning':['ma','المغرب'],
- 'bibf-learning':['bh','البحرين'],'edlal-learning':['om','عُمان'],
- 'tadarab-learning':['kw','الكويت'],'gomycode-learning':['tn','تونس'],
- 'cnfepd-learning':['dz','الجزائر'],'newton-learning':['iq','العراق'],
- 'kamkalima-learning':['lb','لبنان · انطلاقة/فريق']
-};
 const flagAssetBase='/images/flags/';
 function countryEntries(info){
  if(!info)return [];
@@ -71,195 +31,6 @@ function countryBadgeMarkup(x,map=itemCountryMap){
  else if(/إقليمي|جهة عربية|منصة عربية|مشروع المعرفة/i.test(text))label='عربي / إقليمي';
  return `<div class="country-badge-slot"><span class="country-badge country-badge-neutral"><span class="material-symbols-outlined country-neutral-icon" aria-hidden="true">language</span><bdi>${label}</bdi></span></div>`;
 }
-const originRouteMap={
-  chatgpt:{cat:'tech',sub:'ai'},
-  canva:{cat:'create',sub:'design'},
-  drive:{cat:'tech',sub:'infra'},
-  coursera:{cat:'learn',sub:'courses'},
-  fiverr:{cat:'work',sub:'services'},
-  shopify:{cat:'work',sub:'commerce'},
-  acrobat:{cat:'work',sub:'management'},
-  teams:{cat:'work',sub:'management'},
-  spotify:{cat:'culture',sub:'podcasts'},
-  udemy:{cat:'learn',sub:'courses'},
-  amazon:{cat:'shopping',sub:'marketplaces'},
-  jumia:{cat:'shopping',sub:'marketplaces'},
-  wikipedia:{cat:'learn',sub:'encyclopedias'},
-  youtube:{cat:'culture',sub:'kids'},
-  netflix:{cat:'culture',sub:'drama'},
-  kindle:{cat:'culture',sub:'books'},
-  scholar:{cat:'learn',sub:'research'},
-  jstor:{cat:'learn',sub:'research'}
-};
-const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
-const subfilterMap={
- work:[['all','الكل'],['management','إدارة شغلك'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
- shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','بيع وشراء بين الناس'],['specialized','متاجر متخصصة']],
- learn:[['all','الكل'],['courses','كورس أو مهارة'],['research','بحث ومصادر'],['encyclopedias','موسوعات ومعرفة'],['islamic','مصادر إسلامية'],['language','لغة ومعاجم']],
- create:[['all','الكل'],['writing','كتابة ومحتوى'],['design','تصميم'],['audio','صوت']],
- culture:[['all','الكل'],['books','كتب وقراءة'],['drama','أفلام ودراما'],['kids','للأطفال'],['games','ألعاب'],['podcasts','بودكاست وصوت']],
- tech:[['all','الكل'],['ai','ذكاء اصطناعي'],['infra','بنية وخدمات رقمية'],['software','برامج وأدوات']]
-};
-
-const items=[
-{id:"karnak",name:"كرنك",logo:officialFavicon("karnak.aic.gov.eg"),type:"إطلاق تجريبي",cat:"tech",sub:"ai",origin:["chatgpt"],value:"مساعد محادثة مصري بُني للفصحى والمصرية. يستحق تجربة مباشرة إذا كان السياق المحلي والعربي جزءا من شغلك.",arabRelation:"العربية والمصرية في صلب الفكرة",creator:"مركز الابتكار التطبيقي : وزارة الاتصالات المصرية",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"طور بالاستفادة من نماذج مفتوحة. لم تختبر دقة إجاباته، ولا يثبت المصدر أن إصدار النموذج المنشور هو نفسه إصدار كل جلسة محادثة.",url:"https://karnak.aic.gov.eg/",domain:"karnak.aic.gov.eg",modules:[["الواجهة والمخرجات","لم تفحص واجهة الحساب · فصحى ومصرية بحسب إعلان المطور"],["الدليل المتاح","إطلاق تجريبي رسمي من مركز الابتكار التطبيقي · لا توجد بعد عينة عامة مستقلة كافية للحكم على الجودة"],["مصادر التحقق المحفوظة","<a href=\"https://www.aic.gov.eg/news/43/\" target=\"_blank\" rel=\"noopener noreferrer\">إعلان الإطلاق التجريبي</a> · <a href=\"https://huggingface.co/Applied-Innovation-Center/Karnak-40B-v1.0\" target=\"_blank\" rel=\"noopener noreferrer\">بطاقة إصدار النموذج</a>"]]},
-{id:"dhawwi",name:"ضوّي",logo:officialFavicon("dhawwi.com"),type:"تصميم عربي",cat:"create",sub:"design",origin:["canva"],value:"محرر تصميم عربي أونلاين يضع النص والخطوط والقوالب العربية في الواجهة، بدل إصلاح العربية بعد انتهاء التصميم.",arabRelation:"واجهة وتجربة تصميم عربية من البداية",creator:"بدأ ضوّي من الرياض في 2026، ويعمل فريقه بين الرياض والقاهرة ودبي.",availability:"راجع الخطة الحالية وشروط التصدير في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 17 سبتمبر 2026",reviewed:"17 سبتمبر 2026",limit:"يعرض الموقع 400+ قالب و32 خطا عربيا و7 أدوات ذكاء و12 ألف مصمم نشط. هذه أرقام منشورة من الجهة نفسها، وليست تدقيقا مستقلا.",url:"https://www.dhawwi.com/",domain:"dhawwi.com",modules:[["الواجهة والمخرجات","عربية · تصاميم وصور ونصوص عربية"],["الدليل المتاح","400+ قالب و32 خطا عربيا بحسب الموقع · لم نجد عينة مستقلة كبيرة تكفي لتقييم الجودة"],["مصادر التحقق المحفوظة","<a href=\"https://www.dhawwi.com/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي والخصائص المعلنة</a>"]]},
-{id:"midaad",name:"مِداد",logo:officialFavicon("midaadapp.com"),type:"مستندات عربية",cat:"work",sub:"management",origin:["acrobat"],value:"مساحة عمل عربية للمستندات: تحرير PDF، تحويل إلى Word، OCR وتلخيص وترجمة، كلها من واجهة تبدأ من العربية.",arabRelation:"مستندات وOCR بالعربية من صلب المنتج",creator:"منصة عربية تعرض تسعيرها بالريال وتصف مخرجاتها بذوق سعودي؛ بلد تسجيل الكيان لم يُحسم بعد.",availability:"الباقة المجانية: 3 ملفات يوميًا حتى 25 MB، مع رصيد محدود للذكاء وOCR.",price:"مجاني بحدود / احترافي 29 ر.س شهريًا",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"الباقة المجانية تضيف ختمًا خفيفًا في تذييل التصدير، وتسمح بـ3 ملفات يوميًا حتى 25 MB مع رصيد محدود للذكاء وOCR. التصدير بلا ختم في الباقة الاحترافية.",url:"https://midaadapp.com/",domain:"midaadapp.com",modules:[["الواجهة والمخرجات","عربية · PDF وWord ونصوص وملخصات عربية"],["الدليل المتاح","قدرات معلنة رسميا · لا توجد عينة مستقلة كافية لدينا لجودة التحويل"],["مصادر التحقق المحفوظة","<a href=\"https://midaadapp.com/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"taqreer",name:"taqreer.ai",logo:officialFavicon("taqreer.ai"),type:"عروض عربية",cat:"create",sub:"design",origin:["canva"],value:"مولد عروض وتقارير بالعربية والإنجليزية، مناسب لمن يريد شرائح تحترم RTL والهوية بدل إعادة ترتيب كل شريحة يدويا.",arabRelation:"إنشاء عروض بالعربية مع RTL وتعديل الهوية",creator:"تشغّلها PIXEL WOLVES LLC المسجلة في وايومنغ بالولايات المتحدة؛ المنتج نفسه عربي أولًا ويدعم الإنجليزية.",availability:"المجاني حتى 5 شرائح لكل عرض، وتصدير PNG فقط.",price:"مجاني بعلامة مائية / Plus من 9$ شهريًا",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"في الخطة المجانية: حتى 5 شرائح لكل عرض، وتصدير PNG فقط بعلامة مائية. إزالة العلامة وباقي صيغ التصدير ضمن الخطط المدفوعة.",url:"https://taqreer.ai/ar/ai-presentations",domain:"taqreer.ai",modules:[["الواجهة والمخرجات","عربية وإنجليزية · عروض وتقارير قابلة للتعديل"],["الدليل المتاح","الخصائص معلنة في الموقع الرسمي · لا نملك بعد مراجعات مستقلة كافية للحكم على جودة التصميم"],["مصادر التحقق المحفوظة","<a href=\"https://taqreer.ai/ar/ai-presentations\" target=\"_blank\" rel=\"noopener noreferrer\">صفحة العروض الرسمية</a> · <a href=\"https://taqreer.ai/en\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"daftra",name:"دفترة",logo:officialFavicon("daftra.com"),type:"خدمة/منتج رقمي",cat:"work",sub:"management",origin:["quickbooks"],value:"نظام إدارة أعمال بهوية عربية: فواتير ومحاسبة ومخزون وعملاء في مكان واحد، مع دعم متطلبات محلية في عدة أسواق عربية.",arabRelation:"إدارة أعمال صممت للسوق العربي ومتطلباته",creator:"طورته Izam Web Solutions مع وجود معلن في مصر والولايات المتحدة.",availability:"تجربة 14 يوما بحسب الموقع، دون بطاقة ائتمان.",price:"مدفوع + تجربة",verified:"مصدر رسمي — مراجعة 17 سبتمبر 2026",reviewed:"17 سبتمبر 2026",limit:"App Store مصر يعرض 4.2/5 من 49 تقييما وقت المراجعة. Capterra يعرض 3.0/5 لكن من مراجعة واحدة فقط، لذلك لا يصح تقديمه كحكم عام.",url:"https://www.daftra.com/",domain:"daftra.com",modules:[["الواجهة والمخرجات","عربية وإنجليزية · فواتير وتقارير وإدارة أعمال"],["الدليل المتاح","خصائص رسمية + إشارات جمهور عامة · 4.2/5 على App Store مصر من 49 تقييما؛ عينة Capterra غير كافية"],["مصادر التحقق المحفوظة","<a href=\"https://www.daftra.com/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a> · <a href=\"https://www.daftra.com/en/about-daftra-en/\" target=\"_blank\" rel=\"noopener noreferrer\">عن الشركة</a> · <a href=\"https://apps.apple.com/eg/app/accounting-software-daftra/id1347814396\" target=\"_blank\" rel=\"noopener noreferrer\">App Store مصر</a> · <a href=\"https://www.capterra.com/p/244865/Daftra/\" target=\"_blank\" rel=\"noopener noreferrer\">Capterra</a>"]]},
-{id:"gravity",name:"Gravity Error",logo:"material:sports_esports",type:"لعبة ألغاز",cat:"culture",sub:"games",origin:["steam"],value:"لعبة منصات من استوديو سعودي، مثال صغير على أن الألعاب العربية ليست مجرد تعريب لمنتج أجنبي.",arabRelation:"إنتاج سعودي مستقل",creator:"Semaphore : استوديو تطوير سعودي",availability:"يشير المطور إلى إصدار PlayStation 4؛ راجع الإتاحة في متجر بلدك.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"لم تختبر اللعبة ولم تجمع مراجعات لاعبين ضمن هذه المراجعة. وصف النوع لا يعد تصنيفا عمريا.",url:"https://www.semaphorelab.com/gravity-error",domain:"semaphorelab.com",modules:[["الواجهة والمخرجات","إنجليزية · لغة اللعبة تحتاج مراجعة نسخة المتجر"],["الدليل المتاح","صفحة المطور الرسمية · لم نجمع بعد عينة مراجعات لاعبين مستقلة"],["مصادر التحقق المحفوظة","<a href=\"https://www.semaphorelab.com/gravity-error\" target=\"_blank\" rel=\"noopener noreferrer\">صفحة اللعبة لدى المطور</a> · <a href=\"https://www.semaphorelab.com/\" target=\"_blank\" rel=\"noopener noreferrer\">التعريف بالاستوديو</a>"]]},
-{id:"shamaa",name:"شمعة",logo:officialFavicon("search.shamaa.org"),type:"قاعدة بحثية",cat:"learn",sub:"research",origin:["scholar","jstor"],value:"لو تبحث عن دراسة تربوية عربية قبل أن تذهب إلى قواعد أجنبية أوسع، شمعة نقطة بداية متخصصة في الإنتاج التربوي العربي.",arabRelation:"تركيز عربي متخصص في التربية",creator:"شبكة المعلومات العربية التربوية",availability:"إتاحة النص الكامل تختلف حسب السجل وحقوق الناشر.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"إدراج الرسالة يسهل العثور عليها؛ تقييم منهجها ونتائجها يظل مهمة بحثية مستقلة.",url:"https://search.shamaa.org/",domain:"search.shamaa.org",modules:[["الواجهة والمخرجات","عربية وإنجليزية · دراسات بالعربية والإنجليزية والفرنسية"],["الدليل المتاح","شبكة بحثية عربية ومصادرها الرسمية · لا يقاس المنتج بتقييم نجوم؛ القيمة في التغطية والفهرسة"],["مصادر التحقق المحفوظة","<a href=\"https://shamaa.org/ara/submit-to-shamaa/\" target=\"_blank\" rel=\"noopener noreferrer\">نطاق الدراسات ومعايير القبول</a> · <a href=\"https://search.shamaa.org/\" target=\"_blank\" rel=\"noopener noreferrer\">البحث في شمعة</a>"]]},
-{id:"faseeh",name:"فصيح Faseeh",logo:"material:mic",type:"تعليق صوتي",cat:"create",sub:"audio",origin:["elevenlabs"],value:"للتعليق الصوتي العربي، هذه تجربة تستحق الاختبار قبل اللجوء لصوت أجنبي معرّب. ركّز على النطق والوقفات واللهجة المطلوبة.",arabRelation:"توليد صوت عربي من البداية",creator:"CNTXT AI : مقرها الإمارات",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"لم يظهر في المصادر التي تمت مراجعتها تقييم مستقل كاف لجودة هذا الإصدار في المصرية أو الخليجية. نتائج Munsit للتفريغ الصوتي لا تقيس جودة فصيح.",url:"https://munsit.com/text-to-speech-model",domain:"munsit.com",modules:[["الواجهة والمخرجات","عربية وإنجليزية · توليد صوت عربي بحسب المطور"],["الدليل المتاح","الوظائف معلنة رسميا لدى Munsit · لا توجد عينة مستقلة كافية حاليا لجودة اللهجات"],["مصادر التحقق المحفوظة","<a href=\"https://munsit.com/text-to-speech-model\" target=\"_blank\" rel=\"noopener noreferrer\">وظائف توليد الصوت</a> · <a href=\"https://munsit.com/about-us\" target=\"_blank\" rel=\"noopener noreferrer\">الجهة المطورة</a>"]]},
-{id:"arabicdesign",name:"ArabicDesign.ai",logo:officialFavicon("arabicdesign.ai"),type:"أداة تصميم",cat:"create",sub:"design",origin:["canva"],value:"إذا كان النص العربي داخل التصميم هو نقطة الضعف، فهذه أداة بُنيت حول الحروف والنقاط والتشكيل لا حول صورة جميلة فقط.",arabRelation:"النص العربي هو قلب المنتج",creator:"Arabic Design LLC؛ شركة مسجلة في الإمارات ومقرها دبي، ومنتجها ArabicDesign.ai مخصص للتصميم والخط العربي.",availability:"10 نقاط مجانية لمدة 7 أيام بعد تفعيل الحساب.",price:"10 نقاط/7 أيام مجانًا؛ باقات من 15$",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"التجربة المجانية 10 نقاط لمدة 7 أيام. الإنشاء وإعادة التوليد وبعض العمليات مثل القوالب والتحويل إلى Vector تستهلك نقاطًا؛ الباقات المدفوعة تبدأ من 15$.",url:"https://arabicdesign.ai/ar",domain:"arabicdesign.ai",modules:[["الواجهة والمخرجات","عربية وإنجليزية · تصميم عبارات وخطوط عربية"],["الدليل المتاح","المطور يعلن حفظ النص حتى 95% مع بقاء احتمال الخطأ · لم نجد عينة مراجعات مستقلة كبيرة بما يكفي"],["مصادر التحقق المحفوظة","<a href=\"https://arabicdesign.ai/ar\" target=\"_blank\" rel=\"noopener noreferrer\">صفحة الأداة بالعربية</a> · <a href=\"https://arabicdesign.ai/en\" target=\"_blank\" rel=\"noopener noreferrer\">صفحة الأداة بالإنجليزية</a> · <a href=\"https://arabic.design/about-arabic-design/\" target=\"_blank\" rel=\"noopener noreferrer\">صفحة الجهة</a>"]]},
-{id:"qriib",name:"Qriib",logo:officialFavicon("qriib.com"),type:"منظومة عمل",cat:"work",sub:"management",origin:["teams"],value:"حزمة عمل واتصال وذكاء اصطناعي بهوية عربية أولا. مناسبة للفضولي الذي يريد رؤية بديل إقليمي لمنظومات العمل المعتادة.",arabRelation:"عربي أولا بحسب الجهة",creator:"عنوان معلن في مصر؛ توصف المنظومة بأنها عربية أولا.",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"التعريف مبني على المصادر المتاحة؛ لم تجر تجربة استخدام مستقلة.",url:"https://qriib.com/en/home",domain:"qriib.com",modules:[["الواجهة والمخرجات","إنجليزية؛ تعلن العربية أولا · الدعم العربي بحسب المنتج"],["الدليل المتاح","الموقع الرسمي · لم تنفذ تجربة مستقلة كاملة للحزمة"],["مصادر التحقق المحفوظة","<a href=\"https://qriib.com/en/home\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"vconnct",name:"V.connct SPACE",logo:officialFavicon("vconnct.me"),type:"حل للمؤسسات",cat:"work",sub:"management",origin:["teams"],value:"منظومة تعاون واتصال مصرية للمؤسسات. تستحق المراجعة عندما يكون الاستضافة المحلية والعمل المؤسسي أهم من اسم الأداة الأشهر.",arabRelation:"منشأ مصري وحضور مؤسسي",creator:"🇪🇬 منشأ مصري",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"احتفظ بهذا النموذج من المرجع الأصلي. الصفحة لم توفر نصا كافيا في المراجعة الحالية؛ لا نعتمد عدد التطبيقات أو اكتمال التعريب دون تحقق إضافي.",url:"https://vconnct.me/en/products/v-space",domain:"vconnct.me",modules:[["الواجهة والمخرجات","لم يكتمل التحقق الحالي · تحتاج مراجعة الحزمة المطلوبة"],["الدليل المتاح","الموقع الرسمي · لم تكتمل مراجعة الواجهة والحزم"],["مصادر التحقق المحفوظة","<a href=\"https://vconnct.me/en/products/v-space\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"paymob",name:"Paymob",logo:officialFavicon("paymob.sa"),type:"مدفوعات للأعمال",cat:"work",sub:"commerce",origin:["stripe"],value:"لو تقبل مدفوعات في المنطقة، Paymob ليس مجرد اسم محلي: هو جزء من البنية التي تربط التجارة بطرق دفع يفهمها السوق.",arabRelation:"مبني لمدفوعات وأسواق المنطقة",creator:"تأسس المشروع في القاهرة؛ يعمل في أسواق متعددة.",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"تختلف الوسائل والرسوم وشروط القبول بحسب السوق؛ لا يفترض تطابق الخدمة في كل بلد.",url:"https://www.paymob.sa/en/about-us",domain:"paymob.sa",modules:[["الواجهة والمخرجات","عربية وإنجليزية · لا ينطبق عليها تقييم جودة توليد العربية"],["الدليل المتاح","مصادر الشركة والمنتج · الجودة تعتمد على السوق والعقد والدعم؛ تحتاج مقارنة حسب بلدك"],["مصادر التحقق المحفوظة","<a href=\"https://www.paymob.sa/en/about-us\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"wuzzuf",name:"WUZZUF",logo:officialFavicon("wuzzuf.net"),type:"توظيف",cat:"work",sub:"services",origin:["linkedin"],value:"منصة توظيف مصرية تربطك بسوق عمل محلي لا يظهر بنفس العمق في منصات التوظيف العالمية.",arabRelation:"سوق وظائف محلي فعلي",creator:"BasharSoft؛ انطلقت المنصة في مصر.",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"التعريف مبني على المصادر المتاحة؛ لم تجر تجربة استخدام مستقلة.",url:"https://wuzzuf.net/about-us",domain:"wuzzuf.net",modules:[["الواجهة والمخرجات","إنجليزية في الصفحات المفحوصة · لغة إعلان الوظيفة يحددها ناشره"],["الدليل المتاح","الموقع الرسمي · قيمة التجربة ترتبط بتخصصك وعدد الوظائف المتاحة وقت البحث"],["مصادر التحقق المحفوظة","<a href=\"https://wuzzuf.net/about-us\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"fanar",name:"فنار Fanar",logo:"/images/fanar-logo.png",type:"تعرف إليه",cat:"tech",sub:"ai",origin:["chatgpt"],value:"منصة ذكاء توليدي قطرية تستهدف العربية عبر النص والصوت والصورة. مرشح مهم عندما تريد مقارنة تجربة عربية مع الأدوات العالمية.",arabRelation:"تركيز عربي متعدد الوسائط",creator:"معهد قطر لبحوث الحوسبة : جامعة حمد بن خليفة",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"التغطية اللغوية المعلنة لا تكفي للحكم على دقة كل مهمة. راجع إصدار الخدمة ونتيجة الاستخدام.",url:"https://fanar.qa/en",domain:"fanar.qa",modules:[["الواجهة والمخرجات","صفحة مفحوصة بالإنجليزية · العربية ولهجاتها بحسب المطور"],["الدليل المتاح","الموقع الرسمي ووصف المنتج · نحتاج اختبارا مستقلا قبل الحكم على الجودة"],["مصادر التحقق المحفوظة","<a href=\"https://fanar.qa/en\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"falcon",name:"Falcon Arabic",logo:officialFavicon("falconllm.tii.ae"),type:"نموذج تقني",cat:"tech",sub:"ai",origin:["chatgpt"],value:"نموذج لغوي عربي من الإمارات للمطورين والباحثين. قيمته الأساسية أنه يضع العربية في صلب النموذج لا كطلب ترجمة لاحق.",arabRelation:"نموذج موجه للعربية",creator:"معهد الابتكار التكنولوجي : TII",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"التعريف مبني على المصادر المتاحة؛ لم تجر تجربة استخدام مستقلة.",url:"https://falconllm.tii.ae/falcon-arabic.html",domain:"falconllm.tii.ae",modules:[["الواجهة والمخرجات","إنجليزية · فصحى ولهجات بحسب بطاقة المطور"],["الدليل المتاح","بطاقات وإعلانات رسمية · التقييم الحقيقي يحتاج benchmark واستخداما محددا"],["مصادر التحقق المحفوظة","<a href=\"https://falconllm.tii.ae/falcon-arabic.html\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"arabicai",name:"Arabic.AI",logo:officialFavicon("arabic.ai"),type:"خدمات للمؤسسات",cat:"tech",sub:"ai",origin:["chatgpt"],value:"منظومة مؤسسية للنص والوثائق والصوت بالعربية. تستحق المتابعة خصوصا للفرق التي تحتاج OCR أو ترجمة أو صوتا عربيا على نطاق كبير.",arabRelation:"Arabic-first للمؤسسات",creator:"انطلقت المنظومة من عمّان عام 2008 باسم Tarjama قبل تطورها إلى Arabic.AI.",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"يراجع كل منتج على حدة؛ لا نمنح المنظومة كلها درجة واحدة لأداء العربية.",url:"https://arabic.ai/ar/",domain:"arabic.ai",modules:[["الواجهة والمخرجات","عربية وإنجليزية · العربية بحسب الخدمة"],["الدليل المتاح","الموقع ينشر قدرات ونتائج benchmark خاصة به · النتائج المنشورة تحتاج قراءة منهجية قبل اعتبارها مقارنة مستقلة"],["مصادر التحقق المحفوظة","<a href=\"https://arabic.ai/ar/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"salla",name:"سلة",logo:officialFavicon("salla.com"),type:"تجارة إلكترونية",cat:"work",sub:"commerce",origin:["shopify"],value:"بدل تركيب متجر عالمي ثم تكييفه مع السوق الخليجي، سلة تبدأ من التجارة المحلية والدفع والشحن في المنطقة.",arabRelation:"تجارة إلكترونية مبنية للسوق السعودي والخليجي",creator:"🇸🇦 السعودية",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"قارن الباقة والتكاملات وبلدان الخدمة قبل الانتقال؛ لم تختبر إدارة متجر كامل ضمن هذه المراجعة.",url:"https://salla.com/",domain:"salla.com",modules:[["الواجهة والمخرجات","عربية؛ صفحة إنجليزية متاحة · محتوى المتجر يحرره صاحبه"],["الدليل المتاح","الموقع الرسمي · الملاءمة تعتمد على بلد التشغيل وحجم المتجر والتكاملات"],["مصادر التحقق المحفوظة","<a href=\"https://salla.com/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"edraak",name:"إدراك",logo:officialFavicon("edraak.org"),type:"منصة تعلم",cat:"learn",sub:"courses",origin:["coursera","udemy"],value:"منصة عربية للتعلم المجاني، وتقريرها الأخير يذكر أكثر من 300 مساق و26.5 مليون تسجيل في المساقات.",arabRelation:"تعلم عربي مجاني على نطاق واسع",creator:"🇯🇴 الأردن",availability:"راجع شروط الإتاحة في الموقع.",price:"مجاني/حسب المسار",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"راجع متطلبات الدورة وإتاحة الشهادة في صفحتها؛ لا نعادل الشهادة تلقائيا بمؤهل أكاديمي.",url:"https://www.edraak.org/",domain:"edraak.org",modules:[["الواجهة والمخرجات","عربية · دورات تعليمية بالعربية"],["الدليل المتاح","تقرير أثر رسمي 2026 · Google Play يعرض نحو 3.9/5 من أكثر من 9 آلاف مراجعة"],["مصادر التحقق المحفوظة","<a href=\"https://www.edraak.org/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"mandumah",name:"دار المنظومة",logo:officialFavicon("mandumah.com"),type:"قاعدة معرفة",cat:"learn",sub:"research",origin:["scholar","jstor"],value:"قاعدة معرفية سعودية تجعل الرسائل والدوريات العربية أقرب للباحث الذي لا يريد أن يبدأ كل مرة من قاعدة أجنبية.",arabRelation:"محتوى أكاديمي عربي متخصص",creator:"🇸🇦 السعودية",availability:"نصوص كاملة أو مستخلصات وإتاحة جزئية؛ الوصول قد يعتمد على اشتراك المؤسسة.",price:"بحسب الوصول",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"وجود المستخلص لا يعني توافر الرسالة كاملة. ارجع إلى المصدر قبل الاقتباس والتوثيق.",url:"https://www.mandumah.com/service/dissertation/",domain:"mandumah.com",modules:[["الواجهة والمخرجات","عربية وإنجليزية · رسائل ودراسات؛ اللغة حسب السجل"],["الدليل المتاح","الموقع الرسمي · القيمة في التغطية والإتاحة أكثر من تقييم النجوم"],["مصادر التحقق المحفوظة","<a href=\"https://www.mandumah.com/service/dissertation/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"openalex",name:"OpenAlex",logo:officialFavicon("openalex.org"),type:"اكتشاف الأبحاث",cat:"learn",sub:"research",origin:["scholar"],value:"أداة عالمية مساعدة، وليست بديلا عربيا. نحتفظ بها لأنها توسع البحث عندما تحتاج أن تربط الإنتاج العربي بالمشهد العلمي العالمي.",arabRelation:"مصدر عالمي مساعد — ليس عربيًا",creator:"OurResearch : مشروع عالمي لفهرسة المعرفة العلمية",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر عالمي مساعد — ليس بديلاً عربيًا",reviewed:"14 سبتمبر 2026",limit:"مصدر مساعد للاكتشاف؛ راجع الورقة الأصلية وبياناتها قبل إدراجها في قائمة المراجع.",url:"https://openalex.org/",domain:"openalex.org",modules:[["الواجهة والمخرجات","التوثيق بالإنجليزية · فهرسة متعددة اللغات؛ تحقق من كل سجل"],["الدليل المتاح","مشروع عالمي مفتوح · تظهر كأداة مساندة لا كواجهة للهوية"],["مصادر التحقق المحفوظة","<a href=\"https://openalex.org/\" target=\"_blank\" rel=\"noopener noreferrer\">فتح محرك البحث</a> · <a href=\"https://help.openalex.org/\" target=\"_blank\" rel=\"noopener noreferrer\">التعريف والتوثيق</a>"]]},
-{id:"zotero",name:"Zotero",logo:officialFavicon("zotero.org"),type:"إدارة المراجع",cat:"learn",sub:"research",origin:[],value:"أداة عالمية مساعدة لتنظيم المراجع. موجودة هنا لأنها تخدم الباحث العربي، لا لأنها جزء من البدائل العربية.",arabRelation:"مصدر عالمي مساعد — ليس عربيًا",creator:"Digital Scholar ومجتمع تطوير عالمي",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر عالمي مساعد — ليس بديلاً عربيًا",reviewed:"14 سبتمبر 2026",limit:"راجع أسماء المؤلفين والعناوين ونمط التوثيق المطلوب من جامعتك؛ الأداة تنظم البيانات ولا تصحح المصدر تلقائيا.",url:"https://www.zotero.org/",domain:"zotero.org",modules:[["الواجهة والمخرجات","الموقع بالإنجليزية؛ التطبيق متعدد اللغات · يدعم حفظ المراجع بلغات متعددة ومنها العربية"],["الدليل المتاح","مشروع مفتوح ومعروف · نضعها في طبقة الأدوات المساعدة لا في الواجهة"],["مصادر التحقق المحفوظة","<a href=\"https://www.zotero.org/\" target=\"_blank\" rel=\"noopener noreferrer\">الأداة الرسمية</a> · <a href=\"https://www.zotero.org/support/supported_languages\" target=\"_blank\" rel=\"noopener noreferrer\">دعم اللغات والتوثيق</a>"]]},
-{id:"fresh",name:"فريش",logo:officialFavicon("fresh.com.eg"),type:"منتجات وصناعة",cat:"tech",sub:"all",origin:[],value:"منتج مصري مادي داخل الدليل يذكّر بأن البديل العربي لا يقتصر على التطبيقات. المقارنة هنا تبدأ بالمواصفات وخدمة ما بعد البيع.",arabRelation:"صناعة مصرية",creator:"شركة فريش المصرية للأجهزة المنزلية",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"بلد منشأ العلامة لا يثبت بلد تصنيع كل طراز أو مكون. لا تتضمن هذه البطاقة توصية شراء لطراز محدد.",url:"https://fresh.com.eg/",domain:"fresh.com.eg",modules:[["الواجهة والمخرجات","عربية وإنجليزية · معلومات المنتجات بالعربية"],["الدليل المتاح","الموقع الرسمي ومواصفات الطراز · يحتاج التقييم إلى مراجعات لكل طراز على حدة"],["مصادر التحقق المحفوظة","<a href=\"https://fresh.com.eg/ar/about\" target=\"_blank\" rel=\"noopener noreferrer\">عن الشركة</a> · <a href=\"https://fresh.com.eg/\" target=\"_blank\" rel=\"noopener noreferrer\">كتالوج المنتجات</a>"]]},
-{id:"aamenn",name:"آمن Aamenn",logo:"material:shield",type:"مرشح للتجربة",cat:"tech",sub:"infra",origin:["drive"],value:"مشروع لمشاركة وتخزين الملفات بصلات مصرية قيد التحقق. نبرزه كمرشح، لا كمنتج موثوق نهائيا.",arabRelation:"مرشح محلي يحتاج استكمال التحقق",creator:"فريق مؤسس يعمل من مصر؛ لم يكتمل التحقق من بلد التسجيل القانوني للكيان.",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مرشح قديم — التحقق غير مكتمل",reviewed:"14 سبتمبر 2026",limit:"الرابط لصفحة الشركة، وليس لمنتج اختبرناه. التشفير والسعر والاسترجاع لم تخضع للتحقق هنا.",url:"https://www.linkedin.com/company/aamenn",domain:"linkedin.com",modules:[["الواجهة والمخرجات","لم تفحص واجهة الخدمة · لم يختبر دعم العربية"],["الدليل المتاح","مصادر أولية محدودة · لا يوجد أساس كاف لتقييم جودة أو ثقة بعد"],["مصادر التحقق المحفوظة","<a href=\"https://www.linkedin.com/company/aamenn\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"munsit",name:"منصت Munsit",logo:officialFavicon("munsit.com"),type:"تقنية صوت",cat:"create",sub:"audio",origin:["otter"],value:"لو ساعاتك تضيع في تفريغ الاجتماعات أو التسجيلات العربية، منصت يضع اللهجات العربية في قلب الاستخدام.",arabRelation:"تفريغ صوت عربي ولهجات",creator:"CNTXT AI : مقرها الإمارات",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"القياس يخص نظام Munsit المشارك في مسابقة 2025، وليس اختبارا منا للخدمة الحالية. معدل خطأ الكلمات ليس نسبة رضا أو جودة التعليق الصوتي.",url:"https://munsit.com/",domain:"munsit.com",modules:[["الواجهة والمخرجات","عربية وإنجليزية · تفريغ صوت عربي ولهجات متعددة"],["الدليل المتاح","الموقع الرسمي · جودة التفريغ تختلف حسب اللهجة والصوت وتحتاج اختبارا بعينتك"],["مصادر التحقق المحفوظة","<a href=\"https://munsit.com/\" target=\"_blank\" rel=\"noopener noreferrer\">منصة منصت</a> · <a href=\"https://munsit.com/about-us\" target=\"_blank\" rel=\"noopener noreferrer\">الجهة المطورة</a> · <a href=\"https://arxiv.org/html/2509.02038v1#S4.T4\" target=\"_blank\" rel=\"noopener noreferrer\">نتائج منظمي NADI 2025 : جدول 4</a>"]]},
-{id:"anghami",name:"أنغامي",logo:officialFavicon("anghami.com"),type:"بث صوتي",cat:"culture",sub:"all",origin:["spotify"],value:"منصة موسيقى خرجت من المنطقة قبل أن يصبح البث عادة يومية. خيار عربي راسخ يستحق أن يبقى ضمن المقارنة مع المنصات العالمية.",arabRelation:"منشأ لبناني وحضور عربي واسع",creator:"منشأ لبناني / مقر إقليمي",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"لم تراجع كل إصدارات المحتوى أو لغات التطبيق ضمن هذه المراجعة.",url:"https://www.anghami.com/about",domain:"anghami.com",modules:[["الواجهة والمخرجات","إنجليزية في الصفحة المفحوصة · المحتوى العربي حسب المكتبة"],["الدليل المتاح","الموقع الرسمي ومصادر الشركة · المكتبة والأسعار تختلف حسب البلد"],["مصادر التحقق المحفوظة","<a href=\"https://www.anghami.com/about\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"hudhud",name:"هدهد Hudhud Maps",logo:officialFavicon("hudhud.sa"),type:"خرائط محلية",cat:"tech",sub:"software",origin:["googlemaps"],value:"خرائط وملاحة سعودية تركز على الأماكن والعناوين المحلية. مثال واضح على قيمة المنتج حين يعرف تفاصيل المكان أكثر من الاسم العالمي.",arabRelation:"ملاحة محلية للسوق السعودي",creator:"🇸🇦 السعودية",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"نطاقه الجغرافي مهم عند المقارنة؛ لم يختبر مسار ملاحة فعليا.",url:"https://hudhud.sa/en",domain:"hudhud.sa",modules:[["الواجهة والمخرجات","إنجليزية في الصفحة المفحوصة · العناوين العربية بحسب الخدمة"],["الدليل المتاح","الموقع الرسمي · الاختبار الميداني هو الفيصل في الدقة والتغطية"],["مصادر التحقق المحفوظة","<a href=\"https://hudhud.sa/en\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"arabybot",name:"ArabyBot",logo:officialFavicon("arabybot.com"),type:"محادثات أعمال",cat:"work",sub:"management",origin:[],value:"منصة مصرية لمحادثات العملاء والأتمتة. مفيدة للفرق التي تريد خدمة عربية أقرب لأسلوب العميل المحلي.",arabRelation:"محادثات وأتمتة موجهة للأعمال العربية",creator:"🇪🇬 مصر",availability:"راجع شروط الإتاحة في الموقع.",price:"راجع السعر الحالي في الموقع",verified:"مصدر رسمي — مراجعة 14 سبتمبر 2026",reviewed:"14 سبتمبر 2026",limit:"راجع القنوات والتكاملات والاشتراك؛ لم تختبر الأتمتة أو عملية ربط الحساب.",url:"https://arabybot.com/about",domain:"arabybot.com",modules:[["الواجهة والمخرجات","عربية في الصفحة المفحوصة · دعم العربية بحسب الجهة"],["الدليل المتاح","الموقع الرسمي · يحتاج الحكم إلى تجربة قنوات فعلية وحجم رسائل حقيقي"],["مصادر التحقق المحفوظة","<a href=\"https://arabybot.com/about\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"khamsat",name:"خمسات",logo:officialFavicon("khamsat.com"),type:"منصة خدمات",cat:"work",sub:"services",origin:["fiverr"],value:"شراء خدمات رقمية من مستقلين عرب لمهام واضحة.",arabRelation:"منصة عربية",creator:"خمسات سوق عربي تابع لحسوب؛ Hsoub Limited مسجلة في المملكة المتحدة، بينما المنتج والسوق والجمهور عربيون.",availability:"متاح عبر الويب",price:"حسب الخدمة",verified:"مصدر رسمي",reviewed:"لم تُسجل مراجعة حديثة بعد",limit:"وضوح الطلب ومراجعة الأعمال السابقة جزء أساسي من القرار.",url:"https://khamsat.com/",domain:"khamsat.com",modules:[["كيف تبدأ؟","اكتب المطلوب وحدد التسليم والموعد قبل مقارنة مقدمي الخدمة."]]},
-{id:"hsoub",name:"أكاديمية حسوب",logo:officialFavicon("academy.hsoub.com"),type:"مصدر تعلم",cat:"learn",sub:"courses",origin:["coursera","udemy"],value:"مصادر ودورات عربية في البرمجة وتطوير الويب والتقنية.",arabRelation:"تعلّم بالعربية",creator:"حسوب تأسست في المملكة المتحدة عام 2011، لكنها تبني منتجات وفرص عمل وتعليم موجهة للعالم العربي، والأكاديمية محتواها عربي.",availability:"الويب",price:"مجاني + مدفوع",verified:"مصادر رسمية",reviewed:"لم تُسجل مراجعة حديثة بعد",limit:"المحتوى المجاني والمدفوع يحتاجان مقارنة بالهدف والوقت.",url:"https://academy.hsoub.com/",domain:"academy.hsoub.com",modules:[["طريقة الاستخدام","ابدأ من المجال الذي تحتاجه ثم انتقل من الشرح المجاني إلى المسار المدفوع فقط إذا احتجت تنظيمًا أو متابعة إضافية."]]},
-{id:"abjjad",name:"أبجد",logo:officialFavicon("abjjad.com"),type:"منصة كتب",cat:"culture",sub:"books",origin:["kindle"],value:"كتب عربية رقمية وصوتية ضمن تجربة قراءة واكتشاف.",arabRelation:"منصة/محتوى عربي",creator:"جهة عربية",availability:"بحسب الكتالوج والسوق",price:"حسب الخطة",verified:"مصدر رسمي — يراجع الكتالوج",reviewed:"لم تُسجل مراجعة حديثة بعد",limit:"توافر الكتب والحقوق والأسعار يتغير مع الوقت.",url:"https://www.abjjad.com/",domain:"abjjad.com",modules:[["تفاصيل ثقافية","للكتاب الواحد نهتم بالمؤلف والطبعة والناشر ونوع النسخة وطريقة الوصول: قراءة أو استماع أو استخدام دون إنترنت."]]},
-{id:"sowt",name:"صوت",logo:officialFavicon("sowt.com"),type:"شبكة/محتوى صوتي",cat:"culture",sub:"podcasts",origin:["spotify"],value:"بودكاست وقصص صوتية عربية تُكتشف لقيمتها نفسها.",arabRelation:"إبداع عربي أصيل",creator:"جهة عربية",availability:"منصات متعددة",price:"بحسب المحتوى",verified:"كل برنامج يراجع بذاته",reviewed:"لم تُسجل مراجعة حديثة بعد",limit:"لا نختزل شبكة كاملة في تقييم واحد.",url:"https://www.sowt.com/",domain:"sowt.com",modules:[["المحتوى","لكل سلسلة أو برنامج نهتم بالمقدم والموضوع والمواسم أو الحلقات ومنصات الاستماع المتاحة."]]},
-{id:"noon",name:"نون",logo:officialFavicon("noon.com"),type:"سوق إلكتروني",cat:"shopping",sub:"marketplaces",origin:["amazon","jumia"],value:"منصة تسوق إقليمية عامة تضم ملايين المنتجات، وتعمل حاليًا في مصر والسعودية والإمارات.",arabRelation:"منصة إقليمية بواجهة ودعم عربي",creator:"Noon AD Holdings؛ منصة إقليمية تعمل في مصر والسعودية والإمارات.",availability:"متاحة حاليًا في مصر والسعودية والإمارات بحسب مركز مساعدة نون.",price:"التصفح مجاني / السعر حسب المنتج",verified:"مصادر رسمية — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"الأسعار والشحن والإرجاع تختلف حسب البلد والمنتج والبائع؛ راجع صفحة المنتج وشروط السوق قبل الشراء.",url:"https://www.noon.com/egypt-ar/",domain:"noon.com",modules:[["نطاق التسوق","إلكترونيات، أزياء، منزل، أطفال، جمال، بقالة وغيرها بحسب السوق."],["الإتاحة","نون تذكر أن أسواقها الحالية هي السعودية والإمارات ومصر."],["مصادر التحقق المحفوظة","<a href=\"https://help.noon.com/portal/en/kb/articles/about-noon-7-3-2024\" target=\"_blank\" rel=\"noopener noreferrer\">عن نون</a> · <a href=\"https://help.noon.com/portal/en/kb/articles/seller-onboarding-faq\" target=\"_blank\" rel=\"noopener noreferrer\">الأسواق الحالية</a>"]]},
-{id:"opensooq",name:"السوق المفتوح",logo:officialFavicon("opensooq.com"),type:"إعلانات مبوبة",cat:"shopping",sub:"classifieds",origin:["jumia"],value:"منصة إقليمية للبيع والشراء المباشر والإعلانات المبوبة، من السيارات والعقارات إلى الإلكترونيات والخدمات.",arabRelation:"منصة موجّهة للشرق الأوسط وشمال إفريقيا",creator:"OpenSooq؛ لها شركة تطوير مسجلة في الأردن ومكاتب إقليمية.",availability:"متاح في 20 بلدًا بحسب الجهة.",price:"بحسب القسم ونوع الإعلان",verified:"مصادر رسمية — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"ليس متجرًا مركزيًا مثل Amazon أو Jumia؛ كثير من الصفقات تتم بين المستخدمين، لذلك تحقق من البائع وطريقة الدفع والتسليم.",url:"https://eg.opensooq.com/ar",domain:"eg.opensooq.com",modules:[["طريقة الاستخدام","إعلانات مبوبة تربط الأفراد والشركات للبيع والشراء والتأجير والوظائف والخدمات."],["الحجم المعلن","أكثر من 800 مليون زيارة سنويًا و120 مليون مستخدم فريد بحسب الجهة نفسها."],["مصادر التحقق المحفوظة","<a href=\"https://eg.opensooq.com/ar/site/about-us\" target=\"_blank\" rel=\"noopener noreferrer\">عن السوق المفتوح</a> · <a href=\"https://jo.opensooq.com/en/termOfUse?view=termOfUse\" target=\"_blank\" rel=\"noopener noreferrer\">الشروط والكيانات القانونية</a>"]]},
-{id:"mumzworld",name:"Mumzworld",logo:officialFavicon("mumzworld.com"),type:"متجر متخصص",cat:"shopping",sub:"specialized",origin:["amazon"],value:"منصة تسوق متخصصة للأم والطفل، تأسست في المنطقة وتجمع منتجات وعلامات متعددة مع تجربة ثنائية اللغة.",arabRelation:"منصة إقليمية ثنائية اللغة للأم والطفل",creator:"Mumzworld؛ أسستها Mona Ataya وLeena Khalil في 2011.",availability:"تخدم أسواقًا في المنطقة؛ راجع بلد الشحن الحالي قبل الطلب.",price:"حسب المنتج والشحن",verified:"مصادر رسمية — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"متجر متخصص وليس بديلًا عامًا لـAmazon أو Jumia؛ قارن السعر والشحن والإرجاع للمنتج نفسه.",url:"https://www.mumzworld.com/en/",domain:"mumzworld.com",modules:[["التخصص","منتجات للأم والطفل والعائلة من علامات محلية وعالمية."],["عن المنصة","تأسست في 2011، وتصف نفسها كمنصة إقليمية متخصصة للأم والطفل."],["مصادر التحقق المحفوظة","<a href=\"https://www.mumzworld.com/en/about-our-products\" target=\"_blank\" rel=\"noopener noreferrer\">عن المنتجات والمنصة</a> · <a href=\"https://blog.mumzworld.com/en/mumzworld-a-journey-of-entrepreneurship-and-motherhood\" target=\"_blank\" rel=\"noopener noreferrer\">قصة التأسيس</a>"]]},
-
-{id:"spacetoonyt",name:"سبيستون",logo:officialFavicon("youtube.com"),type:"قناة أطفال",cat:"culture",sub:"kids",origin:["youtube"],value:"قناة رسمية عربية على YouTube للكرتون والأنمي والأغاني والبرامج الموجهة للأطفال والعائلة.",arabRelation:"دبلجة ومحتوى عربي للأطفال",creator:"Spacetoon",availability:"متاحة مجانًا عبر القناة الرسمية على YouTube.",price:"مجاني عبر YouTube",verified:"قناة موثقة على YouTube — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"المحتوى يتغير باستمرار؛ راجع ملاءمة الحلقة لعمر الطفل واستخدم أدوات الإشراف المناسبة.",url:"https://www.youtube.com/@spacetoonyoutube",domain:"youtube.com",modules:[["المحتوى","حلقات كرتون وأنمي وأغانٍ وبرامج أطفال باللغة العربية من القناة الرسمية."],["مصادر التحقق المحفوظة","<a href=\"https://www.youtube.com/@spacetoonyoutube\" target=\"_blank\" rel=\"noopener noreferrer\">القناة الرسمية</a>"]]},
-{id:"majidkids",name:"ماجد للأطفال",logo:officialFavicon("youtube.com"),type:"قناة أطفال",cat:"culture",sub:"kids",origin:["youtube"],value:"قناة عربية إماراتية متخصصة في برامج الأطفال والرسوم المتحركة، تجمع شخصيات محلية ومحتوى ترفيهي وتعليمي.",arabRelation:"محتوى عربي وهوية إماراتية للأطفال",creator:"عالم ماجد / أبوظبي للإعلام",availability:"متاحة عبر القناة الرسمية على YouTube.",price:"مجاني عبر YouTube",verified:"قناة موثقة على YouTube — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"اختيار القناة لا يغني عن مراجعة المحتوى المناسب لعمر الطفل وإعدادات الإشراف.",url:"https://www.youtube.com/@majidkids",domain:"youtube.com",modules:[["المحتوى","رسوم متحركة وبرامج أطفال عربية تجمع التسلية والفائدة."],["مصادر التحقق المحفوظة","<a href=\"https://www.youtube.com/@majidkids\" target=\"_blank\" rel=\"noopener noreferrer\">القناة الرسمية</a>"]]},
-{id:"marefa",name:"المعرفة",logo:officialFavicon("marefa.org"),type:"موسوعة عربية مفتوحة",cat:"learn",sub:"encyclopedias",origin:["wikipedia"],value:"موسوعة عربية مفتوحة تجمع وتنتج محتوى عربيًا متنوعًا، ويمكن للمجتمع المساهمة في تحريرها.",arabRelation:"المحتوى العربي هو أساس المشروع",creator:"مشروع عربي أطلقه نايل الشافعي عام 2007؛ مؤسسة Marefa Foundation تظهر كجهة أمريكية غير ربحية، بينما هوية الموسوعة ومحتواها عربيان.",availability:"مفتوحة عبر الويب.",price:"مجاني",verified:"الموقع الرسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"لأنها موسوعة مفتوحة قابلة للتحرير، راجع المراجع الأصلية خصوصًا في الموضوعات الحساسة أو المتغيرة.",url:"https://www.marefa.org/",domain:"marefa.org",modules:[["طريقة الاستخدام","ابدأ بالمقال للاكتشاف، ثم راجع المراجع والمصادر المرتبطة قبل الاعتماد الأكاديمي أو المهني."],["مصادر التحقق المحفوظة","<a href=\"https://www.marefa.org/Main_Page\" target=\"_blank\" rel=\"noopener noreferrer\">الرئيسية والتعريف بالمشروع</a>"]]},
-{id:"arabency",name:"الموسوعة العربية",logo:officialFavicon("arab-ency.com.sy"),type:"موسوعة علمية عربية",cat:"learn",sub:"encyclopedias",origin:["wikipedia"],value:"مرجع موسوعي عربي تحريري يغطي العلوم والآداب والحضارة والمصطلحات، تصدره هيئة علمية ثقافية رسمية في دمشق.",arabRelation:"مرجع عربي مؤسسي شامل",creator:"هيئة الموسوعة العربية — وزارة الثقافة السورية",availability:"المواد متاحة للتصفح عبر الموقع.",price:"مجاني للتصفح",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"حداثة المواد وتواتر تحديثها يختلفان حسب الموضوع؛ في المعلومات السريعة التغير راجع مصدرًا أحدث أيضًا.",url:"https://arab-ency.com.sy/",domain:"arab-ency.com.sy",modules:[["نطاق المعرفة","علوم بحتة وتطبيقية، قانون واقتصاد، تاريخ، حضارة عربية، لغة وأدب وفنون."],["مصادر التحقق المحفوظة","<a href=\"https://www.arab-ency.com.sy/about-ency/\" target=\"_blank\" rel=\"noopener noreferrer\">عن الموسوعة</a>"]]},
-{id:"dorar",name:"الدرر السنية",logo:officialFavicon("dorar.net"),type:"موسوعات إسلامية",cat:"learn",sub:"islamic",origin:[],value:"منصة بحث عربية في الحديث وشروحه وعلوم شرعية متعددة، مع صفحات توضّح المنهج والمراجع في الموسوعات.",arabRelation:"بحث وموسوعات شرعية بالعربية",creator:"الدرر السنية",availability:"متاحة عبر الويب.",price:"مجاني",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"نتيجة البحث المختصرة لا تغني عن سياق الحديث أو المسألة ولا عن الرجوع لأهل الاختصاص في النوازل والخلاف.",url:"https://dorar.net/",domain:"dorar.net",modules:[["ما يفيدك","بحث في الأحاديث ودرجاتها والشروح، مع مراجع ومنهج عمل منشور داخل الموسوعات."],["مصادر التحقق المحفوظة","<a href=\"https://dorar.net/hadith\" target=\"_blank\" rel=\"noopener noreferrer\">الموسوعة الحديثية</a>"]]},
-{id:"tafsircenter",name:"مركز تفسير",logo:officialFavicon("tafsir.net"),type:"مصادر قرآنية",cat:"learn",sub:"islamic",origin:[],value:"مركز عربي متخصص في الدراسات القرآنية يقدم موسوعات وتطبيقات ومحتوى بحثيًا لخدمة التفسير وعلوم القرآن.",arabRelation:"مشروع عربي متخصص في القرآن وعلومه",creator:"مركز تفسير للدراسات القرآنية — الرياض",availability:"الويب وتطبيقات قرآنية رسمية.",price:"بحسب الخدمة؛ كثير من المحتوى متاح مباشرة",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"مصدر متخصص في الدراسات القرآنية، وليس بديلًا واحدًا يغطي كل فروع العلوم الشرعية.",url:"https://www.tafsir.net/",domain:"tafsir.net",modules:[["أبرز ما يقدمه","تطبيقات وموسوعات قرآنية، منها موسوعة التفسير الموضوعي التي تجمع 365 موضوعًا قرآنيًا."],["مصادر التحقق المحفوظة","<a href=\"https://www.tafsir.net/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a> · <a href=\"https://tafsir.net/applications/12859\" target=\"_blank\" rel=\"noopener noreferrer\">موسوعة التفسير الموضوعي</a>"]]},
-{id:"shamela",name:"المكتبة الشاملة",logo:officialFavicon("shamela.ws"),type:"مكتبة إسلامية رقمية",cat:"learn",sub:"islamic",origin:[],value:"مكتبة رقمية عربية ضخمة للبحث والقراءة في كتب التراث والعلوم الإسلامية واللغة والتاريخ.",arabRelation:"محتوى عربي وتراثي في صلب المشروع",creator:"مشروع عربي؛ متجر Google Play الرسمي يعرّف مطوّر التطبيق الرسمي بعنوان في مصر، ولا نعتبر ذلك وحده إثباتًا لبلد نشأة المشروع كله.",availability:"بحث وقراءة عبر الويب، مع تنزيل المشروع من الموقع الرسمي.",price:"مجاني للاستخدام الأساسي",verified:"الموقع الرسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"وجود الكتاب في المكتبة لا يعني اعتماد كل ما فيه؛ راجع المؤلف والطبعة والتحقيق ومكانة المصدر.",url:"https://shamela.ws/",domain:"shamela.ws",modules:[["الحجم المعلن","الموقع الرسمي يذكر نحو 7 ملايين صفحة و8 آلاف كتاب و3 آلاف مؤلف."],["مصادر التحقق المحفوظة","<a href=\"https://shamela.ws/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"hindawi",name:"هنداوي",logo:officialFavicon("hindawi.org"),type:"كتب عربية مجانية",cat:"culture",sub:"books",origin:["kindle"],value:"مؤسسة تتيح مؤلفات وأعمالًا أدبية عربية ومترجمة مجانًا، مع مبادرات قراءة للكبار والأطفال.",arabRelation:"إتاحة المعرفة والقراءة باللغة العربية",creator:"مؤسسة خيرية مسجلة في إنجلترا وويلز، ولها مقرّان رئيسيان في وندسور والقاهرة؛ تأسست رسالتها أصلًا لمعالجة نقص مواد القراءة العربية.",availability:"قراءة وتحميل مجانيان للأعمال المتاحة؛ الكتب الحالية مرتبطة أيضًا بمبادرة صفحات.",price:"مجاني",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"توافر كل عنوان يتوقف على حقوق النشر والإتاحة؛ لا تفترض أن كل كتاب مطبوع موجود رقميًا.",url:"https://www.hindawi.org/ar",domain:"hindawi.org",modules:[["ما يميزها","إتاحة مجانية قانونية للأعمال التي تملك المؤسسة حقوق نشرها أو إعادة نشرها، مع مبادرات مثل صفحات وبوك تايم."],["مصادر التحقق المحفوظة","<a href=\"https://www.hindawi.org/ar/about\" target=\"_blank\" rel=\"noopener noreferrer\">عن هنداوي</a>"]]},
-{id:"shahid",name:"شاهد",logo:officialFavicon("shahid.mbc.net"),type:"منصة مشاهدة",cat:"culture",sub:"drama",origin:["netflix"],value:"منصة مشاهدة عربية وإقليمية للمسلسلات والأفلام والقنوات المباشرة وأعمال شاهد الأصلية.",arabRelation:"محتوى عربي أصلي ومكتبة إقليمية",creator:"MBC Group",availability:"مجاني جزئيًا + اشتراك VIP بحسب المحتوى والبلد.",price:"مجاني جزئيًا / VIP مدفوع",verified:"مصدر رسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"المكتبة والإتاحة والأسعار تختلف حسب البلد وحقوق العرض؛ راجع صفحة العمل قبل الاشتراك.",url:"https://shahid.mbc.net/ar",domain:"shahid.mbc.net",modules:[["المحتوى","مسلسلات وأفلام وقنوات مباشرة وأعمال أصلية عربية."],["مصادر التحقق المحفوظة","<a href=\"https://shahid.mbc.net/ar/shahidoriginals\" target=\"_blank\" rel=\"noopener noreferrer\">أعمال شاهد الأصلية</a>"]]},
-{id:"watchit",name:"WATCH IT",logo:officialFavicon("watchit.com"),type:"منصة مشاهدة مصرية",cat:"culture",sub:"drama",origin:["netflix"],value:"منصة رقمية تركز على الدراما والبرامج والأعمال المصرية، مع مكتبة حالية وإنتاجات تعرض حصريًا.",arabRelation:"تركيز قوي على المحتوى المصري والعربي",creator:"WATCH IT",availability:"اشتراك عبر الويب والتطبيقات؛ وسائل دفع محلية منها فوري داخل مصر.",price:"داخل مصر وقت المراجعة: 19.99 ج.م أساسية بإعلانات / 99.99 ج.م بريميم شهريًا",verified:"مركز الدعم الرسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"الأسعار والمكتبة تختلف حسب البلد وقد تتغير؛ تحقق من صفحة الاشتراك الحالية قبل الدفع.",url:"https://www.watchit.com/",domain:"watchit.com",modules:[["الدفع في مصر","مركز الدعم يذكر الاشتراك بالبطاقات والتطبيقات وفوري داخل مصر."],["مصادر التحقق المحفوظة","<a href=\"https://support.watchit.com/hc/ar/articles/5118489729437\" target=\"_blank\" rel=\"noopener noreferrer\">الاشتراك والأسعار</a>"]]},
-{id:"dubaiplus",name:"Dubai+",logo:officialFavicon("dubaiplus.net"),type:"مشاهدة مجانية",cat:"culture",sub:"drama",origin:["netflix"],value:"منصة مشاهدة عند الطلب تجمع مسلسلات عربية وخليجية ومصرية وأفلامًا وبرامج وقنوات مباشرة، وتعرض محتوى أطفال أيضًا.",arabRelation:"محتوى عربي وإقليمي وقنوات من دبي",creator:"Dubai+",availability:"مشاهدة عبر الويب والتطبيق بحسب الخدمة.",price:"مجاني بحسب الموقع",verified:"الموقع الرسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"الإتاحة تختلف حسب حقوق العرض والمنطقة، وبعض العناوين قد تتغير مع الوقت.",url:"https://www.dubaiplus.net/web/",domain:"dubaiplus.net",modules:[["المحتوى","دراما مصرية وخليجية وسورية، أفلام، قنوات مباشرة، أطفال ووثائقيات وبرامج."],["مصادر التحقق المحفوظة","<a href=\"https://www.dubaiplus.net/web/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]},
-{id:"almaany",name:"المعاني",logo:officialFavicon("almaany.com"),type:"معاجم وقواميس",cat:"learn",sub:"language",origin:[],value:"محرك معاجم عربي يضم عربي-عربي وترجمات ومصطلحات متخصصة في مجالات متعددة.",arabRelation:"اللغة العربية هي محور الخدمة",creator:"موقع المعاني",availability:"متاح عبر الويب.",price:"مجاني للاستخدام الأساسي عبر الموقع",verified:"الموقع الرسمي — مراجعة 21 سبتمبر 2026",reviewed:"21 سبتمبر 2026",limit:"المعنى أو الترجمة الصحيحة يعتمد على السياق والمجال؛ لا تعتمد أول نتيجة آليًا في النصوص المتخصصة.",url:"https://www.almaany.com/",domain:"almaany.com",modules:[["المحتوى","معاجم عربية وترجمات ثنائية ومصطلحات في مجالات قانونية وطبية وتقنية وعلمية وغيرها."],["مصادر التحقق المحفوظة","<a href=\"https://www.almaany.com/\" target=\"_blank\" rel=\"noopener noreferrer\">الموقع الرسمي</a>"]]}
-,
-{id:"unifonic",name:"Unifonic",logo:officialFavicon("unifonic.com"),type:"اتصالات وتجربة عملاء",cat:"tech",sub:"software",origin:[],value:"منصة مؤسسات بدأت في السعودية لبناء تجارب تواصل مع العملاء عبر الرسائل والصوت والقنوات الرقمية، مع اهتمام معلن باللهجات العربية.",arabRelation:"لهجات وسياقات عربية ضمن المنتج",creator:"بدأت الشركة في السعودية عام 2006 بحسب صفحتها الرسمية.",availability:"خدمة موجهة أساسًا للمؤسسات؛ التفعيل والتسعير حسب الاحتياج.",price:"تواصل وتسعير حسب الاستخدام",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"القدرات والأرقام الواردة على صفحة الشركة بيانات رسمية؛ لم نختبر الأداء أو جودة فهم اللهجات بصورة مستقلة.",url:"https://www.unifonic.com/ar/",domain:"unifonic.com",modules:[["ماذا تقدم؟","قنوات تواصل وتجربة عملاء وطبقة ذكاء للمؤسسات."],["مصادر التحقق المحفوظة","<a href='https://www.unifonic.com/ar/about' target='_blank' rel='noopener noreferrer'>عن Unifonic</a>"]]},
-
-{id:"ithra",name:"إثراء",logo:officialFavicon("ithra.com"),type:"معرفة وثقافة",cat:"culture",sub:"books",origin:[],value:"مركز معرفي وثقافي في الظهران يجمع مكتبة كبيرة ومتحفًا ومسرحًا ومختبر أفكار وأكاديمية وبرامج تعلم واكتشاف.",arabRelation:"إنتاج معرفي وثقافي سعودي بامتداد عربي وعالمي",creator:"مركز الملك عبدالعزيز الثقافي العالمي «إثراء» — الظهران، السعودية.",availability:"جزء كبير من المعرفة والبرامج متاح رقميًا؛ الدخول والفعاليات تختلف حسب البرنامج.",price:"مجاني ومدفوع بحسب الخدمة أو الفعالية",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"إثراء ليس منصة كتب رقمية فقط؛ بعض الموارد والفعاليات تتطلب عضوية أو حضورًا أو حجزًا.",url:"https://www.ithra.com/ar",domain:"ithra.com",modules:[["المكتبة","الموقع الرسمي يذكر 389 ألف+ كتاب مطبوع و74 ألف+ كتاب إلكتروني ومسموع."],["مصادر التحقق المحفوظة","<a href='https://www.ithra.com/ar/about-ithra' target='_blank' rel='noopener noreferrer'>عن إثراء</a> · <a href='https://www.ithra.com/ar/visit-ithra/attractions/library' target='_blank' rel='noopener noreferrer'>المكتبة</a>"]]},
-
-{id:"thmanyah",name:"ثمانية",logo:officialFavicon("thmanyah.com"),type:"شبكة محتوى عربية",cat:"culture",sub:"podcasts",origin:["spotify"],value:"شبكة سعودية للمحتوى العربي تجمع البودكاست والوثائقيات والنشرات والبرامج والتطبيقات في منظومة واحدة.",arabRelation:"صناعة محتوى عربي أصلي من الرياض",creator:"بدأت ثمانية في الرياض في سبتمبر 2016، ومقرها في السعودية.",availability:"معظم المحتوى متاح مجانًا، مع مزايا ومواد ضمن اشتراكات مدفوعة.",price:"مجاني غالبًا + اشتراكات لبعض المزايا",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"ليست بديلًا مباشرًا لـSpotify في كل الوظائف؛ المقارنة هنا في الاستماع واكتشاف المحتوى الصوتي العربي.",url:"https://thmanyah.com/",domain:"thmanyah.com",modules:[["المحتوى","بودكاست ووثائقيات ومقالات ونشرات وترفيه وتطبيقات صوتية ومرئية."],["مصادر التحقق المحفوظة","<a href='https://company.thmanyah.com/about' target='_blank' rel='noopener noreferrer'>عن الشركة</a> · <a href='https://company.thmanyah.com/social' target='_blank' rel='noopener noreferrer'>الحسابات الرسمية</a>"]]},
-
-{id:"alef",name:"ألف للتعليم",logo:officialFavicon("alefeducation.com"),type:"تقنية تعليم",cat:"learn",sub:"courses",origin:[],value:"منصة تعليم مدعومة بالذكاء الاصطناعي للمراحل المدرسية، بدأت من أبوظبي وتعمل مع أنظمة تعليمية ومدارس في عدة أسواق.",arabRelation:"حل تعليمي انطلق لتلبية احتياجات مدارس الإمارات ويدعم تعليم العربية",creator:"تأسست في أبوظبي عام 2016.",availability:"الوصول غالبًا عبر المدارس والجهات التعليمية والعقود المؤسسية.",price:"مؤسسي؛ راجع الجهة أو المدرسة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"ليست منصة كورسات مفتوحة شبيهة بـUdemy؛ الاستخدام الأساسي مؤسسي ومدرسي.",url:"https://www.alefeducation.com/ar/",domain:"alefeducation.com",modules:[["النطاق","تعلم مخصص وبيانات وتقييمات للمرحلة K-12."],["مصادر التحقق المحفوظة","<a href='https://www.alefeducation.com/ar/our-story' target='_blank' rel='noopener noreferrer'>قصة ألف للتعليم</a>"]]},
-
-{id:"bayut",name:"بيوت",logo:officialFavicon("bayut.com"),type:"بوابة عقارية",cat:"shopping",sub:"specialized",origin:[],value:"بوابة عقارية إماراتية للشراء والإيجار والبيع، مع أدوات للتحقق من الوسطاء والإعلانات وبيانات للسوق العقاري.",arabRelation:"خدمة محلية مبنية حول سوق الإمارات وبواجهة عربية",creator:"جزء من Dubizzle Group؛ انطلقت بيوت في 2008 وتخدم الإمارات.",availability:"متاحة عبر الويب والتطبيق؛ الصفقات نفسها تتم مع المعلن أو الوسيط وفق الحالة.",price:"التصفح مجاني؛ تكاليف العقار والخدمات منفصلة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"ظهور إعلان على المنصة لا يغني عن فحص العقار والوسيط والعقد والجهة التنظيمية قبل أي دفع.",url:"https://www.bayut.com/ar/",domain:"bayut.com",modules:[["ما الذي يميزها؟","إعلانات عقارية في الإمارات وأدوات مثل TruBroker وTruCheck وبيانات معاملات دبي."],["مصادر التحقق المحفوظة","<a href='https://www.bayut.com/ar/about/' target='_blank' rel='noopener noreferrer'>عن بيوت</a>"]]},
-
-{id:"dubaifuture",name:"مؤسسة دبي للمستقبل",logo:officialFavicon("dubaifuture.ae"),type:"أبحاث واستشراف",cat:"learn",sub:"research",origin:[],value:"مصدر إماراتي لتقارير الاستشراف والتقنيات الناشئة، ومعه أكاديمية تقدم فرص تعلم ودورات افتراضية في مهارات المستقبل.",arabRelation:"معرفة واستشراف من المنطقة وبالعربية والإنجليزية",creator:"مؤسسة دبي للمستقبل — تأسست في 2016.",availability:"التقارير متاحة على الموقع، وبعض دورات الأكاديمية مجانية وعن بعد.",price:"تقارير مجانية + برامج تختلف شروطها",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"تقارير الاستشراف ليست بديلًا عن الأبحاث الأكاديمية المحكمة؛ استخدمها لفهم الاتجاهات والسيناريوهات.",url:"https://www.dubaifuture.ae/research/",domain:"dubaifuture.ae",modules:[["المحتوى","تقارير مستقبلية وتحليلات للتقنيات والاقتصاد والمجتمع، إلى جانب أكاديمية مستقبل."],["مصادر التحقق المحفوظة","<a href='https://www.dubaifuture.ae/research/' target='_blank' rel='noopener noreferrer'>البحوث والتقارير</a> · <a href='https://www.dubaifuture.ae/initiatives/capacity-building/dubai-future-academy/' target='_blank' rel='noopener noreferrer'>أكاديمية دبي للمستقبل</a>"]]},
-
-{id:"qdl",name:"مكتبة قطر الرقمية",logo:officialFavicon("qdl.qa"),type:"أرشيف رقمي",cat:"learn",sub:"research",origin:["scholar","jstor"],value:"أرشيف رقمي مجاني ضخم لتاريخ الخليج والشرق الأوسط، يضم خرائط ومخطوطات ووثائق وصورًا وتسجيلات مع شروح بالعربية والإنجليزية.",arabRelation:"مصادر أولية عن تاريخ الخليج والتراث العربي والإسلامي",creator:"شراكة بين مكتبة قطر الوطنية ومؤسسة قطر والمكتبة البريطانية.",availability:"وصول مجاني عبر الويب.",price:"مجاني",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"قوتها في المصادر التاريخية والأرشيفية؛ ليست محركًا عامًا لكل التخصصات العلمية.",url:"https://qdl.qa/ar",domain:"qdl.qa",modules:[["المحتوى","أرشيفات وخرائط ومخطوطات وتسجيلات وفنون بصرية ومقالات تفسيرية."],["مصادر التحقق المحفوظة","<a href='https://qdl.qa/en/about' target='_blank' rel='noopener noreferrer'>عن مكتبة قطر الرقمية</a>"]]},
-
-{id:"snoonu",name:"سنونو",logo:officialFavicon("snoonu.com"),type:"تطبيق فائق",cat:"shopping",sub:"marketplaces",origin:[],value:"تطبيق قطري يجمع توصيل الطعام والبقالة والإلكترونيات والملابس وغيرها، ويعمل كبوابة محلية للتجار والخدمات.",arabRelation:"بُني للسوق القطري وشبكة التجار المحلية",creator:"سنونو — قطر.",availability:"الخدمات والإتاحة تختلف حسب المنطقة داخل قطر ونوع المتجر.",price:"التطبيق مجاني؛ رسوم الطلب والتوصيل تختلف",verified:"مصدر رسمي للشركاء — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"وصف «التطبيق الفائق الرائد في قطر» صادر عن الجهة نفسها؛ لا نقدمه كتقييم مستقل للسوق.",url:"https://snoonu.com/",domain:"snoonu.com",modules:[["ما الذي يقدمه؟","طعام وبقالة وإلكترونيات وملابس وخدمات أخرى عبر شبكة تجار."],["مصادر التحقق المحفوظة","<a href='https://partner.snoonu.com/' target='_blank' rel='noopener noreferrer'>بوابة سنونو الرسمية للشركاء</a>"]]},
-
-{id:"kezakoo",name:"Kezakoo",logo:officialFavicon("kezakoo.com"),type:"تعليم مدرسي",cat:"learn",sub:"courses",origin:[],value:"منصة تعليمية مغربية لطلاب الثانوي، تجمع الفيديو والملخصات والتمارين والاختبارات والامتحانات المصححة وفق البرنامج المحلي.",arabRelation:"منصة وُلدت في المغرب لخدمة التلميذ المغربي",creator:"Kezakoo — منصة تعليم مغربية بدأت في 2013.",availability:"متاحة عبر الويب والتطبيق؛ يوجد محتوى وتجربة مجانية وخطط مدفوعة.",price:"مجاني جزئيًا + اشتراك",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"المحتوى مرتبط أساسًا بالمناهج المغربية؛ لا تفترض مطابقته لمناهج بلد آخر.",url:"https://www.kezakoo.com/ar/",domain:"kezakoo.com",modules:[["النطاق","محتوى للثانوي المغربي مع فيديوهات وملخصات وتمارين واختبارات."],["مصادر التحقق المحفوظة","<a href='https://orientation.kezakoo.com/qui-sommes-nous' target='_blank' rel='noopener noreferrer'>قصة Kezakoo</a> · <a href='https://www.kezakoo.com/ar/' target='_blank' rel='noopener noreferrer'>المنصة</a>"]]},
-
-{id:"telmidtice",name:"TelmidTICE",logo:officialFavicon("telmidtice.men.gov.ma"),type:"تعليم رسمي",cat:"learn",sub:"courses",origin:[],value:"منصة مغربية رسمية للدروس والملخصات والتمارين والفروض والامتحانات لمستويات ومواد دراسية متعددة.",arabRelation:"محتوى مدرسي رسمي مرتبط بالنظام التعليمي المغربي",creator:"وزارة التربية الوطنية والتعليم الأولي والرياضة في المغرب.",availability:"متاحة عبر الويب.",price:"مجاني بحسب المنصة الرسمية",verified:"مصدر حكومي رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"المحتوى مخصص أساسًا للمقرر المغربي؛ استخدمه خارج المغرب كمصدر شرح لا كبديل عن منهج بلدك.",url:"https://telmidtice.men.gov.ma/",domain:"telmidtice.men.gov.ma",modules:[["المحتوى","دروس وتمارين وفروض وامتحانات للمراحل المدرسية."],["مصادر التحقق المحفوظة","<a href='https://telmidtice.men.gov.ma/' target='_blank' rel='noopener noreferrer'>المنصة الرسمية</a>"]]},
-
-{id:"chari",name:"Chari",logo:officialFavicon("chari.com"),type:"خدمات مالية رقمية",cat:"tech",sub:"infra",origin:[],value:"تطبيق مالي مغربي يجمع محفظة إلكترونية وحسابًا بمعرّف مغربي وبطاقات وتحويلات وشحنًا ودفع فواتير.",arabRelation:"خدمة مالية مبنية للسوق المغربي وتدعم العربية والدارجة",creator:"Chari — فريق مغربي؛ كيان الدفع مرخّص من بنك المغرب.",availability:"موجه للأفراد والتجار الصغار في المغرب وفق شروط الأهلية والتحقق.",price:"تختلف الرسوم حسب الخدمة وتظهر قبل العمليات بحسب الموقع",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"خدمة مالية منظمة؛ راجع الشروط والرسوم وحدود الحساب مباشرة قبل أي تحويل أو إيداع.",url:"https://www.chari.com/",domain:"chari.com",modules:[["التنظيم","تقول Chari إن كيان الدفع مرخص من Bank Al-Maghrib."],["مصادر التحقق المحفوظة","<a href='https://www.chari.com/en/a-propos' target='_blank' rel='noopener noreferrer'>عن Chari</a>"]]},
-
-{id:"benefit",name:"BENEFIT",logo:officialFavicon("benefit.bh"),type:"بنية مدفوعات",cat:"tech",sub:"infra",origin:[],value:"بنية بحرينية للمدفوعات والخدمات المالية الرقمية تقف خلف خدمات وطنية مثل الشبكة المشتركة وحلول الدفع والتحقق.",arabRelation:"بنية مالية محلية للسوق البحريني",creator:"تأسست في البحرين عام 1997 بمبادرة من 17 بنكًا تجاريًا.",availability:"الخدمات تختلف بين أفراد ومؤسسات وبنوك، وبعضها يعمل عبر تطبيقات ومنظومات محلية.",price:"تختلف حسب الخدمة والجهة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"ليست «محفظة واحدة» فقط؛ هي شركة بنية مالية وخدمات متعددة، لذلك راجع المنتج المحدد الذي تحتاجه.",url:"https://benefit.bh/AR/",domain:"benefit.bh",modules:[["البداية","الشركة الرسمية تذكر تأسيسها كالشبكة الوطنية لأجهزة الصراف ونقاط البيع."],["مصادر التحقق المحفوظة","<a href='https://benefit.bh/AR/about-us/' target='_blank' rel='noopener noreferrer'>عن بنفت</a>"]]},
-
-{id:"tarabut",name:"Tarabut",logo:officialFavicon("tarabut.com"),type:"مصرفية مفتوحة",cat:"tech",sub:"infra",origin:[],value:"منصة بنية مالية بدأت في البحرين للـOpen Banking والتمويل المضمّن، وتربط المؤسسات المالية وخدمات البيانات والمدفوعات.",arabRelation:"بنية مالية انطلقت من البحرين وتوسعت إقليميًا",creator:"بدأت Tarabut في البحرين عام 2018.",availability:"خدمة B2B للمؤسسات والمطورين وليست تطبيقًا مصرفيًا استهلاكيًا عامًا.",price:"مؤسسي؛ تواصل مع الجهة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"لا تعرضها كبديل لبنك أو محفظة للمستخدم الفردي؛ قيمتها في البنية والتكاملات المالية.",url:"https://tarabut.com/sa/company",domain:"tarabut.com",modules:[["التنظيم","تذكر الشركة أنها منظمة في البحرين كمقدم معلومات حسابات وبدء مدفوعات."],["مصادر التحقق المحفوظة","<a href='https://tarabut.com/sa/company' target='_blank' rel='noopener noreferrer'>عن Tarabut</a>"]]},
-
-{id:"bibf",name:"BIBF",logo:officialFavicon("bibf.com"),type:"تعليم مهني",cat:"learn",sub:"courses",origin:[],value:"معهد بحريني يقدم برامج ودورات مهنية في البنوك والتمويل والتمويل الإسلامي والإدارة والتحول الرقمي ومجالات الأعمال.",arabRelation:"خبرة مهنية وتعليم مالي من البحرين للمنطقة",creator:"Bahrain Institute of Banking and Finance — البحرين.",availability:"حضوري وافتراضي وهجين بحسب البرنامج؛ تتوفر أحيانًا دورات إلكترونية مجانية.",price:"مجاني لبعض المبادرات + برامج مدفوعة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"الاعتماد والسعر وطريقة الحضور تختلف من برنامج لآخر؛ راجع صفحة الدورة نفسها.",url:"https://www.bibf.com/find-course/",domain:"bibf.com",modules:[["المجالات","بنوك وتمويل وتمويل إسلامي وإدارة وتحول رقمي وتأمين وغيرها."],["مصادر التحقق المحفوظة","<a href='https://www.bibf.com/find-course/' target='_blank' rel='noopener noreferrer'>دليل الدورات</a>"]]},
-
-{id:"thawani",name:"ثواني باي",logo:officialFavicon("thawani.om"),type:"مدفوعات رقمية",cat:"tech",sub:"infra",origin:[],value:"منصة عُمانية للمدفوعات والمحفظة الرقمية والتحويلات والبطاقات وخدمات الأفراد والتجار عبر تطبيق واحد.",arabRelation:"تقنية مالية محلية منظمة في سلطنة عُمان",creator:"ثواني للتقنيات — عُمان؛ مرخصة من البنك المركزي العُماني.",availability:"الخدمات موجهة للسوق العُماني وتخضع لشروط الحساب والتحقق.",price:"تختلف الرسوم حسب الخدمة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"خدمة مالية؛ راجع الرسوم والحدود والشروط الحالية مباشرة قبل الاستخدام أو التحويل.",url:"https://thawani.om/ar/",domain:"thawani.om",modules:[["التنظيم","الموقع يذكر ترخيص ثواني من البنك المركزي العُماني."],["مصادر التحقق المحفوظة","<a href='https://thawani.om/ar/about-us' target='_blank' rel='noopener noreferrer'>عن ثواني</a>"]]},
-
-{id:"emushrif",name:"eMushrif",logo:officialFavicon("emushrif.com"),type:"تقنية نقل مدرسي",cat:"tech",sub:"software",origin:[],value:"منظومة رقمية للنقل المدرسي تربط الأسر والحافلات وفرق التشغيل بالتتبع والإشعارات وأدوات السلامة وإدارة المسارات.",arabRelation:"منتج إقليمي بحضور تشغيلي واضح في عُمان",creator:"eMushrif؛ للموقع مكتب معلن في مسقط إلى جانب أسواق أخرى.",availability:"مؤسسي للمدارس ومشغلي النقل؛ الإتاحة بحسب العقود والسوق.",price:"مؤسسي؛ تواصل مع الجهة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"المصدر الرسمي الحالي يثبت الحضور والخدمة في عُمان؛ لا ننسب كل عمليات الشركة لبلد واحد خارج ما يعلنه الموقع.",url:"https://www.emushrif.com/ar/home",domain:"emushrif.com",modules:[["الوظائف","تتبع مباشر وإشعارات وتقنيات أمان وإدارة تشغيل النقل المدرسي."],["مصادر التحقق المحفوظة","<a href='https://www.emushrif.com/ar/home' target='_blank' rel='noopener noreferrer'>الموقع الرسمي</a>"]]},
-
-{id:"edlal",name:"إدلال",logo:officialFavicon("edlal.org"),type:"تعلم إلكتروني",cat:"learn",sub:"courses",origin:["coursera"],value:"منصة عُمانية للتعلم الإلكتروني المفتوح، صُممت لتبادل المعرفة والمهارات بين الخبراء والشباب وإثراء المحتوى العربي.",arabRelation:"تعلم ومهارات عربية من عُمان",creator:"أطلقتها عمانتل في 2017 بالشراكة مع Entrepreneurs in Point.",availability:"منصة تعلم عبر الإنترنت؛ راجع الموقع للدورات النشطة حاليًا.",price:"يختلف حسب الدورة؛ توجد مواد ومبادرات مفتوحة",verified:"مصدر رسمي من عمانتل — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"بعض أرقام الانتشار المنشورة تخص أثر المبادرة ككل؛ لا نفترض أن كل دورة متاحة دائمًا أو مجانية.",url:"https://www.edlal.org/",domain:"edlal.org",modules:[["الدليل الرسمي","عمانتل تصف إدلال بأنها أول منصة تعلم إلكتروني مفتوحة من نوعها في عُمان."],["مصادر التحقق المحفوظة","<a href='https://www.omantel.om/ar/csr/key-initiatives/edlal-platform' target='_blank' rel='noopener noreferrer'>عمانتل عن إدلال</a>"]]},
-
-{id:"tadarab",name:"تدرب",logo:officialFavicon("tadarab.com"),type:"منصة دورات",cat:"learn",sub:"courses",origin:["udemy"],value:"منصة دورات عربية من الكويت في المهارات والأعمال والإبداع ومجالات حياتية متعددة، مع محتوى مسجل من مدربين عرب.",arabRelation:"محتوى تدريبي عربي موجه للمنطقة",creator:"منصة تدرب — الكويت.",availability:"تعلم عبر الإنترنت؛ الوصول حسب شراء الدورة أو الباقة الحالية.",price:"مدفوع غالبًا مع عروض ومحتوى يختلف حسب الدورة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"شهادة إتمام الدورة لا تعني تلقائيًا اعتمادًا أكاديميًا أو مهنيًا؛ افحص جهة الشهادة لكل مسار.",url:"https://www.tadarab.com/",domain:"tadarab.com",modules:[["النطاق","الموقع يذكر 1000+ دورة و300 ألف+ متعلم في الوطن العربي."],["مصادر التحقق المحفوظة","<a href='https://www.tadarab.com/about-tadarab' target='_blank' rel='noopener noreferrer'>عن تدرب</a>"]]},
-
-{id:"myfatoorah",name:"MyFatoorah",logo:officialFavicon("myfatoorah.com"),type:"بوابة دفع",cat:"tech",sub:"infra",origin:["stripe"],value:"حل دفع إلكتروني كويتي للشركات يوفر روابط ومدفوعات وتكاملات، وتوسع من الكويت إلى عدة أسواق في المنطقة.",arabRelation:"تقنية مالية خليجية بانتشار إقليمي",creator:"تأسست في الكويت عام 2016.",availability:"للشركات والتجار؛ التفعيل والوسائل المتاحة تختلف حسب البلد.",price:"رسوم تجارية تختلف حسب السوق والخدمة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"لا تنقل تسعير سوق إلى سوق آخر؛ الرسوم وطرق الدفع والتسوية والتنظيم تختلف حسب الدولة.",url:"https://www.myfatoorah.com/",domain:"myfatoorah.com",modules:[["الانتشار","تقول الشركة إن لها مكاتب وخدمات في عدة دول بالمنطقة."],["مصادر التحقق المحفوظة","<a href='https://www.myfatoorah.com/من-نحن/' target='_blank' rel='noopener noreferrer'>عن ماي فاتورة</a>"]]},
-
-{id:"boutiqaat",name:"بوتيكات",logo:officialFavicon("boutiqaat.com"),type:"تسوّق متخصص",cat:"shopping",sub:"specialized",origin:[],value:"منصة تجارة إلكترونية كويتية تركز على الجمال والعطور والموضة ومنتجات مختارة، وتعمل في أسواق خليجية وعربية متعددة.",arabRelation:"تجربة تجارة إلكترونية تأسست في الكويت للسوق الإقليمي",creator:"تأسست في 2015 على يد رواد أعمال كويتيين.",availability:"الشحن والتشكيلة والإرجاع تختلف حسب البلد والمنتج.",price:"الأسعار حسب المنتج والسوق",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"قبل الشراء راجع بلد البائع/الشحن وسياسة الإرجاع والضمان للمنتج المحدد؛ لا نعمم سياسة واحدة على كل الأسواق.",url:"https://www.boutiqaat.com/",domain:"boutiqaat.com",modules:[["التخصص","جمال وعطور وموضة وتسوق إلكتروني مع حضور خليجي وإقليمي."],["مصادر التحقق المحفوظة","<a href='https://blog.boutiqaat.com/ar/about-us' target='_blank' rel='noopener noreferrer'>قصة بوتيكات</a>"]]},
-
-{id:"gomycode",name:"GOMYCODE",logo:officialFavicon("gomycode.com"),type:"تعليم تقني",cat:"learn",sub:"courses",origin:["coursera"],value:"مدرسة تقنية انطلقت من تونس وتقدم مسارات في البرمجة والذكاء الاصطناعي والبيانات والتسويق والتصميم، حضوريًا أو عبر الإنترنت.",arabRelation:"مشروع تعليمي تقني نشأ في تونس وتوسع عبر أفريقيا والمنطقة",creator:"GOMYCODE — مقر Hackerspace معلن في تونس وتوسع إلى عدة دول.",availability:"حضوري أو أونلاين حسب المسار والبلد.",price:"برامج مدفوعة؛ تختلف حسب البلد والمسار",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"البرامج والأسعار ونتائج التوظيف تختلف حسب المسار والبلد؛ لا نعمم أي نسبة نجاح على كل طالب.",url:"https://gomycode.com/tn/",domain:"gomycode.com",modules:[["المجالات","AI وبرمجة وبيانات وتسويق وتصميم ومهارات مهنية."],["مصادر التحقق المحفوظة","<a href='https://gomycode.com/tn/about/' target='_blank' rel='noopener noreferrer'>عن GOMYCODE تونس</a>"]]},
-
-{id:"expensya",name:"Expensya",logo:officialFavicon("expensya.com"),type:"إدارة مصروفات",cat:"work",sub:"management",origin:[],value:"منصة لإدارة مصروفات الشركات وأتمتة تقارير النفقات والبطاقات والسياسات والتكاملات المحاسبية، تأسست في تونس ثم توسعت عالميًا.",arabRelation:"شركة تقنية تأسست في تونس ووصل منتجها لأسواق عالمية",creator:"تأسست في تونس عام 2014؛ أصبحت جزءًا من Medius.",availability:"حل B2B للشركات؛ يتطلب إعدادًا مؤسسيًا.",price:"مؤسسي؛ اطلب عرضًا",verified:"مصدر رسمي للشركة/الاستحواذ — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"الشركة أصبحت ضمن Medius؛ راجع الاسم التجاري والباقة والتكاملات الحالية قبل قرار الشراء.",url:"https://www.expensya.com/en/",domain:"expensya.com",modules:[["النطاق","إدارة المصروفات والبطاقات والسياسات والتكامل مع أنظمة الشركات."],["مصادر التحقق المحفوظة","<a href='https://www.expensya.com/en/news/medius-announces-intent-to-acquire-expensya/' target='_blank' rel='noopener noreferrer'>تأسيس Expensya والاستحواذ</a>"]]},
-
-{id:"dabchy",name:"Dabchy",logo:officialFavicon("dabchy.com"),type:"سوق مستعمل",cat:"shopping",sub:"classifieds",origin:[],value:"سوق تونسي بين الأفراد لبيع وشراء الملابس والإكسسوارات والديكور والرياضة والكتب والألعاب المستعملة.",arabRelation:"Marketplace محلي من تونس",creator:"Dabchy — تونس.",availability:"متاح بحسب المناطق والخدمات التي تدعمها المنصة.",price:"التصفح مجاني؛ الأسعار يحددها البائعون والخدمات",verified:"الموقع الرسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"المعاملات بين الأفراد تحتاج مراجعة حالة المنتج والبائع وشروط الحماية والدفع قبل الشراء.",url:"https://www.dabchy.com/",domain:"dabchy.com",modules:[["النطاق","منصة C2C للمنتجات المستعملة في فئات أسلوب الحياة."],["مصادر التحقق المحفوظة","<a href='https://www.dabchy.com/' target='_blank' rel='noopener noreferrer'>الموقع الرسمي</a>"]]},
-
-{id:"yassir",name:"يسير",logo:officialFavicon("yassir.com"),type:"تطبيق فائق",cat:"tech",sub:"software",origin:[],value:"منصة انطلقت لتسهيل التنقل للجزائريين ثم توسعت إلى التوصيل والتجارة وخدمات أخرى في عدة مدن وأسواق.",arabRelation:"حل تقني بدأ من احتياج محلي جزائري ثم توسع إقليميًا",creator:"ظهرت فكرة يسير في 2017 لخدمة التنقل في الجزائر.",availability:"الخدمات تختلف حسب البلد والمدينة.",price:"تختلف حسب الخدمة والموقع",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"لا تفترض توافر كل خدمات السوبر آب في كل مدينة؛ تحقق من التطبيق في موقعك.",url:"https://yassir.com/ar/algeria",domain:"yassir.com",modules:[["الخدمات","تنقل وتوصيل وطعام وبقالة وخدمات رقمية أخرى بحسب السوق."],["مصادر التحقق المحفوظة","<a href='https://yassir.com/ar/about-us' target='_blank' rel='noopener noreferrer'>قصة يسير</a>"]]},
-
-{id:"ouedkniss",name:"واد كنيس",logo:officialFavicon("ouedkniss.com"),type:"إعلانات مبوبة",cat:"shopping",sub:"classifieds",origin:[],value:"منصة جزائرية للإعلانات المبوبة والبيع والشراء والخدمات بين المستخدمين في فئات واسعة.",arabRelation:"شركة ومنصة مسجلة في الجزائر وموجهة للسوق المحلي",creator:"SARL OUEDKNISS — شركة جزائرية مسجلة رسميًا بحسب شروط الاستخدام.",availability:"متاحة عبر الويب والتطبيق.",price:"التصفح والنشر لهما حدود وخدمات ترويج مدفوعة",verified:"الشروط الرسمية — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"المنصة تستضيف إعلانات المستخدمين ولا تتدخل في كل معاملة؛ تحقق من البائع والمنتج والدفع قبل إتمام الصفقة.",url:"https://www.ouedkniss.com/",domain:"ouedkniss.com",modules:[["طبيعة السوق","إعلانات ينشرها المستخدمون؛ مسؤولية التحقق من الطرف والسلعة مهمة."],["مصادر التحقق المحفوظة","<a href='https://www.ouedkniss.com/terms' target='_blank' rel='noopener noreferrer'>شروط الاستخدام</a>"]]},
-
-{id:"baridimob",name:"BaridiMob",logo:officialFavicon("poste.dz"),type:"خدمات مالية بريدية",cat:"tech",sub:"infra",origin:[],value:"تطبيق رسمي لبريد الجزائر لإدارة حساب CCP وبطاقة الذهبية والتحويلات وبعض الخدمات المالية البريدية من الهاتف.",arabRelation:"خدمة مالية رقمية وطنية في الجزائر",creator:"بريد الجزائر.",availability:"لعملاء بريد الجزائر وحاملي بطاقة EDAHABIA وفق شروط الاشتراك.",price:"بعض العمليات تخضع لرسوم وحدود رسمية",verified:"مصدر حكومي/رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"استخدم التطبيقين الرسميين فقط كما يحذر بريد الجزائر، وراجع حدود ورسوم التحويل الحالية.",url:"https://www.poste.dz/services/professional/baridimobweb",domain:"poste.dz",modules:[["الوظائف","رصيد CCP وإدارة البطاقة والتحويلات وتحديد الصرافات وسجل العمليات."],["مصادر التحقق المحفوظة","<a href='https://www.poste.dz/services/professional/baridimobweb' target='_blank' rel='noopener noreferrer'>BaridiMob لدى بريد الجزائر</a>"]]},
-
-{id:"miswag",name:"مسواگ",logo:officialFavicon("miswag.com"),type:"تجارة إلكترونية",cat:"shopping",sub:"marketplaces",origin:["amazon"],value:"منصة تجارة إلكترونية عراقية تأسست في بغداد وتبيع منتجات من تجار وعلامات محلية وعالمية مع تشغيل وتوصيل داخل العراق.",arabRelation:"شركة عراقية مبنية للسوق العراقي",creator:"تأسست في العراق عام 2014 وبناها فريق عراقي.",availability:"التغطية والتوصيل بحسب المنطقة والمنتج.",price:"الأسعار حسب المنتج والشحن",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"قبل الشراء راجع التوصيل والإرجاع والضمان للمنتج المحدد؛ الأرقام التاريخية على صفحة «من نحن» ليست وصفًا لحجمها الحالي بالضرورة.",url:"https://miswag.com/",domain:"miswag.com",modules:[["الهوية","تصف نفسها بأنها أول موقع تجارة إلكترونية في العراق وشركة مسجلة عراقيًا."],["مصادر التحقق المحفوظة","<a href='https://miswag.com/en/more/about' target='_blank' rel='noopener noreferrer'>عن مسواگ</a>"]]},
-
-{id:"lezzoo",name:"Lezzoo",logo:officialFavicon("lezzoo.com"),type:"تطبيق فائق",cat:"tech",sub:"software",origin:[],value:"سوبر آب من أربيل يجمع الطعام والبقالة والصيدليات والمدفوعات والألعاب وخصائص اجتماعية وخدمات يومية داخل العراق.",arabRelation:"بُني من أربيل للعراق وكردستان",creator:"تأسس في أربيل عام 2018.",availability:"الخدمات والتوصيل متاحة في مدن عراقية محددة وتتوسع تدريجيًا.",price:"التطبيق مجاني؛ رسوم الخدمات تختلف",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"أرقام العملاء والتجار والمبيعات على الموقع معلنة من الشركة نفسها؛ لا نقدمها كتدقيق مستقل.",url:"https://www.lezzoo.com/ar",domain:"lezzoo.com",modules:[["النطاق","طعام وبقالة وصيدلية ومدفوعات وألعاب وتواصل وخصائص رقمية."],["مصادر التحقق المحفوظة","<a href='https://www.lezzoo.com/ar/story' target='_blank' rel='noopener noreferrer'>قصة Lezzoo</a>"]]},
-
-{id:"superqi",name:"SuperQi",logo:officialFavicon("qi.iq"),type:"مدفوعات رقمية",cat:"tech",sub:"infra",origin:[],value:"تطبيق من Qi للمستخدمين العراقيين يجمع التحويلات والمدفوعات وإدارة الإنفاق وخدمات رقمية في واجهة عربية وإنجليزية.",arabRelation:"منتج مالي رقمي موجه للسوق العراقي",creator:"Qi Card — العراق.",availability:"متاح لمستخدمي الخدمة وفق شروط الحساب والبطاقات.",price:"الرسوم والحدود حسب الخدمة",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"خدمة مالية؛ راجع الرسوم والأهلية والحدود وشروط البطاقة الحالية مباشرة قبل الاستخدام.",url:"https://www.qi.iq/ar/individuals/superqi",domain:"qi.iq",modules:[["الوظائف","تحويلات ومدفوعات للتجار وتتبع للمصاريف وميزات تطبيقات مصغرة."],["مصادر التحقق المحفوظة","<a href='https://www.qi.iq/ar/individuals/superqi' target='_blank' rel='noopener noreferrer'>SuperQi الرسمي</a>"]]},
-
-{id:"podeo",name:"Podeo",logo:officialFavicon("podeo.co"),type:"صناعة وتوزيع صوتي",cat:"create",sub:"audio",origin:[],value:"بنية لصناع الصوت والبودكاست تساعد على التسجيل والتوزيع عبر المنصات وتحويل المحتوى إلى صيغ متعددة وإدارة الوصول والعائد.",arabRelation:"بدأت من سوق الصوت العربي ولها كيان وحضور في بيروت",creator:"تأسست في 2020؛ للمجموعة كيان Podeo SAL في بيروت إلى جانب كيانات دولية.",availability:"للأفراد والشبكات والناشرين؛ المزايا تختلف حسب الخطة.",price:"تختلف حسب الخطة والخدمات",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"هي بنية لصناع المحتوى وليست تطبيق استماع مطابقًا لـSpotify؛ بعض أرقام الانتشار معلنة من الشركة.",url:"https://podeo.co/",domain:"podeo.co",modules:[["ما الذي تقدمه؟","إنشاء وتوزيع وتحويل وربح المحتوى الصوتي عبر قنوات متعددة."],["مصادر التحقق المحفوظة","<a href='https://podeo.co/about-us' target='_blank' rel='noopener noreferrer'>عن Podeo</a>"]]},
-
-{id:"mawdoo3",name:"موضوع",logo:officialFavicon("mawdoo3.com"),type:"محتوى ومعرفة",cat:"learn",sub:"encyclopedias",origin:["wikipedia"],value:"موقع محتوى عربي واسع يشرح موضوعات يومية ومعرفية متعددة، مع سياسة تحرير معلنة ومحتوى يراجعه محررون ومتخصصون بحسب الفئة.",arabRelation:"إثراء المحتوى العربي هو جوهر المشروع منذ البداية",creator:"بدأ في 2010 على يد رامي القواسمي ومحمد جبر، وهما أردنيان.",availability:"متاح عبر الويب.",price:"مجاني مع إعلانات وخدمات أخرى",verified:"مصدر رسمي — مراجعة 23 سبتمبر 2026",reviewed:"23 سبتمبر 2026",limit:"مفيد كبداية للفهم العام، لكنه لا يحل محل المصدر الأولي أو المرجع الأكاديمي/الطبي المتخصص عند اتخاذ قرار حساس.",url:"https://mawdoo3.com/",domain:"mawdoo3.com",modules:[["المنهج","صفحة «عن موضوع» تصف مراحل بحث وكتابة وتدقيق ومراجعة، لكن جودة كل مادة تُقيّم بذاتها."],["مصادر التحقق المحفوظة","<a href='https://mawdoo3.com/About_Us' target='_blank' rel='noopener noreferrer'>عن موضوع وسياسة العمل</a>"]]}
-
-
-];
-
-const learning=[
-{id:'yanfaa',type:'platform',name:'ينفع',logo:officialFavicon('yanfaa.com'),teacher:'منصة تعليم',focus:'كورسات عربية في مهارات ومجالات متعددة.',fields:['skills','business'],reference:'مصدر عربي للتعلّم',url:'https://yanfaa.com/'},
-{id:'edraak-learning',type:'platform',name:'إدراك',logo:officialFavicon('edraak.org'),teacher:'منصة تعليم',focus:'مقررات عربية في مجالات متنوعة.',fields:['skills','business','tech'],reference:'منصة كورسات',url:'https://www.edraak.org/'},
-{id:'rwaq',type:'platform',name:'رواق',logo:officialFavicon('rwaq.org'),teacher:'منصة تعليم',focus:'مواد أكاديمية ومهارية باللغة العربية.',fields:['skills','tech','business'],reference:'منصة عربية',url:'https://rwaq.org/'},
-{id:'almentor',type:'platform',name:'المنتور',logo:officialFavicon('almentor.net'),teacher:'منصة تعليم',focus:'محتوى مهني ومهاري عربي باشتراك.',fields:['skills','business','design'],reference:'اشتراك مدفوع',url:'https://www.almentor.net/'},
-
-{id:'salla-academy',type:'resource',name:'أكاديمية سلة',logo:officialFavicon('salla.com'),teacher:'سلة',focus:'دورات عملية في التجارة الإلكترونية والتسويق وتصميم المتجر وإدارة الطلبات.',fields:['business','skills','design'],reference:'محتوى تعليمي رسمي من سلة؛ مفيد للتعلم لكنه ليس مراجعة مستقلة للمنصة.',url:'https://academy.salla.com/courses',commercialId:'salla',commercialContentKey:'academy',vendorContent:true},
-{id:'qoyod-academy',type:'resource',name:'أكاديمية قيود',logo:officialFavicon('qoyod.com'),teacher:'قيود',focus:'مسارات ودورات عربية مجانية في استخدام النظام والمفاهيم المحاسبية، مع ندوات وشهادة إتمام.',fields:['business','skills'],reference:'محتوى تعليمي رسمي من قيود؛ لا نعامله كتقييم مستقل للمنتج.',url:'https://academy.qoyod.com/',commercialId:'qoyod',commercialContentKey:'academy',vendorContent:true},
-{id:'daftra-hub',type:'resource',name:'مركز دفترة التعليمي',logo:officialFavicon('daftra.com'),teacher:'دفترة',focus:'مقالات ودروس في المحاسبة وإدارة الأعمال والمبيعات والمخزون والموارد البشرية.',fields:['business','skills'],reference:'مركز تعليمي رسمي من دفترة؛ المعلومة التعليمية منفصلة عن تقييم المنتج نفسه.',url:'https://www.daftra.com/hub/',commercialId:'daftra',commercialContentKey:'learningHub',vendorContent:true},
-{id:'khamsat-blog',type:'resource',name:'مدونة خمسات',logo:officialFavicon('khamsat.com'),teacher:'خمسات',focus:'مقالات عملية عن العمل الحر، بيع الخدمات، التسويق للمستقل وبناء حضور مهني.',fields:['business','skills'],reference:'محتوى رسمي من خمسات؛ نستخدمه كمصدر تعلم لا كمراجعة مستقلة لخمسات.',url:'https://blog.khamsat.com/category/freelancing/',commercialId:'khamsat',commercialContentKey:'freelancingBlog',vendorContent:true},
-{id:'hsoub-library',type:'resource',name:'أكاديمية حسوب — مقالات ودروس',logo:officialFavicon('academy.hsoub.com'),teacher:'أكاديمية حسوب',focus:'مقالات وكتب ودروس عربية مجانية في البرمجة والتطوير والتقنية وسوق العمل.',fields:['tech','business','skills'],reference:'محتوى رسمي من أكاديمية حسوب؛ يظهر هنا لقيمته التعليمية، لا بسبب أي علاقة تجارية.',url:'https://academy.hsoub.com/',commercialId:'hsoub',commercialContentKey:'learning',vendorContent:true},
-
-{id:'zamerican',type:'channel',name:'zAmericanEnglish',logo:'material:language',teacher:'إبراهيم عادل',focus:'تعلّم الإنجليزية بشرح عربي منظم.',fields:['languages'],reference:'قناة يوتيوب',url:'https://www.youtube.com/@ZAmericanEnglish'},
-{id:'droosonline',type:'channel',name:'دروس أونلاين',logo:'material:school',teacher:'أحمد أبو زيد',focus:'تعلم ومهارات عملية ومحتوى تعليمي متنوع.',fields:['skills','languages'],reference:'قناة يوتيوب',url:'https://www.youtube.com/@DroosOnline4u'},
-{id:'elzero',type:'channel',name:'Elzero Web School',logo:'material:code',teacher:'أسامة الزيرو',focus:'برمجة وتطوير ويب بالعربية من مسارات عملية.',fields:['tech'],reference:'قناة يوتيوب',url:'https://www.youtube.com/@ElzeroWebSchool'},
-{id:'makram',type:'channel',name:'mostafa makram TV',logo:'material:movie',teacher:'مصطفى مكرم',focus:'تصميم ومونتاج وبرامج إبداعية بشرح عربي.',fields:['design','skills'],reference:'قناة يوتيوب',url:'https://www.youtube.com/@mostafamakram'},
-
-{id:'hsoub-youtube',type:'channel',name:'أكاديمية حسوب',logo:'material:code',teacher:'أكاديمية حسوب',focus:'برمجة وتقنية وسوق عمل بالعربية، مع دروس ومسارات تطبيقية.',fields:['tech','business'],reference:'قناة YouTube موثقة لأكاديمية حسوب',url:'https://www.youtube.com/@HsoubAcademy'},
-{id:'akhdar-youtube',type:'channel',name:'أخضر',logo:'material:menu_book',teacher:'أخضر',focus:'تبسيط كتب ومعرفة ومهارات عملية للشباب العربي.',fields:['knowledge','skills'],reference:'القناة المرتبطة رسميًا بمنصة أخضر',url:'https://www.youtube.com/@a5drcom'},
-{id:'khan-arabi',type:'channel',name:'KhanAcademyArabi',logo:'material:school',teacher:'Khan Academy',focus:'أرشيف عربي رسمي في الرياضيات والعلوم والاقتصاد ومواد أكاديمية متنوعة.',fields:['knowledge','tech'],reference:'القناة العربية الرسمية لأكاديمية خان',url:'https://www.youtube.com/@KhanAcademyArabi'},
-{id:'abdulbasit-official',type:'reciter',name:'عبد الباسط عبد الصمد',logo:'material:mic',teacher:'الشيخ عبد الباسط عبد الصمد',focus:'تلاوات مرتلة ومجودة من التسجيلات الأصلية التي أنتجتها صوت القاهرة.',fields:['quran'],reference:'قناة رسمية — تسجيلات صوت القاهرة',url:'https://www.youtube.com/@AbdulbasitOfficial'},
-{id:'hussary-official',type:'reciter',name:'محمود خليل الحصري',logo:'material:mic',teacher:'الشيخ محمود خليل الحصري',focus:'أرشيف رسمي واسع للتلاوات المرتلة والمجودة للشيخ الحصري.',fields:['quran'],reference:'القناة الرسمية للشيخ الحصري',url:'https://www.youtube.com/@hosariofficial'},
-{id:'mostafa-ismail-official',type:'reciter',name:'مصطفى إسماعيل',logo:'material:mic',teacher:'الشيخ مصطفى إسماعيل',focus:'تسجيلات رسمية من تراث أحد أعلام المدرسة المصرية في التلاوة.',fields:['quran'],reference:'قناة رسمية يربط إليها موقع صوت القاهرة',url:'https://www.youtube.com/user/ShMostafaIsmail'},
-{id:'maher-official',type:'reciter',name:'ماهر المعيقلي',logo:'material:mic',teacher:'الشيخ ماهر المعيقلي',focus:'تلاوات حديثة ومصحف كامل من القناة الرسمية للقارئ.',fields:['quran'],reference:'قناة رسمية / Official Artist Channel',url:'https://www.youtube.com/@maheralmuaiqly'},
-{id:'alafasy-official',type:'reciter',name:'مشاري راشد العفاسي',logo:'material:mic',teacher:'الشيخ مشاري راشد العفاسي',focus:'تلاوات قرآنية وإصدارات صوتية عبر القناة الرسمية الموثقة.',fields:['quran'],reference:'قناة رسمية موثقة',url:'https://www.youtube.com/@Alafasy'},
-{id:'saad-ghamdi-official',type:'reciter',name:'سعد الغامدي',logo:'material:mic',teacher:'الشيخ سعد الغامدي',focus:'تلاوات ومصحف مرتل عبر القناة الرسمية للقارئ.',fields:['quran'],reference:'قناة رسمية',url:'https://www.youtube.com/@SheikhSaadAlGhamdi'}
-,
-{id:'misk-skills',type:'platform',name:'مسك المهارات',logo:officialFavicon('hub.misk.org.sa'),teacher:'مؤسسة محمد بن سلمان «مسك»',focus:'برامج مهارات واستعداد مهني وفرص تعلم ذاتي وتفاعلي للشباب، ومنها مسارات عربية أونلاين.',fields:['skills','business','tech'],reference:'منصة رسمية سعودية؛ شروط كل برنامج مستقلة',url:'https://hub.misk.org.sa/ar/misk-skills/'},
-{id:'thmanyah-youtube',type:'channel',name:'ثمانية',logo:'material:movie',teacher:'شركة ثمانية',focus:'وثائقيات وبرامج وبودكاست وقصص عربية بإنتاج تحريري أصلي من السعودية.',fields:['knowledge','skills'],reference:'قناة رسمية مدرجة في صفحة حسابات ثمانية',url:'https://www.youtube.com/@thmanyah'},
-{id:'alef-learning',type:'platform',name:'ألف للتعليم',logo:officialFavicon('alefeducation.com'),teacher:'ألف للتعليم',focus:'تعلم رقمي مدعوم بالذكاء الاصطناعي للمراحل K-12؛ الوصول غالبًا عبر المدرسة أو الجهة التعليمية.',fields:['knowledge','tech'],reference:'منصة إماراتية مؤسسية؛ ليست كورسات عامة مفتوحة',url:'https://www.alefeducation.com/ar/'},
-{id:'dff-academy',type:'platform',name:'أكاديمية دبي للمستقبل',logo:officialFavicon('dubaifuture.ae'),teacher:'مؤسسة دبي للمستقبل',focus:'مهارات مستقبل وتطوير مهني، مع دليل لدورات افتراضية مجانية ذاتية وبالعربية والإنجليزية.',fields:['skills','business','tech','knowledge'],reference:'مبادرة رسمية من مؤسسة دبي للمستقبل',url:'https://www.dubaifuture.ae/initiatives/capacity-building/dubai-future-academy/'},
-{id:'qdl-youtube',type:'channel',name:'مكتبة قطر الرقمية',logo:'material:menu_book',teacher:'Qatar Digital Library',focus:'فيديوهات مرتبطة بأرشيف تاريخ الخليج والمخطوطات والخرائط والمصادر الأولية الرقمية.',fields:['knowledge'],reference:'قناة للمشروع الرقمي المشترك بين مكتبة قطر الوطنية ومؤسسة قطر والمكتبة البريطانية',url:'https://www.youtube.com/@qatardigitallibrary9578'},
-{id:'kezakoo-learning',type:'platform',name:'Kezakoo',logo:officialFavicon('kezakoo.com'),teacher:'Kezakoo',focus:'دروس واختبارات وتمارين وملخصات للثانوي المغربي وفق البرنامج الرسمي.',fields:['knowledge','skills'],reference:'منصة تعليمية وُلدت في المغرب',url:'https://www.kezakoo.com/ar/'},
-{id:'telmidtice-learning',type:'platform',name:'TelmidTICE',logo:officialFavicon('telmidtice.men.gov.ma'),teacher:'وزارة التربية الوطنية المغربية',focus:'دروس وملخصات وتمارين وفروض وامتحانات لمراحل ومواد المدرسة المغربية.',fields:['knowledge'],reference:'منصة حكومية رسمية',url:'https://telmidtice.men.gov.ma/'},
-{id:'bibf-learning',type:'platform',name:'BIBF',logo:officialFavicon('bibf.com'),teacher:'Bahrain Institute of Banking and Finance',focus:'تعلم مهني في البنوك والتمويل والتمويل الإسلامي والإدارة والتحول الرقمي، حضوريًا وافتراضيًا.',fields:['business','skills'],reference:'معهد بحريني؛ الاعتماد والتكلفة حسب البرنامج',url:'https://www.bibf.com/find-course/'},
-{id:'edlal-learning',type:'platform',name:'إدلال',logo:officialFavicon('edlal.org'),teacher:'إدلال',focus:'تعلم إلكتروني عربي في المعرفة والمهارات وسوق العمل؛ أطلقتها عمانتل مع شريك محلي.',fields:['skills','business','tech'],reference:'منصة عُمانية؛ تحقق من الدورات النشطة حاليًا',url:'https://www.edlal.org/'},
-{id:'tadarab-learning',type:'platform',name:'تدرب',logo:officialFavicon('tadarab.com'),teacher:'منصة تدرب',focus:'مكتبة دورات عربية في المهارات والأعمال والإبداع ومجالات متعددة.',fields:['skills','business','design','knowledge'],reference:'منصة كويتية؛ شهادة الإتمام ليست اعتمادًا أكاديميًا تلقائيًا',url:'https://www.tadarab.com/'},
-{id:'gomycode-learning',type:'platform',name:'GOMYCODE',logo:officialFavicon('gomycode.com'),teacher:'GOMYCODE',focus:'تعلم تقني في الذكاء الاصطناعي والبرمجة والبيانات والتسويق والتصميم، أونلاين أو حضوريًا.',fields:['tech','design','business'],reference:'مدرسة تقنية انطلقت من تونس وتوسعت إقليميًا',url:'https://gomycode.com/tn/'},
-{id:'cnfepd-learning',type:'platform',name:'CNFEPD',logo:officialFavicon('cnepd.edu.dz'),teacher:'وزارة التكوين والتعليم المهنيين — الجزائر',focus:'تكوين مهني عن بعد في عشرات التخصصات، مع مسارات تؤدي لشهادات دولة وفق شروط المركز.',fields:['skills','business','tech'],reference:'مؤسسة عمومية جزائرية رسمية؛ نوع الشهادة والمدة حسب التخصص',url:'https://www.cnepd.edu.dz/'},
-{id:'newton-learning',type:'platform',name:'منصة نيوتن',logo:officialFavicon('newton.iq'),teacher:'منصة نيوتن',focus:'تعليم مدرسي عن بعد في العراق يضم محاضرات وكتبًا وتمارين ومواد دراسية متعددة.',fields:['knowledge','tech'],reference:'منصة عراقية؛ الأرقام المعروضة للمحاضرات والطلاب منشورة على الموقع نفسه',url:'https://newton.iq/explore'},
-{id:'kamkalima-learning',type:'platform',name:'كم كلمة',logo:officialFavicon('kamkalima.com'),teacher:'Kamkalima',focus:'منصة رقمية لتعليم العربية في المدارس، بأدوات للقراءة والكتابة والتقييم والمعلمين.',fields:['languages','knowledge'],reference:'انطلقت من بيئة الشركات الناشئة اللبنانية؛ الكيان التشغيلي الحالي مسجل في ADGM بالإمارات',url:'https://www.kamkalima.com/ar/home'}
-
-
-];
-
 let filter='all',subfilter='all',originFilter=null,countryFilter=null,learningType='all';
 let directoryVisible=window.matchMedia('(max-width:760px)').matches?3:6;
 let learningVisible={platform:4,channel:4,reciter:4};
@@ -313,7 +84,9 @@ function updateDirectoryRefineUI(){
  if(subfilter!=='all')bits.push(`<span class="active-filter-pill"><bdi>${subcategoryLabel(filter,subfilter)}</bdi></span>`);
  const q=document.getElementById('searchInput')?.value.trim()||'';
  if(q)bits.push(`<span class="active-filter-pill search-pill"><bdi>بحث: ${q.replace(/[<>&"]/g,'')}</bdi></span>`);
- root.innerHTML=bits.length?bits.join(''):'<span class="active-filter-pill is-muted">كل الاكتشافات</span>';
+ const contextWrap=root.closest('.directory-active-context');
+ if(contextWrap)contextWrap.hidden=!bits.length;
+ root.innerHTML=bits.length?bits.join(''):'';
 
  const subBtn=document.getElementById('subfilterTrigger');
  if(subBtn){
@@ -470,23 +243,37 @@ function showAllDirectory(){
  renderCards();
  goDirectoryResults();
 }
+function clearDirectoryContext(){
+ if(countryFilter)countryFilter=null;
+ else if(document.getElementById('searchInput').value.trim())document.getElementById('searchInput').value='';
+ else{
+  originFilter=null;subfilter='all';
+  document.querySelectorAll('[data-origin]').forEach(b=>b.setAttribute('aria-pressed','false'));
+ }
+ buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();resetDirectoryLimit();
+ closeDirectoryRefiners();renderCards();goDirectoryResults();
+}
 function updateDirectoryActionLabel(){
  const btn=document.getElementById('directoryContextBtn');
+ const homeBtn=document.getElementById('directoryHomeBtn');
  if(!btn)return;
  const q=document.getElementById('searchInput')?.value.trim()||'';
+ const hasAny=!!countryFilter||filter!=='all'||subfilter!=='all'||!!originFilter||!!q;
+ const hasInner=!!countryFilter||subfilter!=='all'||!!originFilter||!!q;
+
+ if(homeBtn)homeBtn.hidden=!hasAny;
+ btn.hidden=!hasInner;
+ if(!hasInner)return;
 
  if(countryFilter){
-   btn.textContent='كل الدليل';
-   btn.title='إلغاء فلتر الدولة وإظهار كل الدليل';
- }else if(filter!=='all'){
-   btn.textContent='كل '+categoryLabel(filter);
-   btn.title='إلغاء الفلاتر الداخلية وإظهار كل '+categoryLabel(filter);
+   btn.textContent='إلغاء الدولة';
+   btn.title='إلغاء فلتر الدولة مع البقاء في المسار الحالي';
  }else if(q){
    btn.textContent='مسح البحث';
-   btn.title='مسح عبارة البحث وإظهار كل الدليل';
+   btn.title='مسح عبارة البحث مع البقاء في المسار الحالي';
  }else{
-   btn.textContent='عرض الكل';
-   btn.title='إظهار كل عناصر الدليل';
+   btn.textContent='كل '+categoryLabel(filter);
+   btn.title='إلغاء التصفية الأدق مع البقاء داخل '+categoryLabel(filter);
  }
 }
 function toggleOriginOptions(btn){
@@ -555,9 +342,9 @@ function updateDirectoryContinue(){
  }else if(q){
    actions=[['كل الدليل',"resetDirectory()"],['آخر المراجعات',"go('updates')"],['مصادر التعلّم',"go('learning')"]];
  }else{
-   actions=[['تقنية وذكاء اصطناعي',"openDiscoveryGroup('tech','all')"],['شغلك ومشروعك',"openDiscoveryGroup('work','all')"],['تعلّم وبحث',"openDiscoveryGroup('learn','all')"]];
+   actions=[[categoryLabel('tech'),"openDiscoveryGroup('tech','all')"],[categoryLabel('work'),"openDiscoveryGroup('work','all')"],[categoryLabel('learn'),"openDiscoveryGroup('learn','all')"]];
  }
- root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتدور، جرّب واحدًا من المسارات القريبة.',actions.slice(0,3));
+ root.innerHTML=sectionContinueMarkup('تابع من نفس المسار','إذا كنت ما زلت تبحث، جرّب أحد المسارات القريبة.',actions.slice(0,3));
 }
 function updateLearningContinue(){
  const root=document.getElementById('learningContinue');if(!root)return;
@@ -576,65 +363,18 @@ function updateLearningContinue(){
  }else{
    actions=[['منصات الكورسات',"setLearningPath('platform','all')"],['قنوات يوتيوب',"setLearningPath('channel','all')"],['قنوات القراء الرسمية',"setLearningPath('reciter','quran')"]];
  }
- root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتقارن، جرّب مصدرًا قريبًا من نفس هدفك.',actions);
+ root.innerHTML=sectionContinueMarkup('تابع من نفس الهدف','إذا كنت ما زلت تقارن، جرّب مصدرًا قريبًا من هدفك.',actions);
 }
 
-const relatedGuideMap={
- khamsat:['/guides/khamsat-fiverr','خمسات أم Fiverr؟'],
- wuzzuf:['/guides/wuzzuf-linkedin','WUZZUF أم LinkedIn؟'],
- faseeh:['/guides/arabic-voice-ai','فصيح أم ElevenLabs؟'],
- munsit:['/guides/munsit-otter','منصت أم Otter؟'],
- anghami:['/guides/anghami-spotify','أنغامي أم Spotify؟'],
- hudhud:['/guides/hudhud-googlemaps','هدهد أم Google Maps؟'],
- almaany:['/guides/almaany-translate','المعاني أم Google Translate؟'],
- dorar:['/guides/islamic-sources','أين تتحقق من الحديث؟'],
- tafsircenter:['/guides/islamic-sources','كيف تتحقق من مصدر التفسير؟'],
- shamela:['/guides/islamic-sources','كيف ترجع إلى النص والمصدر؟'],
- fanar:['/guides/arabic-ai','متى تختار مساعدًا عربيًا؟'],
- karnak:['/guides/arabic-ai','كيف تختبر مساعدًا عربيًا؟'],
- arabicai:['/guides/arabic-ai','كيف تقارن أدوات الذكاء العربي؟'],
- midaad:['/guides/arabic-pdf','كيف تختبر OCR العربي قبل الاشتراك؟'],
- dhawwi:['/guides/arabic-design','أداة تصميم عربية أم Canva؟'],
- arabicdesign:['/guides/arabic-design','كيف تختبر أداة تصميم عربية؟'],
- taqreer:['/guides/arabic-design','ما الذي تختبره في التصميم العربي؟'],
- shamaa:['/guides/arabic-research','من أين تبدأ البحث الأكاديمي العربي؟'],
- mandumah:['/guides/arabic-research','قاعدة عربية أم بحث عالمي؟'],
- qdl:['/guides/arabic-research','كيف تستخدم المصادر العربية والأولية؟'],
- openalex:['/guides/arabic-research','وسّع البحث ثم ارجع للمصدر الأصلي'],
- zotero:['/guides/arabic-research','مسار بحث عربي أكثر تنظيمًا'],
- salla:['/guides/ecommerce-platform','سلة أم Shopify؟'],
- paymob:['/guides/payment-gateway','كيف تختار بوابة الدفع؟'],
- myfatoorah:['/guides/payment-gateway','ماذا تفحص قبل ربط بوابة الدفع؟'],
- thawani:['/guides/payment-gateway','بوابة الدفع: الرسوم والتسوية والربط'],
- benefit:['/guides/payment-gateway','كيف تقرأ بنية المدفوعات المحلية؟'],
- daftra:['/guides/business-software','دفترة أم QuickBooks؟'],
- abjjad:['/guides/reading','أبجد أم Kindle؟'],
- noon:['/guides/shopping','نون أم Amazon؟ قارن العرض نفسه']
-};
-const learningGuideMap={
- yanfaa:['/guides/learning-platform','كيف تختار منصة تعلم عربية؟'],
- 'edraak-learning':['/guides/learning-platform','متى يكفي المجاني ومتى تدفع؟'],
- rwaq:['/guides/learning-platform','اختر النتيجة لا عدد الدورات'],
- almentor:['/guides/learning-platform','هل الاشتراك التعليمي يستحق؟'],
- 'tadarab-learning':['/guides/learning-platform','كيف تقيّم المنصة قبل الاشتراك؟'],
- 'gomycode-learning':['/guides/learning-platform','مسار تقني أم مكتبة دورات؟']
-};
-function editorialGuideLinkMarkup(id,detail=false){
- const g=relatedGuideMap[id];
- const href=g?g[0]:'/guides';
- if(detail){
-  return `<a class="editorial-guide-link is-detail" href="${href}" onclick="event.stopPropagation()"><span>اقرأ</span><strong>${g?g[1]:'اقرأ حسب حاجتك'}</strong><b aria-hidden="true">←</b></a>`;
- }
- return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ قبل الاختيار':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
+function guideLinkMarkup(guide,detail=false){
+ const href=guide?guide[0]:'/guides';
+ const content=detail
+  ? `<span>اقرأ</span><strong>${guide?guide[1]:'اقرأ حسب حاجتك'}</strong>`
+  : `<strong>${guide?'اقرأ':'مركز القراءة'}</strong>`;
+ return `<a class="editorial-guide-link ${detail?'is-detail':'card-read-link'}" href="${href}" onclick="event.stopPropagation()">${content}<b aria-hidden="true">←</b></a>`;
 }
-function learningGuideLinkMarkup(id,detail=false){
- const g=learningGuideMap[id];
- const href=g?g[0]:'/guides';
- if(detail){
-  return `<a class="editorial-guide-link is-detail" href="${href}" onclick="event.stopPropagation()"><span>اقرأ</span><strong>${g?g[1]:'اقرأ حسب حاجتك'}</strong><b aria-hidden="true">←</b></a>`;
- }
- return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ قبل الاختيار':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
-}
+function editorialGuideLinkMarkup(id,detail=false){return guideLinkMarkup(relatedGuideMap[id],detail)}
+function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
 function compactCardPurpose(x){
  const manual={
@@ -656,14 +396,6 @@ function compactCardPurpose(x){
  if(cut>0)return sentence.slice(0,cut).replace(/[،؛:]\s*$/,'').trim()+'.';
  return sentence.slice(0,92).replace(/\s+\S*$/,'').trim()+'…';
 }
-function cardFrontNote(x){
- const note=String(x.arabRelation||'').trim();
- if(!note)return '';
- const generic=new Set(['منصة عربية','تعلّم بالعربية','منصة/محتوى عربي','نموذج موجه للعربية']);
- if(generic.has(note))return '';
- return [...note].length<=20?note:'';
-}
-
 function renderCards(){
  closeCardShelf();
  updateDirectoryRefineUI();
@@ -691,15 +423,16 @@ function renderCards(){
    return;
  }
  root.innerHTML=shown.map(x=>`
-  <article class="item">
+  <article class="item" data-item-id="${x.id}">
    <button class="item-identity" onclick="openDetail('${x.id}')">
     ${logoMarkup(x.logo,'item-logo',x.name)}
     <span class="item-name">${x.name}</span>
    </button>
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${x.origin[0]?'':'is-empty'}">${x.origin[0]?`<span>إذا كنت تستخدم</span><span class="origin-mini">${originName(x.origin[0])}</span>`:''}</div>
-   ${cardFrontNote(x)?`<div class="card-front-note">${cardFrontNote(x)}</div>`:''}
-   <p class="card-purpose">${compactCardPurpose(x)}</p>
+   <div class="card-summary">
+    <p class="card-purpose">${compactCardPurpose(x)}</p>
+   </div>
    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
     <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">تفاصيل +</button>
@@ -746,10 +479,9 @@ function updateLearningActionLabel(){
    (document.getElementById('learningField')?.value||'all')!=='all' ||
    (document.getElementById('learningSearch')?.value.trim()||'')!=='';
 
- btn.textContent='كل مصادر التعلّم';
- btn.title=hasAnyFilter
-   ? 'إلغاء الفلاتر الداخلية وإظهار كل مصادر التعلّم'
-   : 'إظهار كل مصادر التعلّم';
+ btn.hidden=!hasAnyFilter;
+ btn.textContent='كل المصادر';
+ btn.title='إلغاء التصفية وإظهار كل مصادر التعلّم';
 }
 function updateLearningCrumb(){
  const typeLabel=learningType==='platform'?'منصات الكورسات':learningType==='resource'?'مصادر عملية من المنصات':learningType==='channel'?'قنوات يوتيوب':learningType==='reciter'?'قنوات القراء الرسمية':'';
@@ -804,7 +536,7 @@ function renderLearning(){
    <div class="learning-carousel-shell">
     <button class="learning-carousel-arrow learning-carousel-prev" type="button" aria-label="السابق" onclick="scrollLearningCarousel('${type}',-1)">›</button>
     <div class="learning-carousel-viewport"><div class="learning-grid learning-carousel-track">${g.map(x=>`
-     <article class="learning-card">
+     <article class="learning-card" data-learning-id="${x.id}">
       ${logoMarkup(x.logo,'learning-logo',x.name)}
       <h3>${x.name}</h3>
       ${countryBadgeMarkup(x,learningCountryMap)}
@@ -912,11 +644,11 @@ function genericDecisionAction(x){
  if(x.cat==='learn') return 'راجع متطلبات التسجيل، وهل المسار الكامل أو الشهادة مدفوعان، قبل ما تستثمر وقتًا طويلًا.';
  if(x.cat==='tech'&&x.sub==='ai') return 'اختبر بعينة حقيقية غير حساسة، وقارن النتيجة بمصدر مستقل قبل الاعتماد عليها في قرار مهم.';
  if(x.cat==='tech') return 'راجع التوافق، الإتاحة الحالية، والقيود التقنية من المصدر الرسمي قبل الاعتماد.';
- if(x.cat==='work') return 'راجع بلد الخدمة، الرسوم، الباقة، والتكاملات التي تحتاجها قبل الدفع أو نقل شغلك إليها.';
+ if(x.cat==='work') return 'راجع بلد الخدمة، الرسوم، الباقة، والتكاملات التي تحتاجها قبل الدفع أو نقل عملك إليها.';
  if(x.cat==='shopping') return 'قارن بلد الإتاحة، البائع، رسوم الشحن، سياسة الإرجاع، وضمان المنتج قبل الشراء.';
  if(x.cat==='create') return 'جرّب عينة فعلية أولًا، وتحقق من شروط التصدير والترخيص وحدود الخطة المجانية إن وجدت.';
  if(x.cat==='culture') return 'راجع بلد الإتاحة، نوع الوصول، وهل المحتوى كامل أم جزء منه قبل الاشتراك أو التحميل.';
- return 'راجع المصدر الرسمي الحالي قبل الاعتماد، ولو القيد يمنعك ابحث عن بديل داخل نفس التصنيف.';
+ return 'راجع المصدر الرسمي الحالي قبل الاعتماد، وإذا كان القيد يمنعك فابحث عن خيار آخر داخل نفس التصنيف.';
 }
 function decisionNoteFor(x){
  if(!x)return null;
@@ -929,7 +661,7 @@ function decisionNoteFor(x){
  if(x.id==='mandumah') return {
    type:'قيد وصول',
    alert:'الوصول الكامل لبعض مواد دار المنظومة قد يعتمد على بنك المعرفة المصري أو اشتراك مؤسسي، ووجود المستخلص لا يعني أن النص الكامل متاح.',
-   action:'لو أنت في مصر، ابدأ من حساب بنك المعرفة المصري. ولو لم تتوفر الصلاحية، استخدم المستخلص للاكتشاف ثم ابحث عن المصدر الأصلي أو نسخة مفتوحة موثوقة.',
+   action:'إذا كنت في مصر، ابدأ من حساب بنك المعرفة المصري. وإذا لم تتوفر الصلاحية، استخدم المستخلص للاكتشاف ثم ابحث عن المصدر الأصلي أو نسخة مفتوحة موثوقة.',
    source:'<a href="https://www.mandumah.com/ekb/" target="_blank" rel="noopener noreferrer">اتفاق دار المنظومة مع بنك المعرفة</a> · <a href="https://www.ekb.eg/" target="_blank" rel="noopener noreferrer">بنك المعرفة المصري</a>'
  };
  const alert=(x.limit||'').trim();
@@ -1011,7 +743,7 @@ function learningDecisionNoteFor(x){
  };
  if(x.type==='platform')return {
    alert:'بعض المسارات أو الشهادات قد تكون مدفوعة حتى لو كانت المنصة نفسها مجانية.',
-   action:'راجع صفحة المسار نفسه: التكلفة، شروط التسجيل، وهل الشهادة مشمولة قبل ما تبدأ.'
+   action:'راجع صفحة المسار نفسه: التكلفة، شروط التسجيل، وهل الشهادة مشمولة قبل أن تبدأ.'
  };
  return {
    alert:'المحتوى الجيد لا يعني بالضرورة أن القناة مرتبة كمسار من البداية للنهاية.',
@@ -1069,7 +801,7 @@ function directoryDiscoveryMarkup(x){
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
  if(!related.length)return '';
  return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>قبل ما تخرج</h4><p>لو حابب تقارن، دي خيارات قريبة من نفس الاستخدام.</p></div>
+  <div class="detail-discovery-head"><h4>قبل الانتقال</h4><p>إذا أردت المقارنة، فهذه خيارات قريبة من نفس الاستخدام.</p></div>
   <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="openDetail('${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></button>`).join('')}</div>
   <button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>
  </section>`;
@@ -1117,8 +849,12 @@ function geoContextMarkup(id){
  const note=geoContextNotes[id];
  return note?'<section class="detail-section geo-context"><h4>المنشأ والتسجيل</h4><div>'+note+'</div></section>':'';
 }
+let activeDetail=null;
+let detailReturnFocus=null;
 function openDetail(id){
  const x=items.find(a=>a.id===id);if(!x)return;
+ activeDetail={kind:'directory',id};
+ detailReturnFocus=document.activeElement;
  const special=specialDetails(x);
  const facts=special?.facts||genericFacts(x);
  const sections=special?.sections||[];
@@ -1147,6 +883,8 @@ const fieldNames={
 };
 function showLearningNote(id){
  const x=learning.find(a=>a.id===id);if(!x)return;
+ activeDetail={kind:'learning',id};
+ detailReturnFocus=document.activeElement;
  const fields=x.fields.map(f=>fieldNames[f]||f).join(' · ');
  const isChannel=x.type==='channel'||x.type==='reciter';
  const isReciter=x.type==='reciter';
@@ -1228,6 +966,7 @@ function openExternal(id){
 }
 let methodologyReturnFocus=null;
 function openMethodology(){
+ activeDetail=null;
  methodologyReturnFocus=document.activeElement;
  document.getElementById('modalBody').innerHTML=`
   <div class="detail-overview">
@@ -1247,18 +986,21 @@ function openMethodology(){
 let activeCardShelfId=null;
 let activeCardShelfBtn=null;
 
-function closeCardShelf(){
+function closeCardShelf(returnFocus=false){
+ const trigger=activeCardShelfBtn;
  const shelf=document.getElementById('cardDetailShelf');
  if(shelf)shelf.remove();
  if(activeCardShelfBtn){
   activeCardShelfBtn.setAttribute('aria-expanded','false');
+  activeCardShelfBtn.removeAttribute('aria-controls');
   activeCardShelfBtn.textContent='تفاصيل +';
  }
  activeCardShelfId=null;
  activeCardShelfBtn=null;
+ if(returnFocus&&trigger?.isConnected)trigger.focus({preventScroll:true});
 }
 
-function openCardShelf(id,btn){
+function openCardShelf(id,btn,scroll=true){
  const grid=document.getElementById('catalogGrid');
  const card=btn?.closest('.item');
  const x=items.find(a=>a.id===id);
@@ -1285,7 +1027,7 @@ function openCardShelf(id,btn){
   <div class="card-shelf-pointer" aria-hidden="true"></div>
   <div class="card-shelf-head">
    <div><small>المصادر والمعلومات</small><strong>${x.name}</strong></div>
-   <button type="button" aria-label="إغلاق التفاصيل" onclick="closeCardShelf()">×</button>
+   <button type="button" aria-label="إغلاق التفاصيل" onclick="closeCardShelf(true)">×</button>
   </div>
   ${note?`<div class="card-shelf-caution"><small>قبل الاختيار</small><strong>${cardCautionText(x,note)}</strong></div>`:''}
   <div class="card-shelf-facts">
@@ -1293,15 +1035,17 @@ function openCardShelf(id,btn){
    <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
    <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
    <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
+   <div class="card-shelf-arab-relation"><small>صلته بالعربية</small><strong>${x.arabRelation||'—'}</strong></div>
   </div>
   <div class="card-shelf-actions">
-   <button type="button" onclick="closeCardShelf();openDetail('${x.id}')">كل التفاصيل والمصادر</button>
+   <button type="button" onclick="closeCardShelf(true);openDetail('${x.id}')">كل التفاصيل والمصادر</button>
   </div>`;
 
  anchor.insertAdjacentElement('afterend',shelf);
  activeCardShelfId=id;
  activeCardShelfBtn=btn;
  btn.setAttribute('aria-expanded','true');
+ btn.setAttribute('aria-controls',shelf.id);
  btn.textContent='أقل −';
 
  requestAnimationFrame(()=>{
@@ -1309,53 +1053,10 @@ function openCardShelf(id,btn){
   const cr=card.getBoundingClientRect();
   const center=Math.max(24,Math.min(sr.width-24,(cr.left+cr.width/2)-sr.left));
   shelf.style.setProperty('--shelf-pointer',center+'px');
-  shelf.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(scroll)shelf.scrollIntoView({behavior:'smooth',block:'nearest'});
  });
 }
 
-function openCardPeek(id,btn){
- const x=items.find(a=>a.id===id);if(!x)return;
- const layer=document.getElementById('quickPeekLayer');
- const panel=document.getElementById('quickPeekPanel');
- const body=document.getElementById('quickPeekBody');
- const note=decisionNoteFor(x);
- body.innerHTML=`
-  <div class="quick-peek-kicker">نظرة سريعة</div>
-  <div class="quick-peek-head">${logoMarkup(x.logo,'quick-peek-logo',x.name)}<div><h3>${x.name}</h3>${countryBadgeMarkup(x)}</div></div>
-  ${note?`<div class="quick-peek-caution"><small>قبل الاختيار</small><strong>${cardCautionText(x,note)}</strong></div>`:''}
-  <div class="quick-peek-facts">
-   <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
-   <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
-   <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
-  </div>
-  <div class="quick-peek-actions">
-   <button type="button" class="peek-primary" onclick="closeCardPeek();openDetail('${x.id}')">التفاصيل والمصادر</button>
-   <button type="button" class="peek-secondary" onclick="openExternal('${x.id}')">افتح ${x.name} ↗</button>
-  </div>`;
- layer.hidden=false;
- layer.classList.add('show');
- requestAnimationFrame(()=>{
-  panel.style.removeProperty('top');panel.style.removeProperty('left');panel.style.removeProperty('right');panel.style.removeProperty('bottom');panel.style.removeProperty('width');
-  if(window.matchMedia('(max-width:760px)').matches)return;
-  const card=btn.closest('.item');if(!card)return;
-  const r=card.getBoundingClientRect();
-  const w=Math.min(430,window.innerWidth-32);
-  panel.style.width=w+'px';
-  panel.style.visibility='hidden';
-  requestAnimationFrame(()=>{
-   const h=panel.offsetHeight;
-   let top=Math.max(16,Math.min(r.top+24,window.innerHeight-h-16));
-   let left=r.right+12;
-   if(left+w>window.innerWidth-16)left=r.left-w-12;
-   if(left<16)left=Math.max(16,Math.min(r.left,window.innerWidth-w-16));
-   panel.style.top=top+'px';panel.style.left=left+'px';panel.style.visibility='visible';
-  });
- });
-}
-function closeCardPeek(){
- const layer=document.getElementById('quickPeekLayer');if(!layer)return;
- layer.classList.remove('show');layer.hidden=true;
-}
 function toggleCardMore(id,btn){
  const panel=document.getElementById('card-more-'+id);if(!panel)return;
  const open=panel.hasAttribute('hidden');
@@ -1377,6 +1078,7 @@ function toggleStaticDisclosure(bodyId,btn,kind){
  const section=btn.closest('.fold-card');if(section)section.classList.toggle('is-open',opening);
  btn.setAttribute('aria-expanded',opening?'true':'false');
  const mark=btn.querySelector('[aria-hidden="true"]');if(mark)mark.textContent=opening?'−':'+';
+ const label=btn.querySelector('.sr-only');if(label)label.textContent=opening?'إخفاء القسم':'إظهار القسم';
  if(opening&&kind==='competition'&&!body.dataset.loaded){
   body.dataset.loaded='1';
   setCompetitionStory('shopping',document.querySelector('.competition-tab[data-story="shopping"]'));
@@ -1384,11 +1086,14 @@ function toggleStaticDisclosure(bodyId,btn,kind){
 }
 
 function closeModal(){
+ activeDetail=null;
+ if(detailReturnFocus?.isConnected)detailReturnFocus.focus({preventScroll:true});
+ detailReturnFocus=null;
  document.getElementById('detailModal').classList.remove('show');
  document.body.classList.remove('lock');
  if(methodologyReturnFocus){methodologyReturnFocus.focus({preventScroll:true});methodologyReturnFocus=null}
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCardPeek();closeModal();const d=document.getElementById('feedbackDialog');if(d&&d.open)d.close()}})
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCardShelf(true);closeModal();const d=document.getElementById('feedbackDialog');if(d&&d.open)d.close()}})
 
 function openFeedback(kind){
  const d=document.getElementById('feedbackDialog');
@@ -1742,13 +1447,16 @@ function toggleArabExtraMetrics(btn){
  const opening=panel.hasAttribute('hidden');
  if(opening)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
  btn.setAttribute('aria-expanded',opening?'true':'false');
- btn.textContent=opening?'− المزيد':'+ المزيد';
+ const mark=btn.querySelector('.arab-more-plus');if(mark)mark.textContent=opening?'−':'+';
 }
 function closeArabExtraMetrics(){
  const panel=document.getElementById('arabExtraMetrics');
  const btn=document.getElementById('arabMoreMetricsBtn');
  if(panel&&!panel.hasAttribute('hidden'))panel.setAttribute('hidden','');
- if(btn){btn.setAttribute('aria-expanded','false');btn.textContent='+ المزيد'}
+ if(btn){
+  btn.setAttribute('aria-expanded','false');
+  const mark=btn.querySelector('.arab-more-plus');if(mark)mark.textContent='+';
+ }
 }
 function selectArabMetric(metric,btn=null){
  currentArabMetric=metric;

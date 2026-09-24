@@ -1,0 +1,251 @@
+/*
+  بديلك عربي — تجربة رؤية 24 سبتمبر 2026
+  نطاق متعمد: الواجهة الأولى ومسار الدخول فقط.
+  لا تغييرات على البيانات أو وظائف الدليل أو المرصد أو الأدلة.
+  يمكن إلغاء التجربة بحذف هذا الملف وإزالة رابطه من index.html.
+*/
+
+.intro > .portal{
+  grid-column:1 / -1!important;
+  grid-row:auto!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:8px 0 0!important;
+  padding:0!important;
+  align-self:stretch!important;
+}
+
+.portal-heading{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 2px 9px;
+  direction:rtl;
+}
+.portal-heading strong{
+  font-family:var(--ui);
+  font-size:.78rem;
+  color:var(--deep);
+  font-weight:700;
+}
+.portal-heading span{
+  font-family:var(--text);
+  font-size:.66rem;
+  color:var(--muted);
+}
+
+.portal-bar{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:9px!important;
+  overflow:visible!important;
+  border:1px solid rgba(195,149,67,.18)!important;
+  border-top:1px solid rgba(195,149,67,.22)!important;
+  border-radius:18px!important;
+  padding:10px!important;
+  background:rgba(255,253,248,.58)!important;
+  box-shadow:0 8px 26px rgba(23,63,61,.035)!important;
+}
+
+.portal-icon-btn{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:70px!important;
+  min-height:70px!important;
+  padding:9px 10px!important;
+  border:1px solid rgba(35,75,72,.10)!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.64)!important;
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr) auto!important;
+  grid-template-rows:1fr!important;
+  align-items:center!important;
+  gap:8px!important;
+  text-align:right!important;
+  box-shadow:none!important;
+}
+.portal-icon-btn:hover,
+.portal-icon-btn:focus-visible{
+  border-color:rgba(195,149,67,.52)!important;
+  background:#fffdf8!important;
+  transform:translateY(-1px)!important;
+  box-shadow:0 6px 15px rgba(23,63,61,.055)!important;
+  outline:none;
+}
+.portal-field-icon{
+  font-size:1.45rem!important;
+  line-height:1!important;
+  color:var(--deep)!important;
+  align-self:center!important;
+  margin:0!important;
+}
+.portal-field-label{
+  display:block!important;
+  min-width:0;
+  font-family:var(--ui)!important;
+  font-size:.68rem!important;
+  line-height:1.55!important;
+  font-weight:700!important;
+  color:var(--deep)!important;
+  text-align:right!important;
+}
+.portal-jump{
+  font-size:.66rem!important;
+  line-height:1!important;
+  align-self:center!important;
+  color:var(--sunrise)!important;
+  opacity:.78;
+}
+
+/* تثبيت الإيقاع في مقدمة الصفحة دون المساس بالهوية التي استقرت. */
+.intro{
+  row-gap:10px!important;
+  padding-bottom:24px!important;
+}
+.origin-explorer{
+  box-shadow:0 8px 26px rgba(23,63,61,.045)!important;
+}
+.intro-support{
+  max-width:400px!important;
+}
+.intro-description{
+  font-size:.96rem!important;
+  line-height:1.85!important;
+}
+.intro-link{
+  font-size:.7rem!important;
+}
+
+@media(max-width:980px){
+  .intro > .portal{
+    grid-column:1!important;
+    margin-top:2px!important;
+  }
+  .portal-bar{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:650px){
+  .portal-heading{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:2px;
+    margin-bottom:8px;
+  }
+  .portal-heading span{font-size:.62rem}
+  .portal-bar{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;
+    padding:8px!important;
+  }
+  .portal-icon-btn{
+    width:100%!important;
+    min-width:0!important;
+    height:62px!important;
+    min-height:62px!important;
+    padding:8px!important;
+    border-radius:12px!important;
+  }
+  .portal-field-icon{font-size:1.28rem!important}
+  .portal-field-label{font-size:.62rem!important}
+  .portal-jump{font-size:.58rem!important}
+}
+
+
+/* HUMAN POLISH PASS — v2
+   Visual review: remove redundant controls, lower nested-box weight, keep content intact. */
+.portal-heading{justify-content:flex-start!important;margin-bottom:8px!important}
+.portal-heading strong{font-size:.8rem!important}
+.directory-active-context[hidden],.return-actions button[hidden]{display:none!important}
+.directory-refine-bar:has(.directory-active-context[hidden]){justify-content:flex-start!important}
+.directory-refine-triggers button,
+.directory-refine-panel .filter,
+.directory-refine-panel .subfilter,
+.return-actions button{min-height:34px!important}
+.navigation a{min-height:34px;display:inline-flex;align-items:center;padding-block:5px}
+
+.card-shelf-facts{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0 18px!important;
+  border-block:1px solid rgba(23,63,61,.11);
+  padding:2px 0;
+}
+.card-shelf-facts>div{
+  border:0!important;border-radius:0!important;background:transparent!important;padding:8px 2px!important
+}
+.card-shelf-facts>div:nth-child(-n+2){border-bottom:1px solid rgba(23,63,61,.09)!important}
+
+.modal-card{width:min(760px,100%)!important;border-radius:20px!important}
+.modal-body{padding:18px 20px 22px!important}
+.detail-logo{width:56px!important;height:56px!important}
+.quick-title{font-size:2.25rem!important;line-height:1.25!important}
+.quick-purpose{margin:4px auto 10px!important}
+.detail-facts{
+  gap:0 18px!important;margin:13px 0 16px!important;
+  border-block:1px solid rgba(23,63,61,.11)
+}
+.detail-facts>div{
+  border:0!important;border-radius:0!important;background:transparent!important;
+  min-height:0!important;padding:9px 2px!important
+}
+.detail-facts>div:nth-child(-n+2){border-bottom:1px solid rgba(23,63,61,.09)!important}
+
+@media(max-width:760px){
+  .card-shelf-facts,.detail-facts{grid-template-columns:1fr!important}
+  .card-shelf-facts>div,.detail-facts>div{border-bottom:1px solid rgba(23,63,61,.09)!important}
+  .card-shelf-facts>div:last-child,.detail-facts>div:last-child{border-bottom:0!important}
+  .modal-body{padding:16px 14px 20px!important}
+  .quick-title{font-size:1.9rem!important}
+}
+
+
+/* ACCESSIBILITY + COMFORT PASS — v3
+   Complete the visual-review item that was only partially applied:
+   compact controls remain compact, but text/targets are easier to read and hit. */
+.directory-refine-triggers button{
+  min-height:34px!important;
+  font-size:.62rem!important;
+  padding-inline:10px!important;
+}
+.directory-refine-panel .filter,
+.directory-refine-panel .subfilter{
+  min-height:34px!important;
+  font-size:.62rem!important;
+  line-height:1.45!important;
+}
+.return-actions button{
+  min-height:34px!important;
+  font-size:.6rem!important;
+}
+#learning .learning-types button,
+#learning .learning-actions button,
+.more-btn,
+.load-more-btn,
+.origin-more-btn,
+.section-fold-toggle,
+.feedback-actions button,
+.modal .close{
+  min-height:32px!important;
+}
+#learning .learning-types button{font-size:.62rem!important}
+@media(max-width:760px){
+  .directory-refine-triggers button,
+  .directory-refine-panel .filter,
+  .directory-refine-panel .subfilter{
+    min-height:36px!important;
+    font-size:.64rem!important;
+  }
+}
+
+
+/* DECISION-INFO RESTORE — keep "صلته بالعربية" inside details, not on the card face. */
+.card-shelf-facts>.card-shelf-arab-relation{
+  grid-column:1/-1!important;
+  border-bottom:0!important;
+}
+@media(max-width:760px){
+  .card-shelf-facts>.card-shelf-arab-relation{grid-column:auto!important}
+}

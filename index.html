@@ -18,8 +18,11 @@
 
 
 <link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/vision-2026-09-24.css">
 <script src="/js/commercial-links.js" defer></script>
+<script src="/js/catalog-data.js" defer></script>
 <script src="/js/app.js" defer></script>
+<script src="/js/discovery-memory.js" defer></script>
 <script src="/js/smart-return.js" defer></script>
 </head>
 <body>
@@ -45,14 +48,14 @@
 <section class="intro wrap">
  <div class="intro-heading"><h1 class="art-title art-title--brand" aria-label="بديلك عربي"><span class="sr-only">بديلك عربي</span><img class="art-title-img art-img-brand" src="/images/titles/brand-badilak-arabi-cropped.webp?v=83" alt="" loading="eager" fetchpriority="high" decoding="async"></h1></div>
  <div class="intro-copy">
-  <p class="intro-promise">اكتشف العربي. قارن بوعي. واختر ما يناسبك.</p>
+  <p class="intro-promise">ابدأ من حاجتك. قارن الخيارات العربية. ثم اختر ما يناسبك.</p>
   <div class="intro-support">
-   <p class="intro-description">اكتشف أدوات وخدمات ومصادر عربية للعمل والتعلّم والمعرفة. افهم فائدتها وحدودها قبل أن تختار أو تدفع.</p>
+   <p class="intro-description">أدوات وخدمات ومصادر عربية للعمل والتعلّم والمعرفة، مع فائدتها وتوفرها وأهم القيود ومصدر المعلومة.</p>
    <a class="intro-link" href="#directory">تصفّح الدليل ←</a>
   </div>
  </div>
  <aside class="origin-explorer">
-  <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">اختَر خدمة تعرفها، وابدأ منها.</span></div>
+  <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">اختَر خدمة تعرفها، وشاهد خيارات عربية تؤدي المهمة نفسها أو جزءًا منها.</span></div>
   <div class="origin-options">
    <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi></button>
    <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi></button>
@@ -70,24 +73,27 @@
  </aside>
 
 <section class="portal wrap" aria-label="انتقل إلى مجال داخل الدليل">
+ <div class="portal-heading">
+  <strong>أو ابدأ من مجالك</strong>
+ </div>
  <div class="portal-bar">
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('tech')" aria-label="تقنية وذكاء اصطناعي" title="تقنية وذكاء اصطناعي">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">code</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">code</span><span class="portal-field-label">تقنية وذكاء اصطناعي</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('work')" aria-label="شغلك ومشروعك" title="شغلك ومشروعك">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">work</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">work</span><span class="portal-field-label">شغلك ومشروعك</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('shopping')" aria-label="تسوّق وشراء" title="تسوّق وشراء">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">shopping_bag</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">shopping_bag</span><span class="portal-field-label">تسوّق وشراء</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('learn')" aria-label="تعلّم وبحث" title="تعلّم وبحث">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">school</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">school</span><span class="portal-field-label">تعلّم وبحث</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('create')" aria-label="تصميم ومحتوى" title="تصميم ومحتوى">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">slideshow</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">slideshow</span><span class="portal-field-label">تصميم ومحتوى</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('culture')" aria-label="كتب وصوت وترفيه" title="كتب وصوت وترفيه">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">movie</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">movie</span><span class="portal-field-label">كتب وصوت وترفيه</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
  </div>
 </section>
@@ -111,18 +117,18 @@
  <div class="local-nav">
   <div class="wrap local-nav-inner">
    <div class="crumbs"><button onclick="resetAllAndHome()">الرئيسية</button><span>‹</span><button onclick="resetDirectory()">الدليل</button><span id="directoryCrumbWrap" style="display:none">‹ <span class="current" id="directoryCrumb"></span></span></div>
-   <div class="return-actions"><button onclick="resetDirectory()" title="العودة إلى الدليل بكل أقسامه">كل الدليل</button><button id="directoryContextBtn" class="primary" onclick="showAllDirectory()" title="إزالة الفلاتر الداخلية مع البقاء داخل القسم الحالي">عرض الكل</button></div>
+   <div class="return-actions"><button id="directoryHomeBtn" hidden onclick="resetDirectory()" title="العودة إلى الدليل بكل أقسامه">كل الدليل</button><button id="directoryContextBtn" hidden class="primary" onclick="clearDirectoryContext()" title="إزالة الفلاتر الداخلية مع البقاء داخل القسم الحالي">عرض الكل</button></div>
   </div>
  </div>
  <div class="catalog-shell frame-plain">
   <div class="directory-refine-bar" id="directoryRefineBar">
-   <div class="directory-active-context">
+   <div class="directory-active-context" hidden>
     <span class="directory-refine-label">المعروض الآن</span>
     <div class="active-filter-pills" id="directoryActiveFilters"><span class="active-filter-pill is-muted">كل الاكتشافات</span></div>
    </div>
    <div class="directory-refine-triggers" aria-label="تصفية النتائج">
     <button type="button" data-refine-trigger="search" aria-expanded="false" aria-controls="directoryRefineSearch" onclick="toggleDirectoryRefine('search',this)">⌕ ابحث</button>
-    <button type="button" data-refine-trigger="category" aria-expanded="false" aria-controls="directoryRefineCategory" onclick="toggleDirectoryRefine('category',this)">بتدور على إيه؟ <span class="refine-caret" aria-hidden="true">⌄</span></button>
+    <button type="button" data-refine-trigger="category" aria-expanded="false" aria-controls="directoryRefineCategory" onclick="toggleDirectoryRefine('category',this)">ماذا تبحث عنه؟ <span class="refine-caret" aria-hidden="true">⌄</span></button>
     <button type="button" id="subfilterTrigger" data-refine-trigger="sub" aria-expanded="false" aria-controls="directoryRefineSub" onclick="toggleDirectoryRefine('sub',this)" hidden>اختيار أدق <span class="refine-caret" aria-hidden="true">⌄</span></button>
    </div>
   </div>
@@ -148,7 +154,7 @@
   </div>
 
   <div class="directory-results-anchor" id="directoryResultsStart"></div>
-  <div class="directory-state" id="stateLine"></div>
+  <div class="directory-state" id="stateLine" role="status" aria-live="polite"></div>
   <div class="catalog-grid" id="catalogGrid"></div>
   <div class="load-more-wrap" id="directoryMore"></div>
   <div class="section-continue" id="directoryContinue"></div>
@@ -225,7 +231,7 @@
  <div class="local-nav">
   <div class="wrap local-nav-inner">
    <div class="crumbs"><button onclick="resetAllAndHome()">الرئيسية</button><span>‹</span><button onclick="resetLearning()">التعلّم</button><span id="learningCrumbWrap" style="display:none">‹ <span class="current" id="learningCrumb"></span></span></div>
-   <div class="return-actions"><button onclick="resetLearning()" title="العودة إلى بداية قسم التعلّم بكل أنواعه ومجالاته">رئيسية التعلّم</button><button id="learningContextBtn" class="primary" onclick="showAllLearning()" title="إظهار كل المحتوى داخل المسار الحالي">كل المصادر</button></div>
+   <div class="return-actions"><button id="learningContextBtn" hidden class="primary" onclick="showAllLearning()" title="إلغاء التصفية وإظهار كل مصادر التعلّم">كل المصادر</button></div>
   </div>
  </div>
  <div class="wrap">
@@ -249,8 +255,8 @@
 </section>
 
 <section class="section wrap fold-card" id="guides">
- <div class="section-head"><div><h2 class="art-title art-title--section art-title--beforepay"><span class="sr-only">قبل ما تدفع</span><img class="art-title-img art-img-beforepay" src="/images/titles/beforepay.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">قبل الاشتراك أو نقل شغلك، راجع ما قد يغيّر القرار فعلًا.</p></div></div>
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="guidesBody" onclick="toggleStaticDisclosure('guidesBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">اقرأ</span></button>
+ <div class="section-head"><div><h2 class="art-title art-title--section art-title--beforepay"><span class="sr-only">قبل ما تدفع</span><img class="art-title-img art-img-beforepay" src="/images/titles/beforepay.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">قبل الاشتراك أو نقل عملك، راجع ما قد يغيّر القرار فعلًا.</p></div></div>
+ <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="guidesBody" onclick="toggleStaticDisclosure('guidesBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">إظهار القسم</span></button>
  <div class="section-fold-body" id="guidesBody" hidden>
 <div class="guides frame-soft">
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">code</span></span><span class="guide-intent">ذكاء اصطناعي</span></div><h3>كيف تقارن مساعدًا عربيًا بمساعد عالمي؟</h3><p>لا تبدأ بسؤال «من الأذكى؟». ابدأ بالعربية واللهجات والسياق والملفات والخصوصية والمهمة التي تريد إنجازها.</p><a href="/guides/arabic-ai">اقرأ الدليل الكامل ←</a></article>
@@ -258,7 +264,7 @@
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">school</span></span><span class="guide-intent">بحث أكاديمي</span></div><h3>البحث العربي: من أين تبدأ؟</h3><p>متى تبدأ بقاعدة عربية متخصصة، ومتى توسّع البحث عبر Google Scholar، ومتى تحتاج مصدرًا أوليًا لا مجرد نتيجة بحث.</p><a href="/guides/arabic-research">اقرأ الدليل الكامل ←</a></article>
  </div>
  <div class="section-continue">
-  <div class="section-continue-copy"><strong>كمّل القرار</strong><span>اختر المسار الأقرب قبل أن تنتقل إلى أي خدمة خارجية.</span></div>
+  <div class="section-continue-copy"><strong>أكمل قرارك</strong><span>اختر المسار الأقرب قبل أن تنتقل إلى أي خدمة خارجية.</span></div>
   <div class="section-continue-actions">
    <button class="accent" onclick="badilakNavigate('/guides')">مركز القراءة</button>
    <button onclick="setLearningPath('all','all')">مصادر التعلّم</button>
@@ -281,16 +287,16 @@
 
 
 <section class="section wrap fold-card" id="knowledge">
- <div class="section-head"><div><h2 class="art-title art-title--section art-title--nottools"><span class="sr-only">مش بس أدوات</span><img class="art-title-img art-img-nottools" src="/images/titles/nottools.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">كتب وألعاب وصوت وتجارب عربية لها قيمة حتى من غير مقارنة بمنتج عالمي.</p></div></div>
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="knowledgeBody" onclick="toggleStaticDisclosure('knowledgeBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">اقرأ</span></button>
+ <div class="section-head"><div><h2 class="art-title art-title--section art-title--nottools"><span class="sr-only">مش بس أدوات</span><img class="art-title-img art-img-nottools" src="/images/titles/nottools.webp?v=81" alt="" loading="lazy" decoding="async"></h2><p class="section-human-note">كتب وألعاب وصوت وتجارب عربية لها قيمة مستقلة، حتى من دون مقارنة بمنتج عالمي.</p></div></div>
+ <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="knowledgeBody" onclick="toggleStaticDisclosure('knowledgeBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">إظهار القسم</span></button>
  <div class="section-fold-body" id="knowledgeBody" hidden>
 <div class="discovery-shelf">
-  <button class="discovery-card" onclick="openDetail('gravity')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">sports_esports</span></span></div><div class="discovery-body"><span class="discovery-kind">لعبة عربية</span><span class="discovery-country"><img src="/images/flags/sa.png" alt="">السعودية</span><h3>Gravity Error</h3><p>لعبة ألغاز ومنصات من استوديو سعودي؛ اكتشاف عربي يستحق التجربة حتى لو لم يكن بديلًا لمنتج أجنبي.</p></div></button>
-  <button class="discovery-card" onclick="openDetail('abjjad')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">menu_book</span></span></div><div class="discovery-body"><span class="discovery-kind">قراءة عربية</span><span class="discovery-country"><img src="/images/flags/jo.png" alt="">الأردن</span><h3>أبجد</h3><p>منصة للكتب والقراءة العربية؛ قيمة مستقلة عن فكرة «البديل» نفسها.</p></div></button>
-  <button class="discovery-card" onclick="openDetail('sowt')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">headphones</span></span></div><div class="discovery-body"><span class="discovery-kind">محتوى صوتي</span><span class="discovery-country"><img src="/images/flags/jo.png" alt="">الأردن</span><h3>صوت</h3><p>اكتشاف صوتي عربي يوسّع بديلك عربي من الأدوات إلى الثقافة والمعرفة اليومية.</p></div></button>
+  <button class="discovery-card" onclick="openDetail('gravity')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">sports_esports</span></span></div><div class="discovery-body"><span class="discovery-kind">لعبة عربية</span><span class="discovery-country"><img src="/images/flags/sa.png" alt="">السعودية</span><h3>Gravity Error</h3><p>لعبة ألغاز ومنصات من استوديو سعودي؛ نعرضها هنا كلعبة عربية مستقلة، لا كبديل لمنتج أجنبي.</p></div></button>
+  <button class="discovery-card" onclick="openDetail('abjjad')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">menu_book</span></span></div><div class="discovery-body"><span class="discovery-kind">قراءة عربية</span><span class="discovery-country"><img src="/images/flags/jo.png" alt="">الأردن</span><h3>أبجد</h3><p>منصة للكتب العربية الرقمية والصوتية، للقراءة والاستماع.</p></div></button>
+  <button class="discovery-card" onclick="openDetail('sowt')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">headphones</span></span></div><div class="discovery-body"><span class="discovery-kind">محتوى صوتي</span><span class="discovery-country"><img src="/images/flags/jo.png" alt="">الأردن</span><h3>صوت</h3><p>بودكاست وقصص صوتية عربية للاستماع والمعرفة والترفيه.</p></div></button>
  </div>
  <div class="section-continue">
-  <div class="section-continue-copy"><strong>اكتشف من نفس النوع</strong><span>لو واحد من الأمثلة شدك، افتح المجال كله بدل الوقوف عند بطاقة واحدة. <a class="quiet-read-link" href="/guides">مركز القراءة ←</a></span></div>
+  <div class="section-continue-copy"><strong>تابع من نفس النوع</strong><span>إذا لفتك أحد الأمثلة، افتح المجال كاملًا بدل الوقوف عند بطاقة واحدة. <a class="quiet-read-link" href="/guides">مركز القراءة ←</a></span></div>
   <div class="section-continue-actions">
    <button class="accent" onclick="openDiscoveryGroup('culture','books')">كتب وقراءة</button>
    <button onclick="openDiscoveryGroup('culture','podcasts')">بودكاست وصوت</button>
@@ -309,7 +315,7 @@
    <button class="monitor-card" onclick="openDetail('aamenn')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">shield</span></span><span class="monitor-status">قيد التحقق</span></div><h3>Aamenn: راجع الشروط قبل الشراء</h3><span class="monitor-country"><img src="/images/flags/eg.png" alt="">مصر · فريق/إطلاق</span><p>تحقق من السعر وسياسة الاسترجاع والتفاصيل الفنية من المصدر قبل اتخاذ قرار الشراء.</p><time>14 سبتمبر 2026</time></button>
   </div>
   <div class="section-continue">
-   <div class="section-continue-copy"><strong>بعد المراجعة</strong><span>ارجع للاكتشاف، أو ساعدنا في الإضافة والتصحيح. <a class="quiet-read-link" href="/guides">مركز القراءة ←</a></span></div>
+   <div class="section-continue-copy"><strong>بعد المراجعة</strong><span>عد إلى الدليل، أو ساعدنا في الإضافة والتصحيح. <a class="quiet-read-link" href="/guides">مركز القراءة ←</a></span></div>
    <div class="section-continue-actions">
     <button class="accent" onclick="resetDirectory()">كل الدليل</button>
     <button onclick="setLearningPath('all','all')">مصادر التعلّم</button>
@@ -342,13 +348,6 @@
 
 
 <button class="back-to-top" id="backToTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ أعلى</button>
-
-<div class="quick-peek-layer" id="quickPeekLayer" hidden onclick="if(event.target===this)closeCardPeek()">
- <section class="quick-peek-panel" id="quickPeekPanel" role="dialog" aria-modal="true" aria-label="نظرة سريعة">
-  <button class="quick-peek-close" type="button" aria-label="إغلاق" onclick="closeCardPeek()">×</button>
-  <div id="quickPeekBody"></div>
- </section>
-</div>
 
 <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-label="التفاصيل والمصادر" onclick="if(event.target===this)closeModal()">
  <div class="modal-card">

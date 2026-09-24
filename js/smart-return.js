@@ -8,7 +8,7 @@
  const cleanStack=k=>{const now=Date.now();return (read(k,[])||[]).filter(x=>x&&x.url&&now-(x.ts||0)<TTL).slice(-MAX)};
  const getBack=()=>cleanStack(BACK), setBack=s=>write(BACK,s.slice(-MAX));
  const getForward=()=>cleanStack(FORWARD), setForward=s=>write(FORWARD,s.slice(-MAX));
- const snapshot=()=>({url:location.href,y:Math.max(0,Math.round(window.scrollY||0)),title:document.title,ts:Date.now()});
+ const snapshot=()=>({url:location.href,y:Math.max(0,Math.round(window.scrollY||0)),title:document.title,ts:Date.now(),discovery:window.badilakDiscoveryMemory?.capture()});
 
  function pushUnique(stack,item){
   if(stack.length&&samePage(stack[stack.length-1].url,item.url))stack[stack.length-1]=item;
@@ -107,9 +107,12 @@
  }
 
  function restoreIfNeeded(){
-  const r=read(RESTORE,null);if(!r||!r.url)return;
+  const historyVisit=performance.getEntriesByType('navigation')[0]?.type==='back_forward';
+  const previous=historyVisit?[...getBack(),...getForward()].filter(x=>samePage(x.url,location.href)).sort((a,b)=>b.ts-a.ts)[0]:null;
+  const r=read(RESTORE,null)||previous;if(!r||!r.url||Date.now()-(r.ts||0)>=TTL)return;
   if(!samePage(r.url,location.href))return;
   try{sessionStorage.removeItem(RESTORE)}catch{}
+  window.badilakDiscoveryMemory?.restore(r.discovery);
   if('scrollRestoration'in history)history.scrollRestoration='manual';
   const y=Number(r.y)||0;
   const go=()=>window.scrollTo({top:y,left:0,behavior:'auto'});
