@@ -73,7 +73,6 @@
 <section class="portal wrap" aria-label="انتقل إلى مجال داخل الدليل">
  <div class="portal-heading">
   <strong>أو ابدأ من مجالك</strong>
-  <span>اختَر الباب الأقرب، وبعدها تقدر تضيق الاختيار من داخل الدليل.</span>
  </div>
  <div class="portal-bar">
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('tech')" aria-label="تقنيات وابتكارات" title="تقنيات وابتكارات">
@@ -116,12 +115,12 @@
  <div class="local-nav">
   <div class="wrap local-nav-inner">
    <div class="crumbs"><button onclick="resetAllAndHome()">الرئيسية</button><span>‹</span><button onclick="resetDirectory()">الدليل</button><span id="directoryCrumbWrap" style="display:none">‹ <span class="current" id="directoryCrumb"></span></span></div>
-   <div class="return-actions"><button onclick="resetDirectory()" title="العودة إلى الدليل بكل أقسامه">كل الدليل</button><button id="directoryContextBtn" class="primary" onclick="showAllDirectory()" title="إزالة الفلاتر الداخلية مع البقاء داخل القسم الحالي">عرض الكل</button></div>
+   <div class="return-actions"><button id="directoryHomeBtn" hidden onclick="resetDirectory()" title="العودة إلى الدليل بكل أقسامه">كل الدليل</button><button id="directoryContextBtn" hidden class="primary" onclick="showAllDirectory()" title="إزالة الفلاتر الداخلية مع البقاء داخل القسم الحالي">عرض الكل</button></div>
   </div>
  </div>
  <div class="catalog-shell frame-plain">
   <div class="directory-refine-bar" id="directoryRefineBar">
-   <div class="directory-active-context">
+   <div class="directory-active-context" hidden>
     <span class="directory-refine-label">المعروض الآن</span>
     <div class="active-filter-pills" id="directoryActiveFilters"><span class="active-filter-pill is-muted">كل الاكتشافات</span></div>
    </div>
@@ -139,12 +138,12 @@
   <div class="directory-refine-panel" id="directoryRefineCategory" hidden>
    <div class="filters">
     <button class="filter active" data-filter="all" onclick="setFilter('all',this)">الكل</button>
-    <button class="filter" data-filter="tech" onclick="setFilter('tech',this)">تقنية وذكاء اصطناعي</button>
-    <button class="filter" data-filter="work" onclick="setFilter('work',this)">شغلك ومشروعك</button>
-    <button class="filter" data-filter="shopping" onclick="setFilter('shopping',this)">تسوّق وشراء</button>
-    <button class="filter" data-filter="learn" onclick="setFilter('learn',this)">تعلّم وبحث</button>
-    <button class="filter" data-filter="create" onclick="setFilter('create',this)">تصميم ومحتوى</button>
-    <button class="filter" data-filter="culture" onclick="setFilter('culture',this)">كتب وصوت وترفيه</button>
+    <button class="filter" data-filter="tech" onclick="setFilter('tech',this)">تقنيات وابتكارات</button>
+    <button class="filter" data-filter="work" onclick="setFilter('work',this)">للعمل والمشاريع</button>
+    <button class="filter" data-filter="shopping" onclick="setFilter('shopping',this)">للتسوّق والأسواق</button>
+    <button class="filter" data-filter="learn" onclick="setFilter('learn',this)">للتعلّم والبحث</button>
+    <button class="filter" data-filter="create" onclick="setFilter('create',this)">للمحتوى والإبداع</button>
+    <button class="filter" data-filter="culture" onclick="setFilter('culture',this)">للثقافة والترفيه</button>
    </div>
   </div>
 

@@ -91,7 +91,7 @@ const originRouteMap={
   scholar:{cat:'learn',sub:'research'},
   jstor:{cat:'learn',sub:'research'}
 };
-const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
+const categoryNames={all:'كل الاكتشافات',work:'للعمل والمشاريع',shopping:'للتسوّق والأسواق',learn:'للتعلّم والبحث',create:'للمحتوى والإبداع',culture:'للثقافة والترفيه',tech:'تقنيات وابتكارات'};
 const subfilterMap={
  work:[['all','الكل'],['management','إدارة شغلك'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
  shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','بيع وشراء بين الناس'],['specialized','متاجر متخصصة']],
@@ -313,7 +313,9 @@ function updateDirectoryRefineUI(){
  if(subfilter!=='all')bits.push(`<span class="active-filter-pill"><bdi>${subcategoryLabel(filter,subfilter)}</bdi></span>`);
  const q=document.getElementById('searchInput')?.value.trim()||'';
  if(q)bits.push(`<span class="active-filter-pill search-pill"><bdi>بحث: ${q.replace(/[<>&"]/g,'')}</bdi></span>`);
- root.innerHTML=bits.length?bits.join(''):'<span class="active-filter-pill is-muted">كل الاكتشافات</span>';
+ const contextWrap=root.closest('.directory-active-context');
+ if(contextWrap)contextWrap.hidden=!bits.length;
+ root.innerHTML=bits.length?bits.join(''):'';
 
  const subBtn=document.getElementById('subfilterTrigger');
  if(subBtn){
@@ -472,21 +474,25 @@ function showAllDirectory(){
 }
 function updateDirectoryActionLabel(){
  const btn=document.getElementById('directoryContextBtn');
+ const homeBtn=document.getElementById('directoryHomeBtn');
  if(!btn)return;
  const q=document.getElementById('searchInput')?.value.trim()||'';
+ const hasAny=!!countryFilter||filter!=='all'||subfilter!=='all'||!!originFilter||!!q;
+ const hasInner=!!countryFilter||subfilter!=='all'||!!originFilter||!!q;
+
+ if(homeBtn)homeBtn.hidden=!hasAny;
+ btn.hidden=!hasInner;
+ if(!hasInner)return;
 
  if(countryFilter){
-   btn.textContent='كل الدليل';
-   btn.title='إلغاء فلتر الدولة وإظهار كل الدليل';
- }else if(filter!=='all'){
-   btn.textContent='كل '+categoryLabel(filter);
-   btn.title='إلغاء الفلاتر الداخلية وإظهار كل '+categoryLabel(filter);
+   btn.textContent='إلغاء الدولة';
+   btn.title='إلغاء فلتر الدولة مع البقاء في المسار الحالي';
  }else if(q){
    btn.textContent='مسح البحث';
-   btn.title='مسح عبارة البحث وإظهار كل الدليل';
+   btn.title='مسح عبارة البحث مع البقاء في المسار الحالي';
  }else{
-   btn.textContent='عرض الكل';
-   btn.title='إظهار كل عناصر الدليل';
+   btn.textContent='كل '+categoryLabel(filter);
+   btn.title='إلغاء التصفية الأدق مع البقاء داخل '+categoryLabel(filter);
  }
 }
 function toggleOriginOptions(btn){

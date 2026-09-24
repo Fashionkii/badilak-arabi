@@ -153,3 +153,50 @@
   .portal-field-label{font-size:.62rem!important}
   .portal-jump{font-size:.58rem!important}
 }
+
+
+/* HUMAN POLISH PASS — v2
+   Visual review: remove redundant controls, lower nested-box weight, keep content intact. */
+.portal-heading{justify-content:flex-start!important;margin-bottom:8px!important}
+.portal-heading strong{font-size:.8rem!important}
+.directory-active-context[hidden],.return-actions button[hidden]{display:none!important}
+.directory-refine-bar:has(.directory-active-context[hidden]){justify-content:flex-start!important}
+.directory-refine-triggers button,
+.directory-refine-panel .filter,
+.directory-refine-panel .subfilter,
+.return-actions button{min-height:34px!important}
+.navigation a{min-height:34px;display:inline-flex;align-items:center;padding-block:5px}
+
+.card-shelf-facts{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0 18px!important;
+  border-block:1px solid rgba(23,63,61,.11);
+  padding:2px 0;
+}
+.card-shelf-facts>div{
+  border:0!important;border-radius:0!important;background:transparent!important;padding:8px 2px!important
+}
+.card-shelf-facts>div:nth-child(-n+2){border-bottom:1px solid rgba(23,63,61,.09)!important}
+
+.modal-card{width:min(760px,100%)!important;border-radius:20px!important}
+.modal-body{padding:18px 20px 22px!important}
+.detail-logo{width:56px!important;height:56px!important}
+.quick-title{font-size:2.25rem!important;line-height:1.25!important}
+.quick-purpose{margin:4px auto 10px!important}
+.detail-facts{
+  gap:0 18px!important;margin:13px 0 16px!important;
+  border-block:1px solid rgba(23,63,61,.11)
+}
+.detail-facts>div{
+  border:0!important;border-radius:0!important;background:transparent!important;
+  min-height:0!important;padding:9px 2px!important
+}
+.detail-facts>div:nth-child(-n+2){border-bottom:1px solid rgba(23,63,61,.09)!important}
+
+@media(max-width:760px){
+  .card-shelf-facts,.detail-facts{grid-template-columns:1fr!important}
+  .card-shelf-facts>div,.detail-facts>div{border-bottom:1px solid rgba(23,63,61,.09)!important}
+  .card-shelf-facts>div:last-child,.detail-facts>div:last-child{border-bottom:0!important}
+  .modal-body{padding:16px 14px 20px!important}
+  .quick-title{font-size:1.9rem!important}
+}
