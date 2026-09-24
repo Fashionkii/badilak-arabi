@@ -662,14 +662,6 @@ function compactCardPurpose(x){
  if(cut>0)return sentence.slice(0,cut).replace(/[،؛:]\s*$/,'').trim()+'.';
  return sentence.slice(0,92).replace(/\s+\S*$/,'').trim()+'…';
 }
-function cardFrontNote(x){
- const note=String(x.arabRelation||'').trim();
- if(!note)return '';
- const generic=new Set(['منصة عربية','تعلّم بالعربية','منصة/محتوى عربي','نموذج موجه للعربية']);
- if(generic.has(note))return '';
- return [...note].length<=20?note:'';
-}
-
 function renderCards(){
  closeCardShelf();
  updateDirectoryRefineUI();
@@ -704,7 +696,6 @@ function renderCards(){
    </button>
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${x.origin[0]?'':'is-empty'}">${x.origin[0]?`<span>إذا كنت تستخدم</span><span class="origin-mini">${originName(x.origin[0])}</span>`:''}</div>
-   ${cardFrontNote(x)?`<div class="card-front-note">${cardFrontNote(x)}</div>`:''}
    <p class="card-purpose">${compactCardPurpose(x)}</p>
    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
@@ -752,10 +743,9 @@ function updateLearningActionLabel(){
    (document.getElementById('learningField')?.value||'all')!=='all' ||
    (document.getElementById('learningSearch')?.value.trim()||'')!=='';
 
- btn.textContent='كل مصادر التعلّم';
- btn.title=hasAnyFilter
-   ? 'إلغاء الفلاتر الداخلية وإظهار كل مصادر التعلّم'
-   : 'إظهار كل مصادر التعلّم';
+ btn.hidden=!hasAnyFilter;
+ btn.textContent='كل المصادر';
+ btn.title='إلغاء التصفية وإظهار كل مصادر التعلّم';
 }
 function updateLearningCrumb(){
  const typeLabel=learningType==='platform'?'منصات الكورسات':learningType==='resource'?'مصادر عملية من المنصات':learningType==='channel'?'قنوات يوتيوب':learningType==='reciter'?'قنوات القراء الرسمية':'';
@@ -1299,6 +1289,7 @@ function openCardShelf(id,btn){
    <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
    <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
    <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
+   <div class="card-shelf-arab-relation"><small>صلته بالعربية</small><strong>${x.arabRelation||'—'}</strong></div>
   </div>
   <div class="card-shelf-actions">
    <button type="button" onclick="closeCardShelf();openDetail('${x.id}')">كل التفاصيل والمصادر</button>
@@ -1319,49 +1310,6 @@ function openCardShelf(id,btn){
  });
 }
 
-function openCardPeek(id,btn){
- const x=items.find(a=>a.id===id);if(!x)return;
- const layer=document.getElementById('quickPeekLayer');
- const panel=document.getElementById('quickPeekPanel');
- const body=document.getElementById('quickPeekBody');
- const note=decisionNoteFor(x);
- body.innerHTML=`
-  <div class="quick-peek-kicker">نظرة سريعة</div>
-  <div class="quick-peek-head">${logoMarkup(x.logo,'quick-peek-logo',x.name)}<div><h3>${x.name}</h3>${countryBadgeMarkup(x)}</div></div>
-  ${note?`<div class="quick-peek-caution"><small>قبل الاختيار</small><strong>${cardCautionText(x,note)}</strong></div>`:''}
-  <div class="quick-peek-facts">
-   <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
-   <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
-   <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
-  </div>
-  <div class="quick-peek-actions">
-   <button type="button" class="peek-primary" onclick="closeCardPeek();openDetail('${x.id}')">التفاصيل والمصادر</button>
-   <button type="button" class="peek-secondary" onclick="openExternal('${x.id}')">افتح ${x.name} ↗</button>
-  </div>`;
- layer.hidden=false;
- layer.classList.add('show');
- requestAnimationFrame(()=>{
-  panel.style.removeProperty('top');panel.style.removeProperty('left');panel.style.removeProperty('right');panel.style.removeProperty('bottom');panel.style.removeProperty('width');
-  if(window.matchMedia('(max-width:760px)').matches)return;
-  const card=btn.closest('.item');if(!card)return;
-  const r=card.getBoundingClientRect();
-  const w=Math.min(430,window.innerWidth-32);
-  panel.style.width=w+'px';
-  panel.style.visibility='hidden';
-  requestAnimationFrame(()=>{
-   const h=panel.offsetHeight;
-   let top=Math.max(16,Math.min(r.top+24,window.innerHeight-h-16));
-   let left=r.right+12;
-   if(left+w>window.innerWidth-16)left=r.left-w-12;
-   if(left<16)left=Math.max(16,Math.min(r.left,window.innerWidth-w-16));
-   panel.style.top=top+'px';panel.style.left=left+'px';panel.style.visibility='visible';
-  });
- });
-}
-function closeCardPeek(){
- const layer=document.getElementById('quickPeekLayer');if(!layer)return;
- layer.classList.remove('show');layer.hidden=true;
-}
 function toggleCardMore(id,btn){
  const panel=document.getElementById('card-more-'+id);if(!panel)return;
  const open=panel.hasAttribute('hidden');
@@ -1395,7 +1343,7 @@ function closeModal(){
  document.body.classList.remove('lock');
  if(methodologyReturnFocus){methodologyReturnFocus.focus({preventScroll:true});methodologyReturnFocus=null}
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCardPeek();closeModal();const d=document.getElementById('feedbackDialog');if(d&&d.open)d.close()}})
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();const d=document.getElementById('feedbackDialog');if(d&&d.open)d.close()}})
 
 function openFeedback(kind){
  const d=document.getElementById('feedbackDialog');
@@ -1749,13 +1697,16 @@ function toggleArabExtraMetrics(btn){
  const opening=panel.hasAttribute('hidden');
  if(opening)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
  btn.setAttribute('aria-expanded',opening?'true':'false');
- btn.textContent=opening?'− المزيد':'+ المزيد';
+ const mark=btn.querySelector('.arab-more-plus');if(mark)mark.textContent=opening?'−':'+';
 }
 function closeArabExtraMetrics(){
  const panel=document.getElementById('arabExtraMetrics');
  const btn=document.getElementById('arabMoreMetricsBtn');
  if(panel&&!panel.hasAttribute('hidden'))panel.setAttribute('hidden','');
- if(btn){btn.setAttribute('aria-expanded','false');btn.textContent='+ المزيد'}
+ if(btn){
+  btn.setAttribute('aria-expanded','false');
+  const mark=btn.querySelector('.arab-more-plus');if(mark)mark.textContent='+';
+ }
 }
 function selectArabMetric(metric,btn=null){
  currentArabMetric=metric;

@@ -239,3 +239,13 @@
     font-size:.64rem!important;
   }
 }
+
+
+/* DECISION-INFO RESTORE — keep "صلته بالعربية" inside details, not on the card face. */
+.card-shelf-facts>.card-shelf-arab-relation{
+  grid-column:1/-1!important;
+  border-bottom:0!important;
+}
+@media(max-width:760px){
+  .card-shelf-facts>.card-shelf-arab-relation{grid-column:auto!important}
+}

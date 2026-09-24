@@ -229,7 +229,7 @@
  <div class="local-nav">
   <div class="wrap local-nav-inner">
    <div class="crumbs"><button onclick="resetAllAndHome()">الرئيسية</button><span>‹</span><button onclick="resetLearning()">التعلّم</button><span id="learningCrumbWrap" style="display:none">‹ <span class="current" id="learningCrumb"></span></span></div>
-   <div class="return-actions"><button onclick="resetLearning()" title="العودة إلى بداية قسم التعلّم بكل أنواعه ومجالاته">رئيسية التعلّم</button><button id="learningContextBtn" class="primary" onclick="showAllLearning()" title="إظهار كل المحتوى داخل المسار الحالي">كل المصادر</button></div>
+   <div class="return-actions"><button id="learningContextBtn" hidden class="primary" onclick="showAllLearning()" title="إلغاء التصفية وإظهار كل مصادر التعلّم">كل المصادر</button></div>
   </div>
  </div>
  <div class="wrap">
@@ -346,13 +346,6 @@
 
 
 <button class="back-to-top" id="backToTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ أعلى</button>
-
-<div class="quick-peek-layer" id="quickPeekLayer" hidden onclick="if(event.target===this)closeCardPeek()">
- <section class="quick-peek-panel" id="quickPeekPanel" role="dialog" aria-modal="true" aria-label="نظرة سريعة">
-  <button class="quick-peek-close" type="button" aria-label="إغلاق" onclick="closeCardPeek()">×</button>
-  <div id="quickPeekBody"></div>
- </section>
-</div>
 
 <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-label="التفاصيل والمصادر" onclick="if(event.target===this)closeModal()">
  <div class="modal-card">

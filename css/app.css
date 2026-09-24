@@ -5481,66 +5481,21 @@ main#top>section{position:relative;z-index:1}
 }
 
 /* read-label-v148 */
-.navigation a[href="lab-guides.html"]{font-size:.72rem!important;font-weight:800!important;line-height:1.2!important}
-.footer-links a[href="lab-guides.html"]{font-weight:800!important}
+.navigation a[href="/guides"]{font-size:.72rem!important;font-weight:800!important;line-height:1.2!important}
+.footer-links a[href="/guides"]{font-weight:800!important}
 .card-read-link strong{font-weight:800!important}
-@media(max-width:760px){.navigation a[href="lab-guides.html"]{font-size:.7rem!important}}
+@media(max-width:760px){.navigation a[href="/guides"]{font-size:.7rem!important}}
 
-/* quick-peek-and-read-nav-v151 */
-.navigation a[href="lab-guides.html"]{
+/* read-nav-current — keep the active /guides route prominent. */
+.navigation a[href="/guides"]{
  color:#fff!important;
  font-size:.79rem!important;
  font-weight:900!important;
  opacity:1!important;
  text-shadow:0 0 1px rgba(255,255,255,.2);
 }
-.quick-peek-layer[hidden]{display:none!important}
-.quick-peek-layer{
- position:fixed;inset:0;z-index:85;
- background:rgba(20,47,45,.12);
- backdrop-filter:blur(1.5px);
-}
-.quick-peek-panel{
- position:fixed;z-index:86;
- width:min(430px,calc(100vw - 32px));
- max-height:min(620px,calc(100vh - 32px));
- overflow:auto;
- background:#FFFDF8;
- border:1px solid #cdbfa9;
- border-radius:18px;
- box-shadow:0 22px 60px rgba(23,63,61,.24);
- padding:18px;
- color:#243b38;
-}
-.quick-peek-close{
- position:absolute;left:10px;top:10px;width:31px;height:31px;border-radius:9px;
- border:1px solid #d9cdbb;background:#fff;color:#173F3D;font-size:1rem;cursor:pointer;
-}
-.quick-peek-kicker{font-family:var(--ui);font-size:.54rem;font-weight:800;color:#B86C43;margin-bottom:8px}
-.quick-peek-head{display:flex;align-items:center;gap:11px;padding-left:34px;margin-bottom:12px}
-.quick-peek-logo{width:46px;height:46px;border-radius:11px;border:1px solid #ddd1bf;object-fit:contain;background:#fff;padding:5px}
-.quick-peek-head h3{margin:0 0 4px;font-family:var(--display);font-size:1.05rem;color:#173F3D}
-.quick-peek-head .country-badge-slot{justify-content:flex-start!important;margin:0!important;height:auto!important;min-height:0!important}
-.quick-peek-caution{padding:9px 10px;margin:0 0 10px;border-radius:11px;background:#f7f1e7;border:1px solid #ddc9ab}
-.quick-peek-caution small{display:block;font-family:var(--ui);font-size:.52rem;color:#8a642a;margin-bottom:2px}
-.quick-peek-caution strong{display:block;font-size:.68rem;line-height:1.65}
-.quick-peek-facts{display:grid;gap:6px}
-.quick-peek-facts>div{display:grid;grid-template-columns:92px 1fr;gap:9px;padding:8px 9px;border:1px solid #dfd7cb;border-radius:10px;background:#fff}
-.quick-peek-facts small{font-family:var(--ui);font-size:.52rem;color:#7a766e}
-.quick-peek-facts strong{font-size:.66rem;line-height:1.55}
-.quick-peek-actions{display:grid;grid-template-columns:1.2fr 1fr;gap:7px;margin-top:12px}
-.quick-peek-actions button{min-height:38px;border-radius:10px;font-family:var(--ui);font-size:.59rem;font-weight:800;cursor:pointer}
-.peek-primary{background:#173F3D;color:#fff;border:1px solid #173F3D}
-.peek-secondary{background:#fff8ed;color:#173F3D;border:1px solid #ddc7a7}
-@media(max-width:760px){
- .navigation a[href="lab-guides.html"]{font-size:.76rem!important}
- .quick-peek-layer{background:rgba(20,47,45,.18);backdrop-filter:blur(2px)}
- .quick-peek-panel{
-  left:8px!important;right:8px!important;bottom:8px!important;top:auto!important;
-  width:auto!important;max-height:72vh;border-radius:20px 20px 14px 14px;padding:17px;
- }
- .quick-peek-actions{grid-template-columns:1fr}
-}
+.footer-links a[href="/guides"]{font-weight:800!important}
+@media(max-width:760px){.navigation a[href="/guides"]{font-size:.76rem!important}}
 
 /* card-row-shelf-v152 */
 .catalog-grid{align-items:start!important}
