@@ -5935,6 +5935,7 @@ body:has(main#top) .card .tag{
   margin:3px 0 5px!important;justify-content:center!important;
 }
 .catalog-grid .country-badge{font-size:.6875rem!important;line-height:1.25!important}
+.catalog-grid .country-badge bdi{font-size:inherit!important}
 .catalog-grid .item>.comparison-strip{
   height:24px!important;min-height:24px!important;max-height:24px!important;margin:0 0 6px!important;
 }
@@ -5958,6 +5959,7 @@ body:has(main#top) .card .tag{
   display:flex!important;width:100%!important;min-height:40px!important;height:40px!important;
   margin:0!important;font-size:.75rem!important;
 }
+.catalog-grid .card-read-link strong{font-size:inherit!important}
 .card-primary-actions{margin-top:auto!important;display:flex!important;flex-direction:column!important;gap:5px!important}
 .card-primary-actions>.more-btn{
   width:100%!important;min-height:44px!important;height:44px!important;margin:0!important;border-radius:10px!important;
