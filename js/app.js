@@ -93,7 +93,7 @@ const originRouteMap={
 };
 const categoryNames={all:'كل الاكتشافات',work:'للعمل والمشاريع',shopping:'للتسوّق والأسواق',learn:'للتعلّم والبحث',create:'للمحتوى والإبداع',culture:'للثقافة والترفيه',tech:'تقنيات وابتكارات'};
 const subfilterMap={
- work:[['all','الكل'],['management','إدارة شغلك'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
+ work:[['all','الكل'],['management','إدارة العمل'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
  shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','بيع وشراء بين الناس'],['specialized','متاجر متخصصة']],
  learn:[['all','الكل'],['courses','كورس أو مهارة'],['research','بحث ومصادر'],['encyclopedias','موسوعات ومعرفة'],['islamic','مصادر إسلامية'],['language','لغة ومعاجم']],
  create:[['all','الكل'],['writing','كتابة ومحتوى'],['design','تصميم'],['audio','صوت']],
@@ -561,9 +561,9 @@ function updateDirectoryContinue(){
  }else if(q){
    actions=[['كل الدليل',"resetDirectory()"],['آخر المراجعات',"go('updates')"],['مصادر التعلّم',"go('learning')"]];
  }else{
-   actions=[['تقنية وذكاء اصطناعي',"openDiscoveryGroup('tech','all')"],['شغلك ومشروعك',"openDiscoveryGroup('work','all')"],['تعلّم وبحث',"openDiscoveryGroup('learn','all')"]];
+   actions=[[categoryLabel('tech'),"openDiscoveryGroup('tech','all')"],[categoryLabel('work'),"openDiscoveryGroup('work','all')"],[categoryLabel('learn'),"openDiscoveryGroup('learn','all')"]];
  }
- root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتدور، جرّب واحدًا من المسارات القريبة.',actions.slice(0,3));
+ root.innerHTML=sectionContinueMarkup('تابع من نفس المسار','إذا كنت ما زلت تبحث، جرّب أحد المسارات القريبة.',actions.slice(0,3));
 }
 function updateLearningContinue(){
  const root=document.getElementById('learningContinue');if(!root)return;
@@ -582,7 +582,7 @@ function updateLearningContinue(){
  }else{
    actions=[['منصات الكورسات',"setLearningPath('platform','all')"],['قنوات يوتيوب',"setLearningPath('channel','all')"],['قنوات القراء الرسمية',"setLearningPath('reciter','quran')"]];
  }
- root.innerHTML=sectionContinueMarkup('كمّل من نفس الاهتمام','لو لسه بتقارن، جرّب مصدرًا قريبًا من نفس هدفك.',actions);
+ root.innerHTML=sectionContinueMarkup('تابع من نفس الهدف','إذا كنت ما زلت تقارن، جرّب مصدرًا قريبًا من هدفك.',actions);
 }
 
 const relatedGuideMap={
@@ -631,7 +631,7 @@ function editorialGuideLinkMarkup(id,detail=false){
  if(detail){
   return `<a class="editorial-guide-link is-detail" href="${href}" onclick="event.stopPropagation()"><span>اقرأ</span><strong>${g?g[1]:'اقرأ حسب حاجتك'}</strong><b aria-hidden="true">←</b></a>`;
  }
- return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ قبل الاختيار':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
+ return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
 }
 function learningGuideLinkMarkup(id,detail=false){
  const g=learningGuideMap[id];
@@ -639,7 +639,7 @@ function learningGuideLinkMarkup(id,detail=false){
  if(detail){
   return `<a class="editorial-guide-link is-detail" href="${href}" onclick="event.stopPropagation()"><span>اقرأ</span><strong>${g?g[1]:'اقرأ حسب حاجتك'}</strong><b aria-hidden="true">←</b></a>`;
  }
- return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ قبل الاختيار':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
+ return `<a class="editorial-guide-link card-read-link" href="${href}" onclick="event.stopPropagation()"><strong>${g?'اقرأ':'مركز القراءة'}</strong><b aria-hidden="true">←</b></a>`;
 }
 
 function compactCardPurpose(x){
@@ -918,11 +918,11 @@ function genericDecisionAction(x){
  if(x.cat==='learn') return 'راجع متطلبات التسجيل، وهل المسار الكامل أو الشهادة مدفوعان، قبل ما تستثمر وقتًا طويلًا.';
  if(x.cat==='tech'&&x.sub==='ai') return 'اختبر بعينة حقيقية غير حساسة، وقارن النتيجة بمصدر مستقل قبل الاعتماد عليها في قرار مهم.';
  if(x.cat==='tech') return 'راجع التوافق، الإتاحة الحالية، والقيود التقنية من المصدر الرسمي قبل الاعتماد.';
- if(x.cat==='work') return 'راجع بلد الخدمة، الرسوم، الباقة، والتكاملات التي تحتاجها قبل الدفع أو نقل شغلك إليها.';
+ if(x.cat==='work') return 'راجع بلد الخدمة، الرسوم، الباقة، والتكاملات التي تحتاجها قبل الدفع أو نقل عملك إليها.';
  if(x.cat==='shopping') return 'قارن بلد الإتاحة، البائع، رسوم الشحن، سياسة الإرجاع، وضمان المنتج قبل الشراء.';
  if(x.cat==='create') return 'جرّب عينة فعلية أولًا، وتحقق من شروط التصدير والترخيص وحدود الخطة المجانية إن وجدت.';
  if(x.cat==='culture') return 'راجع بلد الإتاحة، نوع الوصول، وهل المحتوى كامل أم جزء منه قبل الاشتراك أو التحميل.';
- return 'راجع المصدر الرسمي الحالي قبل الاعتماد، ولو القيد يمنعك ابحث عن بديل داخل نفس التصنيف.';
+ return 'راجع المصدر الرسمي الحالي قبل الاعتماد، وإذا كان القيد يمنعك فابحث عن خيار آخر داخل نفس التصنيف.';
 }
 function decisionNoteFor(x){
  if(!x)return null;
@@ -935,7 +935,7 @@ function decisionNoteFor(x){
  if(x.id==='mandumah') return {
    type:'قيد وصول',
    alert:'الوصول الكامل لبعض مواد دار المنظومة قد يعتمد على بنك المعرفة المصري أو اشتراك مؤسسي، ووجود المستخلص لا يعني أن النص الكامل متاح.',
-   action:'لو أنت في مصر، ابدأ من حساب بنك المعرفة المصري. ولو لم تتوفر الصلاحية، استخدم المستخلص للاكتشاف ثم ابحث عن المصدر الأصلي أو نسخة مفتوحة موثوقة.',
+   action:'إذا كنت في مصر، ابدأ من حساب بنك المعرفة المصري. وإذا لم تتوفر الصلاحية، استخدم المستخلص للاكتشاف ثم ابحث عن المصدر الأصلي أو نسخة مفتوحة موثوقة.',
    source:'<a href="https://www.mandumah.com/ekb/" target="_blank" rel="noopener noreferrer">اتفاق دار المنظومة مع بنك المعرفة</a> · <a href="https://www.ekb.eg/" target="_blank" rel="noopener noreferrer">بنك المعرفة المصري</a>'
  };
  const alert=(x.limit||'').trim();
@@ -1017,7 +1017,7 @@ function learningDecisionNoteFor(x){
  };
  if(x.type==='platform')return {
    alert:'بعض المسارات أو الشهادات قد تكون مدفوعة حتى لو كانت المنصة نفسها مجانية.',
-   action:'راجع صفحة المسار نفسه: التكلفة، شروط التسجيل، وهل الشهادة مشمولة قبل ما تبدأ.'
+   action:'راجع صفحة المسار نفسه: التكلفة، شروط التسجيل، وهل الشهادة مشمولة قبل أن تبدأ.'
  };
  return {
    alert:'المحتوى الجيد لا يعني بالضرورة أن القناة مرتبة كمسار من البداية للنهاية.',
@@ -1075,7 +1075,7 @@ function directoryDiscoveryMarkup(x){
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
  if(!related.length)return '';
  return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>قبل ما تخرج</h4><p>لو حابب تقارن، دي خيارات قريبة من نفس الاستخدام.</p></div>
+  <div class="detail-discovery-head"><h4>قبل الانتقال</h4><p>إذا أردت المقارنة، فهذه خيارات قريبة من نفس الاستخدام.</p></div>
   <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="openDetail('${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></button>`).join('')}</div>
   <button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>
  </section>`;
@@ -1383,6 +1383,7 @@ function toggleStaticDisclosure(bodyId,btn,kind){
  const section=btn.closest('.fold-card');if(section)section.classList.toggle('is-open',opening);
  btn.setAttribute('aria-expanded',opening?'true':'false');
  const mark=btn.querySelector('[aria-hidden="true"]');if(mark)mark.textContent=opening?'−':'+';
+ const label=btn.querySelector('.sr-only');if(label)label.textContent=opening?'إخفاء القسم':'إظهار القسم';
  if(opening&&kind==='competition'&&!body.dataset.loaded){
   body.dataset.loaded='1';
   setCompetitionStory('shopping',document.querySelector('.competition-tab[data-story="shopping"]'));
