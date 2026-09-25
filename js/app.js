@@ -143,8 +143,8 @@ function setFilter(v,el){
 function setSubfilter(v,el){
  subfilter=v;
  if(originFilter){
-  const route=originRouteMap[originFilter]||{cat:'all',sub:'all'};
-  if(v!=='all'&&route.sub!==v){
+  const hasRelatedItems=items.some(x=>x.origin.includes(originFilter)&&(filter==='all'||x.cat===filter)&&x.sub===v);
+  if(v!=='all'&&!hasRelatedItems){
    originFilter=null;
    document.querySelectorAll('[data-origin]').forEach(b=>b.setAttribute('aria-pressed','false'));
   }
