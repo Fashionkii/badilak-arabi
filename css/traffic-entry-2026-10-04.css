@@ -14,14 +14,31 @@
   border:0!important;
   border-top:1px solid rgba(23,63,61,.16)!important;
   border-radius:0!important;
-  padding:10px 0 0!important;
+  padding:8px 0 0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  gap:4px!important;
+}
+.portal-icon-btn{
+  height:50px!important;
+  min-height:50px!important;
+  padding:6px 7px!important;
+  gap:6px!important;
+  border-color:transparent!important;
+  border-radius:11px!important;
   background:transparent!important;
   box-shadow:none!important;
 }
-.portal-icon-btn{
-  border-color:transparent!important;
-  background:transparent!important;
-  box-shadow:none!important;
+.portal-field-icon{
+  font-size:1.18rem!important;
+}
+.portal-field-label{
+  font-size:.62rem!important;
+  line-height:1.45!important;
+}
+.portal-jump{
+  font-size:.56rem!important;
+  opacity:.45!important;
 }
 .portal-icon-btn:hover,
 .portal-icon-btn:focus-visible{
@@ -30,8 +47,91 @@
   box-shadow:none!important;
 }
 
+/* Research pass: reduce the visual mass of the primary explorer without
+   changing its approved contents, order, routing, or 4×3 desktop structure. */
+.origin-explorer{
+  padding:18px!important;
+  border-color:rgba(23,63,61,.15)!important;
+  box-shadow:0 8px 22px rgba(23,63,61,.05)!important;
+}
+.origin-heading{
+  gap:12px!important;
+  margin-bottom:12px!important;
+}
+.origin-heading h2{
+  font-size:.92rem!important;
+  line-height:1.5!important;
+}
+.origin-hint{
+  max-width:520px;
+  font-size:.66rem!important;
+  line-height:1.65!important;
+}
+.origin-options{
+  gap:8px!important;
+}
+.origin-option{
+  min-height:82px!important;
+  padding:8px 6px!important;
+  gap:6px!important;
+  border-radius:12px!important;
+  box-shadow:none!important;
+}
+.origin-option:hover,
+.origin-option[aria-pressed="true"]{
+  transform:translateY(-1px)!important;
+  box-shadow:0 5px 13px rgba(23,63,61,.045)!important;
+}
+.origin-logo{
+  width:34px!important;
+  height:34px!important;
+  border-radius:10px!important;
+}
+.origin-logo img{
+  max-width:25px!important;
+  max-height:25px!important;
+}
+.origin-name{
+  font-size:.65rem!important;
+  line-height:1.35!important;
+}
+
 @media(max-width:650px){
+  .origin-explorer{
+    padding:14px!important;
+    border-radius:17px!important;
+  }
+  .origin-heading{
+    align-items:flex-start!important;
+    margin-bottom:10px!important;
+  }
+  .origin-heading h2{
+    font-size:.88rem!important;
+  }
+  .origin-hint{
+    font-size:.63rem!important;
+  }
+  .origin-options{
+    gap:7px!important;
+  }
+  .origin-option{
+    min-height:70px!important;
+    padding:7px 5px!important;
+  }
+  .origin-logo{
+    width:31px!important;
+    height:31px!important;
+  }
+  .origin-logo img{
+    max-width:23px!important;
+    max-height:23px!important;
+  }
   .portal-bar{
-    padding:8px 0 0!important;
+    padding:7px 0 0!important;
+    gap:3px!important;
+  }
+  .portal-icon-btn{
+    height:48px!important;
+    min-height:48px!important;
   }
 }
