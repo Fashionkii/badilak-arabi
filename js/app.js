@@ -795,7 +795,11 @@ function relatedDirectoryItems(x){
   .map(r=>r.item);
 }
 function openDiscoveryGroup(cat,sub='all'){
- closeModal();
+ closeModal({route:false});
+ if(/^\/discover\//.test(location.pathname)){
+  const path=sub==='all'?'/category/'+encodeURIComponent(cat):'/';
+  history.replaceState(sub==='all'?{badilakCategory:cat}:{},'',path);
+ }
  countryFilter=null;
  filter=cat;
  subfilter=(sub&&sub!=='all')?sub:'all';
