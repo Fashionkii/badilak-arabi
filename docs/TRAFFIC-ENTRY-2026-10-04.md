@@ -22,6 +22,8 @@ Consensus supplied contextual evidence for progressive disclosure and choice ove
 ## Why the visible design was not rebuilt
 Badilak Arabi is a discovery/decision platform, not the problem-first community product studied in Naql Khibraat. The current entry structure already expresses Badilak's job: start from a familiar service or a domain, then discover and compare. Previous project decisions also protect the 12 familiar entries and main domain paths.
 
+The visible simplification is deliberately narrow: the stable 12 familiar-service entries remain the primary boxed entry, while the six stable domain entries are rendered as a lighter secondary strip. Nothing is hidden, renamed, reordered, or removed. This follows the project's earlier rejection of hiding those entries behind tabs while reducing competing visual containers.
+
 The simplification therefore happens in the journey:
 - articles stay the acquisition layer;
 - the directory stays the discovery/conversion layer;
