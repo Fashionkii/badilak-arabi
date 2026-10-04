@@ -1,0 +1,37 @@
+/* Badilak Arabi — entry simplification pass, 2026-10-04
+   Scope: visual hierarchy of the two stable entry paths only.
+   Protected: all 12 familiar services, all 6 domains, copy, data and behavior. */
+
+/* Keep "ابدأ بما تعرفه" as the primary, familiar entry.
+   Make the domain path a light secondary strip instead of a second boxed surface. */
+.intro > .portal{
+  margin-top:2px!important;
+}
+.portal-heading{
+  margin:0 2px 6px!important;
+}
+.portal-bar{
+  border:0!important;
+  border-top:1px solid rgba(23,63,61,.16)!important;
+  border-radius:0!important;
+  padding:10px 0 0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.portal-icon-btn{
+  border-color:transparent!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.portal-icon-btn:hover,
+.portal-icon-btn:focus-visible{
+  border-color:rgba(195,149,67,.32)!important;
+  background:rgba(255,253,248,.74)!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:650px){
+  .portal-bar{
+    padding:8px 0 0!important;
+  }
+}
