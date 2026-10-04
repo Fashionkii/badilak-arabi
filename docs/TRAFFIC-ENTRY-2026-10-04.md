@@ -34,9 +34,10 @@ The simplification therefore happens in the journey:
 
 ## Social preview pass
 - Homepage and guide hub receive Open Graph/Twitter metadata.
-- All guide pages receive per-page title/description/url metadata in the next commit.
+- All 20 guide pages now carry per-page title/description/url metadata.
 - A 1200×630 Badilak-branded base social image is stored at `/images/social/badilak-social-base.png`.
 - This base image is intentionally separate from paid-ad creative. Per-article custom ad creatives remain a content-production task, not a reason to mutate article copy.
+- During branch review, canonical/OG URLs point to the branch's stable Vercel alias so preview crawlers can fetch the image. Swap that host only when this branch is promoted to `lab` or production.
 
 ## Lab protection
 `X-Robots-Tag: noindex` remains untouched. This branch does not create a production sitemap, remove noindex, or install Meta/GA IDs that are not available.
