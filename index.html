@@ -35,10 +35,11 @@
 
 <link rel="stylesheet" href="/css/app.css">
 <link rel="stylesheet" href="/css/vision-2026-09-24.css">
-<link rel="stylesheet" href="/css/traffic-entry-2026-10-04.css">
+<link rel="stylesheet" href="/css/guided-discovery.css">
 <script src="/js/commercial-links.js" defer></script>
 <script src="/js/catalog-data.js" defer></script>
 <script src="/js/app.js" defer></script>
+<script src="/js/guided-discovery.js" defer></script>
 <script src="/js/discovery-memory.js" defer></script>
 <script src="/js/smart-return.js" defer></script>
 </head>
@@ -56,13 +57,19 @@
    <a href="#learning" onclick="resetLearning();return false;">التعلّم</a>
    <a href="/guides">اقرأ</a>
    <a href="#competitionIndex">المرصد</a>
+   <details class="journey-menu"><summary>المزيد</summary><div>
+    <a href="#guides">قبل ما تدفع</a>
+    <a href="#knowledge">مش بس أدوات</a>
+    <a href="#updates">مرصد بديلك</a>
+    <a href="#nominate">التصحيح والترشيح</a>
+   </div></details>
   </nav>
  </div>
 </header>
 
 <main id="top">
 
-<section class="intro wrap">
+<section class="intro wrap" id="start">
  <div class="intro-heading"><h1 class="art-title art-title--brand" aria-label="بديلك عربي"><span class="sr-only">بديلك عربي</span><img class="art-title-img art-img-brand" src="/images/titles/brand-badilak-arabi-cropped.webp?v=83" alt="" loading="eager" fetchpriority="high" decoding="async"></h1></div>
  <div class="intro-copy">
   <p class="intro-promise">ابدأ من حاجتك. قارن الخيارات العربية. ثم اختر ما يناسبك.</p>
@@ -74,18 +81,18 @@
  <aside class="origin-explorer">
   <div class="origin-heading"><h2>ابدأ بما تعرفه</h2><span class="origin-hint">اختَر خدمة تعرفها، وشاهد خيارات عربية تؤدي المهمة نفسها أو جزءًا منها.</span></div>
   <div class="origin-options">
-   <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi></button>
-   <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi></button>
-   <button class="origin-option" data-origin="drive" aria-pressed="false" onclick="chooseOrigin('drive',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://drive.google.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Google Drive</bdi></button>
-   <button class="origin-option" data-origin="coursera" aria-pressed="false" onclick="chooseOrigin('coursera',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.coursera.org" loading="lazy" decoding="async"></span><bdi class="origin-name">Coursera</bdi></button>
-   <button class="origin-option" data-origin="fiverr" aria-pressed="false" onclick="chooseOrigin('fiverr',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.fiverr.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Fiverr</bdi></button>
-   <button class="origin-option" data-origin="shopify" aria-pressed="false" onclick="chooseOrigin('shopify',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.shopify.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Shopify</bdi></button>
-   <button class="origin-option" data-origin="acrobat" aria-pressed="false" onclick="chooseOrigin('acrobat',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://acrobat.adobe.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Acrobat</bdi></button>
-   <button class="origin-option" data-origin="teams" aria-pressed="false" onclick="chooseOrigin('teams',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://teams.microsoft.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Teams</bdi></button>
-   <button class="origin-option" data-origin="spotify" aria-pressed="false" onclick="chooseOrigin('spotify',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.spotify.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Spotify</bdi></button>
-   <button class="origin-option" data-origin="udemy" aria-pressed="false" onclick="chooseOrigin('udemy',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.udemy.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Udemy</bdi></button>
-   <button class="origin-option" data-origin="amazon" aria-pressed="false" onclick="chooseOrigin('amazon',this)" title="يشمل المسار من كان يستخدم Souq سابقًا"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.amazon.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Amazon / Souq</bdi></button>
-   <button class="origin-option" data-origin="jumia" aria-pressed="false" onclick="chooseOrigin('jumia',this)"><span class="origin-logo"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.jumia.com.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Jumia</bdi></button>
+   <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi></button>
+   <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi></button>
+   <button class="origin-option" data-origin="drive" aria-pressed="false" onclick="chooseOrigin('drive',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://drive.google.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Google Drive</bdi></button>
+   <button class="origin-option" data-origin="coursera" aria-pressed="false" onclick="chooseOrigin('coursera',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.coursera.org" loading="lazy" decoding="async"></span><bdi class="origin-name">Coursera</bdi></button>
+   <button class="origin-option" data-origin="fiverr" aria-pressed="false" onclick="chooseOrigin('fiverr',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.fiverr.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Fiverr</bdi></button>
+   <button class="origin-option" data-origin="shopify" aria-pressed="false" onclick="chooseOrigin('shopify',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.shopify.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Shopify</bdi></button>
+   <button class="origin-option" data-origin="acrobat" aria-pressed="false" onclick="chooseOrigin('acrobat',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://acrobat.adobe.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Acrobat</bdi></button>
+   <button class="origin-option" data-origin="teams" aria-pressed="false" onclick="chooseOrigin('teams',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://teams.microsoft.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Teams</bdi></button>
+   <button class="origin-option" data-origin="spotify" aria-pressed="false" onclick="chooseOrigin('spotify',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.spotify.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Spotify</bdi></button>
+   <button class="origin-option" data-origin="udemy" aria-pressed="false" onclick="chooseOrigin('udemy',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.udemy.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Udemy</bdi></button>
+   <button class="origin-option" data-origin="amazon" aria-pressed="false" onclick="chooseOrigin('amazon',this)" title="يشمل المسار من كان يستخدم Souq سابقًا"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.amazon.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Amazon / Souq</bdi></button>
+   <button class="origin-option" data-origin="jumia" aria-pressed="false" onclick="chooseOrigin('jumia',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=256&domain_url=https://www.jumia.com.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Jumia</bdi></button>
   </div>
  </aside>
 
@@ -95,22 +102,22 @@
  </div>
  <div class="portal-bar">
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('tech')" aria-label="تقنية وذكاء اصطناعي" title="تقنية وذكاء اصطناعي">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">code</span><span class="portal-field-label">تقنية وذكاء اصطناعي</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <svg class="portal-field-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5 2 12l6 7M16 5l6 7-6 7M14 3l-4 18"/></svg><span class="portal-field-label">تقنية وذكاء اصطناعي</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('work')" aria-label="شغلك ومشروعك" title="شغلك ومشروعك">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">work</span><span class="portal-field-label">شغلك ومشروعك</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <svg class="portal-field-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7V4h8v3M3 7h18v14H3zM3 12c6 4 12 4 18 0M10 14h4"/></svg><span class="portal-field-label">شغلك ومشروعك</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('shopping')" aria-label="تسوّق وشراء" title="تسوّق وشراء">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">shopping_bag</span><span class="portal-field-label">تسوّق وشراء</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <svg class="portal-field-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l1 13H3zM8 9V6a4 4 0 0 1 8 0v3"/></svg><span class="portal-field-label">تسوّق وشراء</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('learn')" aria-label="تعلّم وبحث" title="تعلّم وبحث">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">school</span><span class="portal-field-label">تعلّم وبحث</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <svg class="portal-field-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 8 10-5 10 5-10 5zM6 11v7c4 3 8 3 12 0v-7M22 8v9"/></svg><span class="portal-field-label">تعلّم وبحث</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('create')" aria-label="تصميم ومحتوى" title="تصميم ومحتوى">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">slideshow</span><span class="portal-field-label">تصميم ومحتوى</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <svg class="portal-field-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v14H3zM12 17v5M7 22l5-5 5 5M7 7h5M7 11h10"/></svg><span class="portal-field-label">تصميم ومحتوى</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
   <button class="portal-btn portal-icon-btn" onclick="openDirectory('culture')" aria-label="كتب وصوت وترفيه" title="كتب وصوت وترفيه">
-   <span class="material-symbols-outlined portal-field-icon" aria-hidden="true">movie</span><span class="portal-field-label">كتب وصوت وترفيه</span><span class="portal-jump" aria-hidden="true">↓</span>
+   <svg class="portal-field-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v16H3zM3 8h18M7 4v4M12 4v4M17 4v4m-7 4 5 3-5 3z"/></svg><span class="portal-field-label">كتب وصوت وترفيه</span><span class="portal-jump" aria-hidden="true">↓</span>
   </button>
  </div>
 </section>
@@ -127,6 +134,10 @@
 
 
 <section class="section wrap" id="directory">
+ <div class="journey-result-head">
+  <button class="journey-back" type="button" onclick="badilakJourney.home()">→ غيّر اختيارك</button>
+  <h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>
+ </div>
  <div class="section-head">
   <div><h2 class="art-title art-title--section art-title--discover"><span class="sr-only">اكتشف حسب حاجتك</span><img class="art-title-img art-img-discover" src="/images/titles/discover.webp?v=81" alt="" loading="lazy" decoding="async"></h2></div>
   
