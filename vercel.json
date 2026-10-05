@@ -218,6 +218,16 @@
       "permanent": true
     }
   ],
+  "rewrites": [
+    {
+      "source": "/discover/:id",
+      "destination": "/"
+    },
+    {
+      "source": "/category/:cat",
+      "destination": "/"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

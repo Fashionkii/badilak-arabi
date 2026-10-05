@@ -9,7 +9,7 @@
  window.badilakDiscoveryMemory={
   capture(){
    return {
-    version:1,filter,subfilter,originFilter,countryFilter,directoryVisible,
+    version:1,journeyView:window.badilakJourney?.view,filter,subfilter,originFilter,countryFilter,directoryVisible,
     search:value('searchInput'),learningType,learningSearch:value('learningSearch'),learningField:value('learningField'),
     sections:{...learningSectionOpen},
     carousels:types.map(type=>{
@@ -22,6 +22,7 @@
   },
   restore(state){
    if(!state||state.version!==1||!byId('catalogGrid'))return;
+   if(state.journeyView)window.badilakJourney?.show(state.journeyView,{history:false,focus:false});
    filter=Object.hasOwn(categoryNames,state.filter)?state.filter:'all';
    subfilter=(subfilterMap[filter]||[]).some(([id])=>id===state.subfilter)?state.subfilter:'all';
    originFilter=Object.hasOwn(originRouteMap,state.originFilter)?state.originFilter:null;
