@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "articles": {
+    "almaany-translate": {
+      "socialTitle": "معنى الكلمة أم ترجمة الجملة؟",
+      "alt": "كتب مفتوحة للبحث عن المعاني والترجمة",
+      "photo": "/images/articles/almaany-translate-photo.webp",
+      "source": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1456513080510-7bf3a84b82f8",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "anghami-spotify": {
+      "socialTitle": "أنغامي أم Spotify؟",
+      "alt": "سماعات للاستماع إلى الموسيقى",
+      "photo": "/images/articles/anghami-spotify-photo.webp",
+      "source": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1505740420928-5e560c06d30e",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "arab-progress": {
+      "socialTitle": "ماذا يقول المؤشر فعلًا؟",
+      "alt": "رسم بياني لقراءة البيانات والمؤشرات",
+      "photo": "/images/articles/arab-progress-photo.webp",
+      "source": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1460925895917-afdab827c52f",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "arabic-ai": {
+      "socialTitle": "مساعد عربي أم مساعد عالمي؟",
+      "alt": "حاسوب لاختبار أدوات الذكاء الاصطناعي",
+      "photo": "/images/articles/arabic-ai-photo.webp",
+      "source": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1496181133206-80ce9b88a853",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "arabic-design": {
+      "socialTitle": "التصميم العربي يبدأ من التفاصيل",
+      "alt": "ألوان وتصميم بصري للتعبير عن أدوات التصميم",
+      "photo": "/images/articles/arabic-design-photo.webp",
+      "source": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1541701494587-cb58502866ab",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "arabic-pdf": {
+      "socialTitle": "هل يقرأ PDF العربية بدقة؟",
+      "alt": "مستندات ورقية وكتابة لمراجعة المحتوى قبل رقمنته",
+      "photo": "/images/articles/arabic-pdf-photo.webp",
+      "source": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1434030216411-0b793f4b4173",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "arabic-research": {
+      "socialTitle": "بحث عربي: من أين تبدأ؟",
+      "alt": "رفوف مكتبة للبحث والمراجع",
+      "photo": "/images/articles/arabic-research-photo.webp",
+      "source": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1507842217343-583bb7270b66",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "arabic-voice-ai": {
+      "socialTitle": "هل يتقن الصوت لهجتك؟",
+      "alt": "استوديو إنتاج صوتي لاختبار جودة الصوت",
+      "photo": "/images/articles/arabic-voice-ai-photo.webp",
+      "source": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1598488035139-bdbb2231ce04",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "business-software": {
+      "socialTitle": "برنامج إدارة يناسب عملك",
+      "alt": "آلة حاسبة لتنظيم الحسابات",
+      "photo": "/images/articles/business-software-photo.webp",
+      "source": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1554224155-6726b3ff858f",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "ecommerce-platform": {
+      "socialTitle": "سلة أم Shopify؟",
+      "alt": "إتمام طلب داخل متجر باستخدام نظام إلكتروني",
+      "photo": "/images/articles/ecommerce-platform-photo.webp",
+      "source": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1556742049-0cfed4f6a45d",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "hudhud-googlemaps": {
+      "socialTitle": "أي خريطة تخدم رحلتك؟",
+      "alt": "خريطة لتخطيط الرحلات واختيار المسار",
+      "photo": "/images/articles/hudhud-googlemaps-photo.webp",
+      "source": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1524661135-423995f22d0b",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "islamic-sources": {
+      "socialTitle": "تحقق من المصدر قبل النقل",
+      "alt": "كتاب مفتوح للتحقق من النصوص الدينية",
+      "photo": "/images/articles/islamic-sources-photo.webp",
+      "source": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1609599006353-e629aaabfeae",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "khamsat-fiverr": {
+      "socialTitle": "خمسات أم Fiverr؟",
+      "alt": "مساحة عمل لإنجاز خدمة رقمية",
+      "photo": "/images/articles/khamsat-fiverr-photo.webp",
+      "source": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1499951360447-b19be8fe80f5",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "learning-platform": {
+      "socialTitle": "اختر نتيجة تعلّم حقيقية",
+      "alt": "شرح عملي باستخدام حاسوب في جلسة تعلم",
+      "photo": "/images/articles/learning-platform-photo.webp",
+      "source": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1516321318423-f06f85e504b3",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "mostaql-upwork": {
+      "socialTitle": "مستقل أم Upwork؟",
+      "alt": "فريق يعمل على مشروع رقمي باستخدام الحواسيب",
+      "photo": "/images/articles/mostaql-upwork-photo.webp",
+      "source": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1522071820081-009f0129c71c",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "munsit-otter": {
+      "socialTitle": "هل يُفرّغ تسجيلك العربي بدقة؟",
+      "alt": "ميكروفون لتسجيل الصوت قبل تفريغه إلى نص",
+      "photo": "/images/articles/munsit-otter-photo.webp",
+      "source": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1478737270239-2f02b77fc618",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "payment-gateway": {
+      "socialTitle": "بوابة الدفع: اختبر ما يهم",
+      "alt": "جهاز لقبول المدفوعات",
+      "photo": "/images/articles/payment-gateway-photo.webp",
+      "source": "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1556742111-a301076d9d18",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "reading": {
+      "socialTitle": "أبجد أم Kindle؟",
+      "alt": "مجموعة كتب لاختيار ما تريد قراءته",
+      "photo": "/images/articles/reading-photo.webp",
+      "source": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1512820790803-83ca734da794",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "shopping": {
+      "socialTitle": "نون أم Amazon؟ قارن العرض",
+      "alt": "لافتة متجر للتعبير عن اختيار عروض التسوق",
+      "photo": "/images/articles/shopping-photo.webp",
+      "source": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1472851294608-062f824d29cc",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
+    "wuzzuf-linkedin": {
+      "socialTitle": "وظّف أم LinkedIn؟",
+      "alt": "مراجعة مستندات في اجتماع عمل",
+      "photo": "/images/articles/wuzzuf-linkedin-photo.webp",
+      "source": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1454165804606-c3d57bc86b40",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    }
+  }
+}

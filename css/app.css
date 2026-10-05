@@ -3726,7 +3726,7 @@ main#top>section{position:relative;z-index:1}
 .learning-vendor-note{display:inline-flex;align-items:center;justify-content:center;margin:1px auto 7px;padding:3px 8px;border:1px solid #d9c59f;border-radius:999px;background:#fff8e9;color:#755b35;font-family:var(--ui);font-size:.49rem;font-weight:700}
 #learning .learning-types{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important;width:100%}
 #learning .learning-types button{width:100%;min-width:0}
-#learning .learning-card{height:auto!important;min-height:340px!important;max-height:none!important;overflow:visible!important}
+#learning .learning-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
 #learning .learning-card .learning-actions{margin-top:auto!important;flex:0 0 auto!important;padding-bottom:1px}
 #learning .learning-vendor-note{flex:0 0 auto}
 .origin-option::after{margin-top:-4px}
@@ -3738,7 +3738,7 @@ main#top>section{position:relative;z-index:1}
 .origin-option[data-origin="scholar"]::after,.origin-option[data-origin="jstor"]::after{content:"بحث علمي"}
 
 @media(max-width:900px){#learning .learning-types{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
-@media(max-width:600px){#learning .learning-types{grid-template-columns:repeat(2,minmax(0,1fr))!important}#learning .learning-card{min-height:330px!important}}
+@media(max-width:600px){#learning .learning-types{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 :root{--deep:#2F5B57;--heading:#2F5B57;--sage:#2F5B57}
 .section-human-note{
   margin:.35rem 0 0;
@@ -4535,3 +4535,15 @@ body.guided-discovery .navigation{display:flex!important}
 .guided-discovery .origin-logo.logo-unavailable::before{content:'↗';font-size:23px;color:var(--deep)}
 .guided-discovery .origin-logo img[hidden]{display:none!important}
 body.guided-discovery .footer-inner,body.guided-discovery .footer-inner strong,body.guided-discovery .footer-links{color:var(--deep)!important}
+
+/* Local corrections from the human review, without changing the guided journey. */
+body.guided-discovery #learning .learning-spacer{display:none!important}
+body.guided-discovery #learning .learning-actions{margin-top:10px!important}
+body.guided-discovery #learning .learning-focus{height:auto!important;min-height:43px!important;max-height:none!important;display:block!important;overflow:visible!important;flex:0 0 auto!important}
+body.guided-discovery #learning .local-nav{width:min(1180px,calc(100% - 34px));margin:0 auto 16px!important}
+body.guided-discovery #learning .learning-toolbar{margin-bottom:20px!important}
+body.guided-discovery #learning .learning-carousel-group{margin-top:20px!important}
+body.guided-discovery #learningGroups>.learning-carousel-group:first-child{margin-top:0!important}
+body.guided-discovery #learning .learning-carousel-group>.learning-group-title{margin-top:0!important}
+body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand{display:flex!important;justify-content:center;align-items:center;line-height:0!important;height:auto!important;min-height:0!important}
+body.guided-discovery .intro-heading{margin-bottom:14px!important}
