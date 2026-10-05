@@ -1,0 +1,40 @@
+.commercial-guide-cta{
+ margin:14px 0 2px;
+ padding-top:10px;
+ border-top:1px solid rgba(23,63,61,.10);
+}
+.commercial-guide-cta>a{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ min-height:38px;
+ padding:7px 13px;
+ border:1px solid #b8c8bf;
+ border-radius:11px;
+ background:#eef4f0;
+ color:#173F3D;
+ text-decoration:none;
+ font-family:"Cairo","IBM Plex Sans Arabic",Tahoma,sans-serif;
+ font-size:.67rem;
+ font-weight:800;
+}
+.commercial-guide-cta>a:hover{background:#e6efe9;border-color:#9db3a7}
+.commercial-disclosure{
+ margin:0 0 9px;
+ padding:9px 11px;
+ border:1px solid #d9c59f;
+ border-radius:11px;
+ background:#fff8e9;
+ color:#544936;
+}
+.commercial-disclosure strong{
+ display:block;
+ font-family:"Cairo","IBM Plex Sans Arabic",Tahoma,sans-serif;
+ font-size:.58rem;
+ color:#8a6329;
+ margin-bottom:2px
+}
+.commercial-disclosure span{display:block;font-size:.68rem;line-height:1.7}
+@media(max-width:650px){
+ .commercial-guide-cta>a{width:100%}
+}
