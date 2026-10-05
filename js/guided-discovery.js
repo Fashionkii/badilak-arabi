@@ -22,7 +22,7 @@
   panels.forEach(panel=>{
    const visible=panel.id==='start'?view==='home':panel.id?panel.id===view:
     (panel.classList.contains('commercial-demo-wrap')||panel.classList.contains('ad-demo-end'))?view==='directory':view==='learning';
-   panel.hidden=!visible;
+   panel.hidden=panel.hasAttribute('data-preview-only')||!visible;
    panel.dataset.journeyPanel='';
   });
   if(view==='knowledge'||view==='guides'){
