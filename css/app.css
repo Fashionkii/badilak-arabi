@@ -4535,8 +4535,7 @@ body.guided-discovery #learning .learning-carousel-group>.learning-group-title{m
 body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand{display:flex!important;justify-content:center;align-items:center;line-height:0!important;height:auto!important;min-height:0!important}
 body.guided-discovery .intro-heading{margin-bottom:14px!important}
 
-/* Keep public journeys free of inactive ad mockups and protect heading insets. */
-main>section[data-preview-only][hidden]{display:none!important}
+/* Protect heading insets within the public journey. */
 body.guided-discovery #directory .journey-result-head{padding-inline:var(--journey-space)}
 /* Decorative pseudo-element resets must not erase meaningful logo fallbacks. */
 :is(.item-logo,.detail-logo,.learning-logo):is(.logo-fallback,.logo-broken)::after{

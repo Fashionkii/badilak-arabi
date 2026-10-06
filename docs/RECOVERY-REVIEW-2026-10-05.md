@@ -63,3 +63,22 @@ image-upload interface or automatic editorial approval backend.
 
 The private archive review and source inventory are delivered separately and
 are not included in the public repository.
+
+## User correction — 2026-10-06
+
+The user supplied screenshots and explicitly clarified that the three advertising
+examples are intentional reserved placements to populate later. This supersedes
+the decision above to hide them. Restore the original markup and existing journey
+visibility: Salla display example before learning; Wuilt direct-ad example and
+the three-card Multiplex example in the directory journey. Keep their original
+preview disclosures and dormant configuration. No real advertising is activated.
+
+The referenced developed snapshot (`8ab0ae0`) contains these three sections in
+`index.html`; its standalone `guides.html` does not contain them. Do not invent
+new placements in that page while restoring the existing ones. Heading spacing,
+logo fallbacks, article images, editorial content and catalog data remain intact.
+
+Verification for the correction: all three restored section blocks match the
+reference exactly. Home/directory/learning at 390 and 1440 pixels show respectively
+zero/two/one reserved placements, without horizontal overflow or JavaScript
+errors. Existing article return, detail and deep-link checks also pass.
