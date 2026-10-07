@@ -99,5 +99,3 @@ const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 write('_redirects',vercel.redirects.map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
 // A custom 404 disables the SPA fallback on Cloudflare Pages; no wildcard rewrites.
 console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. All are noindex; sitemap intentionally empty.`);
-// Temporary review harness; removed before production promotion.
-if(fs.existsSync(path.join(__dirname,'first-paint-fixtures.cjs')))require('./first-paint-fixtures.cjs')(out);

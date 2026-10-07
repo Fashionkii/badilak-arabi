@@ -44,3 +44,16 @@ The Git repository is the durable source of the site; the domain is its address.
 6. Improve editorial evidence and comparisons as a separate content task. Technical readiness is not a ranking guarantee or a 100% overall SEO score.
 
 No domain, hosting subscription or paid SEO service was purchased by this change. Current provider pricing must be rechecked at purchase time.
+
+## First-paint cleanup — 7 October 2026
+The source review covered the current decisions and the relevant product, language/change and design records supplied in this thread. The two preceding changes (noindex guard and portable SEO routes) preserved catalog evidence, articles and reserved ads. The SEO routes did introduce a separate simplified initial presentation, and the existing home view still relied on deferred JavaScript to apply its current layout. These were initial-render gaps, not authorization to change copy, data, ad examples or indexing policy.
+
+- Apply the current guided layout and panel identity in the initial HTML; choose hash routes before page content is parsed. During preview verification, legacy ID-based display rules still exposed three other sections; the initial selectors now take precedence.
+- Share the existing card/detail presentation between static build and browser, including sources, flags, decision caveats and related links. The existing 23 moved presentation helpers were compared byte-for-byte with the baseline.
+- Initialize directory, learning and observatory DOM when needed; preserve subsequent filters, navigation and restoration. This defers DOM work, not all script downloads.
+- Remove five proven superseded CSS declarations/rules only. No claim of a complete stylesheet cleanup.
+- Exclude 20 original article photos (2,077,506 bytes) from deployment output, retaining them and attribution metadata in the repository for regeneration. Covers and social images remain shipped. This is deployment-size reduction, not per-visit transfer or a measured speed gain.
+
+Preview `a21de8e238dba5da517955cad81d754105348b34` was exercised in the browser: desktop first render; a 390px-wide iframe; learning with reserved Salla ad; category cards and Fanar detail text before/after deferred scripts; Canva → article → “ارجع لمكانك” restoring the same three results; and observatory initialization. No site-script errors or framework overlay were observed; extension messages and the earlier Vercel login warning were unrelated. Initial-state fixtures deliberately suppressed deferred external scripts; this is not a measured slow-network or physical-phone test. Temporary fixtures and their build hook were removed before main promotion.
+
+The final build/audits compare against `7518c8c10ae65d1433d20d7ed689eb3133edab62`. Existing article copy, 82 directory records, 36 learning records, commercial configuration, navigation memory and all three reserved ad examples remain protected. Noindex, empty sitemap, hosting/domain choices and launch requirements remain unchanged. No newer main commit or relevant newer source decision was found when this task resumed; other project chats were not directly searchable in this session.
