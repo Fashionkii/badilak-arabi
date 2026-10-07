@@ -18,6 +18,15 @@ The baseline is main commit `0eecd3dc1c879c9122868e3006268e4316976a9c`, with 82 
 ## Reproduce verification
 Run `node scripts/build-site.cjs`, `node scripts/audit-prelaunch.cjs ba542d9bdf3cf039c45c5ef32233d86feec67fa4`, and `node scripts/audit-taxonomy.cjs`. Deployment checks must additionally verify HTTP statuses/headers, route restoration, history, article return and visual layout.
 
+Verified on the isolated Vercel preview for `c1983126921221a0a208d3e440ec46c4a58acc2e`:
+- All 111 generated HTML files passed the local audit; 20 article bodies and the protected data/behavior assets were unchanged.
+- The home screen matched the existing production layout; all six domain controls kept the same computed font, grid display and 50px height at the tested desktop viewport.
+- Category-to-item navigation, direct item loading, modal close/back and metadata restoration worked. Canva → Arabic design article → “ارجع لمكانك” restored the same three filtered results.
+- Actual preview responses returned 200 for item/category/robots/sitemap and 404 for invalid item/category routes, with `X-Robots-Tag: noindex, follow`. A legacy reading URL resolved to the correct article.
+- No horizontal overflow was observed in the inspected desktop detail view. This pass does not claim fresh mobile screenshots or performance scores. Observed console errors belonged to the browser extension, not the site's scripts.
+
+The follow-up portable-build correction retains every legacy redirect, including deleted `.html` aliases. Cloudflare reference: https://developers.cloudflare.com/pages/configuration/redirects/ . This changes only generated Cloudflare configuration; the tested Vercel HTML, CSS and browser scripts remain identical.
+
 ## Economical hosting trial — prepared, not deployed
 Cloudflare Pages can build this same Git repository with framework preset None, build command `node scripts/build-site.cjs`, output directory `dist`, and Node 22 or later. Keep the existing Vercel site while testing a separate Pages project. `_headers`, `_redirects` and a real `404.html` are emitted. No Cloudflare account connection is available in this session, so an actual Pages deployment is not claimed.
 

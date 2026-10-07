@@ -31,6 +31,8 @@ for(const file of articleFiles){
 assert.ok(!fs.readFileSync(path.join(out,'sitemap.xml'),'utf8').includes('<loc>'),'Prelaunch sitemap must remain empty');
 assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/X-Robots-Tag: noindex, follow/);
 assert.ok(!fs.readFileSync(path.join(out,'robots.txt'),'utf8').includes('Disallow: /'));
+const redirects=fs.readFileSync(path.join(out,'_redirects'),'utf8');
+for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects)assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
 if(process.argv[2]){
  const ref=process.argv[2];
  for(const file of ['js/catalog-data.js','js/commercial-links.js','js/guided-discovery.js','js/discovery-memory.js'])assert.equal(fs.readFileSync(path.join(root,file),'utf8'),execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'}),'Protected data/behavior changed: '+file);

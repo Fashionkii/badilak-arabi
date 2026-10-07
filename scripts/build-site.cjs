@@ -85,6 +85,7 @@ write('robots.txt','# Prelaunch: indexing is blocked by X-Robots-Tag and HTML me
 write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
 write('_headers','/*\n  X-Robots-Tag: noindex, follow\n');
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
-write('_redirects',vercel.redirects.filter(x=>!x.source.endsWith('.html')).map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
+// Keep legacy .html aliases too: those deleted files need explicit redirects.
+write('_redirects',vercel.redirects.map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
 // A custom 404 disables the SPA fallback on Cloudflare Pages; no wildcard rewrites.
 console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. All are noindex; sitemap intentionally empty.`);
