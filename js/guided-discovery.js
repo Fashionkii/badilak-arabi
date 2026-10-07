@@ -23,7 +23,7 @@
    const visible=panel.id==='start'?view==='home':panel.id?panel.id===view:
     (panel.classList.contains('commercial-demo-wrap')||panel.classList.contains('ad-demo-end'))?view==='directory':view==='learning';
    panel.hidden=!visible;
-   panel.dataset.journeyPanel='';
+   // Preserve the static panel identity used before JavaScript loads.
   });
   if(view==='knowledge'||view==='guides'){
    const body=document.getElementById(view+'Body');
@@ -34,6 +34,7 @@
    if(target==='#'+(view==='home'?'top':view))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
   });
   document.querySelectorAll('.journey-menu').forEach(menu=>menu.open=false);
+  ensureJourneyPanel(view);
   updateTitle();
   if(options.history!==false&&!restoring){
    const current=location.pathname+location.search+location.hash;

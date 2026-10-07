@@ -13,6 +13,12 @@ if(config.phase!=='prelaunch')throw new Error('Only prelaunch builds are enabled
 const origin=config.canonicalOrigin;
 const context=vm.createContext({});
 vm.runInContext(fs.readFileSync(path.join(root,'js/catalog-data.js'),'utf8'),context);
+context.window=context;
+// Register the existing commercial resolver without running browser DOM enhancement.
+context.document={readyState:'loading',addEventListener(){}};
+vm.runInContext(fs.readFileSync(path.join(root,'js/commercial-links.js'),'utf8'),context);
+delete context.document;
+vm.runInContext(fs.readFileSync(path.join(root,'js/detail-renderers.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'js/route-seo.js'),'utf8'),context);
 const {items,categoryNames}=vm.runInContext('({items,categoryNames})',context);
 const seo=context.badilakSEO;
@@ -24,7 +30,10 @@ for(const x of items){
 }
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for(const dir of ['css','js','images','guides'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});
+// Source photos remain in git for regeneration; visitors need covers/social images only.
+const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json'),'utf8'));
+const sourcePhotos=new Set(Object.values(media.articles).map(x=>path.join(root,x.photo)));
+for(const dir of ['css','js','images','guides'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
 for(const file of ['index.html','guides.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
 const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
@@ -45,6 +54,8 @@ function prepare(html){
  return html;
 }
 function setPageHead(html,page){
+ if(page.kind==='category'||page.kind==='item')html=html.replace('data-journey="home"','data-journey="directory"');
+ if(page.kind==='item')html=html.replace('<body class="guided-discovery"','<body class="guided-discovery lock"');
  html=html.replace(/<title>[\s\S]*?<\/title>/,'<title>'+escape(page.title)+'</title>');
  html=html.replace(/<meta name="description" content="[^"]*">/,'<meta name="description" content="'+escape(page.description)+'">');
  html=html.replace(/<link rel="canonical" href="[^"]*">/,'<link rel="canonical" href="'+escape(page.url)+'">');
@@ -67,7 +78,7 @@ for(const x of items){
  html=html.replace('<div class="modal-body" id="modalBody"></div>','<div class="modal-body" id="modalBody">'+seo.staticItem(x)+'</div>');
  html=html.replace('class="modal" id="detailModal"','class="modal show" id="detailModal"');
  html=html.replace('<button class="close" aria-label="إغلاق التفاصيل" onclick="closeModal()">×</button>',`<a class="close" href="/category/${escape(x.cat)}" aria-label="إغلاق التفاصيل" onclick="closeModal();return false">×</a>`);
- html=html.replace('</head>',`<style>body:not(.guided-discovery) main{display:none}body:not(.guided-discovery) #detailModal{position:static;display:block;background:none;padding:24px 16px}body:not(.guided-discovery) #detailModal .modal-card{margin:auto;max-height:none;overflow:visible}body:not(.guided-discovery) #detailModal .modal-body{max-height:none;overflow:visible}.modal-head a.close{text-decoration:none;text-align:center}</style></head>`);
+ html=html.replace('</head>','<style>.modal-head a.close{text-decoration:none;text-align:center}</style></head>');
  write('discover/'+x.id+'.html',html);
 }
 for(const id of seo.categories()){
@@ -76,7 +87,6 @@ for(const id of seo.categories()){
  html=html.replace('<div id="routeIndex" hidden></div>','<div id="routeIndex">'+seo.categoryIndex(id)+'</div>');
  html=html.replace(/(<div[^>]+id="catalogGrid"[^>]*>)[\s\S]*?<\/div>/,'$1'+seo.staticCards(id)+'</div>');
  html=html.replace('<h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>','<h2 id="journeyResultTitle">'+escape(categoryNames[id])+'</h2>');
- html=html.replace('</head>','<style>body:not(.guided-discovery) main>section:not(#directory){display:none}</style></head>');
  write('category/'+id+'.html',html);
 }
 write('404.html',`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/app.css"></head><body><main class="wrap" style="padding:60px 0"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><a href="/">الرئيسية</a> · <a href="/guides">مركز القراءة</a></main></body></html>`);
@@ -89,3 +99,5 @@ const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 write('_redirects',vercel.redirects.map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
 // A custom 404 disables the SPA fallback on Cloudflare Pages; no wildcard rewrites.
 console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. All are noindex; sitemap intentionally empty.`);
+// Temporary review harness; removed before production promotion.
+if(fs.existsSync(path.join(__dirname,'first-paint-fixtures.cjs')))require('./first-paint-fixtures.cjs')(out);

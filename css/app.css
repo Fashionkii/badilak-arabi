@@ -16,15 +16,10 @@ button{color:inherit}
 .brand-lockup{gap:11px}
 .navigation{display:flex;align-items:center;gap:21px}
 .navigation a{transition:.18s}
-.intro-copy{display:flex;flex-direction:column;justify-content:center}
-.intro-description{color:#505b55}
 .intro-link{font-family:var(--ui);font-weight:700}
-.origin-explorer{padding:22px}
-.origin-heading{display:flex;margin-bottom:17px}
 .origin-heading h2{margin:0;}
 .origin-hint{color:var(--muted)}
 .origin-option{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:.18s}
-.origin-option:hover,.origin-option[aria-pressed="true"]{transform:translateY(-2px);box-shadow:0 7px 18px rgba(75,96,78,.07)}
 .origin-logo{display:grid;place-items:center}
 .origin-logo img{display:block}
 .origin-name{direction:ltr;unicode-bidi:isolate}
@@ -4550,3 +4545,13 @@ a.detail-related{display:block}
 .route-index summary{cursor:pointer;font-weight:600}
 .route-index ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px;margin:16px 0 0;padding-inline-start:20px}
 .route-index a{color:var(--deep);text-underline-offset:4px}
+
+/* Initial panel selection also works before the deferred application scripts. */
+body.guided-discovery[data-journey="home"] main>section[data-journey-panel]:not([data-journey-panel="home"]){display:none!important}
+body.guided-discovery[data-journey="directory"] main>section[data-journey-panel]:not([data-journey-panel="directory"]){display:none!important}
+body.guided-discovery[data-journey="learning"] main>section[data-journey-panel]:not([data-journey-panel="learning"]){display:none!important}
+body.guided-discovery[data-journey="competitionIndex"] main>section[data-journey-panel]:not([data-journey-panel="competitionIndex"]){display:none!important}
+body.guided-discovery[data-journey="guides"] main>section[data-journey-panel]:not([data-journey-panel="guides"]){display:none!important}
+body.guided-discovery[data-journey="knowledge"] main>section[data-journey-panel]:not([data-journey-panel="knowledge"]){display:none!important}
+body.guided-discovery[data-journey="updates"] main>section[data-journey-panel]:not([data-journey-panel="updates"]){display:none!important}
+body.guided-discovery[data-journey="nominate"] main>section[data-journey-panel]:not([data-journey-panel="nominate"]){display:none!important}

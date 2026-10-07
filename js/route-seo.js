@@ -46,12 +46,10 @@
   return `<details class="route-index"><summary>جميع الاكتشافات في ${escape(categoryNames[id])}</summary><ul>${items.filter(x=>x.cat===id).map(x=>`<li><a href="/discover/${escape(x.id)}" onclick="return badilakOpenItem(event,'${escape(x.id)}')">${escape(x.name)}</a></li>`).join('')}</ul></details>`;
  }
  function staticItem(x){
-  const facts=[['نوع الخدمة',x.type],['صلته بالعربية',x.arabRelation],['الجهة / المنشأ',x.creator],['الإتاحة',x.availability],['السعر',x.price],['القيود',x.limit]];
-  const guide=relatedGuideMap[x.id];
-  return `<div class="detail-overview"><h1 class="quick-title">${escape(x.name)}</h1><p class="quick-purpose">${escape(x.value)}</p><div class="detail-facts">${facts.filter(v=>v[1]).map(([k,v])=>`<div class="detail-fact"><small>${escape(k)}</small><strong>${escape(v)}</strong></div>`).join('')}</div>${(x.modules||[]).map(([k,v])=>`<section class="detail-section"><h4>${escape(k)}</h4><div>${v}</div></section>`).join('')}<div class="detail-source-line"><span>${escape(x.verified)}</span><span>آخر مراجعة: ${escape(x.reviewed)}</span></div>${guide?`<a class="quiet-read-link" href="${escape(guide[0])}">${escape(guide[1])}</a>`:''}<p><a href="${escape(x.url)}" target="_blank" rel="noopener noreferrer">افتح ${escape(x.name)}</a></p><p><a href="/category/${escape(x.cat)}">${escape(categoryNames[x.cat])}</a></p></div>`;
+  return directoryDetailMarkup(x)+`<noscript><p><a href="${escape(x.url)}" target="_blank" rel="noopener noreferrer">افتح ${escape(x.name)}</a> · <a href="/category/${escape(x.cat)}">${escape(categoryNames[x.cat])}</a></p></noscript>`;
  }
  function staticCards(id){
-  return items.filter(x=>x.cat===id).map(x=>`<article class="item" data-item-id="${escape(x.id)}"><a class="item-identity" href="/discover/${escape(x.id)}"><span class="item-name">${escape(x.name)}</span></a><div class="card-summary"><p class="card-purpose">${escape(x.value)}</p></div><a class="more-btn" href="/discover/${escape(x.id)}">كل التفاصيل والمصادر</a></article>`).join('');
+  return items.filter(x=>x.cat===id).slice(0,3).map(directoryCardMarkup).join('');
  }
  root.badilakSEO={route,metadata,categoryIndex,staticItem,staticCards,categories,escape};
  if(typeof document==='undefined')return;

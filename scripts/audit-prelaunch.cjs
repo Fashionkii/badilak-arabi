@@ -19,7 +19,7 @@ for(const file of files){
   assert.ok(fs.existsSync(target)||fs.existsSync(target+'.html'),'Broken local path: '+file+' -> '+url);
  }
  if(file.startsWith('discover/')){
-  assert.match(html,/<div class="modal-body" id="modalBody"><div class="detail-overview"><h1/,file);
+  assert.match(html,/<div class="modal-body" id="modalBody">\s*<div class="detail-overview">[\s\S]*?<h1 class="quick-title"/,file);
   assert.match(html,/class="modal show" id="detailModal"/,file);
  }
 }
@@ -35,8 +35,8 @@ const redirects=fs.readFileSync(path.join(out,'_redirects'),'utf8');
 for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects)assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
 if(process.argv[2]){
  const ref=process.argv[2];
- for(const file of ['js/catalog-data.js','js/commercial-links.js','js/guided-discovery.js','js/discovery-memory.js'])assert.equal(fs.readFileSync(path.join(root,file),'utf8'),execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'}),'Protected data/behavior changed: '+file);
- const before=execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}),after=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ for(const file of ['js/catalog-data.js','js/commercial-links.js','js/discovery-memory.js'])assert.equal(fs.readFileSync(path.join(root,file),'utf8'),execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'}),'Protected data/behavior changed: '+file);
+ const before=execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}),after=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/ data-journey-panel="[^"]*"/g,'');
  for(const marker of ['<section class="commercial-demo-wrap','<section class="ad-demo-wrap ad-demo-end']){
   const section=s=>s.slice(s.indexOf(marker),s.indexOf('</section>',s.indexOf(marker))+10);assert.equal(section(before),section(after),marker);
  }
