@@ -48,7 +48,7 @@
 /* Choose the visible panel before any page content is parsed. */
 (()=>{const path=location.pathname,hash=location.hash.slice(1);const view=/^\/(category|discover)\//.test(path)?'directory':hash==='top'||hash==='start'?'home':hash;const allowed=['home','directory','learning','competitionIndex','guides','knowledge','updates','nominate'];if(allowed.includes(view))document.body.dataset.journey=view;})();
 </script>
-<noscript><style>body.guided-discovery[data-journey="home"] main>section[data-journey-panel]{display:block!important}</style></noscript>
+<noscript><style>body.guided-discovery[data-journey="home"] main#top>section[data-journey-panel]{display:block!important}</style></noscript>
 <a class="skip" href="#directory">انتقل إلى الدليل</a>
 
 <header class="site-header">

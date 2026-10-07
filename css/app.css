@@ -4547,11 +4547,11 @@ a.detail-related{display:block}
 .route-index a{color:var(--deep);text-underline-offset:4px}
 
 /* Initial panel selection also works before the deferred application scripts. */
-body.guided-discovery[data-journey="home"] main>section[data-journey-panel]:not([data-journey-panel="home"]){display:none!important}
-body.guided-discovery[data-journey="directory"] main>section[data-journey-panel]:not([data-journey-panel="directory"]){display:none!important}
-body.guided-discovery[data-journey="learning"] main>section[data-journey-panel]:not([data-journey-panel="learning"]){display:none!important}
-body.guided-discovery[data-journey="competitionIndex"] main>section[data-journey-panel]:not([data-journey-panel="competitionIndex"]){display:none!important}
-body.guided-discovery[data-journey="guides"] main>section[data-journey-panel]:not([data-journey-panel="guides"]){display:none!important}
-body.guided-discovery[data-journey="knowledge"] main>section[data-journey-panel]:not([data-journey-panel="knowledge"]){display:none!important}
-body.guided-discovery[data-journey="updates"] main>section[data-journey-panel]:not([data-journey-panel="updates"]){display:none!important}
-body.guided-discovery[data-journey="nominate"] main>section[data-journey-panel]:not([data-journey-panel="nominate"]){display:none!important}
+body.guided-discovery[data-journey="home"] main#top>section[data-journey-panel]:not([data-journey-panel="home"]){display:none!important}
+body.guided-discovery[data-journey="directory"] main#top>section[data-journey-panel]:not([data-journey-panel="directory"]){display:none!important}
+body.guided-discovery[data-journey="learning"] main#top>section[data-journey-panel]:not([data-journey-panel="learning"]){display:none!important}
+body.guided-discovery[data-journey="competitionIndex"] main#top>section[data-journey-panel]:not([data-journey-panel="competitionIndex"]){display:none!important}
+body.guided-discovery[data-journey="guides"] main#top>section[data-journey-panel]:not([data-journey-panel="guides"]){display:none!important}
+body.guided-discovery[data-journey="knowledge"] main#top>section[data-journey-panel]:not([data-journey-panel="knowledge"]){display:none!important}
+body.guided-discovery[data-journey="updates"] main#top>section[data-journey-panel]:not([data-journey-panel="updates"]){display:none!important}
+body.guided-discovery[data-journey="nominate"] main#top>section[data-journey-panel]:not([data-journey-panel="nominate"]){display:none!important}
