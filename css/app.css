@@ -4542,3 +4542,11 @@ body.guided-discovery #directory .journey-result-head{padding-inline:var(--journ
  content:attr(data-fallback)!important;display:block!important;position:static;
  inset:auto;border:0;border-radius:0;font-size:14px;line-height:1.4;
 }
+
+/* Crawlable links retain the established button presentation. */
+a.item-identity,a.portal-btn,a.detail-related{color:inherit;text-decoration:none;font:inherit;box-sizing:border-box}
+a.detail-related{display:block}
+.route-index{margin:22px 0 0;padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:var(--ivory);font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif}
+.route-index summary{cursor:pointer;font-weight:600}
+.route-index ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px;margin:16px 0 0;padding-inline-start:20px}
+.route-index a{color:var(--deep);text-underline-offset:4px}

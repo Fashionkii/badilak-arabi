@@ -5,7 +5,10 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
       ]
     }
   ],
@@ -226,14 +229,6 @@
       "permanent": true
     }
   ],
-  "rewrites": [
-    {
-      "source": "/discover/:id",
-      "destination": "/"
-    },
-    {
-      "source": "/category/:cat",
-      "destination": "/"
-    }
-  ]
+  "buildCommand": "node scripts/build-site.cjs",
+  "outputDirectory": "dist"
 }

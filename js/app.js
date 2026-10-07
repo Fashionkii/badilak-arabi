@@ -450,10 +450,10 @@ function renderCards(){
  }
  root.innerHTML=shown.map(x=>`
   <article class="item" data-item-id="${x.id}">
-   <button class="item-identity" onclick="openDetail('${x.id}')">
+   <a class="item-identity" href="/discover/${x.id}" onclick="return badilakOpenItem(event,'${x.id}')">
     ${logoMarkup(x.logo,'item-logo',x.name)}
     <span class="item-name">${x.name}</span>
-   </button>
+   </a>
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${x.origin[0]?'':'is-empty'}">${x.origin[0]?`<span>إذا كنت تستخدم</span><span class="origin-mini">${originName(x.origin[0])}</span>`:''}</div>
    <div class="card-summary">
@@ -834,7 +834,7 @@ function directoryDiscoveryMarkup(x){
  if(!related.length)return '';
  return `<section class="detail-discovery">
   <div class="detail-discovery-head"><h4>قبل الانتقال</h4><p>إذا أردت المقارنة، فهذه خيارات قريبة من نفس الاستخدام.</p></div>
-  <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="openDetail('${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></button>`).join('')}</div>
+  <div class="detail-related-grid">${related.map(a=>`<a class="detail-related" href="/discover/${a.id}" onclick="return badilakOpenItem(event,'${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></a>`).join('')}</div>
   <button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>
  </section>`;
 }
@@ -905,7 +905,7 @@ function openDetail(id,options={}){
  const sections=special?.sections||[];
  document.getElementById('modalBody').innerHTML=`
   <div class="detail-overview">
-   <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h3 class="quick-title">${x.name}</h3>${countryBadgeMarkup(x)}</div>
+   <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h1 class="quick-title">${x.name}</h1>${countryBadgeMarkup(x)}</div>
    <p class="quick-purpose">${x.value}</p>
    <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${decisionPanelMarkup(x)}
    ${editorialGuideLinkMarkup(x.id,true)}
