@@ -1181,3 +1181,297 @@ body:not(.guided-discovery):not(.design-lab-page) .human-question::before{
   .lab-icon-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .lab-decision-icons,.lab-section-visuals,.lab-og-gallery{grid-template-columns:1fr}
 }
+
+
+/* =========================================================
+   Decorative System — section frames, separators, corner motifs
+   Experimental branch only; content/data/behavior untouched.
+   ========================================================= */
+
+/* Shared section framing: partial, not boxy */
+#directory>.wrap,
+#competitionIndex>.wrap,
+#learning>.wrap,
+#guides>.wrap,
+#knowledge>.wrap{
+  position:relative;
+  isolation:isolate;
+  background:
+    linear-gradient(90deg,transparent,rgba(23,63,61,.16),transparent) center bottom/78% 1px no-repeat;
+}
+#directory>.wrap::before,
+#competitionIndex>.wrap::before,
+#learning>.wrap::before,
+#guides>.wrap::before,
+#knowledge>.wrap::before{
+  content:"";
+  position:absolute;
+  top:2px;
+  inset-inline-end:0;
+  width:96px;
+  height:96px;
+  background:url("/images/visual/decor-corner-route.svg") center/contain no-repeat;
+  pointer-events:none;
+  opacity:.82;
+  z-index:-1;
+}
+#directory>.wrap::after,
+#competitionIndex>.wrap::after,
+#learning>.wrap::after,
+#guides>.wrap::after,
+#knowledge>.wrap::after{
+  content:"";
+  display:block;
+  width:min(92%,960px);
+  height:36px;
+  margin:34px auto 0;
+  background:url("/images/visual/decor-divider-choice.svg") center/100% 36px no-repeat;
+  pointer-events:none;
+}
+
+/* Section headings get a signature tick, without boxing the text. */
+#directory .section-head,
+#competitionIndex .section-head,
+#guides .section-head,
+#knowledge .section-head{
+  position:relative;
+  padding-inline-end:104px;
+  min-height:54px;
+}
+#directory .section-head::after,
+#competitionIndex .section-head::after,
+#guides .section-head::after,
+#knowledge .section-head::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  inset-inline-end:0;
+  width:86px;
+  height:24px;
+  background:url("/images/visual/decor-section-ticks.svg") center/contain no-repeat;
+  opacity:.9;
+}
+
+/* Directory: editorial frame around the decision area. */
+#directory .catalog-shell{
+  position:relative;
+  background:
+    linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/82px 1px no-repeat,
+    linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/1px 48px no-repeat,
+    linear-gradient(var(--lab-gold),var(--lab-gold)) bottom left/70px 1px no-repeat,
+    linear-gradient(var(--lab-gold),var(--lab-gold)) bottom left/1px 38px no-repeat!important;
+  padding:18px 16px 22px!important;
+}
+
+/* Observatory: orbit framing only in the observatory, not site-wide. */
+#competitionIndex>.wrap::before{
+  width:136px;
+  height:136px;
+  top:-8px;
+  background-image:url("/images/visual/decor-orbit-corner.svg");
+  opacity:.86;
+}
+#competitionIndex .competition-feature{
+  border-inline-start:2px solid rgba(23,63,61,.22);
+  padding-inline-start:20px;
+}
+#competitionIndex .competition-feature::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:8px;
+  width:110px;
+  height:110px;
+  background:url("/images/visual/decor-orbit-corner.svg") center/contain no-repeat;
+  transform:rotate(180deg);
+  opacity:.28;
+  pointer-events:none;
+}
+
+/* Learning: route becomes a frame accent, not only a decorative illustration. */
+#learning>.wrap{
+  background:
+    url("/images/visual/decor-learning-route.svg") left 12px top 16px/220px 74px no-repeat,
+    linear-gradient(90deg,transparent,rgba(23,63,61,.16),transparent) center bottom/78% 1px no-repeat;
+}
+#learning .learning-toolbar{
+  border-inline-end:2px solid rgba(199,154,71,.36)!important;
+  border-bottom:1px solid rgba(23,63,61,.10)!important;
+}
+#learning .learning-grid{
+  position:relative;
+}
+#learning .learning-grid::before{
+  content:"";
+  position:absolute;
+  inset-inline-start:8px;
+  top:12px;
+  bottom:12px;
+  width:1px;
+  background:linear-gradient(var(--lab-clay),var(--lab-gold),var(--lab-petrol));
+  opacity:.24;
+  pointer-events:none;
+}
+
+/* Guides / knowledge: reading-oriented corners, less technical than the directory. */
+#guides>.wrap::before,
+#knowledge>.wrap::before{
+  width:150px;
+  height:100px;
+  background-image:url("/images/visual/decor-article-frame.svg");
+  opacity:.75;
+}
+#guides .guide-grid,
+#knowledge .discovery-shelf{
+  position:relative;
+}
+#guides .guide-grid::after,
+#knowledge .discovery-shelf::after{
+  content:"";
+  display:block;
+  width:120px;
+  height:2px;
+  margin:18px 0 0 auto;
+  background:linear-gradient(90deg,var(--lab-clay),var(--lab-gold),transparent);
+  opacity:.55;
+}
+
+/* Article pages: partial editorial frame around the reading surface. */
+body:not(.guided-discovery):not(.design-lab-page) article{
+  position:relative;
+  background:
+    linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/96px 1px no-repeat,
+    linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/1px 62px no-repeat,
+    linear-gradient(var(--lab-gold),var(--lab-gold)) bottom left/82px 1px no-repeat,
+    linear-gradient(var(--lab-gold),var(--lab-gold)) bottom left/1px 48px no-repeat,
+    #fff!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) article::before{
+  content:"";
+  position:absolute;
+  inset-inline-end:18px;
+  top:18px;
+  width:132px;
+  height:88px;
+  background:url("/images/visual/decor-article-frame.svg") center/contain no-repeat;
+  opacity:.18;
+  pointer-events:none;
+}
+
+/* Detail modal: one subtle corner to connect it to the same language. */
+.guided-discovery.lock .modal-card{
+  position:relative;
+  overflow:hidden;
+}
+.guided-discovery.lock .modal-card::after{
+  content:"";
+  position:absolute;
+  inset-inline-end:-12px;
+  bottom:-12px;
+  width:118px;
+  height:118px;
+  background:url("/images/visual/decor-corner-route.svg") center/contain no-repeat;
+  transform:rotate(180deg);
+  opacity:.20;
+  pointer-events:none;
+}
+
+/* Ad previews stay undecorated: commercial areas must not resemble editorial frames. */
+
+/* Design lab: decorative-system gallery */
+.lab-decor-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.lab-decor-tile{
+  min-height:170px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--lab-line);
+  background:#fff;
+  padding:16px;
+}
+.lab-decor-tile strong{
+  position:relative;
+  z-index:2;
+  font-family:var(--ui);
+  font-size:.72rem;
+  color:var(--lab-petrol);
+}
+.lab-decor-tile span{
+  position:relative;
+  z-index:2;
+  display:block;
+  margin-top:4px;
+  max-width:75%;
+  font-size:.58rem;
+  color:var(--lab-muted);
+}
+.lab-decor-tile.corner::after{
+  content:"";position:absolute;top:0;right:0;width:112px;height:112px;
+  background:url("/images/visual/decor-corner-route.svg") center/contain no-repeat;
+}
+.lab-decor-tile.orbit::after{
+  content:"";position:absolute;left:-6px;bottom:-6px;width:130px;height:130px;
+  background:url("/images/visual/decor-orbit-corner.svg") center/contain no-repeat;
+}
+.lab-decor-tile.route::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:12px;height:72px;
+  background:url("/images/visual/decor-learning-route.svg") center/contain no-repeat;
+}
+.lab-decor-tile.article::after{
+  content:"";position:absolute;top:18px;right:12px;width:150px;height:100px;
+  background:url("/images/visual/decor-article-frame.svg") center/contain no-repeat;
+}
+.lab-decor-tile.divider::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:24px;height:36px;
+  background:url("/images/visual/decor-divider-choice.svg") center/100% 36px no-repeat;
+}
+.lab-decor-tile.ticks::after{
+  content:"";position:absolute;right:18px;bottom:28px;width:100px;height:28px;
+  background:url("/images/visual/decor-section-ticks.svg") center/contain no-repeat;
+}
+
+@media(max-width:760px){
+  #directory>.wrap::before,
+  #competitionIndex>.wrap::before,
+  #learning>.wrap::before,
+  #guides>.wrap::before,
+  #knowledge>.wrap::before{
+    width:72px;height:72px;opacity:.5;
+  }
+  #directory>.wrap::after,
+  #competitionIndex>.wrap::after,
+  #learning>.wrap::after,
+  #guides>.wrap::after,
+  #knowledge>.wrap::after{
+    width:92%;height:28px;margin-top:24px;
+  }
+  #directory .section-head,
+  #competitionIndex .section-head,
+  #guides .section-head,
+  #knowledge .section-head{
+    padding-inline-end:0;
+    min-height:0;
+  }
+  #directory .section-head::after,
+  #competitionIndex .section-head::after,
+  #guides .section-head::after,
+  #knowledge .section-head::after{
+    display:none;
+  }
+  #directory .catalog-shell{
+    padding:12px 8px 16px!important;
+    background:
+      linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/52px 1px no-repeat,
+      linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/1px 34px no-repeat,
+      #fff0!important;
+  }
+  #learning>.wrap{
+    background:
+      url("/images/visual/decor-learning-route.svg") left 4px top 8px/150px 50px no-repeat,
+      linear-gradient(90deg,transparent,rgba(23,63,61,.14),transparent) center bottom/88% 1px no-repeat;
+  }
+  .lab-decor-grid{grid-template-columns:1fr}
+}
