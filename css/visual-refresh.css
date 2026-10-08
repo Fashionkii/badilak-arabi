@@ -1,0 +1,121 @@
+/* Selected additions from design-lab-20261008, rebuilt on current main.
+   Palette, type and card surfaces only; existing layout, copy and states stay intact. */
+:root {
+  --deep:#123736;
+  --heading:#123736;
+  --sage:#123736;
+  --sage3:#EDF4EE;
+  --sunrise:#9B6A3D;
+  --sunrise-dark:#80532D;
+  --sand:#D8D3C7;
+  --line:#D8D3C7;
+  --white:#FFFFFF;
+  --ink:#253331;
+  --muted:#5D6B65;
+  --arab-ink:#253331;
+  --clean-ui:"Almarai","Cairo",sans-serif;
+  --ui:var(--clean-ui);
+  --card-line:rgba(18,55,54,.145);
+  --card-shadow:0 5px 16px rgba(18,55,54,.035);
+}
+html { background:#FAFBF8; }
+body.guided-discovery {
+  color:var(--ink);
+  background:linear-gradient(180deg,#FAFBF8 0%,#EDF4EE 58%,#FAFBF8 100%)!important;
+}
+body.guided-discovery .site-header {
+  background:rgba(250,251,248,.97)!important;
+  border-bottom-color:var(--line)!important;
+}
+body.guided-discovery .brand-lockup {
+  background:#FAFBF8!important;
+  border-color:var(--line)!important;
+}
+body.guided-discovery .footer { border-top-color:var(--line)!important; }
+.guided-discovery :is(.intro-promise,.origin-heading h2,.portal-field-label),
+.guided-discovery :is(.section-head h2,.quick-title,#journeyResultTitle) {
+  font-family:var(--ui)!important;
+}
+.guided-discovery .intro-promise { font-weight:700!important; }
+.guided-discovery :is(.intro-description,.origin-hint) { color:var(--muted)!important; }
+.guided-discovery .origin-option {
+  background:#FFFFFF!important;
+  border-color:var(--line)!important;
+}
+/* Keep the useful service descriptors and the main site's category icons/geometry. */
+.guided-discovery .portal-btn { background:#EDF4EE!important; border-color:var(--line)!important; }
+.guided-discovery .origin-option:hover,
+.guided-discovery .origin-option[aria-pressed="true"],
+.guided-discovery .portal-btn:hover,
+.guided-discovery .portal-btn[aria-current] {
+  background:#EDF4EE!important;
+  border-color:var(--deep)!important;
+}
+.guided-discovery :is(button,a,summary):focus-visible {
+  outline-color:#80532D!important;
+}
+.section.alt,.updates-warm { background:#EDF4EE!important; border-block-color:var(--card-line)!important; }
+
+/* Quiet card treatment; no extra frames, ornaments or changes to card contents. */
+#directory .catalog-grid>.item,
+#learning .learning-card,
+#guides .guide,
+#knowledge .knowledge:not(:first-child),
+#knowledge .discovery-card:not(:first-child),
+#updates .monitor-card {
+  border:1px solid var(--card-line)!important;
+  border-radius:18px!important;
+  background-color:#FFFFFF!important;
+  box-shadow:var(--card-shadow)!important;
+}
+@media(hover:hover) {
+  #directory .catalog-grid>.item:hover,
+  #learning .learning-card:hover,
+  #guides .guide:hover,
+  #knowledge .knowledge:not(:first-child):hover,
+  #knowledge .discovery-card:not(:first-child):hover,
+  #updates .monitor-card:hover {
+    border-color:rgba(155,106,61,.45)!important;
+    box-shadow:0 10px 24px rgba(18,55,54,.07)!important;
+  }
+}
+#directory .catalog-shell {
+  border-color:var(--card-line)!important;
+  box-shadow:inset 0 0 0 1px rgba(18,55,54,.035),0 8px 24px rgba(18,55,54,.035)!important;
+}
+
+/* Retain the established calligraphic name; add the lab's lantern to its LEFT in RTL. */
+.brand-lockup .brand-lantern { display:block; width:25px; height:30px; flex:none; object-fit:contain; }
+body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand {
+  direction:rtl;
+  flex-direction:row;
+  gap:14px;
+}
+body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand>img.art-img-brand {
+  margin:0!important;
+}
+.intro .brand-lantern { display:block; width:52px; height:61px; flex:none; object-fit:contain; }
+
+/* Reading pages share type and palette, keeping their light header and article layout. */
+body:not(.guided-discovery) {
+  color:#253331;
+  background:linear-gradient(180deg,#FAFBF8 0%,#EDF4EE 60%,#FAFBF8 100%);
+}
+body:not(.guided-discovery) :is(h1,h2,h3,.toplinks a,.hubnav a,.kicker,.stamp,.jumpbar a) {
+  font-family:var(--ui);
+}
+body:not(.guided-discovery) .top { background:rgba(250,251,248,.97); border-bottom-color:var(--line); }
+body:not(.guided-discovery) :is(.top .brand,.toplinks a,.hubnav a) { color:var(--deep); }
+body:not(.guided-discovery) .quick-answer { background:var(--deep); }
+body:not(.guided-discovery) .human-question { background:#EDF4EE!important; border-color:var(--line)!important; }
+body:not(.guided-discovery) article { background:#FFFFFF; border-color:var(--card-line); }
+@media(max-width:760px) {
+  .intro .brand-lantern { width:36px; height:42px; }
+  body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand { gap:10px; }
+  #directory .catalog-grid>.item,
+  #learning .learning-card,
+  #guides .guide,
+  #knowledge .knowledge:not(:first-child),
+  #knowledge .discovery-card:not(:first-child),
+  #updates .monitor-card { border-radius:16px!important; }
+}

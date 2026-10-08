@@ -111,6 +111,31 @@
       "source": "https://fonts.gstatic.com/s/marhey/v8/x3dhck7Laq-T7wlRmI8kRNs.woff2",
       "file": "fonts/google-d5c46ee19101.woff2",
       "bytes": 12368
+    },
+    {
+      "family": "Almarai",
+      "weight": 400,
+      "source": "https://fonts.gstatic.com/s/almarai/v19/tsstApxBaigK_hnnc1o.ttf",
+      "file": "fonts/almarai-400.woff2",
+      "bytes": 48544,
+      "conversion": "Official TTF encoded as WOFF2 with fontTools; glyph set unchanged."
+    },
+    {
+      "family": "Almarai",
+      "weight": 700,
+      "source": "https://fonts.gstatic.com/s/almarai/v19/tssoApxBaigK_hnnS-aghng.ttf",
+      "file": "fonts/almarai-700.woff2",
+      "bytes": 49740,
+      "conversion": "Official TTF encoded as WOFF2 with fontTools; glyph set unchanged."
+    },
+    {
+      "family": "Almarai",
+      "weight": 800,
+      "source": "https://fonts.gstatic.com/s/almarai/v19/tssoApxBaigK_hnnS_qjhng.ttf",
+      "file": "fonts/almarai-800.woff2",
+      "bytes": 52016,
+      "conversion": "Official TTF encoded as WOFF2 with fontTools; glyph set unchanged."
     }
-  ]
+  ],
+  "almaraiLicenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/almarai/OFL.txt"
 }

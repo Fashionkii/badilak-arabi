@@ -74,8 +74,8 @@ const standaloneLinks=html=>html.replace(/ onclick="[^"]*"/g,'').replace(/href="
 const standaloneHeader=standaloneLinks(source.match(/<header class="site-header">[\s\S]*?<\/header>/)[0]);
 const standaloneFooter=standaloneLinks(source.match(/<footer class="footer">[\s\S]*?<\/footer>/)[0]);
 function standalonePage(page,content){
- // Direct reading pages use body/title fonts; the home screen only needs Cairo and IBM bold initially.
- const fontPreloads=['6c9f4bab97d6','3270f0cb47fd','41f1e64ff8db','bf43e79904fc','5588af5713c2'].map(id=>`<link rel="preload" href="/fonts/google-${id}.woff2" as="font" type="font/woff2" crossorigin>`).join('\n');
+ // Direct reading pages need both body weights; share locally hosted UI fonts with home.
+ const fontPreloads=['almarai-400','almarai-700','google-41f1e64ff8db','google-bf43e79904fc'].map(id=>`<link rel="preload" href="/fonts/${id}.woff2" as="font" type="font/woff2" crossorigin>`).join('\n');
  const head=source.match(/<head>[\s\S]*?<\/head>/)[0].replace(/<script src="[^"]+" defer><\/script>\s*/g,'').replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="stylesheet" href="/css/fonts.css">',fontPreloads+'\n<link rel="stylesheet" href="/css/fonts.css">');
  return setPageHead(prepare('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+standaloneHeader+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+'<script src="/js/smart-return.js" defer></script></body></html>'),page);
 }
