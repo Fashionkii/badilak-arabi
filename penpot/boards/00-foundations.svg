@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1180" viewBox="0 0 1440 1180">
+<rect width="1440" height="1180" fill="#F7F8F3"/>
+<text x="1320" y="80" text-anchor="end" direction="rtl" font-family="Cairo" font-size="36" font-weight="700" fill="#173F3D">بديلك عربي — Foundations</text>
+<text x="1320" y="120" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="18" fill="#66716D">مرجع بصري قابل للتحرير في Penpot — غير معتمد للنشر</text>
+<g transform="translate(120 190)">
+  <rect width="1200" height="180" rx="6" fill="#FFFFFF" stroke="#D9E0DC"/>
+  <text x="1140" y="44" text-anchor="end" direction="rtl" font-family="Cairo" font-size="24" font-weight="700" fill="#173F3D">الألوان</text>
+  <g transform="translate(40 75)">
+    <rect x="0" y="0" width="160" height="64" fill="#173F3D"/><text x="80" y="88" text-anchor="middle" font-family="Cairo" font-size="13" fill="#26312F">Petrol #173F3D</text>
+    <rect x="190" y="0" width="160" height="64" fill="#A65F3B"/><text x="270" y="88" text-anchor="middle" font-family="Cairo" font-size="13" fill="#26312F">Clay #A65F3B</text>
+    <rect x="380" y="0" width="160" height="64" fill="#A77F2F"/><text x="460" y="88" text-anchor="middle" font-family="Cairo" font-size="13" fill="#26312F">Gold #A77F2F</text>
+    <rect x="570" y="0" width="160" height="64" fill="#F7F8F3" stroke="#D9E0DC"/><text x="650" y="88" text-anchor="middle" font-family="Cairo" font-size="13" fill="#26312F">Page #F7F8F3</text>
+    <rect x="760" y="0" width="160" height="64" fill="#FFFFFF" stroke="#D9E0DC"/><text x="840" y="88" text-anchor="middle" font-family="Cairo" font-size="13" fill="#26312F">White</text>
+    <rect x="950" y="0" width="160" height="64" fill="#26312F"/><text x="1030" y="88" text-anchor="middle" font-family="Cairo" font-size="13" fill="#26312F">Ink #26312F</text>
+  </g>
+</g>
+<g transform="translate(120 400)">
+  <rect width="1200" height="210" rx="6" fill="#FFFFFF" stroke="#D9E0DC"/>
+  <text x="1140" y="44" text-anchor="end" direction="rtl" font-family="Cairo" font-size="24" font-weight="700" fill="#173F3D">Typography</text>
+  <text x="1140" y="102" text-anchor="end" direction="rtl" font-family="Marhey" font-size="42" font-weight="700" fill="#173F3D">بديلك عربي</text>
+  <text x="1140" y="145" text-anchor="end" direction="rtl" font-family="Cairo" font-size="26" font-weight="700" fill="#26312F">الدليل · التعلّم · اقرأ · المرصد</text>
+  <text x="1140" y="180" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="19" fill="#66716D">نصوص القراءة والشرح والمقارنة</text>
+</g>
+<g transform="translate(120 640)">
+  <rect width="1200" height="220" rx="6" fill="#FFFFFF" stroke="#D9E0DC"/>
+  <text x="1140" y="44" text-anchor="end" direction="rtl" font-family="Cairo" font-size="24" font-weight="700" fill="#173F3D">Spacing / Radius</text>
+  <g transform="translate(40 90)" fill="#173F3D">
+    <rect x="0" y="0" width="4" height="60"/><rect x="40" y="0" width="8" height="60"/><rect x="84" y="0" width="12" height="60"/><rect x="132" y="0" width="16" height="60"/><rect x="184" y="0" width="24" height="60"/><rect x="244" y="0" width="32" height="60"/><rect x="312" y="0" width="48" height="60"/><rect x="396" y="0" width="64" height="60"/><rect x="496" y="0" width="80" height="60"/>
+  </g>
+  <text x="1140" y="110" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="17" fill="#66716D">Scale: 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80</text>
+  <text x="1140" y="150" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="17" fill="#66716D">Radius افتراضي: 4–6px · Pills للحالات الدلالية فقط</text>
+</g>
+<g transform="translate(120 890)">
+  <rect width="1200" height="190" rx="6" fill="#FFFFFF" stroke="#D9E0DC"/>
+  <text x="1140" y="44" text-anchor="end" direction="rtl" font-family="Cairo" font-size="24" font-weight="700" fill="#173F3D">RTL / Accessibility / Performance</text>
+  <text x="1140" y="90" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="17" fill="#26312F">RTL حقيقي · Focus مرئي · Touch target 44px · SVG للأيقونات · حركة قليلة · لا Glassmorphism</text>
+  <text x="1140" y="130" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="17" fill="#66716D">المحتوى والبيانات والروابط والسلوك تأتي من GitHub وليست من ملف التصميم.</text>
+</g>
+</svg>
