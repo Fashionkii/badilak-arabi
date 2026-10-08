@@ -1,4 +1,7 @@
 /* Load the official form client only when the visitor opens the form. */
+// WebsitePublisher rejects both Vercel origins (403 Origin not allowed).
+// Enable only after the receiver accepts the real site and an end-to-end test passes.
+const feedbackUnavailable=true;
 let feedbackClientPromise;
 function getFeedbackClient(){
  if(feedbackClientPromise)return feedbackClientPromise;
@@ -26,6 +29,13 @@ function openFeedback(kind){
  title.textContent=field.value==='تصحيح'?'صحّح معلومة':'رشّح اكتشافًا';
  document.getElementById('feedbackStatus').textContent='';
  dialog.showModal();
+ if(feedbackUnavailable){
+  dialog.querySelectorAll('input,textarea').forEach(input=>input.disabled=true);
+  document.getElementById('feedbackSubmit').disabled=true;
+  document.getElementById('feedbackStatus').textContent='الإرسال متوقف مؤقتًا لحين استكمال إعداد خدمة الاستقبال. لا تُرسل أي بيانات من هذا النموذج حاليًا.';
+  dialog.querySelector('.feedback-close').focus();
+  return;
+ }
  dialog.querySelector('input[name="subject"]').focus();
  getFeedbackClient().catch(()=>{}); // Submission displays any connection failure without losing the draft.
 }
@@ -34,7 +44,7 @@ async function submitDirectoryFeedback(event){
  const form=event.currentTarget;
  const status=document.getElementById('feedbackStatus');
  const submit=document.getElementById('feedbackSubmit');
- if(submit.disabled||!form.reportValidity())return;
+ if(feedbackUnavailable||submit.disabled||!form.reportValidity())return;
  const fields=Object.fromEntries(new FormData(form).entries());
  submit.disabled=true;
  form.setAttribute('aria-busy','true');

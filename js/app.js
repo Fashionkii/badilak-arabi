@@ -871,6 +871,7 @@ function closeModal(options={}){
  if(!modal.open)return;
  const routedDetail=/^\/discover\//.test(location.pathname);
  const routeState=history.state;
+ const returningDetail=activeDetail;
  activeDetail=null;
  modal.close();
  modal.classList.remove('show');
@@ -880,11 +881,24 @@ function closeModal(options={}){
  if(methodologyReturnFocus?.isConnected)methodologyReturnFocus.focus({preventScroll:true});
  methodologyReturnFocus=null;
  if(options.route!==false&&routedDetail){
-  if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1)history.back();
+  if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1){
+   // The history adapter recreates cards; focus their new element after restoration.
+   window.addEventListener('popstate',()=>requestAnimationFrame(()=>{
+    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningDetail.id}"] .item-identity`)?.focus({preventScroll:true});
+   }),{once:true});
+   history.back();
+  }
   else history.replaceState({},'',detailRouteReturnPath||'/');
  }
 }
 document.getElementById('detailModal').addEventListener('cancel',event=>{event.preventDefault();closeModal();});
+document.getElementById('detailModal').addEventListener('keydown',event=>{
+ if(event.key!=='Tab')return;
+ const controls=[...event.currentTarget.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]')].filter(el=>el.getClientRects().length);
+ const first=controls[0],last=controls.at(-1);
+ if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
+ else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
+});
 // Native dialogs own focus containment and make the background inert.
 document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&!document.querySelector('dialog[open]'))closeCardShelf(true);
