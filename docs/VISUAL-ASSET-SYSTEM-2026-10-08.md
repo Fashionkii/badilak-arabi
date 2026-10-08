@@ -92,3 +92,22 @@
 - وظائف البحث والفلاتر.
 - مواضع الإعلانات.
 - صور المقالات الحالية.
+
+
+## نظام الزينة الهندسية
+
+الأصول:
+- `images/visual/decor-corner-route.svg`
+- `images/visual/decor-divider-choice.svg`
+- `images/visual/decor-orbit-corner.svg`
+- `images/visual/decor-learning-route.svg`
+- `images/visual/decor-article-frame.svg`
+- `images/visual/decor-section-ticks.svg`
+
+القواعد:
+- الزينة تستخدم على مستوى السكشن، لا حول كل بطاقة.
+- المرصد له Orbit، والتعلم له Route، والمقالات لها Reading frame.
+- الدليل يستخدم Corner + partial frame لأنه مساحة قرار، لا لوحة تحكم.
+- الإعلانات التجارية لا تستخدم نفس الزينة حتى لا تختلط بالمحتوى التحريري.
+- على الموبايل تقل كثافة الزينة وتختفي بعض العلامات الصغيرة بدل تصغيرها قسرًا.
+- هذه الأصول تجريبية على الفرع الجانبي، ولا تعد اعتمادًا بصريًا نهائيًا.
