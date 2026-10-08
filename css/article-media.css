@@ -24,3 +24,8 @@ body{background:#f7f8f3}
 .card h3{height:auto;min-height:0;line-height:1.55}
 .card p{height:auto;min-height:0;display:block;overflow:visible}
 @media(max-width:650px){.topin{flex-direction:column;align-items:flex-start}.hubnav{gap:12px}.hubnav a{font-size:.72rem}}
+
+/* Verified contrast failures in the existing reading template. */
+.decision-path{color:#626d66}.lens.warn small{color:#8b4c29}
+.policy-links{margin-top:14px;display:flex;flex-wrap:wrap;gap:9px}
+.policy-links a{color:#173f3d;text-decoration:underline;text-underline-offset:4px}

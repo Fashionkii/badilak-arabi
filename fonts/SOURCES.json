@@ -1,0 +1,116 @@
+{
+  "retrieved": "2026-10-08",
+  "license": "SIL Open Font License 1.1",
+  "files": [
+    {
+      "source": "https://fonts.gstatic.com/s/cairo/v31/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscQyyS4J0.woff2",
+      "file": "fonts/google-6c9f4bab97d6.woff2",
+      "bytes": 30896
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cairo/v31/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscRiyS.woff2",
+      "file": "fonts/google-3270f0cb47fd.woff2",
+      "bytes": 33820
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cairo/v31/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscSCyS4J0.woff2",
+      "file": "fonts/google-e8fc56ad5aa5.woff2",
+      "bytes": 16648
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ys43PWrfQ.woff2",
+      "file": "fonts/google-41f1e64ff8db.woff2",
+      "bytes": 42848
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ys93PU.woff2",
+      "file": "fonts/google-686b11487471.woff2",
+      "bytes": 19164
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ysw3PWrfQ.woff2",
+      "file": "fonts/google-3a67cf2b96d0.woff2",
+      "bytes": 1448
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ysz3PWrfQ.woff2",
+      "file": "fonts/google-e613bad269e1.woff2",
+      "bytes": 6656
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCRXMR5Kw.woff2",
+      "file": "fonts/google-bf43e79904fc.woff2",
+      "bytes": 44280
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCUXMQ.woff2",
+      "file": "fonts/google-6f58c7351ca1.woff2",
+      "bytes": 19504
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCZXMR5Kw.woff2",
+      "file": "fonts/google-ce013ebebfbf.woff2",
+      "bytes": 1476
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCaXMR5Kw.woff2",
+      "file": "fonts/google-238ad63b7ac8.woff2",
+      "bytes": 6564
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CRXMR5Kw.woff2",
+      "file": "fonts/google-d0c935d94fc7.woff2",
+      "bytes": 45296
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CUXMQ.woff2",
+      "file": "fonts/google-689a46e3c1ca.woff2",
+      "bytes": 20088
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CZXMR5Kw.woff2",
+      "file": "fonts/google-dcc9886568f2.woff2",
+      "bytes": 1456
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CaXMR5Kw.woff2",
+      "file": "fonts/google-e493f5fa912c.woff2",
+      "bytes": 6540
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCRXMR5Kw.woff2",
+      "file": "fonts/google-50d246d60cbe.woff2",
+      "bytes": 45688
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCUXMQ.woff2",
+      "file": "fonts/google-632518d85472.woff2",
+      "bytes": 20500
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCZXMR5Kw.woff2",
+      "file": "fonts/google-468493a3b9dd.woff2",
+      "bytes": 1476
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCaXMR5Kw.woff2",
+      "file": "fonts/google-0930d8c09d99.woff2",
+      "bytes": 6680
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marhey/v8/x3dhck7Laq-T7wlRk48kRNs.woff2",
+      "file": "fonts/google-5588af5713c2.woff2",
+      "bytes": 26876
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marhey/v8/x3dhck7Laq-T7wlRlo8k.woff2",
+      "file": "fonts/google-07a639a753ed.woff2",
+      "bytes": 26276
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marhey/v8/x3dhck7Laq-T7wlRmI8kRNs.woff2",
+      "file": "fonts/google-d5c46ee19101.woff2",
+      "bytes": 12368
+    }
+  ]
+}

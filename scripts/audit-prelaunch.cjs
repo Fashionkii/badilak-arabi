@@ -19,8 +19,10 @@ for(const file of files){
   assert.ok(fs.existsSync(target)||fs.existsSync(target+'.html'),'Broken local path: '+file+' -> '+url);
  }
  if(file.startsWith('discover/')){
-  assert.match(html,/<div class="modal-body" id="modalBody">\s*<div class="detail-overview">[\s\S]*?<h1 class="quick-title"/,file);
-  assert.match(html,/class="modal show" id="detailModal"/,file);
+  assert.match(html,/<article class="standalone-detail">\s*<div class="detail-overview">[\s\S]*?<h1 class="quick-title"/,file);
+  assert.ok(!html.includes('id="detailModal"')&&!html.includes('/js/app.js'),'Direct service must be readable without the homepage runtime: '+file);
+  assert.ok(!/ onclick=/.test(html),'Standalone links must work without JavaScript: '+file);
+  assert.match(html,/<a class="destination-link" href="https:\/\//,file);
  }
 }
 const articleFiles=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'));
@@ -36,7 +38,11 @@ for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8
 if(process.argv[2]){
  const ref=process.argv[2];
  for(const file of ['js/catalog-data.js','js/commercial-links.js','js/discovery-memory.js'])assert.equal(fs.readFileSync(path.join(root,file),'utf8'),execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'}),'Protected data/behavior changed: '+file);
- const before=execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}),after=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/ data-journey-panel="[^"]*"/g,'');
+ const before=execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}).replace(/ data-journey-panel="[^"]*"/g,''),after=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/ data-journey-panel="[^"]*"/g,'');
+ for(const file of articleFiles){
+  const article=s=>s.match(/<article\b[^>]*>[\s\S]*?<\/article>/)[0];
+  assert.equal(article(fs.readFileSync(path.join(root,'guides',file),'utf8')),article(execFileSync('git',['show',ref+':guides/'+file],{cwd:root,encoding:'utf8'})),'Article copy changed: '+file);
+ }
  for(const marker of ['<section class="commercial-demo-wrap','<section class="ad-demo-wrap ad-demo-end']){
   const section=s=>s.slice(s.indexOf(marker),s.indexOf('</section>',s.indexOf(marker))+10);assert.equal(section(before),section(after),marker);
  }

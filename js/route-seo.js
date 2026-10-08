@@ -46,7 +46,7 @@
   return `<details class="route-index"><summary>جميع الاكتشافات في ${escape(categoryNames[id])}</summary><ul>${items.filter(x=>x.cat===id).map(x=>`<li><a href="/discover/${escape(x.id)}" onclick="return badilakOpenItem(event,'${escape(x.id)}')">${escape(x.name)}</a></li>`).join('')}</ul></details>`;
  }
  function staticItem(x){
-  return directoryDetailMarkup(x)+`<noscript><p><a href="${escape(x.url)}" target="_blank" rel="noopener noreferrer">افتح ${escape(x.name)}</a> · <a href="/category/${escape(x.cat)}">${escape(categoryNames[x.cat])}</a></p></noscript>`;
+  return directoryDetailMarkup(x,true);
  }
  function staticCards(id){
   return items.filter(x=>x.cat===id).slice(0,3).map(directoryCardMarkup).join('');

@@ -125,7 +125,7 @@ h2{font-size:3rem;line-height:1.12;margin:0}
 
 .detail-discovery{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;text-align:right}
 .detail-discovery-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:9px}
-.detail-discovery-head h4{font-family:var(--ui);font-size:.72rem;color:var(--deep);margin:0}
+.detail-discovery-head :is(h2,h4){font-family:var(--ui);font-size:.72rem;color:var(--deep);margin:0;line-height:1.8}
 .detail-discovery-head p{font-size:.61rem;color:var(--muted);margin:0}
 .detail-related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .detail-related{border:1px solid var(--line);background:var(--white);border-radius:12px;padding:10px 11px;text-align:right;cursor:pointer;display:flex;flex-direction:column;gap:2px;transition:.18s}
@@ -177,7 +177,7 @@ h2{font-size:3rem;line-height:1.12;margin:0}
 .detail-fact small{display:block;color:var(--muted);font-size:.56rem;margin-bottom:3px}
 .detail-fact strong{display:block;color:var(--deep);font-size:.72rem;line-height:1.65}
 .detail-section{border-top:1px solid var(--line);padding:16px 0}
-.detail-section h4{font-family:var(--ui);font-size:.7rem;margin:0 0 7px}
+.detail-section :is(h2,h4){font-family:var(--ui);font-size:.7rem;margin:0 0 7px;line-height:1.8}
 .detail-section div{color:#56615a}
 .detail-section a{color:var(--sunrise);font-weight:600}
 .detail-source-line{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;color:var(--muted)}
@@ -890,7 +890,7 @@ h2{font-size:3rem;line-height:1.12;margin:0}
   .intro h1{color:var(--deep)!important;background:transparent!important;padding:0!important;border-radius:0!important;width:auto!important;max-width:none!important;display:block!important;}
 }
 
-.learning-group-title,.detail-section h4{color:var(--deep)!important}
+.learning-group-title,.detail-section :is(h2,h4){color:var(--deep)!important}
 .meta small{display:block!important;color:var(--muted)!important}
 .meta strong{color:var(--deep)!important}
 .learning-card h3,.guide h3,.knowledge h3,.quick-title{letter-spacing:0;}
@@ -4555,3 +4555,23 @@ body.guided-discovery[data-journey="guides"] main#top>section[data-journey-panel
 body.guided-discovery[data-journey="knowledge"] main#top>section[data-journey-panel]:not([data-journey-panel="knowledge"]){display:none!important}
 body.guided-discovery[data-journey="updates"] main#top>section[data-journey-panel]:not([data-journey-panel="updates"]){display:none!important}
 body.guided-discovery[data-journey="nominate"] main#top>section[data-journey-panel]:not([data-journey-panel="nominate"]){display:none!important}
+
+/* Native dialogs contain keyboard focus and leave the existing card design intact. */
+dialog.modal{width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;color:var(--ink);}
+dialog.modal::backdrop{background:transparent}
+.feedback-privacy a{text-decoration:underline;text-underline-offset:3px}
+/* Direct service and policy URLs are ordinary, fully rendered documents. */
+.standalone-main{width:min(900px,calc(100% - 34px));padding-block:26px 40px;}
+.detail-breadcrumb{font-family:var(--ui);font-size:.75rem;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:8px}
+.detail-breadcrumb a{text-decoration:underline;text-underline-offset:4px}
+.standalone-detail{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px;}
+.standalone-detail .destination-link{margin-top:14px;background:#fff}
+.standalone-detail .detail-collection{display:block;text-align:center}
+.policy-page{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:28px;}
+.policy-page h1{font-family:var(--ui);font-size:2rem;line-height:1.5;margin:0 0 8px}
+.policy-page h2{font-family:var(--ui);font-size:1.15rem;line-height:1.6;margin:24px 0 10px}
+.policy-page p{font-size:1rem;line-height:1.95;margin:10px 0}
+.policy-page a{text-decoration:underline;text-underline-offset:4px;color:var(--deep)}
+.policy-page .policy-updated{font-size:.8rem;color:var(--muted)}
+.standalone-page .footer-links{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+@media(max-width:600px){.standalone-detail,.policy-page{padding:18px 14px}.policy-page h1{font-size:1.65rem}}

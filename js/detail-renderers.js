@@ -194,14 +194,14 @@ function relatedDirectoryItems(x){
   .map(r=>r.item);
 }
 
-function directoryDiscoveryMarkup(x){
+function directoryDiscoveryMarkup(x,standalone=false){
  const related=relatedDirectoryItems(x);
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
  if(!related.length)return '';
  return `<section class="detail-discovery">
   <div class="detail-discovery-head"><h4>قبل الانتقال</h4><p>إذا أردت المقارنة، فهذه خيارات قريبة من نفس الاستخدام.</p></div>
   <div class="detail-related-grid">${related.map(a=>`<a class="detail-related" href="/discover/${a.id}" onclick="return badilakOpenItem(event,'${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></a>`).join('')}</div>
-  <button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>
+  ${standalone?`<a class="detail-collection" href="/category/${x.cat}${x.sub&&x.sub!=='all'?'?sub='+encodeURIComponent(x.sub):''}">عرض كل ${collectionLabel}</a>`:`<button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>`}
  </section>`;
 }
 
@@ -243,11 +243,12 @@ const geoContextNotes={
  daftra:'<b>لماذا علمان؟</b> دفترة منتج بهوية عربية طورته Izam Web Solutions، ولدينا حضور معلن للجهة في مصر والولايات المتحدة؛ لذلك نعرض الصلتين بدل اختزالها في بلد واحد.'
 };
 
-function directoryDetailMarkup(x){
+function directoryDetailMarkup(x,standalone=false){
  const special=specialDetails(x);
  const facts=special?.facts||genericFacts(x);
  const sections=special?.sections||[];
- return `
+ const destination=resolveCommercialLink(x.id,x.url);
+ let markup=`
   <div class="detail-overview">
    <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h1 class="quick-title">${x.name}</h1>${countryBadgeMarkup(x)}</div>
    <p class="quick-purpose">${x.value}</p>
@@ -256,9 +257,12 @@ function directoryDetailMarkup(x){
    ${renderSections(x,sections)}
    <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة: '+x.reviewed:''}</span></div>
    ${commercialDisclosureMarkup(x.id)}
-   <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
-   ${directoryDiscoveryMarkup(x)}
+   ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button class="destination-link" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
+   ${directoryDiscoveryMarkup(x,standalone)}
   </div>`;
+ // A service title is h1; the sections below it are h2, with their existing visual size.
+ markup=markup.replace(/<(\/?)h4\b/g,'<$1h2');
+ return standalone?markup.replace(/ onclick="[^"]*"/g,''):markup;
 }
 
 

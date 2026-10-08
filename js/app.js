@@ -202,9 +202,7 @@ function resetAllAndHome(){
  renderLearning();
 
  // Close any open detail layer, then return to the real homepage.
- const modal=document.getElementById('detailModal');
- if(modal) modal.classList.remove('show');
- document.body.classList.remove('lock');
+ closeModal({route:false});
  go('top');
 }
 
@@ -656,9 +654,9 @@ function openDetail(id,options={}){
  const x=items.find(a=>a.id===id);if(!x)return;
  if(options.route!==false){window.badilakJourney?.remember();syncDetailRoute(id);}
  activeDetail={kind:'directory',id};
- detailReturnFocus=document.activeElement;
+ if(!document.getElementById('detailModal').open)detailReturnFocus=document.activeElement;
  document.getElementById('modalBody').innerHTML=directoryDetailMarkup(x);
- document.getElementById('detailModal').classList.add('show');document.body.classList.add('lock')
+ showDetailDialog()
 }
 const fieldNames={
  languages:'إنجليزي ولغات',
@@ -672,7 +670,7 @@ const fieldNames={
 function showLearningNote(id){
  const x=learning.find(a=>a.id===id);if(!x)return;
  activeDetail={kind:'learning',id};
- detailReturnFocus=document.activeElement;
+ if(!document.getElementById('detailModal').open)detailReturnFocus=document.activeElement;
  const fields=x.fields.map(f=>fieldNames[f]||f).join(' · ');
  const isChannel=x.type==='channel'||x.type==='reciter';
  const isReciter=x.type==='reciter';
@@ -693,7 +691,7 @@ function showLearningNote(id){
    <button class="destination-link" onclick="openLearningExternal('${x.id}')"><span class="destination-label"><bdi>${isReciter?'افتح القناة الرسمية':isChannel?'افتح القناة والدروس':x.type==='resource'?'افتح المصدر التعليمي':'اذهب إلى المنصة'}</bdi><small>${x.url.replace('https://','')}</small></span><span class="outbound-key">↗</span></button>
    ${learningDiscoveryMarkup(x)}
   </div>`;
- document.getElementById('detailModal').classList.add('show');document.body.classList.add('lock')
+ showDetailDialog()
 }
 // Central commercial-link model lives in /js/commercial-links.js.
 // Activate a program only by updating that one asset.
@@ -754,8 +752,7 @@ function openMethodology(){
    <section class="detail-section"><h4>قبل التسجيل أو الدفع</h4><div>افحص خطة بلدك، وحدود المجاني، والتجديد والإلغاء، وحقوق الاستخدام. قد تتغير الأسعار والشروط بعد تاريخ المراجعة، والقرار النهائي يعود لصفحة الخدمة الحالية.</div></section>
    <section class="detail-section"><h4>قرار تحريري معلن</h4><div>معيار الترشيح هو فائدته للقارئ وحدوده المعلنة. أي تعاون تجاري يحتاج إفصاحًا واضحًا بجواره، ولا يكفي وحده سببًا للترشيح أو الأفضلية.</div></section>
   </div>`;
- document.getElementById('detailModal').classList.add('show');
- document.body.classList.add('lock');
+ showDetailDialog();
  document.querySelector('#detailModal .modal-card').scrollTop=0;
  document.querySelector('#detailModal .close').focus();
 }
@@ -861,53 +858,39 @@ function toggleStaticDisclosure(bodyId,btn,kind){
  }
 }
 
+function showDetailDialog(){
+ const modal=document.getElementById('detailModal');
+ modal.classList.add('show');
+ if(!modal.open)modal.showModal();
+ document.body.classList.add('lock');
+ modal.querySelector('.modal-card').scrollTop=0;
+ modal.querySelector('.close').focus({preventScroll:true});
+}
 function closeModal(options={}){
+ const modal=document.getElementById('detailModal');
+ if(!modal.open)return;
  const routedDetail=/^\/discover\//.test(location.pathname);
  const routeState=history.state;
  activeDetail=null;
+ modal.close();
+ modal.classList.remove('show');
+ document.body.classList.remove('lock');
  if(detailReturnFocus?.isConnected)detailReturnFocus.focus({preventScroll:true});
  detailReturnFocus=null;
- document.getElementById('detailModal').classList.remove('show');
- document.body.classList.remove('lock');
- if(methodologyReturnFocus){methodologyReturnFocus.focus({preventScroll:true});methodologyReturnFocus=null}
+ if(methodologyReturnFocus?.isConnected)methodologyReturnFocus.focus({preventScroll:true});
+ methodologyReturnFocus=null;
  if(options.route!==false&&routedDetail){
   if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1)history.back();
   else history.replaceState({},'',detailRouteReturnPath||'/');
  }
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCardShelf(true);closeModal();const d=document.getElementById('feedbackDialog');if(d&&d.open)d.close()}})
+document.getElementById('detailModal').addEventListener('cancel',event=>{event.preventDefault();closeModal();});
+// Native dialogs own focus containment and make the background inert.
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape'&&!document.querySelector('dialog[open]'))closeCardShelf(true);
+});
+document.addEventListener('DOMContentLoaded',()=>{if(location.hash==='#methodology')openMethodology();});
 
-function openFeedback(kind){
- const d=document.getElementById('feedbackDialog');
- const k=document.getElementById('feedbackKind');
- const t=document.getElementById('feedbackTitle');
- const s=document.getElementById('feedbackStatus');
- if(!d||!k||!t)return;
- k.value=kind||'ترشيح';
- t.textContent=k.value==='تصحيح'?'صحّح معلومة':'رشّح اكتشافًا';
- if(s)s.textContent='';
- d.showModal();
- setTimeout(()=>d.querySelector('input[name="subject"]')?.focus(),30);
-}
-async function submitDirectoryFeedback(e){
- e.preventDefault();
- const form=e.currentTarget, status=document.getElementById('feedbackStatus'), submit=document.getElementById('feedbackSubmit');
- const fields=Object.fromEntries(new FormData(form).entries());
- submit.disabled=true;status.textContent='جارٍ الإرسال…';
- try{
-  const res=await fetch('https://api.websitepublisher.ai/sapi/project/28472/form/submit',{
-   method:'POST',headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({form_name:'directory_feedback',fields})
-  });
-  const data=await res.json().catch(()=>({}));
-  if(!res.ok||data.success===false)throw new Error(data.message||'تعذر الإرسال');
-  status.textContent='وصلت للمراجعة. شكرًا لمساعدتك في تحسين الدليل.';
-  form.reset();document.getElementById('feedbackKind').value=fields.kind||'ترشيح';
-  setTimeout(()=>document.getElementById('feedbackDialog')?.close(),1300);
- }catch(err){
-  status.textContent='تعذر الإرسال الآن. حاول مرة أخرى بعد قليل.';
- }finally{submit.disabled=false}
-}
 function ensureJourneyPanel(view){
  if(initializedJourneyPanels.has(view))return;
  if(view==='directory'){buildSubfilters();renderCards();updateDirectoryCrumb();updateDirectoryActionLabel();}
@@ -929,7 +912,13 @@ function applyShareableRoute(){
  const category=location.pathname.match(/^\/category\/([^/]+)\/?$/);
  if(category){
   const cat=decodeURIComponent(category[1]);
-  if(categoryNames[cat]&&cat!=='all')openDirectory(cat,{route:false});
+  if(categoryNames[cat]&&cat!=='all'){
+   openDirectory(cat,{route:false});
+   const requestedSub=new URLSearchParams(location.search).get('sub');
+   if((subfilterMap[cat]||[]).some(([id])=>id===requestedSub)){
+    subfilter=requestedSub;buildSubfilters();updateDirectoryCrumb();renderCards();
+   }
+  }
   return;
  }
  if(document.getElementById('detailModal')?.classList.contains('show'))closeModal({route:false});

@@ -33,7 +33,7 @@ fs.mkdirSync(out,{recursive:true});
 // Source photos remain in git for regeneration; visitors need covers/social images only.
 const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json'),'utf8'));
 const sourcePhotos=new Set(Object.values(media.articles).map(x=>path.join(root,x.photo)));
-for(const dir of ['css','js','images','guides'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
+for(const dir of ['css','js','images','guides','fonts'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
 for(const file of ['index.html','guides.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
 const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
@@ -68,18 +68,29 @@ function setPageHead(html,page){
 }
 function write(file,html){fs.mkdirSync(path.dirname(path.join(out,file)),{recursive:true});fs.writeFileSync(path.join(out,file),html);}
 const source=fs.readFileSync(path.join(root,'index.html'),'utf8');
+// Standalone routes reuse the site's header, footer, fonts and detail renderer.
+// They do not ship the homepage panels or its application runtime.
+const standaloneLinks=html=>html.replace(/ onclick="[^"]*"/g,'').replace(/href="#/g,'href="/#');
+const standaloneHeader=standaloneLinks(source.match(/<header class="site-header">[\s\S]*?<\/header>/)[0]);
+const standaloneFooter=standaloneLinks(source.match(/<footer class="footer">[\s\S]*?<\/footer>/)[0]);
+function standalonePage(page,content){
+ const head=source.match(/<head>[\s\S]*?<\/head>/)[0].replace(/<script src="[^"]+" defer><\/script>\s*/g,'');
+ return setPageHead(prepare('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+standaloneHeader+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+'<script src="/js/smart-return.js" defer></script></body></html>'),page);
+}
 write('index.html',setPageHead(prepare(source),seo.metadata('/',origin)));
 write('guides.html',prepare(fs.readFileSync(path.join(root,'guides.html'),'utf8')));
 const guides=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'));
 for(const file of guides)write('guides/'+file,prepare(fs.readFileSync(path.join(root,'guides',file),'utf8')));
 for(const x of items){
  const page=seo.metadata('/discover/'+x.id,origin);
- let html=setPageHead(prepare(source),page);
- html=html.replace('<div class="modal-body" id="modalBody"></div>','<div class="modal-body" id="modalBody">'+seo.staticItem(x)+'</div>');
- html=html.replace('class="modal" id="detailModal"','class="modal show" id="detailModal"');
- html=html.replace('<button class="close" aria-label="إغلاق التفاصيل" onclick="closeModal()">×</button>',`<a class="close" href="/category/${escape(x.cat)}" aria-label="إغلاق التفاصيل" onclick="closeModal();return false">×</a>`);
- html=html.replace('</head>','<style>.modal-head a.close{text-decoration:none;text-align:center}</style></head>');
+ const trail=`<nav class="detail-breadcrumb" aria-label="مسار الصفحة"><a href="/">الرئيسية</a><span aria-hidden="true"> / </span><a href="/category/${escape(x.cat)}">${escape(categoryNames[x.cat])}</a><span aria-hidden="true"> / </span><span aria-current="page">${escape(x.name)}</span></nav>`;
+ const html=standalonePage(page,trail+'<article class="standalone-detail">'+seo.staticItem(x)+'</article>');
  write('discover/'+x.id+'.html',html);
+}
+for(const slug of ['privacy','disclosure']){
+ const entry=JSON.parse(fs.readFileSync(path.join(root,'data',slug+'.json'),'utf8'));
+ const page={kind:'policy',title:entry.title+' — بديلك عربي',description:entry.description,url:origin+'/'+slug,schema:{'@context':'https://schema.org','@type':'WebPage',name:entry.title,url:origin+'/'+slug,inLanguage:'ar'}};
+ write(slug+'.html',standalonePage(page,'<article class="policy-page"><h1>'+escape(entry.title)+'</h1><p class="policy-updated">آخر تحديث: 8 أكتوبر 2026</p>'+entry.sections.map(x=>'<section><h2>'+escape(x.title)+'</h2>'+x.html+'</section>').join('')+'</article>'));
 }
 for(const id of seo.categories()){
  const page=seo.metadata('/category/'+id,origin);
