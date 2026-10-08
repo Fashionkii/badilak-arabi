@@ -1605,3 +1605,70 @@ body:not(.guided-discovery):not(.design-lab-page) .human-question{
     padding-inline:5px!important;
   }
 }
+
+
+/* Phase 04 — quiet Arabic cards, frames and ornaments (experimental only) */
+:root{
+  --stage4-hairline:rgba(18,55,54,.145);
+  --stage4-card-shadow:0 5px 16px rgba(18,55,54,.035);
+  --stage4-card-shadow-hover:0 10px 24px rgba(18,55,54,.07);
+}
+/* Preserve the currently featured first cards; refine ordinary cards only. */
+#directory .catalog-grid>.item,
+#learning .learning-card,
+#guides .guide,
+#knowledge .knowledge:not(:first-child),
+#knowledge .discovery-card:not(:first-child),
+#updates .monitor-card{
+  border:1px solid var(--stage4-hairline)!important;
+  border-radius:18px!important;
+  background-color:#FFFFFF!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.94),var(--stage4-card-shadow)!important;
+}
+#directory .catalog-grid>.item:hover,
+#learning .learning-card:hover,
+#guides .guide:hover,
+#knowledge .knowledge:not(:first-child):hover,
+#knowledge .discovery-card:not(:first-child):hover,
+#updates .monitor-card:hover{
+  border-color:rgba(155,106,61,.34)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),var(--stage4-card-shadow-hover)!important;
+  transform:translateY(-1px);
+}
+/* Keep current geometric path corners; add no new decorative assets. */
+#directory .catalog-shell{
+  border:1px solid rgba(18,55,54,.14)!important;
+  border-radius:22px!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.52),0 8px 25px rgba(18,55,54,.042)!important;
+}
+#learning .learning-toolbar,
+#guides .guides,
+#knowledge .knowledge,
+#updates .updates{
+  border-color:var(--stage4-hairline)!important;
+}
+#directory>.wrap::before,
+#learning>.wrap::before,
+#guides>.wrap::before,
+#knowledge>.wrap::before{opacity:.58}
+#directory .section-head::after,
+#guides .section-head::after,
+#knowledge .section-head::after{opacity:.68}
+@media(max-width:760px){
+  #directory .catalog-shell{border-radius:18px!important}
+  #directory .catalog-grid>.item,
+  #learning .learning-card,
+  #guides .guide,
+  #knowledge .knowledge:not(:first-child),
+  #knowledge .discovery-card:not(:first-child),
+  #updates .monitor-card{border-radius:16px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #directory .catalog-grid>.item:hover,
+  #learning .learning-card:hover,
+  #guides .guide:hover,
+  #knowledge .knowledge:not(:first-child):hover,
+  #knowledge .discovery-card:not(:first-child):hover,
+  #updates .monitor-card:hover{transform:none!important}
+}
+/* Advertising reservations, examples, data, text and behavior left unchanged. */
