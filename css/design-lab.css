@@ -1575,3 +1575,35 @@ body:not(.guided-discovery):not(.design-lab-page) article{
     #FFFFFF!important;
 }
 /* Commercial examples, their labels/placements and functions stay untouched. */
+
+
+/* Modern-clean: guided-discovery specificity reconciliation */
+body.guided-discovery{
+  background:
+    radial-gradient(circle at 96% 3%,rgba(216,211,199,.14),transparent 32rem),
+    linear-gradient(180deg,#FAFBF8 0%,#EDF4EE 58%,#FAFBF8 100%)!important;
+}
+body.guided-discovery .site-header{
+  background:rgba(250,251,248,.97)!important;
+  border-bottom-color:rgba(18,55,54,.13)!important;
+}
+body.guided-discovery .brand-lockup{
+  background:#FAFBF8!important;
+  border-color:rgba(18,55,54,.13)!important;
+}
+body.guided-discovery .origin-option,
+body.guided-discovery .portal-btn{
+  background:#FFFFFF!important;
+  border-color:#D8D3C7!important;
+}
+body.guided-discovery .origin-option:hover,
+body.guided-discovery .origin-option[aria-pressed=true],
+body.guided-discovery .portal-btn:hover,
+body.guided-discovery .portal-btn[aria-current]{
+  background:#EDF4EE!important;
+  border-color:#123736!important;
+}
+body.guided-discovery .footer{
+  background:transparent!important;
+  border-top-color:#D8D3C7!important;
+}
