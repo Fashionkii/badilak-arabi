@@ -921,3 +921,263 @@ body:not(.guided-discovery):not(.design-lab-page) .source-card{
   .lab-browser.mobile iframe{width:390px;height:650px}
   .guided-discovery.lock .detail-facts{grid-template-columns:1fr!important}
 }
+
+
+/* =========================================================
+   Visual Asset Pass — geometry, category icons, decision cues
+   ========================================================= */
+
+/* Core geometric identity */
+.intro{
+  position:relative!important;
+  isolation:isolate;
+  overflow:hidden;
+}
+.intro::before{
+  content:"";
+  position:absolute;
+  top:8px;right:-54px;
+  width:min(410px,42vw);
+  aspect-ratio:1;
+  background:url("/images/visual/pattern-choice-grid.svg") center/contain no-repeat;
+  opacity:.72;
+  pointer-events:none;
+  z-index:-1;
+}
+.intro::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:132px;height:3px;
+  background:linear-gradient(90deg,var(--lab-clay),var(--lab-gold),var(--lab-petrol));
+  opacity:.75;
+}
+.portal-field-icon-img{
+  width:40px!important;height:40px!important;
+  object-fit:contain;padding:5px;
+  border:1px solid var(--lab-line);
+  background:#fff;
+}
+.portal-btn:hover .portal-field-icon-img{
+  border-color:rgba(23,63,61,.36);
+  background:#F7F9F6;
+}
+
+/* Decision language: benefit / constraint / source */
+.card-purpose,.quick-purpose{
+  position:relative;
+  padding-inline-start:38px!important;
+}
+.card-purpose::before,.quick-purpose::before{
+  content:"";
+  position:absolute;inset-inline-start:0;top:.05em;
+  width:28px;height:28px;
+  background:url("/images/visual/icon-benefit.svg") center/contain no-repeat;
+}
+.card-decision-note{
+  position:relative;
+  padding-inline-start:38px!important;
+}
+.card-decision-note::before{
+  content:"";
+  position:absolute;inset-inline-start:0;top:50%;
+  width:28px;height:28px;transform:translateY(-50%);
+  background:url("/images/visual/icon-constraint.svg") center/contain no-repeat;
+}
+.decision-panel{
+  position:relative;
+  padding-inline-start:52px!important;
+}
+.decision-panel::before{
+  content:"";
+  position:absolute;inset-inline-start:14px;top:16px;
+  width:28px;height:28px;
+  background:url("/images/visual/icon-constraint.svg") center/contain no-repeat;
+}
+.detail-source-line,.arab-progress-source{
+  position:relative;
+  padding-inline-start:38px!important;
+}
+.detail-source-line::before,.arab-progress-source::before{
+  content:"";
+  position:absolute;inset-inline-start:0;top:50%;
+  width:26px;height:26px;transform:translateY(-50%);
+  background:url("/images/visual/icon-source.svg") center/contain no-repeat;
+}
+
+/* Observatory visual system */
+.competition-feature{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.competition-feature::before{
+  content:"";
+  position:absolute;
+  width:240px;height:240px;
+  left:-34px;top:40px;
+  background:url("/images/visual/monitor-orbit.svg") center/contain no-repeat;
+  opacity:.58;z-index:-1;pointer-events:none;
+}
+.arab-progress-chart{border-top:1px solid var(--lab-line)!important}
+.arab-progress-row{position:relative}
+.arab-progress-row::after{
+  content:"";
+  position:absolute;inset:auto 0 0 0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--lab-line),transparent);
+}
+.arab-metric-medallion,.arab-insight-emblem{
+  border-radius:50%!important;
+  border:1px solid rgba(23,63,61,.14)!important;
+  background:#fff!important;
+  box-shadow:inset 0 0 0 6px #F2F5F1!important;
+}
+.arab-progress-bar,.arab-rank-track{
+  background:#E9EEEA!important;border-radius:999px!important;
+}
+.arab-progress-bar>span,.arab-rank-track>span{
+  background:linear-gradient(90deg,var(--lab-petrol),var(--lab-gold))!important;
+}
+
+/* Learning visual system */
+#learning .section-head{
+  position:relative;
+  min-height:110px;
+  padding-inline-end:min(285px,32vw);
+}
+#learning .section-head::after{
+  content:"";
+  position:absolute;
+  top:50%;right:0;
+  width:min(250px,29vw);
+  aspect-ratio:12/5;
+  transform:translateY(-50%);
+  background:url("/images/visual/learning-path.svg") center/contain no-repeat;
+  opacity:.92;pointer-events:none;
+}
+.learning-toolbar{position:relative}
+.learning-toolbar::before{
+  content:"مسار التعلّم";
+  position:absolute;top:-12px;left:14px;
+  padding:2px 7px;background:var(--lab-bg);
+  color:var(--lab-muted);font-family:var(--ui);
+  font-size:.54rem;font-weight:700;
+}
+.learning-card{
+  position:relative;overflow:hidden;
+}
+.learning-card::after{
+  content:"";
+  position:absolute;right:0;bottom:0;
+  width:54px;height:3px;
+  background:linear-gradient(90deg,var(--lab-petrol),var(--lab-gold));
+  opacity:.72;
+}
+
+/* Article / reading visual system */
+body:not(.guided-discovery):not(.design-lab-page) .hero{
+  position:relative;overflow:hidden;isolation:isolate;
+}
+body:not(.guided-discovery):not(.design-lab-page) .hero::after{
+  content:"";
+  position:absolute;right:0;top:2px;
+  width:min(230px,28vw);
+  aspect-ratio:11/6;
+  background:url("/images/visual/article-quote-path.svg") center/contain no-repeat;
+  opacity:.72;pointer-events:none;z-index:-1;
+}
+body:not(.guided-discovery):not(.design-lab-page) .source-card{
+  position:relative;padding-inline-start:52px!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) .source-card::before{
+  content:"";
+  position:absolute;inset-inline-start:14px;top:16px;
+  width:26px;height:26px;
+  background:url("/images/visual/icon-source.svg") center/contain no-repeat;
+}
+body:not(.guided-discovery):not(.design-lab-page) .human-question{
+  position:relative;padding-inline-start:52px!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) .human-question::before{
+  content:"";
+  position:absolute;inset-inline-start:14px;top:16px;
+  width:26px;height:26px;
+  background:url("/images/visual/icon-constraint.svg") center/contain no-repeat;
+}
+
+/* Real empty state visual */
+.empty{
+  position:relative!important;
+  min-height:160px!important;
+  padding:34px 24px 26px!important;
+  padding-inline-start:104px!important;
+  border:1px dashed var(--lab-line)!important;
+  background:#fff!important;
+}
+.empty::before{
+  content:"";
+  position:absolute;inset-inline-start:24px;top:50%;
+  width:58px;height:58px;transform:translateY(-50%);
+  background:url("/images/visual/state-empty.svg") center/contain no-repeat;
+}
+
+/* Design lab visual gallery */
+.lab-visual-assets{display:grid;gap:18px}
+.lab-pattern-preview{
+  min-height:180px;
+  border:1px solid var(--lab-line);
+  background:#F7F8F3 url("/images/visual/pattern-choice-grid.svg") center/160px 160px repeat;
+}
+.lab-icon-grid{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;
+}
+.lab-icon-tile{
+  display:grid;gap:8px;justify-items:center;
+  padding:14px 8px;border:1px solid var(--lab-line);background:#fff;text-align:center;
+}
+.lab-icon-tile img{width:48px;height:48px}
+.lab-icon-tile span{font-family:var(--ui);font-size:.58rem;color:var(--lab-ink)}
+.lab-decision-icons{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+}
+.lab-decision-icon{
+  display:flex;align-items:center;gap:10px;padding:12px;
+  border:1px solid var(--lab-line);background:#fff;
+}
+.lab-decision-icon img{width:34px;height:34px}
+.lab-decision-icon strong{display:block;font-family:var(--ui);font-size:.68rem;color:var(--lab-petrol)}
+.lab-decision-icon span{display:block;font-size:.58rem;color:var(--lab-muted)}
+.lab-section-visuals{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+}
+.lab-section-visual{
+  min-height:150px;border:1px solid var(--lab-line);background:#fff;padding:12px;
+  display:grid;place-items:center;text-align:center;
+}
+.lab-section-visual img{max-width:100%;max-height:100px}
+.lab-section-visual span{font-family:var(--ui);font-size:.58rem;color:var(--lab-muted)}
+.lab-og-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.lab-og-card{border:1px solid var(--lab-line);background:#fff;padding:10px}
+.lab-og-card img{display:block;width:100%;height:auto;border:1px solid var(--lab-line)}
+.lab-og-card footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:8px}
+.lab-og-card footer strong{font-family:var(--ui);font-size:.66rem;color:var(--lab-petrol)}
+.lab-og-card footer a{font-family:var(--ui);font-size:.58rem;font-weight:700;color:var(--lab-petrol)!important}
+.lab-state.empty::before,.lab-state.error::before,.lab-state.loading::before{
+  content:"";display:block;width:40px;height:40px;
+  background-position:center;background-size:contain;background-repeat:no-repeat;
+  position:static;transform:none;margin-bottom:6px;
+}
+.lab-state.empty::before{background-image:url("/images/visual/state-empty.svg")}
+.lab-state.error::before{background-image:url("/images/visual/state-error.svg")}
+.lab-state.loading::before{background-image:url("/images/visual/state-loading.svg")}
+
+/* Responsive visual system */
+@media(max-width:760px){
+  .intro::before{width:260px;right:-88px;top:34px;opacity:.42}
+  .portal-field-icon-img{width:36px!important;height:36px!important}
+  #learning .section-head{padding-inline-end:0;min-height:0}
+  #learning .section-head::after{position:static;display:block;width:180px;margin:12px 0 0 auto;transform:none}
+  .competition-feature::before{width:170px;height:170px;left:-58px;top:60px;opacity:.38}
+  .lab-icon-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lab-decision-icons,.lab-section-visuals,.lab-og-gallery{grid-template-columns:1fr}
+}
