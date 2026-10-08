@@ -1,34 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">علامة بديلك عربي — المشكاة</title>
-  <desc id="desc">مشكاة هندسية مبسطة يتجه داخلها مسار نحو الضوء، رمزًا للاكتشاف والاختيار</desc>
-  <defs>
-    <linearGradient id="arch" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#245D52"/>
-      <stop offset="1" stop-color="#0F3E3C"/>
-    </linearGradient>
-    <linearGradient id="light" x1="0" y1="0" x2=".25" y2="1">
-      <stop offset="0" stop-color="#FFF9EF"/>
-      <stop offset=".55" stop-color="#F1DEC2"/>
-      <stop offset="1" stop-color="#E4C9A5"/>
-    </linearGradient>
-    <linearGradient id="ground" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#82A996"/>
-      <stop offset="1" stop-color="#547F70"/>
-    </linearGradient>
-    <clipPath id="niche">
-      <path d="M6 62V25C6 16.7 13.2 10.9 21 5.9L32 0L43 5.9C50.8 10.9 58 16.7 58 25V62Z"/>
-    </clipPath>
-  </defs>
-  <!-- Outer silhouette is an abstract niche, not a lantern. -->
-  <path d="M6 62V25C6 16.7 13.2 10.9 21 5.9L32 0L43 5.9C50.8 10.9 58 16.7 58 25V62Z" fill="url(#arch)"/>
-  <g clip-path="url(#niche)">
-    <path d="M14 16C24 6 41 8 51 20L58 26V0H5V33Z" fill="#96B5A5" opacity=".12"/>
-    <!-- The warm center suggests illumination inside the niche. -->
-    <path d="M20.5 62V34.5C20.5 25 25.3 19 32 15.2C38.7 19 43.5 25 43.5 34.5V62Z" fill="#FFF9EF"/>
-    <path d="M23 62V35C23 28.3 26.2 23.9 32 20.6C37.8 23.9 41 28.3 41 35V62Z" fill="url(#light)"/>
-    <path d="M27.3 54V36.7C27.3 32.5 29 29.5 32 27.3C35 29.5 36.7 32.5 36.7 36.7V54Z" fill="#FFF9EE" opacity=".7"/>
-    <!-- Landscape and winding choice-path in deliberately large shapes for favicon legibility. -->
-    <path d="M4 62C9.5 52 19.5 45.1 29 43.4C37.4 41.8 45 44.3 60 55V64H4Z" fill="url(#ground)"/>
-    <path d="M15 64C23 57.3 36 57 39.5 50.9C41.8 47.1 36.5 45.9 32 44.5C27 43 27.8 40.7 32.7 39.1C36 37.9 39.9 37.9 43 38" fill="none" stroke="#FFF9EF" stroke-width="3.7" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 112" role="img" aria-labelledby="title desc">
+<title id="title">قنديل بديلك عربي</title><desc id="desc">قنديل عربي تقليدي ينبعث منه ضوء دافئ وطريق للاكتشاف</desc>
+<defs>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#367C6A"/><stop offset=".46" stop-color="#14574E"/><stop offset="1" stop-color="#092E2C"/></linearGradient>
+<linearGradient id="cap" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#326F61"/><stop offset=".9" stop-color="#0D4640"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ECB058"/><stop offset=".46" stop-color="#FFF7E0"/><stop offset="1" stop-color="#E7AE5A"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".61" r=".53"><stop stop-color="#FFFEEF"/><stop offset=".5" stop-color="#FFE6A4"/><stop offset="1" stop-color="#F0AF55" stop-opacity=".12"/></radialGradient>
+<linearGradient id="road" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFDF2"/><stop offset=".7" stop-color="#F9E4A9"/><stop offset="1" stop-color="#EBC27C"/></linearGradient>
+</defs>
+<circle cx="48" cy="12" r="8.2" stroke="#0F4941" stroke-width="5" fill="none"/>
+<path d="M22 27Q48 10 74 27Q77 31 72 32H24Q19 30 22 27Z" fill="url(#metal)"/>
+<path d="M27 33H69V45H27Z" fill="url(#cap)"/>
+<path d="M35 36V40M48 36V40M61 36V40" fill="none" stroke="#F6E5BC" stroke-width="2.7" stroke-linecap="round"/>
+<path d="M25 45H71" stroke="#0B403B" stroke-width="5" stroke-linecap="round"/>
+<path d="M25 44C14 43 11 52 10 66L8 79C7 88 12 92 20 94" stroke="url(#metal)" stroke-width="8" stroke-linecap="round" fill="none"/>
+<path d="M71 44C82 43 85 52 86 66L88 79C89 88 84 92 76 94" stroke="url(#metal)" stroke-width="8" stroke-linecap="round" fill="none"/>
+<path d="M28 48Q48 43 68 48L65.5 81Q48 88 30.5 81Z" fill="url(#glass)"/>
+<ellipse cx="48" cy="66" rx="20.5" ry="23" fill="url(#glow)"/>
+<path d="M48 78C39 72 41 65 46 58C47 66 54 64 53 71C52 75 50 78 48 78Z" fill="#FFFADE"/>
+<path d="M29 54Q48 63 66 81M67 54Q48 63 30 81" fill="none" stroke="#1B574D" stroke-width="3" stroke-linecap="round" opacity=".76"/>
+<path d="M27 83H69" stroke="#0B3F3A" stroke-width="5" stroke-linecap="round"/>
+<path d="M27 85H69L73 95H23Z" fill="url(#metal)"/>
+<path d="M22 95H74Q79 95 80 105H16Q17 95 22 95Z" fill="url(#cap)"/>
+<path d="M46 81C57 85 53 89 39 92C54 96 57 101 38 105H16C42 99 49 97 29 94C22 92 27 88 43 85Z" fill="url(#road)"/>
 </svg>
