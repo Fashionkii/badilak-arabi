@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">علامة بديلك عربي التجريبية</title>
+  <desc id="desc">مساران يتفرعان من نقطة واحدة للدلالة على البدائل والاختيار</desc>
+  <rect width="64" height="64" rx="10" fill="#173F3D"/>
+  <path d="M32 50V38C32 31 28 27 22 24L16 21" fill="none" stroke="#F7F8F3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 38C32 31 36 27 42 24L48 21" fill="none" stroke="#C79A47" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="16" cy="21" r="3" fill="#B86C43"/>
+  <circle cx="48" cy="21" r="3" fill="#F7F8F3"/>
+</svg>
