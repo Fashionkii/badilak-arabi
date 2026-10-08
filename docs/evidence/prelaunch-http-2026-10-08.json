@@ -1,0 +1,71 @@
+{
+  "commit": "e9b020581fe5786c72d931fdbc632e24897cd4cf",
+  "checkedAt": "2026-10-08T18:56:03.711730+00:00",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/discover/daftra",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/guides/arabic-design",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/disclosure",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/js/feedback.js",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/js/app.js",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/css/fonts.css",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true
+    },
+    {
+      "path": "/discover/qa-not-a-service",
+      "status": 404,
+      "robots": "noindex, follow"
+    }
+  ]
+}

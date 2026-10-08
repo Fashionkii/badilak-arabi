@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-08",
+  "tool": "HYPD AI Lighthouse 13.4 mobile; lab simulation, not field Core Web Vitals",
+  "baselineCommit": "7dd19bca938ec585c727d7bb0cdf31b07c08642c",
+  "baseline": [
+    {
+      "path": "/",
+      "performance": 95,
+      "accessibility": 100,
+      "FCP": 1750.5633,
+      "LCP": 2701.4249,
+      "CLS": 0.0465166,
+      "TBT": 3.5,
+      "bytes": 482243
+    },
+    {
+      "path": "/discover/daftra",
+      "performance": 55,
+      "accessibility": 98,
+      "FCP": 3558.8313,
+      "LCP": 4158.8313,
+      "CLS": 0.681950897,
+      "TBT": 0,
+      "bytes": 493041
+    },
+    {
+      "path": "/guides/arabic-design",
+      "performance": 73,
+      "accessibility": 95,
+      "FCP": 3398.3714,
+      "LCP": 3398.3714,
+      "CLS": 0.22272039,
+      "TBT": 0,
+      "bytes": 324026
+    }
+  ],
+  "firstProductionCommit": "4d7bd8ed3abb5f1e8f05dba07194a9c8015494b3",
+  "firstProduction": [
+    {
+      "path": "/",
+      "fetchTime": "2026-10-08T07:22:45.997Z",
+      "finalUrl": "https://badilak-arabi.vercel.app/",
+      "performance": 93,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1549.011,
+        "largest-contentful-paint": 3150.0399999999995,
+        "cumulative-layout-shift": 0.0009032194089270151,
+        "total-blocking-time": 0,
+        "total-byte-weight": 457405
+      },
+      "warnings": [],
+      "accessibilityFailures": []
+    },
+    {
+      "path": "/discover/daftra",
+      "fetchTime": "2026-10-08T07:22:45.044Z",
+      "finalUrl": "https://badilak-arabi.vercel.app/discover/daftra",
+      "performance": 96,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1768.5565,
+        "largest-contentful-paint": 2562.1575,
+        "cumulative-layout-shift": 0.0005712436687527352,
+        "total-blocking-time": 0,
+        "total-byte-weight": 382063
+      },
+      "warnings": [],
+      "accessibilityFailures": []
+    },
+    {
+      "path": "/guides/arabic-design",
+      "fetchTime": "2026-10-08T07:22:45.307Z",
+      "finalUrl": "https://badilak-arabi.vercel.app/guides/arabic-design",
+      "performance": 99,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 892.362,
+        "largest-contentful-paint": 2138.362,
+        "cumulative-layout-shift": 0.0017499490825520865,
+        "total-blocking-time": 0,
+        "total-byte-weight": 351532
+      },
+      "warnings": [],
+      "accessibilityFailures": []
+    }
+  ],
+  "repeatHomeBeforeConnectionFix": {
+    "path": "/",
+    "fetchTime": "2026-10-08T07:24:12.211Z",
+    "performance": 89,
+    "accessibility": 100,
+    "metrics": {
+      "first-contentful-paint": 1544.221,
+      "largest-contentful-paint": 3710.888,
+      "cumulative-layout-shift": 0.002433158101438622,
+      "total-blocking-time": 20
+    },
+    "warnings": []
+  },
+  "notes": [
+    "Baseline numbers were preserved from earlier actual tool outputs in this workflow; original full baseline LHR not retained.",
+    "Preview scores have authentication-redirect warnings and are intentionally excluded from the final before/after comparison.",
+    "Initial implementation at 04d77e1: Four Arabic font preloads and font-display:optional stabilized layouts; other font subsets load when needed. Google Material Symbols stylesheet and some images still use external services.",
+    "Article transfer bytes increased; there is no claim every page transfers fewer bytes.",
+    "First production home runs exposed worse LCP; the follow-up restores the original Google preconnect hints used by the retained icon stylesheet.",
+    "Restoring Google preconnects alone did not resolve home LCP. Subsequent traces identified a late Cairo Latin/punctuation subset and the remote icon stylesheet.",
+    "The final home preloads Cairo Arabic/Latin and IBM bold Arabic/Latin. Standalone pages retain the tested body/title preloads. All original text-font families and weights remain available.",
+    "The existing Google icon face definition is now inside local fonts.css. The glyph file remains on Google and loads only where needed. The separate render-blocking Google CSS request was removed; observer icons were visually verified.",
+    "The final home performance score of 83 includes an explicit slow-CPU calibration warning. Its LCP is 2677.674 ms and CLS 0.0001892. Do not treat the score as directly comparable to warning-free earlier runs or as an SEO-readiness percentage.",
+    "Do not continue iterative score chasing from these samples. Reassess mobile performance on the chosen final domain/host before launch."
+  ],
+  "additionalProductionRuns": [
+    {
+      "commit": "27021139014c2eefb519ee53f068c382f9d096aa",
+      "path": "/",
+      "fetchTime": "2026-10-08T07:27:14.984Z",
+      "performance": 86,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1789.883,
+        "largest-contentful-paint": 3947.906,
+        "cumulative-layout-shift": 0.0012399217388541028,
+        "total-blocking-time": 34.5,
+        "total-byte-weight": 453679
+      },
+      "warnings": []
+    },
+    {
+      "commit": "1ff816e2a44c51e6bbf523227901df01fdabeefd",
+      "path": "/",
+      "fetchTime": "2026-10-08T07:38:29.122Z",
+      "performance": 88,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1219.7945,
+        "largest-contentful-paint": 3870.8505,
+        "cumulative-layout-shift": 0.0003183191567414135,
+        "total-blocking-time": 22,
+        "total-byte-weight": 436245
+      },
+      "warnings": []
+    },
+    {
+      "commit": "1ff816e2a44c51e6bbf523227901df01fdabeefd",
+      "path": "/discover/daftra",
+      "fetchTime": "2026-10-08T07:38:29.260Z",
+      "performance": 97,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1386.716,
+        "largest-contentful-paint": 2436.716,
+        "cumulative-layout-shift": 0.0006699215323032058,
+        "total-blocking-time": 0,
+        "total-byte-weight": 381519
+      },
+      "warnings": []
+    },
+    {
+      "commit": "1ff816e2a44c51e6bbf523227901df01fdabeefd",
+      "path": "/guides/arabic-design",
+      "fetchTime": "2026-10-08T07:38:27.851Z",
+      "performance": 98,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1061.7225,
+        "largest-contentful-paint": 2343.7225,
+        "cumulative-layout-shift": 0.0017499490825520865,
+        "total-blocking-time": 0,
+        "total-byte-weight": 352039
+      },
+      "warnings": []
+    }
+  ],
+  "controlledHomeComparison": {
+    "context": "Two authenticated preview URLs with redirect warnings, measured minutes apart. Single lab samples; not a stable production benchmark.",
+    "old": {
+      "tree": "9f948f690e85c1cbcc482ba24b2de2db00d5bd26",
+      "rebuildCommit": "4de9d352b9ff92268c14f654ede65db99c2b58fb",
+      "fetchTime": "2026-10-08T07:46:34.406Z",
+      "performance": 82,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1992.3512,
+        "largest-contentful-paint": 4562.7987,
+        "cumulative-layout-shift": 0.04651661379007896,
+        "total-blocking-time": 0,
+        "total-byte-weight": 483019
+      }
+    },
+    "candidate": {
+      "commit": "e9b020581fe5786c72d931fdbc632e24897cd4cf",
+      "fetchTime": "2026-10-08T07:43:15.587Z",
+      "performance": 87,
+      "accessibility": 100,
+      "metrics": {
+        "first-contentful-paint": 1771.204,
+        "largest-contentful-paint": 3765.604,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 60,
+        "total-byte-weight": 437140
+      }
+    },
+    "rejectedRun": "The previous production deployment redirected to Vercel login. Its 43 performance / 91 accessibility result is not a site measurement and is excluded."
+  },
+  "finalHome": {
+    "path": "/",
+    "commit": "e9b020581fe5786c72d931fdbc632e24897cd4cf",
+    "fetchTime": "2026-10-08T18:55:52.828Z",
+    "finalUrl": "https://badilak-arabi.vercel.app/",
+    "performance": 83,
+    "accessibility": 100,
+    "metrics": {
+      "first-contentful-paint": 1569.2590000000018,
+      "largest-contentful-paint": 2677.6740000000036,
+      "cumulative-layout-shift": 0.00018919259483642537,
+      "total-blocking-time": 241.9339999999993,
+      "total-byte-weight": 499547
+    },
+    "warnings": [
+      "The tested device appears to have a slower CPU than  Lighthouse expects. This can negatively affect your performance score. Learn more about [calibrating an appropriate CPU slowdown multiplier](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md#cpu-throttling)."
+    ]
+  },
+  "finalImplementationCommit": "e9b020581fe5786c72d931fdbc632e24897cd4cf"
+}
