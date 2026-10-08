@@ -1598,3 +1598,10 @@ body:not(.guided-discovery):not(.design-lab-page) .human-question{
 #directory .catalog-shell{
   box-shadow:inset 0 0 0 1px rgba(18,55,54,.045),0 8px 24px rgba(18,55,54,.035)!important;
 }
+/* On narrow phones, keep the existing six navigation labels inside the viewport. */
+@media(max-width:380px){
+  .guided-discovery .navigation>a,
+  .guided-discovery .journey-menu>summary{
+    padding-inline:5px!important;
+  }
+}
