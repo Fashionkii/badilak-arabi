@@ -43,7 +43,8 @@ for(const file of [
  'COMPONENT-SPECS-2026-10-08.md',
  'RESPONSIVE-RTL-INTERACTIONS-2026-10-08.md',
  'ADS-PLACEMENTS-2026-10-08.md',
- 'ACCEPTANCE-TESTS-2026-10-08.md'
+ 'ACCEPTANCE-TESTS-2026-10-08.md',
+ 'VISUAL-ASSET-SYSTEM-2026-10-08.md'
 ])fs.copyFileSync(path.join(root,'docs',file),path.join(out,'docs',file));
 const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
