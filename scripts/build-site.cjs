@@ -39,7 +39,7 @@ const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
 const oldOrigin='https://badilak-arabi.vercel.app';
 function prepare(html){
- html=html.split(oldOrigin).join(origin);
+ html=html.split(oldOrigin).join(origin);\n if(!html.includes('/css/design-lab.css')) html=html.replace('<link rel=\"stylesheet\" href=\"/css/app.css\">','<link rel=\"stylesheet\" href=\"/css/app.css\">\\n<link rel=\"stylesheet\" href=\"/css/design-lab.css\">');
  html=html.replace(/<meta\s+name=["']robots["'][^>]*>\s*/gi,'');
  html=html.replace(/<head>/i,'<head>\n<meta name="robots" content="noindex, follow, max-image-preview:large">\n<meta name="badilak:origin" content="'+escape(origin)+'">');
  // Real organization URL; do not invent authors, publication dates or ratings.
