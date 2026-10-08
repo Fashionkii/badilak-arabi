@@ -33,7 +33,7 @@ fs.mkdirSync(out,{recursive:true});
 // Source photos remain in git for regeneration; visitors need covers/social images only.
 const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json'),'utf8'));
 const sourcePhotos=new Set(Object.values(media.articles).map(x=>path.join(root,x.photo)));
-for(const dir of ['css','js','images','guides'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
+for(const dir of ['css','js','images','guides','penpot'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
 for(const file of ['index.html','guides.html','design-lab.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
 fs.mkdirSync(path.join(out,'docs'),{recursive:true});
 for(const file of [
