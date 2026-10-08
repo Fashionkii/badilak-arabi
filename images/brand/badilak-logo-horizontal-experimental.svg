@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+  <title id="title">بديلك عربي — شعار تجريبي</title>
+  <desc id="desc">علامة المسارين والاسم العربي بديلك عربي</desc>
+  <rect width="120" height="120" rx="18" fill="#173F3D"/>
+  <path d="M60 94V70C60 56 52 48 40 42L29 36" fill="none" stroke="#F7F8F3" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60 70C60 56 68 48 80 42L91 36" fill="none" stroke="#C79A47" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="29" cy="36" r="5" fill="#B86C43"/>
+  <circle cx="91" cy="36" r="5" fill="#F7F8F3"/>
+  <text x="500" y="76" text-anchor="end" direction="rtl" unicode-bidi="bidi-override"
+        font-family="Cairo, 'IBM Plex Sans Arabic', Arial, sans-serif"
+        font-size="48" font-weight="700" fill="#173F3D">بديلك عربي</text>
+</svg>
