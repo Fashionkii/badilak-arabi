@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">علامة بديلك عربي أحادية اللون</title>
+  <path d="M32 52V38C32 30 27 25 20 22L14 19M32 38C32 30 37 25 44 22L50 19" fill="none" stroke="#173F3D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="14" cy="19" r="3.5" fill="#173F3D"/>
+  <circle cx="50" cy="19" r="3.5" fill="#173F3D"/>
+</svg>
