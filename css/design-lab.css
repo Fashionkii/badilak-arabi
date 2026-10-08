@@ -1475,3 +1475,103 @@ body:not(.guided-discovery):not(.design-lab-page) article::before{
   }
   .lab-decor-grid{grid-template-columns:1fr}
 }
+
+
+/* Design lab — Modern Clean direction 3 (2026-10-08)
+   Only typography + colors/backgrounds; current layouts/assets/routes remain unchanged. */
+:root{
+  /* Chosen modern-clean palette; use one coherent accent. */
+  --lab-petrol:#123736;
+  --lab-petrol-2:#0F2D2D;
+  --lab-ivory:#FAFBF8;
+  --lab-ivory-2:#FFFFFF;
+  --lab-sand:#D8D3C7;
+  --lab-gold:#9B6A3D;
+  --lab-clay:#9B6A3D;
+  --lab-ink:#253331;
+  --lab-muted:#5D6B65;
+  --lab-line:rgba(18,55,54,.14);
+  --lab-bg:#FAFBF8;
+  --deep:var(--lab-petrol);
+  --sunrise:var(--lab-clay);
+  --sunrise-dark:#80532D;
+  --line:var(--lab-sand);
+  --white:var(--lab-ivory-2);
+  --ink:var(--lab-ink);
+  --muted:var(--lab-muted);
+
+  /* All freely licensed on Google Fonts. Keep Marhey logo + IBM long copy. */
+  --ui:"Almarai","Cairo",sans-serif;
+  --clean-ui:"Almarai","Cairo",sans-serif;
+  --heading-font:"Almarai","Cairo",sans-serif;
+  --text:"IBM Plex Sans Arabic","Cairo",sans-serif;
+  --clean-text:"IBM Plex Sans Arabic","Cairo",sans-serif;
+  --display:"Marhey","Cairo",sans-serif;
+}
+html{background:#FAFBF8!important}
+body{
+  color:#253331!important;
+  background:
+    radial-gradient(circle at 96% 4%,rgba(216,211,199,.22),transparent 31rem),
+    linear-gradient(180deg,#FAFBF8 0%,#EDF4EE 56%,#FAFBF8 100%)!important;
+}
+.site-header{
+  background:rgba(250,251,248,.96)!important;
+  border-bottom-color:rgba(18,55,54,.12)!important;
+}
+.navigation>a,.journey-menu>summary,
+.origin-heading h2,.portal-field-label,.section-head h2,
+.competition-head h2,.learning-group-title,.guide h3,.knowledge h3,
+.monitor-card h3,.catalog-grid .item-name,.quick-title{
+  font-family:var(--ui)!important;
+}
+.experimental-brand-wordmark,.experimental-hero-brand,.lab-wordmark{
+  font-family:var(--display)!important;
+}
+.intro-promise{font-family:var(--ui)!important;color:#123736!important}
+.intro-description,.section-copy,.section-human-note{color:#5D6B65!important}
+.intro-link{background:#123736!important;color:#fff!important}
+.intro-link:hover{background:#0F2D2D!important}
+.section.alt,.updates-warm{
+  background:rgba(237,244,238,.72)!important;
+  border-block-color:rgba(18,55,54,.10)!important;
+}
+.origin-explorer,.portal-bar,.catalog-shell,
+.learning-toolbar,.local-nav,.guides,.nominate,.modal-card{
+  border-color:rgba(18,55,54,.14)!important;
+}
+.origin-explorer,.portal-bar,.learning-toolbar,
+.local-nav,.guides,.nominate,.modal-card{
+  background:rgba(250,251,248,.92)!important;
+}
+.catalog-grid>.item,.learning-card,.guide,.knowledge,.monitor-card,.discovery-card,
+.origin-option,.portal-btn{
+  background:#fff!important;
+  border-color:rgba(18,55,54,.13)!important;
+}
+.origin-option:hover,.portal-btn:hover,
+.catalog-grid>.item:hover,.learning-card:hover,.guide:hover,
+.knowledge:hover,.monitor-card:hover,.discovery-card:hover{
+  border-color:rgba(155,106,61,.35)!important;
+}
+.portal-field-icon,.guide-intent,.origin-hint,
+.eyebrow,.card-shelf-head small{color:#80532D!important}
+.country-badge,.origin-mini,.guide-intent,.monitor-status{
+  background:#EDF4EE!important;
+  border-color:rgba(155,106,61,.20)!important;
+  color:#684522!important;
+}
+.item-logo,.learning-logo,.detail-logo{
+  background:#FAFBF8!important;
+  border-color:#D8D3C7!important;
+}
+.footer{background:#123736!important;border-top-color:#9B6A3D!important}
+body:not(.guided-discovery):not(.design-lab-page) article{
+  background:
+    linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/96px 1px no-repeat,
+    linear-gradient(var(--lab-petrol),var(--lab-petrol)) top right/1px 62px no-repeat,
+    linear-gradient(var(--lab-clay),var(--lab-clay)) bottom left/82px 1px no-repeat,
+    linear-gradient(var(--lab-clay),var(--lab-clay)) bottom left/1px 48px no-repeat,
+    #FFFFFF!important;
+}
+/* Commercial examples, their labels/placements and functions stay untouched. */
