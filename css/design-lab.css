@@ -513,16 +513,7 @@ body{
   font-size:1rem!important;
 }
 
-/* Directory: flatter, more editorial, information-first. */
-.catalog-shell{
-  border:0!important;
-  border-top:1px solid var(--lab-line)!important;
-  border-bottom:1px solid var(--lab-line)!important;
-  border-radius:0!important;
-  background:transparent!important;
-  padding:0!important;
-  box-shadow:none!important;
-}
+
 .directory-refine-triggers{
   padding-block:14px!important;
 }
@@ -536,43 +527,17 @@ body{
   border-radius:4px!important;
   background:var(--lab-surface)!important;
 }
-.catalog-grid{
-  gap:0!important;
-  border-top:1px solid var(--lab-line)!important;
-}
-.catalog-grid>.item{
-  border:0!important;
-  border-bottom:1px solid var(--lab-line)!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  padding-block:20px!important;
-}
-.catalog-grid>.item:hover{
-  background:rgba(255,255,255,.58)!important;
-  border-color:var(--lab-line)!important;
-  box-shadow:none!important;
-}
+
+
+
 .item-logo,.learning-logo,.detail-logo{
   border-radius:4px!important;
   background:#EEF2EF!important;
 }
 
-/* Editorial/content cards: remove uniform-card feel. */
-.discovery-shelf,.monitor-grid,.learning-grid,.guide-grid{
-  gap:0!important;
-}
-.discovery-card,.monitor-card,.learning-card,.guide,.knowledge{
-  border:0!important;
-  border-bottom:1px solid var(--lab-line)!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-.discovery-card:hover,.monitor-card:hover,.learning-card:hover,.guide:hover{
-  background:rgba(255,255,255,.58)!important;
-  box-shadow:none!important;
-}
+
+
+
 .discovery-card:first-child{
   background:transparent!important;
   color:inherit!important;
@@ -1636,4 +1601,9 @@ body:not(.guided-discovery):not(.design-lab-page) .quick-answer{
 body:not(.guided-discovery):not(.design-lab-page) .human-question{
   background:#EDF4EE!important;
   border-color:#D8D3C7!important;
+}
+
+/* Restore inherited light frames, while keeping the clean palette and decorative corner motifs. */
+#directory .catalog-shell{
+  box-shadow:inset 0 0 0 1px rgba(18,55,54,.045),0 8px 24px rgba(18,55,54,.035)!important;
 }
