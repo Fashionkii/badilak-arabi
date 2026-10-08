@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1200" viewBox="0 0 390 1200">
+<rect width="390" height="1200" fill="#F7F8F3"/>
+<rect width="390" height="66" fill="#F7F8F3" stroke="#D9E0DC"/>
+<text x="350" y="41" text-anchor="end" direction="rtl" font-family="Cairo" font-size="21" font-weight="700" fill="#173F3D">بديلك عربي</text><text x="34" y="41" font-family="Cairo" font-size="20" fill="#173F3D">☰</text>
+<g transform="translate(24 110)">
+  <text x="342" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="12" font-weight="700" fill="#A65F3B">اكتشاف · مقارنة · اختيار</text>
+  <text x="342" y="48" text-anchor="end" direction="rtl" font-family="Cairo" font-size="31" font-weight="700" fill="#173F3D">ابدأ من حاجتك.</text>
+  <text x="342" y="90" text-anchor="end" direction="rtl" font-family="Cairo" font-size="31" font-weight="700" fill="#173F3D">قارن الخيارات العربية.</text>
+  <text x="342" y="132" text-anchor="end" direction="rtl" font-family="Cairo" font-size="31" font-weight="700" fill="#173F3D">ثم اختر ما يناسبك.</text>
+  <text x="342" y="180" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="14" fill="#66716D">أدوات وخدمات ومصادر عربية للعمل والتعلّم والمعرفة.</text>
+</g>
+<line x1="24" y1="330" x2="366" y2="330" stroke="#D9E0DC"/>
+<text x="366" y="380" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">ابدأ بما تعرفه</text>
+<g transform="translate(24 420)">
+  <rect x="0" y="0" width="164" height="52" fill="#fff" stroke="#D9E0DC"/><text x="82" y="31" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#173F3D">ChatGPT</text>
+  <rect x="178" y="0" width="164" height="52" fill="#fff" stroke="#D9E0DC"/><text x="260" y="31" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#173F3D">Canva</text>
+  <rect x="0" y="64" width="164" height="52" fill="#fff" stroke="#D9E0DC"/><text x="82" y="95" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#173F3D">Drive</text>
+  <rect x="178" y="64" width="164" height="52" fill="#fff" stroke="#D9E0DC"/><text x="260" y="95" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#173F3D">Coursera</text>
+</g>
+<line x1="24" y1="590" x2="366" y2="590" stroke="#D9E0DC"/>
+<text x="366" y="640" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">أو ابدأ من مجالك</text>
+<g transform="translate(24 680)">
+  <rect width="342" height="60" fill="#fff" stroke="#D9E0DC"/><text x="320" y="37" text-anchor="end" direction="rtl" font-family="Cairo" font-size="15" font-weight="700" fill="#173F3D">تقنية وذكاء اصطناعي</text>
+  <rect y="72" width="342" height="60" fill="#fff" stroke="#D9E0DC"/><text x="320" y="109" text-anchor="end" direction="rtl" font-family="Cairo" font-size="15" font-weight="700" fill="#173F3D">شغلك ومشروعك</text>
+  <rect y="144" width="342" height="60" fill="#fff" stroke="#D9E0DC"/><text x="320" y="181" text-anchor="end" direction="rtl" font-family="Cairo" font-size="15" font-weight="700" fill="#173F3D">تسوّق وشراء</text>
+</g>
+</svg>
