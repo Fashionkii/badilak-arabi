@@ -114,30 +114,96 @@
       </div>
     </section>
 
-    <section class="lab-card third">
-      <h2>Mobile</h2>
-      <p>اختبار مبسط لإيقاع العناصر والمسافات على شاشة ضيقة.</p>
-      <div class="lab-mobile">
-        <div class="lab-mobile-head">بديلك عربي</div>
-        <div class="lab-mobile-body">
-          <div class="lab-mobile-block tall"></div>
-          <div class="lab-mobile-block"></div>
-          <div class="lab-mobile-block"></div>
-          <div class="lab-mobile-block"></div>
+    <section class="lab-card full" id="components">
+      <h2>مكتبة المكوّنات والحالات</h2>
+      <p>دي حالات تنفيذ فعلية قابلة للنقل، وليست صورًا ثابتة.</p>
+      <div class="lab-component-grid">
+        <div class="lab-component">
+          <h3>Buttons</h3>
+          <div class="lab-inline">
+            <button class="lab-btn primary" type="button">إجراء أساسي</button>
+            <button class="lab-btn secondary" type="button">إجراء ثانوي</button>
+            <a class="lab-text-link" href="#components">رابط نصي ←</a>
+          </div>
+        </div>
+        <div class="lab-component">
+          <h3>Search</h3>
+          <label class="lab-search-demo"><span class="sr-only">بحث تجريبي</span><input type="search" placeholder="ابحث عن أداة أو خدمة"><button type="button">بحث</button></label>
+        </div>
+        <div class="lab-component">
+          <h3>Tabs / Selected</h3>
+          <div class="lab-tabs" role="tablist" aria-label="مثال تبويبات"><button class="active" role="tab" aria-selected="true">الكل</button><button role="tab">أدوات</button><button role="tab">تعلّم</button></div>
+        </div>
+        <div class="lab-component">
+          <h3>Focus</h3>
+          <a class="lab-focus-demo" href="#components">اضغط Tab وشاهد حالة التركيز</a>
+        </div>
+        <div class="lab-component">
+          <h3>Loading</h3>
+          <div class="lab-state loading" aria-label="تحميل"><i></i><i></i><i></i></div>
+        </div>
+        <div class="lab-component">
+          <h3>Empty</h3>
+          <div class="lab-state empty"><strong>لا توجد نتائج مطابقة</strong><span>غيّر الفلتر أو جرّب كلمة أوسع.</span></div>
+        </div>
+        <div class="lab-component">
+          <h3>Error</h3>
+          <div class="lab-state error"><strong>تعذر تحميل النتائج</strong><span>المحتوى الحالي يظل محفوظًا، ويمكن إعادة المحاولة.</span></div>
+        </div>
+        <div class="lab-component">
+          <h3>Product / Decision row</h3>
+          <div class="lab-decision-row">
+            <div><strong>اسم المنتج</strong><span>المهمة الأساسية في سطر واضح.</span></div>
+            <dl><div><dt>الفائدة</dt><dd>ما الذي يميّزه؟</dd></div><div><dt>أهم قيد</dt><dd>ما الذي يجب أن تعرفه؟</dd></div><div><dt>المصدر</dt><dd>مرجع التحقق</dd></div></dl>
+            <a href="#screens">عرض التفاصيل ←</a>
+          </div>
+        </div>
+        <div class="lab-component">
+          <h3>Responsive ad placeholder</h3>
+          <div class="lab-ad compact"><small>مساحة محجوزة — معاينة فقط</small><strong>الحاوية تتكيف مع العرض</strong><span>لا يوجد ارتفاع ثابت ولا ادعاء إعلان مفعّل.</span></div>
         </div>
       </div>
     </section>
 
-    <section class="lab-card" style="grid-column:span 8">
+    <section class="lab-card full" id="screens">
+      <h2>الشاشات الفعلية — Desktop / Mobile</h2>
+      <p>المعاينات التالية تحمل الصفحات الحقيقية من نفس الفرع التجريبي؛ أي تغيير في الكود يظهر فيها مباشرة.</p>
+      <div class="lab-screen-list">
+        <article class="lab-screen-set">
+          <div class="lab-screen-head"><div><strong>الرئيسية</strong><span>الوعد → ابدأ بما تعرفه → المجالات</span></div><a href="/" target="_blank">فتح الصفحة ↗</a></div>
+          <div class="lab-screen-grid"><div class="lab-browser desktop"><b>Desktop</b><iframe title="الرئيسية على سطح المكتب" src="/" loading="lazy"></iframe></div><div class="lab-browser mobile"><b>Mobile 390</b><iframe title="الرئيسية على الموبايل" src="/" loading="lazy"></iframe></div></div>
+        </article>
+        <article class="lab-screen-set">
+          <div class="lab-screen-head"><div><strong>الدليل / مجال</strong><span>الفلاتر والنتائج ومسارات الانتقال</span></div><a href="/category/tech" target="_blank">فتح الصفحة ↗</a></div>
+          <div class="lab-screen-grid"><div class="lab-browser desktop"><b>Desktop</b><iframe title="الدليل على سطح المكتب" src="/category/tech" loading="lazy"></iframe></div><div class="lab-browser mobile"><b>Mobile 390</b><iframe title="الدليل على الموبايل" src="/category/tech" loading="lazy"></iframe></div></div>
+        </article>
+        <article class="lab-screen-set">
+          <div class="lab-screen-head"><div><strong>التفاصيل</strong><span>الفائدة والقيد والمصدر والانتقال الخارجي</span></div><a href="/discover/midaad" target="_blank">فتح الصفحة ↗</a></div>
+          <div class="lab-screen-grid"><div class="lab-browser desktop"><b>Desktop</b><iframe title="تفاصيل المنتج على سطح المكتب" src="/discover/midaad" loading="lazy"></iframe></div><div class="lab-browser mobile"><b>Mobile 390</b><iframe title="تفاصيل المنتج على الموبايل" src="/discover/midaad" loading="lazy"></iframe></div></div>
+        </article>
+        <article class="lab-screen-set">
+          <div class="lab-screen-head"><div><strong>المقال</strong><span>قراءة هادئة ومصادر واضحة وعودة مفهومة</span></div><a href="/guides/arabic-ai" target="_blank">فتح الصفحة ↗</a></div>
+          <div class="lab-screen-grid"><div class="lab-browser desktop"><b>Desktop</b><iframe title="المقال على سطح المكتب" src="/guides/arabic-ai" loading="lazy"></iframe></div><div class="lab-browser mobile"><b>Mobile 390</b><iframe title="المقال على الموبايل" src="/guides/arabic-ai" loading="lazy"></iframe></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="lab-card full">
       <h2>شروط النقل للمبرمج أو AI</h2>
       <p>دي شروط تنفيذ، وليست Copy للموقع.</p>
       <div class="lab-checks">
-        <div class="lab-check"><strong>RTL حقيقي</strong>الأسهم، الـbreadcrumbs، البحث، الموبايل والأرقام المختلطة تُختبر فعليًا.</div>
+        <div class="lab-check"><strong>RTL حقيقي</strong>الأسهم والبحث والموبايل والأرقام المختلطة تُختبر فعليًا.</div>
         <div class="lab-check"><strong>قابلية الوصول</strong>Focus واضح، Contrast كافٍ، وTargets مناسبة للمس.</div>
         <div class="lab-check"><strong>أداء خفيف</strong>SVG للأيقونات واللوجو، صور محسنة، ولا JavaScript للزينة فقط.</div>
         <div class="lab-check"><strong>لا تغيير بيانات</strong>النصوص والروابط والمصادر والسلوك تأتي من مصدر الموقع الحالي.</div>
         <div class="lab-check"><strong>إعلانات مرنة</strong>المواضع المحجوزة تبقى ظاهرة ولا تُعامل كإعلانات نشطة.</div>
-        <div class="lab-check"><strong>لا حبس داخل أداة</strong>النتيجة النهائية يجب أن تُترجم إلى CSS/Tokens/SVG ومواصفات قابلة للنقل.</div>
+        <div class="lab-check"><strong>نقل انتقائي</strong>لا يُنقل Overlay كامل إلى main؛ يُعاد تطبيق القرارات المعتمدة بأصغر Diff نظيف.</div>
+      </div>
+      <div class="lab-spec-links">
+        <a href="/docs/DESIGN-TOKENS-2026-10-08.md" target="_blank">Design Tokens</a>
+        <a href="/docs/RESPONSIVE-RTL-INTERACTIONS-2026-10-08.md" target="_blank">Responsive / RTL / Interactions</a>
+        <a href="/docs/ADS-PLACEMENTS-2026-10-08.md" target="_blank">Ads</a>
+        <a href="/docs/ACCEPTANCE-TESTS-2026-10-08.md" target="_blank">Acceptance Tests</a>
       </div>
     </section>
   </div>
