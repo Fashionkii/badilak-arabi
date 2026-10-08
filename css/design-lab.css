@@ -1674,4 +1674,4 @@ body:not(.guided-discovery):not(.design-lab-page) .human-question{
 /* Advertising reservations, examples, data, text and behavior left unchanged. */
 
 /* Put the qandil AFTER the Arabic name, visually left in RTL. */
-.experimental-brand,.experimental-hero-brand{flex-direction:row-reverse!important}
+.experimental-brand,.experimental-hero-brand{direction:rtl!important;flex-direction:row-reverse!important}
