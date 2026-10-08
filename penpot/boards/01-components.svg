@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1500" viewBox="0 0 1440 1500">
+<rect width="1440" height="1500" fill="#F7F8F3"/>
+<text x="1320" y="80" text-anchor="end" direction="rtl" font-family="Cairo" font-size="36" font-weight="700" fill="#173F3D">بديلك عربي — Components</text>
+<g transform="translate(120 140)">
+  <text x="1200" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">Buttons</text>
+  <rect x="820" y="35" width="180" height="48" rx="4" fill="#173F3D"/><text x="910" y="66" text-anchor="middle" direction="rtl" font-family="Cairo" font-size="16" font-weight="700" fill="#fff">إجراء أساسي</text>
+  <rect x="1020" y="35" width="180" height="48" rx="4" fill="#fff" stroke="#173F3D"/><text x="1110" y="66" text-anchor="middle" direction="rtl" font-family="Cairo" font-size="16" font-weight="700" fill="#173F3D">إجراء ثانوي</text>
+  <text x="760" y="66" text-anchor="end" direction="rtl" font-family="Cairo" font-size="15" font-weight="700" fill="#173F3D">رابط نصي ←</text>
+</g>
+<g transform="translate(120 270)">
+  <text x="1200" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">Search / Tabs</text>
+  <rect x="650" y="35" width="550" height="48" fill="#fff" stroke="#D9E0DC"/><text x="1175" y="65" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="15" fill="#66716D">ابحث عن أداة أو خدمة</text>
+  <rect x="500" y="35" width="130" height="48" fill="#173F3D"/><text x="565" y="65" text-anchor="middle" direction="rtl" font-family="Cairo" font-size="15" font-weight="700" fill="#fff">بحث</text>
+  <g transform="translate(0 125)">
+    <text x="1200" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="17" font-weight="700" fill="#173F3D">الكل</text><line x1="1120" y1="20" x2="1200" y2="20" stroke="#173F3D" stroke-width="3"/>
+    <text x="1080" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="17" fill="#66716D">أدوات</text>
+    <text x="960" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="17" fill="#66716D">تعلّم</text>
+  </g>
+</g>
+<g transform="translate(120 530)">
+  <text x="1200" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">Decision Row</text>
+  <rect x="0" y="35" width="1200" height="190" fill="#fff" stroke="#D9E0DC"/>
+  <text x="1140" y="80" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">اسم المنتج العربي</text>
+  <text x="1140" y="115" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="16" fill="#66716D">المهمة الأساسية في سطر واضح، بدون اختراع بيانات غير موجودة.</text>
+  <g transform="translate(300 140)">
+    <text x="760" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="14" font-weight="700" fill="#173F3D">الفائدة</text>
+    <text x="500" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="14" font-weight="700" fill="#A65F3B">أهم قيد</text>
+    <text x="250" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="14" font-weight="700" fill="#A77F2F">المصدر</text>
+  </g>
+</g>
+<g transform="translate(120 800)">
+  <text x="1200" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">States</text>
+  <g transform="translate(0 35)">
+    <rect x="800" width="400" height="150" fill="#fff" stroke="#D9E0DC"/><text x="1160" y="55" text-anchor="end" direction="rtl" font-family="Cairo" font-size="18" font-weight="700" fill="#173F3D">لا توجد نتائج مطابقة</text><text x="1160" y="90" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="14" fill="#66716D">غيّر الفلتر أو جرّب كلمة أوسع.</text>
+    <rect x="380" width="390" height="150" fill="#FFF9F5" stroke="#A65F3B"/><text x="730" y="55" text-anchor="end" direction="rtl" font-family="Cairo" font-size="18" font-weight="700" fill="#A65F3B">تعذر تحميل النتائج</text><text x="730" y="90" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="14" fill="#66716D">المحتوى الحالي يظل محفوظًا.</text>
+    <rect x="0" width="350" height="150" fill="#fff" stroke="#D9E0DC"/><rect x="30" y="35" width="220" height="14" fill="#EEF1EC"/><rect x="30" y="65" width="280" height="14" fill="#EEF1EC"/><rect x="30" y="95" width="190" height="14" fill="#EEF1EC"/>
+  </g>
+</g>
+<g transform="translate(120 1060)">
+  <text x="1200" y="0" text-anchor="end" direction="rtl" font-family="Cairo" font-size="22" font-weight="700" fill="#173F3D">Responsive commercial placeholder</text>
+  <rect x="0" y="35" width="1200" height="150" fill="#FFFDF8" stroke="#A65F3B" stroke-dasharray="8 8"/>
+  <text x="1140" y="78" text-anchor="end" direction="rtl" font-family="Cairo" font-size="14" font-weight="700" fill="#A65F3B">مساحة محجوزة — معاينة فقط</text>
+  <text x="1140" y="112" text-anchor="end" direction="rtl" font-family="Cairo" font-size="19" font-weight="700" fill="#173F3D">محتوى تجاري أو رعاية مستقبلًا</text>
+  <text x="1140" y="143" text-anchor="end" direction="rtl" font-family="IBM Plex Sans Arabic" font-size="14" fill="#66716D">Responsive ولا يفرض ارتفاعًا ثابتًا على إعلان مستقبلي.</text>
+</g>
+</svg>
