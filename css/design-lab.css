@@ -1,6 +1,8 @@
 /* Badilak Arabi — side design lab visual layer
    Branch: design-lab-20261008
    Scope: visual/layout only. Production copy, data, links and behavior stay in their original files. */
+@import url("https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap");
+
 
 :root{
   --lab-petrol:#173F3D;
@@ -1606,4 +1608,32 @@ body.guided-discovery .portal-btn[aria-current]{
 body.guided-discovery .footer{
   background:transparent!important;
   border-top-color:#D8D3C7!important;
+}
+
+
+/* Modern-clean typography and background on guides/article pages.
+   Reuses the same freely licensed font and keeps content/layout unchanged. */
+body:not(.guided-discovery):not(.design-lab-page){
+  background:linear-gradient(180deg,#FAFBF8 0%,#EDF4EE 60%,#FAFBF8 100%)!important;
+  color:#253331!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) .top{
+  background:rgba(18,55,54,.98)!important;
+  border-bottom-color:#9B6A3D!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) .brand{
+  font-family:"Marhey","Cairo",sans-serif!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) :is(h1,h2,h3){
+  font-family:"Almarai","Cairo",sans-serif!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) :is(.toplinks a,.hubnav a,.kicker,.stamp,.quick-answer .eyebrow,.human-question>span,.human-question>strong){
+  font-family:"Almarai","Cairo",sans-serif!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) .quick-answer{
+  background:#123736!important;
+}
+body:not(.guided-discovery):not(.design-lab-page) .human-question{
+  background:#EDF4EE!important;
+  border-color:#D8D3C7!important;
 }
