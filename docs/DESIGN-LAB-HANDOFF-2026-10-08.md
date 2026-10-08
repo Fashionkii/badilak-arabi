@@ -39,3 +39,13 @@
 
 ## خلاصة التحليل متعدد الأدوات
 راجع: `docs/DESIGN-SYNTHESIS-2026-10-08.md`.
+
+
+## ملفات التسليم التفصيلية
+- `docs/DESIGN-TOKENS-2026-10-08.md`
+- `docs/COMPONENT-SPECS-2026-10-08.md`
+- `docs/RESPONSIVE-RTL-INTERACTIONS-2026-10-08.md`
+- `docs/ADS-PLACEMENTS-2026-10-08.md`
+- `docs/ACCEPTANCE-TESTS-2026-10-08.md`
+
+هذه الملفات تصف المرشح التجريبي. لا يحوّل وجودها أي جزء إلى قرار معتمد من المستخدم.
