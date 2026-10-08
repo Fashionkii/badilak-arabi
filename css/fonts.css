@@ -1,4 +1,14 @@
 /* Same Google Fonts families/weights, served locally. See fonts/SOURCES.json. */
+/* Existing 14-icon subset from Google Fonts (2026-10-08). Its glyph file remains
+   on Google; defining the face here avoids a render-blocking remote stylesheet.
+   Source: https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=account_tree,code,description,headphones,language,menu_book,mic,movie,school,shield,shopping_bag,slideshow,sports_esports,work&display=block */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/l/font?kit=kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejdc8kzUJPvbB_992W88O_DfwqcidEBtLxJHdVtt4stVJ1rpmu9zEIeWcXhlxzLP0smKJPGaQ&skey=b8dc2088854b122f&v=v375) format('woff2');
+}
 /* arabic */
 @font-face {
   font-family: 'Cairo';
