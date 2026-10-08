@@ -35,6 +35,16 @@ const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json')
 const sourcePhotos=new Set(Object.values(media.articles).map(x=>path.join(root,x.photo)));
 for(const dir of ['css','js','images','guides'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
 for(const file of ['index.html','guides.html','design-lab.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
+fs.mkdirSync(path.join(out,'docs'),{recursive:true});
+for(const file of [
+ 'DESIGN-LAB-HANDOFF-2026-10-08.md',
+ 'DESIGN-SYNTHESIS-2026-10-08.md',
+ 'DESIGN-TOKENS-2026-10-08.md',
+ 'COMPONENT-SPECS-2026-10-08.md',
+ 'RESPONSIVE-RTL-INTERACTIONS-2026-10-08.md',
+ 'ADS-PLACEMENTS-2026-10-08.md',
+ 'ACCEPTANCE-TESTS-2026-10-08.md'
+])fs.copyFileSync(path.join(root,'docs',file),path.join(out,'docs',file));
 const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
 const oldOrigin='https://badilak-arabi.vercel.app';
