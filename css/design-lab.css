@@ -677,3 +677,47 @@ body{
     padding-block:16px!important;
   }
 }
+
+
+/* Experimental portable brand lockup — branch only */
+.experimental-brand{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  color:var(--lab-petrol)!important;
+  white-space:nowrap!important;
+}
+.experimental-brand-mark{
+  width:34px!important;
+  height:34px!important;
+  flex:0 0 auto!important;
+}
+.experimental-brand-wordmark{
+  font-family:"Marhey",var(--ui),sans-serif!important;
+  font-size:1.08rem!important;
+  font-weight:700!important;
+  line-height:1!important;
+  color:var(--lab-petrol)!important;
+}
+.experimental-hero-brand{
+  margin:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:14px!important;
+  color:var(--lab-petrol)!important;
+  font-family:"Marhey",var(--ui),sans-serif!important;
+  font-size:clamp(2rem,4vw,3.5rem)!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+}
+.experimental-hero-mark{
+  width:64px!important;
+  height:64px!important;
+  flex:0 0 auto!important;
+}
+@media(max-width:760px){
+  .experimental-brand-mark{width:30px!important;height:30px!important}
+  .experimental-brand-wordmark{font-size:1rem!important}
+  .experimental-hero-brand{font-size:2rem!important;gap:10px!important}
+  .experimental-hero-mark{width:50px!important;height:50px!important}
+}
