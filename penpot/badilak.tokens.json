@@ -1,0 +1,51 @@
+{
+  "Badilak Global": {
+    "color": {
+      "brand": {
+        "petrol": { "$value": "#173F3D", "$type": "color", "$description": "Primary identity color" },
+        "petrolDark": { "$value": "#102F2E", "$type": "color", "$description": "Dark identity shade" },
+        "clay": { "$value": "#A65F3B", "$type": "color", "$description": "Constraint / warning accent" },
+        "gold": { "$value": "#A77F2F", "$type": "color", "$description": "Source / verified accent" }
+      },
+      "text": {
+        "ink": { "$value": "#26312F", "$type": "color" },
+        "muted": { "$value": "#66716D", "$type": "color" }
+      },
+      "surface": {
+        "page": { "$value": "#F7F8F3", "$type": "color" },
+        "base": { "$value": "#FFFFFF", "$type": "color" },
+        "soft": { "$value": "#FBFCF8", "$type": "color" },
+        "line": { "$value": "#D9E0DC", "$type": "color" }
+      }
+    },
+    "spacing": {
+      "1": { "$value": "4px", "$type": "dimension" },
+      "2": { "$value": "8px", "$type": "dimension" },
+      "3": { "$value": "12px", "$type": "dimension" },
+      "4": { "$value": "16px", "$type": "dimension" },
+      "6": { "$value": "24px", "$type": "dimension" },
+      "8": { "$value": "32px", "$type": "dimension" },
+      "12": { "$value": "48px", "$type": "dimension" },
+      "16": { "$value": "64px", "$type": "dimension" },
+      "20": { "$value": "80px", "$type": "dimension" }
+    },
+    "radius": {
+      "sm": { "$value": "4px", "$type": "dimension" },
+      "md": { "$value": "6px", "$type": "dimension" },
+      "pill": { "$value": "999px", "$type": "dimension" }
+    },
+    "size": {
+      "touchTarget": { "$value": "44px", "$type": "dimension" },
+      "pageMax": { "$value": "1180px", "$type": "dimension" },
+      "articleMax": { "$value": "760px", "$type": "dimension" }
+    },
+    "font": {
+      "display": { "$value": "Marhey", "$type": "fontFamily" },
+      "ui": { "$value": "Cairo", "$type": "fontFamily" },
+      "body": { "$value": "IBM Plex Sans Arabic", "$type": "fontFamily" },
+      "regular": { "$value": "400", "$type": "fontWeight" },
+      "medium": { "$value": "500", "$type": "fontWeight" },
+      "bold": { "$value": "700", "$type": "fontWeight" }
+    }
+  }
+}
