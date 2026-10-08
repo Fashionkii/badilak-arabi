@@ -1675,3 +1675,6 @@ body:not(.guided-discovery):not(.design-lab-page) .human-question{
 
 /* Put the qandil AFTER the Arabic name, visually left in RTL. */
 .experimental-brand,.experimental-hero-brand{direction:rtl!important;flex-direction:row-reverse!important}
+
+/* Hero has an inherited display:block!important; give its symbol/text a true RTL flex lockup. */
+body.guided-discovery .intro-heading h1.experimental-hero-brand{display:inline-flex!important;direction:rtl!important;flex-direction:row-reverse!important}
