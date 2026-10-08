@@ -721,3 +721,10 @@ body{
   .experimental-hero-brand{font-size:2rem!important;gap:10px!important}
   .experimental-hero-mark{width:50px!important;height:50px!important}
 }
+
+.lab-top-links{display:flex;gap:8px;flex-wrap:wrap}
+.lab-asset-links{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.lab-asset-links a{display:inline-flex;min-height:38px;align-items:center;padding:7px 10px;border:1px solid var(--lab-line);border-radius:4px;background:#fff;font-family:var(--ui);font-size:.62rem;font-weight:700;color:var(--lab-petrol)!important}
+.lab-logo-current{display:flex;align-items:center;justify-content:center;min-height:170px;margin:0 0 16px;border:1px solid var(--lab-line);background:#fff;padding:22px}
+.lab-logo-current img{width:min(520px,100%);height:auto}
+.lab-mark-image{display:block!important;object-fit:contain!important;padding:0!important;background:transparent!important}
