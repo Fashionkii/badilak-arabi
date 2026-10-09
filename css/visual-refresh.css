@@ -108,6 +108,7 @@ body:not(.guided-discovery) .top { background:rgba(250,251,248,.97); border-bott
 body:not(.guided-discovery) :is(.top .brand,.toplinks a,.hubnav a) { color:var(--deep); }
 body:not(.guided-discovery) .quick-answer { background:var(--deep); }
 body:not(.guided-discovery) .human-question { background:#EDF4EE!important; border-color:var(--line)!important; }
+body:not(.guided-discovery) :is(.human-question>span,.lens:not(.warn)>small) { color:var(--sunrise-dark); }
 body:not(.guided-discovery) article { background:#FFFFFF; border-color:var(--card-line); }
 @media(max-width:760px) {
   .intro .brand-lantern { width:36px; height:42px; }
