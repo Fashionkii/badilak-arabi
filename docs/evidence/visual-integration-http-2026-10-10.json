@@ -1,0 +1,48 @@
+{
+  "checked_at_utc": "2026-10-09T23:47:59.681837+00:00",
+  "implementation": "fd616252971aa92db44c94eb0cf93b7eabbfbe58",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "noindex_header": "noindex, follow",
+      "matches_build": true,
+      "sha256": "bafa180206f5782a88af76b5bde4de0d5543d8e39b20b0461ff65d08a9e06edb",
+      "bytes": 43317
+    },
+    {
+      "route": "/css/visual-refresh.css",
+      "status": 200,
+      "noindex_header": "noindex, follow",
+      "matches_build": true,
+      "sha256": "eb1accf60a350482503e6e3d11a141690e22a0d21279ab074503b433b70cd3e9",
+      "bytes": 4936
+    },
+    {
+      "route": "/discover/dhawwi",
+      "status": 200,
+      "noindex_header": "noindex, follow",
+      "matches_build": true,
+      "sha256": "179c7aed1130e2f9b1a7b07a345421459246bcd190da9f4ff050d6c1a0564957",
+      "bytes": 10650,
+      "checked_at_utc": "2026-10-09T23:49:33.688670+00:00"
+    },
+    {
+      "route": "/guides/arabic-design",
+      "status": 200,
+      "noindex_header": "noindex, follow",
+      "matches_build": true,
+      "sha256": "ab0b7048f26f3f07a064e42f8b4e8f95dd6cf7df3cbe19df9d44de094afa2b2b",
+      "bytes": 20730
+    },
+    {
+      "route": "/fonts/almarai-700.woff2",
+      "status": 200,
+      "noindex_header": "noindex, follow",
+      "matches_build": true,
+      "sha256": "46dc55a6c34393f5ee3cedbb79f9a4fca27cdbaf8074e66f1a15d1a2b9d7ee43",
+      "bytes": 49740
+    }
+  ],
+  "method_note": "The first direct-service comparison used an incorrect local output path; it was rerun against dist/discover/dhawwi.html. The public response itself was available."
+}

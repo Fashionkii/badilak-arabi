@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-09T23:46:14.059Z",
+  "commit": "fd616252971aa92db44c94eb0cf93b7eabbfbe58",
+  "route": "/guides/arabic-design",
+  "formFactor": "mobile",
+  "lighthouseVersion": "13.4.0",
+  "score": 1,
+  "colorContrast": 1,
+  "failures": [],
+  "warnings": [
+    "The protected preview test URL redirected to its clean URL; this accessibility recheck is not a comparable production performance measurement."
+  ]
+}
