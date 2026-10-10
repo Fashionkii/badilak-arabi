@@ -13,6 +13,8 @@ body.cosmic-theme::before {
   background:linear-gradient(90deg,rgba(3,13,22,.22),rgba(3,13,22,.42)),url('/images/brand/cosmic-space-1600.webp') left center/cover no-repeat;
 }
 body.cosmic-theme main#top::before { display:none!important; }
+/* A direct /#top return must leave the taller wordmark below the sticky header. */
+body.cosmic-theme main#top { scroll-margin-top:96px; }
 body.cosmic-theme .site-header,
 body.cosmic-theme .top {
   background:#071922!important;

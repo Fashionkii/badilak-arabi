@@ -1,0 +1,177 @@
+{
+  "commit": "d1ef9bdfa0bc2028b5bc2d8e1fa4b09c28930a8b",
+  "optimizedProtectedPreview": {
+    "version": "13.4.0",
+    "date": "2026-10-10T18:00:16.346Z",
+    "url": "https://badilak-arabi-mo4hphgax-ahmed-mostafa3.vercel.app/",
+    "settings": {
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "scores": {
+      "performance": 81,
+      "accessibility": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 5084.570000000002,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 19,
+      "first-contentful-paint": 1489.4629999999997,
+      "total-byte-weight": 599630
+    },
+    "longTasks": [
+      {
+        "url": "Unattributable",
+        "duration": 113,
+        "startTime": 795.2269999999999
+      },
+      {
+        "url": "https://badilak-arabi-mo4hphgax-ahmed-mostafa3.vercel.app/js/catalog-data.js",
+        "duration": 69,
+        "startTime": 5015.5700000000015
+      }
+    ],
+    "failedA11y": []
+  },
+  "production": [
+    {
+      "version": "13.4.0",
+      "date": "2026-10-10T18:02:14.294Z",
+      "url": "https://badilak-arabi.vercel.app/",
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        }
+      },
+      "scores": {
+        "performance": 76,
+        "accessibility": 100
+      },
+      "metrics": {
+        "largest-contentful-paint": 3363.94,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 634.4999999999998,
+        "first-contentful-paint": 1376.0674999999999,
+        "total-byte-weight": 592513
+      },
+      "longTasks": [
+        {
+          "url": "https://badilak-arabi.vercel.app/js/commercial-links.js",
+          "duration": 337,
+          "startTime": 5208.597499999999
+        },
+        {
+          "url": "https://badilak-arabi.vercel.app/",
+          "duration": 330,
+          "startTime": 1184.0674999999999
+        },
+        {
+          "url": "https://badilak-arabi.vercel.app/",
+          "duration": 218,
+          "startTime": 1771.0674999999997
+        },
+        {
+          "url": "https://badilak-arabi.vercel.app/",
+          "duration": 209.99999999999977,
+          "startTime": 1514.0674999999999
+        },
+        {
+          "url": "https://badilak-arabi.vercel.app/",
+          "duration": 124,
+          "startTime": 1989.0674999999997
+        },
+        {
+          "url": "Unattributable",
+          "duration": 95,
+          "startTime": 1038.0674999999999
+        },
+        {
+          "url": "https://badilak-arabi.vercel.app/",
+          "duration": 51,
+          "startTime": 2113.0674999999997
+        }
+      ],
+      "failedA11y": []
+    },
+    {
+      "version": "13.4.0",
+      "date": "2026-10-10T18:03:06.204Z",
+      "url": "https://badilak-arabi.vercel.app/",
+      "settings": {
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        }
+      },
+      "scores": {
+        "performance": 90,
+        "accessibility": 100
+      },
+      "metrics": {
+        "largest-contentful-paint": 3595.132499999999,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 2.5,
+        "first-contentful-paint": 1103.083,
+        "total-byte-weight": 598880
+      },
+      "longTasks": [
+        {
+          "url": "https://badilak-arabi.vercel.app/",
+          "duration": 71,
+          "startTime": 844.625
+        },
+        {
+          "url": "https://badilak-arabi.vercel.app/js/commercial-links.js",
+          "duration": 55,
+          "startTime": 5033.807999999999
+        }
+      ],
+      "failedA11y": []
+    }
+  ],
+  "limits": [
+    "Lab measurements, not field CWV or INP.",
+    "Both public runs retained: performance 76 then 90; TBT 634.5ms then 2.5ms. LCP 3.364s then 3.595s; CLS 0 in both; automated accessibility 100 in both.",
+    "Main baseline same tool/settings/time window: performance 90, LCP 3.558s. There is no demonstrated performance improvement or persistent regression.",
+    "Follow-up CSS-only anchor offset leaves /#top wordmark below the sticky header; no resource or runtime change."
+  ]
+}

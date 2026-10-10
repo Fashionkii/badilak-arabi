@@ -1,0 +1,78 @@
+{
+  "commit": "d1ef9bdfa0bc2028b5bc2d8e1fa4b09c28930a8b",
+  "checkedAt": "2026-10-10T18:02:35.552397+00:00",
+  "pages": [
+    {
+      "route": "/",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 43904,
+      "sha256": "1ab6a45d0a0eb0e9c31d50bb4760196cc4fb321e5a15ac1d5aac6dd6e52c4434"
+    },
+    {
+      "route": "/category/create",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 49393,
+      "sha256": "912b843240d85c76bdbe10e98697bd382812ff6989c0013b5472f4df7e9a577c"
+    },
+    {
+      "route": "/discover/daftra",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 11391,
+      "sha256": "d24168ac4ddce52b47935288ffbf1bd6cb2b983c0897126be146a86467b07cc3"
+    },
+    {
+      "route": "/guides/arabic-design",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 20956,
+      "sha256": "1bab98968b07cf86fb471097e0af5b4f52f02213ad51db9cbcb43ca2261cc811"
+    },
+    {
+      "route": "/privacy",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 9852,
+      "sha256": "03cfa378719d1dcfa01e6f3b257f65a43b1e8c7c1fdcd2adc068a5d836e86422"
+    },
+    {
+      "route": "/js/app.js",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 80523,
+      "sha256": "620c8854a75a1d8a331c1f54f3c81092bdfc49363755de70daf291fbc86359f9"
+    },
+    {
+      "route": "/css/visual-refresh.css",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 9358,
+      "sha256": "fadfb017db8e68e536f08315051b7fc9984787de89537ff218a7a28feac9bc1a"
+    },
+    {
+      "route": "/images/brand/cosmic-logo-640.avif",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 19369,
+      "sha256": "e10bcff7a0eb3099ea167ca8fa1344878bd6fd26d0cd525cf92b9df7b363c8fb"
+    },
+    {
+      "route": "/images/brand/cosmic-space-800.webp",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "bytes": 5478,
+      "sha256": "c6eb3c78d31bdcc06edda33d3cf8efb0cf248c39329494ba48196ed5118d5615"
+    }
+  ]
+}
