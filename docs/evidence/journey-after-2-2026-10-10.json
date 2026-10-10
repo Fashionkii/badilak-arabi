@@ -1,0 +1,572 @@
+{
+  "phase": "after",
+  "commit": "2bd760f3c4d2598e1ac482e2b78b6d2cd8a9d7ad",
+  "url": "https://badilak-arabi.vercel.app/discover/aamenn",
+  "fetchTime": "2026-10-10T09:37:27.382Z",
+  "lighthouseVersion": "13.4.0",
+  "runWarnings": [],
+  "environment": {
+    "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36",
+    "hostUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/132.0.0.0 Safari/537.36",
+    "benchmarkIndex": 2652.5,
+    "credits": {
+      "axe-core": "4.12.1"
+    }
+  },
+  "configSettings": {
+    "output": [
+      "json"
+    ],
+    "maxWaitForFcp": 30000,
+    "maxWaitForLoad": 45000,
+    "pauseAfterFcpMs": 1000,
+    "pauseAfterLoadMs": 1000,
+    "networkQuietThresholdMs": 1000,
+    "cpuQuietThresholdMs": 1000,
+    "formFactor": "mobile",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "throttlingMethod": "simulate",
+    "screenEmulation": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+    "auditMode": false,
+    "gatherMode": false,
+    "clearStorageTypes": [
+      "file_systems",
+      "shader_cache",
+      "service_workers",
+      "cache_storage"
+    ],
+    "disableStorageReset": true,
+    "debugNavigation": false,
+    "channel": "cli",
+    "usePassiveGathering": false,
+    "disableFullPageScreenshot": false,
+    "skipAboutBlank": false,
+    "blankPage": "about:blank",
+    "ignoreStatusCode": false,
+    "locale": "en-US",
+    "blockedUrlPatterns": null,
+    "additionalTraceCategories": null,
+    "extraHeaders": null,
+    "precomputedLanternData": null,
+    "onlyAudits": null,
+    "onlyCategories": [
+      "accessibility",
+      "performance"
+    ],
+    "skipAudits": [
+      "full-page-screenshot"
+    ]
+  },
+  "scores": {
+    "performance": 0.95,
+    "accessibility": 1
+  },
+  "metrics": {
+    "largest-contentful-paint": 2770.9465,
+    "cumulative-layout-shift": 0.0005718385238694646,
+    "total-blocking-time": 0,
+    "first-contentful-paint": 1627.5749
+  },
+  "issues": {
+    "unminified-css": {
+      "title": "Minify CSS",
+      "score": 0.5,
+      "displayValue": "Est savings of 3 KiB",
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Est Savings"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://badilak-arabi.vercel.app/css/site-bundle.css",
+            "totalBytes": 36892,
+            "wastedBytes": 2956,
+            "wastedPercent": 8.012001784048984
+          }
+        ],
+        "overallSavingsMs": 0,
+        "overallSavingsBytes": 2956,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 0
+          }
+        }
+      }
+    },
+    "unused-css-rules": {
+      "title": "Reduce unused CSS",
+      "score": 0,
+      "displayValue": "Est savings of 32 KiB",
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Est Savings"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://badilak-arabi.vercel.app/css/site-bundle.css",
+            "wastedBytes": 32864,
+            "wastedPercent": 89.44116693021937,
+            "totalBytes": 36744
+          }
+        ],
+        "overallSavingsMs": 160,
+        "overallSavingsBytes": 32864,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 160,
+            "LCP": 160
+          }
+        }
+      }
+    },
+    "cache-insight": {
+      "title": "Use efficient cache lifetimes",
+      "score": 0.5,
+      "displayValue": "Est savings of 1 KiB",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "Request"
+          },
+          {
+            "key": "cacheLifetimeMs",
+            "valueType": "ms",
+            "label": "Cache TTL",
+            "displayUnit": "duration"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size",
+            "displayUnit": "kb",
+            "granularity": 1
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.gstatic.com/l/font?kit=kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejdc8kzUJPvbB_992W88O_DfwqcidEBtLxJHdVtt4stVJ1rpmu9zEIeWcXhlxzLP0smKJPGaQ&skey=b8dc2088854b122f&v=v375",
+            "cacheLifetimeMs": 86400000,
+            "totalBytes": 3765,
+            "wastedBytes": 1506
+          }
+        ],
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "skipSumming": [
+          "cacheLifetimeMs"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 1506
+        }
+      }
+    },
+    "font-display-insight": {
+      "title": "Font display",
+      "score": 0,
+      "displayValue": "Est savings of 80 ms",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "ms",
+            "label": "Est Savings"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://fonts.gstatic.com/l/font?kit=kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejdc8kzUJPvbB_992W88O_DfwqcidEBtLxJHdVtt4stVJ1rpmu9zEIeWcXhlxzLP0smKJPGaQ&skey=b8dc2088854b122f&v=v375",
+            "wastedMs": 75
+          }
+        ],
+        "skipSumming": [
+          "wastedMs"
+        ]
+      }
+    },
+    "network-dependency-tree-insight": {
+      "title": "Network dependency tree",
+      "score": 0,
+      "details": {
+        "type": "list",
+        "items": [
+          {
+            "type": "list-section",
+            "value": {
+              "type": "network-tree",
+              "chains": {
+                "C4D9487ACB107302BE9E01958785F999": {
+                  "url": "https://badilak-arabi.vercel.app/discover/aamenn",
+                  "navStartToEndTime": 81,
+                  "transferSize": 4080,
+                  "isLongest": true,
+                  "children": {
+                    "3061.6": {
+                      "url": "https://badilak-arabi.vercel.app/css/site-bundle.css",
+                      "navStartToEndTime": 117,
+                      "transferSize": 36892,
+                      "isLongest": true,
+                      "children": {
+                        "3061.21": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-6c9f4bab97d6.woff2",
+                          "navStartToEndTime": 238,
+                          "transferSize": 31071,
+                          "isLongest": true,
+                          "children": []
+                        },
+                        "3061.44": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-632518d85472.woff2",
+                          "navStartToEndTime": 238,
+                          "transferSize": 20656,
+                          "children": []
+                        },
+                        "3061.41": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-50d246d60cbe.woff2",
+                          "navStartToEndTime": 237,
+                          "transferSize": 45853,
+                          "children": []
+                        },
+                        "3061.20": {
+                          "url": "https://fonts.gstatic.com/l/font?kit=kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejdc8kzUJPvbB_992W88O_DfwqcidEBtLxJHdVtt4stVJ1rpmu9zEIeWcXhlxzLP0smKJPGaQ&skey=b8dc2088854b122f&v=v375",
+                          "navStartToEndTime": 237,
+                          "transferSize": 3765,
+                          "children": []
+                        },
+                        "3061.23": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-3270f0cb47fd.woff2",
+                          "navStartToEndTime": 236,
+                          "transferSize": 33977,
+                          "children": []
+                        },
+                        "3061.49": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-5588af5713c2.woff2",
+                          "navStartToEndTime": 236,
+                          "transferSize": 27046,
+                          "children": []
+                        },
+                        "3061.51": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-07a639a753ed.woff2",
+                          "navStartToEndTime": 206,
+                          "transferSize": 26455,
+                          "children": []
+                        },
+                        "3061.36": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-686b11487471.woff2",
+                          "navStartToEndTime": 205,
+                          "transferSize": 19405,
+                          "children": []
+                        },
+                        "3061.48": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/google-6f58c7351ca1.woff2",
+                          "navStartToEndTime": 194,
+                          "transferSize": 19693,
+                          "children": []
+                        },
+                        "3061.57": {
+                          "url": "https://badilak-arabi.vercel.app/fonts/almarai-800.woff2",
+                          "navStartToEndTime": 175,
+                          "transferSize": 52200,
+                          "children": []
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "longestChain": {
+                "duration": 238
+              }
+            }
+          },
+          {
+            "type": "list-section",
+            "title": "Preconnected origins",
+            "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+            "value": {
+              "type": "text",
+              "value": "no origins were preconnected"
+            }
+          },
+          {
+            "type": "list-section",
+            "title": "Preconnect candidates",
+            "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4.",
+            "value": {
+              "type": "text",
+              "value": "No additional origins are good candidates for preconnecting"
+            }
+          }
+        ]
+      }
+    },
+    "render-blocking-insight": {
+      "title": "Render-blocking requests",
+      "score": 0,
+      "displayValue": "Est savings of 740 ms",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duration"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://badilak-arabi.vercel.app/css/site-bundle.css",
+            "totalBytes": 36892,
+            "wastedMs": 327
+          }
+        ]
+      }
+    }
+  },
+  "lcp": {
+    "id": "lcp-breakdown-insight",
+    "title": "LCP breakdown",
+    "description": "Each [subpart has specific improvement strategies](https://developer.chrome.com/docs/performance/insights/lcp-breakdown). Ideally, most of the LCP time should be spent on loading the resources, not within delays.",
+    "score": 1,
+    "scoreDisplayMode": "informative",
+    "metricSavings": {
+      "LCP": 0
+    },
+    "details": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "label",
+              "valueType": "text",
+              "label": "Subpart"
+            },
+            {
+              "key": "duration",
+              "valueType": "ms",
+              "label": "Duration"
+            }
+          ],
+          "items": [
+            {
+              "subpart": "timeToFirstByte",
+              "label": "Time to first byte",
+              "duration": 59.525
+            },
+            {
+              "subpart": "elementRenderDelay",
+              "label": "Element render delay",
+              "duration": 147.5
+            }
+          ]
+        },
+        {
+          "type": "node",
+          "lhId": "page-0-P",
+          "path": "1,HTML,1,BODY,2,MAIN,1,ARTICLE,0,DIV,1,P",
+          "selector": "main#content > article.standalone-detail > div.detail-overview > p.quick-purpose",
+          "boundingRect": {
+            "top": 308,
+            "bottom": 364,
+            "left": 32,
+            "right": 380,
+            "width": 348,
+            "height": 57
+          },
+          "snippet": "<p class=\"quick-purpose\">",
+          "nodeLabel": "خدمة لتخزين الملفات ومشاركتها، يقدمها فريق يعمل من مصر. تعلن تشفير الملفات قبل …"
+        }
+      ]
+    },
+    "guidanceLevel": 3
+  },
+  "requests": [
+    {
+      "url": "https://badilak-arabi.vercel.app/discover/aamenn",
+      "bytes": 4080,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/almarai-400.woff2",
+      "bytes": 48717,
+      "priority": "High"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/almarai-700.woff2",
+      "bytes": 49900,
+      "priority": "High"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-41f1e64ff8db.woff2",
+      "bytes": 43013,
+      "priority": "High"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-bf43e79904fc.woff2",
+      "bytes": 44445,
+      "priority": "High"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/css/site-bundle.css",
+      "bytes": 36892,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/images/titles/brand-badilak-arabi-cropped.webp?v=83",
+      "bytes": 24137,
+      "priority": "Medium"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/images/brand/lantern.svg",
+      "bytes": 1188,
+      "priority": "Medium"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/images/flags/eg.png",
+      "bytes": 421,
+      "priority": "Medium"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/js/smart-return.js",
+      "bytes": 2888,
+      "priority": "Low"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/almarai-800.woff2",
+      "bytes": 52200,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://fonts.gstatic.com/l/font?kit=kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOejdc8kzUJPvbB_992W88O_DfwqcidEBtLxJHdVtt4stVJ1rpmu9zEIeWcXhlxzLP0smKJPGaQ&skey=b8dc2088854b122f&v=v375",
+      "bytes": 3765,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-6f58c7351ca1.woff2",
+      "bytes": 19693,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-5588af5713c2.woff2",
+      "bytes": 27046,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-686b11487471.woff2",
+      "bytes": 19405,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-50d246d60cbe.woff2",
+      "bytes": 45853,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-07a639a753ed.woff2",
+      "bytes": 26455,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-632518d85472.woff2",
+      "bytes": 20656,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-3270f0cb47fd.woff2",
+      "bytes": 33977,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/fonts/google-6c9f4bab97d6.woff2",
+      "bytes": 31071,
+      "priority": "VeryHigh"
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/favicon.ico",
+      "bytes": 763,
+      "priority": "High"
+    }
+  ],
+  "lcpDiscovery": {
+    "id": "lcp-discovery-insight",
+    "title": "LCP request discovery",
+    "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+    "score": null,
+    "scoreDisplayMode": "notApplicable",
+    "guidanceLevel": 3
+  }
+}

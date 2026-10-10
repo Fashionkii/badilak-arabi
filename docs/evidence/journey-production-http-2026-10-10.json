@@ -1,0 +1,69 @@
+{
+  "commit": "2bd760f3c4d2598e1ac482e2b78b6d2cd8a9d7ad",
+  "checkedAt": "2026-10-10T04:21:06.035783+00:00",
+  "pages": [
+    {
+      "route": "/",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "359751245fdaf564a0a485b1093bd6cc0ed48f239322d0909b66524c99f8c5e4"
+    },
+    {
+      "route": "/category/work",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "9bd9e2d261b2b8b2e1ad2ca10bacb33d00d6df3f9b4aae30b505b9b601224b11"
+    },
+    {
+      "route": "/discover/aamenn",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "7497a94d9bcbf406a12887da1a05e5a04693f6be4d2f35cb45afe65bc8ecf523"
+    },
+    {
+      "route": "/discover/fanar",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "0a8681d1bafbb2c6b06b795e994456f0a7c27aedbef33519b751f0e0be7a7bdc"
+    },
+    {
+      "route": "/js/catalog-data.js",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "58200ed735e14bb4110a3a6eda7006c38206f802c95733b3962ee0b56351000c"
+    },
+    {
+      "route": "/js/detail-renderers.js",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "7ef3e6ab47733c2a47b96e540b4bbbabf07f3be18d5708aab96b90fc4d09c2d6"
+    },
+    {
+      "route": "/js/app.js",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "44808d6703ed461ce1a1fb30dad363646e1d4de1d15f3f85c69e7d6fb8442b71"
+    },
+    {
+      "route": "/css/site-bundle.css",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "c96140afe10f46e428f1e679cc4e3baa32925f99d130db03a108c7d1b49f1b0f"
+    },
+    {
+      "route": "/sitemap.xml",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "63835cfef3e52851c5fda3c47603a3a40f7da0784eedf8c8b068effb20e07ac2"
+    }
+  ]
+}
