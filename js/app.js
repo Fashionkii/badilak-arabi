@@ -376,6 +376,8 @@ function renderCards(){
  if(originFilter) context.push(originContextLabel(originFilter));
  if(countryFilter) context.push(arabProgressCountryNames[countryFilter]||countryFilter);
  const shown=list.slice(0,directoryVisible);
+ const fitNote=document.getElementById('originFitNote');
+ if(fitNote)fitNote.hidden=!originFilter;
  document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length}${context.length?' · '+context.join(' · '):' · كل الدليل'}`;
  const root=document.getElementById('catalogGrid');
  const more=document.getElementById('directoryMore');
@@ -385,7 +387,7 @@ function renderCards(){
    updateDirectoryContinue();
    return;
  }
- root.innerHTML=shown.map(directoryCardMarkup).join('');
+ root.innerHTML=shown.map(x=>directoryCardMarkup(x,originFilter)).join('');
  if(more){
    const remaining=list.length-shown.length;
    const moreLabel=originFilter ? 'بدائل أكثر لهذا الاختيار +' : subfilter!=='all' ? 'المزيد من '+subcategoryLabel(filter,subfilter)+' +' : filter!=='all' ? 'المزيد من '+categoryLabel(filter)+' +' : 'اكتشافات أكثر +';
@@ -513,7 +515,7 @@ const cardCautionOverrides={
  karnak:'إطلاق تجريبي؛ الدقة لم تُختبر مستقلًا.',
  dhawwi:'أرقام الاستخدام معلنة من الجهة نفسها.',
  midaad:'المجاني يضيف ختمًا خفيفًا للتصدير.',
- taqreer:'المجاني: 5 شرائح وتصدير PNG بعلامة مائية.',
+ taqreer:'المجاني يصمم أول 5 شرائح؛ راجع بقية حدود الخطة.',
  daftra:'التقييمات المستقلة المتاحة محدودة.',
  gravity:'لم نجمع بعد مراجعات لاعبين مستقلة.',
  shamaa:'توفر النص الكامل يختلف حسب حقوق النشر.',

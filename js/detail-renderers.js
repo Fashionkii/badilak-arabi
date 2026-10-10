@@ -21,7 +21,7 @@ function countryEntries(info){
 function countryBadgeMarkup(x,map=itemCountryMap){
  const entries=countryEntries(map[x.id]);
  if(entries.length){
-  return `<div class="country-badge-slot">${entries.map(info=>`<span class="country-badge"><img src="${flagAssetBase+info[0]+'.png'}" alt=""><bdi>${String(info[1]||'').split('·')[0].trim()}</bdi></span>`).join('')}</div>`;
+  return `<div class="country-badge-slot">${entries.map(info=>`<span class="country-badge"><img src="${flagAssetBase+info[0]+'.png'}" alt=""><bdi>${x.id==='taqreer'?'تسجيل أمريكي':String(info[1]||'').split('·')[0].trim()}</bdi></span>`).join('')}</div>`;
  }
  const text=[x.creator||'',x.arabRelation||'',x.reference||''].join(' ');
  let label='المنشأ قيد التحقق';
@@ -38,15 +38,15 @@ function subcategoryLabel(cat,sub){
  return pair ? pair[1] : sub;
 }
 
-function guideLinkMarkup(guide,detail=false){
+function guideLinkMarkup(guide,detail=false,label='اقرأ'){
  const href=guide?guide[0]:'/guides';
  const content=detail
   ? `<span>اقرأ</span><strong>${guide?guide[1]:'اقرأ حسب حاجتك'}</strong>`
-  : `<strong>${guide?'اقرأ':'مركز القراءة'}</strong>`;
+  : `<strong>${guide?label:'مركز القراءة'}</strong>`;
  return `<a class="editorial-guide-link ${detail?'is-detail':'card-read-link'}" href="${href}" onclick="event.stopPropagation()">${content}<b aria-hidden="true">←</b></a>`;
 }
 
-function editorialGuideLinkMarkup(id,detail=false){return guideLinkMarkup(relatedGuideMap[id],detail)}
+function editorialGuideLinkMarkup(id,detail=false){return guideLinkMarkup(relatedGuideMap[id],detail,'دليل الاختيار')}
 
 function detailFact(label,value){
  if(!value)return '';
@@ -289,17 +289,59 @@ function compactCardPurpose(x){
  return sentence.slice(0,92).replace(/\s+\S*$/,'').trim()+'…';
 }
 
-function directoryCardMarkup(x){return `
+// Concise decision context, derived from each record's scope and existing limits.
+// These describe the relationship; they are not ratings or claims of full equivalence.
+const comparisonGuidance={
+ karnak:['مساعد محادثة تجريبي','إطلاق تجريبي؛ الدقة لم تُختبر مستقلًا.'],
+ fanar:['مساعد عربي متعدد الوسائط','التغطية اللغوية لا تعني دقة كل مهمة.'],
+ falcon:['نموذج للمطورين والباحثين','يتطلب تشغيلًا تقنيًا؛ ليس واجهة محادثة جاهزة.'],
+ arabicai:['حلول ذكاء اصطناعي للمؤسسات','قارن الخدمة المحددة داخل المنظومة.'],
+ dhawwi:['محرر للتصميم بالعربية',''],
+ taqreer:['متخصص في العروض العربية','المجاني يصمم أول 5 شرائح؛ راجع بقية حدود الخطة.'],
+ arabicdesign:['متخصص في الخط والعبارات العربية','التجربة المجانية 7 أيام وبرصيد محدود.'],
+ aamenn:['تخزين ومشاركة ملفات','التشفير معلن من المطور؛ لم نختبر الأمان مستقلًا.'],
+ midaad:['أدوات للمستندات وملفات PDF','المجاني يضيف ختمًا خفيفًا للتصدير.'],
+ qriib:['اجتماعات وتعاون عن بُعد','لم ننفذ تجربة استخدام مستقلة.'],
+ vconnct:['اتصال وتعاون للمؤسسات','راجع متطلبات مؤسستك وخيارات التشغيل.'],
+ salla:['إنشاء متجر وإدارة البيع','الباقات والتكاملات تختلف حسب السوق.'],
+ wuilt:['إنشاء موقع أو متجر','الموقع التعريفي والمتجر لهما باقات مختلفة.'],
+ khamsat:['سوق للخدمات المصغرة','راجع الأعمال السابقة وحدد طلبك بوضوح.'],
+ forlanso:['إدارة خدمات المستقلين','عرض خدماتك لا يضمن وصول عملاء إليك.'],
+ edraak:['مساقات للتعلم بالعربية','شروط الشهادة والإتاحة تختلف حسب الدورة.'],
+ hsoub:['تعلم البرمجة بالعربية','قارن المسار المجاني والمدفوع حسب هدفك.'],
+ edlal:['دورات مهارية بالعربية','راجع الدورات النشطة وشروطها الحالية.'],
+ tadarab:['دورات عربية مسجلة','شهادة الإتمام لا تعني اعتمادًا أكاديميًا.'],
+ gomycode:['تدريب تقني بمسارات محددة','البرامج والأسعار تختلف حسب المسار والبلد.'],
+ anghami:['منصة لبث الموسيقى والصوت',''],
+ sowt:['بودكاست وقصص صوتية عربية','شبكة محتوى صوتي؛ ليست مكتبة موسيقى عامة.'],
+ thmanyah:['محتوى وبودكاست عربي','شبكة محتوى؛ تختلف وظائفها عن منصة بث عامة.'],
+ noon:['سوق إلكتروني عام','الشحن والإرجاع يختلفان حسب البلد والبائع.'],
+ opensooq:['إعلانات للبيع والشراء المباشر','تتعامل مع البائع؛ ليست تجربة متجر مركزي.'],
+ mumzworld:['متجر متخصص للأم والطفل','قارن توفر الشحن والسعر لبلدك.'],
+ miswag:['تسوق وتوصيل داخل العراق','راجع تغطية التوصيل وشروط المنتج.']
+};
+function directoryComparison(x,activeOrigin){
+ const selected=typeof activeOrigin==='string'&&x.origin.includes(activeOrigin);
+ const reference=selected?activeOrigin:x.origin[0];
+ const [fit,caution]=comparisonGuidance[x.id]||[x.type||'', ''];
+ // Extra decision notes belong to the familiar-service journey; leave general browsing compact.
+ return {reference,fit:selected?fit:'',caution:selected?caution:''};
+}
+function directoryCardMarkup(x,activeOrigin=null){
+ const {reference,fit,caution}=directoryComparison(x,activeOrigin);
+ return `
   <article class="item" data-item-id="${x.id}">
    <a class="item-identity" href="/discover/${x.id}" onclick="return badilakOpenItem(event,'${x.id}')">
     ${logoMarkup(x.logo,'item-logo',x.name)}
     <span class="item-name">${x.name}</span>
    </a>
    ${countryBadgeMarkup(x)}
-   <div class="comparison-strip ${x.origin[0]?'':'is-empty'}">${x.origin[0]?`<span>إذا كنت تستخدم</span><span class="origin-mini">${originName(x.origin[0])}</span>`:''}</div>
+   <div class="comparison-strip ${reference?'':'is-empty'}">${reference?`<span>إذا كنت تستخدم</span><bdi class="origin-mini">${originName(reference)}</bdi>`:''}</div>
+   ${fit?`<p class="card-fit">${fit}</p>`:''}
    <div class="card-summary">
     <p class="card-purpose">${compactCardPurpose(x)}</p>
    </div>
+   ${caution?`<p class="card-key-limit">${caution}</p>`:''}
    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
     <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">تفاصيل +</button>

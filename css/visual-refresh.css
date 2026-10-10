@@ -110,6 +110,10 @@ body:not(.guided-discovery) .quick-answer { background:var(--deep); }
 body:not(.guided-discovery) .human-question { background:#EDF4EE!important; border-color:var(--line)!important; }
 body:not(.guided-discovery) :is(.human-question>span,.lens:not(.warn)>small) { color:var(--sunrise-dark); }
 body:not(.guided-discovery) article { background:#FFFFFF; border-color:var(--card-line); }
+/* Keep the established card layout; expose relationship and decisive limits before the actions. */
+#directory .card-fit { margin:0 0 8px; color:var(--deep); font-size:.8125rem; line-height:1.6; font-weight:700; text-align:center; }
+#directory .card-key-limit { margin:0 0 8px; padding:6px 8px; color:var(--sunrise-dark); background:#FAF6EF; border-radius:8px; font-size:.75rem; line-height:1.65; text-align:center; }
+#directory .origin-fit-note { margin:0 0 16px; color:var(--muted); font-size:.8125rem; line-height:1.7; }
 @media(max-width:760px) {
   .intro .brand-lantern { width:36px; height:42px; }
   body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand { gap:10px; }
