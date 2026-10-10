@@ -1,0 +1,27 @@
+{
+  "commit": "6b6045463adfabb1b8849bc00ae3d9cbd7ede20c",
+  "checkedAt": "2026-10-10T18:08:09.398032+00:00",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "1ab6a45d0a0eb0e9c31d50bb4760196cc4fb321e5a15ac1d5aac6dd6e52c4434"
+    },
+    {
+      "route": "/css/visual-refresh.css",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "ac3c661a8f6c0f0ff10eb0c6cc8a2ac3a7240c0501db0f66a4d78e908b3b941d"
+    },
+    {
+      "route": "/discover/daftra",
+      "status": 200,
+      "robots": "noindex, follow",
+      "matchesBuild": true,
+      "sha256": "d24168ac4ddce52b47935288ffbf1bd6cb2b983c0897126be146a86467b07cc3"
+    }
+  ]
+}
