@@ -16,6 +16,35 @@ function directoryBatchSize(){
  const focused=filter!=='all'||subfilter!=='all'||!!originFilter||!!countryFilter||!!q;
  return mobile||focused ? 3 : 6;
 }
+// Keep a few discovery cards fresh between visits, never between refreshes in the same tab.
+const directoryRotationKey='badilak_directory_rotation_v1';
+function directoryVisitOffset(){
+ try{
+  const saved=sessionStorage.getItem(directoryRotationKey);
+  if(saved!==null&&/^\d{1,7}$/.test(saved))return Number(saved);
+  const next=Math.floor(Math.random()*1000000);
+  sessionStorage.setItem(directoryRotationKey,String(next));
+  return next;
+ }catch{return 0}
+}
+const directoryRotationOffset=directoryVisitOffset();
+function orderDirectoryDiscoveryCards(list,search){
+ // Search and precise filters keep the original, predictable result order.
+ if(search||subfilter!=='all'||originFilter||countryFilter)return list;
+ const pageSize=directoryBatchSize();
+ const candidateCount=Math.min(12,Math.max(0,list.length-pageSize));
+ if(!candidateCount)return list;
+ const rotatingSlots=Math.min(pageSize===6?2:1,candidateCount);
+ const categoryOffset=[...filter].reduce((sum,letter)=>sum+letter.charCodeAt(0),0);
+ const candidateStart=(directoryRotationOffset+categoryOffset)%candidateCount;
+ const ordered=list.slice();
+ for(let i=0;i<rotatingSlots;i++){
+  const visibleAt=pageSize-rotatingSlots+i;
+  const candidateAt=pageSize+(candidateStart+i)%candidateCount;
+  [ordered[visibleAt],ordered[candidateAt]]=[ordered[candidateAt],ordered[visibleAt]];
+ }
+ return ordered;
+}
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
 function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
 function resetLearningLimit(){learningVisible={platform:4,resource:4,channel:4,reciter:4}}
@@ -375,7 +404,7 @@ function renderCards(){
  if(subfilter!=='all') context.push(subcategoryLabel(filter,subfilter));
  if(originFilter) context.push(originContextLabel(originFilter));
  if(countryFilter) context.push(arabProgressCountryNames[countryFilter]||countryFilter);
- const shown=list.slice(0,directoryVisible);
+ const shown=orderDirectoryDiscoveryCards(list,q).slice(0,directoryVisible);
  const fitNote=document.getElementById('originFitNote');
  if(fitNote)fitNote.hidden=!originFilter;
  document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length}${context.length?' · '+context.join(' · '):' · كل الدليل'}`;
