@@ -1,0 +1,85 @@
+/* Static, local space artwork. No motion loop, video, canvas or external service. */
+body.cosmic-theme {
+  background:#06111b!important;
+  position:relative;
+  isolation:isolate;
+}
+body.cosmic-theme::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(3,13,22,.22),rgba(3,13,22,.42)),url('/images/brand/cosmic-space-1600.webp') left center/cover no-repeat;
+}
+body.cosmic-theme main#top::before { display:none!important; }
+body.cosmic-theme .site-header,
+body.cosmic-theme .top {
+  background:#071922!important;
+  border-bottom:1px solid #28424b!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+body.cosmic-theme .brand-lockup {
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.cosmic-logo { display:block; object-fit:contain; height:auto; }
+.brand-lockup .cosmic-logo,
+.top .cosmic-logo { width:160px; height:auto; }
+body.cosmic-theme .intro .intro-heading h1.art-title.art-title--brand {
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+.intro .cosmic-logo { width:min(440px,86vw); aspect-ratio:2025/777; }
+body.cosmic-theme .navigation>a,
+body.cosmic-theme .journey-menu>summary,
+body.cosmic-theme :is(.toplinks,.hubnav)>a {
+  color:#f6efdf!important;
+}
+body.cosmic-theme .navigation>a[aria-current],
+body.cosmic-theme :is(.toplinks,.hubnav)>a.active { border-bottom-color:#dfbf7e!important; }
+body.cosmic-theme .journey-menu>div a { color:var(--deep)!important; }
+body.cosmic-theme .intro :is(.intro-promise,.origin-heading h2,.portal-heading strong) { color:#f6efdf!important; }
+body.cosmic-theme .intro :is(.intro-description,.origin-hint) { color:#c7d7d9!important; }
+body.cosmic-theme .intro .intro-link { color:#ead09b!important; border-bottom-color:#55717a!important; }
+/* Reading surfaces keep the established light palette and card hierarchy. */
+body.cosmic-theme main#top>section[data-journey-panel]:not(#start),
+body.cosmic-theme .standalone-main,
+body.cosmic-theme:not(.guided-discovery) main.wrap {
+  background:#f7f9f5!important;
+  border:1px solid #d8e0d9!important;
+  border-radius:22px;
+  margin-block:24px;
+}
+body.cosmic-theme main#top>section[data-journey-panel]:not(#start) { padding-block:24px!important; }
+body.cosmic-theme .standalone-main { padding:24px; }
+body.cosmic-theme:not(.guided-discovery) main.wrap { padding-inline:24px; }
+body.cosmic-theme .footer {
+  background:#071922!important;
+  border-top:1px solid #28424b!important;
+}
+body.cosmic-theme :is(.footer,.footer a,.footer-inner,.footer-inner strong,.footer-links) { color:#dce7e4!important; }
+body.cosmic-theme .navigation :is(a,summary):focus-visible,
+body.cosmic-theme .intro-link:focus-visible,
+body.cosmic-theme .footer a:focus-visible,
+body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important; }
+@media(max-width:760px) {
+  body.cosmic-theme::before { background-image:linear-gradient(rgba(3,13,22,.26),rgba(3,13,22,.5)),url('/images/brand/cosmic-space-800.webp'); }
+  .brand-lockup .cosmic-logo,.top .cosmic-logo { width:132px; }
+  .intro .cosmic-logo { width:min(320px,88vw); }
+  body.cosmic-theme main#top>section[data-journey-panel]:not(#start),
+  body.cosmic-theme .standalone-main,
+  body.cosmic-theme:not(.guided-discovery) main.wrap { border-radius:16px; margin-block:16px; }
+  body.cosmic-theme .standalone-main,
+  body.cosmic-theme:not(.guided-discovery) main.wrap { padding-inline:16px; }
+}
+@media print {
+  body.cosmic-theme { background:white!important; }
+  body.cosmic-theme::before { display:none; }
+}

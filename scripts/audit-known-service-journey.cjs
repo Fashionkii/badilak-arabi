@@ -24,7 +24,10 @@ for(let i=0;i<current.items.length;i++){
 for(const file of ['js/commercial-links.js','js/discovery-memory.js','js/smart-return.js','js/guided-discovery.js','js/feedback.js','data/privacy.json','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected file: '+file);
 for(const file of fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html')))assert.equal(read('guides/'+file),before('guides/'+file),'Article changed: '+file);
 const index=read('index.html');
-assert.equal(index.replace(/^  <p id="originFitNote".*\n/m,''),before('index.html'),'Unrelated homepage copy, links, ads or markup changed');
+const normalizeBrand=html=>html
+ .replace(/(<a href="#top" class="brand-lockup"[^>]*>)[\s\S]*?(<\/a>)/,'$1[approved brand artwork]$2')
+ .replace(/(<h1 class="art-title art-title--brand" aria-label="بديلك عربي">)[\s\S]*?(<\/h1>)/,'$1[approved brand artwork]$2');
+assert.equal(normalizeBrand(index.replace(/^  <p id="originFitNote".*\n/m,'')),normalizeBrand(before('index.html')),'Unrelated homepage copy, links, ads or markup changed');
 const {items}=vm.runInContext('({items})',context);
 let relationships=0;
 for(const origin of Object.keys(current.originRouteMap)){
@@ -43,7 +46,7 @@ assert.ok(context.guideLinkMarkup(['/guides/arabic-design','عنوان']).includ
 assert.ok(context.countryBadgeMarkup(items.find(x=>x.id==='taqreer')).includes('تسجيل أمريكي'));
 assert.equal(items.find(x=>x.id==='aamenn').url,'https://www.aamenn.com/');
 assert.match(items.find(x=>x.id==='fanar').modules.at(-1)[1],/2609\.35564/,'Later Fanar research lost');
-const bundle=['fonts.css','app.css','visual-refresh.css'].map(file=>read('css/'+file)).join('\n');
+const bundle=['fonts.css','app.css','visual-refresh.css'].map(file=>read('css/'+file)).join('\n')+'\n'+read('css/cosmic-theme.css');
 assert.equal(read('dist/css/site-bundle.css'),bundle,'CSS cascade/rules changed during bundling');
 for(const file of ['discover/aamenn.html','privacy.html']){
  const html=read('dist/'+file);assert.ok(html.includes('/css/site-bundle.css'));

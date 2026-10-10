@@ -16,6 +16,38 @@ function directoryBatchSize(){
  const focused=filter!=='all'||subfilter!=='all'||!!originFilter||!!countryFilter||!!q;
  return mobile||focused ? 3 : 6;
 }
+// Limited discovery rotation, stable for the tab visit even after a resize/reload.
+// Derived from the separate rotation experiment; precise result sets never rotate.
+const directoryRotationKey='badilak_directory_rotation_v2';
+function directoryVisitState(){
+ try{
+  const saved=JSON.parse(sessionStorage.getItem(directoryRotationKey));
+  if(saved&&Number.isSafeInteger(saved.seed)&&saved.seed>=0&&saved.seed<4294967296&&typeof saved.wide==='boolean')return saved;
+  const state={seed:Math.floor(Math.random()*4294967296),wide:!window.matchMedia('(max-width:760px)').matches};
+  sessionStorage.setItem(directoryRotationKey,JSON.stringify(state));
+  return state;
+ }catch{return null} // Storage unavailable: keep the ordinary catalog order.
+}
+const directoryVisit=directoryVisitState();
+function orderDirectoryDiscoveryCards(list,search){
+ if(!directoryVisit||search||subfilter!=='all'||originFilter||countryFilter)return list;
+ // The initial footprint is a visit property, not the current viewport width.
+ const pageSize=directoryVisit.wide&&filter==='all'?6:3;
+ const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
+ if(!pool.length)return list;
+ const slots=Math.min(pageSize===6?2:1,pool.length);
+ let seed=directoryVisit.seed^0x9e3779b9;
+ for(const char of filter)seed=Math.imul(seed^char.charCodeAt(0),16777619);
+ const random=()=>{seed=(seed+0x6d2b79f5)|0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};
+ const ordered=list.slice();
+ for(let i=0;i<slots;i++){
+  // Sample without replacement from every eligible later card, not only 12.
+  const candidate=pool.splice(Math.floor(random()*pool.length),1)[0];
+  const slot=pageSize-slots+i;
+  [ordered[slot],ordered[candidate]]=[ordered[candidate],ordered[slot]];
+ }
+ return ordered;
+}
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
 function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
 function resetLearningLimit(){learningVisible={platform:4,resource:4,channel:4,reciter:4}}
@@ -375,7 +407,7 @@ function renderCards(){
  if(subfilter!=='all') context.push(subcategoryLabel(filter,subfilter));
  if(originFilter) context.push(originContextLabel(originFilter));
  if(countryFilter) context.push(arabProgressCountryNames[countryFilter]||countryFilter);
- const shown=list.slice(0,directoryVisible);
+ const shown=orderDirectoryDiscoveryCards(list,q).slice(0,directoryVisible);
  const fitNote=document.getElementById('originFitNote');
  if(fitNote)fitNote.hidden=!originFilter;
  document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length}${context.length?' · '+context.join(' · '):' · كل الدليل'}`;

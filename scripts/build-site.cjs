@@ -38,12 +38,18 @@ for(const file of ['index.html','guides.html'])fs.copyFileSync(path.join(root,fi
 const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
 const oldOrigin='https://badilak-arabi.vercel.app';
+const cosmicStyles=fs.readFileSync(path.join(root,'css/cosmic-theme.css'),'utf8');
+// Keep the established request/cascade profile; the theme adds no blocking request.
+fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles);
 // Standalone pages keep every rule/order but reduce three blocking requests to one.
 const siteStyles=['fonts.css','app.css','visual-refresh.css'];
-fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteStyles.map(file=>fs.readFileSync(path.join(root,'css',file),'utf8')).join('\n'));
+fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteStyles.map(file=>fs.readFileSync(path.join(root,'css',file),'utf8')).join('\n')+'\n'+cosmicStyles);
 const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts\.css">\s*<link rel="stylesheet" href="\/css\/app\.css">\s*<link rel="stylesheet" href="\/css\/visual-refresh\.css">/,'<link rel="stylesheet" href="/css/site-bundle.css">');
 function prepare(html){
  html=html.split(oldOrigin).join(origin);
+ html=html.replace(/<body([^>]*)>/,(_,attrs)=>'<body'+(/class="/.test(attrs)?attrs.replace(/class="([^"]*)"/,'class="$1 cosmic-theme"'):' class="cosmic-theme"'+attrs)+'>');
+ // Editorial body/copy stay intact; only the shared header gets the supplied identity.
+ html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async">$2');
  html=html.replace(/<meta\s+name=["']robots["'][^>]*>\s*/gi,'');
  html=html.replace(/<head>/i,'<head>\n<meta name="robots" content="noindex, follow, max-image-preview:large">\n<meta name="badilak:origin" content="'+escape(origin)+'">');
  // Real organization URL; do not invent authors, publication dates or ratings.
@@ -84,7 +90,7 @@ function standalonePage(page,content){
  return setPageHead(prepare(bundleStyles('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+standaloneHeader+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+'<script src="/js/smart-return.js" defer></script></body></html>')),page);
 }
 // The small header uses this same image first; explicitly prioritize the hero's LCP request.
-const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" href="/images/titles/brand-badilak-arabi-cropped.webp?v=83" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" href="/images/brand/cosmic-logo-640.webp" imagesrcset="/images/brand/cosmic-logo-640.webp 640w, /images/brand/cosmic-logo-1080.webp 1080w" imagesizes="(max-width:360px) 88vw, (max-width:760px) 320px, 440px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
 write('guides.html',prepare(fs.readFileSync(path.join(root,'guides.html'),'utf8')));
 const guides=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'));
