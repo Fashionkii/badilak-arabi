@@ -45,9 +45,13 @@ assert.equal(items.find(x=>x.id==='aamenn').url,'https://www.aamenn.com/');
 assert.match(items.find(x=>x.id==='fanar').modules.at(-1)[1],/2609\.35564/,'Later Fanar research lost');
 const bundle=['fonts.css','app.css','visual-refresh.css'].map(file=>read('css/'+file)).join('\n');
 assert.equal(read('dist/css/site-bundle.css'),bundle,'CSS cascade/rules changed during bundling');
-for(const file of ['index.html','category/work.html','discover/aamenn.html']){
+for(const file of ['discover/aamenn.html','privacy.html']){
  const html=read('dist/'+file);assert.ok(html.includes('/css/site-bundle.css'));
  assert.ok(!html.includes('href="/css/app.css"'),'Blocking styles not combined');
+}
+for(const file of ['index.html','category/work.html']){
+ const html=read('dist/'+file);assert.ok(!html.includes('/css/site-bundle.css'));
+ for(const css of ['fonts','app','visual-refresh'])assert.ok(html.includes(`href="/css/${css}.css"`),'Preserve established homepage/category loading');
 }
 assert.match(read('dist/index.html'),/rel="preload" as="image"[^>]+fetchpriority="high"/);
 console.log(`PASS: ${relationships} active comparisons, general browsing, 82 identities/order, 36 learning records, two scoped data updates, later Fanar evidence, 20 articles/three ads/navigation/noindex/receiver protected, exact CSS cascade.`);
