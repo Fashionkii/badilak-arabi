@@ -49,7 +49,7 @@ function prepare(html){
  html=html.split(oldOrigin).join(origin);
  html=html.replace(/<body([^>]*)>/,(_,attrs)=>'<body'+(/class="/.test(attrs)?attrs.replace(/class="([^"]*)"/,'class="$1 cosmic-theme"'):' class="cosmic-theme"'+attrs)+'>');
  // Editorial body/copy stay intact; only the shared header gets the supplied identity.
- html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async">$2');
+ html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<picture><source type="image/avif" srcset="/images/brand/cosmic-logo-320.avif"><img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async"></picture>$2');
  html=html.replace(/<meta\s+name=["']robots["'][^>]*>\s*/gi,'');
  html=html.replace(/<head>/i,'<head>\n<meta name="robots" content="noindex, follow, max-image-preview:large">\n<meta name="badilak:origin" content="'+escape(origin)+'">');
  // Real organization URL; do not invent authors, publication dates or ratings.
@@ -90,7 +90,7 @@ function standalonePage(page,content){
  return setPageHead(prepare(bundleStyles('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+standaloneHeader+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+'<script src="/js/smart-return.js" defer></script></body></html>')),page);
 }
 // The small header uses this same image first; explicitly prioritize the hero's LCP request.
-const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" href="/images/brand/cosmic-logo-640.webp" imagesrcset="/images/brand/cosmic-logo-640.webp 640w, /images/brand/cosmic-logo-1080.webp 1080w" imagesizes="(max-width:360px) 88vw, (max-width:760px) 320px, 440px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/avif" href="/images/brand/cosmic-logo-640.avif" imagesrcset="/images/brand/cosmic-logo-640.avif 640w, /images/brand/cosmic-logo-1080.avif 1080w" imagesizes="(max-width:360px) 88vw, (max-width:760px) 320px, 440px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
 write('guides.html',prepare(fs.readFileSync(path.join(root,'guides.html'),'utf8')));
 const guides=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'));
@@ -104,7 +104,7 @@ for(const x of items){
 for(const slug of ['privacy','disclosure']){
  const entry=JSON.parse(fs.readFileSync(path.join(root,'data',slug+'.json'),'utf8'));
  const page={kind:'policy',title:entry.title+' — بديلك عربي',description:entry.description,url:origin+'/'+slug,schema:{'@context':'https://schema.org','@type':'WebPage',name:entry.title,url:origin+'/'+slug,inLanguage:'ar'}};
- write(slug+'.html',standalonePage(page,'<article class="policy-page"><h1>'+escape(entry.title)+'</h1><p class="policy-updated">آخر تحديث: 8 أكتوبر 2026</p>'+entry.sections.map(x=>'<section><h2>'+escape(x.title)+'</h2>'+x.html+'</section>').join('')+'</article>'));
+ write(slug+'.html',standalonePage(page,'<article class="policy-page"><h1>'+escape(entry.title)+'</h1><p class="policy-updated">آخر تحديث: '+escape(entry.updated||'8 أكتوبر 2026')+'</p>'+entry.sections.map(x=>'<section><h2>'+escape(x.title)+'</h2>'+x.html+'</section>').join('')+'</article>'));
 }
 for(const id of seo.categories()){
  const page=seo.metadata('/category/'+id,origin);

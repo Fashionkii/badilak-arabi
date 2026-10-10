@@ -1,0 +1,196 @@
+{
+  "task": "Cosmic identity and limited rotation",
+  "baselineCommit": "f7d0722ec2e2b669073c01c8877e8ba00fdf17f2",
+  "initialPreviewCommit": "a3f404bb5539c886332cd5ed203d81713e27cc72",
+  "main": {
+    "lighthouseVersion": "13.4.0",
+    "fetchTime": "2026-10-10T17:55:33.486Z",
+    "url": "https://badilak-arabi.vercel.app/",
+    "settings": {
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "scores": {
+      "performance": 90
+    },
+    "metrics": {
+      "largest-contentful-paint": 3557.818499999999,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 0,
+      "first-contentful-paint": 1274.112,
+      "total-byte-weight": 589028
+    },
+    "lcp": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "label",
+              "valueType": "text",
+              "label": "Subpart"
+            },
+            {
+              "key": "duration",
+              "valueType": "ms",
+              "label": "Duration"
+            }
+          ],
+          "items": [
+            {
+              "subpart": "timeToFirstByte",
+              "label": "Time to first byte",
+              "duration": 51.182
+            },
+            {
+              "subpart": "resourceLoadDelay",
+              "label": "Resource load delay",
+              "duration": 22.859
+            },
+            {
+              "subpart": "resourceLoadDuration",
+              "label": "Resource load duration",
+              "duration": 144.818
+            },
+            {
+              "subpart": "elementRenderDelay",
+              "label": "Element render delay",
+              "duration": 152.03
+            }
+          ]
+        },
+        {
+          "type": "node",
+          "lhId": "page-0-IMG",
+          "path": "1,HTML,1,BODY,4,MAIN,0,SECTION,0,DIV,0,H1,1,IMG",
+          "selector": "section#start > div.intro-heading > h1.art-title > img.art-title-img",
+          "boundingRect": {
+            "top": 95,
+            "bottom": 167,
+            "left": 109,
+            "right": 349,
+            "width": 240,
+            "height": 72
+          },
+          "snippet": "<img class=\"art-title-img art-img-brand\" src=\"/images/titles/brand-badilak-arabi-cropped.webp?v=83\" width=\"784\" height=\"234\" alt=\"\" loading=\"eager\" fetchpriority=\"high\" decoding=\"async\">",
+          "nodeLabel": "section#start > div.intro-heading > h1.art-title > img.art-title-img"
+        }
+      ]
+    },
+    "failedAccessibility": []
+  },
+  "initialWebpPreview": {
+    "lighthouseVersion": "13.4.0",
+    "fetchTime": "2026-10-10T17:54:10.506Z",
+    "url": "https://badilak-arabi-k2o9ahkvl-ahmed-mostafa3.vercel.app/",
+    "settings": {
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      }
+    },
+    "scores": {
+      "performance": 82,
+      "accessibility": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 4993.9879999999985,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 0,
+      "first-contentful-paint": 1106.538,
+      "total-byte-weight": 637378
+    },
+    "lcp": {
+      "type": "list",
+      "items": [
+        {
+          "type": "table",
+          "headings": [
+            {
+              "key": "label",
+              "valueType": "text",
+              "label": "Subpart"
+            },
+            {
+              "key": "duration",
+              "valueType": "ms",
+              "label": "Duration"
+            }
+          ],
+          "items": [
+            {
+              "subpart": "timeToFirstByte",
+              "label": "Time to first byte",
+              "duration": 114.426
+            },
+            {
+              "subpart": "resourceLoadDelay",
+              "label": "Resource load delay",
+              "duration": 58.325
+            },
+            {
+              "subpart": "resourceLoadDuration",
+              "label": "Resource load duration",
+              "duration": 137.667
+            },
+            {
+              "subpart": "elementRenderDelay",
+              "label": "Element render delay",
+              "duration": 50.98
+            }
+          ]
+        },
+        {
+          "type": "node",
+          "lhId": "page-0-IMG",
+          "path": "1,HTML,1,BODY,4,MAIN,0,SECTION,0,DIV,0,H1,1,IMG",
+          "selector": "section#start > div.intro-heading > h1.art-title > img.cosmic-logo",
+          "boundingRect": {
+            "top": 95,
+            "bottom": 218,
+            "left": 46,
+            "right": 366,
+            "width": 320,
+            "height": 123
+          },
+          "snippet": "<img class=\"cosmic-logo\" src=\"/images/brand/cosmic-logo-640.webp\" srcset=\"/images/brand/cosmic-logo-640.webp 640w, /images/brand/cosmic-logo-1080.we…\" sizes=\"(max-width:360px) 88vw, (max-width:760px) 320px, 440px\" width=\"2025\" height=\"777\" alt=\"\" loading=\"eager\" fetchpriority=\"high\" decoding=\"async\">",
+          "nodeLabel": "section#start > div.intro-heading > h1.art-title > img.cosmic-logo"
+        }
+      ]
+    },
+    "failedAccessibility": []
+  },
+  "notes": [
+    "Lab, simulated mobile, not field Core Web Vitals or INP.",
+    "Protected preview requires an authorized share-link redirect; comparison with public main is not a controlled causal measurement.",
+    "The clean protected URL measured the Vercel login screen; that run is excluded.",
+    "Initial preview logo was 44,952 bytes WebP. Final preview adds AVIF 19,369 bytes; follow-up needed."
+  ]
+}

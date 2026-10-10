@@ -60,14 +60,18 @@ body.cosmic-theme:not(.guided-discovery) main.wrap {
 body.cosmic-theme main#top>section[data-journey-panel]:not(#start) { padding-block:24px!important; }
 body.cosmic-theme .standalone-main { padding:24px; }
 body.cosmic-theme:not(.guided-discovery) main.wrap { padding-inline:24px; }
-body.cosmic-theme .footer {
+body.cosmic-theme .footer,
+body.cosmic-theme:not(.guided-discovery)>footer {
   background:#071922!important;
   border-top:1px solid #28424b!important;
 }
-body.cosmic-theme :is(.footer,.footer a,.footer-inner,.footer-inner strong,.footer-links) { color:#dce7e4!important; }
+body.cosmic-theme :is(.footer,.footer a,.footer-inner,.footer-inner strong,.footer-links),
+body.cosmic-theme:not(.guided-discovery)>footer,
+body.cosmic-theme:not(.guided-discovery)>footer a { color:#dce7e4!important; }
 body.cosmic-theme .navigation :is(a,summary):focus-visible,
 body.cosmic-theme .intro-link:focus-visible,
 body.cosmic-theme .footer a:focus-visible,
+body.cosmic-theme:not(.guided-discovery)>footer a:focus-visible,
 body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important; }
 @media(max-width:760px) {
   body.cosmic-theme::before { background-image:linear-gradient(rgba(3,13,22,.26),rgba(3,13,22,.5)),url('/images/brand/cosmic-space-800.webp'); }

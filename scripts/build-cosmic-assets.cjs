@@ -9,6 +9,7 @@ fs.mkdirSync(out,{recursive:true});
 (async()=>{
  for(const width of [320,640,1080]){
   await sharp(logo).resize({width,withoutEnlargement:true}).webp({quality:84,alphaQuality:100,effort:6}).toFile(path.join(out,`cosmic-logo-${width}.webp`));
+  await sharp(logo).resize({width,withoutEnlargement:true}).avif({quality:50,effort:7}).toFile(path.join(out,`cosmic-logo-${width}.avif`));
  }
  for(const [width,quality] of [[800,48],[1600,56]]){
   await sharp(space).resize({width,withoutEnlargement:true}).webp({quality,effort:6}).toFile(path.join(out,`cosmic-space-${width}.webp`));

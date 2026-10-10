@@ -30,7 +30,7 @@ for(const file of articleFiles){
  // The approved global identity replaces only this exact header mark and body class.
  const body=s=>s.match(/<body[\s\S]*<\/body>/)[0]
   .replace('<body class="cosmic-theme">','<body>')
-  .replace('<img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async">','بديلك عربي');
+  .replace('<picture><source type="image/avif" srcset="/images/brand/cosmic-logo-320.avif"><img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي');
  assert.equal(body(fs.readFileSync(path.join(root,'guides',file),'utf8')),body(fs.readFileSync(path.join(out,'guides',file),'utf8')),'Article changed: '+file);
 }
 assert.ok(!fs.readFileSync(path.join(out,'sitemap.xml'),'utf8').includes('<loc>'),'Prelaunch sitemap must remain empty');

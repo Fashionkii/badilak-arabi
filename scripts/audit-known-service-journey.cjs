@@ -21,7 +21,14 @@ for(let i=0;i<current.items.length;i++){
   if(!allowed[now.id]?.includes(key))assert.deepEqual(now[key],old[key],now.id+'.'+key);
  }
 }
-for(const file of ['js/commercial-links.js','js/discovery-memory.js','js/smart-return.js','js/guided-discovery.js','js/feedback.js','data/privacy.json','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected file: '+file);
+for(const file of ['js/commercial-links.js','js/discovery-memory.js','js/smart-return.js','js/guided-discovery.js','js/feedback.js','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected file: '+file);
+// Permit only the session-rotation disclosure and its date; protect all prior policy text.
+const rotationNote='<p>نحفظ أيضًا اختيارًا عشوائيًا لطريقة عرض بعض بطاقات الدليل في جلسة التبويب نفسها، حتى يبقى ترتيبها ثابتًا أثناء التصفح والتحديث. هذا الاختيار محلي، ولا يُرسل إلى أداة تحليلات، ويُحذف مع انتهاء جلسة التبويب.</p>';
+const privacy=JSON.parse(read('data/privacy.json'));
+assert.equal(privacy.updated,'10 أكتوبر 2026');
+assert.equal(privacy.sections.find(x=>x.title==='ما يُحفظ في متصفحك').html.split(rotationNote).length,2,'One accurate rotation disclosure');
+const normalizePrivacy=value=>{const policy=JSON.parse(value);delete policy.updated;for(const section of policy.sections)section.html=section.html.replace(rotationNote,'');return policy;};
+assert.deepEqual(normalizePrivacy(read('data/privacy.json')),normalizePrivacy(before('data/privacy.json')),'Unrelated privacy policy changed');
 for(const file of fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html')))assert.equal(read('guides/'+file),before('guides/'+file),'Article changed: '+file);
 const index=read('index.html');
 const normalizeBrand=html=>html
