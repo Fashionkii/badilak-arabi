@@ -119,7 +119,7 @@ function openDirectory(cat,options={}){
  if(options.route!==false)syncCategoryRoute(cat);
  setDirectoryFilter(cat);
  closeDirectoryRefiners();
- goDirectoryResults();
+ if(options.scroll!==false)goDirectoryResults();
 }
 function setDirectoryFilter(v){
  filter=v;
@@ -392,7 +392,6 @@ function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learnin
 function renderCards(){
  initializedJourneyPanels.add('directory');
  window.badilakJourney?.updateTitle();
- closeCardShelf();
  updateDirectoryRefineUI();
  const q=norm(document.getElementById('searchInput').value);
  const list=items.filter(x=>
@@ -790,94 +789,6 @@ function openMethodology(){
  document.querySelector('#detailModal .modal-card').scrollTop=0;
  document.querySelector('#detailModal .close').focus();
 }
-let activeCardShelfId=null;
-let activeCardShelfBtn=null;
-
-function closeCardShelf(returnFocus=false){
- const trigger=activeCardShelfBtn;
- const shelf=document.getElementById('cardDetailShelf');
- if(shelf)shelf.remove();
- if(activeCardShelfBtn){
-  activeCardShelfBtn.setAttribute('aria-expanded','false');
-  activeCardShelfBtn.removeAttribute('aria-controls');
-  activeCardShelfBtn.textContent='تفاصيل +';
- }
- activeCardShelfId=null;
- activeCardShelfBtn=null;
- if(returnFocus&&trigger?.isConnected)trigger.focus({preventScroll:true});
-}
-
-function openCardShelf(id,btn,scroll=true){
- const grid=document.getElementById('catalogGrid');
- const card=btn?.closest('.item');
- const x=items.find(a=>a.id===id);
- if(!grid||!card||!x)return;
-
- if(activeCardShelfId===id){
-  closeCardShelf();
-  return;
- }
- closeCardShelf();
-
- const cards=[...grid.querySelectorAll(':scope > .item')];
- const index=cards.indexOf(card);
- const cols=Math.max(1,getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length);
- const rowEndIndex=Math.min(cards.length-1,Math.ceil((index+1)/cols)*cols-1);
- const anchor=cards[rowEndIndex]||card;
- const note=decisionNoteFor(x);
-
- const shelf=document.createElement('section');
- shelf.id='cardDetailShelf';
- shelf.className='card-detail-shelf';
- shelf.setAttribute('aria-label','مصادر ومعلومات عن '+x.name);
- shelf.innerHTML=`
-  <div class="card-shelf-pointer" aria-hidden="true"></div>
-  <div class="card-shelf-head">
-   <div><small>المصادر والمعلومات</small><strong>${x.name}</strong></div>
-   <button type="button" aria-label="إغلاق التفاصيل" onclick="closeCardShelf(true)">×</button>
-  </div>
-  ${note?`<div class="card-shelf-caution"><small>قبل الاختيار</small><strong>${cardCautionText(x,note)}</strong></div>`:''}
-  <div class="card-shelf-facts">
-   <div><small>السعر</small><strong>${x.price||'راجع الموقع'}</strong></div>
-   <div><small>الإتاحة</small><strong>${x.availability||'—'}</strong></div>
-   <div><small>الجهة / المنشأ</small><strong>${x.creator||'—'}</strong></div>
-   <div><small>آخر مراجعة</small><strong>${x.reviewed||'—'}</strong></div>
-   <div class="card-shelf-arab-relation"><small>صلته بالعربية</small><strong>${x.arabRelation||'—'}</strong></div>
-  </div>
-  <div class="card-shelf-actions">
-   <button type="button" onclick="closeCardShelf(true);openDetail('${x.id}')">كل التفاصيل والمصادر</button>
-  </div>`;
-
- anchor.insertAdjacentElement('afterend',shelf);
- activeCardShelfId=id;
- activeCardShelfBtn=btn;
- btn.setAttribute('aria-expanded','true');
- btn.setAttribute('aria-controls',shelf.id);
- btn.textContent='أقل −';
-
- requestAnimationFrame(()=>{
-  const sr=shelf.getBoundingClientRect();
-  const cr=card.getBoundingClientRect();
-  const center=Math.max(24,Math.min(sr.width-24,(cr.left+cr.width/2)-sr.left));
-  shelf.style.setProperty('--shelf-pointer',center+'px');
-  if(scroll)shelf.scrollIntoView({behavior:'smooth',block:'nearest'});
- });
-}
-
-function toggleCardMore(id,btn){
- const panel=document.getElementById('card-more-'+id);if(!panel)return;
- const open=panel.hasAttribute('hidden');
- if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
- btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'تفاصيل +';
-}
-function toggleLearningMore(id,btn){
- const panel=document.getElementById('learning-more-'+id);if(!panel)return;
- const open=panel.hasAttribute('hidden');
- if(open)panel.removeAttribute('hidden');else panel.setAttribute('hidden','');
- btn.setAttribute('aria-expanded',open?'true':'false');
- btn.textContent=open?'أقل −':'تفاصيل +';
-}
 function toggleStaticDisclosure(bodyId,btn,kind){
  const body=document.getElementById(bodyId);if(!body)return;
  const opening=body.hasAttribute('hidden');
@@ -906,6 +817,7 @@ function closeModal(options={}){
  const routedDetail=/^\/discover\//.test(location.pathname);
  const routeState=history.state;
  const returningDetail=activeDetail;
+ const returnToDetails=detailReturnFocus?.matches('.more-btn');
  activeDetail=null;
  modal.close();
  modal.classList.remove('show');
@@ -918,7 +830,7 @@ function closeModal(options={}){
   if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1){
    // The history adapter recreates cards; focus their new element after restoration.
    window.addEventListener('popstate',()=>requestAnimationFrame(()=>{
-    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningDetail.id}"] .item-identity`)?.focus({preventScroll:true});
+    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningDetail.id}"] ${returnToDetails?'.more-btn':'.item-identity'}`)?.focus({preventScroll:true});
    }),{once:true});
    history.back();
   }
@@ -932,10 +844,6 @@ document.getElementById('detailModal').addEventListener('keydown',event=>{
  const first=controls[0],last=controls.at(-1);
  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
-});
-// Native dialogs own focus containment and make the background inert.
-document.addEventListener('keydown',event=>{
- if(event.key==='Escape'&&!document.querySelector('dialog[open]'))closeCardShelf(true);
 });
 document.addEventListener('DOMContentLoaded',()=>{if(location.hash==='#methodology')openMethodology();});
 
@@ -961,7 +869,9 @@ function applyShareableRoute(){
  if(category){
   const cat=decodeURIComponent(category[1]);
   if(categoryNames[cat]&&cat!=='all'){
-   openDirectory(cat,{route:false});
+   // Initial route setup precedes guided-discovery; leave its title at the top.
+   // Later navigation still uses the journey's ordinary focus/scroll behavior.
+   openDirectory(cat,{route:false,scroll:!!window.badilakJourney});
    const requestedSub=new URLSearchParams(location.search).get('sub');
    if((subfilterMap[cat]||[]).some(([id])=>id===requestedSub)){
     subfilter=requestedSub;buildSubfilters();updateDirectoryCrumb();renderCards();
@@ -1373,7 +1283,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
  root.innerHTML=`
   <div class="arab-metric-head">
    <div class="arab-metric-copy">
-    <div class="arab-metric-title-wrap"><span class="arab-metric-medallion"><span class="material-symbols-outlined">${meta.icon}</span></span><strong>${d.title}</strong><span class="arab-metric-badge">${meta.badge}</span></div>
+    <div class="arab-metric-title-wrap"><span class="arab-metric-medallion" aria-hidden="true"><span class="material-symbols-outlined">${meta.icon}</span></span><strong>${d.title}</strong><span class="arab-metric-badge">${meta.badge}</span></div>
     <small class="arab-metric-why">${d.why||''}</small>
    </div>
    <span class="arab-metric-scale">ماذا يقيس؟ · ${d.note}</span>
@@ -1385,7 +1295,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
  const insight=document.getElementById('arabProgressInsight');
  if(insight){
   insight.innerHTML=`
-   <div class="arab-insight-head"><span class="arab-insight-emblem"><span class="material-symbols-outlined">${meta.icon}</span></span><h3>لماذا يهم؟</h3></div>
+   <div class="arab-insight-head"><span class="arab-insight-emblem" aria-hidden="true"><span class="material-symbols-outlined">${meta.icon}</span></span><h3>لماذا يهم؟</h3></div>
    <p class="arab-insight-summary">${meta.summary}</p>
    <div class="arab-insight-list">${meta.points.map(([n,t,s])=>`<div class="arab-insight-point"><span>${n}</span><div><b>${t}</b><small>${s}</small></div></div>`).join('')}</div>
    <div class="arab-insight-quote">هذا المؤشر لا يحكي القصة كاملة وحده؛ لكنه يوضح نوعًا محددًا من التقدم يمكن مقارنته بين الدول بمصدر واحد.</div>`;

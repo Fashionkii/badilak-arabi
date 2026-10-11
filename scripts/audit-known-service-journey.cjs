@@ -2,6 +2,7 @@
 // Guard the two reviewed data updates and the active-reference regression.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
+const {withoutRetiredShelf}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'02ff5a758052600710959008aa80c96cf3fd23ba';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -21,7 +22,10 @@ for(let i=0;i<current.items.length;i++){
   if(!allowed[now.id]?.includes(key))assert.deepEqual(now[key],old[key],now.id+'.'+key);
  }
 }
-for(const file of ['js/commercial-links.js','js/discovery-memory.js','js/smart-return.js','js/guided-discovery.js','js/feedback.js','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected file: '+file);
+for(const file of ['js/commercial-links.js','js/discovery-memory.js','js/smart-return.js','js/guided-discovery.js','js/feedback.js','data/disclosure.json','site.config.json','vercel.json']){
+ const normalize=file==='js/discovery-memory.js'?withoutRetiredShelf:x=>x;
+ assert.equal(normalize(read(file)),normalize(before(file)),'Protected file: '+file);
+}
 // Permit only the session-rotation disclosure and its date; protect all prior policy text.
 const rotationNote='<p>نحفظ أيضًا اختيارًا عشوائيًا لطريقة عرض بعض بطاقات الدليل في جلسة التبويب نفسها، حتى يبقى ترتيبها ثابتًا أثناء التصفح والتحديث. هذا الاختيار محلي، ولا يُرسل إلى أداة تحليلات، ويُحذف مع انتهاء جلسة التبويب.</p>';
 const privacy=JSON.parse(read('data/privacy.json'));
@@ -32,6 +36,7 @@ assert.deepEqual(normalizePrivacy(read('data/privacy.json')),normalizePrivacy(be
 for(const file of fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html')))assert.equal(read('guides/'+file),before('guides/'+file),'Article changed: '+file);
 const index=read('index.html');
 const normalizeBrand=html=>html
+ .replaceAll('badilak-social-base.png?v=20261011-1','badilak-social-base.png?v=20261005-1')
  .replace(/(<a href="#top" class="brand-lockup"[^>]*>)[\s\S]*?(<\/a>)/,'$1[approved brand artwork]$2')
  .replace(/(<h1 class="art-title art-title--brand" aria-label="بديلك عربي">)[\s\S]*?(<\/h1>)/,'$1[approved brand artwork]$2');
 assert.equal(normalizeBrand(index.replace(/^  <p id="originFitNote".*\n/m,'')),normalizeBrand(before('index.html')),'Unrelated homepage copy, links, ads or markup changed');

@@ -16,7 +16,7 @@
      const group=byId('learning-group-'+type);
      return {type,index:learningCarouselIndex[type],x:group?.querySelector('.learning-carousel-track')?.scrollLeft||0,browsing:group?.classList.contains('is-browsing')||false};
     }),
-    shelf:activeCardShelfId,detail:activeDetail?{...activeDetail,y:document.querySelector('#detailModal .modal-card')?.scrollTop||0}:null,
+    detail:activeDetail?{...activeDetail,y:document.querySelector('#detailModal .modal-card')?.scrollTop||0}:null,
     metric:currentArabMetric,countries:arabCountryVisible
    };
   },
@@ -57,9 +57,6 @@
     arabCountryVisible=Math.max(3,count(state.countries,arabProgressData[state.metric].rows.length,3));
     renderArabProgress(state.metric);
    }
-   const shelfItem=items.find(x=>x.id===state.shelf);
-   const shelfButton=shelfItem&&document.querySelector(`[data-item-id="${shelfItem.id}"] .more-btn`);
-   if(shelfButton)openCardShelf(shelfItem.id,shelfButton,false);
    const detail=state.detail;
    if(detail?.kind==='directory'&&items.some(x=>x.id===detail.id)){
     document.querySelector(`[data-item-id="${detail.id}"] .item-identity`)?.focus({preventScroll:true});

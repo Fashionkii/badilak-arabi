@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
+const {withoutRetiredShelf}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
 const canonical=new Set();
@@ -40,7 +41,10 @@ const redirects=fs.readFileSync(path.join(out,'_redirects'),'utf8');
 for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects)assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
 if(process.argv[2]){
  const ref=process.argv[2];
- for(const file of ['js/catalog-data.js','js/commercial-links.js','js/discovery-memory.js'])assert.equal(fs.readFileSync(path.join(root,file),'utf8'),execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'}),'Protected data/behavior changed: '+file);
+ for(const file of ['js/catalog-data.js','js/commercial-links.js','js/discovery-memory.js']){
+  const normalize=file==='js/discovery-memory.js'?withoutRetiredShelf:x=>x;
+  assert.equal(normalize(fs.readFileSync(path.join(root,file),'utf8')),normalize(execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'})),'Protected data/behavior changed: '+file);
+ }
  const before=execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}).replace(/ data-journey-panel="[^"]*"/g,''),after=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/ data-journey-panel="[^"]*"/g,'');
  for(const file of articleFiles){
   const article=s=>s.match(/<article\b[^>]*>[\s\S]*?<\/article>/)[0];

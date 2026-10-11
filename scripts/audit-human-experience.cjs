@@ -1,0 +1,55 @@
+'use strict';
+// The approved presentation changes must not silently rewrite catalog information.
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const {execFileSync}=require('node:child_process');
+const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
+const read=file=>fs.readFileSync(path.join(root,file),'utf8');
+const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
+const context=readFile=>{
+ const c=vm.createContext({window:{}});
+ vm.runInContext(readFile('js/catalog-data.js')+'\n'+readFile('js/detail-renderers.js'),c);
+ return c;
+};
+const old=context(before),now=context(read),items=vm.runInContext('items',now);
+const normalized=value=>String(value||'').replace(/\s+/g,' ').trim();
+let duplicateFacts=0;
+for(const item of items){
+ const oldCard=old.directoryCardMarkup(item);
+ assert.equal(now.directoryCardMarkup(item),oldCard.replace(`<button class="more-btn" aria-expanded="false" onclick="openCardShelf('${item.id}',this)">تفاصيل +</button>`,`<button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${item.id}')">تفاصيل</button>`),item.id+' card copy/links');
+ const duplicates=(old.specialDetails(item)?.facts||old.genericFacts(item)).filter(([,value])=>normalized(value)===normalized(item.value));
+ duplicateFacts+=duplicates.length;
+ for(const standalone of [false,true]){
+  let expected=old.directoryDetailMarkup(item,standalone);
+  for(const [label,value] of duplicates)expected=expected.replace(old.detailFact(label,value),'');
+  assert.equal(now.directoryDetailMarkup(item,standalone),expected,item.id+' distinct details/sources');
+ }
+}
+for(const file of ['js/catalog-data.js','js/commercial-links.js','js/guided-discovery.js','js/smart-return.js','js/feedback.js','js/route-seo.js','data/privacy.json','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected '+file);
+const normalizeOG=html=>html.replace(/badilak-social-base\.png(?:\?v=[\d-]+)?/g,'badilak-social-base.png');
+for(const file of ['index.html','guides.html'])assert.equal(normalizeOG(read(file)),normalizeOG(before(file)),'Homepage/hub semantics');
+// Initial categories must not scroll past their heading before the journey adapter exists.
+const source=read('js/app.js');
+const routeFunction=source.slice(source.indexOf('function applyShareableRoute(){'),source.indexOf('\napplyShareableRoute();'));
+const calls=[];
+const routeContext=vm.createContext({window:{},document:{getElementById:()=>null},location:{pathname:'/category/tech',search:''},categoryNames:{tech:'تقنية وذكاء اصطناعي'},subfilterMap:{tech:[]},URLSearchParams,openDirectory:(...args)=>calls.push(args)});
+vm.runInContext(routeFunction,routeContext);routeContext.applyShareableRoute();
+assert.equal(calls[0][0],'tech');assert.equal(calls[0][1].route,false);assert.equal(calls[0][1].scroll,false);
+routeContext.window.badilakJourney={restoreHistory:()=>false};routeContext.applyShareableRoute();
+assert.equal(calls[1][1].scroll,true,'In-page category navigation still focuses the journey');
+routeContext.window.badilakJourney.restoreHistory=()=>true;routeContext.applyShareableRoute();
+assert.equal(calls.length,2,'Saved history takes precedence over a fresh category reset');
+for(const file of ['js/app.js','js/detail-renderers.js','js/discovery-memory.js','css/app.css'])assert.doesNotMatch(read(file),/CardShelf|card-shelf|card-detail-shelf|headings-sprite|toggleCardMore|toggleLearningMore/,'Retired code: '+file);
+assert.ok(!fs.existsSync(path.join(root,'dist/images/headings-sprite.webp')));
+const pages=fs.readdirSync(path.join(root,'dist'),{recursive:true}).filter(x=>x.endsWith('.html'));
+for(const file of pages){
+ const html=read('dist/'+file);
+ assert.match(html,/rel="icon" href="\/favicon.ico\?v=20261011-1"/,file);
+ assert.match(html,/class="[^"]*cosmic-theme/,file);
+ if(file.startsWith('guides/')){
+  const img=s=>s.match(/<meta property="og:image"[^>]+>/)[0];
+  assert.equal(img(html),img(read(file)),'Article sharing image: '+file);
+ }
+}
+const missing=read('dist/404.html');
+assert.match(missing,/site-bundle\.css/);assert.match(missing,/الصفحة غير موجودة/);assert.ok(!missing.includes('/js/app.js'));
+console.log(`PASS: ${items.length} cards preserve copy/links; ${duplicateFacts} exact duplicate facts removed with every distinct detail/source intact; initial category and history routing; ${pages.length} themed pages/icons; article sharing preserved; retired shelf/sprite absent.`);

@@ -245,7 +245,9 @@ const geoContextNotes={
 
 function directoryDetailMarkup(x,standalone=false){
  const special=specialDetails(x);
- const facts=special?.facts||genericFacts(x);
+ // Keep every distinct fact; do not repeat the overview verbatim under a second label.
+ const normalized=value=>String(value||'').replace(/\s+/g,' ').trim();
+ const facts=(special?.facts||genericFacts(x)).filter(([,value])=>normalized(value)!==normalized(x.value));
  const sections=special?.sections||[];
  const destination=resolveCommercialLink(x.id,x.url);
  let markup=`
@@ -344,7 +346,7 @@ function directoryCardMarkup(x,activeOrigin=null){
    ${caution?`<p class="card-key-limit">${caution}</p>`:''}
    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
-    <button class="more-btn" aria-expanded="false" onclick="openCardShelf('${x.id}',this)">تفاصيل +</button>
+    <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">تفاصيل</button>
     <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`;}

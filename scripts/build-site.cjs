@@ -35,6 +35,7 @@ const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json')
 const sourcePhotos=new Set(Object.values(media.articles).map(x=>path.join(root,x.photo)));
 for(const dir of ['css','js','images','guides','fonts'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
 for(const file of ['index.html','guides.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
+fs.copyFileSync(path.join(root,'favicon.ico'),path.join(out,'favicon.ico'));
 const escape=seo.escape;
 const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
 const oldOrigin='https://badilak-arabi.vercel.app';
@@ -47,6 +48,7 @@ fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteStyles.map(file=>fs.re
 const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts\.css">\s*<link rel="stylesheet" href="\/css\/app\.css">\s*<link rel="stylesheet" href="\/css\/visual-refresh\.css">/,'<link rel="stylesheet" href="/css/site-bundle.css">');
 function prepare(html){
  html=html.split(oldOrigin).join(origin);
+ html=html.replace('</head>','<link rel="icon" href="/favicon.ico?v=20261011-1" sizes="16x16 32x32 48x48">\n<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/apple-touch-icon.png">\n</head>');
  html=html.replace(/<body([^>]*)>/,(_,attrs)=>'<body'+(/class="/.test(attrs)?attrs.replace(/class="([^"]*)"/,'class="$1 cosmic-theme"'):' class="cosmic-theme"'+attrs)+'>');
  // Editorial body/copy stay intact; only the shared header gets the supplied identity.
  html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<picture><source type="image/avif" srcset="/images/brand/cosmic-logo-320.avif"><img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async"></picture>$2');
@@ -114,7 +116,7 @@ for(const id of seo.categories()){
  html=html.replace('<h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>','<h2 id="journeyResultTitle">'+escape(categoryNames[id])+'</h2>');
  write('category/'+id+'.html',html);
 }
-write('404.html',`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/app.css"></head><body><main class="wrap" style="padding:60px 0"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><a href="/">الرئيسية</a> · <a href="/guides">مركز القراءة</a></main></body></html>`);
+write('404.html',prepare(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/site-bundle.css"></head><body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>${standaloneHeader}<main class="standalone-main wrap" id="content"><article class="policy-page not-found"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><nav aria-label="متابعة التصفح"><a href="/">الرئيسية</a><a href="/guides">مركز القراءة</a></nav></article></main>${standaloneFooter}</body></html>`));
 // Crawlers must be allowed to read noindex. Disallow:/ would hide that instruction.
 write('robots.txt','# Prelaunch: indexing is blocked by X-Robots-Tag and HTML meta tags.\nUser-agent: *\nAllow: /\n');
 write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
