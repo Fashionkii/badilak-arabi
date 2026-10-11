@@ -129,3 +129,34 @@ body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important;
   body.cosmic-theme { background:white!important; }
   body.cosmic-theme::before { display:none; }
 }
+
+/* Directory navigation is visible, compact and independent of the results grid. */
+body.cosmic-theme #directory #directoryRefineCategory {
+  padding:0;border:0;background:transparent;margin-bottom:12px;
+}
+#directory #directoryRefineCategory .filters {
+  display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;
+  gap:8px!important;background:none!important;padding:0!important;border:0!important;box-shadow:none!important;
+}
+#directory #directoryRefineCategory .filters>.filter {
+  grid-column:auto!important;display:flex!important;flex-direction:column;justify-content:center;
+  align-items:center;gap:8px;min-width:0;min-height:88px!important;padding:10px 8px!important;
+  font-size:13px!important;line-height:1.5!important;white-space:normal;
+  border:1px solid #d8d3c7!important;border-radius:12px!important;background:#fffdf8!important;
+  color:var(--deep)!important;box-shadow:none!important;transform:none!important;
+}
+#directory #directoryRefineCategory .filter.active {background:var(--deep)!important;color:#fff!important;border-color:#c5a35b!important;}
+#directory .directory-category-icon {width:24px;height:24px;flex:none;}
+#directory #directoryRefineSub {background:#fffdf8;padding:10px 12px;}
+#directory #directoryRefineSub .subfilter {font-size:13px!important;min-height:40px!important;}
+#directory #directoryRefineCategory .filter:focus-visible,
+#directory #directoryRefineSub .subfilter:focus-visible {outline:3px solid #d2a64c!important;outline-offset:3px;}
+@media(max-width:1050px) and (min-width:761px){
+ #directory #directoryRefineCategory .filters {grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+}
+@media(max-width:760px){
+ #directory #directoryRefineCategory .filters {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;}
+ #directory #directoryRefineCategory .filters>.filter {flex-direction:row;min-height:48px!important;padding:8px!important;font-size:12px!important;}
+ #directory #directoryRefineCategory .filters>.filter[data-filter="all"] {grid-column:1 / -1!important;min-height:40px!important;}
+ #directory .directory-category-icon {width:20px;height:20px;}
+}

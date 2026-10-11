@@ -167,8 +167,6 @@
    </div>
    <div class="directory-refine-triggers" aria-label="تصفية النتائج">
     <button type="button" data-refine-trigger="search" aria-expanded="false" aria-controls="directoryRefineSearch" onclick="toggleDirectoryRefine('search',this)">⌕ ابحث</button>
-    <button type="button" data-refine-trigger="category" aria-expanded="false" aria-controls="directoryRefineCategory" onclick="toggleDirectoryRefine('category',this)">ماذا تبحث عنه؟ <span class="refine-caret" aria-hidden="true">⌄</span></button>
-    <button type="button" id="subfilterTrigger" data-refine-trigger="sub" aria-expanded="false" aria-controls="directoryRefineSub" onclick="toggleDirectoryRefine('sub',this)" hidden>اختيار أدق <span class="refine-caret" aria-hidden="true">⌄</span></button>
    </div>
   </div>
 
@@ -176,15 +174,15 @@
    <div class="search"><span class="search-mark">⌕</span><input id="searchInput" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
   </div>
 
-  <div class="directory-refine-panel" id="directoryRefineCategory" hidden>
+  <div class="directory-refine-panel" id="directoryRefineCategory" role="group" aria-label="ماذا تبحث عنه؟">
    <div class="filters">
-    <button class="filter active" data-filter="all" onclick="setFilter('all',this)">الكل</button>
-    <button class="filter" data-filter="tech" onclick="setFilter('tech',this)">تقنية وذكاء اصطناعي</button>
-    <button class="filter" data-filter="work" onclick="setFilter('work',this)">شغلك ومشروعك</button>
-    <button class="filter" data-filter="shopping" onclick="setFilter('shopping',this)">تسوّق وشراء</button>
-    <button class="filter" data-filter="learn" onclick="setFilter('learn',this)">تعلّم وبحث</button>
-    <button class="filter" data-filter="create" onclick="setFilter('create',this)">تصميم ومحتوى</button>
-    <button class="filter" data-filter="culture" onclick="setFilter('culture',this)">كتب وصوت وترفيه</button>
+    <button class="filter active" data-filter="all" onclick="setFilter('all',this)" aria-pressed="true"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>الكل</span></button>
+    <button class="filter" data-filter="tech" onclick="setFilter('tech',this)" aria-pressed="false"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5 2 12l6 7M16 5l6 7-6 7M14 3l-4 18"/></svg><span>تقنية وذكاء اصطناعي</span></button>
+    <button class="filter" data-filter="work" onclick="setFilter('work',this)" aria-pressed="false"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7V4h8v3M3 7h18v14H3zM3 12c6 4 12 4 18 0M10 14h4"/></svg><span>شغلك ومشروعك</span></button>
+    <button class="filter" data-filter="shopping" onclick="setFilter('shopping',this)" aria-pressed="false"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l1 13H3zM8 9V6a4 4 0 0 1 8 0v3"/></svg><span>تسوّق وشراء</span></button>
+    <button class="filter" data-filter="learn" onclick="setFilter('learn',this)" aria-pressed="false"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2 8 10-5 10 5-10 5zM6 11v7c4 3 8 3 12 0v-7M22 8v9"/></svg><span>تعلّم وبحث</span></button>
+    <button class="filter" data-filter="create" onclick="setFilter('create',this)" aria-pressed="false"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v14H3zM12 17v5M7 22l5-5 5 5M7 7h5M7 11h10"/></svg><span>تصميم ومحتوى</span></button>
+    <button class="filter" data-filter="culture" onclick="setFilter('culture',this)" aria-pressed="false"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v16H3zM3 8h18M7 4v4M12 4v4M17 4v4m-7 4 5 3-5 3z"/></svg><span>كتب وصوت وترفيه</span></button>
    </div>
   </div>
 

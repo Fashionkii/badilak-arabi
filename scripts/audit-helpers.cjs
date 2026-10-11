@@ -13,3 +13,9 @@ exports.withoutModalRestoreHandoff=source=>source
 
 // Replace only the six decorative title images; preserve their exact accessible text.
 exports.withTextSectionHeadings=html=>html.replace(/<h2 class="art-title art-title--section art-title--[^" ]+"><span class="sr-only">([^<]+)<\/span><img[^>]+><\/h2>/g,'<h2 class="section-title">$1</h2>');
+
+// Only directory control presentation changes; keep button labels, filters and handlers exact.
+exports.withoutDirectoryControlPresentation=html=>html
+ .replace(/^    <button[^\n]+data-refine-trigger="(?:category|sub)"[^\n]+\n/gm,'')
+ .replace(/id="directoryRefineCategory"(?: hidden| role="group" aria-label="ماذا تبحث عنه؟")/g,'id="directoryRefineCategory"')
+ .replace(/(<button class="filter(?: active)?" data-filter="[^"]+"[^>]*>)([\s\S]*?)(<\/button>)/g,(_,open,body,close)=>open.replace(/ aria-pressed="(?:true|false)"/,'')+body.replace(/<svg[\s\S]*?<\/svg>/,'').replace(/<\/?span>/g,'')+close);

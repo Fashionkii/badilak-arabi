@@ -60,11 +60,12 @@ function go(id){
 function categoryLabel(v){return categoryNames[v]||v}
 
 function closeDirectoryRefiners(){
- document.querySelectorAll('.directory-refine-panel').forEach(p=>p.setAttribute('hidden',''));
+ // Categories and their subchoices remain visible; only search is collapsible.
+ document.getElementById('directoryRefineSearch')?.setAttribute('hidden','');
  document.querySelectorAll('[data-refine-trigger]').forEach(b=>b.setAttribute('aria-expanded','false'));
 }
 function toggleDirectoryRefine(kind,btn){
- const map={search:'directoryRefineSearch',category:'directoryRefineCategory',sub:'directoryRefineSub'};
+ const map={search:'directoryRefineSearch'};
  const panel=document.getElementById(map[kind]);if(!panel)return;
  const opening=panel.hasAttribute('hidden');
  closeDirectoryRefiners();
@@ -90,15 +91,10 @@ function updateDirectoryRefineUI(){
  if(contextWrap)contextWrap.hidden=!bits.length;
  root.innerHTML=bits.length?bits.join(''):'';
 
- const subBtn=document.getElementById('subfilterTrigger');
- if(subBtn){
-  const hasSub=filter!=='all'&&Array.isArray(subfilterMap[filter])&&subfilterMap[filter].length>1;
-  subBtn.hidden=!hasSub;
-  if(!hasSub){
-   const panel=document.getElementById('directoryRefineSub');if(panel)panel.setAttribute('hidden','');
-   subBtn.setAttribute('aria-expanded','false');
-  }
- }
+ const hasSub=filter!=='all'&&Array.isArray(subfilterMap[filter])&&subfilterMap[filter].length>1;
+ const subPanel=document.getElementById('directoryRefineSub');if(subPanel)subPanel.hidden=!hasSub;
+ document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+ document.querySelectorAll('[data-subfilter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.subfilter===subfilter)));
 }
 function goDirectoryResults(){
  if(window.badilakJourney?.show('directory'))return;
@@ -135,7 +131,16 @@ function setDirectoryFilter(v){
  closeDirectoryRefiners();
  renderCards();
 }
+// Each explicit filter choice is a restorable step; keep the directory route on “all”.
+function rememberDirectorySelection(){
+ if(!originFilter&&!countryFilter){
+  const url=filter==='all'?'/#directory':'/category/'+encodeURIComponent(filter)+(subfilter==='all'?'':'?sub='+encodeURIComponent(subfilter));
+  if(location.pathname+location.search+location.hash!==url)history.pushState({},'',url);
+ }
+ window.badilakJourney?.remember();
+}
 function setFilter(v,el){
+ window.badilakJourney?.remember();
  filter=v;
  subfilter='all';
  if(originFilter){
@@ -152,13 +157,10 @@ function setFilter(v,el){
  updateDirectoryActionLabel();
  closeDirectoryRefiners();
  renderCards();
- if(v==='all'){
-  if(/^\/category\//.test(location.pathname))history.replaceState({},'','/');
- }else if(!originFilter){
-  syncCategoryRoute(v);
- }
+ rememberDirectorySelection();
 }
 function setSubfilter(v,el){
+ window.badilakJourney?.remember();
  subfilter=v;
  if(originFilter){
   const hasRelatedItems=items.some(x=>x.origin.includes(originFilter)&&(filter==='all'||x.cat===filter)&&x.sub===v);
@@ -174,6 +176,7 @@ function setSubfilter(v,el){
  updateDirectoryActionLabel();
  closeDirectoryRefiners();
  renderCards();
+ rememberDirectorySelection();
 }
 function buildSubfilters(){
  const row=document.getElementById('subfilterRow'),root=document.getElementById('subfilters');
