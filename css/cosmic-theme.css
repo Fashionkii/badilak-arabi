@@ -72,6 +72,9 @@ body.cosmic-theme :is(#learning,#updates,#guides.is-open,#knowledge.is-open) .se
   border-radius:16px;
   padding:16px!important;
 }
+body.cosmic-theme :is(#learning,#updates,#guides,#knowledge) .section-head>div { min-width:0;max-width:100%; }
+body.cosmic-theme :is(#learning,#updates,#guides,#knowledge) .section-head h2.art-title { width:100%!important;min-width:0!important;max-width:100%!important; }
+body.cosmic-theme .modal-card { background:#fffdf8!important; }
 body.cosmic-theme .section-continue {
   background:#f7f9f5;
   border-radius:12px;
@@ -107,6 +110,9 @@ body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important;
   body.cosmic-theme::before { background-image:linear-gradient(rgba(3,13,22,.26),rgba(3,13,22,.5)),url('/images/brand/cosmic-space-800.webp'); }
   .brand-lockup .cosmic-logo,.top .cosmic-logo { width:132px; }
   .intro .cosmic-logo { width:min(320px,88vw); }
+  body.cosmic-theme .directory-refine-bar { flex-direction:column!important;align-items:stretch!important;gap:12px!important; }
+  body.cosmic-theme .directory-active-context { min-width:0;max-width:100%; }
+  body.cosmic-theme .directory-refine-triggers { flex-wrap:wrap!important;justify-content:flex-start!important; }
   body.cosmic-theme:not(.guided-discovery) main.wrap { border-radius:16px; margin-block:16px; }
   body.cosmic-theme:not(.guided-discovery) main.wrap { padding-inline:16px; }
 }
