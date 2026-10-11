@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-10-11T20:30:46.397279+00:00",
+  "runtime_commit": "9f28d02b8e0f10432822aaac7d88ae6e80cdaf98",
+  "deployment": "dpl_BzRxj8XD84FkWWN3121Z24eScqXZ",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "noindex": "noindex, follow",
+      "matches_build": true,
+      "sha256": "f7cfadc0d0845e705e3a48d54d7505d74cdcb08657bebb5342cdd0dc4589a42b"
+    },
+    {
+      "path": "/category/tech",
+      "status": 200,
+      "noindex": "noindex, follow",
+      "matches_build": true,
+      "sha256": "aa01e3e0574bbd85aff7a4f7a71c1355096af27a0dea74e7fa8e536c5ce00a67"
+    },
+    {
+      "path": "/js/detail-renderers.js",
+      "status": 200,
+      "noindex": "noindex, follow",
+      "matches_build": true,
+      "sha256": "8ec4c886ed2da6bb3413d210e22044b27a80efec4e6992108ea57ae550333e50"
+    },
+    {
+      "path": "/css/site-bundle.css",
+      "status": 200,
+      "noindex": "noindex, follow",
+      "matches_build": true,
+      "sha256": "8fdcc846f8b5e038c0d4128d1a10c75e032497a812fb167997072243039c33fe"
+    }
+  ],
+  "desktop": {
+    "heading": "قبل ما تدفع",
+    "height_px": 54.078125,
+    "font_size_px": 33.3935,
+    "horizontal_overflow": false,
+    "card_action_order": [
+      "تفاصيل",
+      "اقرأ",
+      "زيارة الخدمة"
+    ],
+    "details_opened": "dhawwi",
+    "read_destination": "/guides/arabic-design",
+    "browser_back_cards": 6
+  },
+  "mobile": "Visual screenshot of #learning: text heading fits; no clipped heading. Not a complete mobile interaction test."
+}
