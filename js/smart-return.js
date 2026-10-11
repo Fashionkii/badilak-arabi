@@ -10,6 +10,16 @@
  const getForward=()=>cleanStack(FORWARD), setForward=s=>write(FORWARD,s.slice(-MAX));
  const snapshot=()=>({url:location.href,y:Math.max(0,Math.round(window.scrollY||0)),title:document.title,ts:Date.now(),discovery:window.badilakDiscoveryMemory?.capture()});
 
+ // A saved directory dialog needs the discovery runtime; a fresh service URL does not.
+ function restoreVisit(target,replace=false){
+  const destination=new URL(target.url,location.href);
+  if(target.discovery&&destination.origin===location.origin&&/^\/discover\//.test(destination.pathname)){
+   destination.pathname='/';destination.search='';destination.hash='#directory';
+  }
+  write(RESTORE,{...target,url:destination.href});
+  location[replace?'replace':'assign'](destination.href);
+ }
+
  function pushUnique(stack,item){
   if(stack.length&&samePage(stack[stack.length-1].url,item.url))stack[stack.length-1]=item;
   else stack.push(item);
@@ -81,8 +91,7 @@
     const current=snapshot();
     setBack(st);
     setForward(pushUnique(getForward(),current));
-    write(RESTORE,target);
-    location.href=target.url;
+    restoreVisit(target);
    });
    wrap.appendChild(b);
   }
@@ -97,8 +106,7 @@
     const current=snapshot();
     setForward(st);
     setBack(pushUnique(getBack(),current));
-    write(RESTORE,target);
-    location.href=target.url;
+    restoreVisit(target);
    });
    wrap.appendChild(f);
   }
@@ -111,6 +119,7 @@
   const previous=historyVisit?[...getBack(),...getForward()].filter(x=>samePage(x.url,location.href)).sort((a,b)=>b.ts-a.ts)[0]:null;
   const r=read(RESTORE,null)||previous;if(!r||!r.url||Date.now()-(r.ts||0)>=TTL)return;
   if(!samePage(r.url,location.href))return;
+  if(r.discovery&&!window.badilakDiscoveryMemory&&/^\/discover\//.test(location.pathname)){restoreVisit(r,true);return;}
   try{sessionStorage.removeItem(RESTORE)}catch{}
   window.badilakDiscoveryMemory?.restore(r.discovery);
   if('scrollRestoration'in history)history.scrollRestoration='manual';

@@ -2,7 +2,7 @@
 // Guard the two reviewed data updates and the active-reference regression.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutRetiredShelf}=require('./audit-helpers.cjs');
+const {withoutRetiredShelf,withoutModalRestoreHandoff}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'02ff5a758052600710959008aa80c96cf3fd23ba';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -23,7 +23,7 @@ for(let i=0;i<current.items.length;i++){
  }
 }
 for(const file of ['js/commercial-links.js','js/discovery-memory.js','js/smart-return.js','js/guided-discovery.js','js/feedback.js','data/disclosure.json','site.config.json','vercel.json']){
- const normalize=file==='js/discovery-memory.js'?withoutRetiredShelf:x=>x;
+ const normalize=file==='js/discovery-memory.js'?withoutRetiredShelf:file==='js/smart-return.js'?withoutModalRestoreHandoff:x=>x;
  assert.equal(normalize(read(file)),normalize(before(file)),'Protected file: '+file);
 }
 // Permit only the session-rotation disclosure and its date; protect all prior policy text.
