@@ -2,7 +2,7 @@
 // The approved presentation changes must not silently rewrite catalog information.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutModalRestoreHandoff}=require('./audit-helpers.cjs');
+const {withoutModalRestoreHandoff,withTextSectionHeadings}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -16,7 +16,14 @@ const normalized=value=>String(value||'').replace(/\s+/g,' ').trim();
 let duplicateFacts=0;
 for(const item of items){
  const oldCard=old.directoryCardMarkup(item);
- assert.equal(now.directoryCardMarkup(item),oldCard.replace(`<button class="more-btn" aria-expanded="false" onclick="openCardShelf('${item.id}',this)">تفاصيل +</button>`,`<button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${item.id}')">تفاصيل</button>`),item.id+' card copy/links');
+ let expectedCard=oldCard.replace(`<button class="more-btn" aria-expanded="false" onclick="openCardShelf('${item.id}',this)">تفاصيل +</button>`,`<button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${item.id}')">تفاصيل</button>`);
+ const slot=expectedCard.match(/   <div class="card-guide-slot">.*?<\/div>\n/)[0];
+ expectedCard=expectedCard.replace(slot,'').replace(`onclick="openDetail('${item.id}')">تفاصيل</button>\n`,`onclick="openDetail('${item.id}')">تفاصيل</button>\n `+slot).replace(/<strong>(?:دليل الاختيار|مركز القراءة)<\/strong>/,'<strong>اقرأ</strong>');
+ const currentCard=now.directoryCardMarkup(item);
+ assert.equal(currentCard.replace(/ aria-label="اقرأ: [^"]*"/,''),expectedCard,item.id+' card copy/links/order');
+ assert.match(currentCard,/class="card-read-link|editorial-guide-link card-read-link/);
+ assert.match(currentCard,/aria-label="اقرأ: [^"]+"/);
+
  const duplicates=(old.specialDetails(item)?.facts||old.genericFacts(item)).filter(([,value])=>normalized(value)===normalized(item.value));
  duplicateFacts+=duplicates.length;
  for(const standalone of [false,true]){
@@ -41,7 +48,7 @@ returnContext.restoreVisit({...saved,discovery:undefined});assert.equal(visits.a
 returnContext.restoreVisit({...saved,url:'https://badilak-arabi.vercel.app/category/create'});assert.equal(visits.at(-1)[1],'https://badilak-arabi.vercel.app/category/create');
 returnContext.restoreVisit(saved,true);assert.equal(visits.at(-1)[0],'replace');
 const normalizeOG=html=>html.replace(/badilak-social-base\.png(?:\?v=[\d-]+)?/g,'badilak-social-base.png');
-for(const file of ['index.html','guides.html'])assert.equal(normalizeOG(read(file)),normalizeOG(before(file)),'Homepage/hub semantics');
+for(const file of ['index.html','guides.html'])assert.equal(withTextSectionHeadings(normalizeOG(read(file))),withTextSectionHeadings(normalizeOG(before(file))),'Homepage/hub semantics');
 // Initial categories must not scroll past their heading before the journey adapter exists.
 const source=read('js/app.js');
 const routeFunction=source.slice(source.indexOf('function applyShareableRoute(){'),source.indexOf('\napplyShareableRoute();'));
@@ -55,6 +62,8 @@ routeContext.window.badilakJourney.restoreHistory=()=>true;routeContext.applySha
 assert.equal(calls.length,2,'Saved history takes precedence over a fresh category reset');
 for(const file of ['js/app.js','js/detail-renderers.js','js/discovery-memory.js','css/app.css'])assert.doesNotMatch(read(file),/CardShelf|card-shelf|card-detail-shelf|headings-sprite|toggleCardMore|toggleLearningMore/,'Retired code: '+file);
 assert.ok(!fs.existsSync(path.join(root,'dist/images/headings-sprite.webp')));
+assert.equal((read('index.html').match(/class="section-title"/g)||[]).length,6);
+assert.doesNotMatch(read('index.html'),/images\/titles\//);
 const pages=fs.readdirSync(path.join(root,'dist'),{recursive:true}).filter(x=>x.endsWith('.html'));
 for(const file of pages){
  const html=read('dist/'+file);

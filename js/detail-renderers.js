@@ -38,15 +38,16 @@ function subcategoryLabel(cat,sub){
  return pair ? pair[1] : sub;
 }
 
-function guideLinkMarkup(guide,detail=false,label='اقرأ'){
+function guideLinkMarkup(guide,detail=false){
  const href=guide?guide[0]:'/guides';
  const content=detail
   ? `<span>اقرأ</span><strong>${guide?guide[1]:'اقرأ حسب حاجتك'}</strong>`
-  : `<strong>${guide?label:'مركز القراءة'}</strong>`;
- return `<a class="editorial-guide-link ${detail?'is-detail':'card-read-link'}" href="${href}" onclick="event.stopPropagation()">${content}<b aria-hidden="true">←</b></a>`;
+  : '<strong>اقرأ</strong>';
+ const readingLabel=detail?'':` aria-label="اقرأ: ${String(guide?guide[1]:'مركز القراءة').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}"`;
+ return `<a class="editorial-guide-link ${detail?'is-detail':'card-read-link'}" href="${href}"${readingLabel} onclick="event.stopPropagation()">${content}<b aria-hidden="true">←</b></a>`;
 }
 
-function editorialGuideLinkMarkup(id,detail=false){return guideLinkMarkup(relatedGuideMap[id],detail,'دليل الاختيار')}
+function editorialGuideLinkMarkup(id,detail=false){return guideLinkMarkup(relatedGuideMap[id],detail)}
 
 function detailFact(label,value){
  if(!value)return '';
@@ -344,9 +345,9 @@ function directoryCardMarkup(x,activeOrigin=null){
     <p class="card-purpose">${compactCardPurpose(x)}</p>
    </div>
    ${caution?`<p class="card-key-limit">${caution}</p>`:''}
-   <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
    <div class="card-primary-actions">
     <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">تفاصيل</button>
+    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
     <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`;}

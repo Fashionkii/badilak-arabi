@@ -66,14 +66,23 @@ body.cosmic-theme #competitionIndex>.competition-head :is(h2,p),
 body.cosmic-theme #learning .learning-group-title { color:#f6efdf!important; }
 body.cosmic-theme #learning .learning-folded-head .learning-group-title { color:var(--deep)!important; }
 body.cosmic-theme #learning :is(.learning-toolbar,.learning-folded-head) { background:#f7f9f5!important; }
-/* Illustrated section headings and explanatory copy keep their reading surface. */
-body.cosmic-theme :is(#learning,#updates,#guides.is-open,#knowledge.is-open) .section-head {
+/* Live text headings stay sharp at every size and retain the established reading surface. */
+body.cosmic-theme :is(#learning,#updates,#guides,#knowledge) .section-head {
   background:#f7f9f5;
   border-radius:16px;
   padding:16px!important;
 }
 body.cosmic-theme :is(#learning,#updates,#guides,#knowledge) .section-head>div { min-width:0;max-width:100%; }
-body.cosmic-theme :is(#learning,#updates,#guides,#knowledge) .section-head h2.art-title { width:100%!important;min-width:0!important;max-width:100%!important; }
+body.cosmic-theme .section-head h2.section-title,
+body.cosmic-theme #nominate h2.section-title {
+  display:block;position:static;width:auto;max-width:100%;min-width:0;
+  height:auto;min-height:0;margin:0;font-family:inherit;
+  font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;line-height:1.5;
+  color:var(--deep);background:none;text-align:inherit;
+}
+body.cosmic-theme .section-head h2.section-title::before,
+body.cosmic-theme .section-head h2.section-title::after { content:none; }
+body.cosmic-theme .catalog-grid .card-primary-actions .card-guide-slot { margin:0!important; }
 body.cosmic-theme .modal-card { background:#fffdf8!important; }
 body.cosmic-theme .section-continue {
   background:#f7f9f5;
