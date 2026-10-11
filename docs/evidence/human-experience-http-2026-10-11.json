@@ -1,0 +1,170 @@
+{
+  "checked_at_utc": "2026-10-11T19:45:29.835709+00:00",
+  "runtime_commit": "d53f4a8da2d5ba6b2bdf7c35284bd68b9d1618e1",
+  "deployment_id": "dpl_7dmPcg22Ui3zuvPMormspY3ph8YX",
+  "deployment_state": "READY",
+  "base_url": "https://badilak-arabi.vercel.app",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 44154,
+      "sha256": "10e5f228c523c2418988ed767cde5143cd2791c6e421a0c3a3dd5e4d4e7b6429",
+      "matches_local_build": true,
+      "meta_noindex": true,
+      "passed": true
+    },
+    {
+      "path": "/category/tech",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 52136,
+      "sha256": "3c39daced114a0a5c5ef0d1238755dfecc3fe31e8fd204be724afa7bbe568628",
+      "matches_local_build": true,
+      "meta_noindex": true,
+      "passed": true
+    },
+    {
+      "path": "/discover/dhawwi",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 10425,
+      "sha256": "c598feb434f4aa1d6abef79dfce1233e23015d4473c22ec95009c708e0bd4242",
+      "matches_local_build": true,
+      "meta_noindex": true,
+      "passed": true
+    },
+    {
+      "path": "/guides/arabic-design",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 21206,
+      "sha256": "d63ee2b2675d7912251fc17e787a91ef5698de40c15244c786659be869415708",
+      "matches_local_build": true,
+      "meta_noindex": true,
+      "passed": true
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 10102,
+      "sha256": "6de1d0d61de866b8561f361c104d42a151a3d84f7b6595898507e2625460ff74",
+      "matches_local_build": true,
+      "meta_noindex": true,
+      "passed": true
+    },
+    {
+      "path": "/review-missing-page",
+      "status": 404,
+      "expected_status": 404,
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 2670,
+      "sha256": "394d9f11a0c583670a19f1263ef61b69948bd24116b8bef5b9a66ed28860fa59",
+      "matches_local_build": true,
+      "meta_noindex": true,
+      "passed": true
+    },
+    {
+      "path": "/js/smart-return.js",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 7061,
+      "sha256": "48f8adab1646218a51b78e461530de1c6592311c4031e664b05736deb0c0402c",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/js/app.js",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 76908,
+      "sha256": "9923b39e465ac20e075c6ea5c6ed0128c702324b4ec2be98b2ef1501e380a672",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/js/detail-renderers.js",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 32257,
+      "sha256": "77a34f76bace62ec0fd6bd858de9aeb7ef856222c50016f81812e3b58787301c",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/css/app.css",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 169893,
+      "sha256": "909bf6f92308e2ba0f7cbe89473e025a755cff893c139dbc19ccec6452f9db23",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/css/visual-refresh.css",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 11520,
+      "sha256": "4a899483dcd4cc8af6d19f98e26ff031df98e325082fa6671350fa9e7f4acde0",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "image/vnd.microsoft.icon",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 7429,
+      "sha256": "9572d9f22a69f6a168803525d0721659a309971ecc5d4608fbd843988286e610",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/images/social/badilak-social-base.png?v=20261011-1",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "image/png",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 385064,
+      "sha256": "d98cffc8f9c15930c5e89a3bb6016961c53a4fb36d8102845f4eecc270792719",
+      "matches_local_build": true,
+      "passed": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "expected_status": 200,
+      "content_type": "application/xml",
+      "x_robots_tag": "noindex, follow",
+      "bytes": 109,
+      "sha256": "63835cfef3e52851c5fda3c47603a3a40f7da0784eedf8c8b068effb20e07ac2",
+      "matches_local_build": true,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}
