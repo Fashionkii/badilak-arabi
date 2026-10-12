@@ -33,7 +33,13 @@ assert.equal(privacy.updated,'10 أكتوبر 2026');
 assert.equal(privacy.sections.find(x=>x.title==='ما يُحفظ في متصفحك').html.split(rotationNote).length,2,'One accurate rotation disclosure');
 const normalizePrivacy=value=>{const policy=JSON.parse(value);delete policy.updated;for(const section of policy.sections)section.html=section.html.replace(rotationNote,'');return policy;};
 assert.deepEqual(normalizePrivacy(read('data/privacy.json')),normalizePrivacy(before('data/privacy.json')),'Unrelated privacy policy changed');
-for(const file of fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html')))assert.equal(read('guides/'+file),before('guides/'+file),'Article changed: '+file);
+for(const file of fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'))){
+ if(file==='arabic-design.html'){
+  // The scoped Canva review updates this one guide; every other article stays exact.
+  const hash=require('node:crypto').createHash('sha256').update(read('guides/'+file)).digest('hex');
+  assert.equal(hash,'fd3347ba45af14086e907c5de430668a39f513ed7168476c7da21ff0dbe646a3','Reviewed Canva guide changed');
+ }else assert.equal(read('guides/'+file),before('guides/'+file),'Article changed: '+file);
+}
 const index=read('index.html');
 const normalizeBrand=html=>withoutDirectoryControlPresentation(withTextSectionHeadings(withPreviousSharedBrandImage(html)))
  .replaceAll('badilak-social-base.png?v=20261011-1','badilak-social-base.png?v=20261005-1')

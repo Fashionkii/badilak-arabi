@@ -392,6 +392,12 @@ function updateLearningContinue(){
 
 function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
+function originFitNoteText(origin){
+ return origin==='canva'
+  ? 'محرر تصميم، وعروض تقديمية، وخط عربي: اختر بحسب المهمة. قد تحتاج أداة مكمّلة فقط؛ جرّب مشروعًا واحدًا قبل نقل عملك. ترتيب العرض ليس تقييمًا للأفضل.'
+  : 'خيارات تؤدي المهمة نفسها أو جزءًا منها؛ ترتيب العرض ليس تقييمًا للأفضل.';
+}
+
 function renderCards(){
  initializedJourneyPanels.add('directory');
  window.badilakJourney?.updateTitle();
@@ -411,7 +417,7 @@ function renderCards(){
  if(countryFilter) context.push(arabProgressCountryNames[countryFilter]||countryFilter);
  const shown=orderDirectoryDiscoveryCards(list,q).slice(0,directoryVisible);
  const fitNote=document.getElementById('originFitNote');
- if(fitNote)fitNote.hidden=!originFilter;
+ if(fitNote){fitNote.hidden=!originFilter;fitNote.textContent=originFitNoteText(originFilter);}
  document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length}${context.length?' · '+context.join(' · '):' · كل الدليل'}`;
  const root=document.getElementById('catalogGrid');
  const more=document.getElementById('directoryMore');
