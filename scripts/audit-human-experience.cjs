@@ -2,7 +2,7 @@
 // The approved presentation changes must not silently rewrite catalog information.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('./audit-helpers.cjs');
+const {markupMeaning,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -20,7 +20,7 @@ for(const item of items){
  const slot=expectedCard.match(/   <div class="card-guide-slot">.*?<\/div>\n/)[0];
  expectedCard=expectedCard.replace(slot,'').replace(`onclick="openDetail('${item.id}')">تفاصيل</button>\n`,`onclick="openDetail('${item.id}')">تفاصيل</button>\n `+slot).replace(/<strong>(?:دليل الاختيار|مركز القراءة)<\/strong>/,'<strong>اقرأ</strong>');
  const currentCard=now.directoryCardMarkup(item);
- assert.equal(currentCard.replace(/ aria-label="اقرأ: [^"]*"/,''),expectedCard,item.id+' card copy/links/order');
+ assert.equal(currentCard.replace(/ aria-label="اقرأ: [^"]*"/,'').replace(/<p class="card-key-limit card-key-limit--general">[\s\S]*?<\/p>/,''),expectedCard,item.id+' card copy/links/order');
  assert.match(currentCard,/class="card-read-link|editorial-guide-link card-read-link/);
  assert.match(currentCard,/aria-label="اقرأ: [^"]+"/);
 
@@ -29,7 +29,7 @@ for(const item of items){
  for(const standalone of [false,true]){
   let expected=old.directoryDetailMarkup(item,standalone);
   for(const [label,value] of duplicates)expected=expected.replace(old.detailFact(label,value),'');
-  assert.equal(now.directoryDetailMarkup(item,standalone),expected,item.id+' distinct details/sources');
+  assert.deepEqual(markupMeaning(now.directoryDetailMarkup(item,standalone)),markupMeaning(expected),item.id+' distinct details/sources');
  }
 }
 for(const file of ['js/catalog-data.js','js/commercial-links.js','js/guided-discovery.js','js/feedback.js','js/route-seo.js','data/privacy.json','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected '+file);

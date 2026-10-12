@@ -58,13 +58,17 @@ for(const origin of Object.keys(current.originRouteMap)){
 }
 const noon=items.find(x=>x.id==='noon');
 assert.ok(!context.directoryCardMarkup(noon,'jumia').match(/<div class="comparison-strip[\s\S]*?<\/div>/)[0].includes('Amazon'));
-for(const html of items.map(context.directoryCardMarkup))assert.ok(!html.includes('class="card-fit"')&&!html.includes('class="card-key-limit"'),'General browsing acquired comparison-only notes');
+for(const item of items){
+ const html=context.directoryCardMarkup(item);
+ assert.ok(!html.includes('class="card-fit"'),'General browsing acquired comparison-only fit');
+ assert.ok(html.includes('class="card-key-limit card-key-limit--general"')&&html.includes(context.decisionNoteFor(item).alert),'General browsing must expose its existing decision limit');
+}
 assert.ok(context.editorialGuideLinkMarkup('dhawwi').includes('<strong>اقرأ</strong>'));
 assert.ok(context.guideLinkMarkup(['/guides/arabic-design','عنوان']).includes('<strong>اقرأ</strong>'),'Learning label changed');
 assert.ok(context.countryBadgeMarkup(items.find(x=>x.id==='taqreer')).includes('تسجيل أمريكي'));
 assert.equal(items.find(x=>x.id==='aamenn').url,'https://www.aamenn.com/');
 assert.match(items.find(x=>x.id==='fanar').modules.at(-1)[1],/2609\.35564/,'Later Fanar research lost');
-const bundle=['fonts.css','app.css','visual-refresh.css'].map(file=>read('css/'+file)).join('\n')+'\n'+read('css/cosmic-theme.css');
+const bundle=['fonts.css','app.css','visual-refresh.css'].map(file=>read('css/'+file)).join('\n')+'\n'+read('css/cosmic-theme.css')+'\n'+read('css/reading-hierarchy.css');
 assert.equal(read('dist/css/site-bundle.css'),bundle,'CSS cascade/rules changed during bundling');
 for(const file of ['discover/aamenn.html','privacy.html']){
  const html=read('dist/'+file);assert.ok(html.includes('/css/site-bundle.css'));

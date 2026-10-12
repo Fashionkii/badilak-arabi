@@ -1,0 +1,158 @@
+/* Shared reading hierarchy: purpose, decisive limit, then supporting detail.
+   Loaded after the existing themes, inside their bundles (no extra request).
+   Content, links, artwork, advertising and navigation remain independent. */
+:root {
+  --reading-paper:#FCFCF9;
+  --reading-purpose:#F0F5F2;
+  --reading-caution:#FBF7EE;
+  --reading-ink:#263A36;
+  --reading-secondary:#53645E;
+  --reading-line:#D9E2DC;
+  --reading-accent:#8D6B30;
+}
+
+/* A light summary replaces the large inverse green panel in every article. */
+body:not(.guided-discovery) .quick-answer {
+  background:var(--reading-purpose);color:var(--reading-ink);
+  border:1px solid var(--reading-line);border-inline-start:3px solid #78978A;
+  border-radius:12px;box-shadow:none;padding:clamp(18px,3vw,26px);
+}
+body:not(.guided-discovery) .quick-answer :is(h2,li,strong,a) {color:var(--reading-ink);}
+body:not(.guided-discovery) .quick-answer .eyebrow {color:var(--reading-secondary);font-size:.8125rem;}
+body:not(.guided-discovery) .quick-answer h2 {font-size:1.375rem;line-height:1.6;}
+body:not(.guided-discovery) .quick-answer li {font-size:1rem;line-height:1.9;margin-block:10px;}
+body:not(.guided-discovery) .quick-answer a {font-size:.875rem;border-bottom-color:#78978A;}
+body.cosmic-theme:not(.guided-discovery) main.wrap {background:var(--reading-paper)!important;}
+body:not(.guided-discovery) .guide-shell>article {
+  background:transparent;border:0;border-radius:0;box-shadow:none;
+  padding:8px clamp(0px,2vw,18px) 18px;
+}
+body:not(.guided-discovery) .guide-shell article :is(p,li) {line-height:1.95;}
+body:not(.guided-discovery) .guide-shell article h2 {font-size:1.375rem;line-height:1.6;margin-block:30px 12px;}
+body:not(.guided-discovery) .guide-shell article>section:first-child>h2:first-child {margin-top:16px;}
+body:not(.guided-discovery) :is(.section-intro,.lead) {color:var(--reading-secondary);}
+
+/* Navigation reads like an outline, without a second sticky layer over the text. */
+body:not(.guided-discovery) .jumpbar {
+  position:static;background:transparent;border:0;border-bottom:1px solid var(--reading-line);
+  border-radius:0;padding:10px 0;margin-block:10px 20px;backdrop-filter:none;gap:8px;
+}
+body:not(.guided-discovery) .jumpbar a {
+  background:transparent;border:0;border-radius:6px;
+  color:var(--reading-ink);font-size:.875rem;padding:9px 10px;min-height:44px;
+}
+body:not(.guided-discovery) .jumpbar a:hover {background:var(--reading-purpose);}
+body:not(.guided-discovery) .guide-shell :is(a,summary):focus-visible {outline:3px solid #8D6B30;outline-offset:3px;}
+
+/* Practical guidance is quiet; only existing caution components use amber. */
+body:not(.guided-discovery) .human-question {
+  background:transparent!important;border:0!important;border-block:1px solid var(--reading-line)!important;
+  border-radius:0;padding:18px 0;margin-block:24px;
+}
+body:not(.guided-discovery) .human-question>span {color:var(--reading-secondary);font-size:.8125rem;}
+body:not(.guided-discovery) .human-question>strong {font-size:1rem;}
+body:not(.guided-discovery) .check-grid {gap:0 20px;}
+body:not(.guided-discovery) .check {
+  background:transparent;border:0;border-bottom:1px solid var(--reading-line);
+  border-radius:0;padding:14px 0;
+}
+body:not(.guided-discovery) .check b {font-size:.9375rem;color:var(--reading-ink);}
+body:not(.guided-discovery) .check span {font-size:.9375rem;color:var(--reading-secondary);}
+body:not(.guided-discovery) :is(.note,.lens.warn) {
+  background:var(--reading-caution);border:1px solid #E5DBBF;
+  border-inline-start:3px solid var(--reading-accent);border-radius:10px;box-shadow:none;
+  color:var(--reading-ink);
+}
+body:not(.guided-discovery) .lens:not(.warn) {
+  background:var(--reading-purpose);border:1px solid var(--reading-line);border-radius:10px;
+}
+body:not(.guided-discovery) .lens :is(small,p) {font-size:.9375rem;color:var(--reading-secondary);}
+body:not(.guided-discovery) .lens b {font-size:1rem;color:var(--reading-ink);}
+body:not(.guided-discovery) .lens.warn small {color:#705322;}
+body:not(.guided-discovery) .decision {
+  background:var(--reading-purpose);border:1px solid var(--reading-line);border-radius:10px;
+  padding:18px;box-shadow:none;
+}
+body:not(.guided-discovery) .decision::after {content:none;}
+body:not(.guided-discovery) .decision small {color:var(--reading-secondary);font-size:.8125rem;}
+body:not(.guided-discovery) .decision b {font-size:1rem;line-height:1.9;}
+
+/* Sources remain fully visible and linked, as a list rather than more cards. */
+body:not(.guided-discovery) .sources {border-top:1px solid var(--reading-line);margin-top:32px;}
+body:not(.guided-discovery) .source-list {gap:0;}
+body:not(.guided-discovery) .source-card {
+  background:transparent;border:0;border-bottom:1px solid var(--reading-line);
+  border-radius:0;padding:14px 0;box-shadow:none;transform:none;
+}
+body:not(.guided-discovery) .source-card:hover {background:var(--reading-purpose);box-shadow:none;transform:none;}
+body:not(.guided-discovery) .source-title {font-size:.9375rem;}
+body:not(.guided-discovery) :is(.source-meta,.source-open) {font-size:.8125rem;color:var(--reading-secondary);}
+body:not(.guided-discovery) .next {
+  background:transparent;border:0;border-top:1px solid var(--reading-line);border-radius:0;padding:22px 0;
+}
+body:not(.guided-discovery) .next-actions a {
+  background:transparent;border-color:var(--reading-line);font-size:.9375rem;
+}
+body:not(.guided-discovery) .next-actions a:first-child {
+  background:var(--reading-purpose);color:var(--reading-ink);border-color:#78978A;
+}
+body:not(.guided-discovery) .next-actions a:hover {box-shadow:none;transform:none;}
+
+/* Directory cards: benefit first, an explicit limit, then the same three actions. */
+#directory .catalog-grid>.item {align-self:stretch!important;}
+#directory .catalog-grid .card-summary {height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;align-items:stretch!important;}
+#directory .catalog-grid .card-purpose {
+  background:var(--reading-purpose);border-radius:8px;padding:10px 12px!important;
+  text-align:start!important;color:var(--reading-ink)!important;
+  font-size:.9375rem!important;line-height:1.8!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  display:block!important;overflow:visible!important;-webkit-line-clamp:unset!important;
+}
+#directory .catalog-grid .card-key-limit {
+  background:var(--reading-caution);border:0;border-inline-start:3px solid var(--reading-accent);
+  border-radius:6px;padding:10px 12px;margin:8px 0 14px;
+  text-align:start;color:var(--reading-ink);font-size:.875rem;line-height:1.8;
+  height:auto;max-height:none;overflow:visible;
+}
+#directory .card-key-limit strong {display:block;font-size:.8125rem;color:#705322;margin-bottom:3px;}
+#directory .card-key-limit span {display:block;}
+#directory .catalog-grid .card-primary-actions {margin-top:auto!important;}
+#directory .catalog-grid .card-fit {font-size:.875rem;line-height:1.7;}
+#learning .learning-card .learning-focus {
+  background:var(--reading-purpose);color:var(--reading-ink)!important;border-radius:8px;
+  padding:10px!important;text-align:start!important;font-size:.875rem!important;line-height:1.8!important;
+  height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;
+  display:block!important;overflow:visible!important;-webkit-line-clamp:unset!important;
+}
+
+/* Shared service/learning detail: purpose and caution precede the fact grid. */
+.detail-overview .quick-purpose {
+  background:var(--reading-purpose);border-inline-start:3px solid #78978A;border-radius:8px;
+  padding:14px 16px!important;margin:16px 0!important;max-width:none;
+  text-align:start!important;font-size:1rem!important;line-height:1.9!important;color:var(--reading-ink)!important;
+}
+.detail-overview .decision-panel {
+  background:var(--reading-caution)!important;border:1px solid #E5DBBF!important;
+  border-inline-start:3px solid var(--reading-accent)!important;border-radius:10px!important;
+  padding:16px!important;margin:16px 0!important;box-shadow:none!important;
+}
+.detail-overview .decision-panel-head {display:flex!important;flex-wrap:wrap!important;}
+.detail-overview .decision-panel-head strong {font-size:.9375rem!important;color:#705322!important;}
+.detail-overview .decision-panel-head em {font-size:.8125rem!important;background:transparent!important;border:0!important;}
+.detail-overview .decision-alert-text {font-size:1rem!important;line-height:1.9!important;color:var(--reading-ink)!important;}
+.detail-overview .decision-action {border-top:1px solid #E5DBBF;padding-top:10px!important;margin-top:10px!important;background:transparent!important;}
+.detail-overview .decision-action :is(b,span) {font-size:.9375rem!important;line-height:1.9!important;color:var(--reading-ink)!important;}
+.detail-overview :is(.decision-source,.detail-source-line) {font-size:.8125rem!important;line-height:1.8!important;color:var(--reading-secondary)!important;}
+.detail-overview .detail-fact small {font-size:.8125rem!important;color:var(--reading-secondary)!important;}
+.detail-overview .detail-fact strong {font-size:.9375rem!important;line-height:1.8!important;color:var(--reading-ink)!important;}
+.detail-overview .detail-section :is(h2,h4) {font-size:1rem!important;line-height:1.7!important;}
+.detail-overview .detail-section>div {font-size:.9375rem!important;line-height:1.9!important;}
+.detail-overview .detail-section a {color:#325D52!important;text-decoration:underline;text-underline-offset:3px;}
+
+@media(max-width:720px) {
+  body:not(.guided-discovery) .guide-shell>article {padding-inline:0;}
+  body:not(.guided-discovery) .jumpbar {gap:3px;}
+  body:not(.guided-discovery) .jumpbar a {font-size:.8125rem;padding-inline:8px;}
+  body:not(.guided-discovery) .source-card {grid-template-columns:minmax(0,1fr);gap:4px;}
+  body:not(.guided-discovery) .source-open {justify-self:start;}
+}

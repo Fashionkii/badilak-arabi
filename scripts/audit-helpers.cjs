@@ -25,3 +25,18 @@ exports.withoutDirectoryControlPresentation=html=>html
  .replace(/^    <button[^\n]+data-refine-trigger="(?:category|sub)"[^\n]+\n/gm,'')
  .replace(/id="directoryRefineCategory"(?: hidden| role="group" aria-label="ماذا تبحث عنه؟")/g,'id="directoryRefineCategory"')
  .replace(/(<button class="filter(?: active)?" data-filter="[^"]+"[^>]*>)([\s\S]*?)(<\/button>)/g,(_,open,body,close)=>open.replace(/ aria-pressed="(?:true|false)"/,'')+body.replace(/<svg[\s\S]*?<\/svg>/,'').replace(/<\/?span>/g,'')+close);
+
+// Reverse only the approved 12 October reading-priority markup changes.
+// The current renderer itself is exercised by audit-reading-hierarchy.cjs.
+exports.withoutReadingHierarchyApp=source=>source
+ .replace('  <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong></div>\n','')
+ .replace("   ${learningDecisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${learningDecisionPanelMarkup(x)}");
+exports.withoutReadingHierarchyRenderer=source=>source
+ .replace("   ${decisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${decisionPanelMarkup(x)}")
+ .replace(" // Show the existing decision limit in every browsing context, without shortening it.\n const keyLimit=caution||decisionNoteFor(x)?.alert||'';\n",'')
+ .replace('   ${keyLimit?`<p class="card-key-limit${caution?\'\':\' card-key-limit--general\'}"><strong>قبل أن تختار</strong><span>${keyLimit}</span></p>`:\'\'}','   ${caution?`<p class="card-key-limit">${caution}</p>`:\'\'}');
+// Compare all text tokens and functional destinations when only DOM order changes.
+exports.markupMeaning=html=>({
+ words:html.replace(/<[^>]*>/g,' ').trim().split(/\s+/).filter(Boolean).sort(),
+ attrs:[...html.matchAll(/(?:href|src|onclick|target|rel)="([^"]*)"/g)].map(x=>x[0]).sort()
+});

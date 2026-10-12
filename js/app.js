@@ -627,6 +627,7 @@ function learningDecisionCardMarkup(x){
 function learningDecisionPanelMarkup(x){
  const n=learningDecisionNoteFor(x);if(!n)return '';
  return `<section class="decision-panel">
+  <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong></div>
   <p class="decision-alert-text">${n.alert}</p>
   <div class="decision-action"><b>ما الذي يمكنك فعله؟</b><span>${n.action}</span></div>
  </section>`;
@@ -727,7 +728,8 @@ function showLearningNote(id){
   <div class="detail-overview">
    <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h3 class="quick-title">${x.name}</h3>${countryBadgeMarkup(x,learningCountryMap)}</div>
    <p class="quick-purpose">${x.focus}</p>
-   <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${learningDecisionPanelMarkup(x)}
+   ${learningDecisionPanelMarkup(x)}
+   <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
    ${learningGuideLinkMarkup(x.id,true)}
    ${learningCommercialDisclosureMarkup(x)}
    <button class="destination-link" onclick="openLearningExternal('${x.id}')"><span class="destination-label"><bdi>${isReciter?'افتح القناة الرسمية':isChannel?'افتح القناة والدروس':x.type==='resource'?'افتح المصدر التعليمي':'اذهب إلى المنصة'}</bdi><small>${x.url.replace('https://','')}</small></span><span class="outbound-key">↗</span></button>

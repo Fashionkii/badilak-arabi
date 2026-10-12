@@ -255,7 +255,8 @@ function directoryDetailMarkup(x,standalone=false){
   <div class="detail-overview">
    <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h1 class="quick-title">${x.name}</h1>${countryBadgeMarkup(x)}</div>
    <p class="quick-purpose">${x.value}</p>
-   <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${decisionPanelMarkup(x)}
+   ${decisionPanelMarkup(x)}
+   <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
    ${editorialGuideLinkMarkup(x.id,true)}
    ${renderSections(x,sections)}
    <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة: '+x.reviewed:''}</span></div>
@@ -332,6 +333,8 @@ function directoryComparison(x,activeOrigin){
 }
 function directoryCardMarkup(x,activeOrigin=null){
  const {reference,fit,caution}=directoryComparison(x,activeOrigin);
+ // Show the existing decision limit in every browsing context, without shortening it.
+ const keyLimit=caution||decisionNoteFor(x)?.alert||'';
  return `
   <article class="item" data-item-id="${x.id}">
    <a class="item-identity" href="/discover/${x.id}" onclick="return badilakOpenItem(event,'${x.id}')">
@@ -344,7 +347,7 @@ function directoryCardMarkup(x,activeOrigin=null){
    <div class="card-summary">
     <p class="card-purpose">${compactCardPurpose(x)}</p>
    </div>
-   ${caution?`<p class="card-key-limit">${caution}</p>`:''}
+   ${keyLimit?`<p class="card-key-limit${caution?'':' card-key-limit--general'}"><strong>قبل أن تختار</strong><span>${keyLimit}</span></p>`:''}
    <div class="card-primary-actions">
     <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">تفاصيل</button>
     <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
