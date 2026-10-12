@@ -160,3 +160,14 @@ body.cosmic-theme #directory #directoryRefineCategory {
  #directory #directoryRefineCategory .filters>.filter[data-filter="all"] {grid-column:1 / -1!important;min-height:40px!important;}
  #directory .directory-category-icon {width:20px;height:20px;}
 }
+/* Keep newly visible controls from pushing mobile results unnecessarily far down. */
+#directory #directoryRefineSub .subfilter.active { background:var(--deep)!important;color:#fff!important; }
+@media(max-width:760px){
+ body.cosmic-theme.guided-discovery main#top>#directory {padding-top:16px!important;}
+ body.cosmic-theme #directory .journey-result-head {gap:4px;margin-bottom:12px;}
+ body.cosmic-theme #directory #journeyResultTitle {font-size:26px;}
+ body.cosmic-theme #directory .directory-refine-bar {display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center!important;gap:8px!important;padding-block:0;}
+ body.cosmic-theme #directory .directory-refine-triggers {justify-self:end;}
+ body.cosmic-theme #directory .directory-refine-bar:has(.directory-active-context[hidden]) {grid-template-columns:1fr;}
+ body.cosmic-theme #directory .active-filter-pills {gap:4px;}
+}
