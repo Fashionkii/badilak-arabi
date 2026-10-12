@@ -2,7 +2,7 @@
 // The approved presentation changes must not silently rewrite catalog information.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation}=require('./audit-helpers.cjs');
+const {withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -47,7 +47,7 @@ assert.deepEqual(writes.at(-1)[1].discovery,saved.discovery);assert.equal(writes
 returnContext.restoreVisit({...saved,discovery:undefined});assert.equal(visits.at(-1)[1],saved.url);
 returnContext.restoreVisit({...saved,url:'https://badilak-arabi.vercel.app/category/create'});assert.equal(visits.at(-1)[1],'https://badilak-arabi.vercel.app/category/create');
 returnContext.restoreVisit(saved,true);assert.equal(visits.at(-1)[0],'replace');
-const normalizeOG=html=>html.replace(/badilak-social-base\.png(?:\?v=[\d-]+)?/g,'badilak-social-base.png');
+const normalizeOG=html=>withPreviousSharedBrandImage(html).replace(/badilak-social-base\.png(?:\?v=[\d-]+)?/g,'badilak-social-base.png');
 for(const file of ['index.html','guides.html'])assert.equal(withoutDirectoryControlPresentation(withTextSectionHeadings(normalizeOG(read(file)))),withoutDirectoryControlPresentation(withTextSectionHeadings(normalizeOG(before(file)))),'Homepage/hub semantics');
 // Initial categories must not scroll past their heading before the journey adapter exists.
 const source=read('js/app.js');

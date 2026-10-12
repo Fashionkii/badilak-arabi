@@ -2,7 +2,7 @@
 // Guard the two reviewed data updates and the active-reference regression.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutRetiredShelf,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation}=require('./audit-helpers.cjs');
+const {withoutRetiredShelf,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'02ff5a758052600710959008aa80c96cf3fd23ba';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -35,7 +35,7 @@ const normalizePrivacy=value=>{const policy=JSON.parse(value);delete policy.upda
 assert.deepEqual(normalizePrivacy(read('data/privacy.json')),normalizePrivacy(before('data/privacy.json')),'Unrelated privacy policy changed');
 for(const file of fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html')))assert.equal(read('guides/'+file),before('guides/'+file),'Article changed: '+file);
 const index=read('index.html');
-const normalizeBrand=html=>withoutDirectoryControlPresentation(withTextSectionHeadings(html))
+const normalizeBrand=html=>withoutDirectoryControlPresentation(withTextSectionHeadings(withPreviousSharedBrandImage(html)))
  .replaceAll('badilak-social-base.png?v=20261011-1','badilak-social-base.png?v=20261005-1')
  .replace(/(<a href="#top" class="brand-lockup"[^>]*>)[\s\S]*?(<\/a>)/,'$1[approved brand artwork]$2')
  .replace(/(<h1 class="art-title art-title--brand" aria-label="بديلك عربي">)[\s\S]*?(<\/h1>)/,'$1[approved brand artwork]$2');
