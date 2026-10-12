@@ -331,10 +331,54 @@ function directoryComparison(x,activeOrigin){
  // Extra decision notes belong to the familiar-service journey; leave general browsing compact.
  return {reference,fit:selected?fit:'',caution:selected?caution:''};
 }
+const cardCautionOverrides={
+ karnak:'إطلاق تجريبي؛ الدقة لم تُختبر مستقلًا.',
+ dhawwi:'أرقام الاستخدام معلنة من الجهة نفسها.',
+ midaad:'المجاني يضيف ختمًا خفيفًا للتصدير.',
+ taqreer:'المجاني يصمم أول 5 شرائح؛ راجع بقية حدود الخطة.',
+ daftra:'التقييمات المستقلة المتاحة محدودة.',
+ gravity:'لم نجمع بعد مراجعات لاعبين مستقلة.',
+ shamaa:'توفر النص الكامل يختلف حسب حقوق النشر.',
+ faseeh:'جودة اللهجات لم تُختبر بما يكفي.',
+ arabicdesign:'التجربة المجانية 7 أيام وبرصيد محدود.',
+ qriib:'لم ننفذ تجربة استخدام مستقلة.',
+ vconnct:'البيانات المستقلة المتاحة محدودة.',
+ mandumah:'الوصول الكامل قد يحتاج اشتراكًا مؤسسيًا.',
+ zotero:'راجع بيانات المصدر قبل اعتماد التوثيق.',
+ salla:'الباقات والتكاملات تختلف حسب السوق.',
+ edraak:'إتاحة الشهادة وشروطها تختلف حسب الدورة.',
+ openalex:'استخدمه للاكتشاف، وراجع المصدر الأصلي.',
+ paymob:'الرسوم ووسائل الدفع تختلف حسب السوق.',
+ munsit:'القياس المنشور لا يقيّم الخدمة الحالية.',
+ arabybot:'الأتمتة والتكاملات لم تُختبر مستقلًا.',
+ arabicai:'الأداء يختلف بين منتجات المنظومة.',
+ wuzzuf:'لم ننفذ تجربة استخدام مستقلة.',
+ falcon:'لم ننفذ تجربة استخدام مستقلة.',
+ anghami:'لم نراجع كل المحتوى وإصدارات التطبيق.',
+ hudhud:'نطاق الإتاحة الجغرافي مهم عند المقارنة.',
+ khamsat:'راجع الأعمال السابقة وحدد طلبك بوضوح.',
+ fanar:'التغطية اللغوية لا تعني دقة كل مهمة.',
+ hsoub:'قارن المجاني والمدفوع حسب هدفك ووقتك.',
+ noon:'الشحن والسعر يختلفان حسب البلد والمنتج.',
+ opensooq:'تحقق من البائع والدفع قبل إتمام الصفقة.',
+ mumzworld:'متجر متخصص للأم والطفل، لا سوق عام.',
+ spacetoonyt:'راجع ملاءمة الحلقة لعمر الطفل.',
+ majidkids:'راجع ملاءمة الحلقة لعمر الطفل.',
+ marefa:'راجع المراجع الأصلية قبل الاعتماد.',
+ arabency:'حداثة المواد تختلف حسب الموضوع.',
+ dorar:'لا تختزل المسألة في نتيجة بحث واحدة.',
+ tafsircenter:'مصدر قرآني متخصص، لا يغطي كل العلوم الشرعية.',
+ shamela:'وجود الكتاب لا يعني اعتماد كل محتواه.',
+ hindawi:'التوافر يتغير حسب حقوق النشر.',
+ shahid:'المكتبة والإتاحة تختلف حسب البلد.',
+ watchit:'الأسعار والمكتبة قد تتغير.',
+ dubaiplus:'الإتاحة تتغير مع حقوق العرض.',
+ almaany:'المعنى الصحيح يعتمد على السياق.'
+};
 function directoryCardMarkup(x,activeOrigin=null){
  const {reference,fit,caution}=directoryComparison(x,activeOrigin);
- // Show the existing decision limit in every browsing context, without shortening it.
- const keyLimit=caution||decisionNoteFor(x)?.alert||'';
+ // Reuse the existing short caution where available; keep the full evidence in details.
+ const keyLimit=caution||comparisonGuidance[x.id]?.[1]||cardCautionOverrides[x.id]||decisionNoteFor(x)?.alert||'';
  return `
   <article class="item" data-item-id="${x.id}">
    <a class="item-identity" href="/discover/${x.id}" onclick="return badilakOpenItem(event,'${x.id}')">

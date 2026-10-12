@@ -117,6 +117,7 @@ body:not(.guided-discovery) .next-actions a:hover {box-shadow:none;transform:non
 #directory .card-key-limit strong {display:block;font-size:.8125rem;color:#705322;margin-bottom:3px;}
 #directory .card-key-limit span {display:block;}
 #directory .catalog-grid .card-primary-actions {margin-top:auto!important;}
+#directory .catalog-grid .card-primary-actions :is(.more-btn,.destination-link) {box-shadow:none!important;transform:none!important;}
 #directory .catalog-grid .card-fit {font-size:.875rem;line-height:1.7;}
 #learning .learning-card .learning-focus {
   background:var(--reading-purpose);color:var(--reading-ink)!important;border-radius:8px;

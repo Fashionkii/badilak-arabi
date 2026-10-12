@@ -12,13 +12,15 @@ assert.equal(withoutReadingHierarchyApp(read('js/app.js')),before('js/app.js'),'
 assert.equal(withoutReadingHierarchyRenderer(read('js/detail-renderers.js')),before('js/detail-renderers.js'),'Other renderer data/behavior');
 const context=reader=>{const c=vm.createContext({window:{}});vm.runInContext(reader('js/catalog-data.js')+'\n'+reader('js/detail-renderers.js'),c);return c;};
 const prior=context(before),now=context(read),items=vm.runInContext('items',now);
+const oldCautions=vm.runInNewContext(before('js/app.js').match(/const cardCautionOverrides=\{[\s\S]*?\n\};/)[0]+';cardCautionOverrides');
+assert.deepEqual(JSON.parse(JSON.stringify(vm.runInContext('cardCautionOverrides',now))),JSON.parse(JSON.stringify(oldCautions)),'Existing caution copy moved without edits');
 for(const item of items){
  for(const origin of [null,...item.origin]){
   const old=prior.directoryCardMarkup(item,origin),html=now.directoryCardMarkup(item,origin);
   const removeLimit=s=>s.replace(/<p class="card-key-limit[^"]*">[\s\S]*?<\/p>/,'');
   assert.equal(removeLimit(html),removeLimit(old),'Card actions/copy '+item.id);
   const limit=html.match(/<p class="card-key-limit[^"]*"><strong>قبل أن تختار<\/strong><span>([\s\S]*?)<\/span><\/p>/)?.[1];
-  assert.equal(limit,prior.directoryComparison(item,origin).caution||prior.decisionNoteFor(item).alert,'Existing full caution '+item.id);
+  assert.equal(limit,prior.directoryComparison(item,origin).caution||vm.runInContext('comparisonGuidance',prior)[item.id]?.[1]||oldCautions[item.id]||prior.decisionNoteFor(item).alert,'Existing caution '+item.id);
   assert.ok(html.indexOf('class="card-purpose"')<html.indexOf('class="card-key-limit'),'Purpose precedes caution');
   assert.ok(html.indexOf('class="card-key-limit')<html.indexOf('class="card-primary-actions"'),'Caution precedes actions');
  }
@@ -38,4 +40,4 @@ assert.ok(read('dist/css/site-bundle.css').endsWith(css));
 function luminance(hex){const rgb=hex.match(/[0-9a-f]{2}/gi).map(x=>parseInt(x,16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;}
 const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
 for(const [ink,paper] of [['263A36','F0F5F2'],['263A36','FBF7EE'],['53645E','FCFCF9'],['705322','FBF7EE']])assert.ok(contrast(ink,paper)>=4.5,'Readable text contrast '+ink+'/'+paper);
-console.log('PASS: 82 cards and static/dialog details preserve text, sources and actions; full existing limits precede actions; 36 learning records and all 20 articles unchanged; shared CSS delivered without an extra request; key text pairs exceed 4.5:1.');
+console.log('PASS: 82 cards and static/dialog details preserve text, sources and actions; existing cautions precede actions; full details preserved; 36 learning records and all 20 articles unchanged; shared CSS delivered without an extra request; key text pairs exceed 4.5:1.');

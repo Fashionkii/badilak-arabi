@@ -61,7 +61,7 @@ assert.ok(!context.directoryCardMarkup(noon,'jumia').match(/<div class="comparis
 for(const item of items){
  const html=context.directoryCardMarkup(item);
  assert.ok(!html.includes('class="card-fit"'),'General browsing acquired comparison-only fit');
- assert.ok(html.includes('class="card-key-limit card-key-limit--general"')&&html.includes(context.decisionNoteFor(item).alert),'General browsing must expose its existing decision limit');
+ assert.ok(html.includes('class="card-key-limit card-key-limit--general"')&&html.includes(vm.runInContext('comparisonGuidance',context)[item.id]?.[1]||vm.runInContext('cardCautionOverrides',context)[item.id]||context.decisionNoteFor(item).alert),'General browsing must expose its existing decision limit');
 }
 assert.ok(context.editorialGuideLinkMarkup('dhawwi').includes('<strong>اقرأ</strong>'));
 assert.ok(context.guideLinkMarkup(['/guides/arabic-design','عنوان']).includes('<strong>اقرأ</strong>'),'Learning label changed');

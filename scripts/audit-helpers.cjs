@@ -28,12 +28,15 @@ exports.withoutDirectoryControlPresentation=html=>html
 
 // Reverse only the approved 12 October reading-priority markup changes.
 // The current renderer itself is exercised by audit-reading-hierarchy.cjs.
+const currentCardCautions=()=>require('node:fs').readFileSync(require('node:path').join(__dirname,'../js/detail-renderers.js'),'utf8').match(/const cardCautionOverrides=\{[\s\S]*?\n\};/)[0];
 exports.withoutReadingHierarchyApp=source=>source
+ .replace('function cardCautionText(',currentCardCautions()+'\nfunction cardCautionText(')
  .replace('  <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong></div>\n','')
  .replace("   ${learningDecisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${learningDecisionPanelMarkup(x)}");
 exports.withoutReadingHierarchyRenderer=source=>source
+ .replace(/const cardCautionOverrides=\{[\s\S]*?\n\};\n/,'')
  .replace("   ${decisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${decisionPanelMarkup(x)}")
- .replace(" // Show the existing decision limit in every browsing context, without shortening it.\n const keyLimit=caution||decisionNoteFor(x)?.alert||'';\n",'')
+ .replace(" // Reuse the existing short caution where available; keep the full evidence in details.\n const keyLimit=caution||comparisonGuidance[x.id]?.[1]||cardCautionOverrides[x.id]||decisionNoteFor(x)?.alert||'';\n",'')
  .replace('   ${keyLimit?`<p class="card-key-limit${caution?\'\':\' card-key-limit--general\'}"><strong>قبل أن تختار</strong><span>${keyLimit}</span></p>`:\'\'}','   ${caution?`<p class="card-key-limit">${caution}</p>`:\'\'}');
 // Compare all text tokens and functional destinations when only DOM order changes.
 exports.markupMeaning=html=>({
