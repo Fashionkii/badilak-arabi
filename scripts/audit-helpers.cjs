@@ -28,12 +28,17 @@ exports.withoutDirectoryControlPresentation=html=>html
 
 // Reverse only the approved 12 October reading-priority markup changes.
 // The current renderer itself is exercised by audit-reading-hierarchy.cjs.
+// The later optional Canva section is checked separately in audit-canva-decision.cjs.
+exports.withoutCanvaTaskComparisonRenderer=source=>source
+ .replace(/\/\/ Optional comparison for the reviewed Canva journey; other discovery stays unchanged\.[\s\S]*?\/\/ End of the optional Canva comparison\.\n\n/,'')
+ .replace(' const comparison=canvaTaskComparisonMarkup(x,standalone);\n if(comparison)return comparison;\n','');
+exports.withPreviousDiscoveryMarkup=(html,previousDetail)=>html.replace(/<details class="detail-task-comparison">[\s\S]*?<\/details>/,()=>previousDetail.match(/<section class="detail-discovery">[\s\S]*?<\/section>/)[0]);
 const currentCardCautions=()=>require('node:fs').readFileSync(require('node:path').join(__dirname,'../js/detail-renderers.js'),'utf8').match(/const cardCautionOverrides=\{[\s\S]*?\n\};/)[0];
 exports.withoutReadingHierarchyApp=source=>source
  .replace('function cardCautionText(',currentCardCautions()+'\nfunction cardCautionText(')
  .replace('  <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong></div>\n','')
  .replace("   ${learningDecisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${learningDecisionPanelMarkup(x)}");
-exports.withoutReadingHierarchyRenderer=source=>source
+exports.withoutReadingHierarchyRenderer=source=>exports.withoutCanvaTaskComparisonRenderer(source)
  .replace(/const cardCautionOverrides=\{[\s\S]*?\n\};\n/,'')
  .replace("   ${decisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${decisionPanelMarkup(x)}")
  .replace(" // Reuse the existing short caution where available; keep the full evidence in details.\n const keyLimit=caution||comparisonGuidance[x.id]?.[1]||cardCautionOverrides[x.id]||decisionNoteFor(x)?.alert||'';\n",'')

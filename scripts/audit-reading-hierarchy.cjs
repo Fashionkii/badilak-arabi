@@ -2,7 +2,7 @@
 // This presentation change may expose/reorder existing facts, never replace them.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {markupMeaning,withoutReadingHierarchyApp,withoutReadingHierarchyRenderer}=require('./audit-helpers.cjs');
+const {markupMeaning,withoutReadingHierarchyApp,withoutReadingHierarchyRenderer,withPreviousDiscoveryMarkup}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),base='f18ed7c9107cc9bd72fadb98ca59b8570d477dcd';
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const before=f=>execFileSync('git',['show',base+':'+f],{cwd:root,encoding:'utf8'});
@@ -26,7 +26,7 @@ for(const item of items){
  }
  for(const standalone of [false,true]){
   const html=now.directoryDetailMarkup(item,standalone);
-  assert.deepEqual(markupMeaning(html),markupMeaning(prior.directoryDetailMarkup(item,standalone)),'Every detail/source/handler '+item.id);
+  assert.deepEqual(markupMeaning(withPreviousDiscoveryMarkup(html,prior.directoryDetailMarkup(item,standalone))),markupMeaning(prior.directoryDetailMarkup(item,standalone)),'Every detail/source/handler outside optional comparison '+item.id);
   assert.ok(html.indexOf('class="quick-purpose"')<html.indexOf('class="decision-panel"'),'Purpose first');
   assert.ok(html.indexOf('class="decision-panel"')<html.indexOf('class="detail-facts"'),'Critical limit before facts');
   if(standalone)assert.ok(read('dist/discover/'+item.id+'.html').includes(html),'Static detail matches shared renderer');

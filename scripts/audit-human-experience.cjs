@@ -2,7 +2,7 @@
 // The approved presentation changes must not silently rewrite catalog information.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {markupMeaning,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('./audit-helpers.cjs');
+const {markupMeaning,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage,withPreviousDiscoveryMarkup}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
@@ -29,7 +29,7 @@ for(const item of items){
  for(const standalone of [false,true]){
   let expected=old.directoryDetailMarkup(item,standalone);
   for(const [label,value] of duplicates)expected=expected.replace(old.detailFact(label,value),'');
-  assert.deepEqual(markupMeaning(now.directoryDetailMarkup(item,standalone)),markupMeaning(expected),item.id+' distinct details/sources');
+  assert.deepEqual(markupMeaning(withPreviousDiscoveryMarkup(now.directoryDetailMarkup(item,standalone),expected)),markupMeaning(expected),item.id+' distinct details/sources outside optional comparison');
  }
 }
 for(const file of ['js/catalog-data.js','js/commercial-links.js','js/guided-discovery.js','js/feedback.js','js/route-seo.js','data/privacy.json','data/disclosure.json','site.config.json','vercel.json'])assert.equal(read(file),before(file),'Protected '+file);

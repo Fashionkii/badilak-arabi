@@ -195,7 +195,35 @@ function relatedDirectoryItems(x){
   .map(r=>r.item);
 }
 
+// Optional comparison for the reviewed Canva journey; other discovery stays unchanged.
+function canvaTaskComparisonMarkup(x,standalone=false){
+ if(!['dhawwi','taqreer','arabicdesign'].includes(x.id))return '';
+ // Summaries of /guides/arabic-design, reviewed 12 October 2026.
+ // Keep these task distinctions separate from the general similarity ranking.
+ const notes={
+  dhawwi:{task:'تصميم بالقوالب والنصوص العربية',fit:'جرّبه إذا أردت إعداد تصميم داخل محرر عربي.',check:'اختبر التصدير والترخيص؛ لم نتحقق من نقل قوالب Canva أو إعدادات فريقك إليه.'},
+  taqreer:{task:'عروض وتقارير عربية',fit:'لإعداد شرائح؛ يعلن الموقع تصدير PowerPoint قابلًا للتعديل.',check:'راجع العربية والخطوط بعد التصدير، وحدود الخطة المجانية قبل الاعتماد عليها.'},
+  arabicdesign:{task:'عبارات وتكوينات بالخط العربي',fit:'جرّبه كعنصر تضيفه إلى تصميمك الحالي، دون تغيير محرر التصميم.',check:'راجع الحروف والترخيص وإمكان تعديل الناتج، وحدود التجربة المجانية.'}
+ };
+ const choices=[x,...Object.keys(notes).filter(id=>id!==x.id).map(id=>items.find(a=>a.id===id))].filter(Boolean);
+ return `<details class="detail-task-comparison">
+  <summary><span><strong>قارن الخيارات لهذه المهمة</strong><small>تصميم كامل، أم عروض، أم خط عربي؟</small></span></summary>
+  <div class="task-comparison-body">
+   <p class="task-comparison-intro">هذه الأدوات تخدم مهام مختلفة. ابدأ بما تحتاجه؛ قد يناسبك بديل لمهمة واحدة، أو أداة مكمّلة، أو البقاء مع أداتك الحالية.</p>
+   <ul class="task-comparison-list">${choices.map(a=>{const note=notes[a.id];return `<li>
+    <div class="task-comparison-heading"><h4>${a.id===x.id?`<bdi>${a.name}</bdi>`:`<a href="/discover/${a.id}"${standalone?'':` onclick="return badilakOpenItem(event,'${a.id}')"`}><bdi>${a.name}</bdi></a>`}</h4>${a.id===x.id?'<span class="task-comparison-current">تقرأ عنه الآن</span>':''}</div>
+    <p class="task-comparison-task">${note.task}</p><p>${note.fit}</p><p class="task-comparison-check"><b>قبل الاعتماد:</b> ${note.check}</p>
+   </li>`}).join('')}</ul>
+   <p class="task-comparison-evidence">مبني على مراجعة 12 أكتوبر 2026؛ ليس اختبار أداء مستقلًا. <a href="/guides/arabic-design#decision">الشرح والمصادر</a></p>
+   ${standalone?'<a class="detail-collection" href="/category/create?sub=design">عرض كل تصميم</a>':'<button type="button" class="detail-collection" onclick="openDiscoveryGroup(\'create\',\'design\')">عرض كل تصميم</button>'}
+  </div>
+ </details>`;
+}
+// End of the optional Canva comparison.
+
 function directoryDiscoveryMarkup(x,standalone=false){
+ const comparison=canvaTaskComparisonMarkup(x,standalone);
+ if(comparison)return comparison;
  const related=relatedDirectoryItems(x);
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
  if(!related.length)return '';
