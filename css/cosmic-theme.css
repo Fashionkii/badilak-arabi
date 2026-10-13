@@ -52,14 +52,14 @@ body.cosmic-theme .intro :is(.intro-promise,.origin-heading h2,.portal-heading s
 body.cosmic-theme .intro :is(.intro-description,.origin-hint) { color:#c7d7d9!important; }
 body.cosmic-theme .intro .intro-link { color:#ead09b!important; border-bottom-color:#55717a!important; }
 /* Space continues between content surfaces; long-form reading stays light. */
-body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(#nominate),
+body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(#nominate):not(.ad-demo-wrap):not(.commercial-demo-wrap),
 body.cosmic-theme #directory .catalog-shell,
 body.cosmic-theme .standalone-main {
   background:transparent!important;
   border-color:transparent!important;
   box-shadow:none!important;
 }
-body.cosmic-theme main#top>section[data-journey-panel]:not(#start) { padding-block:24px!important; }
+body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(.ad-demo-wrap):not(.commercial-demo-wrap) { padding-block:24px!important; }
 body.cosmic-theme :is(#journeyResultTitle,.journey-back,.detail-breadcrumb,.detail-breadcrumb a),
 body.cosmic-theme #directory :is(#stateLine,.directory-refine-label,.origin-fit-note),
 body.cosmic-theme #competitionIndex>.competition-head :is(h2,p),
@@ -192,6 +192,10 @@ body.cosmic-theme.guided-discovery .intro.wrap::after {
 body.cosmic-theme.guided-discovery .intro.wrap > * {
   position:relative;
   z-index:1;
+}
+body.cosmic-theme.guided-discovery .intro :is(.intro-promise,.origin-heading,.portal-heading,.intro-support) {
+  padding-inline:12px!important;
+  box-sizing:border-box;
 }
 body.cosmic-theme.guided-discovery .origin-explorer {
   background:rgba(248,251,249,.97)!important;
