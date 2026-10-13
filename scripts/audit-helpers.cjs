@@ -34,7 +34,11 @@ exports.withoutCanvaTaskComparisonRenderer=source=>source
  .replace(' const comparison=canvaTaskComparisonMarkup(x,standalone);\n if(comparison)return comparison;\n','');
 exports.withPreviousDiscoveryMarkup=(html,previousDetail)=>html.replace(/<details class="detail-task-comparison">[\s\S]*?<\/details>/,()=>previousDetail.match(/<section class="detail-discovery">[\s\S]*?<\/section>/)[0]);
 const currentCardCautions=()=>require('node:fs').readFileSync(require('node:path').join(__dirname,'../js/detail-renderers.js'),'utf8').match(/const cardCautionOverrides=\{[\s\S]*?\n\};/)[0];
-exports.withoutReadingHierarchyApp=source=>source
+// A closed native disclosure must not trap keyboard focus in its hidden body.
+exports.withoutDisclosureFocusFix=source=>source
+ .replace('textarea:not([disabled]),summary,[tabindex="0"]','textarea:not([disabled]),[tabindex="0"]')
+ .replace(".filter(el=>el.getClientRects().length&&!el.closest('details:not([open]) > :not(summary)'))",".filter(el=>el.getClientRects().length)");
+exports.withoutReadingHierarchyApp=source=>exports.withoutDisclosureFocusFix(source)
  .replace('function cardCautionText(',currentCardCautions()+'\nfunction cardCautionText(')
  .replace('  <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong></div>\n','')
  .replace("   ${learningDecisionPanelMarkup(x)}\n   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}", "   <div class=\"detail-facts\">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}    ${learningDecisionPanelMarkup(x)}");
