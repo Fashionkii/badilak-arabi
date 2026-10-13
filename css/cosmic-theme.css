@@ -172,63 +172,22 @@ body.cosmic-theme #directory #directoryRefineCategory {
  body.cosmic-theme #directory .active-filter-pills {gap:4px;}
 }
 
-/* Home visual containment, 2026-10-13: confine space art to the entry panel.
-   Keep established routes, wording, commercial examples and interaction intact. */
-body.cosmic-theme.guided-discovery {
-  background:#071722!important;
-}
-body.cosmic-theme.guided-discovery::before {
-  display:none!important;
-  background:none!important;
-}
+/* Shared sky, 2026-10-13: keep the existing full-viewport space artwork on
+   every route. Reading surfaces stay calm; the hero no longer owns the sky. */
 body.cosmic-theme.guided-discovery .intro.wrap {
   position:relative;
   isolation:isolate;
   overflow:hidden!important;
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(13,64,76,.42),transparent 70%),
-    #071923!important;
+  background:rgba(7,25,35,.58)!important;
   border:1px solid #24414b!important;
   border-radius:24px!important;
   margin-top:18px!important;
   padding-bottom:26px!important;
 }
-body.cosmic-theme.guided-discovery .intro.wrap::before {
-  content:"";
-  display:block!important;
-  position:absolute;
-  inset:0!important;
-  width:auto!important;
-  height:auto!important;
-  clip-path:none!important;
-  background:url('/images/brand/badilak-hero-stars-480.webp') center top/100% auto no-repeat!important;
-  opacity:.85!important;
-  z-index:0!important;
-  pointer-events:none;
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 18%,transparent 77%);
-  mask-image:linear-gradient(to bottom,#000 0%,#000 18%,transparent 77%);
-}
+body.cosmic-theme.guided-discovery .intro.wrap::before,
 body.cosmic-theme.guided-discovery .intro.wrap::after {
-  content:"";
-  display:block!important;
-  position:absolute;
-  inset:0!important;
-  width:auto!important;
-  height:auto!important;
-  background:
-    radial-gradient(circle at 8% 13%,rgba(255,236,192,.85) 0 1px,transparent 2px),
-    radial-gradient(circle at 22% 7%,rgba(191,233,249,.8) 0 1px,transparent 2px),
-    radial-gradient(circle at 33% 24%,rgba(250,220,153,.8) 0 1px,transparent 2px),
-    radial-gradient(circle at 46% 11%,rgba(236,244,255,.9) 0 1px,transparent 2px),
-    radial-gradient(circle at 60% 22%,rgba(255,233,188,.7) 0 1px,transparent 2px),
-    radial-gradient(circle at 72% 8%,rgba(176,220,245,.85) 0 1px,transparent 2px),
-    radial-gradient(circle at 86% 19%,rgba(249,222,176,.85) 0 1px,transparent 2px),
-    radial-gradient(circle at 95% 9%,rgba(246,249,255,.65) 0 1px,transparent 2px);
-  opacity:.65!important;
-  z-index:0!important;
-  pointer-events:none;
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 65%);
-  mask-image:linear-gradient(to bottom,#000 0%,transparent 65%);
+  content:none!important;
+  display:none!important;
 }
 body.cosmic-theme.guided-discovery .intro.wrap > * {
   position:relative;
@@ -244,7 +203,7 @@ body.cosmic-theme.guided-discovery .intro .origin-explorer .origin-heading h2 {
 body.cosmic-theme.guided-discovery .intro .origin-explorer .origin-hint {
   color:#455a5e!important;
 }
-/* Solid reading and filtering surfaces over the now-uniform dark remainder. */
+/* Solid reading and filtering surfaces over the shared sky. */
 body.cosmic-theme.guided-discovery #directory .catalog-shell {
   background:rgba(247,250,248,.97)!important;
   border:1px solid #d5e0dd!important;
@@ -273,16 +232,6 @@ body.cosmic-theme.guided-discovery :is(.commercial-demo-wrap,.ad-demo-wrap) :is(
     margin-top:10px!important;
     padding-bottom:18px!important;
   }
-  body.cosmic-theme.guided-discovery .intro.wrap::before {
-    background-size:auto 260px!important;
-    background-position:center top!important;
-    -webkit-mask-image:linear-gradient(to bottom,#000,transparent 380px);
-    mask-image:linear-gradient(to bottom,#000,transparent 380px);
-  }
   body.cosmic-theme.guided-discovery :is(.ad-demo-wrap,.commercial-demo-wrap) {padding:12px!important;}
-}
-@media(print) {
-  body.cosmic-theme.guided-discovery .intro.wrap::before,
-  body.cosmic-theme.guided-discovery .intro.wrap::after {display:none!important;}
 }
 
