@@ -31,6 +31,7 @@ for(const file of articleFiles){
  // The approved global identity replaces only this exact header mark and body class.
  const body=s=>s.match(/<body[\s\S]*<\/body>/)[0]
   .replace('<body class="cosmic-theme">','<body>')
+  .replace('<picture><img class="cosmic-logo" src="/images/brand/approved-logo-20261014-320.webp" width="1678" height="937" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
   .replace('<picture><source type="image/avif" srcset="/images/brand/cosmic-logo-320.avif"><img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي');
  assert.equal(body(fs.readFileSync(path.join(root,'guides',file),'utf8')),body(fs.readFileSync(path.join(out,'guides',file),'utf8')),'Article changed: '+file);
 }
@@ -45,7 +46,8 @@ if(process.argv[2]){
   const normalize=file==='js/discovery-memory.js'?withoutRetiredShelf:x=>x;
   assert.equal(normalize(fs.readFileSync(path.join(root,file),'utf8')),normalize(execFileSync('git',['show',ref+':'+file],{cwd:root,encoding:'utf8'})),'Protected data/behavior changed: '+file);
  }
- const before=execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}).replace(/ data-journey-panel="[^"]*"/g,''),after=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/ data-journey-panel="[^"]*"/g,'');
+ const normalizeAd=html=>html.replaceAll('<img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://wuilt.com" alt="">','<span class="commercial-demo-initial" aria-hidden="true">و</span>');
+ const before=normalizeAd(execFileSync('git',['show',ref+':index.html'],{cwd:root,encoding:'utf8'}).replace(/ data-journey-panel="[^"]*"/g,'')),after=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/ data-journey-panel="[^"]*"/g,'');
  for(const file of articleFiles){
   const article=s=>s.match(/<article\b[^>]*>[\s\S]*?<\/article>/)[0];
   assert.equal(article(fs.readFileSync(path.join(root,'guides',file),'utf8')),article(execFileSync('git',['show',ref+':guides/'+file],{cwd:root,encoding:'utf8'})),'Article copy changed: '+file);

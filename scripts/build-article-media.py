@@ -36,6 +36,27 @@ def text_lines(draw, text, font, width):
     if line: lines.append(line)
     return lines
 
+def build_thumbnails():
+    """Reuse approved covers; don't regenerate article artwork, copy or metadata."""
+    hub_path = ROOT/'guides.html'
+    hub = hub_path.read_text()
+    cards = list(re.finditer(r'<img class="guide-cover"[^>]*>', hub))
+    for index, match in reversed(list(enumerate(cards))):
+        tag = match.group()
+        source = re.search(r'src="(/images/articles/[a-z0-9-]+)-(?:cover|thumb)\.webp"', tag)
+        if not source: raise ValueError('Unexpected guide image: '+tag)
+        base = source.group(1)
+        with Image.open(ROOT/(base.lstrip('/')+'-cover.webp')) as cover:
+            thumb = ImageOps.fit(cover.convert('RGB'), (640,360), method=Image.Resampling.LANCZOS)
+            save_image(thumb, ROOT/(base.lstrip('/')+'-thumb.webp'), 'WEBP', quality=76, method=6)
+        tag = re.sub(r'src="[^"]*"', f'src="{base}-thumb.webp"', tag)
+        tag = re.sub(r'width="\d+"', 'width="640"', tag)
+        tag = re.sub(r'height="\d+"', 'height="360"', tag)
+        tag = re.sub(r'loading="[^"]*"', 'loading="'+('eager' if index<3 else 'lazy')+'"', tag)
+        hub = hub[:match.start()]+tag+hub[match.end():]
+    hub_path.write_text(hub)
+    print(f'Built {len(cards)} reading-list thumbnails; full article covers unchanged.')
+
 def build(font_path):
     if not features.check('raqm'): raise RuntimeError('Pillow must support RAQM for Arabic text.')
     manifest = json.loads((ROOT/'data/article-media.json').read_text())
@@ -121,8 +142,11 @@ def build(font_path):
         hub = re.sub(pattern,lambda m:m.group(1)+thumb,hub)
     if '/css/article-media.css' not in hub: hub = hub.replace('</head>','<link rel="stylesheet" href="/css/article-media.css">\n</head>')
     hub_path.write_text(hub)
+    build_thumbnails()
     print(f'Built {len(articles)} article covers, social images, and metadata.')
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--font',default='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
-    build(parser.parse_args().font)
+    parser.add_argument('--thumbnails-only', action='store_true')
+    args=parser.parse_args()
+    build_thumbnails() if args.thumbnails_only else build(args.font)

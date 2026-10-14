@@ -97,7 +97,11 @@ function standalonePage(page,content){
 // The small header uses this same image first; explicitly prioritize the hero's LCP request.
 const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/approved-logo-20261014-640.webp" imagesrcset="/images/brand/approved-logo-20261014-640.webp 640w, /images/brand/approved-logo-20261014-1080.webp 1080w" imagesizes="(max-width:360px) 88vw, (max-width:760px) 320px, 440px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
-write('guides.html',prepare(fs.readFileSync(path.join(root,'guides.html'),'utf8')));
+const hubSource=fs.readFileSync(path.join(root,'guides.html'),'utf8');
+// Describe the actual reading list, in its visible order; no ratings or invented dates.
+const guideList=[...hubSource.matchAll(/<a class="card" href="(\/guides\/[a-z0-9-]+)">[\s\S]*?<h3>([^<]+)<\/h3>/g)];
+const hubSchema={'@context':'https://schema.org','@type':'CollectionPage',url:origin+'/guides',name:'اقرأ قبل أن تختار',inLanguage:'ar',mainEntity:{'@type':'ItemList',numberOfItems:guideList.length,itemListElement:guideList.map((match,i)=>({'@type':'ListItem',position:i+1,url:origin+match[1],name:match[2]}))}};
+write('guides.html',prepare(hubSource.replace('</head>','<script type="application/ld+json">'+json(hubSchema)+'</script>\n</head>')));
 const guides=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'));
 for(const file of guides)write('guides/'+file,prepare(fs.readFileSync(path.join(root,'guides',file),'utf8')));
 for(const x of items){
@@ -116,7 +120,7 @@ for(const id of seo.categories()){
  let html=setPageHead(prepare(source),page);
  html=html.replace('<div id="routeIndex" hidden></div>','<div id="routeIndex">'+seo.categoryIndex(id)+'</div>');
  html=html.replace(/(<div[^>]+id="catalogGrid"[^>]*>)[\s\S]*?<\/div>/,'$1'+seo.staticCards(id)+'</div>');
- html=html.replace('<h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>','<h2 id="journeyResultTitle">'+escape(categoryNames[id])+'</h2>');
+ html=html.replace('<h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>','<h1 id="journeyResultTitle">'+escape(categoryNames[id])+'</h1>');
  write('category/'+id+'.html',html);
 }
 write('404.html',prepare(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/site-bundle.css"></head><body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>${standaloneHeader}<main class="standalone-main wrap" id="content"><article class="policy-page not-found"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><nav aria-label="متابعة التصفح"><a href="/">الرئيسية</a><a href="/guides">مركز القراءة</a></nav></article></main>${standaloneFooter}</body></html>`));
@@ -128,4 +132,18 @@ const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 // Keep legacy .html aliases too: those deleted files need explicit redirects.
 write('_redirects',vercel.redirects.map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
 // A custom 404 disables the SPA fallback on Cloudflare Pages; no wildcard rewrites.
+// Keep historic artwork in source control, not in the deployed public asset tree.
+// Limit pruning to fixed-name shared brand/social assets; other images can be data-driven.
+const publicText=fs.readdirSync(out,{recursive:true}).filter(file=>/\.(html|css|js)$/.test(file)).map(file=>fs.readFileSync(path.join(out,file),'utf8')).join('\n');
+let retiredAssetCount=0,retiredAssetBytes=0;
+for(const dir of ['images/brand','images/social']){
+ for(const file of fs.readdirSync(path.join(out,dir))){
+  const publicPath='/'+dir+'/'+file;
+  if(!publicText.includes(publicPath)){
+   retiredAssetBytes+=fs.statSync(path.join(out,dir,file)).size;
+   fs.unlinkSync(path.join(out,dir,file));retiredAssetCount++;
+  }
+ }
+}
+console.log(`Excluded ${retiredAssetCount} unreferenced historic brand/social assets (${retiredAssetBytes} bytes) from deployment.`);
 console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. All are noindex; sitemap intentionally empty.`);

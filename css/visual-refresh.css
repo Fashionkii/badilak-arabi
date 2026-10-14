@@ -83,18 +83,13 @@ body.guided-discovery .footer { border-top-color:var(--line)!important; }
   border-color:var(--card-line)!important;
   box-shadow:inset 0 0 0 1px rgba(18,55,54,.035),0 8px 24px rgba(18,55,54,.035)!important;
 }
-
 /* Retain the established calligraphic name; add the lab's lantern to its LEFT in RTL. */
-.brand-lockup .brand-lantern { display:block; width:25px; height:30px; flex:none; object-fit:contain; }
+
 body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand {
   direction:rtl;
   flex-direction:row;
   gap:14px;
 }
-body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand>img.art-img-brand {
-  margin:0!important;
-}
-.intro .brand-lantern { display:block; width:52px; height:61px; flex:none; object-fit:contain; }
 
 /* Reading pages share type and palette, keeping their light header and article layout. */
 body:not(.guided-discovery) {
@@ -115,7 +110,8 @@ body:not(.guided-discovery) article { background:#FFFFFF; border-color:var(--car
 #directory .card-key-limit { margin:0 0 8px; padding:6px 8px; color:var(--sunrise-dark); background:#FAF6EF; border-radius:8px; font-size:.75rem; line-height:1.65; text-align:center; }
 #directory .origin-fit-note { margin:0 0 16px; color:var(--muted); font-size:.8125rem; line-height:1.7; }
 @media(max-width:760px) {
-  .intro .brand-lantern { width:36px; height:42px; }
+
+
   body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand { gap:10px; }
   #directory .catalog-grid>.item,
   #learning .learning-card,

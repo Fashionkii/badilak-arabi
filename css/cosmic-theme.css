@@ -52,7 +52,7 @@ body.cosmic-theme .intro :is(.intro-promise,.origin-heading h2,.portal-heading s
 body.cosmic-theme .intro :is(.intro-description,.origin-hint) { color:#c7d7d9!important; }
 body.cosmic-theme .intro .intro-link { color:#ead09b!important; border-bottom-color:#55717a!important; }
 /* Space continues between content surfaces; long-form reading stays light. */
-body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(#nominate):not(.ad-demo-wrap):not(.commercial-demo-wrap),
+body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(#nominate):not(#learning):not(#competitionIndex):not(.ad-demo-wrap):not(.commercial-demo-wrap),
 body.cosmic-theme #directory .catalog-shell,
 body.cosmic-theme .standalone-main {
   background:transparent!important;
@@ -61,11 +61,21 @@ body.cosmic-theme .standalone-main {
 }
 body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(.ad-demo-wrap):not(.commercial-demo-wrap) { padding-block:24px!important; }
 body.cosmic-theme :is(#journeyResultTitle,.journey-back,.detail-breadcrumb,.detail-breadcrumb a),
-body.cosmic-theme #directory :is(#stateLine,.directory-refine-label,.origin-fit-note),
-body.cosmic-theme #competitionIndex>.competition-head :is(h2,p),
-body.cosmic-theme #learning .learning-group-title { color:#f6efdf!important; }
+body.cosmic-theme #directory :is(#stateLine,.directory-refine-label,.origin-fit-note) { color:#f6efdf!important; }
 body.cosmic-theme #learning .learning-folded-head .learning-group-title { color:var(--deep)!important; }
 body.cosmic-theme #learning :is(.learning-toolbar,.learning-folded-head) { background:#f7f9f5!important; }
+/* Opaque shared surfaces keep the approved sky outside reading and chart areas. */
+body.cosmic-theme.guided-discovery main#top>:is(#learning,#competitionIndex) {
+  background:#f7faf8!important;border:1px solid #d5e0dd!important;
+  border-radius:19px!important;padding-inline:24px!important;box-shadow:none!important;
+}
+body.cosmic-theme #competitionIndex>.competition-head :is(h2,p),
+body.cosmic-theme #learning .learning-group-title {color:#274348!important;}
+body.cosmic-theme #competitionIndex .arab-observer-main {background:#fffefa!important;}
+body.cosmic-theme #learning>.section-head {background:transparent;padding-inline:0!important;}
+@media(max-width:760px) {
+  body.cosmic-theme.guided-discovery main#top>:is(#learning,#competitionIndex) {padding-inline:12px!important;border-radius:16px!important;}
+}
 /* Live text headings stay sharp at every size and retain the established reading surface. */
 body.cosmic-theme :is(#learning,#updates,#guides,#knowledge) .section-head {
   background:#f7f9f5;
