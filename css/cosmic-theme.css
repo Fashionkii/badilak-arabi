@@ -69,6 +69,11 @@ body.cosmic-theme.guided-discovery main#top>:is(#learning,#competitionIndex) {
   background:#f7faf8!important;border:1px solid #d5e0dd!important;
   border-radius:19px!important;padding-inline:24px!important;box-shadow:none!important;
 }
+body.cosmic-theme.guided-discovery main#top>#learning {width:min(1180px,calc(100% - 34px));margin-inline:auto!important;}
+body.cosmic-theme.guided-discovery #learning>.wrap,
+body.cosmic-theme.guided-discovery #learning .local-nav,
+body.cosmic-theme.guided-discovery #learning .local-nav-inner {width:100%;}
+body.cosmic-theme.guided-discovery #learning>.wrap>.section-head {background:transparent;padding-inline:0!important;box-shadow:none!important;}
 body.cosmic-theme #competitionIndex>.competition-head :is(h2,p),
 body.cosmic-theme #learning .learning-group-title {color:#274348!important;}
 body.cosmic-theme #competitionIndex .arab-observer-main {background:#fffefa!important;}

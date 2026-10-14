@@ -3333,7 +3333,7 @@ main#top>section{position:relative;z-index:1}
  height:31px!important;
  min-height:31px!important;
  max-height:31px!important;
- margin:0 0 4px!important;
+ margin:auto 0 4px!important;
  flex:0 0 31px!important;
 }
 #learning .learning-card-guide-slot .card-read-link{
