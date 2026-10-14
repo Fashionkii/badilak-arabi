@@ -15,7 +15,7 @@ body.cosmic-theme::before {
 }
 body.cosmic-theme main#top::before { display:none!important; }
 /* A direct /#top return must leave the taller wordmark below the sticky header. */
-body.cosmic-theme main#top { scroll-margin-top:96px; }
+body.cosmic-theme :is(main#top,#competitionIndex) { scroll-margin-top:96px; }
 body.cosmic-theme .site-header,
 body.cosmic-theme .top {
   background:#071922!important;
