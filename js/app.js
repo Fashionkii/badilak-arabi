@@ -738,19 +738,49 @@ function openLearningExternal(id){
  document.dispatchEvent(new CustomEvent('badilak:outbound',{detail:{id,kind:r.affiliate?'affiliate-content':'official-content'}}));
 }
 
+// Directory exits require a deliberate choice; reuse existing evidence/comparisons.
 function openExternal(id){
  const x=items.find(a=>a.id===id);if(!x||!x.url||x.url==='#'){alert('لا يتوفر لهذا العنصر رابط رسمي موثق حاليًا.');return}
+ const trigger=document.activeElement;
  const r=resolveCommercialLink(id,x.url);
- const a=document.createElement('a');
- a.href=r.url;
- a.target='_blank';
- a.rel=r.affiliate?'sponsored noopener noreferrer':'noopener noreferrer';
- a.dataset.linkKind=r.affiliate?'affiliate':'official';
- a.dataset.itemId=id;
- document.body.appendChild(a);
- a.click();
- a.remove();
- document.dispatchEvent(new CustomEvent('badilak:outbound',{detail:{id,kind:r.affiliate?'affiliate':'official'}}));
+ let dialog=document.getElementById('outboundDialog');
+ if(!dialog){
+  dialog=document.createElement('dialog');
+  dialog.id='outboundDialog';dialog.className='outbound-dialog';
+  dialog.setAttribute('aria-labelledby','outboundTitle');
+  dialog.setAttribute('aria-describedby','outboundDescription');
+  dialog.innerHTML='<h2 id="outboundTitle"></h2><p id="outboundDescription">يمكنك الانتقال الآن، أو مراجعة الاختيارات قبل أن تقرر.<span class="outbound-domain"></span></p><a class="outbound-continue" target="_blank">الانتقال إلى الموقع الخارجي ↗</a><button type="button" class="outbound-review">راجع البدائل أولًا</button><button type="button" class="outbound-dismiss">متابعة التصفح</button>';
+  document.body.appendChild(dialog);
+  dialog.addEventListener('close',()=>document.body.classList.remove('outbound-open'));
+  dialog.addEventListener('click',event=>{if(event.target===dialog){const b=dialog.getBoundingClientRect();if(event.clientX<b.left||event.clientX>b.right||event.clientY<b.top||event.clientY>b.bottom)dialog.close();}});
+  window.addEventListener('popstate',()=>{if(dialog.open)dialog.close();});
+ }
+ dialog.querySelector('h2').textContent=x.name;
+ dialog.querySelector('.outbound-domain').textContent=x.domain;
+ const link=dialog.querySelector('.outbound-continue');
+ link.href=r.url;link.rel=r.affiliate?'sponsored noopener noreferrer':'noopener noreferrer';
+ link.dataset.linkKind=r.affiliate?'affiliate':'official';link.dataset.itemId=id;
+ link.setAttribute('aria-label','الانتقال إلى '+x.name+' — يفتح في علامة تبويب جديدة');
+ link.onclick=()=>{
+  dialog.close();
+  document.dispatchEvent(new CustomEvent('badilak:outbound',{detail:{id,kind:r.affiliate?'affiliate':'official'}}));
+ };
+ const review=dialog.querySelector('.outbound-review');
+ const hasComparison=relatedDirectoryItems(x).length>0||!!canvaTaskComparisonMarkup(x);
+ review.textContent=hasComparison?'راجع البدائل ونقاط قوتها أولًا':'راجع التفاصيل والقيود أولًا';
+ review.onclick=()=>{
+  dialog.close();
+  if(trigger?.isConnected)trigger.focus({preventScroll:true});
+  openDetail(id);
+  if(hasComparison){
+   const comparison=document.querySelector('#modalBody .detail-task-comparison');
+   if(comparison){comparison.open=true;comparison.querySelector('summary')?.focus();comparison.scrollIntoView({block:'start',behavior:'instant'});}
+  }
+ };
+ dialog.querySelector('.outbound-dismiss').onclick=()=>dialog.close();
+ document.body.classList.add('outbound-open');
+ if(!dialog.open)dialog.showModal();
+ link.focus({preventScroll:true});
 }
 let methodologyReturnFocus=null;
 function openMethodology(){
@@ -801,7 +831,7 @@ function closeModal(options={}){
  // Comparisons can open a resource absent from the underlying results. Return to
  // the card that opened the dialog, even when history recreates its DOM element.
  const returningItemId=detailReturnFocus?.closest('[data-item-id]')?.dataset.itemId||returningDetail?.id;
- const returnToDetails=detailReturnFocus?.matches('.more-btn');
+ const returnControl=detailReturnFocus?.matches('.more-btn')?'.more-btn':detailReturnFocus?.matches('.destination-link')?'.destination-link':'.item-identity';
  activeDetail=null;
  modal.close();
  modal.classList.remove('show');
@@ -814,7 +844,7 @@ function closeModal(options={}){
   if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1){
    // The history adapter recreates cards; focus their new element after restoration.
    window.addEventListener('popstate',()=>requestAnimationFrame(()=>{
-    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningItemId}"] ${returnToDetails?'.more-btn':'.item-identity'}`)?.focus({preventScroll:true});
+    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningItemId}"] ${returnControl}`)?.focus({preventScroll:true});
    }),{once:true});
    history.back();
   }

@@ -125,6 +125,21 @@ body:not(.guided-discovery) .next-actions a:hover {box-shadow:none;transform:non
 
 /* Directory cards: benefit first, an explicit limit, then the same three actions. */
 #directory .catalog-grid>.item {align-self:stretch!important;}
+/* Share each content row across adjacent cards, without clipping longer copy.
+   The existing flex layout remains the fallback for older browsers. */
+@supports (grid-template-rows:subgrid) {
+  #directory .catalog-grid>.item {display:grid!important;grid-template-rows:subgrid;grid-row:span 7;row-gap:0;}
+  #directory .catalog-grid>.item>.item-identity {grid-row:1;}
+  #directory .catalog-grid>.item>.country-badge-slot {grid-row:2;}
+  #directory .catalog-grid>.item>.comparison-strip {grid-row:3;}
+  #directory .catalog-grid>.item>.card-fit {grid-row:4;}
+  #directory .catalog-grid>.item>.card-summary {grid-row:5;}
+  #directory .catalog-grid>.item>.card-key-limit {grid-row:6;}
+  #directory .catalog-grid>.item>.card-primary-actions {grid-row:7;}
+}
+#directory .catalog-grid .item-identity {height:auto!important;min-height:100px!important;max-height:none!important;overflow:visible!important;}
+#directory .catalog-grid .item-name {height:auto!important;max-height:none!important;overflow:visible!important;}
+
 #directory .catalog-grid .card-summary {height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;align-items:stretch!important;}
 #directory .catalog-grid .card-purpose {
   background:var(--reading-purpose);border-radius:8px;padding:10px 12px!important;

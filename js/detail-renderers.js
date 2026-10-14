@@ -305,7 +305,7 @@ function directoryDetailMarkup(x,standalone=false){
    ${renderSections(x,sections)}
    <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة: '+x.reviewed:''}</span></div>
    ${commercialDisclosureMarkup(x.id)}
-   ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button class="destination-link" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
+   ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
    ${directoryDiscoveryMarkup(x,standalone)}
   </div>`;
  // A service title is h1; the sections below it are h2, with their existing visual size.
@@ -439,6 +439,6 @@ function directoryCardMarkup(x,activeOrigin=null){
    <div class="card-primary-actions">
     <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">تفاصيل</button>
     <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
-    <button class="destination-link" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
+    <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`;}

@@ -10,7 +10,7 @@ body.cosmic-theme::before {
   inset:0;
   z-index:-1;
   pointer-events:none;
-  opacity:1!important;
+  opacity:.24!important;
   background:linear-gradient(90deg,rgba(3,13,22,.08),rgba(3,13,22,.18)),url('/images/brand/approved-sky-20261014-1600.webp') center/cover no-repeat;
 }
 body.cosmic-theme main#top::before { display:none!important; }
@@ -187,17 +187,17 @@ body.cosmic-theme #directory #directoryRefineCategory {
  body.cosmic-theme #directory .active-filter-pills {gap:4px;}
 }
 
-/* Approved sky, 2026-10-14: the supplied identity continues on every route.
-   Keep the stars visible behind the mark, and solid surfaces behind reading. */
+/* Approved identity: a quiet sky outside solid reading surfaces.
+   Interior gutters protect icons, focus rings and text from the frame. */
 body.cosmic-theme.guided-discovery .intro.wrap {
   position:relative;
   isolation:isolate;
   overflow:hidden!important;
-  background:rgba(7,25,35,.18)!important;
+  background:rgba(7,25,35,.78)!important;
   border:1px solid #24414b!important;
   border-radius:24px!important;
   margin-top:18px!important;
-  padding-bottom:26px!important;
+  padding:28px!important;
 }
 body.cosmic-theme.guided-discovery .intro.wrap::before,
 body.cosmic-theme.guided-discovery .intro.wrap::after {
@@ -213,7 +213,9 @@ body.cosmic-theme.guided-discovery .intro :is(.intro-promise,.origin-heading,.po
   box-sizing:border-box;
 }
 body.cosmic-theme.guided-discovery .origin-explorer {
-  background:rgba(248,251,249,.97)!important;
+  background:#f7faf8!important;
+  padding:20px!important;
+  border-radius:16px!important;
   border-color:#b8c9c8!important;
 }
 body.cosmic-theme.guided-discovery .intro .origin-explorer .origin-heading h2 {
@@ -224,7 +226,7 @@ body.cosmic-theme.guided-discovery .intro .origin-explorer .origin-hint {
 }
 /* Solid reading and filtering surfaces over the shared sky. */
 body.cosmic-theme.guided-discovery #directory .catalog-shell {
-  background:rgba(247,250,248,.97)!important;
+  background:#f7faf8!important;
   border:1px solid #d5e0dd!important;
   border-radius:19px!important;
 }
@@ -249,8 +251,39 @@ body.cosmic-theme.guided-discovery :is(.commercial-demo-wrap,.ad-demo-wrap) :is(
   body.cosmic-theme.guided-discovery .intro.wrap {
     border-radius:17px!important;
     margin-top:10px!important;
-    padding-bottom:18px!important;
+    padding:20px 12px!important;
   }
   body.cosmic-theme.guided-discovery :is(.ad-demo-wrap,.commercial-demo-wrap) {padding:12px!important;}
 }
 
+
+/* Homepage controls share a stable icon column and comfortable edge spacing. */
+body.cosmic-theme.guided-discovery .intro .portal-icon-btn {
+  display:grid!important;grid-template-columns:24px minmax(0,1fr)!important;
+  align-items:center!important;justify-content:stretch!important;
+  height:auto!important;min-height:56px!important;padding:12px 14px!important;
+  text-align:start!important;
+}
+body.cosmic-theme.guided-discovery .intro .portal-field-icon {width:24px;height:24px;justify-self:center;}
+body.cosmic-theme.guided-discovery .intro .portal-field-label {min-width:0;}
+body.cosmic-theme.guided-discovery .intro .origin-option:focus-visible {outline-offset:2px!important;}
+@media(max-width:760px) {
+  body.cosmic-theme.guided-discovery .intro .origin-explorer {padding:16px 10px!important;border-radius:12px!important;}
+  body.cosmic-theme.guided-discovery .intro .portal-icon-btn {grid-template-columns:20px minmax(0,1fr)!important;padding:10px!important;}
+  body.cosmic-theme.guided-discovery .intro .portal-field-icon {width:20px;height:20px;}
+}
+/* One short choice before a directory destination; no delay or auto-redirect. */
+.outbound-dialog {
+  width:min(440px,calc(100% - 32px));max-height:calc(100dvh - 32px);
+  margin:auto;padding:24px;border:1px solid #d5e0dd;border-radius:18px;
+  color:#263a36;background:#fcfcf9;box-shadow:0 20px 70px #0005;text-align:start;
+}
+.outbound-dialog::backdrop {background:rgba(3,13,22,.66);}
+.outbound-dialog h2 {font:700 21px/1.6 var(--ui);margin:0 0 8px;}
+.outbound-dialog p {font-size:14px;line-height:1.8;margin:0 0 16px;color:#53645e;}
+.outbound-dialog .outbound-domain {display:block;direction:ltr;text-align:start;overflow-wrap:anywhere;font-size:13px;}
+.outbound-dialog :is(a,button) {display:block;width:100%;min-height:48px;padding:12px;margin-top:10px;border:1px solid #b9cbc3;border-radius:10px;font:700 14px/1.6 var(--ui);text-align:center;cursor:pointer;background:#eff4f1;color:#263a36;}
+.outbound-dialog .outbound-continue {background:#173e3d;color:#fff;border-color:#173e3d;}
+.outbound-dialog .outbound-dismiss {background:transparent;border-color:transparent;font-weight:400;}
+.outbound-dialog :is(a,button):focus-visible {outline:3px solid #997338;outline-offset:3px;}
+body.outbound-open {overflow:hidden;}
