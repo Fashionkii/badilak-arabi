@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-14T23:01:14.410342+00:00",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "url": "https://badilak-arabi.vercel.app/",
+      "xRobotsTag": "noindex, follow",
+      "metaRobots": [
+        "noindex, follow, max-image-preview:large"
+      ]
+    },
+    {
+      "path": "/guides",
+      "status": 200,
+      "url": "https://badilak-arabi.vercel.app/guides",
+      "xRobotsTag": "noindex, follow",
+      "metaRobots": [
+        "noindex, follow, max-image-preview:large"
+      ]
+    },
+    {
+      "path": "/category/work",
+      "status": 200,
+      "url": "https://badilak-arabi.vercel.app/category/work",
+      "xRobotsTag": "noindex, follow",
+      "metaRobots": [
+        "noindex, follow, max-image-preview:large"
+      ]
+    },
+    {
+      "path": "/discover/daftra",
+      "status": 200,
+      "url": "https://badilak-arabi.vercel.app/discover/daftra",
+      "xRobotsTag": "noindex, follow",
+      "metaRobots": [
+        "noindex, follow, max-image-preview:large"
+      ]
+    },
+    {
+      "path": "/guides/arabic-design",
+      "status": 200,
+      "url": "https://badilak-arabi.vercel.app/guides/arabic-design",
+      "xRobotsTag": "noindex, follow",
+      "metaRobots": [
+        "noindex, follow, max-image-preview:large"
+      ]
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "url": "https://badilak-arabi.vercel.app/privacy",
+      "xRobotsTag": "noindex, follow",
+      "metaRobots": [
+        "noindex, follow, max-image-preview:large"
+      ]
+    }
+  ],
+  "passed": true
+}

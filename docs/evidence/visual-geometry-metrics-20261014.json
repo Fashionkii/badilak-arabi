@@ -1,0 +1,1145 @@
+{
+  "baseline": {
+    "source": "Earlier tool result in this task; summary transcribed before interruption, full raw response not retained",
+    "commit": "9f330250b81b4941ae4b9133b6a54894b5385318",
+    "fetchTime": "2026-10-14T11:59:48.363Z",
+    "url": "https://badilak-arabi.vercel.app/",
+    "formFactor": "mobile",
+    "scores": {
+      "performance": 0.91,
+      "accessibility": 1,
+      "bestPractices": 0.96
+    },
+    "lcpMs": 3461.868,
+    "tbtMs": 9,
+    "cls": 0,
+    "bytes": 703508
+  },
+  "after": [
+    {
+      "url": "https://badilak-arabi.vercel.app/",
+      "fetchTime": "2026-10-14T18:03:13.704Z",
+      "lighthouseVersion": "13.4.0",
+      "configSettings": {
+        "output": [
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": true,
+        "debugNavigation": false,
+        "channel": "cli",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "accessibility",
+          "best-practices",
+          "performance"
+        ],
+        "skipAudits": [
+          "full-page-screenshot"
+        ]
+      },
+      "scores": {
+        "performance": 0.86,
+        "accessibility": 1,
+        "best-practices": 1
+      },
+      "audits": {
+        "first-contentful-paint": {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "description": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/).",
+          "score": 0.9,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 1768.4240000000002,
+          "numericUnit": "millisecond",
+          "displayValue": "1.8 s",
+          "scoringOptions": {
+            "p10": 1800,
+            "median": 3000
+          }
+        },
+        "largest-contentful-paint": {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "score": 0.49,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 4018.3640000000005,
+          "numericUnit": "millisecond",
+          "displayValue": "4.0 s",
+          "scoringOptions": {
+            "p10": 2500,
+            "median": 4000
+          }
+        },
+        "total-blocking-time": {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 19,
+          "numericUnit": "millisecond",
+          "displayValue": "20 ms",
+          "scoringOptions": {
+            "p10": 200,
+            "median": 600
+          }
+        },
+        "cumulative-layout-shift": {
+          "id": "cumulative-layout-shift",
+          "title": "Cumulative Layout Shift",
+          "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0",
+          "scoringOptions": {
+            "p10": 0.1,
+            "median": 0.25
+          },
+          "details": {
+            "type": "debugdata",
+            "items": [
+              {
+                "cumulativeLayoutShiftMainFrame": 0,
+                "newEngineResult": {
+                  "cumulativeLayoutShift": 0,
+                  "cumulativeLayoutShiftMainFrame": 0
+                },
+                "newEngineResultDiffered": false
+              }
+            ]
+          }
+        },
+        "total-byte-weight": {
+          "id": "total-byte-weight",
+          "title": "Avoids enormous network payloads",
+          "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/).",
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "numericValue": 701061,
+          "numericUnit": "byte",
+          "displayValue": "Total size was 685 KiB",
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL"
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Transfer Size"
+              }
+            ],
+            "items": [
+              {
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-logo-20261014-640.webp",
+                "totalBytes": 55196
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-sky-20261014-800.webp",
+                "totalBytes": 54765
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-800.woff2",
+                "totalBytes": 52206
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-700.woff2",
+                "totalBytes": 49909
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-400.woff2",
+                "totalBytes": 48703
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-bf43e79904fc.woff2",
+                "totalBytes": 44453
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-41f1e64ff8db.woff2",
+                "totalBytes": 43019
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/js/catalog-data.js",
+                "totalBytes": 35121
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-3270f0cb47fd.woff2",
+                "totalBytes": 33976
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/app.css",
+                "totalBytes": 31509
+              }
+            ],
+            "sortedBy": [
+              "totalBytes"
+            ]
+          },
+          "guidanceLevel": 1
+        },
+        "errors-in-console": {
+          "id": "errors-in-console",
+          "title": "No browser errors logged to the console",
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "sourceLocation",
+                "valueType": "source-location",
+                "label": "Source"
+              },
+              {
+                "key": "description",
+                "valueType": "code",
+                "label": "Description"
+              }
+            ],
+            "items": []
+          }
+        },
+        "render-blocking-insight": {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 120 ms",
+          "metricSavings": {
+            "FCP": 100,
+            "LCP": 0
+          },
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL"
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Transfer Size"
+              },
+              {
+                "key": "wastedMs",
+                "valueType": "timespanMs",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "url": "https://badilak-arabi.vercel.app/css/fonts.css",
+                "totalBytes": 1838
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/app.css",
+                "totalBytes": 31509,
+                "wastedMs": 321
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/visual-refresh.css",
+                "totalBytes": 7464
+              }
+            ]
+          },
+          "guidanceLevel": 3
+        },
+        "image-delivery-insight": {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery)",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 25 KiB",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 150
+          },
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "node",
+                "valueType": "node",
+                "label": ""
+              },
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL",
+                "subItemsHeading": {
+                  "key": "reason",
+                  "valueType": "text"
+                }
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Resource Size"
+              },
+              {
+                "key": "wastedBytes",
+                "valueType": "bytes",
+                "label": "Est Savings",
+                "subItemsHeading": {
+                  "key": "wastedBytes",
+                  "valueType": "bytes"
+                }
+              }
+            ],
+            "items": [
+              {
+                "node": {
+                  "type": "node",
+                  "lhId": "page-0-IMG",
+                  "path": "1,HTML,1,BODY,4,MAIN,0,SECTION,0,DIV,0,H1,1,PICTURE,0,IMG",
+                  "selector": "div.intro-heading > h1.art-title > picture > img.cosmic-logo",
+                  "boundingRect": {
+                    "top": 106,
+                    "bottom": 285,
+                    "left": 46,
+                    "right": 366,
+                    "width": 320,
+                    "height": 179
+                  },
+                  "snippet": "<img class=\"cosmic-logo\" src=\"/images/brand/approved-logo-20261014-640.webp\" srcset=\"/images/brand/approved-logo-20261014-640.webp 640w, /images/brand/approved…\" sizes=\"(max-width:360px) 88vw, (max-width:760px) 320px, 440px\" width=\"1678\" height=\"937\" alt=\"\" loading=\"eager\" fetchpriority=\"high\" decoding=\"async\">",
+                  "nodeLabel": "div.intro-heading > h1.art-title > picture > img.cosmic-logo"
+                },
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-logo-20261014-640.webp",
+                "totalBytes": 55004,
+                "wastedBytes": 25849,
+                "subItems": {
+                  "type": "subitems",
+                  "items": [
+                    {
+                      "reason": "Increasing the image compression factor could improve this image's download size.",
+                      "wastedBytes": 16924
+                    },
+                    {
+                      "reason": "This image file is larger than it needs to be (640x357) for its displayed dimensions (560x312). Use responsive images to reduce the image download size.",
+                      "wastedBytes": 12892
+                    }
+                  ]
+                }
+              }
+            ],
+            "debugData": {
+              "type": "debugdata",
+              "wastedBytes": 25849
+            }
+          },
+          "guidanceLevel": 3
+        }
+      }
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/",
+      "fetchTime": "2026-10-14T18:05:01.123Z",
+      "lighthouseVersion": "13.4.0",
+      "configSettings": {
+        "output": [
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": true,
+        "debugNavigation": false,
+        "channel": "cli",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "accessibility",
+          "best-practices",
+          "performance"
+        ],
+        "skipAudits": [
+          "full-page-screenshot"
+        ]
+      },
+      "scores": {
+        "performance": 0.9,
+        "accessibility": 1,
+        "best-practices": 1
+      },
+      "audits": {
+        "first-contentful-paint": {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "description": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/).",
+          "score": 0.97,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 1417.2469999999998,
+          "numericUnit": "millisecond",
+          "displayValue": "1.4 s",
+          "scoringOptions": {
+            "p10": 1800,
+            "median": 3000
+          }
+        },
+        "largest-contentful-paint": {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "score": 0.63,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 3517.247,
+          "numericUnit": "millisecond",
+          "displayValue": "3.5 s",
+          "scoringOptions": {
+            "p10": 2500,
+            "median": 4000
+          }
+        },
+        "total-blocking-time": {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 0.5,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms",
+          "scoringOptions": {
+            "p10": 200,
+            "median": 600
+          }
+        },
+        "cumulative-layout-shift": {
+          "id": "cumulative-layout-shift",
+          "title": "Cumulative Layout Shift",
+          "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 0,
+          "numericUnit": "unitless",
+          "displayValue": "0",
+          "scoringOptions": {
+            "p10": 0.1,
+            "median": 0.25
+          },
+          "details": {
+            "type": "debugdata",
+            "items": [
+              {
+                "cumulativeLayoutShiftMainFrame": 0,
+                "newEngineResult": {
+                  "cumulativeLayoutShift": 0,
+                  "cumulativeLayoutShiftMainFrame": 0
+                },
+                "newEngineResultDiffered": false
+              }
+            ]
+          }
+        },
+        "total-byte-weight": {
+          "id": "total-byte-weight",
+          "title": "Avoids enormous network payloads",
+          "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/).",
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "numericValue": 701128,
+          "numericUnit": "byte",
+          "displayValue": "Total size was 685 KiB",
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL"
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Transfer Size"
+              }
+            ],
+            "items": [
+              {
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-logo-20261014-640.webp",
+                "totalBytes": 55184
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-sky-20261014-800.webp",
+                "totalBytes": 54770
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-800.woff2",
+                "totalBytes": 52176
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-700.woff2",
+                "totalBytes": 49901
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-400.woff2",
+                "totalBytes": 48702
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-bf43e79904fc.woff2",
+                "totalBytes": 44453
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-41f1e64ff8db.woff2",
+                "totalBytes": 43017
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/js/catalog-data.js",
+                "totalBytes": 35123
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-3270f0cb47fd.woff2",
+                "totalBytes": 33978
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/app.css",
+                "totalBytes": 31514
+              }
+            ],
+            "sortedBy": [
+              "totalBytes"
+            ]
+          },
+          "guidanceLevel": 1
+        },
+        "errors-in-console": {
+          "id": "errors-in-console",
+          "title": "No browser errors logged to the console",
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "sourceLocation",
+                "valueType": "source-location",
+                "label": "Source"
+              },
+              {
+                "key": "description",
+                "valueType": "code",
+                "label": "Description"
+              }
+            ],
+            "items": []
+          }
+        },
+        "render-blocking-insight": {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 150 ms",
+          "metricSavings": {
+            "FCP": 150,
+            "LCP": 0
+          },
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL"
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Transfer Size"
+              },
+              {
+                "key": "wastedMs",
+                "valueType": "timespanMs",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "url": "https://badilak-arabi.vercel.app/css/app.css",
+                "totalBytes": 31514,
+                "wastedMs": 300
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/visual-refresh.css",
+                "totalBytes": 7443
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/fonts.css",
+                "totalBytes": 1855
+              }
+            ]
+          },
+          "guidanceLevel": 3
+        },
+        "image-delivery-insight": {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery)",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 25 KiB",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 150
+          },
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "node",
+                "valueType": "node",
+                "label": ""
+              },
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL",
+                "subItemsHeading": {
+                  "key": "reason",
+                  "valueType": "text"
+                }
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Resource Size"
+              },
+              {
+                "key": "wastedBytes",
+                "valueType": "bytes",
+                "label": "Est Savings",
+                "subItemsHeading": {
+                  "key": "wastedBytes",
+                  "valueType": "bytes"
+                }
+              }
+            ],
+            "items": [
+              {
+                "node": {
+                  "type": "node",
+                  "lhId": "page-0-IMG",
+                  "path": "1,HTML,1,BODY,4,MAIN,0,SECTION,0,DIV,0,H1,1,PICTURE,0,IMG",
+                  "selector": "div.intro-heading > h1.art-title > picture > img.cosmic-logo",
+                  "boundingRect": {
+                    "top": 106,
+                    "bottom": 285,
+                    "left": 46,
+                    "right": 366,
+                    "width": 320,
+                    "height": 179
+                  },
+                  "snippet": "<img class=\"cosmic-logo\" src=\"/images/brand/approved-logo-20261014-640.webp\" srcset=\"/images/brand/approved-logo-20261014-640.webp 640w, /images/brand/approved…\" sizes=\"(max-width:360px) 88vw, (max-width:760px) 320px, 440px\" width=\"1678\" height=\"937\" alt=\"\" loading=\"eager\" fetchpriority=\"high\" decoding=\"async\">",
+                  "nodeLabel": "div.intro-heading > h1.art-title > picture > img.cosmic-logo"
+                },
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-logo-20261014-640.webp",
+                "totalBytes": 55004,
+                "wastedBytes": 25849,
+                "subItems": {
+                  "type": "subitems",
+                  "items": [
+                    {
+                      "reason": "Increasing the image compression factor could improve this image's download size.",
+                      "wastedBytes": 16924
+                    },
+                    {
+                      "reason": "This image file is larger than it needs to be (640x357) for its displayed dimensions (560x312). Use responsive images to reduce the image download size.",
+                      "wastedBytes": 12892
+                    }
+                  ]
+                }
+              }
+            ],
+            "debugData": {
+              "type": "debugdata",
+              "wastedBytes": 25849
+            }
+          },
+          "guidanceLevel": 3
+        }
+      }
+    },
+    {
+      "url": "https://badilak-arabi.vercel.app/guides",
+      "fetchTime": "2026-10-14T18:05:01.207Z",
+      "lighthouseVersion": "13.4.0",
+      "configSettings": {
+        "output": [
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": true,
+        "debugNavigation": false,
+        "channel": "cli",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "accessibility",
+          "best-practices",
+          "performance"
+        ],
+        "skipAudits": [
+          "full-page-screenshot"
+        ]
+      },
+      "scores": {
+        "performance": 0.93,
+        "accessibility": 1,
+        "best-practices": 1
+      },
+      "audits": {
+        "first-contentful-paint": {
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "description": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 929.289,
+          "numericUnit": "millisecond",
+          "displayValue": "0.9 s",
+          "scoringOptions": {
+            "p10": 1800,
+            "median": 3000
+          }
+        },
+        "largest-contentful-paint": {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "score": 0.73,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 3179.2889999999998,
+          "numericUnit": "millisecond",
+          "displayValue": "3.2 s",
+          "scoringOptions": {
+            "p10": 2500,
+            "median": 4000
+          }
+        },
+        "total-blocking-time": {
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 0,
+          "numericUnit": "millisecond",
+          "displayValue": "0 ms",
+          "scoringOptions": {
+            "p10": 200,
+            "median": 600
+          }
+        },
+        "cumulative-layout-shift": {
+          "id": "cumulative-layout-shift",
+          "title": "Cumulative Layout Shift",
+          "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
+          "score": 1,
+          "scoreDisplayMode": "numeric",
+          "numericValue": 0.0002119798459646326,
+          "numericUnit": "unitless",
+          "displayValue": "0",
+          "scoringOptions": {
+            "p10": 0.1,
+            "median": 0.25
+          },
+          "details": {
+            "type": "debugdata",
+            "items": [
+              {
+                "cumulativeLayoutShiftMainFrame": 0.0002119798459646326,
+                "newEngineResultDiffered": false
+              }
+            ]
+          }
+        },
+        "total-byte-weight": {
+          "id": "total-byte-weight",
+          "title": "Avoids enormous network payloads",
+          "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/).",
+          "score": 1,
+          "scoreDisplayMode": "metricSavings",
+          "numericValue": 487671,
+          "numericUnit": "byte",
+          "displayValue": "Total size was 476 KiB",
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL"
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Transfer Size"
+              }
+            ],
+            "items": [
+              {
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-sky-20261014-800.webp",
+                "totalBytes": 54834
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-800.woff2",
+                "totalBytes": 52216
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/almarai-700.woff2",
+                "totalBytes": 49899
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-bf43e79904fc.woff2",
+                "totalBytes": 44445
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-41f1e64ff8db.woff2",
+                "totalBytes": 43029
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-3270f0cb47fd.woff2",
+                "totalBytes": 33976
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-6c9f4bab97d6.woff2",
+                "totalBytes": 31053
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/fonts/google-07a639a753ed.woff2",
+                "totalBytes": 26432
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-logo-20261014-320.webp",
+                "totalBytes": 21658
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/images/articles/mostaql-upwork-thumb.webp",
+                "totalBytes": 21494
+              }
+            ],
+            "sortedBy": [
+              "totalBytes"
+            ]
+          },
+          "guidanceLevel": 1
+        },
+        "errors-in-console": {
+          "id": "errors-in-console",
+          "title": "No browser errors logged to the console",
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "score": 1,
+          "scoreDisplayMode": "binary",
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "sourceLocation",
+                "valueType": "source-location",
+                "label": "Source"
+              },
+              {
+                "key": "description",
+                "valueType": "code",
+                "label": "Description"
+              }
+            ],
+            "items": []
+          }
+        },
+        "render-blocking-insight": {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 90 ms",
+          "metricSavings": {
+            "FCP": 100,
+            "LCP": 0
+          },
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL"
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Transfer Size"
+              },
+              {
+                "key": "wastedMs",
+                "valueType": "timespanMs",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "url": "https://badilak-arabi.vercel.app/css/article-media.css",
+                "totalBytes": 1113
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/visual-refresh.css",
+                "totalBytes": 7443,
+                "wastedMs": 150
+              },
+              {
+                "url": "https://badilak-arabi.vercel.app/css/fonts.css",
+                "totalBytes": 1887
+              }
+            ]
+          },
+          "guidanceLevel": 3
+        },
+        "image-delivery-insight": {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery)",
+          "score": 0,
+          "scoreDisplayMode": "metricSavings",
+          "displayValue": "Est savings of 18 KiB",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 150
+          },
+          "details": {
+            "type": "table",
+            "headings": [
+              {
+                "key": "node",
+                "valueType": "node",
+                "label": ""
+              },
+              {
+                "key": "url",
+                "valueType": "url",
+                "label": "URL",
+                "subItemsHeading": {
+                  "key": "reason",
+                  "valueType": "text"
+                }
+              },
+              {
+                "key": "totalBytes",
+                "valueType": "bytes",
+                "label": "Resource Size"
+              },
+              {
+                "key": "wastedBytes",
+                "valueType": "bytes",
+                "label": "Est Savings",
+                "subItemsHeading": {
+                  "key": "wastedBytes",
+                  "valueType": "bytes"
+                }
+              }
+            ],
+            "items": [
+              {
+                "node": {
+                  "type": "node",
+                  "lhId": "page-0-IMG",
+                  "path": "1,HTML,1,BODY,0,HEADER,0,DIV,0,A,0,PICTURE,0,IMG",
+                  "selector": "div.wrap > a.brand > picture > img.cosmic-logo",
+                  "boundingRect": {
+                    "top": 10,
+                    "bottom": 64,
+                    "left": 298,
+                    "right": 395,
+                    "width": 97,
+                    "height": 54
+                  },
+                  "snippet": "<img class=\"cosmic-logo\" src=\"/images/brand/approved-logo-20261014-320.webp\" width=\"1678\" height=\"937\" alt=\"بديلك عربي\" decoding=\"async\">",
+                  "nodeLabel": "بديلك عربي"
+                },
+                "url": "https://badilak-arabi.vercel.app/images/brand/approved-logo-20261014-320.webp",
+                "totalBytes": 21490,
+                "wastedBytes": 18830,
+                "subItems": {
+                  "type": "subitems",
+                  "items": [
+                    {
+                      "reason": "Increasing the image compression factor could improve this image's download size.",
+                      "wastedBytes": 11943
+                    },
+                    {
+                      "reason": "This image file is larger than it needs to be (320x179) for its displayed dimensions (169x94). Use responsive images to reduce the image download size.",
+                      "wastedBytes": 15503
+                    }
+                  ]
+                }
+              }
+            ],
+            "debugData": {
+              "type": "debugdata",
+              "wastedBytes": 18830
+            }
+          },
+          "guidanceLevel": 3
+        }
+      }
+    }
+  ],
+  "seo": {
+    "home": {
+      "content": [
+        {
+          "type": "text",
+          "text": "SEO scan for badilak-arabi.vercel.app — score 100/100 (A+: Outstanding)\n12 of 12 on-page checks passed.\n\nAll checks passed — nice work. This scan covers on-page basics only (titles, meta, structure, content); rankings also depend on links, speed, and competition.\nFree scan by GrowMyWebsite — full report and fixes at \thttps://www.growmywebsite.com/"
+        }
+      ],
+      "isError": false
+    },
+    "guides": {
+      "content": [
+        {
+          "type": "text",
+          "text": "SEO scan for badilak-arabi.vercel.app — score 96/100 (A+: Outstanding)\n11 of 12 on-page checks passed.\n\nIssues found (1):\n\n1. Content depth (content) [WARN] — 475 words. Thin content can struggle to rank — aim for 600+ meaningful words.\n   Why it matters: Pages with little text give Google almost nothing to rank you for, so thin pages rarely show up in searches.\n   Try this: Grow the page toward 600+ words: describe your services, answer common customer questions, and add a short FAQ or about section.\n\nFree scan by GrowMyWebsite — full report and fixes at \thttps://www.growmywebsite.com/"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "limits": [
+    "Lab measurements; no field INP or ranking claim.",
+    "Home performance varied 86–90 after, versus 91 before. No demonstrated home LCP improvement.",
+    "Guide thumbnails and obsolete deploy assets are separate savings; not all assets are requested on the homepage."
+  ]
+}

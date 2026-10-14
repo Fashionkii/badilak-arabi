@@ -1,0 +1,38 @@
+{
+  "cards": [
+    {
+      "buttonBottom": 666.4375,
+      "height": 427.859375,
+      "id": "salla-academy",
+      "readTop": 577.4375
+    },
+    {
+      "buttonBottom": 666.4375,
+      "height": 427.859375,
+      "id": "qoyod-academy",
+      "readTop": 577.4375
+    },
+    {
+      "buttonBottom": 666.4375,
+      "height": 427.859375,
+      "id": "daftra-hub",
+      "readTop": 577.4375
+    },
+    {
+      "buttonBottom": 666.4375,
+      "height": 427.859375,
+      "id": "khamsat-blog",
+      "readTop": 577.4375
+    },
+    {
+      "buttonBottom": 666.4375,
+      "height": 427.859375,
+      "id": "hsoub-library",
+      "readTop": 577.4375
+    }
+  ],
+  "focus": "التفاصيل والمصادر",
+  "scrollWidth": 1348,
+  "url": "https://badilak-arabi.vercel.app/#learning",
+  "width": 1363
+}
