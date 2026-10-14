@@ -142,6 +142,7 @@ body:not(.guided-discovery) .next-actions a:hover {box-shadow:none;transform:non
 
 #directory .catalog-grid .card-summary {height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;align-items:stretch!important;}
 #directory .catalog-grid .card-purpose {
+  flex:1;
   background:var(--reading-purpose);border-radius:8px;padding:10px 12px!important;
   text-align:start!important;color:var(--reading-ink)!important;
   font-size:.9375rem!important;line-height:1.8!important;
