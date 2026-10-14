@@ -612,14 +612,20 @@ function openDiscoveryGroup(cat,sub='all'){
  renderCards();
  goDirectoryResults();
 }
+// Keep school curricula, professional learning and recitation in their own context.
+// A shared format (e.g. YouTube) or the broad "skills" tag alone is not a match.
+const learningComparisonGroups=[
+ ['yanfaa','edraak-learning','rwaq','almentor','misk-skills','dff-academy','bibf-learning','edlal-learning','tadarab-learning','gomycode-learning','cnfepd-learning'],
+ ['alef-learning','kezakoo-learning','telmidtice-learning','newton-learning','kamkalima-learning'],
+ ['zamerican','droosonline'],['elzero','hsoub-youtube','hsoub-library'],
+ ['qoyod-academy','daftra-hub'],['khamsat-blog','hsoub-library'],
+ ['makram','gomycode-learning','almentor','tadarab-learning'],
+ ['abdulbasit-official','hussary-official','mostafa-ismail-official','maher-official','alafasy-official','saad-ghamdi-official']
+];
 function relatedLearningItems(x){
- return learning
-  .filter(a=>a.id!==x.id)
-  .map(a=>{
-   let score=a.type===x.type?3:0;
-   score+=(a.fields||[]).filter(f=>(x.fields||[]).includes(f)).length*4;
-   return {item:a,score};
-  })
+ const grouped=new Set(learningComparisonGroups.filter(g=>g.includes(x.id)).flat());
+ return learning.filter(a=>a.id!==x.id&&grouped.has(a.id))
+  .map(a=>({item:a,score:(a.fields||[]).filter(f=>(x.fields||[]).includes(f)&&f!=='skills').length*4+(a.type===x.type?1:0)}))
   .filter(r=>r.score>0)
   .sort((a,b)=>b.score-a.score||a.item.name.localeCompare(b.item.name,'ar'))
   .slice(0,2)
@@ -627,12 +633,20 @@ function relatedLearningItems(x){
 }
 function learningDiscoveryMarkup(x){
  const related=relatedLearningItems(x);
- if(!related.length)return '';
- return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>خيارات قريبة</h4><p>${x.type==='reciter'?'قنوات تلاوة أخرى قريبة من اختيارك.':'مصادر تعلم قريبة من نفس الهدف.'}</p></div>
-  <div class="detail-related-grid">${related.map(a=>`<button type="button" class="detail-related" onclick="showLearningNote('${a.id}')"><strong>${a.name}</strong><small>${a.focus}</small></button>`).join('')}</div>
+ const format={platform:'منصة تعلّم',resource:'مصدر تعليمي',channel:'قناة تعليم ومعرفة',reciter:'قناة تلاوة'};
+ return `<details class="detail-task-comparison">
+  <summary><span><strong>${related.length?'قارن مصادر لهذا الاهتمام':'هل يوجد مصدر آخر يناسبك؟'}</strong><small>${related.length?'المحتوى، وطريقة التعلّم، وما يحتاج مراجعة':'حدود المقارنة المتاحة'}</small></span></summary>
+  <div class="task-comparison-body">
+   <p class="task-comparison-intro">${related.length?(x.type==='reciter'?'قنوات تلاوة أخرى؛ اختر التسجيل والرواية اللذين تحتاجهما. العرض ليس ترتيبًا للقراء.':'هذه مصادر مرتبطة باهتمامك، وليست بالضرورة نفس المقرر أو المستوى. حدّد هدفك، ثم راجع الدرس أو المسار نفسه؛ الترتيب لا يعكس تقييمًا للجودة.'):'لا توجد لدينا مقارنة كافية لهذا الاستخدام حاليًا. تصفّح المصادر حسب هدفك؛ وجودها في المجال نفسه لا يثبت أنها تقدم المحتوى نفسه.'}</p>
+   ${related.length?`<ul class="task-comparison-list">${[x,...related].map(a=>`<li>
+    <div class="task-comparison-heading"><h4>${a.id===x.id?`<bdi>${a.name}</bdi>`:`<button type="button" class="task-comparison-link" onclick="showLearningNote('${a.id}')"><bdi>${a.name}</bdi></button>`}</h4>${a.id===x.id?'<span class="task-comparison-current">تقرأ عنه الآن</span>':''}</div>
+    <p class="task-comparison-task">${a.focus}</p><p>${format[a.type]} · ${a.teacher}</p>
+    <p class="task-comparison-check"><b>قبل الاختيار:</b> ${a.type==='resource'?a.reference:learningDecisionNoteFor(a).alert}</p>
+    <div class="task-comparison-evidence">${a.type==='resource'?'':a.reference+' · '}<a href="${a.url}" target="_blank" rel="noopener noreferrer">${a.type==='reciter'?'القناة الرسمية':'المصدر'}</a></div>
+   </li>`).join('')}</ul>`:''}
   <button type="button" class="detail-collection" onclick="closeModal();showAllLearning()">عرض كل مصادر التعلّم</button>
- </section>`;
+  </div>
+ </details>`;
 }
 
 let activeDetail=null;

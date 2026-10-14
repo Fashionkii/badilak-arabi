@@ -28,11 +28,12 @@
 .task-comparison-heading {display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;}
 .task-comparison-heading :is(h2,h4) {margin:0;font-family:var(--ui);font-size:15px;line-height:1.8;}
 .task-comparison-heading a {display:inline-block;padding:6px 0;text-underline-offset:4px;}
+.task-comparison-heading .task-comparison-link {font:inherit;color:var(--reading-ink);background:none;border:0;padding:6px 0;min-height:44px;cursor:pointer;text-align:start;text-decoration:underline;text-underline-offset:4px;}
 .detail-task-comparison a {color:var(--reading-ink);}
 .task-comparison-current {font-size:12px;color:var(--reading-secondary);}
 .task-comparison-body .task-comparison-task {font-weight:700;}
 .task-comparison-check {color:var(--reading-secondary);}
-.task-comparison-body .task-comparison-evidence {border-top:1px solid var(--reading-line);padding-top:12px;font-size:12px;color:var(--reading-secondary);}
+.task-comparison-body .task-comparison-evidence {border-top:1px solid var(--reading-line);padding-top:12px;font-size:12px;line-height:1.9;color:var(--reading-secondary);overflow-wrap:anywhere;}
 .task-comparison-evidence a {display:inline-block;padding:6px 0;text-underline-offset:4px;}
 
 /* A light summary replaces the large inverse green panel in every article. */

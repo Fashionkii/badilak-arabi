@@ -2,6 +2,8 @@
 // Permit only the reviewed PNG -> JPEG share-image delivery change.
 // Exact tags keep unrelated URLs, MIME types, dimensions, alt text and copy protected.
 exports.withPreviousSharedBrandImage=html=>html
+ .replaceAll('/images/social/badilak-share-20261014.jpg','/images/social/badilak-share-20261012.jpg')
+ .replace('<meta property="og:image:height" content="670">','<meta property="og:image:height" content="630">')
  .replace('<meta property="og:image" content="https://badilak-arabi.vercel.app/images/social/badilak-share-20261012.jpg">\n<meta property="og:image:type" content="image/jpeg">','<meta property="og:image" content="https://badilak-arabi.vercel.app/images/social/badilak-social-base.png?v=20261011-1">')
  .replace('<meta name="twitter:image" content="https://badilak-arabi.vercel.app/images/social/badilak-share-20261012.jpg">','<meta name="twitter:image" content="https://badilak-arabi.vercel.app/images/social/badilak-social-base.png?v=20261011-1">');
 

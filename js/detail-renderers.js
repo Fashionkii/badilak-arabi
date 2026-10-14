@@ -178,24 +178,26 @@ function decisionPanelMarkup(x){
  </section>`;
 }
 
+// Navigation groups describe a shared task, not equal capabilities or a quality rank.
+// Use existing known-service associations too; a broad category alone is not enough.
+const directoryComparisonGroups=[
+ ['daftra','qoyod','expensya'],['qriib','vconnct'],['salla','wuilt','lymonah'],
+ ['paymob','myfatoorah','thawani'],['khamsat','forlanso'],
+ ['edraak','hsoub','edlal','tadarab','gomycode','bibf'],['alef','kezakoo','telmidtice'],
+ ['shamaa','mandumah','openalex','qdl'],['dorar','tafsircenter','shamela'],
+ ['noon','miswag'],['opensooq','ouedkniss','dabchy'],['snoonu','yassir','lezzoo'],
+ ['abjjad','hindawi'],['anghami','sowt','thmanyah'],['spacetoonyt','majidkids'],
+ ['shahid','watchit','dubaiplus'],['marefa','arabency','mawdoo3']
+];
 function relatedDirectoryItems(x){
- return items
-  .filter(a=>a.id!==x.id)
-  .map(a=>{
-   let score=0;
-   if(a.cat===x.cat)score+=4;
-   if(a.cat===x.cat&&a.sub===x.sub)score+=7;
-   if((a.origin||[]).some(o=>(x.origin||[]).includes(o)))score+=3;
-   if(a.type===x.type)score+=1;
-   return {item:a,score};
-  })
-  .filter(r=>r.score>0)
+ const grouped=new Set(directoryComparisonGroups.filter(g=>g.includes(x.id)).flat());
+ return items.filter(a=>a.id!==x.id&&(grouped.has(a.id)||(a.origin||[]).some(o=>(x.origin||[]).includes(o))))
+  .map(a=>({item:a,score:(grouped.has(a.id)?4:0)+((a.origin||[]).some(o=>(x.origin||[]).includes(o))?2:0)+(a.type===x.type?1:0)}))
   .sort((a,b)=>b.score-a.score||a.item.name.localeCompare(b.item.name,'ar'))
-  .slice(0,2)
-  .map(r=>r.item);
+  .slice(0,2).map(r=>r.item);
 }
 
-// Optional comparison for the reviewed Canva journey; other discovery stays unchanged.
+// Keep the task-specific Canva review alongside the shared comparison presentation.
 function canvaTaskComparisonMarkup(x,standalone=false){
  if(!['dhawwi','taqreer','arabicdesign'].includes(x.id))return '';
  // Summaries of /guides/arabic-design, reviewed 12 October 2026.
@@ -226,12 +228,26 @@ function directoryDiscoveryMarkup(x,standalone=false){
  if(comparison)return comparison;
  const related=relatedDirectoryItems(x);
  const collectionLabel=x.sub&&x.sub!=='all'?subcategoryLabel(x.cat,x.sub):categoryLabel(x.cat);
- if(!related.length)return '';
- return `<section class="detail-discovery">
-  <div class="detail-discovery-head"><h4>قبل الانتقال</h4><p>إذا أردت المقارنة، فهذه خيارات قريبة من نفس الاستخدام.</p></div>
-  <div class="detail-related-grid">${related.map(a=>`<a class="detail-related" href="/discover/${a.id}" onclick="return badilakOpenItem(event,'${a.id}')"><strong>${a.name}</strong><small>${a.value}</small></a>`).join('')}</div>
+ const choices=related.length?[x,...related]:[];
+ return `<details class="detail-task-comparison">
+  <summary><span><strong>${related.length?'قارن الخيارات لهذه المهمة':'هل يوجد خيار آخر يناسبك؟'}</strong><small>${related.length?'الفائدة، والتكلفة أو الإتاحة، وما يحتاج مراجعة':'ما نعرفه وحدود المقارنة المتاحة'}</small></span></summary>
+  <div class="task-comparison-body">
+   <p class="task-comparison-intro">${related.length?'هذه اختيارات مرتبطة باحتياجك، وليست بدائل متطابقة أو ترتيبًا للأفضل. قارن ما يقدمه كل خيار وما يتطلبه استخدامه؛ قد يناسبك استكمال أداتك الحالية بدل تغييرها.':'لا تتوفر لدينا مقارنة موثقة كافية لهذا الاستخدام حاليًا. لا يعني ذلك عدم وجود بدائل؛ يمكنك مراجعة المجال، مع التحقق من ملاءمة كل خيار لمهمتك.'}</p>
+   ${choices.length?`<ul class="task-comparison-list">${choices.map(a=>{
+    const note=decisionNoteFor(a);
+    const evidence=(a.modules||[]).find(m=>m[0]==='مصادر التحقق المحفوظة');
+    return `<li>
+     <div class="task-comparison-heading"><h4>${a.id===x.id?`<bdi>${a.name}</bdi>`:`<a href="/discover/${a.id}"${standalone?'':` onclick="return badilakOpenItem(event,'${a.id}')"`}><bdi>${a.name}</bdi></a>`}</h4>${a.id===x.id?'<span class="task-comparison-current">تقرأ عنه الآن</span>':''}</div>
+     <p class="task-comparison-task">${a.value}</p>
+     ${a.price?`<p><b>التكلفة:</b> ${a.price}</p>`:''}${a.availability?`<p><b>الإتاحة:</b> ${a.availability}</p>`:''}
+     ${note?`<p class="task-comparison-check"><b>قبل الاختيار:</b> ${note.alert}</p>`:''}
+     <div class="task-comparison-evidence">${a.reviewed?'آخر مراجعة محفوظة: '+a.reviewed+' · ':''}${evidence?evidence[1]:`<a href="${a.url}" target="_blank" rel="noopener noreferrer">المصدر الرسمي</a>`}</div>
+    </li>`;
+   }).join('')}</ul>`:''}
+   ${related.length?'<p class="task-comparison-evidence">المعلومات من مراجعات الدليل المحفوظة، وليست اختبار أداء مستقلًا. راجع المصدر الحالي قبل الدفع أو نقل عملك.</p>':''}
   ${standalone?`<a class="detail-collection" href="/category/${x.cat}${x.sub&&x.sub!=='all'?'?sub='+encodeURIComponent(x.sub):''}">عرض كل ${collectionLabel}</a>`:`<button type="button" class="detail-collection" onclick="openDiscoveryGroup('${x.cat}','${x.sub||'all'}')">عرض كل ${collectionLabel}</button>`}
- </section>`;
+  </div>
+ </details>`;
 }
 
 function geoContextMarkup(id){

@@ -11,7 +11,7 @@ body.cosmic-theme::before {
   z-index:-1;
   pointer-events:none;
   opacity:1!important;
-  background:linear-gradient(90deg,rgba(3,13,22,.22),rgba(3,13,22,.42)),url('/images/brand/cosmic-space-1600.webp') left center/cover no-repeat;
+  background:linear-gradient(90deg,rgba(3,13,22,.08),rgba(3,13,22,.18)),url('/images/brand/approved-sky-20261014-1600.webp') center/cover no-repeat;
 }
 body.cosmic-theme main#top::before { display:none!important; }
 /* A direct /#top return must leave the taller wordmark below the sticky header. */
@@ -31,7 +31,7 @@ body.cosmic-theme .brand-lockup {
 }
 .cosmic-logo { display:block; object-fit:contain; height:auto; }
 .brand-lockup .cosmic-logo,
-.top .cosmic-logo { width:160px; height:auto; }
+.top .cosmic-logo { width:auto; height:64px; max-width:160px; }
 body.cosmic-theme .intro .intro-heading h1.art-title.art-title--brand {
   width:100%!important;
   margin:0!important;
@@ -39,7 +39,7 @@ body.cosmic-theme .intro .intro-heading h1.art-title.art-title--brand {
   background:none!important;
   box-shadow:none!important;
 }
-.intro .cosmic-logo { width:min(440px,86vw); aspect-ratio:2025/777; }
+.intro .cosmic-logo { width:min(440px,86vw); aspect-ratio:1678/937; margin-inline:auto; }
 body.cosmic-theme .navigation>a,
 body.cosmic-theme .journey-menu>summary,
 body.cosmic-theme :is(.toplinks,.hubnav)>a {
@@ -116,8 +116,8 @@ body.cosmic-theme .footer a:focus-visible,
 body.cosmic-theme:not(.guided-discovery)>footer a:focus-visible,
 body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important; }
 @media(max-width:760px) {
-  body.cosmic-theme::before { background-image:linear-gradient(rgba(3,13,22,.26),rgba(3,13,22,.5)),url('/images/brand/cosmic-space-800.webp'); }
-  .brand-lockup .cosmic-logo,.top .cosmic-logo { width:132px; }
+  body.cosmic-theme::before { background-image:linear-gradient(rgba(3,13,22,.08),rgba(3,13,22,.2)),url('/images/brand/approved-sky-20261014-800.webp'); }
+  .brand-lockup .cosmic-logo,.top .cosmic-logo { width:auto; height:54px; max-width:132px; }
   .intro .cosmic-logo { width:min(320px,88vw); }
   body.cosmic-theme .directory-refine-bar { flex-direction:column!important;align-items:stretch!important;gap:12px!important; }
   body.cosmic-theme .directory-active-context { min-width:0;max-width:100%; }
@@ -172,13 +172,13 @@ body.cosmic-theme #directory #directoryRefineCategory {
  body.cosmic-theme #directory .active-filter-pills {gap:4px;}
 }
 
-/* Shared sky, 2026-10-13: keep the existing full-viewport space artwork on
-   every route. Reading surfaces stay calm; the hero no longer owns the sky. */
+/* Approved sky, 2026-10-14: the supplied identity continues on every route.
+   Keep the stars visible behind the mark, and solid surfaces behind reading. */
 body.cosmic-theme.guided-discovery .intro.wrap {
   position:relative;
   isolation:isolate;
   overflow:hidden!important;
-  background:rgba(7,25,35,.58)!important;
+  background:rgba(7,25,35,.18)!important;
   border:1px solid #24414b!important;
   border-radius:24px!important;
   margin-top:18px!important;
