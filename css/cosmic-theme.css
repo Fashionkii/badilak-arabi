@@ -287,3 +287,35 @@ body.cosmic-theme.guided-discovery .intro .origin-option:focus-visible {outline-
 .outbound-dialog .outbound-dismiss {background:transparent;border-color:transparent;font-weight:400;}
 .outbound-dialog :is(a,button):focus-visible {outline:3px solid #997338;outline-offset:3px;}
 body.outbound-open {overflow:hidden;}
+
+/* Desktop homepage: a landscape overview, with natural scrolling when zoomed.
+   Other journeys and the approved mobile/reading layouts remain unchanged. */
+@media(min-width:1024px) {
+  body.cosmic-theme.guided-discovery[data-journey="home"] {display:flex;flex-direction:column;min-height:100dvh;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] main#top {
+    flex:1;display:grid;align-items:center;min-height:0!important;padding-block:12px!important;
+  }
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap {
+    display:grid!important;grid-template-columns:minmax(250px,1fr) minmax(0,2fr);
+    grid-template-rows:auto auto;gap:18px 26px!important;align-items:center!important;
+    max-width:1180px!important;margin-block:0!important;padding:20px!important;
+  }
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading {grid-column:1;grid-row:1;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .cosmic-logo {width:min(300px,100%);}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-copy {display:block!important;grid-column:1;grid-row:2;min-width:0;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-promise {font-size:17px!important;line-height:1.7!important;margin:0 0 10px!important;padding:0!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-support {margin:0!important;max-width:none!important;padding:0!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-description {font-size:13px!important;line-height:1.7!important;margin:0!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-link {min-height:36px!important;font-size:13px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-explorer {grid-column:2;grid-row:1;padding:16px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-heading {margin-bottom:12px!important;padding:0!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-heading h2 {font-size:22px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-hint {font-size:13px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-options {gap:8px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-option {height:90px!important;min-height:90px!important;padding:8px 4px!important;gap:4px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-name {font-size:12px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro>.portal {grid-column:2;grid-row:2;margin:0!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .portal-icon-btn {min-height:50px!important;padding:9px 10px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .portal-field-label {font-size:13px!important;}
+  body.cosmic-theme.guided-discovery[data-journey="home"] .footer {margin-top:0!important;padding-block:12px!important;}
+}
