@@ -798,6 +798,9 @@ function closeModal(options={}){
  const routedDetail=/^\/discover\//.test(location.pathname);
  const routeState=history.state;
  const returningDetail=activeDetail;
+ // Comparisons can open a resource absent from the underlying results. Return to
+ // the card that opened the dialog, even when history recreates its DOM element.
+ const returningItemId=detailReturnFocus?.closest('[data-item-id]')?.dataset.itemId||returningDetail?.id;
  const returnToDetails=detailReturnFocus?.matches('.more-btn');
  activeDetail=null;
  modal.close();
@@ -811,7 +814,7 @@ function closeModal(options={}){
   if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1){
    // The history adapter recreates cards; focus their new element after restoration.
    window.addEventListener('popstate',()=>requestAnimationFrame(()=>{
-    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningDetail.id}"] ${returnToDetails?'.more-btn':'.item-identity'}`)?.focus({preventScroll:true});
+    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningItemId}"] ${returnToDetails?'.more-btn':'.item-identity'}`)?.focus({preventScroll:true});
    }),{once:true});
    history.back();
   }

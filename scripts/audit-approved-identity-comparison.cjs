@@ -38,7 +38,19 @@ assert.ok(now.relatedDirectoryItems(catalog.find(x=>x.id==='paymob')).some(x=>x.
 
 const app=read('js/app.js'),priorApp=before('js/app.js');
 const newStart=app.indexOf('// Keep school curricula,'),oldStart=priorApp.indexOf('function relatedLearningItems(');
-assert.equal(app.slice(0,newStart)+app.slice(app.indexOf('let activeDetail=')),priorApp.slice(0,oldStart)+priorApp.slice(priorApp.indexOf('let activeDetail=')),'All behavior outside optional learning comparison stays exact');
+const withoutFocusCorrection=s=>s.replace(" // Comparisons can open a resource absent from the underlying results. Return to\n // the card that opened the dialog, even when history recreates its DOM element.\n const returningItemId=detailReturnFocus?.closest('[data-item-id]')?.dataset.itemId||returningDetail?.id;\n",'').replace('${returningItemId}','${returningDetail.id}');
+assert.equal(withoutFocusCorrection(app.slice(0,newStart)+app.slice(app.indexOf('let activeDetail='))),priorApp.slice(0,oldStart)+priorApp.slice(priorApp.indexOf('let activeDetail=')),'Behavior outside optional comparison and original-card focus correction stays exact');
+// Closing after comparing to a resource absent from the grid must focus the
+// recreated original card, not try to focus the resource currently in the dialog.
+for(const fromDetails of [true,false]){
+ let onPopstate,focusedSelector='',wentBack=false;
+ const modal={open:true,close(){this.open=false;},classList:{remove(){}}};
+ const c=vm.createContext({activeDetail:{kind:'directory',id:'vconnct'},detailReturnFocus:{isConnected:true,matches:()=>fromDetails,closest:()=>({dataset:{itemId:'qriib'}}),focus(){}},methodologyReturnFocus:null,location:{pathname:'/discover/vconnct'},history:{state:{badilakDetail:true,returnPath:'/#directory'},length:2,back(){wentBack=true;onPopstate();}},window:{addEventListener(type,fn){assert.equal(type,'popstate');onPopstate=fn;}},requestAnimationFrame:fn=>fn(),document:{getElementById:()=>modal,body:{classList:{remove(){}}},querySelector(selector){return {focus(){focusedSelector=selector;}}}}});
+ vm.runInContext(app.slice(app.indexOf('function closeModal('),app.indexOf("document.getElementById('detailModal').addEventListener('cancel'")),c);
+ c.closeModal();
+ assert.ok(wentBack&&!modal.open);
+ assert.equal(focusedSelector,`[data-item-id="qriib"] ${fromDetails?'.more-btn':'.item-identity'}`,'Restore original trigger after comparison');
+}
 vm.runInContext(app.slice(app.indexOf('function learningDecisionNoteFor('),app.indexOf('function learningDecisionCardMarkup('))+'\n'+app.slice(newStart,app.indexOf('let activeDetail=')),now);
 const learning=vm.runInContext('learning',now);
 for(const x of learning){
