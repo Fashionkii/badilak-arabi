@@ -2883,7 +2883,8 @@ body{
 main#top{
  position:relative;
  isolation:isolate;
- overflow:hidden;
+ /* Clip old decoration without making main an invisible fragment-scroll container. */
+ overflow:clip;
  background:
   radial-gradient(circle at 84% 7%,rgba(199,154,71,.13),transparent 24rem),
   radial-gradient(circle at 8% 40%,rgba(23,63,61,.085),transparent 30rem),
