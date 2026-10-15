@@ -1562,7 +1562,7 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-route:focus-visibl
   width:49px!important;height:36px!important;
  }
  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-options .origin-intent{
-  font-size:9px!important;line-height:1.15!important;
+  font-size:10px!important;line-height:1.15!important;
  }
 }
 /* Keep artwork and explanations centered in a two-column mobile grid. */
