@@ -526,3 +526,18 @@ body.cosmic-theme.guided-discovery #directory .catalog-grid .card-fit {
  line-height:22px!important;
  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
 }
+
+/* User-approved: complete one-line descriptions without a separate grey well. */
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-summary,
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-purpose,
+body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus {
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-purpose,
+body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus {
+  text-align:center!important;
+}

@@ -44,8 +44,8 @@ function guideLinkMarkup(guide,detail=false){
  const href=guide?guide[0]:'/guides';
  const content=detail
   ? `<span>اقرأ</span><strong>${guide?guide[1]:'اقرأ حسب حاجتك'}</strong>`
-  : '<strong>دليل الاختيار</strong>';
- const readingLabel=detail?'':` aria-label="دليل الاختيار: ${String(guide?guide[1]:'مركز القراءة').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}"`;
+  : '<strong>مقال له صلة</strong>';
+ const readingLabel=detail?'':` aria-label="مقال له صلة: ${String(guide?guide[1]:'مركز القراءة').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}"`;
  return `<a class="editorial-guide-link ${detail?'is-detail':'card-read-link'}" href="${href}"${readingLabel} onclick="event.stopPropagation()">${content}<b aria-hidden="true">←</b></a>`;
 }
 
@@ -330,6 +330,91 @@ function compactCardLine(value,max=44){
  const short=lastSpace>=Math.floor(max*.6)?head.slice(0,lastSpace):head;
  return short.replace(/[،؛:.\s]+$/,'').trim()+'…';
 }
+// Card-only summaries based on the existing records. Full descriptions stay unchanged.
+const cardDisplaySummaries={
+  "karnak":"مساعد محادثة بالفصحى والمصرية.",
+  "dhawwi":"محرر تصميم عربي للنصوص والخطوط.",
+  "midaad":"تحرير مستندات PDF وتحويلها بالعربية.",
+  "taqreer":"إنشاء عروض وتقارير بالعربية والإنجليزية.",
+  "daftra":"إدارة الفواتير والمحاسبة والمخزون.",
+  "gravity":"لعبة منصات من استوديو سعودي.",
+  "shamaa":"قاعدة للأبحاث التربوية العربية.",
+  "faseeh":"توليد تعليق صوتي عربي من النصوص.",
+  "arabicdesign":"تصميم عبارات وخطوط عربية.",
+  "qriib":"أدوات تعاون واجتماعات وذكاء اصطناعي.",
+  "vconnct":"منظومة اتصال وتعاون للمؤسسات.",
+  "paymob":"حلول لقبول المدفوعات الرقمية.",
+  "wuzzuf":"منصة للبحث عن الوظائف في مصر.",
+  "fanar":"ذكاء اصطناعي للنص والصوت والصورة.",
+  "falcon":"نموذج لغوي عربي للمطورين والباحثين.",
+  "arabicai":"أدوات مؤسسية للنص والوثائق والصوت.",
+  "salla":"إنشاء المتاجر وإدارتها للسوق المحلي.",
+  "edraak":"مساقات تعليمية باللغة العربية.",
+  "mandumah":"قاعدة للدوريات والبحوث العربية.",
+  "openalex":"استكشاف الأوراق والبحوث العلمية.",
+  "zotero":"تنظيم المراجع والمصادر البحثية.",
+  "fresh":"أجهزة منزلية من علامة مصرية.",
+  "aamenn":"تخزين الملفات ومشاركتها.",
+  "munsit":"تفريغ التسجيلات العربية إلى نص.",
+  "anghami":"موسيقى ومحتوى صوتي عبر منصة عربية.",
+  "hudhud":"خرائط وملاحة للعناوين المحلية.",
+  "arabybot":"محادثات العملاء وأتمتة التواصل.",
+  "khamsat":"شراء وبيع خدمات المستقلين.",
+  "hsoub":"دروس عربية في البرمجة والتقنية.",
+  "abjjad":"قراءة واستماع إلى كتب عربية.",
+  "sowt":"بودكاست وقصص صوتية عربية.",
+  "noon":"متجر إلكتروني لمنتجات متنوعة.",
+  "opensooq":"إعلانات مبوبة للبيع والشراء المباشر.",
+  "mumzworld":"تسوق منتجات الأم والطفل.",
+  "spacetoonyt":"برامج ورسوم متحركة عربية للأطفال.",
+  "majidkids":"برامج ورسوم متحركة للأطفال.",
+  "marefa":"موسوعة عربية قابلة للمساهمة.",
+  "arabency":"مرجع موسوعي عربي في العلوم والآداب.",
+  "dorar":"بحث في الحديث والعلوم الشرعية.",
+  "tafsircenter":"محتوى في التفسير وعلوم القرآن.",
+  "shamela":"البحث في كتب التراث الإسلامي.",
+  "hindawi":"كتب وأعمال عربية ومترجمة مجانًا.",
+  "shahid":"أفلام ومسلسلات وبرامج عربية.",
+  "watchit":"دراما وبرامج وأعمال مصرية.",
+  "dubaiplus":"أفلام ومسلسلات وقنوات مباشرة.",
+  "almaany":"معاجم عربية وترجمات ومصطلحات.",
+  "unifonic":"تواصل العملاء عبر الرسائل والصوت.",
+  "ithra":"مكتبة ومتاحف وبرامج ثقافية.",
+  "thmanyah":"بودكاست ووثائقيات وبرامج عربية.",
+  "alef":"منصة تعلم مدرسي بالذكاء الاصطناعي.",
+  "bayut":"إعلانات عقارية للبيع والإيجار.",
+  "dubaifuture":"تقارير استشراف وتقنيات ناشئة.",
+  "qdl":"أرشيف رقمي لتاريخ الخليج والمنطقة.",
+  "snoonu":"توصيل الطعام والتسوق والخدمات.",
+  "kezakoo":"دروس وتمارين للثانوي المغربي.",
+  "telmidtice":"دروس وتمارين للمدارس المغربية.",
+  "chari":"محفظة ومدفوعات وخدمات مالية.",
+  "benefit":"بنية مدفوعات وخدمات مالية بحرينية.",
+  "tarabut":"بنية مصرفية مفتوحة للمؤسسات.",
+  "bibf":"برامج مهنية في التمويل والإدارة.",
+  "thawani":"حلول دفع إلكتروني للأفراد والتجار.",
+  "emushrif":"تتبع الحافلات وإدارة النقل المدرسي.",
+  "edlal":"دورات إلكترونية لتعلم مهارات متنوعة.",
+  "tadarab":"دورات عربية مسجلة في مجالات متنوعة.",
+  "myfatoorah":"روابط دفع وتكاملات للشركات.",
+  "boutiqaat":"تسوق منتجات الجمال والموضة.",
+  "gomycode":"مسارات لتعلم البرمجة والتقنية.",
+  "expensya":"إدارة مصروفات الشركات وتقاريرها.",
+  "dabchy":"بيع وشراء المستعمل بين الأفراد.",
+  "yassir":"تنقل وتوصيل وخدمات يومية.",
+  "ouedkniss":"إعلانات مبوبة للبيع والشراء.",
+  "baridimob":"خدمات بريد الجزائر من الهاتف.",
+  "miswag":"تسوق وتوصيل منتجات داخل العراق.",
+  "lezzoo":"توصيل الطعام والبقالة وخدمات يومية.",
+  "superqi":"تحويلات ومدفوعات وخدمات مالية.",
+  "podeo":"إنشاء البودكاست وتوزيعه.",
+  "mawdoo3":"مقالات عربية في موضوعات معرفية.",
+  "qoyod":"محاسبة سحابية وفواتير ومخزون.",
+  "wuilt":"إنشاء المواقع والمتاجر دون برمجة.",
+  "lymonah":"بيع الدورات والمنتجات الرقمية.",
+  "aafia":"إدارة العيادات والسجلات والمواعيد.",
+  "forlanso":"إدارة خدمات المستقلين والعقود."
+};
 function compactCardPurpose(x){
  const manual={
   gravity:'لعبة منصات من استوديو سعودي.',
@@ -339,7 +424,7 @@ function compactCardPurpose(x){
   abjjad:'كتب عربية رقمية وصوتية للقراءة والاستماع.',
   sowt:'بودكاست وقصص صوتية عربية.'
  };
- return compactCardLine(manual[x.id]||x.value,44);
+ return cardDisplaySummaries[x.id]||compactCardLine(manual[x.id]||x.value,44);
 }
 
 // Concise decision context, derived from each record's scope and existing limits.
@@ -424,12 +509,6 @@ const cardCautionOverrides={
  dubaiplus:'الإتاحة تتغير مع حقوق العرض.',
  almaany:'المعنى الصحيح يعتمد على السياق.'
 };
-function directoryAboutLabel(x){
- if(x.cat==='learn')return 'عن المصدر';
- if(x.cat==='culture')return 'عن المحتوى';
- if(x.type==='منتجات وصناعة')return 'عن المنتج';
- return 'عن الخدمة';
-}
 function directoryCardMarkup(x,activeOrigin=null){
  const {reference,fit}=directoryComparison(x,activeOrigin);
  return `
@@ -446,7 +525,7 @@ function directoryCardMarkup(x,activeOrigin=null){
    </div>
    <div class="card-primary-actions">
     <div class="card-info-actions ${relatedGuideMap[x.id]?'':'is-single'}">
-     <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">${directoryAboutLabel(x)}</button>
+     <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')" aria-label="معلومات عن ${x.name}">معلومات</button>
      ${relatedGuideMap[x.id]?`<div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>`:''}
     </div>
     <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>زيارة الموقع</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
