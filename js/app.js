@@ -533,9 +533,10 @@ function renderLearning(){
       ${countryBadgeMarkup(x,learningCountryMap)}
       ${x.vendorContent?'<div class="learning-vendor-note">محتوى من الجهة نفسها</div>':''}
       <p class="learning-focus">${x.focus}</p>
-      <div class="learning-card-guide-slot">${learningGuideLinkMarkup(x.id)}</div>
-      <div class="learning-spacer"></div>
-      <div class="learning-actions"><button type="button" onclick="showLearningNote('${x.id}');return false;">التفاصيل والمصادر</button></div>
+      <div class="learning-card-actions ${learningGuideMap[x.id]?'':'is-single'}">
+       <div class="learning-actions"><button type="button" onclick="showLearningNote('${x.id}');return false;">عن المصدر</button></div>
+       ${learningGuideMap[x.id]?`<div class="learning-card-guide-slot">${learningGuideLinkMarkup(x.id)}</div>`:''}
+      </div>
      </article>`).join('')}</div></div>
     <button class="learning-carousel-arrow learning-carousel-next" type="button" aria-label="التالي" onclick="scrollLearningCarousel('${type}',1)">‹</button>
    </div>
