@@ -717,10 +717,10 @@ body.cosmic-theme.guided-discovery #directory .local-nav{
  margin-bottom:13px!important;
 }
 body.cosmic-theme.guided-discovery #directory .directory-refine-bar{
- padding:0!important;margin:0 0 9px!important;
+ padding:0!important;margin:0 0 15px!important;
 }
 body.cosmic-theme.guided-discovery #directory #directoryRefineCategory{
- margin:0 0 13px!important;padding:0!important;
+ margin:0 0 17px!important;padding:0!important;
  background:transparent!important;border:0!important;box-shadow:none!important;
 }
 body.cosmic-theme.guided-discovery #directory #directoryRefineCategory .filters{
@@ -733,8 +733,8 @@ body.cosmic-theme.guided-discovery #directory #directoryRefineCategory .filters>
  display:inline-flex!important;flex:0 0 auto!important;
  flex-direction:row!important;align-items:center!important;justify-content:center!important;
  width:auto!important;grid-column:auto!important;
- gap:7px!important;min-height:44px!important;
- padding:8px 13px!important;
+ gap:6px!important;min-height:44px!important;
+ padding:8px 10px!important;
  border:1px solid #d8e4db!important;border-radius:999px!important;
  background:#fffefa!important;color:#244b45!important;
  box-shadow:none!important;
