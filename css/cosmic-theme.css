@@ -397,22 +397,23 @@ body.cosmic-theme.guided-discovery :is(
 body.cosmic-theme.guided-discovery #directory .catalog-grid .card-summary {
   display:block!important;
   width:100%!important;
-  height:30px!important;min-height:30px!important;max-height:30px!important;
-  flex:0 0 30px!important;
-  margin:0 0 9px!important;
+  height:38px!important;min-height:38px!important;max-height:38px!important;
+  flex:0 0 38px!important;
+  margin:0 0 6px!important;
   overflow:hidden!important;
 }
 body.cosmic-theme.guided-discovery #directory .catalog-grid .card-purpose {
   display:block!important;
   width:100%!important;max-width:100%!important;
-  height:28px!important;min-height:0!important;max-height:28px!important;
-  margin:0!important;
+  height:38px!important;min-height:38px!important;max-height:38px!important;
+  margin:0!important;padding:3px 10px 11px!important;
+  box-sizing:border-box!important;
   overflow:hidden!important;
   white-space:nowrap!important;
   text-overflow:ellipsis!important;
   -webkit-line-clamp:unset!important;
   -webkit-box-orient:initial!important;
-  line-height:28px!important;
+  line-height:24px!important;
   text-align:start!important;
   font-size:.875rem!important;
 }
@@ -487,15 +488,16 @@ body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-l
 body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus {
   display:block!important;
   width:100%!important;max-width:100%!important;
-  height:30px!important;min-height:30px!important;max-height:30px!important;
-  margin:0 0 8px!important;
-  flex:0 0 30px!important;
+  height:38px!important;min-height:38px!important;max-height:38px!important;
+  margin:0 0 6px!important;padding:3px 10px 11px!important;
+  box-sizing:border-box!important;
+  flex:0 0 38px!important;
   overflow:hidden!important;
   white-space:nowrap!important;
   text-overflow:ellipsis!important;
   -webkit-line-clamp:unset!important;
   -webkit-box-orient:initial!important;
-  line-height:30px!important;
+  line-height:24px!important;
   text-align:start!important;
 }
 body.cosmic-theme.guided-discovery #learning .learning-card-actions {
