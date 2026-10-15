@@ -8,7 +8,7 @@ const ids=a=>Array.from(a,x=>x.id);
 function visit({mobile=false,seed=42,saved,blocked=false}={}){
  const state=saved||new Map([['badilak_directory_rotation_v2',JSON.stringify({seed,wide:!mobile})]]);
  const viewport={mobile};
- const ctx=vm.createContext({window:{matchMedia:()=>({matches:viewport.mobile})},sessionStorage:{getItem:k=>{if(blocked)throw Error('blocked');return state.get(k)||null},setItem:(k,v)=>{if(blocked)throw Error('blocked');state.set(k,v)}},Math,filter:'all',subfilter:'all',originFilter:null,countryFilter:null});
+ const ctx=vm.createContext({window:{matchMedia:()=>({matches:viewport.mobile})},sessionStorage:{getItem:k=>{if(blocked)throw Error('blocked');return state.get(k)||null},setItem:(k,v)=>{if(blocked)throw Error('blocked');state.set(k,v)}},Math,document:{getElementById:()=>({value:''})},items:list,initializedJourneyPanels:new Set(),filter:'all',subfilter:'all',originFilter:null,countryFilter:null});
  vm.runInContext(source,ctx);
  return {ctx,state,viewport,order:(rows=list,q='')=>ctx.orderDirectoryDiscoveryCards(rows,q)};
 }
