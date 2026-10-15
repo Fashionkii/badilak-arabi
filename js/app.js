@@ -437,6 +437,45 @@ function updateLearningContinue(){
  root.innerHTML=sectionContinueMarkup('تابع من نفس الهدف','إذا كنت ما زلت تقارن، جرّب مصدرًا قريبًا من هدفك.',actions);
 }
 
+// Card-only summaries; preserve complete focus text in learning details.
+const learningDisplaySummaries={
+  "yanfaa":"كورسات عربية في مهارات متعددة.",
+  "edraak-learning":"مقررات ودورات عربية متنوعة.",
+  "rwaq":"مساقات أكاديمية ومهارية بالعربية.",
+  "almentor":"تعلم مهني ومهارات بالعربية.",
+  "salla-academy":"دروس لإدارة المتاجر الإلكترونية.",
+  "qoyod-academy":"دورات عربية في المحاسبة ونظام قيود.",
+  "daftra-hub":"دروس في المحاسبة وإدارة الأعمال.",
+  "khamsat-blog":"مقالات عن العمل الحر والتسويق.",
+  "hsoub-library":"كتب ودروس في البرمجة والتقنية.",
+  "zamerican":"شرح عربي لتعلم الإنجليزية.",
+  "droosonline":"محتوى تعليمي ومهارات عملية.",
+  "elzero":"دروس عربية في البرمجة وتطوير الويب.",
+  "makram":"شروح عربية للتصميم والمونتاج.",
+  "hsoub-youtube":"شروح في البرمجة وسوق العمل.",
+  "akhdar-youtube":"ملخصات كتب ومهارات عملية بالعربية.",
+  "khan-arabi":"دروس في الرياضيات والعلوم بالعربية.",
+  "abdulbasit-official":"تلاوات الشيخ عبد الباسط الأصلية.",
+  "hussary-official":"تلاوات مرتلة ومجودة للحصري.",
+  "mostafa-ismail-official":"تسجيلات رسمية لتلاوات مصطفى إسماعيل.",
+  "maher-official":"مصحف وتلاوات رسمية للمعيقلي.",
+  "alafasy-official":"تلاوات وإصدارات صوتية للعفاسي.",
+  "saad-ghamdi-official":"مصحف مرتل وتلاوات سعد الغامدي.",
+  "misk-skills":"مهارات واستعداد مهني للشباب.",
+  "thmanyah-youtube":"وثائقيات وبرامج وبودكاست عربي.",
+  "alef-learning":"تعلم رقمي للمراحل المدرسية.",
+  "dff-academy":"مهارات مستقبلية ودورات تدريبية.",
+  "qdl-youtube":"فيديوهات عن أرشيف الخليج ومصادره.",
+  "kezakoo-learning":"دروس وتمارين للثانوي المغربي.",
+  "telmidtice-learning":"دروس وتمارين وامتحانات مغربية.",
+  "bibf-learning":"دورات مهنية في التمويل والإدارة.",
+  "edlal-learning":"تعلم عربي في المعرفة والمهارات.",
+  "tadarab-learning":"دورات عربية في الأعمال والمهارات.",
+  "gomycode-learning":"مسارات تقنية في البرمجة والبيانات.",
+  "cnfepd-learning":"تكوين مهني عن بعد في تخصصات متنوعة.",
+  "newton-learning":"دروس وكتب وتمارين للطلاب بالعراق.",
+  "kamkalima-learning":"تعليم العربية للمدارس والمعلمين."
+};
 function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
 function originFitNoteText(origin){
@@ -569,10 +608,11 @@ function renderLearning(){
       <h3>${x.name}</h3>
       ${countryBadgeMarkup(x,learningCountryMap)}
       ${x.vendorContent?'<div class="learning-vendor-note">محتوى من الجهة نفسها</div>':''}
-      <p class="learning-focus">${x.focus}</p>
-      <div class="learning-card-guide-slot">${learningGuideLinkMarkup(x.id)}</div>
-      <div class="learning-spacer"></div>
-      <div class="learning-actions"><button type="button" onclick="showLearningNote('${x.id}');return false;">التفاصيل والمصادر</button></div>
+      <p class="learning-focus">${learningDisplaySummaries[x.id]||compactCardLine(x.focus,30)}</p>
+      <div class="learning-card-actions ${learningGuideMap[x.id]?'':'is-single'}">
+       <div class="learning-actions"><button type="button" onclick="showLearningNote('${x.id}');return false;" aria-label="معلومات عن ${x.name}">معلومات</button></div>
+       ${learningGuideMap[x.id]?`<div class="learning-card-guide-slot">${learningGuideLinkMarkup(x.id)}</div>`:''}
+      </div>
      </article>`).join('')}</div></div>
    </div>
   </section>`;
@@ -1272,7 +1312,7 @@ function renderHomeCountryOverview(){
  const topRows=priority.map((code,i)=>({
   code,name:arabProgressCountryNames[code],
   count:directoryCountryCount(code),priority:i
- })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,3);
+ })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,6);
  summary.innerHTML=`<span><b>${items.length}</b> منتجًا وخدمةً في الدليل</span><span><b>${totalArab}</b> منها مرتبطة بدول عربية بحسب بياناتنا</span>`;
  top.innerHTML=topRows.map(({code,name,count})=>`
   <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} منتجًا أو خدمةً مرتبطة بـ${name} في الدليل">

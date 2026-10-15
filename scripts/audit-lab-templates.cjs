@@ -1,0 +1,38 @@
+'use strict';
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
+const base='bbe3c15ed35669da1d8f039abb788e184284973f';
+const read=f=>fs.readFileSync(f,'utf8'),old=f=>execFileSync('git',['show',base+':'+f],{encoding:'utf8'});
+const region=(s,a,b)=>s.slice(s.indexOf(a),s.indexOf(b,s.indexOf(a)));
+const plain=value=>JSON.parse(JSON.stringify(value));
+for(const f of ['js/discovery-memory.js','js/guided-discovery.js','js/route-seo.js','js/smart-return.js','js/commercial-links.js','css/reading-hierarchy.css','css/visual-refresh.css','guides.html','site.config.json','vercel.json',...fs.readdirSync('guides').filter(f=>f.endsWith('.html')).map(f=>'guides/'+f)])assert.equal(read(f),old(f),'Protected file: '+f);
+const catalog=code=>{const c=vm.createContext({});vm.runInContext(code,c);return plain(vm.runInContext('({items,itemCountryMap,learningCountryMap})',c));};
+const before=catalog(old('js/catalog-data.js')),after=catalog(read('js/catalog-data.js'));
+assert.equal(after.items.length,94);
+for(const item of before.items)assert.deepEqual(after.items.find(x=>x.id===item.id),item,'Existing record: '+item.id);
+for(const [id,value] of Object.entries(before.itemCountryMap))assert.deepEqual(after.itemCountryMap[id],value,'Existing country: '+id);
+assert.deepEqual(after.learningCountryMap,before.learningCountryMap);
+const expected=['zid','foodics','expandcart','bosta','mostaql','nafezly','bayt','floward','jahez','arabiaweather','vezeeta','fawry'];
+assert.deepEqual(after.items.slice(before.items.length).map(x=>x.id),expected);
+for(const id of ['floward','jahez'])assert.deepEqual(after.items.find(x=>x.id===id).origin,[],'Specialized service is not a general Amazon replacement');
+const app=read('js/app.js'),previousApp=old('js/app.js');
+assert.equal(region(app,'function openExternal(','function openMethodology('),region(previousApp,'function openExternal(','function openMethodology('));
+assert.equal(region(app,'const arabProgressData=','const arabProgressFlagBase='),region(previousApp,'const arabProgressData=','const arabProgressFlagBase='));
+const details=read('js/detail-renderers.js'),priorDetails=old('js/detail-renderers.js');
+assert.equal(region(details,'function directoryDetailMarkup(','function originName('),region(priorDetails,'function directoryDetailMarkup(','function originName('),'Complete detail presentation preserved');
+assert.equal(region(details,'function decisionNoteFor(','function directoryDetailMarkup('),region(priorDetails,'function decisionNoteFor(','function directoryDetailMarkup('),'Decision notes and evidence preserved');
+const beforeHtml=old('index.html'),html=read('index.html');
+assert.equal(html.slice(html.indexOf('<section class="section wrap" id="directory"')),beforeHtml.slice(beforeHtml.indexOf('<section class="section wrap" id="directory"')),'All non-home sections / ads preserved');
+assert.equal(html.slice(0,html.indexOf('<section class="intro wrap"')),beforeHtml.slice(0,beforeHtml.indexOf('<section class="intro wrap"')),'Metadata and header preserved');
+assert.equal(html.match(/<p class="intro-promise">.*?<\/p>/)[0],beforeHtml.match(/<p class="intro-promise">.*?<\/p>/)[0]);
+assert.ok(html.includes('https://www.wipo.int/web-publications/global-innovation-index-2026/en/gii-2026-results.html'));
+const c=vm.createContext({window:{},document:{}});vm.runInContext(read('js/catalog-data.js')+'\n'+details,c);
+const previews=plain(vm.runInContext('items.map(x=>({id:x.id,summary:compactCardPurpose(x),card:directoryCardMarkup(x)}))',c));
+for(const x of previews){
+ assert.ok([...x.summary].length<=46&&x.summary.endsWith('.'),'Complete short description: '+x.id);
+ assert.ok(!x.card.includes('card-key-limit'),'No separate warning box on preview');
+ assert.ok(x.card.includes('/discover/'+x.id)&&x.card.includes("openExternal('"+x.id+"')")&&x.card.includes("openDetail('"+x.id+"')"),'Retain page, details and exit choice: '+x.id);
+}
+assert.equal(vm.runInContext('guideLinkMarkup(null,false)',c),'');
+assert.ok(vm.runInContext('guideLinkMarkup(null,true)',c).includes('href="/guides"'));
+execFileSync(process.execPath,['scripts/audit-prelaunch.cjs'],{stdio:'inherit'});
+console.log('PASS: 82 original records, full detail/caution/evidence functions, articles, ads, journey and index controls retained; 12 additions and 94 coherent one-line previews verified.');
