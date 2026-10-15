@@ -608,3 +608,21 @@ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-card {dis
 @media(prefers-reduced-motion:reduce) {body.cosmic-theme.guided-discovery[data-journey="home"] .home-route {transition:none!important;transform:none!important;}}
 
 body.cosmic-theme.guided-discovery #directory .local-nav {background:transparent!important;border:0!important;box-shadow:none!important;padding-inline:0!important;}
+/* Final checks: breadcrumb contrast and balanced, compact action rows. */
+body.cosmic-theme.guided-discovery #directory .local-nav-inner {background:#f7faf8!important;box-shadow:none!important;}
+body.cosmic-theme.guided-discovery #directory .local-nav .crumbs,
+body.cosmic-theme.guided-discovery #directory .local-nav .crumbs button {color:#24443e!important;text-shadow:none!important;}
+body.cosmic-theme.guided-discovery #directory .journey-result-head {gap:4px!important;margin-bottom:12px!important;padding-inline:0!important;}
+body.cosmic-theme.guided-discovery #directory #journeyResultTitle {font-size:clamp(24px,2.3vw,32px)!important;line-height:1.5!important;margin:0!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions>.more-btn,
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions>.card-guide-slot,
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions .card-read-link {height:auto!important;min-height:44px!important;max-height:none!important;margin:0!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions .card-read-link {display:flex!important;align-items:center!important;justify-content:center!important;border:1px solid #d8c9ac!important;border-radius:10px!important;padding:8px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions>.destination-link {grid-column:1/-1;min-height:44px!important;height:auto!important;margin:0!important;}
+@media(min-width:1024px) {
+ body.cosmic-theme.guided-discovery[data-journey="home"] .home-pathways-heading {margin-bottom:6px!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .home-pathways-heading h2 {font-size:18px!important;line-height:1.4!important;margin:0!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .home-pathways-heading p {margin:0!important;line-height:1.4!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .home-route {min-height:72px!important;padding-block:7px!important;}
+}
