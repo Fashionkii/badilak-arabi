@@ -1318,7 +1318,7 @@ function renderHomeCountryOverview(){
  top.innerHTML=topRows.map(({code,name,count})=>`
   <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} منتجًا أو خدمةً مرتبطة بـ${name} في الدليل">
    <span class="home-country-identity"><img src="/images/flags/${code}.png" width="28" height="19" alt=""><strong>${name}</strong></span>
-   <span class="home-country-count">${count} <small>منتج عربي</small></span>
+   <span class="home-country-count">${count} <small>منتجًا وخدمةً</small></span>
    <span class="home-country-go" aria-hidden="true">↖</span>
   </button>`).join('');
  const ten=[...arabProgressData.innovation.rows].sort((a,b)=>a[2]-b[2]).slice(0,10);
