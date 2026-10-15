@@ -1208,3 +1208,35 @@ body.cosmic-theme.guided-discovery .footer-links a{
 @media(prefers-reduced-motion:reduce){
  body.cosmic-theme.guided-discovery[data-journey="home"] .home-route{transition:none!important;}
 }
+
+/* Homepage readability follow-up after the 1024px/1440px visual review. */
+body.cosmic-theme.guided-discovery[data-journey="home"] .origin-explorer .origin-name{
+ color:#234940!important;font-weight:700!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .origin-explorer .origin-hint{
+ color:#3f5953!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-route-copy small,
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-panel-title p{
+ color:#445e55!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-data-note{
+ font-size:11px!important;color:#435b50!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-country{
+ min-height:32px;padding-block:3px;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-country-link,
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-country-link>b{
+ font-size:12px!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-country-link small{
+ font-size:10px!important;color:#345e51;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-panel{
+ padding-bottom:16px!important;
+}
+/* Keep the existing history controls operational, but away from hero entry cards. */
+body.cosmic-theme.guided-discovery[data-journey="home"] .badilak-nav-memory{
+ top:auto!important;bottom:68px!important;left:12px!important;right:auto!important;
+}
