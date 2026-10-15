@@ -532,7 +532,7 @@ function renderLearning(){
       <h3>${x.name}</h3>
       ${countryBadgeMarkup(x,learningCountryMap)}
       ${x.vendorContent?'<div class="learning-vendor-note">محتوى من الجهة نفسها</div>':''}
-      <p class="learning-focus">${x.focus}</p>
+      <p class="learning-focus">${compactCardLine(x.focus,30)}</p>
       <div class="learning-card-actions ${learningGuideMap[x.id]?'':'is-single'}">
        <div class="learning-actions"><button type="button" onclick="showLearningNote('${x.id}');return false;">عن المصدر</button></div>
        ${learningGuideMap[x.id]?`<div class="learning-card-guide-slot">${learningGuideLinkMarkup(x.id)}</div>`:''}

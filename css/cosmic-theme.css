@@ -514,3 +514,13 @@ body.cosmic-theme.guided-discovery #learning .learning-card-actions .learning-ac
   body.cosmic-theme.guided-discovery #directory .card-info-actions .card-read-link,
   body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link {font-size:.75rem!important;}
 }
+
+/* Correct only the restored fit row: one line without varying card heights. */
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-fit {
+ display:block!important;
+ width:100%!important;max-width:100%!important;
+ height:22px!important;min-height:22px!important;max-height:22px!important;
+ margin:0 0 7px!important;
+ line-height:22px!important;
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}

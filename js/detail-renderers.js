@@ -318,6 +318,18 @@ function directoryDetailMarkup(x,standalone=false){
 
 function originName(id){return ({chatgpt:'ChatGPT',canva:'Canva',drive:'Google Drive',coursera:'Coursera',fiverr:'Fiverr',shopify:'Shopify',acrobat:'Acrobat',teams:'Teams',spotify:'Spotify',udemy:'Udemy',amazon:'Amazon',jumia:'Jumia',wikipedia:'Wikipedia',youtube:'YouTube',netflix:'Netflix',kindle:'Kindle',scholar:'Google Scholar',jstor:'JSTOR',quickbooks:'QuickBooks',elevenlabs:'ElevenLabs',otter:'Otter.ai',stripe:'Stripe',linkedin:'LinkedIn',googlemaps:'Google Maps',steam:'Steam'})[id]||id}
 
+// One-line card previews only; complete descriptions remain unchanged in details.
+function compactCardLine(value,max=44){
+ const source=String(value||'').replace(/\s+/g,' ').trim();
+ if(!source)return '';
+ const sentence=(source.match(/^.*?[.!؟](?:\s|$)/)||[])[0]?.trim()||source;
+ const characters=Array.from(sentence);
+ if(characters.length<=max)return sentence;
+ const head=characters.slice(0,max).join('');
+ const lastSpace=head.lastIndexOf(' ');
+ const short=lastSpace>=Math.floor(max*.6)?head.slice(0,lastSpace):head;
+ return short.replace(/[،؛:.\s]+$/,'').trim()+'…';
+}
 function compactCardPurpose(x){
  const manual={
   gravity:'لعبة منصات من استوديو سعودي.',
@@ -325,21 +337,9 @@ function compactCardPurpose(x){
   fanar:'منصة ذكاء توليدي قطرية للنص والصوت والصورة.',
   daftra:'إدارة أعمال وفواتير ومحاسبة ومخزون في مكان واحد.',
   abjjad:'كتب عربية رقمية وصوتية للقراءة والاستماع.',
-  sowt:'بودكاست وقصص صوتية عربية.',
-  faseeh:'توليد تعليق صوتي عربي من النصوص.',
-  munsit:'تفريغ التسجيلات العربية وتحويلها إلى نص.',
-  podeo:'إنشاء البودكاست وتوزيعه عبر المنصات.'
+  sowt:'بودكاست وقصص صوتية عربية.'
  };
- if(manual[x.id])return manual[x.id];
- const raw=String(x.value||'').trim();
- if(!raw)return '';
- const sentence=(raw.match(/^.*?[.!؟](?:\s|$)/)||[])[0]?.trim()||raw;
- if([...sentence].length<=105)return sentence;
- const head=sentence.slice(0,105);
- const cuts=[head.lastIndexOf('،'),head.lastIndexOf('؛'),head.lastIndexOf(':')].filter(i=>i>=42);
- const cut=cuts.length?Math.max(...cuts):-1;
- if(cut>0)return sentence.slice(0,cut).replace(/[،؛:]\s*$/,'').trim()+'.';
- return sentence.slice(0,92).replace(/\s+\S*$/,'').trim()+'…';
+ return compactCardLine(manual[x.id]||x.value,44);
 }
 
 // Concise decision context, derived from each record's scope and existing limits.
@@ -431,7 +431,7 @@ function directoryAboutLabel(x){
  return 'عن الخدمة';
 }
 function directoryCardMarkup(x,activeOrigin=null){
- const {reference}=directoryComparison(x,activeOrigin);
+ const {reference,fit}=directoryComparison(x,activeOrigin);
  return `
   <article class="item" data-item-id="${x.id}">
    <a class="item-identity" href="/discover/${x.id}" onclick="return badilakOpenItem(event,'${x.id}')">
@@ -440,6 +440,7 @@ function directoryCardMarkup(x,activeOrigin=null){
    </a>
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${reference?'':'is-empty'}">${reference?`<span>إذا كنت تستخدم</span><bdi class="origin-mini">${originName(reference)}</bdi>`:''}</div>
+   ${fit?`<p class="card-fit">${fit}</p>`:''}
    <div class="card-summary">
     <p class="card-purpose">${compactCardPurpose(x)}</p>
    </div>
