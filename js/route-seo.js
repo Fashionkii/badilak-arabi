@@ -49,7 +49,7 @@
   return directoryDetailMarkup(x,true);
  }
  function staticCards(id){
-  return items.filter(x=>x.cat===id).slice(0,3).map(directoryCardMarkup).join('');
+  return items.filter(x=>x.cat===id).slice(0,6).map(directoryCardMarkup).join('');
  }
  root.badilakSEO={route,metadata,categoryIndex,staticItem,staticCards,categories,escape};
  if(typeof document==='undefined')return;
