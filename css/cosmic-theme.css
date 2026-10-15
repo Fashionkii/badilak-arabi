@@ -1671,14 +1671,14 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-count-summary span
  }
 }
 
-/* Home-only brand and headline emphasis, without altering header or other panels. */
+/* Home-only logo sizing: display its complete artwork, never zoom/crop it. */
 body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-heading{
- overflow:hidden!important;
+ overflow:visible!important;
 }
 body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-heading img.cosmic-logo{
- display:block!important;width:min(100%,540px)!important;
- max-width:100%!important;height:auto!important;
- transform:scale(1.75)!important;transform-origin:center center!important;
+ display:block!important;width:min(100%,360px)!important;
+ max-width:100%!important;height:auto!important;object-fit:contain!important;
+ transform:none!important;
 }
 body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-heading h2{
  max-width:100%!important;font-size:clamp(17px,1.45vw,22px)!important;
@@ -1690,7 +1690,7 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-count-panel .home-
 }
 @media(min-width:1024px) and (min-height:720px) and (max-height:930px){
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-heading img.cosmic-logo{
-  width:min(100%,540px)!important;max-width:100%!important;
+  width:min(100%,clamp(300px,35dvh,350px))!important;max-width:100%!important;
  }
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-heading h2{
   font-size:clamp(17px,1.6vw,21px)!important;line-height:1.4!important;
@@ -1701,7 +1701,8 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-count-panel .home-
 }
 @media(max-width:760px){
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-heading img.cosmic-logo{
-  transform:scale(1.15)!important;
+  width:min(100%,270px)!important;max-width:100%!important;
+  transform:none!important;
  }
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-heading h2{
   font-size:21px!important;
