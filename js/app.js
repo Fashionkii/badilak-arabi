@@ -1137,12 +1137,13 @@ const arabProgressData={
   title:'مؤشر الابتكار العالمي',
   why:'يعكس قدرة البلد على تحويل التعليم والبحث والاستثمار إلى أفكار وتقنيات ومنتجات جديدة',
   note:'المركز العالمي — الرقم الأقل أفضل',
-  sourceLabel:'WIPO · GII 2025',
-  sourceUrl:'https://www.wipo.int/web-publications/global-innovation-index-2025/en/gii-2025-results.html',
+  sourceLabel:'WIPO · GII 2026',
+  sourceUrl:'https://www.wipo.int/gii-ranking/en/rank/',
+  checked:'15 أكتوبر 2026',
   type:'rank',
   rows:[
-   ['ae','الإمارات',30],['sa','السعودية',46],['qa','قطر',48],['ma','المغرب',57],['bh','البحرين',62],['jo','الأردن',65],
-   ['om','عُمان',69],['kw','الكويت',73],['tn','تونس',76],['eg','مصر',86]
+   ['ae','الإمارات',25],['sa','السعودية',42],['qa','قطر',47],['ma','المغرب',54],['jo','الأردن',60],['kw','الكويت',62],
+   ['bh','البحرين',64],['om','عُمان',69],['tn','تونس',71],['eg','مصر',83]
   ]
  },
  patents:{
@@ -1234,7 +1235,7 @@ const arabProgressData={
 const arabProgressFlagBase='/images/flags/';
 const arabProgressCountryNames={ae:'الإمارات',sa:'السعودية',qa:'قطر',ma:'المغرب',bh:'البحرين',jo:'الأردن',om:'عُمان',kw:'الكويت',tn:'تونس',eg:'مصر',dz:'الجزائر',iq:'العراق',lb:'لبنان',sy:'سوريا',us:'الولايات المتحدة',gb:'بريطانيا'};
 const arabProgressMeta={
- innovation:{icon:'account_tree',badge:'GII 2025',summary:'كلما كانت منظومة الابتكار أقوى، كانت الدولة أقدر على تحويل المعرفة والاستثمار إلى حلول ومنتجات جديدة.',points:[['01','تعليم وبحث قوي','مواهب ومعرفة تدفع الابتكار'],['02','بيئة أعمال نشطة','تمويل وشركات وفرص لتجربة الأفكار'],['03','مخرجات ملموسة','معرفة وتقنيات ومنتجات إبداعية']]},
+ innovation:{icon:'account_tree',badge:'GII 2026',summary:'كلما كانت منظومة الابتكار أقوى، كانت الدولة أقدر على تحويل المعرفة والاستثمار إلى حلول ومنتجات جديدة.',points:[['01','تعليم وبحث قوي','مواهب ومعرفة تدفع الابتكار'],['02','بيئة أعمال نشطة','تمويل وشركات وفرص لتجربة الأفكار'],['03','مخرجات ملموسة','معرفة وتقنيات ومنتجات إبداعية']]},
  patents:{icon:'description',badge:'WIPO 2024',summary:'طلبات البراءات تكشف جانبًا من النشاط الابتكاري الذي وصل إلى مرحلة الحماية القانونية.',points:[['01','ابتكار قابل للحماية','الفكرة وصلت إلى طلب قانوني رسمي'],['02','نشاط تقني','إشارة إلى حركة تطوير واختراع'],['03','ملكية فكرية','أصل يمكن البناء عليه تجاريًا وتقنيًا']]},
  research:{icon:'school',badge:'SCImago',summary:'الإنتاج العلمي المنشور يوضح حجم حضور الباحثين والمؤسسات في صناعة المعرفة القابلة للتداول عالميًا.',points:[['01','معرفة منشورة','أبحاث وصلت إلى قنوات علمية دولية'],['02','باحثون ومؤسسات','حضور الجامعات والمراكز البحثية'],['03','قاعدة للمستقبل','معرفة يمكن أن تغذي التقنية والابتكار']]},
  ai:{icon:'code',badge:'IMF 2023',summary:'الجاهزية للذكاء الاصطناعي تعني امتلاك بنية ومهارات ومؤسسات تساعد على تبنيه والاستفادة منه.',points:[['01','بنية رقمية','اتصال وأنظمة قادرة على دعم الاستخدام'],['02','مهارات بشرية','تعليم ومواهب قادرة على العمل بالتقنية'],['03','بيئة تنظيمية','مؤسسات وقواعد تساعد على التبني الآمن']]},
@@ -1290,12 +1291,10 @@ function arabMetricVisual(d,value){
   return `<div class="arab-rank-track" aria-hidden="true"><span style="--pos:${Math.min(99,Math.max(1,((value-1)/99)*100))}%"></span></div>`;
  }
  if(d.type==='tier'){
-  const strength=(6-Number(value))/5*100;
-  return `<div class="arab-progress-bar" aria-hidden="true"><span style="--w:${strength.toFixed(1)}%"></span></div>`;
+  return ''; // ITU tiers are categories, not synthetic percentages.
  }
  if(d.type==='group'){
-  const score=({A:4,B:3,C:2,D:1})[value]||1;
-  return `<div class="arab-progress-bar" aria-hidden="true"><span style="--w:${(score/4*100).toFixed(1)}%"></span></div>`;
+  return ''; // GTMI groups are categories, not synthetic percentages.
  }
  const max=d.type==='count'?Math.max(...d.rows.map(r=>Number(r[2])||0)):d.type==='score'?1:100;
  const pct=Math.max(7,(Number(value)/max)*100);
@@ -1309,9 +1308,9 @@ function arabMetricValue(d,value){
  if(d.type==='group')return `المجموعة ${value}`;
  return new Intl.NumberFormat('ar-EG').format(value);
 }
-function arabProgressCountryControl(code,country,value,visual,first=false){
+function arabProgressCountryControl(code,country,value,visual,first=false,categorical=false){
  const count=directoryCountryCount(code);
- const cls='arab-progress-row'+(first?' is-first':'')+(count?' has-directory':'');
+ const cls='arab-progress-row'+(first?' is-first':'')+(count?' has-directory':'')+(categorical?' is-categorical':'');
  const inner=`<div class="arab-progress-country"><img src="${arabProgressFlagBase+code+'.png'}" alt=""><b>${country}</b></div>${visual}<div class="arab-progress-value">${value}</div>`;
  return count
   ? `<button type="button" class="${cls}" onclick="openCountryDirectory('${code}','${country}')" title="اعرض ${count} عنصرًا من ${country} في الدليل">${inner}</button>`
@@ -1328,7 +1327,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
 
  const visibleRows=d.rows.slice(0,arabCountryVisible);
  const rows=visibleRows.map(([code,country,value],i)=>
-  arabProgressCountryControl(code,country,arabMetricValue(d,value),arabMetricVisual(d,value),i===0)
+  arabProgressCountryControl(code,country,arabMetricValue(d,value),arabMetricVisual(d,value),i===0,d.type==='tier'||d.type==='group')
  ).join('');
  const remaining=d.rows.length-visibleRows.length;
  const add=Math.min(3,remaining);
@@ -1345,7 +1344,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
   ${rows}
   ${remaining>0?`<div class="arab-country-more-wrap"><button type="button" class="arab-country-more" onclick="showMoreArabCountries()">+ ${add} دول <small>${remaining} متبقية</small></button></div>`:''}`;
 
- source.innerHTML=`<span>المصدر:</span><a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel} ↗</a><span>· آخر تحقق: 22 سبتمبر 2026</span><span>· اضغط دولة لها عناصر لعرضها في الدليل</span>`;
+ source.innerHTML=`<span>المصدر:</span><a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel} ↗</a><span>· آخر تحقق موثق: ${d.checked||'22 سبتمبر 2026'}</span><span>· اضغط دولة لها عناصر لعرضها في الدليل</span>`;
  const insight=document.getElementById('arabProgressInsight');
  if(insight){
   insight.innerHTML=`

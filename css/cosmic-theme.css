@@ -541,3 +541,54 @@ body.cosmic-theme.guided-discovery #directory .catalog-grid .card-purpose,
 body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus {
   text-align:center!important;
 }
+
+/* Brand panel ONLY; the original mobile flow stays in document order. */
+body.guided-discovery .intro-brand-panel{display:contents;}
+@media(min-width:1024px){
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap>.intro-brand-panel{
+  display:flex!important;grid-column:2!important;grid-row:1 / span 2!important;
+  flex-direction:column;align-items:center;justify-content:center;
+  min-width:0;min-height:0;box-sizing:border-box;
+  padding:18px 14px 20px!important;border-radius:20px!important;
+  background:linear-gradient(150deg,rgba(12,34,43,.33),rgba(8,30,41,.10))!important;
+  border:1px solid rgba(188,214,207,.18)!important;text-align:center;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel>.intro-heading{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-height:0!important;height:auto!important;margin:0 0 8px!important;padding:0!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel>.intro-heading h1.art-title.art-title--brand{
+  display:block!important;width:100%!important;max-width:390px!important;height:auto!important;min-height:0!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-heading picture{display:block;width:100%;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-heading img.cosmic-logo{
+  display:block!important;width:100%!important;max-width:390px!important;height:auto!important;object-fit:contain!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel>.intro-copy{
+  display:flex!important;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;min-width:0;margin:0!important;gap:10px;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-promise{
+  width:100%!important;max-width:100%!important;
+  font-size:clamp(11px,1.04vw,14px)!important;line-height:1.7!important;
+  white-space:nowrap!important;margin:0!important;padding:0!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-support{
+  width:100%!important;max-width:none!important;margin:0!important;padding:0!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-description{
+  max-width:33ch;font-size:13px!important;line-height:1.75!important;margin-inline:auto!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel .intro-link{margin-top:7px!important;}
+}
+@media(max-width:1023px){body.guided-discovery .intro-brand-panel{display:contents!important;}}
+/* Categorical ITU/World Bank source data must not look like synthetic percentages. */
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row.is-categorical{
+ grid-template-columns:minmax(0,1fr) auto!important;
+}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row.is-categorical .arab-progress-value{
+ display:inline-flex;align-items:center;justify-content:center;
+ border:1px solid rgba(30,83,75,.2);border-radius:999px;
+ background:rgba(30,83,75,.075);padding:4px 11px;
+ text-align:center!important;
+}
