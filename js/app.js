@@ -5,16 +5,18 @@ function countryInfoHasCode(info,code){
  return countryEntries(info).some(v=>v&&v[0]===code);
 }
 let filter='all',subfilter='all',originFilter=null,countryFilter=null,learningType='all';
-let directoryVisible=window.matchMedia('(max-width:760px)').matches?3:6;
+let directoryVisible=window.matchMedia('(max-width:760px)').matches?6:window.matchMedia('(max-width:1023px)').matches?8:12;
 let learningVisible={platform:4,channel:4,reciter:4};
 const learningSectionOpen={channel:false,reciter:false};
 const learningCarouselIndex={platform:0,resource:0,channel:0,reciter:0};
 
 function directoryBatchSize(){
  const mobile=window.matchMedia('(max-width:760px)').matches;
- const q=(document.getElementById('searchInput')?.value||'').trim();
- const focused=filter!=='all'||subfilter!=='all'||!!originFilter||!!countryFilter||!!q;
- return mobile||focused ? 3 : 6;
+ const tablet=!mobile&&window.matchMedia('(max-width:1023px)').matches;
+ const specific=subfilter!=='all'||!!originFilter||!!countryFilter||
+  !!(document.getElementById('searchInput')?.value||'').trim();
+ // Wider discovery batches; precise lookups remain deliberately smaller.
+ return specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
 // Limited discovery rotation, stable for the tab visit even after a resize/reload.
 // Derived from the separate rotation experiment; precise result sets never rotate.
