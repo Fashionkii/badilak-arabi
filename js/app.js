@@ -5,19 +5,21 @@ function countryInfoHasCode(info,code){
  return countryEntries(info).some(v=>v&&v[0]===code);
 }
 let filter='all',subfilter='all',originFilter=null,countryFilter=null,learningType='all';
-let directoryVisible=window.matchMedia('(max-width:760px)').matches?3:6;
+let directoryVisible=window.matchMedia('(max-width:760px)').matches?6:window.matchMedia('(max-width:1023px)').matches?8:12;
 let learningVisible={platform:4,channel:4,reciter:4};
 const learningSectionOpen={channel:false,reciter:false};
 const learningCarouselIndex={platform:0,resource:0,channel:0,reciter:0};
 
 function directoryBatchSize(){
  const mobile=window.matchMedia('(max-width:760px)').matches;
- const q=(document.getElementById('searchInput')?.value||'').trim();
- const focused=filter!=='all'||subfilter!=='all'||!!originFilter||!!countryFilter||!!q;
- return mobile||focused ? 3 : 6;
+ const tablet=!mobile&&window.matchMedia('(max-width:1023px)').matches;
+ const specific=subfilter!=='all'||!!originFilter||!!countryFilter||
+  !!(document.getElementById('searchInput')?.value||'').trim();
+ // Wider discovery batches; precise lookups remain deliberately smaller.
+ return specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
-// Limited discovery rotation, stable for the tab visit even after a resize/reload.
-// Derived from the separate rotation experiment; precise result sets never rotate.
+// Two desktop discovery slots (one on mobile) refresh on each *new* directory entry.
+// A search, detailed filter, resize, or history return never reshuffles results.
 const directoryRotationKey='badilak_directory_rotation_v2';
 function directoryVisitState(){
  try{
@@ -28,13 +30,24 @@ function directoryVisitState(){
   return state;
  }catch{return null} // Storage unavailable: keep the ordinary catalog order.
 }
-const directoryVisit=directoryVisitState();
+let directoryVisit=directoryVisitState();
 function orderDirectoryDiscoveryCards(list,search){
  if(!directoryVisit||search||subfilter!=='all'||originFilter||countryFilter)return list;
  // The initial footprint is a visit property, not the current viewport width.
- const pageSize=directoryVisit.wide&&filter==='all'?6:3;
+ const pageSize=directoryVisit.wide?6:3;
  const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
- if(!pool.length)return list;
+ // A category with exactly six items can still feel fresh: swap its two
+ // discovery slots without inventing further products or moving anchors.
+ if(!pool.length){
+  if(pageSize===6&&list.length===6){
+   const ordered=list.slice();
+   let salt=directoryVisit.seed;
+   for(const char of filter)salt=Math.imul(salt^char.charCodeAt(0),16777619);
+   if(salt&1)[ordered[4],ordered[5]]=[ordered[5],ordered[4]];
+   return ordered;
+  }
+  return list;
+ }
  const slots=Math.min(pageSize===6?2:1,pool.length);
  let seed=directoryVisit.seed^0x9e3779b9;
  for(const char of filter)seed=Math.imul(seed^char.charCodeAt(0),16777619);
@@ -48,6 +61,40 @@ function orderDirectoryDiscoveryCards(list,search){
  }
  return ordered;
 }
+// Re-entry from a different section starts a new discovery visit, but only when
+// exploring freely. Returning through browser history restores that visit instead.
+function beginDirectoryDiscoveryVisit(){
+ if(!directoryVisit||subfilter!=='all'||originFilter||countryFilter||
+    (document.getElementById('searchInput')?.value||'').trim())return;
+ const current=items.filter(x=>filter==='all'||x.cat===filter);
+ const start=orderDirectoryDiscoveryCards(current,'').slice(0,directoryVisit.wide?6:3).map(x=>x.id);
+ if(current.length< (directoryVisit.wide?6:3))return;
+ let next=directoryVisit;
+ for(let n=0;n<16;n++){
+  const candidate={seed:Math.floor(Math.random()*4294967296),wide:directoryVisit.wide};
+  directoryVisit=candidate;
+  const reordered=orderDirectoryDiscoveryCards(current,'').slice(0,candidate.wide?6:3).map(x=>x.id);
+  next=candidate;
+  if(reordered.some((id,i)=>id!==start[i]))break;
+ }
+ directoryVisit=next;
+ try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
+ // The directory is rendered lazily at its first entry; later entries must refresh it.
+ if(initializedJourneyPanels.has('directory')){
+  resetDirectoryLimit();
+  renderCards();
+ }
+}
+window.badilakDirectoryRotation={
+ enter:beginDirectoryDiscoveryVisit,
+ capture:()=>directoryVisit?{seed:directoryVisit.seed,wide:directoryVisit.wide}:null,
+ restore(state){
+  if(!state||!Number.isSafeInteger(state.seed)||state.seed<0||state.seed>=4294967296||
+      typeof state.wide!=='boolean')return;
+  directoryVisit={seed:state.seed,wide:state.wide};
+  try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
+ }
+};
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
 function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
 function resetLearningLimit(){learningVisible={platform:4,resource:4,channel:4,reciter:4}}
@@ -513,19 +560,9 @@ function renderLearning(){
  const groups=[['platform','منصات الكورسات'],['resource','مصادر عملية من المنصات'],['channel','قنوات يوتيوب مفيدة'],['reciter','قنوات رسمية لقراء القرآن']];
  document.getElementById('learningGroups').innerHTML=groups.map(([type,label])=>{
   const g=list.filter(x=>x.type===type);if(!g.length)return '';
-  const foldable=type==='channel'||type==='reciter';
-  if(foldable&&!learningSectionOpen[type]){
-   return `<section class="learning-group learning-folded" id="learning-group-${type}">
-    <div class="learning-folded-head"><div><h3 class="learning-group-title">${label}</h3><small>${g.length} مصدرًا متاحًا</small></div><button class="section-fold-toggle compact" type="button" aria-expanded="false" onclick="toggleLearningSection('${type}')"><span aria-hidden="true">+</span><span class="sr-only">فتح ${label}</span></button></div>
-   </section>`;
-  }
-  const moreLabel=type==='platform'?'منصات كورسات أكثر +':type==='resource'?'مصادر عملية أكثر +':type==='channel'?'قنوات يوتيوب أكثر +':'قراء رسميون أكثر +';
-  const titleMarkup=foldable
-   ? `<div class="learning-group-title-row"><h3 class="learning-group-title">${label}</h3><button class="section-fold-toggle compact" type="button" aria-expanded="true" onclick="toggleLearningSection('${type}')"><span aria-hidden="true">−</span><span class="sr-only">طي ${label}</span></button></div>`
-   : `<h3 class="learning-group-title">${label}</h3>`;
+  const titleMarkup=`<h3 class="learning-group-title">${label}</h3>`;
   return `<section class="learning-group learning-carousel-group" id="learning-group-${type}">${titleMarkup}
    <div class="learning-carousel-shell">
-    <button class="learning-carousel-arrow learning-carousel-prev" type="button" aria-label="السابق" onclick="scrollLearningCarousel('${type}',-1)">›</button>
     <div class="learning-carousel-viewport"><div class="learning-grid learning-carousel-track">${g.map(x=>`
      <article class="learning-card" data-learning-id="${x.id}">
       ${logoMarkup(x.logo,'learning-logo',x.name)}
@@ -537,9 +574,7 @@ function renderLearning(){
       <div class="learning-spacer"></div>
       <div class="learning-actions"><button type="button" onclick="showLearningNote('${x.id}');return false;">التفاصيل والمصادر</button></div>
      </article>`).join('')}</div></div>
-    <button class="learning-carousel-arrow learning-carousel-next" type="button" aria-label="التالي" onclick="scrollLearningCarousel('${type}',1)">‹</button>
    </div>
-   ${g.length>4?`<div class="load-more-wrap learning-carousel-more-wrap"><button class="load-more-btn" onclick="enableLearningCarousel('${type}',this)">${moreLabel} <small>${g.length-4} أخرى</small></button></div>`:''}
   </section>`;
  }).join('') || '<div class="empty">لا توجد مصادر مطابقة. <button class="more-btn" onclick="resetLearning()">كل المصادر</button></div>';
  updateLearningContinue();
@@ -1097,12 +1132,13 @@ const arabProgressData={
   title:'مؤشر الابتكار العالمي',
   why:'يعكس قدرة البلد على تحويل التعليم والبحث والاستثمار إلى أفكار وتقنيات ومنتجات جديدة',
   note:'المركز العالمي — الرقم الأقل أفضل',
-  sourceLabel:'WIPO · GII 2025',
-  sourceUrl:'https://www.wipo.int/web-publications/global-innovation-index-2025/en/gii-2025-results.html',
+  sourceLabel:'WIPO · GII 2026',
+  sourceUrl:'https://www.wipo.int/web-publications/global-innovation-index-2026/en/gii-2026-results.html',
+  checked:'15 أكتوبر 2026',
   type:'rank',
   rows:[
-   ['ae','الإمارات',30],['sa','السعودية',46],['qa','قطر',48],['ma','المغرب',57],['bh','البحرين',62],['jo','الأردن',65],
-   ['om','عُمان',69],['kw','الكويت',73],['tn','تونس',76],['eg','مصر',86]
+   ['ae','الإمارات',25],['sa','السعودية',42],['qa','قطر',47],['ma','المغرب',54],['jo','الأردن',60],['kw','الكويت',62],
+   ['bh','البحرين',64],['om','عُمان',69],['tn','تونس',71],['eg','مصر',83]
   ]
  },
  patents:{
@@ -1194,7 +1230,7 @@ const arabProgressData={
 const arabProgressFlagBase='/images/flags/';
 const arabProgressCountryNames={ae:'الإمارات',sa:'السعودية',qa:'قطر',ma:'المغرب',bh:'البحرين',jo:'الأردن',om:'عُمان',kw:'الكويت',tn:'تونس',eg:'مصر',dz:'الجزائر',iq:'العراق',lb:'لبنان',sy:'سوريا',us:'الولايات المتحدة',gb:'بريطانيا'};
 const arabProgressMeta={
- innovation:{icon:'account_tree',badge:'GII 2025',summary:'كلما كانت منظومة الابتكار أقوى، كانت الدولة أقدر على تحويل المعرفة والاستثمار إلى حلول ومنتجات جديدة.',points:[['01','تعليم وبحث قوي','مواهب ومعرفة تدفع الابتكار'],['02','بيئة أعمال نشطة','تمويل وشركات وفرص لتجربة الأفكار'],['03','مخرجات ملموسة','معرفة وتقنيات ومنتجات إبداعية']]},
+ innovation:{icon:'account_tree',badge:'GII 2026',summary:'كلما كانت منظومة الابتكار أقوى، كانت الدولة أقدر على تحويل المعرفة والاستثمار إلى حلول ومنتجات جديدة.',points:[['01','تعليم وبحث قوي','مواهب ومعرفة تدفع الابتكار'],['02','بيئة أعمال نشطة','تمويل وشركات وفرص لتجربة الأفكار'],['03','مخرجات ملموسة','معرفة وتقنيات ومنتجات إبداعية']]},
  patents:{icon:'description',badge:'WIPO 2024',summary:'طلبات البراءات تكشف جانبًا من النشاط الابتكاري الذي وصل إلى مرحلة الحماية القانونية.',points:[['01','ابتكار قابل للحماية','الفكرة وصلت إلى طلب قانوني رسمي'],['02','نشاط تقني','إشارة إلى حركة تطوير واختراع'],['03','ملكية فكرية','أصل يمكن البناء عليه تجاريًا وتقنيًا']]},
  research:{icon:'school',badge:'SCImago',summary:'الإنتاج العلمي المنشور يوضح حجم حضور الباحثين والمؤسسات في صناعة المعرفة القابلة للتداول عالميًا.',points:[['01','معرفة منشورة','أبحاث وصلت إلى قنوات علمية دولية'],['02','باحثون ومؤسسات','حضور الجامعات والمراكز البحثية'],['03','قاعدة للمستقبل','معرفة يمكن أن تغذي التقنية والابتكار']]},
  ai:{icon:'code',badge:'IMF 2023',summary:'الجاهزية للذكاء الاصطناعي تعني امتلاك بنية ومهارات ومؤسسات تساعد على تبنيه والاستفادة منه.',points:[['01','بنية رقمية','اتصال وأنظمة قادرة على دعم الاستخدام'],['02','مهارات بشرية','تعليم ومواهب قادرة على العمل بالتقنية'],['03','بيئة تنظيمية','مؤسسات وقواعد تساعد على التبني الآمن']]},
@@ -1219,6 +1255,42 @@ function openCountryDirectory(code,country){
  document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));
  buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();resetDirectoryLimit();closeDirectoryRefiners();renderCards();goDirectoryResults();
 }
+// Homepage: two different datasets with explicitly different meanings.
+// Counts come only from the curated service directory; observatory values come
+// from WIPO GII 2026, never from a homemade cross-metric average.
+function renderHomeCountryOverview(){
+ const summary=document.getElementById('homeInventorySummary');
+ const top=document.getElementById('homeCountryTop3');
+ const observer=document.getElementById('homeObserverMini');
+ if(!summary||!top||!observer)return;
+ const arabCodes=new Set(['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy']);
+ const totalArab=items.filter(item=>{
+  const info=itemCountryMap[item.id];
+  return info&&[...arabCodes].some(code=>countryInfoHasCode(info,code));
+ }).length;
+ const priority=['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy'];
+ const topRows=priority.map((code,i)=>({
+  code,name:arabProgressCountryNames[code],
+  count:directoryCountryCount(code),priority:i
+ })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,3);
+ summary.innerHTML=`<span><b>${items.length}</b> منتجًا وخدمةً في الدليل</span><span><b>${totalArab}</b> منها مرتبطة بدول عربية بحسب بياناتنا</span>`;
+ top.innerHTML=topRows.map(({code,name,count})=>`
+  <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} منتجًا أو خدمةً مرتبطة بـ${name} في الدليل">
+   <span class="home-country-identity"><img src="/images/flags/${code}.png" width="28" height="19" alt=""><strong>${name}</strong></span>
+   <span class="home-country-count">${count} <small>منتجًا وخدمةً</small></span>
+   <span class="home-country-go" aria-hidden="true">↖</span>
+  </button>`).join('');
+ const ten=[...arabProgressData.innovation.rows].sort((a,b)=>a[2]-b[2]).slice(0,10);
+ observer.innerHTML=ten.map(([code,name,rank],i)=>`
+  <li class="home-observer-country">
+   <span class="home-observer-ordinal" aria-label="الترتيب في الدول المختارة ${i+1}">${i+1}</span>
+   <button type="button" class="home-flag-link" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض عناصر ${name} في الدليل" title="عناصر ${name} في الدليل"><img src="/images/flags/${code}.png" width="25" height="17" alt=""></button>
+   <a href="#competitionIndex" onclick="renderArabProgress('innovation');go('competitionIndex');return false" class="home-observer-country-link" title="افتح مرصد الابتكار"><b>${name}</b><span>${rank} <small>عالميًا</small></span></a>
+  </li>`).join('');
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderHomeCountryOverview,{once:true});
+else renderHomeCountryOverview();
+
 function toggleArabExtraMetrics(btn){
  const panel=document.getElementById('arabExtraMetrics');if(!panel)return;
  const opening=panel.hasAttribute('hidden');
@@ -1250,12 +1322,10 @@ function arabMetricVisual(d,value){
   return `<div class="arab-rank-track" aria-hidden="true"><span style="--pos:${Math.min(99,Math.max(1,((value-1)/99)*100))}%"></span></div>`;
  }
  if(d.type==='tier'){
-  const strength=(6-Number(value))/5*100;
-  return `<div class="arab-progress-bar" aria-hidden="true"><span style="--w:${strength.toFixed(1)}%"></span></div>`;
+  return ''; // ITU tiers are categories, not synthetic percentages.
  }
  if(d.type==='group'){
-  const score=({A:4,B:3,C:2,D:1})[value]||1;
-  return `<div class="arab-progress-bar" aria-hidden="true"><span style="--w:${(score/4*100).toFixed(1)}%"></span></div>`;
+  return ''; // GTMI groups are categories, not synthetic percentages.
  }
  const max=d.type==='count'?Math.max(...d.rows.map(r=>Number(r[2])||0)):d.type==='score'?1:100;
  const pct=Math.max(7,(Number(value)/max)*100);
@@ -1269,9 +1339,9 @@ function arabMetricValue(d,value){
  if(d.type==='group')return `المجموعة ${value}`;
  return new Intl.NumberFormat('ar-EG').format(value);
 }
-function arabProgressCountryControl(code,country,value,visual,first=false){
+function arabProgressCountryControl(code,country,value,visual,first=false,categorical=false){
  const count=directoryCountryCount(code);
- const cls='arab-progress-row'+(first?' is-first':'')+(count?' has-directory':'');
+ const cls='arab-progress-row'+(first?' is-first':'')+(count?' has-directory':'')+(categorical?' is-categorical':'');
  const inner=`<div class="arab-progress-country"><img src="${arabProgressFlagBase+code+'.png'}" alt=""><b>${country}</b></div>${visual}<div class="arab-progress-value">${value}</div>`;
  return count
   ? `<button type="button" class="${cls}" onclick="openCountryDirectory('${code}','${country}')" title="اعرض ${count} عنصرًا من ${country} في الدليل">${inner}</button>`
@@ -1288,7 +1358,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
 
  const visibleRows=d.rows.slice(0,arabCountryVisible);
  const rows=visibleRows.map(([code,country,value],i)=>
-  arabProgressCountryControl(code,country,arabMetricValue(d,value),arabMetricVisual(d,value),i===0)
+  arabProgressCountryControl(code,country,arabMetricValue(d,value),arabMetricVisual(d,value),i===0,d.type==='tier'||d.type==='group')
  ).join('');
  const remaining=d.rows.length-visibleRows.length;
  const add=Math.min(3,remaining);
@@ -1305,7 +1375,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
   ${rows}
   ${remaining>0?`<div class="arab-country-more-wrap"><button type="button" class="arab-country-more" onclick="showMoreArabCountries()">+ ${add} دول <small>${remaining} متبقية</small></button></div>`:''}`;
 
- source.innerHTML=`<span>المصدر:</span><a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel} ↗</a><span>· آخر تحقق: 22 سبتمبر 2026</span><span>· اضغط دولة لها عناصر لعرضها في الدليل</span>`;
+ source.innerHTML=`<span>المصدر:</span><a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel} ↗</a><span>· آخر تحقق موثق: ${d.checked||'22 سبتمبر 2026'}</span><span>· اضغط دولة لها عناصر لعرضها في الدليل</span>`;
  const insight=document.getElementById('arabProgressInsight');
  if(insight){
   insight.innerHTML=`

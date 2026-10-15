@@ -1,0 +1,31 @@
+'use strict';
+const fs=require('node:fs'),assert=require('node:assert/strict'),vm=require('node:vm'),{execFileSync}=require('node:child_process');
+const baseline='18bebbf0bc1d1156f1e8fe13aa8dbc5dcc642ebb';
+const read=f=>fs.readFileSync(f,'utf8'),old=f=>execFileSync('git',['show',baseline+':'+f],{encoding:'utf8'});
+for(const f of ['js/catalog-data.js','js/detail-renderers.js','js/commercial-links.js','css/reading-hierarchy.css','guides.html','site.config.json','vercel.json',...fs.readdirSync('guides').filter(f=>f.endsWith('.html')).map(f=>'guides/'+f)])assert.equal(read(f),old(f),'Protected file: '+f);
+const before=old('index.html'),after=read('index.html');
+for(const marker of ['<section class="commercial-demo-wrap','<section class="ad-demo-wrap ad-demo-end']){
+ const section=s=>s.slice(s.indexOf(marker),s.indexOf('</section>',s.indexOf(marker))+10);assert.equal(section(after),section(before),marker);
+}
+for(const re of [/<a class="ad-demo ad-demo-display"[\s\S]*?<\/a>/,/<p class="intro-promise">[\s\S]*?<\/p>/,/<p class="intro-description">[\s\S]*?<\/p>/,/<div class="monitor-grid">[\s\S]*?<div class="section-continue">/])assert.equal(after.match(re)?.[0],before.match(re)?.[0],String(re));
+const memory=read('js/discovery-memory.js').replace(/^    directoryRotation:.*\n/m,'').replace(/^   window.badilakDirectoryRotation\?\.restore\(state.directoryRotation\);\n/m,'');
+assert.equal(memory,old('js/discovery-memory.js'),'Only visit-order state added to memory');
+const app=read('js/app.js'),was=old('js/app.js');
+const region=(s,a,b)=>s.slice(s.indexOf(a),s.indexOf(b,s.indexOf(a)));
+assert.equal(region(app,'function openExternal(','function openMethodology('),region(was,'function openExternal(','function openMethodology('),'External choice gate preserved');
+assert.ok(app.includes('<p class="learning-focus">${x.focus}</p>'),'Original learning copy');
+assert.equal((after.match(/class="home-route home-route--/g)||[]).length,4);
+const ctx=vm.createContext({});vm.runInContext(read('js/catalog-data.js'),ctx);
+vm.runInContext(region(read('js/detail-renderers.js'),'function countryEntries','function countryBadgeMarkup'),ctx);
+vm.runInContext(region(app,'function countryInfoHasCode','let filter='),ctx);
+vm.runInContext(region(app,'const arabProgressData=','const arabProgressFlagBase='),ctx);
+const data=vm.runInContext('({items,itemCountryMap,arabProgressData})',ctx);
+assert.equal(data.items.length,82);
+const arabCodes=['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy'];
+const count=code=>data.items.filter(x=>ctx.countryInfoHasCode(data.itemCountryMap[x.id],code)).length;
+assert.deepEqual(['eg','sa','ae'].map(count),[13,13,13]);
+assert.equal(data.items.filter(x=>arabCodes.some(c=>ctx.countryInfoHasCode(data.itemCountryMap[x.id],c))).length,75);
+assert.deepEqual(Array.from(data.arabProgressData.innovation.rows,r=>r[2]),[25,42,47,54,60,62,64,69,71,83]);
+assert.ok(!read('js/smart-return.js').includes('badilak-lab.vercel.app'),'No lab destination on production');
+execFileSync(process.execPath,['scripts/audit-prelaunch.cjs'],{stdio:'inherit'});
+console.log('PASS: selective lab integration, original card renderer/copy/cautions/articles/ads/logo links/indexing preserved, 82/75 inventory and country counts verified.');

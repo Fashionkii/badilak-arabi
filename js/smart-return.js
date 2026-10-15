@@ -148,3 +148,39 @@
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.addEventListener('pageshow',()=>setTimeout(renderMemory,0));
 })();
+
+/* Temporary social destinations until the official page links are supplied. */
+(()=>{
+ const install=()=>{
+  const footer=document.querySelector('body>footer,footer.footer');
+  if(!footer||footer.querySelector('.badilak-social-links'))return;
+  const nav=document.createElement('nav');
+  nav.className='badilak-social-links';
+  nav.setAttribute('aria-label','منصات التواصل — روابط تجريبية');
+  nav.innerHTML=`
+  <a href="/" aria-label="Facebook — رابط تجريبي إلى الرئيسية" title="Facebook — رابط مؤقت إلى الرئيسية"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M14.5 21v-8h2.7l.4-3.2h-3.1V7.9c0-1 .3-1.6 1.7-1.6h1.6V3.5c-.3 0-1.3-.2-2.5-.2-2.6 0-4.3 1.5-4.3 4.4v2.1H8v3.2h3V21z" fill="currentColor"/></svg></a>
+  <a href="/" aria-label="Instagram — رابط تجريبي إلى الرئيسية" title="Instagram — رابط مؤقت إلى الرئيسية"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.7" cy="6.4" r="1.2" fill="currentColor"/></svg></a>
+  <a href="/" aria-label="X — رابط تجريبي إلى الرئيسية" title="X — رابط مؤقت إلى الرئيسية"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M4 3h4.2l11.8 18h-4.2L4 3zm15.3 0-6.4 7.4M4.6 21l6.5-7.5" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/></svg></a>
+  <a href="/" aria-label="YouTube — رابط تجريبي إلى الرئيسية" title="YouTube — رابط مؤقت إلى الرئيسية"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 9 6 3-6 3z" fill="currentColor"/></svg></a>
+  <a href="/" aria-label="TikTok — رابط تجريبي إلى الرئيسية" title="TikTok — رابط مؤقت إلى الرئيسية"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M15 2v12.5a4 4 0 1 1-4-4v3a1 1 0 1 0 1 1V2h3zm0 0c.4 2.3 2.2 4.2 5 4.5v3c-1.9-.1-3.6-.7-5-1.9V2z" fill="currentColor"/></svg></a>
+  `;
+  const insertAt=footer.querySelector('.footer-inner')||footer.querySelector('.wrap')||footer;
+  insertAt.appendChild(nav);
+  const css=document.createElement('style');
+  css.id='badilak-social-style';
+  css.textContent=`
+  .badilak-social-links{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;direction:ltr}
+  .badilak-social-links a{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;min-width:40px;
+   border:1px solid currentColor;border-radius:10px;color:inherit!important;background:rgba(255,255,255,.06);
+   opacity:.88;text-decoration:none!important;transition:opacity .16s ease,background-color .16s ease}
+  .badilak-social-links a:hover{opacity:1;background:rgba(165,191,181,.16)}
+  .badilak-social-links a:focus-visible{outline:3px solid #c39543;outline-offset:3px}
+  .badilak-social-links svg{width:19px;height:19px;display:block}
+  @media(max-width:760px){.badilak-social-links{width:100%;justify-content:center;gap:9px}}
+  @media(prefers-reduced-motion:reduce){.badilak-social-links a{transition:none}}
+  `;
+  document.head.appendChild(css);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+ else install();
+})();
