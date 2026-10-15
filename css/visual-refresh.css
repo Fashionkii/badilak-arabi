@@ -149,8 +149,21 @@ body.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo
     max-width:min(344px,90vw)!important;
   }
 }
+@media(min-width:1024px) {
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo {
+    width:min(318px,100%);
+  }
+}
+@media(max-width:760px) {
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo {
+    width:min(340px,90vw);
+  }
+}
 @media(min-width:1024px) and (max-height:800px) {
   body.guided-discovery[data-journey="home"] .intro .intro-heading h1.art-title.art-title--brand {
     max-width:408px!important;
+  }
+  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo {
+    width:min(244px,100%);
   }
 }
