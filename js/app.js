@@ -1295,6 +1295,43 @@ function openCountryDirectory(code,country){
  document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));
  buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();resetDirectoryLimit();closeDirectoryRefiners();renderCards();goDirectoryResults();
 }
+
+// Homepage: two different datasets with explicitly different meanings.
+// Counts come only from the curated service directory; observatory values come
+// from WIPO GII 2026, never from a homemade cross-metric average.
+function renderHomeCountryOverview(){
+ const summary=document.getElementById('homeInventorySummary');
+ const top=document.getElementById('homeCountryTop3');
+ const observer=document.getElementById('homeObserverMini');
+ if(!summary||!top||!observer)return;
+ const arabCodes=new Set(['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy']);
+ const totalArab=items.filter(item=>{
+  const info=itemCountryMap[item.id];
+  return info&&[...arabCodes].some(code=>countryInfoHasCode(info,code));
+ }).length;
+ const priority=['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy'];
+ const topRows=priority.map((code,i)=>({
+  code,name:arabProgressCountryNames[code],
+  count:directoryCountryCount(code),priority:i
+ })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,3);
+ summary.innerHTML=`<span><b>${items.length}</b> عنصرًا في الدليل</span><span><b>${totalArab}</b> مرتبطًا بدول عربية بحسب بياناتنا</span>`;
+ top.innerHTML=topRows.map(({code,name,count})=>`
+  <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} عنصرًا مرتبطًا بـ${name} في الدليل">
+   <span class="home-country-identity"><img src="/images/flags/${code}.png" width="28" height="19" alt=""><strong>${name}</strong></span>
+   <span class="home-country-count">${count} <small>عنصرًا</small></span>
+   <span class="home-country-go" aria-hidden="true">↖</span>
+  </button>`).join('');
+ const ten=[...arabProgressData.innovation.rows].sort((a,b)=>a[2]-b[2]).slice(0,10);
+ observer.innerHTML=ten.map(([code,name,rank],i)=>`
+  <li class="home-observer-country">
+   <span class="home-observer-ordinal" aria-label="الترتيب في الدول المختارة ${i+1}">${i+1}</span>
+   <button type="button" class="home-flag-link" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض عناصر ${name} في الدليل" title="عناصر ${name} في الدليل"><img src="/images/flags/${code}.png" width="25" height="17" alt=""></button>
+   <a href="#competitionIndex" class="home-observer-country-link" title="افتح مرصد الابتكار"><b>${name}</b><span>${rank} <small>عالميًا</small></span></a>
+  </li>`).join('');
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderHomeCountryOverview,{once:true});
+else renderHomeCountryOverview();
+
 function toggleArabExtraMetrics(btn){
  const panel=document.getElementById('arabExtraMetrics');if(!panel)return;
  const opening=panel.hasAttribute('hidden');
