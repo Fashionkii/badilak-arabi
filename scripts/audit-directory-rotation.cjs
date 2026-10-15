@@ -65,8 +65,17 @@ const catList=list.filter(x=>x.cat==='create');
 const oldCategory=ids(entered.order(catList));
 visitInfo.enter();
 const newCategory=ids(entered.order(catList));
-if(catList.length>6)assert.notDeepEqual(newCategory.slice(0,6),oldCategory.slice(0,6),'category re-entry refreshes desktop slots');
+if(catList.length>=6)assert.notDeepEqual(newCategory.slice(0,6),oldCategory.slice(0,6),'category re-entry refreshes desktop slots');
 assert.deepEqual(newCategory.slice(0,4),oldCategory.slice(0,4),'desktop category anchors unchanged');
+const six=visit({seed:42});
+six.ctx.filter='create';
+const creation=list.filter(x=>x.cat==='create');
+if(creation.length===6){
+ const beforeSix=ids(six.order(creation));six.ctx.window.badilakDirectoryRotation.enter();
+ const afterSix=ids(six.order(creation));
+ assert.notDeepEqual(beforeSix.slice(4,6),afterSix.slice(4,6),'six-item category swaps its two discovery slots');
+ assert.deepEqual(beforeSix.slice(0,4),afterSix.slice(0,4),'six-item category preserves anchors');
+}
 const guarded=ids(entered.order(catList));
 entered.ctx.subfilter='design';
 visitInfo.enter();

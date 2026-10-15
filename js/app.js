@@ -36,7 +36,18 @@ function orderDirectoryDiscoveryCards(list,search){
  // The initial footprint is a visit property, not the current viewport width.
  const pageSize=directoryVisit.wide?6:3;
  const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
- if(!pool.length)return list;
+ // A category with exactly six items can still feel fresh: swap its two
+ // discovery slots without inventing further products or moving anchors.
+ if(!pool.length){
+  if(pageSize===6&&list.length===6){
+   const ordered=list.slice();
+   let salt=directoryVisit.seed;
+   for(const char of filter)salt=Math.imul(salt^char.charCodeAt(0),16777619);
+   if(salt&1)[ordered[4],ordered[5]]=[ordered[5],ordered[4]];
+   return ordered;
+  }
+  return list;
+ }
  const slots=Math.min(pageSize===6?2:1,pool.length);
  let seed=directoryVisit.seed^0x9e3779b9;
  for(const char of filter)seed=Math.imul(seed^char.charCodeAt(0),16777619);
@@ -57,7 +68,7 @@ function beginDirectoryDiscoveryVisit(){
     (document.getElementById('searchInput')?.value||'').trim())return;
  const current=items.filter(x=>filter==='all'||x.cat===filter);
  const start=orderDirectoryDiscoveryCards(current,'').slice(0,directoryVisit.wide?6:3).map(x=>x.id);
- if(current.length<= (directoryVisit.wide?6:3))return;
+ if(current.length< (directoryVisit.wide?6:3))return;
  let next=directoryVisit;
  for(let n=0;n<16;n++){
   const candidate={seed:Math.floor(Math.random()*4294967296),wide:directoryVisit.wide};
