@@ -34,6 +34,11 @@
    if(target==='#'+(view==='home'?'top':view))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
   });
   document.querySelectorAll('.journey-menu').forEach(menu=>menu.open=false);
+  // A genuine section-to-directory visit may rotate discovery cards.
+  // Initial routing and browser history restoration deliberately skip this.
+  if(view==='directory'&&previous!==view&&options.history!==false){
+   window.badilakDirectoryRotation?.enter();
+  }
   ensureJourneyPanel(view);
   updateTitle();
   if(options.history!==false&&!restoring){

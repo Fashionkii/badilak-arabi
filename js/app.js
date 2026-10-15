@@ -18,8 +18,8 @@ function directoryBatchSize(){
  // Wider discovery batches; precise lookups remain deliberately smaller.
  return specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
-// Limited discovery rotation, stable for the tab visit even after a resize/reload.
-// Derived from the separate rotation experiment; precise result sets never rotate.
+// Two desktop discovery slots (one on mobile) refresh on each *new* directory entry.
+// A search, detailed filter, resize, or history return never reshuffles results.
 const directoryRotationKey='badilak_directory_rotation_v2';
 function directoryVisitState(){
  try{
@@ -30,11 +30,11 @@ function directoryVisitState(){
   return state;
  }catch{return null} // Storage unavailable: keep the ordinary catalog order.
 }
-const directoryVisit=directoryVisitState();
+let directoryVisit=directoryVisitState();
 function orderDirectoryDiscoveryCards(list,search){
  if(!directoryVisit||search||subfilter!=='all'||originFilter||countryFilter)return list;
  // The initial footprint is a visit property, not the current viewport width.
- const pageSize=directoryVisit.wide&&filter==='all'?6:3;
+ const pageSize=directoryVisit.wide?6:3;
  const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
  if(!pool.length)return list;
  const slots=Math.min(pageSize===6?2:1,pool.length);
@@ -50,6 +50,40 @@ function orderDirectoryDiscoveryCards(list,search){
  }
  return ordered;
 }
+// Re-entry from a different section starts a new discovery visit, but only when
+// exploring freely. Returning through browser history restores that visit instead.
+function beginDirectoryDiscoveryVisit(){
+ if(!directoryVisit||subfilter!=='all'||originFilter||countryFilter||
+    (document.getElementById('searchInput')?.value||'').trim())return;
+ const current=items.filter(x=>filter==='all'||x.cat===filter);
+ const start=orderDirectoryDiscoveryCards(current,'').slice(0,directoryVisit.wide?6:3).map(x=>x.id);
+ if(current.length<= (directoryVisit.wide?6:3))return;
+ let next=directoryVisit;
+ for(let n=0;n<16;n++){
+  const candidate={seed:Math.floor(Math.random()*4294967296),wide:directoryVisit.wide};
+  directoryVisit=candidate;
+  const reordered=orderDirectoryDiscoveryCards(current,'').slice(0,candidate.wide?6:3).map(x=>x.id);
+  next=candidate;
+  if(reordered.some((id,i)=>id!==start[i]))break;
+ }
+ directoryVisit=next;
+ try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
+ // The directory is rendered lazily at its first entry; later entries must refresh it.
+ if(initializedJourneyPanels.has('directory')){
+  resetDirectoryLimit();
+  renderCards();
+ }
+}
+window.badilakDirectoryRotation={
+ enter:beginDirectoryDiscoveryVisit,
+ capture:()=>directoryVisit?{seed:directoryVisit.seed,wide:directoryVisit.wide}:null,
+ restore(state){
+  if(!state||!Number.isSafeInteger(state.seed)||state.seed<0||state.seed>=4294967296||
+      typeof state.wide!=='boolean')return;
+  directoryVisit={seed:state.seed,wide:state.wide};
+  try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
+ }
+};
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
 function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
 function resetLearningLimit(){learningVisible={platform:4,resource:4,channel:4,reciter:4}}

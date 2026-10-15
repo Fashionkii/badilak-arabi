@@ -933,3 +933,13 @@ body.cosmic-theme.guided-discovery #directory #directoryMore .load-more-btn{
 @media(prefers-reduced-motion:reduce){
  body.cosmic-theme.guided-discovery #directory .catalog-grid>.item{transition:none!important;}
 }
+
+/* Keep the existing floating history control out of directory filter and card headers. */
+body.cosmic-theme.guided-discovery[data-journey="directory"] .badilak-nav-memory{
+ top:auto!important;bottom:76px!important;
+}
+@media(max-width:760px){
+ body.cosmic-theme.guided-discovery[data-journey="directory"] .badilak-nav-memory{
+  bottom:72px!important;
+ }
+}

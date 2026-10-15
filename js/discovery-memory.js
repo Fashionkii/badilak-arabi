@@ -10,6 +10,7 @@
   capture(){
    return {
     version:1,journeyView:window.badilakJourney?.view,filter,subfilter,originFilter,countryFilter,directoryVisible,
+    directoryRotation:window.badilakDirectoryRotation?.capture(),
     search:value('searchInput'),learningType,learningSearch:value('learningSearch'),learningField:value('learningField'),
     sections:{...learningSectionOpen},
     carousels:types.map(type=>{
@@ -28,6 +29,7 @@
    originFilter=Object.hasOwn(originRouteMap,state.originFilter)?state.originFilter:null;
    countryFilter=Object.hasOwn(arabProgressCountryNames,state.countryFilter)?state.countryFilter:null;
    directoryVisible=Math.max(1,count(state.directoryVisible,items.length,directoryBatchSize()));
+   window.badilakDirectoryRotation?.restore(state.directoryRotation);
    byId('searchInput').value=text(state.search);
    document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===filter));
    document.querySelectorAll('[data-origin]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.origin===originFilter)));
