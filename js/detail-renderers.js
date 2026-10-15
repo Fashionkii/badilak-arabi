@@ -39,11 +39,13 @@ function subcategoryLabel(cat,sub){
 }
 
 function guideLinkMarkup(guide,detail=false){
+ // Only specific guides belong on cards; the general hub remains in the details.
+ if(!guide&&!detail)return '';
  const href=guide?guide[0]:'/guides';
  const content=detail
   ? `<span>اقرأ</span><strong>${guide?guide[1]:'اقرأ حسب حاجتك'}</strong>`
-  : '<strong>اقرأ</strong>';
- const readingLabel=detail?'':` aria-label="اقرأ: ${String(guide?guide[1]:'مركز القراءة').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}"`;
+  : '<strong>دليل الاختيار</strong>';
+ const readingLabel=detail?'':` aria-label="دليل الاختيار: ${String(guide?guide[1]:'مركز القراءة').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}"`;
  return `<a class="editorial-guide-link ${detail?'is-detail':'card-read-link'}" href="${href}"${readingLabel} onclick="event.stopPropagation()">${content}<b aria-hidden="true">←</b></a>`;
 }
 
@@ -419,10 +421,14 @@ const cardCautionOverrides={
  dubaiplus:'الإتاحة تتغير مع حقوق العرض.',
  almaany:'المعنى الصحيح يعتمد على السياق.'
 };
+function directoryAboutLabel(x){
+ if(x.cat==='learn')return 'عن المصدر';
+ if(x.cat==='culture')return 'عن المحتوى';
+ if(x.type==='منتجات وصناعة')return 'عن المنتج';
+ return 'عن الخدمة';
+}
 function directoryCardMarkup(x,activeOrigin=null){
- const {reference,fit,caution}=directoryComparison(x,activeOrigin);
- // Reuse the existing short caution where available; keep the full evidence in details.
- const keyLimit=caution||comparisonGuidance[x.id]?.[1]||cardCautionOverrides[x.id]||decisionNoteFor(x)?.alert||'';
+ const {reference}=directoryComparison(x,activeOrigin);
  return `
   <article class="item" data-item-id="${x.id}">
    <a class="item-identity" href="/discover/${x.id}" onclick="return badilakOpenItem(event,'${x.id}')">
@@ -431,14 +437,14 @@ function directoryCardMarkup(x,activeOrigin=null){
    </a>
    ${countryBadgeMarkup(x)}
    <div class="comparison-strip ${reference?'':'is-empty'}">${reference?`<span>إذا كنت تستخدم</span><bdi class="origin-mini">${originName(reference)}</bdi>`:''}</div>
-   ${fit?`<p class="card-fit">${fit}</p>`:''}
    <div class="card-summary">
     <p class="card-purpose">${compactCardPurpose(x)}</p>
    </div>
-   ${keyLimit?`<p class="card-key-limit${caution?'':' card-key-limit--general'}"><strong>قبل أن تختار</strong><span>${keyLimit}</span></p>`:''}
    <div class="card-primary-actions">
-    <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">تفاصيل</button>
-    <div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>
-    <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
+    <div class="card-info-actions ${relatedGuideMap[x.id]?'':'is-single'}">
+     <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')">${directoryAboutLabel(x)}</button>
+     ${relatedGuideMap[x.id]?`<div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>`:''}
+    </div>
+    <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>زيارة الموقع</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`;}
