@@ -1588,3 +1588,12 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-route:focus-visibl
   transform:none!important;
  }
 }
+
+/* Six documented countries in two rows at desktop size; keep names and flags
+   readable on narrow phones without sacrificing the existing home layout. */
+@media(max-width:420px){
+ body.cosmic-theme.guided-discovery[data-journey="home"] .home-country-top3{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;
+ }
+}

@@ -1313,7 +1313,7 @@ function renderHomeCountryOverview(){
  const topRows=priority.map((code,i)=>({
   code,name:arabProgressCountryNames[code],
   count:directoryCountryCount(code),priority:i
- })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,3);
+ })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,6);
  summary.innerHTML=`<span><b>${items.length}</b> منتجًا وخدمةً في الدليل</span><span><b>${totalArab}</b> منها مرتبطة بدول عربية بحسب بياناتنا</span>`;
  top.innerHTML=topRows.map(({code,name,count})=>`
   <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} منتجًا أو خدمةً مرتبطة بـ${name} في الدليل">
