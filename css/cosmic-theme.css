@@ -391,3 +391,126 @@ body.cosmic-theme.guided-discovery :is(
   border-color:#d2e1d7!important;
   box-shadow:0 0 0 2px rgba(220,235,225,.42)!important;
 }
+
+/* Lab 2026-10-15 — unified service and learning card template. */
+/* One visible summary line; full text remains in the DOM and full details. */
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-summary {
+  display:block!important;
+  width:100%!important;
+  height:30px!important;min-height:30px!important;max-height:30px!important;
+  flex:0 0 30px!important;
+  margin:0 0 9px!important;
+  overflow:hidden!important;
+}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-purpose {
+  display:block!important;
+  width:100%!important;max-width:100%!important;
+  height:28px!important;min-height:0!important;max-height:28px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+  -webkit-line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+  line-height:28px!important;
+  text-align:start!important;
+  font-size:.875rem!important;
+}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-primary-actions {
+  display:flex!important;
+  flex-direction:column!important;
+  gap:8px!important;
+  margin-top:auto!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions {
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+  align-items:stretch!important;
+  width:100%!important;
+  min-height:44px!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions.is-single,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions.is-single {
+  grid-template-columns:minmax(0,1fr)!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions>.more-btn,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .learning-actions button {
+  display:flex!important;
+  align-items:center!important;justify-content:center!important;
+  width:100%!important;
+  min-width:0!important;min-height:44px!important;height:44px!important;
+  margin:0!important;padding:7px 6px!important;
+  border:1px solid #b8cfc3!important;border-radius:10px!important;
+  background:#eef5f0!important;color:#1b4140!important;
+  box-shadow:none!important;
+  font-family:var(--ui)!important;font-size:.8125rem!important;
+  font-weight:700!important;line-height:1.4!important;
+  white-space:nowrap!important;
+  cursor:pointer;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions>.more-btn:hover,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .learning-actions button:hover {
+  background:#e4f0e8!important;border-color:#769c89!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions .card-guide-slot,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .learning-card-guide-slot {
+  display:flex!important;
+  align-items:stretch!important;
+  width:100%!important;
+  height:44px!important;min-height:44px!important;max-height:44px!important;
+  margin:0!important;overflow:visible!important;
+  flex:0 0 auto!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions .card-read-link,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link {
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-width:0!important;
+  min-height:44px!important;height:44px!important;
+  margin:0!important;padding:7px 5px!important;
+  border:1px solid #d6c8af!important;border-radius:10px!important;
+  background:#fff9ef!important;color:#644c2c!important;
+  box-shadow:none!important;
+  font-family:var(--ui)!important;font-size:.8125rem!important;
+  font-weight:700!important;line-height:1.4!important;
+  gap:4px!important;white-space:nowrap!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions .card-read-link:hover,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link:hover {
+  border-color:#b5996f!important;background:#fff2db!important;
+}
+body.cosmic-theme.guided-discovery #directory .card-info-actions .card-read-link strong,
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link strong {
+  font-size:inherit!important;white-space:nowrap!important;
+}
+body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus {
+  display:block!important;
+  width:100%!important;max-width:100%!important;
+  height:30px!important;min-height:30px!important;max-height:30px!important;
+  margin:0 0 8px!important;
+  flex:0 0 30px!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+  -webkit-line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+  line-height:30px!important;
+  text-align:start!important;
+}
+body.cosmic-theme.guided-discovery #learning .learning-card-actions {
+  flex:0 0 auto!important;
+  margin-top:auto!important;
+}
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .learning-actions {
+  display:block!important;
+  width:100%!important;
+  height:44px!important;min-height:44px!important;max-height:44px!important;
+  margin:0!important;padding:0!important;
+}
+@media(max-width:420px) {
+  body.cosmic-theme.guided-discovery #directory .card-info-actions,
+  body.cosmic-theme.guided-discovery #learning .learning-card-actions {gap:5px!important;}
+  body.cosmic-theme.guided-discovery #directory .card-info-actions .card-read-link,
+  body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link {font-size:.75rem!important;}
+}
