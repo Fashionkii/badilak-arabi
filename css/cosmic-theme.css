@@ -592,3 +592,96 @@ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row.is-categ
  background:rgba(30,83,75,.075);padding:4px 11px;
  text-align:center!important;
 }
+
+/* Oct 2026 lab: compact landscape home without disturbing smaller layouts. */
+@media(min-width:1024px){
+ body.cosmic-theme.guided-discovery[data-journey="home"] main#top{
+  padding-block:6px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap{
+  grid-template-rows:auto auto!important;
+  gap:10px 16px!important;
+  padding:14px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap>.intro-brand-panel{
+  grid-row:1!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-explorer{
+  grid-column:1!important;grid-row:1!important;
+  align-self:stretch!important;
+  display:flex!important;flex-direction:column;justify-content:center!important;
+  padding:15px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro>.portal{
+  grid-row:2!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-options{
+  grid-auto-rows:104px!important;
+  gap:8px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-option{
+  height:104px!important;min-height:104px!important;max-height:104px!important;
+  padding:8px 5px!important;gap:4px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-logo{
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-logo img{
+  max-width:34px!important;max-height:34px!important;
+ }
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .portal-heading{
+  margin-bottom:7px!important;
+ }
+}
+@media(min-width:1024px) and (min-height:820px){
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap{
+  min-height:min(620px,calc(100dvh - 158px))!important;
+ }
+}
+/* More cohesive editorial service cards; preserve widths, content and actions. */
+body.cosmic-theme.guided-discovery #directory .catalog-grid .item>.card-summary{
+ margin-top:auto!important;
+ margin-bottom:8px!important;
+}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .item>.card-primary-actions{
+ margin-top:0!important;
+}
+body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus{
+ margin-top:auto!important;margin-bottom:8px!important;
+}
+body.cosmic-theme.guided-discovery #learning .learning-card .learning-card-actions{
+ margin-top:0!important;
+}
+/* Open learning groups in a plain responsive grid, no horizontal carousel or +. */
+body.cosmic-theme.guided-discovery #learning #learningGroups{
+ display:block!important;
+}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-shell{
+ max-width:none!important;margin-inline:0!important;
+}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-viewport{
+ overflow:visible!important;
+}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ width:100%!important;overflow:visible!important;scroll-snap-type:none!important;
+ gap:12px!important;padding:0!important;
+}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track>.learning-card{
+ flex:none!important;min-width:0!important;width:auto!important;
+ scroll-snap-align:none!important;
+}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-arrow,
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-more-wrap{
+ display:none!important;
+}
+@media(max-width:900px){
+ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:520px){
+ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}

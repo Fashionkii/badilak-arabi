@@ -552,19 +552,9 @@ function renderLearning(){
  const groups=[['platform','منصات الكورسات'],['resource','مصادر عملية من المنصات'],['channel','قنوات يوتيوب مفيدة'],['reciter','قنوات رسمية لقراء القرآن']];
  document.getElementById('learningGroups').innerHTML=groups.map(([type,label])=>{
   const g=list.filter(x=>x.type===type);if(!g.length)return '';
-  const foldable=type==='channel'||type==='reciter';
-  if(foldable&&!learningSectionOpen[type]){
-   return `<section class="learning-group learning-folded" id="learning-group-${type}">
-    <div class="learning-folded-head"><div><h3 class="learning-group-title">${label}</h3><small>${g.length} مصدرًا متاحًا</small></div><button class="section-fold-toggle compact" type="button" aria-expanded="false" onclick="toggleLearningSection('${type}')"><span aria-hidden="true">+</span><span class="sr-only">فتح ${label}</span></button></div>
-   </section>`;
-  }
-  const moreLabel=type==='platform'?'منصات كورسات أكثر +':type==='resource'?'مصادر عملية أكثر +':type==='channel'?'قنوات يوتيوب أكثر +':'قراء رسميون أكثر +';
-  const titleMarkup=foldable
-   ? `<div class="learning-group-title-row"><h3 class="learning-group-title">${label}</h3><button class="section-fold-toggle compact" type="button" aria-expanded="true" onclick="toggleLearningSection('${type}')"><span aria-hidden="true">−</span><span class="sr-only">طي ${label}</span></button></div>`
-   : `<h3 class="learning-group-title">${label}</h3>`;
+  const titleMarkup=`<h3 class="learning-group-title">${label}</h3>`;
   return `<section class="learning-group learning-carousel-group" id="learning-group-${type}">${titleMarkup}
    <div class="learning-carousel-shell">
-    <button class="learning-carousel-arrow learning-carousel-prev" type="button" aria-label="السابق" onclick="scrollLearningCarousel('${type}',-1)">›</button>
     <div class="learning-carousel-viewport"><div class="learning-grid learning-carousel-track">${g.map(x=>`
      <article class="learning-card" data-learning-id="${x.id}">
       ${logoMarkup(x.logo,'learning-logo',x.name)}
@@ -577,9 +567,7 @@ function renderLearning(){
        ${learningGuideMap[x.id]?`<div class="learning-card-guide-slot">${learningGuideLinkMarkup(x.id)}</div>`:''}
       </div>
      </article>`).join('')}</div></div>
-    <button class="learning-carousel-arrow learning-carousel-next" type="button" aria-label="التالي" onclick="scrollLearningCarousel('${type}',1)">‹</button>
    </div>
-   ${g.length>4?`<div class="load-more-wrap learning-carousel-more-wrap"><button class="load-more-btn" onclick="enableLearningCarousel('${type}',this)">${moreLabel} <small>${g.length-4} أخرى</small></button></div>`:''}
   </section>`;
  }).join('') || '<div class="empty">لا توجد مصادر مطابقة. <button class="more-btn" onclick="resetLearning()">كل المصادر</button></div>';
  updateLearningContinue();
