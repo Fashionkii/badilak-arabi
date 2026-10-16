@@ -594,8 +594,8 @@ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-card {dis
 
 @media(min-width:1024px) {
  body.cosmic-theme.guided-discovery[data-journey="home"] {display:flex;flex-direction:column;min-height:100dvh;}
- body.cosmic-theme.guided-discovery[data-journey="home"] main#top {flex:1;display:grid;align-items:center;min-height:0!important;padding-block:8px!important;}
- body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap {display:grid!important;grid-template-columns:minmax(0,2fr) minmax(260px,1fr)!important;grid-template-rows:auto auto auto!important;gap:12px 18px!important;align-items:center!important;max-width:1180px!important;margin-block:0!important;padding:14px!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] main#top {flex:1;display:grid;align-items:center;min-height:0!important;padding-block:6px!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap {display:grid!important;grid-template-columns:minmax(0,2fr) minmax(260px,1fr)!important;grid-template-rows:auto auto auto!important;gap:8px 18px!important;align-items:center!important;max-width:1180px!important;margin-block:0!important;padding:10px!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel {grid-column:2!important;grid-row:1!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading {margin:0!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .cosmic-logo {width:min(350px,100%)!important;}
@@ -688,7 +688,7 @@ body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-l
 @media(min-width:1024px) {
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel {padding:10px;border:1px solid #29434b;border-radius:18px;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-option {height:84px!important;min-height:84px!important;}
- body.cosmic-theme.guided-discovery[data-journey="home"] .home-route {min-height:88px!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .home-route {min-height:80px!important;}
 }
 @media(min-width:1024px) and (max-height:800px) {
  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-heading h2 {font-size:18px!important;}
