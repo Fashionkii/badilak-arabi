@@ -320,6 +320,21 @@ const geoContextNotes={
  daftra:'<b>لماذا علمان؟</b> دفترة منتج بهوية عربية طورته Izam Web Solutions، ولدينا حضور معلن للجهة في مصر والولايات المتحدة؛ لذلك نعرض الصلتين بدل اختزالها في بلد واحد.'
 };
 
+function practicalTrialMarkup(x){
+ if(x.id!=='karnak')return '';
+ return `<details class="detail-task-comparison practical-trial">
+  <summary><span><strong>جرّبه على مهمتك</strong><small>تمرين قصير: تلخيص وصياغة بالمصرية</small></span></summary>
+  <div class="task-comparison-body">
+   <p class="task-comparison-intro">هذا تمرين مقترح، وليس نتيجة اختبار أجريناه لكرنك. وصف المساعد لنفسه لا يثبت قدراته أو يحصره في التاريخ المصري.</p>
+   <p><b>١. انسخ هذا الطلب في محادثة جديدة:</b></p>
+   <blockquote class="practical-trial-prompt">لخّص الإعلان التالي في جملة واحدة، ثم أعد صياغته بالمصرية في جملتين. حافظ على الحقائق ولا تضف معلومات. إذا سُئلت عن معلومة غير مذكورة، قل إنها غير مذكورة.<br><br>إعلان افتراضي للتدريب: ينظّم فريق «مساحة» ورشة مجانية لكتابة المحتوى يوم السبت، من الرابعة إلى السادسة مساءً. الورشة عبر الإنترنت، والتسجيل مطلوب. لم يُحدد عدد المقاعد.</blockquote>
+   <p><b>٢. اسأله بعدها:</b> كم عدد المقاعد المتاحة؟</p>
+   <p><b>٣. راجع بنفسك:</b> هل بقي الموعد والمدة والمجانية والتسجيل صحيحين؟ هل كانت المصرية طبيعية لك؟ وهل قال إن عدد المقاعد غير مذكور بدل اختراع رقم؟</p>
+   <p class="task-comparison-check">جرّب الطلب نفسه في أداتك الحالية. قارن صحة النتيجة والوقت الذي احتجته لتصحيحها. نجاح هذا المثال لا يثبت جودة الأداة في كل المهام؛ قبل الاعتماد، كرره على عينة من عملك دون بيانات حساسة.</p>
+  </div>
+ </details>`;
+}
+
 function directoryDetailMarkup(x,standalone=false){
  const special=specialDetails(x);
  // Keep every distinct fact; do not repeat the overview verbatim under a second label.
@@ -338,7 +353,7 @@ function directoryDetailMarkup(x,standalone=false){
    <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة: '+x.reviewed:''}</span></div>
    ${commercialDisclosureMarkup(x.id)}
    ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
-   ${directoryDiscoveryMarkup(x,standalone)}
+   ${practicalTrialMarkup(x)}${directoryDiscoveryMarkup(x,standalone)}
   </div>`;
  // A service title is h1; the sections below it are h2, with their existing visual size.
  markup=markup.replace(/<(\/?)h4\b/g,'<$1h2');
@@ -346,7 +361,7 @@ function directoryDetailMarkup(x,standalone=false){
 }
 
 
-function originName(id){return ({chatgpt:'ChatGPT',canva:'Canva',drive:'Google Drive',coursera:'Coursera',fiverr:'Fiverr',shopify:'Shopify',acrobat:'Acrobat',teams:'Teams',spotify:'Spotify',udemy:'Udemy',amazon:'Amazon',jumia:'Jumia',wikipedia:'Wikipedia',youtube:'YouTube',netflix:'Netflix',kindle:'Kindle',scholar:'Google Scholar',jstor:'JSTOR',quickbooks:'QuickBooks',elevenlabs:'ElevenLabs',otter:'Otter.ai',stripe:'Stripe',linkedin:'LinkedIn',googlemaps:'Google Maps',steam:'Steam'})[id]||id}
+function originName(id){return ({chatgpt:'ChatGPT',claude:'Claude',gemini:'Gemini',canva:'Canva',drive:'Google Drive',coursera:'Coursera',fiverr:'Fiverr',shopify:'Shopify',acrobat:'Acrobat',teams:'Teams',spotify:'Spotify',udemy:'Udemy',amazon:'Amazon',jumia:'Jumia',wikipedia:'Wikipedia',youtube:'YouTube',netflix:'Netflix',kindle:'Kindle',scholar:'Google Scholar',jstor:'JSTOR',quickbooks:'QuickBooks',elevenlabs:'ElevenLabs',otter:'Otter.ai',stripe:'Stripe',linkedin:'LinkedIn',googlemaps:'Google Maps',steam:'Steam'})[id]||id}
 
 // One-line card previews only; complete descriptions remain unchanged in details.
 function compactCardLine(value,max=44){
@@ -502,7 +517,7 @@ const comparisonGuidance={
  miswag:['تسوق وتوصيل داخل العراق','راجع تغطية التوصيل وشروط المنتج.']
 };
 function directoryComparison(x,activeOrigin){
- const selected=typeof activeOrigin==='string'&&x.origin.includes(activeOrigin);
+ const selected=typeof activeOrigin==='string'&&matchesDirectoryOrigin(x,activeOrigin);
  const reference=selected?activeOrigin:x.origin[0];
  const [fit,caution]=comparisonGuidance[x.id]||[x.type||'', ''];
  // Extra decision notes belong to the familiar-service journey; leave general browsing compact.

@@ -93,7 +93,7 @@
  <aside class="origin-explorer">
   <div class="origin-heading"><h2>ابحث عن بدائل عربية لما تستخدمه في حياتك اليومية</h2><span class="origin-hint">اختر خدمة تستخدمها لتستكشف خيارات عربية تساعدك في المهمة نفسها أو جانب منها.</span></div>
   <div class="origin-options">
-   <button class="origin-option" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin('chatgpt',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi><small class="origin-intent">خيارات المحادثة</small></button>
+   <button class="origin-option" id="conversationExample" data-origin="chatgpt" aria-pressed="false" onclick="chooseOrigin(this.dataset.origin,this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://chatgpt.com" loading="lazy" decoding="async"></span><bdi class="origin-name">ChatGPT</bdi><small class="origin-intent">خيارات المحادثة</small></button>
    <button class="origin-option" data-origin="canva" aria-pressed="false" onclick="chooseOrigin('canva',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://www.canva.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Canva</bdi><small class="origin-intent">أدوات التصميم</small></button>
    <button class="origin-option" data-origin="drive" aria-pressed="false" onclick="chooseOrigin('drive',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://drive.google.com" loading="lazy" decoding="async"></span><bdi class="origin-name">Google Drive</bdi><small class="origin-intent">ملفات وتخزين</small></button>
    <button class="origin-option" data-origin="coursera" aria-pressed="false" onclick="chooseOrigin('coursera',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://www.coursera.org" loading="lazy" decoding="async"></span><bdi class="origin-name">Coursera</bdi><small class="origin-intent">دورات تعلّم</small></button>
@@ -106,6 +106,9 @@
    <button class="origin-option" data-origin="amazon" aria-pressed="false" onclick="chooseOrigin('amazon',this)" title="يشمل المسار من كان يستخدم Souq سابقًا"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://www.amazon.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Amazon / Souq</bdi><small class="origin-intent">متاجر وأسواق</small></button>
    <button class="origin-option" data-origin="jumia" aria-pressed="false" onclick="chooseOrigin('jumia',this)"><span class="origin-logo"><img alt="" onerror="this.hidden=true;this.parentElement.classList.add('logo-unavailable')" src="https://www.google.com/s2/favicons?sz=64&domain_url=https://www.jumia.com.eg" loading="lazy" decoding="async"></span><bdi class="origin-name">Jumia</bdi><small class="origin-intent">تسوّق وأسواق</small></button>
   </div>
+  <label class="conversation-example-choice" for="conversationExampleChoice">مثال المحادثة
+   <select id="conversationExampleChoice" onchange="setConversationExample(this.value)"><option value="chatgpt">ChatGPT</option><option value="claude">Claude</option><option value="gemini">Gemini</option></select>
+  </label>
  </aside>
 
 
@@ -240,6 +243,7 @@
   <div class="directory-results-anchor" id="directoryResultsStart"></div>
   <div class="directory-state" id="stateLine" role="status" aria-live="polite"></div>
   <p id="originFitNote" class="origin-fit-note" hidden>خيارات تؤدي المهمة نفسها أو جزءًا منها؛ ترتيب العرض ليس تقييمًا للأفضل.</p>
+  <button type="button" id="directoryReorder" class="more-btn" hidden onclick="reshuffleDirectory()" title="يغيّر الترتيب فقط، دون إضافة خدمات أو تقييمها">غيّر ترتيب العرض</button>
   <div class="catalog-grid" id="catalogGrid"></div>
   <div class="load-more-wrap" id="directoryMore"></div>
   <div class="section-continue" id="directoryContinue"></div>

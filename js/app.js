@@ -18,79 +18,69 @@ function directoryBatchSize(){
  // Wider discovery batches; precise lookups remain deliberately smaller.
  return specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
-// Two desktop discovery slots (one on mobile) refresh on each *new* directory entry.
-// A search, detailed filter, resize, or history return never reshuffles results.
+// Rotation is fixed within a visit. Search, history return and "more" keep their order.
 const directoryRotationKey='badilak_directory_rotation_v2';
 function directoryVisitState(){
  try{
   const saved=JSON.parse(sessionStorage.getItem(directoryRotationKey));
   if(saved&&Number.isSafeInteger(saved.seed)&&saved.seed>=0&&saved.seed<4294967296&&typeof saved.wide==='boolean')return saved;
   const state={seed:Math.floor(Math.random()*4294967296),wide:!window.matchMedia('(max-width:760px)').matches};
-  sessionStorage.setItem(directoryRotationKey,JSON.stringify(state));
-  return state;
- }catch{return null} // Storage unavailable: keep the ordinary catalog order.
+  sessionStorage.setItem(directoryRotationKey,JSON.stringify(state));return state;
+ }catch{return null}
 }
 let directoryVisit=directoryVisitState();
+function directoryMatchesContext(x){
+ return (filter==='all'||x.cat===filter)&&(subfilter==='all'||x.sub===subfilter)&&
+  (!originFilter||matchesDirectoryOrigin(x,originFilter))&&
+  (!countryFilter||countryInfoHasCode(itemCountryMap[x.id],countryFilter));
+}
 function orderDirectoryDiscoveryCards(list,search){
- if(!directoryVisit||search||subfilter!=='all'||originFilter||countryFilter)return list;
- // The initial footprint is a visit property, not the current viewport width.
- const pageSize=directoryVisit.wide?6:3;
- const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
- // A category with exactly six items can still feel fresh: swap its two
- // discovery slots without inventing further products or moving anchors.
- if(!pool.length){
-  if(pageSize===6&&list.length===6){
-   const ordered=list.slice();
-   let salt=directoryVisit.seed;
-   for(const char of filter)salt=Math.imul(salt^char.charCodeAt(0),16777619);
-   if(salt&1)[ordered[4],ordered[5]]=[ordered[5],ordered[4]];
-   return ordered;
-  }
-  return list;
- }
- const slots=Math.min(pageSize===6?2:1,pool.length);
+ if(!directoryVisit||search||list.length<2)return list;
  let seed=directoryVisit.seed^0x9e3779b9;
- for(const char of filter)seed=Math.imul(seed^char.charCodeAt(0),16777619);
+ for(const char of [filter,subfilter,originFilter||'',countryFilter||''].join('|'))seed=Math.imul(seed^char.charCodeAt(0),16777619);
  const random=()=>{seed=(seed+0x6d2b79f5)|0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};
  const ordered=list.slice();
- for(let i=0;i<slots;i++){
-  // Sample without replacement from every eligible later card, not only 12.
-  const candidate=pool.splice(Math.floor(random()*pool.length),1)[0];
-  const slot=pageSize-slots+i;
-  [ordered[slot],ordered[candidate]]=[ordered[candidate],ordered[slot]];
+ if(subfilter!=='all'||originFilter||countryFilter||list.length<6){
+  // Small, precise result sets rotate as a whole; membership never changes.
+  for(let i=ordered.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[ordered[i],ordered[j]]=[ordered[j],ordered[i]];}
+ }else{
+  // Keep familiar anchors in broad browsing; refresh two desktop / one mobile slots.
+  const pageSize=directoryVisit.wide?6:3;
+  const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
+  if(!pool.length){if(random()<0.5)[ordered[4],ordered[5]]=[ordered[5],ordered[4]];}
+  else for(let i=0,slots=Math.min(directoryVisit.wide?2:1,pool.length);i<slots;i++){
+   const candidate=pool.splice(Math.floor(random()*pool.length),1)[0],slot=pageSize-slots+i;
+   [ordered[slot],ordered[candidate]]=[ordered[candidate],ordered[slot]];
+  }
  }
  return ordered;
 }
-// Re-entry from a different section starts a new discovery visit, but only when
-// exploring freely. Returning through browser history restores that visit instead.
-function beginDirectoryDiscoveryVisit(){
- if(!directoryVisit||subfilter!=='all'||originFilter||countryFilter||
-    (document.getElementById('searchInput')?.value||'').trim())return;
- const current=items.filter(x=>filter==='all'||x.cat===filter);
- const start=orderDirectoryDiscoveryCards(current,'').slice(0,directoryVisit.wide?6:3).map(x=>x.id);
- if(current.length< (directoryVisit.wide?6:3))return;
- let next=directoryVisit;
- for(let n=0;n<16;n++){
-  const candidate={seed:Math.floor(Math.random()*4294967296),wide:directoryVisit.wide};
-  directoryVisit=candidate;
-  const reordered=orderDirectoryDiscoveryCards(current,'').slice(0,candidate.wide?6:3).map(x=>x.id);
-  next=candidate;
-  if(reordered.some((id,i)=>id!==start[i]))break;
+function beginDirectoryDiscoveryVisit(render=true){
+ if(!directoryVisit||(document.getElementById('searchInput')?.value||'').trim())return;
+ const current=items.filter(directoryMatchesContext);if(current.length<2)return;
+ const visible=directoryVisit.wide?6:3;
+ const start=orderDirectoryDiscoveryCards(current,'').slice(0,visible).map(x=>x.id);
+ // Try deterministic successive seeds. Restore the old state if none changes the visible order.
+ const previous=directoryVisit;
+ for(let n=1;n<=64;n++){
+  directoryVisit={seed:(previous.seed+n)>>>0,wide:previous.wide};
+  if(orderDirectoryDiscoveryCards(current,'').slice(0,visible).some((x,i)=>x.id!==start[i]))break;
+  directoryVisit=previous;
  }
- directoryVisit=next;
  try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
- // The directory is rendered lazily at its first entry; later entries must refresh it.
- if(initializedJourneyPanels.has('directory')){
-  resetDirectoryLimit();
-  renderCards();
- }
+ if(render&&initializedJourneyPanels.has('directory')){resetDirectoryLimit();renderCards();}
+}
+function reshuffleDirectory(){
+ beginDirectoryDiscoveryVisit();
+ window.badilakJourney?.remember();
+ const status=document.getElementById('stateLine');
+ if(status)status.textContent+=' · تغيّر ترتيب العرض فقط';
 }
 window.badilakDirectoryRotation={
  enter:beginDirectoryDiscoveryVisit,
  capture:()=>directoryVisit?{seed:directoryVisit.seed,wide:directoryVisit.wide}:null,
  restore(state){
-  if(!state||!Number.isSafeInteger(state.seed)||state.seed<0||state.seed>=4294967296||
-      typeof state.wide!=='boolean')return;
+  if(!state||!Number.isSafeInteger(state.seed)||state.seed<0||state.seed>=4294967296||typeof state.wide!=='boolean')return;
   directoryVisit={seed:state.seed,wide:state.wide};
   try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
  }
@@ -203,6 +193,7 @@ function setFilter(v,el){
  updateDirectoryCrumb();
  updateDirectoryActionLabel();
  closeDirectoryRefiners();
+ beginDirectoryDiscoveryVisit(false);
  renderCards();
  rememberDirectorySelection();
 }
@@ -210,7 +201,7 @@ function setSubfilter(v,el){
  window.badilakJourney?.remember();
  subfilter=v;
  if(originFilter){
-  const hasRelatedItems=items.some(x=>x.origin.includes(originFilter)&&(filter==='all'||x.cat===filter)&&x.sub===v);
+  const hasRelatedItems=items.some(x=>matchesDirectoryOrigin(x,originFilter)&&(filter==='all'||x.cat===filter)&&x.sub===v);
   if(v!=='all'&&!hasRelatedItems){
    originFilter=null;
    document.querySelectorAll('[data-origin]').forEach(b=>b.setAttribute('aria-pressed','false'));
@@ -222,6 +213,7 @@ function setSubfilter(v,el){
  updateDirectoryCrumb();
  updateDirectoryActionLabel();
  closeDirectoryRefiners();
+ beginDirectoryDiscoveryVisit(false);
  renderCards();
  rememberDirectorySelection();
 }
@@ -380,7 +372,7 @@ function chooseOrigin(v,el){
  renderCards();
  goDirectoryResults();
 }
-function originContextLabel(id){return id==='youtube'?'محتوى عربي على YouTube':'خيارات في مجال '+originName(id)}
+function originContextLabel(id){if(id==='claude'||id==='gemini')return 'مهام عربية لمستخدمي '+originName(id);return id==='youtube'?'محتوى عربي على YouTube':'خيارات في مجال '+originName(id)}
 
 
 function setLearningPath(type='all',field='all'){
@@ -479,6 +471,7 @@ const learningDisplaySummaries={
 function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
 function originFitNoteText(origin){
+ if(origin==='claude'||origin==='gemini')return 'ابدأ بمهمة محادثة أو كتابة بالعربية. هذه خيارات لاستكشاف المهمة أو جزء منها، وليست بدائل كاملة لـ'+originName(origin)+' أو مقارنة موثقة بكل ميزاته. افتح المعلومات لتعرف الفرق بين مساعد جاهز، ونموذج للتطوير، وحل للمؤسسات.';
  if(origin==='chatgpt')return 'محادثة جاهزة، أم نموذج لتطوير تطبيق، أم خدمة للمؤسسة؟ هذه الخيارات ليست بدائل متطابقة. جرّب مهمتك أولًا؛ قد تكفيك أداة مكمّلة دون نقل عملك.';
  return origin==='canva'
   ? 'محرر تصميم، وعروض تقديمية، وخط عربي: اختر بحسب المهمة. قد تحتاج أداة مكمّلة فقط؛ جرّب مشروعًا واحدًا قبل نقل عملك. ترتيب العرض ليس تقييمًا للأفضل.'
@@ -490,13 +483,10 @@ function renderCards(){
  window.badilakJourney?.updateTitle();
  updateDirectoryRefineUI();
  const q=norm(document.getElementById('searchInput').value);
- const list=items.filter(x=>
-   (filter==='all'||x.cat===filter) &&
-   (subfilter==='all'||x.sub===subfilter) &&
-   (!originFilter||x.origin.includes(originFilter)) &&
-   (!countryFilter&&true||countryInfoHasCode(itemCountryMap[x.id],countryFilter)) &&
-   (!q||norm([x.name,x.value,x.creator,x.availability,x.arabRelation,x.type].join(' ')).includes(q))
- );
+ const list=items.filter(x=>directoryMatchesContext(x)&&
+   (!q||norm([x.name,x.value,x.creator,x.availability,x.arabRelation,x.type].join(' ')).includes(q)));
+ const reorder=document.getElementById('directoryReorder');
+ if(reorder)reorder.hidden=!!q||!directoryVisit||list.length<2;
  let context=[];
  if(filter!=='all') context.push(categoryLabel(filter));
  if(subfilter!=='all') context.push(subcategoryLabel(filter,subfilter));
@@ -1427,3 +1417,32 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
  }
 }
 // The index renders when its panel is first opened.
+
+
+const conversationExamples={chatgpt:{name:'ChatGPT',domain:'chatgpt.com'},claude:{name:'Claude',domain:'claude.ai'},gemini:{name:'Gemini',domain:'gemini.google.com'}};
+function setConversationExample(id){
+ const example=conversationExamples[id],button=document.getElementById('conversationExample');
+ if(!example||!button)return;
+ button.dataset.origin=id;
+ button.setAttribute('aria-pressed',originFilter===id?'true':'false');
+ button.querySelector('.origin-name').textContent=example.name;
+ const image=button.querySelector('img');
+ image.hidden=false;image.parentElement.classList.remove('logo-unavailable');
+ image.src='https://www.google.com/s2/favicons?sz=64&domain_url=https://'+example.domain;
+ document.getElementById('conversationExampleChoice').value=id;
+ try{sessionStorage.setItem('badilak_conversation_example_v1',id)}catch{}
+}
+function initializeConversationExample(){
+ let id='chatgpt';
+ try{
+  const saved=sessionStorage.getItem('badilak_conversation_example_v1');
+  if(conversationExamples[saved])id=saved;
+  else{
+   const keys=Object.keys(conversationExamples),last=localStorage.getItem('badilak_conversation_last_v1');
+   id=keys[(keys.indexOf(last)+1)%keys.length];
+   localStorage.setItem('badilak_conversation_last_v1',id);
+  }
+ }catch{} // Storage blocked: keep the ordinary, usable ChatGPT example.
+ setConversationExample(id);
+}
+initializeConversationExample();

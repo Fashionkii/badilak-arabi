@@ -198,3 +198,10 @@ body:not(.guided-discovery) .next-actions a:hover {box-shadow:none;transform:non
   body:not(.guided-discovery) .source-card {grid-template-columns:minmax(0,1fr);gap:4px;}
   body:not(.guided-discovery) .source-open {justify-self:start;}
 }
+
+/* Scoped controls for discovery and the optional practical exercise. */
+.practical-trial-prompt {margin:10px 0;padding:12px 16px;border-inline-start:3px solid var(--reading-accent);background:var(--reading-purpose);font-size:14px;line-height:1.9;user-select:text;}
+.conversation-example-choice {display:flex;align-items:center;justify-content:flex-start;gap:8px;margin-top:8px;font-size:12px;color:inherit;}
+.conversation-example-choice select {font:inherit;min-height:32px;max-width:120px;border:1px solid #b5bdb5;border-radius:6px;padding:3px 8px;background:#fffdf7;color:#233e36;}
+#directoryReorder {margin-block:0 12px;}
+#directoryReorder[hidden] {display:none!important;}
