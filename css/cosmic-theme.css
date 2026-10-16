@@ -598,7 +598,7 @@ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-card {dis
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap {display:grid!important;grid-template-columns:minmax(0,2fr) minmax(260px,1fr)!important;grid-template-rows:auto auto auto!important;gap:8px 18px!important;align-items:center!important;max-width:1180px!important;margin-block:0!important;padding:10px!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel {grid-column:2!important;grid-row:1!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading {margin:0!important;}
- body.cosmic-theme.guided-discovery[data-journey="home"] .intro .cosmic-logo {width:min(350px,100%)!important;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .cosmic-logo {width:min(340px,100%)!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-promise {font-size:15px!important;line-height:1.65!important;margin:4px 0 8px!important;padding:0!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-support {margin:0!important;max-width:none!important;padding:0!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-description {font-size:13px!important;line-height:1.65!important;margin:0!important;}
