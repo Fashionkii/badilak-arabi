@@ -31,7 +31,7 @@ for(const file of articleFiles){
  // The approved global identity replaces only this exact header mark and body class.
  const body=s=>s.match(/<body[\s\S]*<\/body>/)[0]
   .replace('<body class="cosmic-theme">','<body>')
-  .replace('<picture><img class="cosmic-logo" src="/images/brand/wordmark-header-20261016-320.webp" srcset="/images/brand/wordmark-header-20261016-320.webp 320w, /images/brand/wordmark-header-20261016-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="1829" height="408" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
+  .replace('<picture><img class="cosmic-logo" src="/images/brand/wordmark-header-20261016-dots-320.webp" srcset="/images/brand/wordmark-header-20261016-dots-320.webp 320w, /images/brand/wordmark-header-20261016-dots-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="1829" height="408" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
   .replace('<picture><img class="cosmic-logo" src="/images/brand/approved-logo-20261014-320.webp" width="1678" height="937" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
   .replace('<picture><source type="image/avif" srcset="/images/brand/cosmic-logo-320.avif"><img class="cosmic-logo" src="/images/brand/cosmic-logo-320.webp" width="2025" height="777" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي');
  assert.equal(body(fs.readFileSync(path.join(root,'guides',file),'utf8')),body(fs.readFileSync(path.join(out,'guides',file),'utf8')),'Article changed: '+file);
