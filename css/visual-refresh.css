@@ -168,48 +168,75 @@ body.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo
   }
 }
 
-/* Lab only: compact, portrait paper-vector marks for top navigation, not cards. */
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"]) {
+/* Lab navigation only: abstract meaning in each rectangular backdrop, centered words, no icons. */
+body.cosmic-theme .navigation > a,
+body.cosmic-theme :is(.toplinks,.hubnav) > a,
+body.cosmic-theme .journey-menu > summary {
   display:inline-flex!important;
   align-items:center!important;
-  gap:4px!important;
-  white-space:nowrap;
-}
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"])::before,
-body.cosmic-theme .journey-menu>summary::before {
-  content:"";
-  display:inline-block;
-  flex:none;
-  width:20px;
-  height:27px;
-  background-size:contain;
-  background-position:center;
-  background-repeat:no-repeat;
-}
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2015.5%2012%2010l7%205.5M7.5%2014.5V23h9v-8.5M10.5%2023v-5h3v5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#directory"],[href="/#directory"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%2011h9.5v12H8zM6%2013.5H5V25h10.5v-2M10.5%2014.5h4.5M10.5%2017.5h4.5M10.5%2020.5h3%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#learning"],[href="/#learning"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4.5%2015%207.5-4%207.5%204-7.5%204zM7.5%2017v4.5c2.5%202%206.5%202%209%200V17M19.5%2015v6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"]::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23E8C887%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23184943%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2012.5c-2.2-1.7-4.8-1.8-7.7-.6v10.2c3-.8%205.4-.5%207.7%201.2%202.3-1.7%204.7-2%207.7-1.2V11.9c-2.9-1.2-5.5-1.1-7.7.6ZM12%2012.5v10.8%22%2F%3E%3Cpath%20d%3D%22m18%206%20.6%201.6L20.2%208l-1.6.6L18%2010.2l-.6-1.6L15.8%208l1.6-.4z%22%20fill%3D%22%23b48e50%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); width:22px;height:29px; }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#competitionIndex"],[href="/#competitionIndex"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2023h14M7%2020v-4M11%2020v-7M15%2020v-9M19%2020v-5%22%2F%3E%3Cpath%20d%3D%22m6%2012%205-3%204%201%204-4%22%20stroke%3D%22%23b48e50%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
-body.cosmic-theme .journey-menu>summary::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%2012h10M7%2017h10M7%2022h10%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); margin-inline-end:4px; }
-/* Reading is luminous white, not a solid green pill around the word. */
-body.cosmic-theme.guided-discovery .navigation>a[href="/guides"],
-body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav)>a[href="/guides"] {
-  color:#FFFFFF!important;
-  background:transparent!important;
-  font-size:15px!important;
-  font-weight:800!important;
-  line-height:1.35!important;
-  padding:5px 0!important;
-  border-radius:0!important;
+  justify-content:center!important;
+  min-height:42px!important;
+  padding:5px 10px!important;
+  margin:0!important;
+  border:1px solid rgba(220,225,207,.19)!important;
+  border-radius:9px!important;
+  background-color:rgba(237,236,218,.045)!important;
+  background-image:linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+  background-size:100% 100%!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+  color:#f6efdf!important;
+  font-size:14px!important;
+  font-weight:700!important;
+  line-height:1.4!important;
+  opacity:1!important;
+  text-align:center!important;
   text-shadow:none!important;
+  white-space:nowrap;
+  transition:background-color .18s,border-color .18s;
 }
-@media(max-width:760px){
-  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"]) { gap:2px!important; }
-  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"])::before,
-  body.cosmic-theme .journey-menu>summary::before { width:14px;height:20px; }
-  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"]::before { width:15px;height:21px; }
-  body.cosmic-theme .journey-menu>summary::before { margin-inline-end:1px; }
-  body.cosmic-theme.guided-discovery .navigation>a[href="/guides"],
-  body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav)>a[href="/guides"] {font-size:13px!important;padding:5px 0!important;}
+/* The decorative lines live BEHIND the word, faint enough to read as texture rather than icons. */
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="/"],[href="#top"]) {
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23D8DBCD%22%20stroke-opacity%3D%220.19%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2042V15Q9%209%2016%209H124Q131%209%20131%2015V42M18%2046H122%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="#directory"],[href="/#directory"]) {
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23D8DBCD%22%20stroke-opacity%3D%220.19%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2012h19M10%2018h15M10%2024h20M112%2012h18M118%2018h12M112%2024h18M12%2044h116%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="#learning"],[href="/#learning"]) {
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23D8DBCD%22%20stroke-opacity%3D%220.19%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%2044q17-24%2036-26M12%2048q19-16%2032-19M97%2029q18-14%2032-18M103%2044q12-15%2028-21%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a[href="/guides"] {
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23F4E9CE%22%20stroke-opacity%3D%220.25%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2014Q28%207%2049%2015Q59%2018%2070%2017Q82%2018%2092%2015Q113%207%20131%2014V43Q108%2039%2091%2045Q78%2048%2070%2046Q59%2048%2048%2045Q29%2039%209%2043Z%22%20%2F%3E%3Cpath%20d%3D%22M70%2017V46M16%2012Q28%2010%2045%2017M94%2017Q114%2010%20126%2012%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),radial-gradient(ellipse at 50% 45%,rgba(248,240,214,.105),rgba(240,229,203,.018) 78%)!important;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="#competitionIndex"],[href="/#competitionIndex"]) {
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23D8DBCD%22%20stroke-opacity%3D%220.19%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2043Q14%2025%2033%2021M4%2034Q12%2020%2025%2016M108%2015Q127%2019%20136%2043M117%2013Q130%2020%20136%2034M10%2046H130%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+}
+body.cosmic-theme .journey-menu > summary {
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23D8DBCD%22%20stroke-opacity%3D%220.19%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2013h23M15%2019h23M10%2025h23M107%2013h23M102%2019h23M107%2025h23M22%2045h96%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:hover,
+body.cosmic-theme .journey-menu>summary:hover {
+  background-color:rgba(237,236,218,.075)!important;
+  border-color:rgba(220,225,207,.30)!important;
+}
+@media(max-width:760px) {
+  body.cosmic-theme.guided-discovery .navigation {gap:3px!important;}
+  body.cosmic-theme .navigation > a,
+body.cosmic-theme :is(.toplinks,.hubnav) > a,
+body.cosmic-theme .journey-menu > summary {
+    min-height:38px!important;
+    padding:4px 5px!important;
+    font-size:12px!important;
+    border-radius:7px!important;
+  }
+}
+@media(max-width:380px) {
+  body.cosmic-theme.guided-discovery .navigation {gap:2px!important;}
+  body.cosmic-theme .navigation > a,
+body.cosmic-theme :is(.toplinks,.hubnav) > a,
+body.cosmic-theme .journey-menu > summary {
+    padding-inline:3px!important;
+    font-size:11px!important;
+  }
 }
