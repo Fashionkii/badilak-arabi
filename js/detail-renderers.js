@@ -225,7 +225,37 @@ function canvaTaskComparisonMarkup(x,standalone=false){
 }
 // End of the optional Canva comparison.
 
+// Task distinctions reviewed against official sources on 16 October 2026.
+// This is editorial guidance, not a comparative performance test.
+function chatgptTaskComparisonMarkup(x,standalone=false){
+ const notes={
+  karnak:{task:'محادثة بالفصحى والمصرية',fit:'مرشح لتجربة الصياغة والسياق المصري؛ يقدمه مركز الابتكار التطبيقي كمساعد محادثة تجريبي.',check:'قارن إجابة على مهمة تعرف نتيجتها، ولا تعتبر جودة اللغة دليلًا على صحة المعلومات.',source:'https://www.aic.gov.eg/news/43/',label:'إعلان مركز الابتكار التطبيقي'},
+  fanar:{task:'محادثة ومهام عربية متعددة الوسائط',fit:'يعرض الموقع محادثة وقدرات للنص والصوت والصورة؛ ابدأ بالميزة التي تحتاجها فعلًا.',check:'تحقق من إتاحة الميزة داخل حسابك ونتيجتها؛ أداء نموذج تفريغ الصوت لا يقيّم المحادثة كلها.',source:'https://fanar.qa/en',label:'فنار — القدرات المعلنة'},
+  falcon:{task:'نموذج عربي وتجربة محادثة',fit:'يعرض المطور Falcon Arabic ورابطًا لتجربة المحادثة. بناء تطبيق بالنموذج مسار مختلف عن استخدام مساعد جاهز.',check:'تحقق من النموذج المستخدم في التجربة. وللتطوير، راجع الترخيص والاستضافة والتكامل قبل تقدير التكلفة.',source:'https://falconllm.tii.ae/falcon-arabic.html',label:'Falcon Arabic — صفحة المطور'},
+  arabicai:{task:'حلول عربية للوثائق والعمل المؤسسي',fit:'ابدأ بمنتج محدد، مثل ترجمة المستندات، بدل مقارنة المنظومة كلها بمساعد محادثة واحد.',check:'اختبر مستندًا غير حساس؛ راجع التنسيق والتكلفة وشروط معالجة البيانات قبل دمجه في عمل المؤسسة.',source:'https://arabic.ai/ar/translate/',label:'Arabic.AI — ترجمة المستندات'}
+ };
+ if(!notes[x.id])return '';
+ const choices=[x,...Object.keys(notes).filter(id=>id!==x.id).map(id=>items.find(a=>a.id===id))].filter(Boolean);
+ return `<details class="detail-task-comparison">
+  <summary><span><strong>قارن الخيارات لهذه المهمة</strong><small>محادثة، أم تطوير تطبيق، أم احتياج مؤسسي؟</small></span></summary>
+  <div class="task-comparison-body">
+   <p class="task-comparison-intro">ابدأ بما تريد إنجازه، لا باسم البديل. قد يناسبك البقاء مع أداتك الحالية، أو إضافة أداة عربية لمهمة محددة. العرض يوضح اختلاف الاستخدام، وليس ترتيبًا للجودة أو ضمانًا لاستبدال ChatGPT.</p>
+   <ul class="task-comparison-list">${choices.map(a=>{const note=notes[a.id];return `<li>
+    <div class="task-comparison-heading"><h4>${a.id===x.id?`<bdi>${a.name}</bdi>`:`<a href="/discover/${a.id}"${standalone?'':` onclick="return badilakOpenItem(event,'${a.id}')"`}><bdi>${a.name}</bdi></a>`}</h4>${a.id===x.id?'<span class="task-comparison-current">تقرأ عنه الآن</span>':''}</div>
+    <p class="task-comparison-task">${note.task}</p><p>${note.fit}</p>
+    <p class="task-comparison-check"><b>قبل الاعتماد:</b> ${note.check}</p>
+    <div class="task-comparison-evidence"><a href="${note.source}" target="_blank" rel="noopener noreferrer">${note.label}</a></div>
+   </li>`}).join('')}</ul>
+   <p class="task-comparison-check"><b>جرّب قبل الانتقال:</b> نفّذ مهمة واحدة بمدخلات غير حساسة تعرف كيف تراجعها. قارن صحة النتيجة والوقت اللازم لتصحيحها، ثم تحقق من نقل ملفاتك وسير عملك والتكلفة الفعلية. إذا لم يتحقق احتياجك، فلا داعي للانتقال.</p>
+   <p class="task-comparison-evidence">مراجعة المصادر الرسمية: 16 أكتوبر 2026. القدرات منسوبة إلى مطوريها؛ لم نجر اختبار أداء مستقلًا أو نقل حسابات وملفات بين الخدمات.</p>
+   ${standalone?'<a class="detail-collection" href="/category/tech?sub=ai">عرض خيارات الذكاء الاصطناعي</a>':'<button type="button" class="detail-collection" onclick="openDiscoveryGroup(\'tech\',\'ai\')">عرض خيارات الذكاء الاصطناعي</button>'}
+  </div>
+ </details>`;
+}
+
 function directoryDiscoveryMarkup(x,standalone=false){
+ const taskComparison=chatgptTaskComparisonMarkup(x,standalone);
+ if(taskComparison)return taskComparison;
  const comparison=canvaTaskComparisonMarkup(x,standalone);
  if(comparison)return comparison;
  const related=relatedDirectoryItems(x);

@@ -479,6 +479,7 @@ const learningDisplaySummaries={
 function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
 function originFitNoteText(origin){
+ if(origin==='chatgpt')return 'محادثة جاهزة، أم نموذج لتطوير تطبيق، أم خدمة للمؤسسة؟ هذه الخيارات ليست بدائل متطابقة. جرّب مهمتك أولًا؛ قد تكفيك أداة مكمّلة دون نقل عملك.';
  return origin==='canva'
   ? 'محرر تصميم، وعروض تقديمية، وخط عربي: اختر بحسب المهمة. قد تحتاج أداة مكمّلة فقط؛ جرّب مشروعًا واحدًا قبل نقل عملك. ترتيب العرض ليس تقييمًا للأفضل.'
   : 'خيارات تؤدي المهمة نفسها أو جزءًا منها؛ ترتيب العرض ليس تقييمًا للأفضل.';
