@@ -168,86 +168,108 @@ body.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo
   }
 }
 
-/* Lab navigation only: abstract meaning in each rectangular backdrop, centered words, no icons. */
-body.cosmic-theme .navigation > a,
-body.cosmic-theme :is(.toplinks,.hubnav) > a,
-body.cosmic-theme .journey-menu > summary {
+/* Lab nav revision: one coherent, useful section switcher. Scoped to header nav only. */
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav) {
+  display:flex!important;
+  align-items:center!important;
+  gap:3px!important;
+  padding:3px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(244,235,214,.12)!important;
+  border-radius:12px!important;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a,
+body.cosmic-theme .journey-menu>summary {
   display:inline-flex!important;
   align-items:center!important;
   justify-content:center!important;
-  min-height:42px!important;
-  padding:5px 10px!important;
+  position:relative;
+  min-height:44px!important;
+  min-width:0;
+  padding:6px 12px!important;
   margin:0!important;
-  border:1px solid rgba(255,255,255,.12)!important;
-  border-radius:9px!important;
-  background-color:rgba(255,255,255,.085)!important;
-  background-image:linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
-  background-size:100% 100%!important;
+  border:0!important;
+  border-radius:8px!important;
+  color:#DED5C4!important;
+  background-color:transparent!important;
   background-position:center!important;
+  background-size:100% 100%!important;
   background-repeat:no-repeat!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-  color:#E2D5B8!important;
+  box-shadow:none!important;
   font-size:14px!important;
   font-weight:700!important;
-  line-height:1.4!important;
+  line-height:1.35!important;
   opacity:1!important;
   text-align:center!important;
   text-shadow:none!important;
   white-space:nowrap;
-  transition:background-color .18s,border-color .18s;
+  transition:background-color .18s ease,box-shadow .18s ease;
 }
-/* The decorative lines live BEHIND the word, faint enough to read as texture rather than icons. */
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="/"],[href="#top"]) {
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.88%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2042V15Q9%209%2016%209H124Q131%209%20131%2015V42M18%2046H122%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+/* Related meanings remain in the background as a subtle watermark, never beside the words. */
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"]) { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.30%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2042V15Q9%209%2016%209H124Q131%209%20131%2015V42M18%2046H122%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")!important; }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#directory"],[href="/#directory"]) { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.30%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2012h19M10%2018h15M10%2024h20M112%2012h18M118%2018h12M112%2024h18M12%2044h116%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")!important; }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#learning"],[href="/#learning"]) { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.30%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%2044q17-24%2036-26M12%2048q19-16%2032-19M97%2029q18-14%2032-18M103%2044q12-15%2028-21%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")!important; }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"] { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.38%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2014Q28%207%2049%2015Q59%2018%2070%2017Q82%2018%2092%2015Q113%207%20131%2014V43Q108%2039%2091%2045Q78%2048%2070%2046Q59%2048%2048%2045Q29%2039%209%2043Z%22%20%2F%3E%3Cpath%20d%3D%22M70%2017V46M16%2012Q28%2010%2045%2017M94%2017Q114%2010%20126%2012%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")!important; }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#competitionIndex"],[href="/#competitionIndex"]) { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.30%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2043Q14%2025%2033%2021M4%2034Q12%2020%2025%2016M108%2015Q127%2019%20136%2043M117%2013Q130%2020%20136%2034M10%2046H130%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")!important; }
+body.cosmic-theme .journey-menu>summary { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.30%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2013h23M15%2019h23M10%2025h23M107%2013h23M102%2019h23M107%2025h23M22%2045h96%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")!important; }
+body.cosmic-theme .journey-menu { display:flex;align-items:stretch; }
+body.cosmic-theme .journey-menu>summary { width:100%; }
+body.cosmic-theme .journey-menu>summary::after { margin-inline-start:3px; }
+/* Visible position: the existing aria-current/active states drive the indicator. */
+body.cosmic-theme.guided-discovery .navigation>a[aria-current="page"],
+body.cosmic-theme .hubnav>a.active,
+body.cosmic-theme .toplinks>a[href="/guides"],
+body.cosmic-theme .journey-menu[open]>summary,
+body.cosmic-theme.guided-discovery:is([data-journey="guides"],[data-journey="knowledge"],[data-journey="updates"],[data-journey="nominate"]) .journey-menu>summary {
+  background-color:rgba(246,237,213,.11)!important;
+  box-shadow:inset 0 -2px #D9BD85!important;
 }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="#directory"],[href="/#directory"]) {
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.88%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2012h19M10%2018h15M10%2024h20M112%2012h18M118%2018h12M112%2024h18M12%2044h116%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+@media(hover:hover) {
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:hover,
+  body.cosmic-theme .journey-menu>summary:hover {
+    background-color:rgba(255,255,255,.075)!important;
+  }
 }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="#learning"],[href="/#learning"]) {
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.88%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%2044q17-24%2036-26M12%2048q19-16%2032-19M97%2029q18-14%2032-18M103%2044q12-15%2028-21%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:focus-visible,
+body.cosmic-theme .journey-menu>summary:focus-visible {
+  outline:2px solid #D9BD85!important;
+  outline-offset:2px!important;
 }
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a[href="/guides"] {
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.95%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%2014Q28%207%2049%2015Q59%2018%2070%2017Q82%2018%2092%2015Q113%207%20131%2014V43Q108%2039%2091%2045Q78%2048%2070%2046Q59%2048%2048%2045Q29%2039%209%2043Z%22%20%2F%3E%3Cpath%20d%3D%22M70%2017V46M16%2012Q28%2010%2045%2017M94%2017Q114%2010%20126%2012%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),radial-gradient(ellipse at 50% 45%,rgba(248,240,214,.105),rgba(240,229,203,.018) 78%)!important;
-}
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav) > a:is([href="#competitionIndex"],[href="/#competitionIndex"]) {
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.88%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2043Q14%2025%2033%2021M4%2034Q12%2020%2025%2016M108%2015Q127%2019%20136%2043M117%2013Q130%2020%20136%2034M10%2046H130%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
-}
-body.cosmic-theme .journey-menu > summary {
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%2054%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-opacity%3D%220.88%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2013h23M15%2019h23M10%2025h23M107%2013h23M102%2019h23M107%2025h23M22%2045h96%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),linear-gradient(125deg,rgba(222,230,214,.07),rgba(241,224,192,.018))!important;
-}
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:hover,
-body.cosmic-theme .journey-menu>summary:hover {
-  background-color:rgba(255,255,255,.13)!important;
-  border-color:rgba(255,255,255,.19)!important;
+/* Keep the previously requested white reading title; all other titles share one neutral tone. */
+body.cosmic-theme.guided-discovery .navigation>a:not([href="/guides"]),
+body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav)>a:not([href="/guides"]),
+body.cosmic-theme .journey-menu>summary { color:#DED5C4!important; }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"] {
+  color:#FFFFFF!important;
+  font-weight:800!important;
 }
 @media(max-width:760px) {
-  body.cosmic-theme.guided-discovery .navigation {gap:3px!important;}
-  body.cosmic-theme .navigation > a,
-body.cosmic-theme :is(.toplinks,.hubnav) > a,
-body.cosmic-theme .journey-menu > summary {
-    min-height:38px!important;
-    padding:4px 5px!important;
-    font-size:12px!important;
+  body.cosmic-theme.guided-discovery .navigation {
+    display:grid!important;
+    width:100%!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    gap:2px!important;
+    padding:2px!important;
+  }
+  body.cosmic-theme.guided-discovery .navigation>a,
+  body.cosmic-theme.guided-discovery .journey-menu {width:100%!important;}
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a,
+body.cosmic-theme .journey-menu>summary {
+    min-height:44px!important;
+    padding:5px 3px!important;
     border-radius:7px!important;
+    font-size:12px!important;
   }
 }
 @media(max-width:380px) {
-  body.cosmic-theme.guided-discovery .navigation {gap:2px!important;}
-  body.cosmic-theme .navigation > a,
-body.cosmic-theme :is(.toplinks,.hubnav) > a,
-body.cosmic-theme .journey-menu > summary {
-    padding-inline:3px!important;
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a,
+body.cosmic-theme .journey-menu>summary {
+    padding-inline:1px!important;
     font-size:11px!important;
   }
+  body.cosmic-theme .journey-menu>summary::after {margin-inline-start:1px;}
 }
-
-/* The reading title alone stays white, including on the reading hub and article headers. */
-/* The shared ivory nav rule loaded later must not wash out the other labels. */
-body.cosmic-theme.guided-discovery .navigation > a:not([href="/guides"]),
-body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav) > a:not([href="/guides"]),
-body.cosmic-theme.guided-discovery .journey-menu > summary {
-  color:#E2D5B8!important;
-}
-body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"] {
-  color:#FFFFFF!important;
+@media(prefers-reduced-motion:reduce) {
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a,
+body.cosmic-theme .journey-menu>summary {transition:none!important;}
 }
