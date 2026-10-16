@@ -1,0 +1,20 @@
+{
+  "revision": "20261016",
+  "background": "#071922",
+  "wordmark-main": {
+    "width": 864,
+    "height": 505,
+    "files": [
+      "wordmark-main-20261016-640.webp",
+      "wordmark-main-20261016-1080.webp"
+    ]
+  },
+  "wordmark-header": {
+    "width": 1829,
+    "height": 408,
+    "files": [
+      "wordmark-header-20261016-320.webp",
+      "wordmark-header-20261016-640.webp"
+    ]
+  }
+}

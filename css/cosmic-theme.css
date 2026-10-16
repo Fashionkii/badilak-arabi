@@ -31,7 +31,7 @@ body.cosmic-theme .brand-lockup {
 }
 .cosmic-logo { display:block; object-fit:contain; height:auto; }
 .brand-lockup .cosmic-logo,
-.top .cosmic-logo { width:auto; height:64px; max-width:160px; }
+.top .cosmic-logo { width:180px; height:auto; max-width:100%; max-height:44px; }
 body.cosmic-theme .intro .intro-heading h1.art-title.art-title--brand {
   width:100%!important;
   margin:0!important;
@@ -39,7 +39,7 @@ body.cosmic-theme .intro .intro-heading h1.art-title.art-title--brand {
   background:none!important;
   box-shadow:none!important;
 }
-.intro .cosmic-logo { width:min(440px,86vw); aspect-ratio:1678/937; margin-inline:auto; }
+.intro .cosmic-logo { width:min(440px,86vw); aspect-ratio:864/505; margin-inline:auto; }
 body.cosmic-theme .navigation>a,
 body.cosmic-theme .journey-menu>summary,
 body.cosmic-theme :is(.toplinks,.hubnav)>a {
@@ -132,7 +132,7 @@ body.cosmic-theme:not(.guided-discovery)>footer a:focus-visible,
 body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important; }
 @media(max-width:760px) {
   body.cosmic-theme::before { background-image:linear-gradient(rgba(3,13,22,.08),rgba(3,13,22,.2)),url('/images/brand/approved-sky-20261014-800.webp'); }
-  .brand-lockup .cosmic-logo,.top .cosmic-logo { width:auto; height:54px; max-width:132px; }
+  .brand-lockup .cosmic-logo,.top .cosmic-logo { width:132px; height:auto; max-height:36px; }
   .intro .cosmic-logo { width:min(320px,88vw); }
   body.cosmic-theme .directory-refine-bar { flex-direction:column!important;align-items:stretch!important;gap:12px!important; }
   body.cosmic-theme .directory-active-context { min-width:0;max-width:100%; }
@@ -658,6 +658,7 @@ body.cosmic-theme.guided-discovery #directory #journeyResultTitle {font-size:cla
 /* Approved home scenes and six-country inventory, on the production layout. */
 body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading h1.art-title {max-width:100%!important;}
 body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading picture {display:block;width:100%;}
+body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading .cosmic-logo {border-radius:10px;}
 body.cosmic-theme.guided-discovery[data-journey="home"] .intro-heading .cosmic-logo {display:block!important;max-width:100%!important;height:auto!important;object-fit:contain!important;transform:none!important;}
 body.cosmic-theme.guided-discovery[data-journey="home"] .origin-heading h2 {font-size:clamp(18px,1.6vw,22px)!important;line-height:1.45!important;text-wrap:balance;color:#173e36!important;}
 body.cosmic-theme.guided-discovery[data-journey="home"] .origin-option {background:linear-gradient(150deg,#fffefa,#edf4ef)!important;border:1px solid #c8ddd0!important;border-radius:11px!important;}
@@ -686,7 +687,7 @@ body.cosmic-theme.guided-discovery #learning .learning-card-actions :is(button,.
 body.cosmic-theme.guided-discovery #learning .learning-card-actions button {background:#19453f!important;color:#fffefa!important;border:1px solid #244f49!important;border-radius:9px!important;padding:8px!important;font-size:13px!important;}
 body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link {background:#f9f5ed!important;color:#685036!important;border:1px solid #d9cbb2!important;border-radius:9px!important;padding:8px!important;font-size:12px!important;}
 @media(min-width:1024px) {
- body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel {padding:10px;border:1px solid #29434b;border-radius:18px;}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel {padding:10px;border:1px solid #29434b;border-radius:18px;background:#071922;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-option {height:84px!important;min-height:84px!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .home-route {min-height:80px!important;}
 }

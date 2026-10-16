@@ -50,11 +50,11 @@ const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts
 function prepare(html){
  html=html.split(oldOrigin).join(origin);
  // Update shared brand previews only; article-specific covers stay intact.
- if(html.includes('/images/social/badilak-share-20261012.jpg'))html=html.replaceAll('/images/social/badilak-share-20261012.jpg','/images/social/badilak-share-20261014.jpg').replace('<meta property="og:image:height" content="630">','<meta property="og:image:height" content="670">');
- html=html.replace('</head>','<link rel="icon" href="/favicon.ico?v=20261014" sizes="16x16 32x32 48x48">\n<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/approved-icon-20261014-32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/approved-icon-20261014-180.png">\n</head>');
+ if(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/.test(html))html=html.replace(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/g,'/images/social/badilak-share-20261016.jpg').replace('<meta property="og:image:height" content="670">','<meta property="og:image:height" content="630">').replace(/(<meta property="og:image:alt" content=")[^"]*(">)/,'$1بديلك عربي — دليلك للبدائل العربية$2');
+ html=html.replace('</head>','<link rel="icon" href="/favicon.ico?v=20261016" sizes="16x16 32x32 48x48">\n<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/wordmark-icon-20261016-32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/wordmark-icon-20261016-180.png">\n</head>');
  html=html.replace(/<body([^>]*)>/,(_,attrs)=>'<body'+(/class="/.test(attrs)?attrs.replace(/class="([^"]*)"/,'class="$1 cosmic-theme"'):' class="cosmic-theme"'+attrs)+'>');
  // Editorial body/copy stay intact; only the shared header gets the supplied identity.
- html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<picture><img class="cosmic-logo" src="/images/brand/approved-logo-20261014-320.webp" width="1678" height="937" alt="بديلك عربي" decoding="async"></picture>$2');
+ html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<picture><img class="cosmic-logo" src="/images/brand/wordmark-header-20261016-320.webp" srcset="/images/brand/wordmark-header-20261016-320.webp 320w, /images/brand/wordmark-header-20261016-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="1829" height="408" alt="بديلك عربي" decoding="async"></picture>$2');
  html=html.replace(/<meta\s+name=["']robots["'][^>]*>\s*/gi,'');
  html=html.replace(/<head>/i,'<head>\n<meta name="robots" content="noindex, follow, max-image-preview:large">\n<meta name="badilak:origin" content="'+escape(origin)+'">');
  // Real organization URL; do not invent authors, publication dates or ratings.
@@ -94,8 +94,8 @@ function standalonePage(page,content){
  const head=source.match(/<head>[\s\S]*?<\/head>/)[0].replace(/<script src="[^"]+" defer><\/script>\s*/g,'').replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="stylesheet" href="/css/fonts.css">',fontPreloads+'\n<link rel="stylesheet" href="/css/fonts.css">');
  return setPageHead(prepare(bundleStyles('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+standaloneHeader+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+'<script src="/js/smart-return.js" defer></script></body></html>')),page);
 }
-// The small header uses this same image first; explicitly prioritize the hero's LCP request.
-const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/approved-logo-20261014-640.webp" imagesrcset="/images/brand/approved-logo-20261014-640.webp 640w, /images/brand/approved-logo-20261014-1080.webp 1080w" imagesizes="(max-width:360px) 88vw, (max-width:760px) 320px, 440px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+// Prioritize the hero asset; the header has its own compact wordmark.
+const home=source.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/wordmark-main-20261016-640.webp" imagesrcset="/images/brand/wordmark-main-20261016-640.webp 640w, /images/brand/wordmark-main-20261016-1080.webp 1080w" imagesizes="(max-width:760px) 320px, (max-width:1023px) 440px, 350px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
 const hubSource=fs.readFileSync(path.join(root,'guides.html'),'utf8');
 // Describe the actual reading list, in its visible order; no ratings or invented dates.
