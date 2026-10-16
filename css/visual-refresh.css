@@ -167,3 +167,23 @@ body.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo
     width:min(244px,100%);
   }
 }
+
+/* Lab: emphasize the top-level "اقرأ" navigation only; never card reading links. */
+body.guided-discovery .navigation > a[href="/guides"],
+body:not(.guided-discovery) :is(.toplinks,.hubnav) > a[href="/guides"] {
+  color:#fff!important;
+  background:var(--deep)!important;
+  font-size:15px!important;
+  font-weight:800!important;
+  line-height:1.35!important;
+  padding:6px 12px!important;
+  border-radius:9px;
+  text-shadow:none!important;
+}
+@media(max-width:760px) {
+  body.guided-discovery .navigation > a[href="/guides"],
+  body:not(.guided-discovery) :is(.toplinks,.hubnav) > a[href="/guides"] {
+    font-size:13px!important;
+    padding-inline:10px!important;
+  }
+}
