@@ -168,22 +168,48 @@ body.guided-discovery[data-journey="home"] .intro .intro-heading img.cosmic-logo
   }
 }
 
-/* Lab: emphasize the top-level "اقرأ" navigation only; never card reading links. */
-body.guided-discovery .navigation > a[href="/guides"],
-body:not(.guided-discovery) :is(.toplinks,.hubnav) > a[href="/guides"] {
-  color:#fff!important;
-  background:var(--deep)!important;
+/* Lab only: compact, portrait paper-vector marks for top navigation, not cards. */
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"]) {
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:4px!important;
+  white-space:nowrap;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"])::before,
+body.cosmic-theme .journey-menu>summary::before {
+  content:"";
+  display:inline-block;
+  flex:none;
+  width:20px;
+  height:27px;
+  background-size:contain;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2015.5%2012%2010l7%205.5M7.5%2014.5V23h9v-8.5M10.5%2023v-5h3v5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#directory"],[href="/#directory"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%2011h9.5v12H8zM6%2013.5H5V25h10.5v-2M10.5%2014.5h4.5M10.5%2017.5h4.5M10.5%2020.5h3%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#learning"],[href="/#learning"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4.5%2015%207.5-4%207.5%204-7.5%204zM7.5%2017v4.5c2.5%202%206.5%202%209%200V17M19.5%2015v6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"]::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23E8C887%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23184943%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2012.5c-2.2-1.7-4.8-1.8-7.7-.6v10.2c3-.8%205.4-.5%207.7%201.2%202.3-1.7%204.7-2%207.7-1.2V11.9c-2.9-1.2-5.5-1.1-7.7.6ZM12%2012.5v10.8%22%2F%3E%3Cpath%20d%3D%22m18%206%20.6%201.6L20.2%208l-1.6.6L18%2010.2l-.6-1.6L15.8%208l1.6-.4z%22%20fill%3D%22%23b48e50%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); width:22px;height:29px; }
+body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="#competitionIndex"],[href="/#competitionIndex"])::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2023h14M7%2020v-4M11%2020v-7M15%2020v-9M19%2020v-5%22%2F%3E%3Cpath%20d%3D%22m6%2012%205-3%204%201%204-4%22%20stroke%3D%22%23b48e50%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+body.cosmic-theme .journey-menu>summary::before { background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2032%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%221.5%22%20width%3D%2220%22%20height%3D%2229%22%20rx%3D%224%22%20fill%3D%22%23EAF0EA%22%20stroke%3D%22%23B6AB94%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M17.5%202v5h4.2%22%20fill%3D%22none%22%20stroke%3D%22%23D5BA87%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2328564C%22%20stroke-width%3D%221.65%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%2012h10M7%2017h10M7%2022h10%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); margin-inline-end:4px; }
+/* Reading is luminous white, not a solid green pill around the word. */
+body.cosmic-theme.guided-discovery .navigation>a[href="/guides"],
+body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav)>a[href="/guides"] {
+  color:#FFFFFF!important;
+  background:transparent!important;
   font-size:15px!important;
   font-weight:800!important;
   line-height:1.35!important;
-  padding:6px 12px!important;
-  border-radius:9px;
+  padding:5px 0!important;
+  border-radius:0!important;
   text-shadow:none!important;
 }
-@media(max-width:760px) {
-  body.guided-discovery .navigation > a[href="/guides"],
-  body:not(.guided-discovery) :is(.toplinks,.hubnav) > a[href="/guides"] {
-    font-size:13px!important;
-    padding-inline:10px!important;
-  }
+@media(max-width:760px){
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"]) { gap:2px!important; }
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a:is([href="/"],[href="#top"],[href="#directory"],[href="/#directory"],[href="#learning"],[href="/#learning"],[href="/guides"],[href="#competitionIndex"],[href="/#competitionIndex"])::before,
+  body.cosmic-theme .journey-menu>summary::before { width:14px;height:20px; }
+  body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"]::before { width:15px;height:21px; }
+  body.cosmic-theme .journey-menu>summary::before { margin-inline-end:1px; }
+  body.cosmic-theme.guided-discovery .navigation>a[href="/guides"],
+  body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav)>a[href="/guides"] {font-size:13px!important;padding:5px 0!important;}
 }
