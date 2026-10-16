@@ -242,6 +242,12 @@ body.cosmic-theme .journey-menu > summary {
 }
 
 /* The reading title alone stays white, including on the reading hub and article headers. */
+/* The shared ivory nav rule loaded later must not wash out the other labels. */
+body.cosmic-theme.guided-discovery .navigation > a:not([href="/guides"]),
+body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav) > a:not([href="/guides"]),
+body.cosmic-theme.guided-discovery .journey-menu > summary {
+  color:#E2D5B8!important;
+}
 body.cosmic-theme :is(.navigation,.toplinks,.hubnav)>a[href="/guides"] {
   color:#FFFFFF!important;
 }
