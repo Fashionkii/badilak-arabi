@@ -839,7 +839,7 @@ function openExternal(id){
   if(trigger?.isConnected)trigger.focus({preventScroll:true});
   openDetail(id);
   if(hasComparison){
-   const comparison=document.querySelector('#modalBody .detail-task-comparison');
+   const comparison=document.querySelector('#modalBody .detail-task-comparison:not(.practical-trial)');
    if(comparison){comparison.open=true;comparison.querySelector('summary')?.focus();comparison.scrollIntoView({block:'start',behavior:'instant'});}
   }
  };
