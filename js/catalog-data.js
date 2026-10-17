@@ -54,6 +54,15 @@ const learningCountryMap={
 
 const originRouteMap={
   chatgpt:{cat:'tech',sub:'ai'},
+  claude:{cat:'tech',sub:'ai'},
+  gemini:{cat:'tech',sub:'ai'},
+  kimi:{cat:'tech',sub:'ai'},
+  deepseek:{cat:'tech',sub:'ai'},
+  adobeexpress:{cat:'create',sub:'design'},
+  wix:{cat:'work',sub:'commerce'},
+  smallpdf:{cat:'work',sub:'management'},
+  upwork:{cat:'work',sub:'services'},
+  ebay:{cat:'shopping',sub:'classifieds'},
   canva:{cat:'create',sub:'design'},
   drive:{cat:'tech',sub:'infra'},
   coursera:{cat:'learn',sub:'courses'},
@@ -73,6 +82,13 @@ const originRouteMap={
   scholar:{cat:'learn',sub:'research'},
   jstor:{cat:'learn',sub:'research'}
 };
+// Lab task matching: no claim that these options replicate the global product.
+// Khamsat is a related freelance-services choice, not a project-marketplace equivalent.
+const originTaskMatches={adobeexpress:['dhawwi'],wix:['wuilt'],smallpdf:['midaad'],upwork:['khamsat'],ebay:['opensooq']};
+function matchesDirectoryOrigin(item,origin){
+ if(originTaskMatches[origin])return originTaskMatches[origin].includes(item.id);
+ return item.origin.includes(['claude','gemini','kimi','deepseek'].includes(origin)?'chatgpt':origin);
+}
 const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
 const subfilterMap={
  work:[['all','الكل'],['management','إدارة العمل'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],

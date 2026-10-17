@@ -380,7 +380,7 @@ function chooseOrigin(v,el){
  renderCards();
  goDirectoryResults();
 }
-function originContextLabel(id){return id==='youtube'?'محتوى عربي على YouTube':'خيارات في مجال '+originName(id)}
+function originContextLabel(id){if(['claude','gemini','kimi','deepseek'].includes(id))return 'مهام عربية لمستخدمي '+originName(id);return id==='youtube'?'محتوى عربي على YouTube':'خيارات في مجال '+originName(id)}
 
 
 function setLearningPath(type='all',field='all'){
@@ -492,7 +492,7 @@ function renderCards(){
  const list=items.filter(x=>
    (filter==='all'||x.cat===filter) &&
    (subfilter==='all'||x.sub===subfilter) &&
-   (!originFilter||x.origin.includes(originFilter)) &&
+   (!originFilter||matchesDirectoryOrigin(x,originFilter)) &&
    (!countryFilter&&true||countryInfoHasCode(itemCountryMap[x.id],countryFilter)) &&
    (!q||norm([x.name,x.value,x.creator,x.availability,x.arabRelation,x.type].join(' ')).includes(q))
  );
@@ -1326,7 +1326,7 @@ function renderHomeCountryOverview(){
   <li class="home-observer-country">
    <span class="home-observer-ordinal" aria-label="الترتيب في الدول المختارة ${i+1}">${i+1}</span>
    <button type="button" class="home-flag-link" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض عناصر ${name} في الدليل" title="عناصر ${name} في الدليل"><img src="/images/flags/${code}.png" width="25" height="17" alt=""></button>
-   <a href="#competitionIndex" class="home-observer-country-link" title="افتح مرصد الابتكار"><b>${name}</b><span>${rank} <small>عالميًا</small></span></a>
+   <a href="#competitionIndex" onclick="renderArabProgress('innovation');go('competitionIndex');return false" class="home-observer-country-link" title="افتح مرصد الابتكار"><b>${name}</b><span>${rank} <small>عالميًا</small></span></a>
   </li>`).join('');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderHomeCountryOverview,{once:true});
@@ -1427,3 +1427,106 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
  }
 }
 // The index renders when its panel is first opened.
+
+// Fixed task positions; refresh only at a qualified return or a spaced page load.
+const homeOriginGroups=[
+ {slots:[0],ids:['chatgpt','claude','gemini','kimi','deepseek']},
+ {slots:[1],ids:['canva','adobeexpress']},
+ {slots:[2],ids:['drive']},
+ {slots:[3,9],ids:['coursera','udemy','wikipedia','scholar','jstor']},
+ {slots:[4],ids:['fiverr','upwork']},
+ {slots:[5],ids:['shopify','wix']},
+ {slots:[6],ids:['acrobat','smallpdf']},
+ {slots:[7],ids:['teams']},
+ {slots:[8],ids:['spotify','netflix','kindle','youtube']},
+ {slots:[10,11],ids:['amazon','jumia','ebay']}
+];
+const homeOriginExtras={
+ adobeexpress:['www.adobe.com','أدوات التصميم'],wix:['www.wix.com','موقع أو متجر'],smallpdf:['smallpdf.com','مستندات PDF'],upwork:['www.upwork.com','مشاريع ومستقلون'],ebay:['www.ebay.com','بيع وشراء'],
+ claude:['claude.ai','خيارات المحادثة'],gemini:['gemini.google.com','خيارات المحادثة'],
+ kimi:['www.kimi.com','خيارات المحادثة'],deepseek:['www.deepseek.com','خيارات المحادثة'],
+ wikipedia:['www.wikipedia.org','موسوعات ومعرفة'],scholar:['scholar.google.com','بحث ومصادر'],jstor:['www.jstor.org','بحث ومصادر'],
+ netflix:['www.netflix.com','أفلام ودراما'],kindle:['www.amazon.com','كتب وقراءة'],youtube:['www.youtube.com','محتوى عربي للأطفال']
+};
+const homeOriginRefreshMs=30*60*1000;
+const homeOriginBrowseMs=2*60*1000;
+function homeOriginBaseline(){
+ const selected=[];
+ for(const group of homeOriginGroups)group.slots.forEach((slot,i)=>selected[slot]=group.ids[i]);
+ return selected;
+}
+function advanceHomeOrigins(state){
+ const selected=state.selected.slice();let cursor=state.cursor,changed=0;
+ // At most three positions, with a fair round-robin across eligible tasks.
+ for(let checked=0;checked<12&&changed<3;checked++){
+  const slot=cursor;cursor=(cursor+1)%12;
+  const ids=homeOriginGroups.find(g=>g.slots.includes(slot)).ids;
+  const start=ids.indexOf(selected[slot]);
+  for(let offset=1;offset<ids.length;offset++){
+   const candidate=ids[(start+offset)%ids.length];
+   if(!selected.includes(candidate)){selected[slot]=candidate;changed++;break;}
+  }
+ }
+ return {...state,selected,cursor};
+}
+function nextHomeOriginState(saved,now){
+ const valid=saved&&saved.version===2&&Array.isArray(saved.selected)&&saved.selected.length===12&&
+  new Set(saved.selected).size===12&&Number.isInteger(saved.cursor)&&saved.cursor>=0&&saved.cursor<12&&
+  Number.isFinite(saved.updatedAt)&&saved.updatedAt>=0&&saved.updatedAt<=now&&
+  saved.selected.every((id,slot)=>homeOriginGroups.find(g=>g.slots.includes(slot)).ids.includes(id));
+ if(!valid)return {version:2,selected:homeOriginBaseline(),cursor:0,updatedAt:now};
+ if(now-saved.updatedAt<homeOriginRefreshMs)return saved;
+ // A long absence still changes only three positions.
+ return {...advanceHomeOrigins(saved),updatedAt:now};
+}
+// Only visible time outside home counts; no timer or persistent browsing history.
+function createHomeOriginVisitClock(){
+ let view='home',visible=true,started=null,elapsed=0;
+ return function visit(next,isVisible,now){
+  if(started!==null)elapsed+=Math.max(0,now-started);
+  const returning=view!=='home'&&next==='home';
+  const refresh=returning&&elapsed>=homeOriginBrowseMs;
+  if(refresh)elapsed=0;
+  view=next;visible=isVisible;
+  started=view!=='home'&&visible?now:null;
+  return refresh;
+ };
+}
+(()=>{
+ const root=document.querySelector('.origin-options');if(!root)return;
+ const templates=new Map([...root.querySelectorAll('[data-origin]')].map(button=>[button.dataset.origin,button.cloneNode(true)]));
+ for(const [id,[domain,intent]] of Object.entries(homeOriginExtras)){
+  const button=templates.get('chatgpt').cloneNode(true);
+  button.dataset.origin=id;button.querySelector('.origin-name').textContent=originName(id);
+  button.querySelector('.origin-intent').textContent=intent;
+  button.querySelector('img').src='https://www.google.com/s2/favicons?sz=64&domain_url=https://'+domain;
+  templates.set(id,button);
+ }
+ let state=nextHomeOriginState(null,Date.now());
+ try{
+  state=nextHomeOriginState(JSON.parse(localStorage.getItem('badilak_home_origins_v2')),Date.now());
+  localStorage.setItem('badilak_home_origins_v2',JSON.stringify(state));
+  sessionStorage.removeItem('badilak_home_origins_v1');localStorage.removeItem('badilak_home_origins_last_v1');
+ }catch{} // Blocked/malformed storage: a stable, usable baseline.
+ function render(){
+  const buttons=state.selected.map(id=>{
+   const button=templates.get(id).cloneNode(true);
+   button.setAttribute('onclick','chooseOrigin(this.dataset.origin,this)');
+   button.setAttribute('aria-pressed',originFilter===id?'true':'false');
+   return button;
+  });
+  root.replaceChildren(...buttons);
+ }
+ const visit=createHomeOriginVisitClock();
+ let currentView='home';
+ function navigate(view){
+  currentView=view;
+  if(!visit(view,!document.hidden,performance.now()))return;
+  state={...advanceHomeOrigins(state),updatedAt:Date.now()};
+  try{localStorage.setItem('badilak_home_origins_v2',JSON.stringify(state));}catch{}
+  render();
+ }
+ window.badilakHomeOrigins={navigate};
+ document.addEventListener('visibilitychange',()=>visit(currentView,!document.hidden,performance.now()));
+ render();
+})();
