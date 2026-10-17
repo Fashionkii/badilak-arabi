@@ -39,6 +39,7 @@
   if(view==='directory'&&previous!==view&&options.history!==false){
    window.badilakDirectoryRotation?.enter();
   }
+  window.badilakHomeOrigins?.navigate(view);
   ensureJourneyPanel(view);
   updateTitle();
   if(options.history!==false&&!restoring){

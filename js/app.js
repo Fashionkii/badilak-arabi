@@ -1421,7 +1421,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
 // The index renders when its panel is first opened.
 
 
-// Fixed task positions; a fresh page load may refresh two choices after a 24-hour cooldown.
+// Fixed task positions; refresh only at a qualified return or a spaced page load.
 const homeOriginGroups=[
  {slots:[0],ids:['chatgpt','claude','gemini','kimi','deepseek']},
  {slots:[1],ids:['canva','adobeexpress']},
@@ -1441,7 +1441,8 @@ const homeOriginExtras={
  wikipedia:['www.wikipedia.org','موسوعات ومعرفة'],scholar:['scholar.google.com','بحث ومصادر'],jstor:['www.jstor.org','بحث ومصادر'],
  netflix:['www.netflix.com','أفلام ودراما'],kindle:['www.amazon.com','كتب وقراءة'],youtube:['www.youtube.com','محتوى عربي للأطفال']
 };
-const homeOriginRefreshMs=24*60*60*1000;
+const homeOriginRefreshMs=30*60*1000;
+const homeOriginBrowseMs=2*60*1000;
 function homeOriginBaseline(){
  const selected=[];
  for(const group of homeOriginGroups)group.slots.forEach((slot,i)=>selected[slot]=group.ids[i]);
@@ -1449,7 +1450,7 @@ function homeOriginBaseline(){
 }
 function advanceHomeOrigins(state){
  const selected=state.selected.slice();let cursor=state.cursor,changed=0;
- // At most two positions per fresh visit, with a fair round-robin across eligible tasks.
+ // At most two positions, with a fair round-robin across eligible tasks.
  for(let checked=0;checked<12&&changed<2;checked++){
   const slot=cursor;cursor=(cursor+1)%12;
   const ids=homeOriginGroups.find(g=>g.slots.includes(slot)).ids;
@@ -1468,8 +1469,21 @@ function nextHomeOriginState(saved,now){
   saved.selected.every((id,slot)=>homeOriginGroups.find(g=>g.slots.includes(slot)).ids.includes(id));
  if(!valid)return {version:2,selected:homeOriginBaseline(),cursor:0,updatedAt:now};
  if(now-saved.updatedAt<homeOriginRefreshMs)return saved;
- // No catch-up for missed days: a long absence still changes only two positions.
+ // A long absence still changes only two positions.
  return {...advanceHomeOrigins(saved),updatedAt:now};
+}
+// Only visible time outside home counts; no timer or persistent browsing history.
+function createHomeOriginVisitClock(){
+ let view='home',visible=true,started=null,elapsed=0;
+ return function visit(next,isVisible,now){
+  if(started!==null)elapsed+=Math.max(0,now-started);
+  const returning=view!=='home'&&next==='home';
+  const refresh=returning&&elapsed>=homeOriginBrowseMs;
+  if(refresh)elapsed=0;
+  view=next;visible=isVisible;
+  started=view!=='home'&&visible?now:null;
+  return refresh;
+ };
 }
 (()=>{
  const root=document.querySelector('.origin-options');if(!root)return;
@@ -1496,5 +1510,16 @@ function nextHomeOriginState(saved,now){
   });
   root.replaceChildren(...buttons);
  }
+ const visit=createHomeOriginVisitClock();
+ let currentView='home';
+ function navigate(view){
+  currentView=view;
+  if(!visit(view,!document.hidden,performance.now()))return;
+  state={...advanceHomeOrigins(state),updatedAt:Date.now()};
+  try{localStorage.setItem('badilak_home_origins_v2',JSON.stringify(state));}catch{}
+  render();
+ }
+ window.badilakHomeOrigins={navigate};
+ document.addEventListener('visibilitychange',()=>visit(currentView,!document.hidden,performance.now()));
  render();
 })();
