@@ -2037,3 +2037,23 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-country{m
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-option{min-height:88px!important}
  body.cosmic-theme.guided-discovery[data-journey="home"] .home-route-copy small{font-size:12px!important}
 }
+
+/* Lab flow specificity guard: older short-screen rules targeted .intro children
+   more strongly, so they must not squeeze the refreshed 12-item discovery grid. */
+body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-explorer{
+ padding:clamp(18px,2vw,24px)!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-heading{
+ margin-bottom:14px!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-heading h2{
+ font-size:clamp(20px,1.8vw,24px)!important;line-height:1.5!important;
+}
+body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-options{
+ grid-auto-rows:minmax(96px,auto)!important;gap:9px!important;
+}
+@media(max-width:760px){
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro .origin-options{
+  grid-auto-rows:minmax(88px,auto)!important;
+ }
+}
