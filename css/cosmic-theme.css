@@ -2023,11 +2023,11 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-observer-country{m
 @media(min-width:1024px){
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap{
   display:grid!important;grid-template-columns:minmax(0,2.5fr) minmax(250px,1fr)!important;
-  grid-template-rows:auto auto auto!important;gap:40px 22px!important}
+  grid-template-rows:auto auto!important;gap:40px 22px!important}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro-brand-panel{grid-column:2!important;grid-row:1!important;align-self:start!important}
  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-explorer{grid-column:1!important;grid-row:1!important}
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro>.home-pathways{grid-column:1/-1!important;grid-row:2!important}
- body.cosmic-theme.guided-discovery[data-journey="home"] .intro>.home-country-overview{grid-column:1/-1!important;grid-row:3!important}
+ body.cosmic-theme.guided-discovery[data-journey="home"] .intro>.home-country-overview{grid-column:1/-1!important;grid-row:2!important}
 }
 @media(max-width:1023px){
  body.cosmic-theme.guided-discovery[data-journey="home"] .intro.wrap{display:flex!important;flex-direction:column!important;gap:28px!important}
