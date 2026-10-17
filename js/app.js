@@ -471,6 +471,8 @@ const learningDisplaySummaries={
 function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
 function originFitNoteText(origin){
+ const taskNotes={adobeexpress:'لتصميم محتوى عربي بالقوالب والنصوص؛ ليست مقارنة بكل قدرات Adobe Express أو ضمانًا لنقل ملفاته.',wix:'لإنشاء موقع أو متجر دون برمجة؛ راجع القوالب والتكاملات وإمكان نقل موقعك قبل التغيير.',smallpdf:'لمعالجة مستندات PDF بالعربية؛ تحقق من الأداة المطلوبة وحدود الملفات والخصوصية قبل رفع مستندك.',upwork:'لطرح مشروع واستقبال عروض مستقلين؛ تختلف العقود والرسوم وآليات الدفع والحماية بين المنصات.',ebay:'للبيع والشراء المباشر محليًا؛ الإعلانات المبوبة ليست سوق مزادات، ولا تضمن حماية المشتري أو الشحن مثل منصة أخرى.'};
+ if(taskNotes[origin])return taskNotes[origin];
  if(['claude','gemini','kimi','deepseek'].includes(origin))return 'ابدأ بمهمة محادثة أو كتابة بالعربية. هذه خيارات لاستكشاف المهمة أو جزء منها، وليست بدائل كاملة لـ'+originName(origin)+' أو مقارنة موثقة بكل ميزاته. افتح المعلومات لتعرف الفرق بين مساعد جاهز، ونموذج للتطوير، وحل للمؤسسات.';
  if(origin==='chatgpt')return 'محادثة جاهزة، أم نموذج لتطوير تطبيق، أم خدمة للمؤسسة؟ هذه الخيارات ليست بدائل متطابقة. جرّب مهمتك أولًا؛ قد تكفيك أداة مكمّلة دون نقل عملك.';
  return origin==='canva'
@@ -1419,26 +1421,55 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
 // The index renders when its panel is first opened.
 
 
-// Stable task groups, renewed on a deliberate home visit; no timer or extra selector.
+// Fixed task positions; a fresh page load may refresh two choices after a 24-hour cooldown.
 const homeOriginGroups=[
  {slots:[0],ids:['chatgpt','claude','gemini','kimi','deepseek']},
- {slots:[1],ids:['canva']},
+ {slots:[1],ids:['canva','adobeexpress']},
  {slots:[2],ids:['drive']},
  {slots:[3,9],ids:['coursera','udemy','wikipedia','scholar','jstor']},
- {slots:[4,5,6,7],ids:['fiverr','shopify','acrobat','teams']},
+ {slots:[4],ids:['fiverr','upwork']},
+ {slots:[5],ids:['shopify','wix']},
+ {slots:[6],ids:['acrobat','smallpdf']},
+ {slots:[7],ids:['teams']},
  {slots:[8],ids:['spotify','netflix','kindle','youtube']},
- {slots:[10,11],ids:['amazon','jumia']}
+ {slots:[10,11],ids:['amazon','jumia','ebay']}
 ];
 const homeOriginExtras={
+ adobeexpress:['www.adobe.com','أدوات التصميم'],wix:['www.wix.com','موقع أو متجر'],smallpdf:['smallpdf.com','مستندات PDF'],upwork:['www.upwork.com','مشاريع ومستقلون'],ebay:['www.ebay.com','بيع وشراء'],
  claude:['claude.ai','خيارات المحادثة'],gemini:['gemini.google.com','خيارات المحادثة'],
  kimi:['www.kimi.com','خيارات المحادثة'],deepseek:['www.deepseek.com','خيارات المحادثة'],
  wikipedia:['www.wikipedia.org','موسوعات ومعرفة'],scholar:['scholar.google.com','بحث ومصادر'],jstor:['www.jstor.org','بحث ومصادر'],
  netflix:['www.netflix.com','أفلام ودراما'],kindle:['www.amazon.com','كتب وقراءة'],youtube:['www.youtube.com','محتوى عربي للأطفال']
 };
-function homeOriginSelection(turn){
+const homeOriginRefreshMs=24*60*60*1000;
+function homeOriginBaseline(){
  const selected=[];
- for(const group of homeOriginGroups)group.slots.forEach((slot,i)=>selected[slot]=group.ids[(turn+i)%group.ids.length]);
+ for(const group of homeOriginGroups)group.slots.forEach((slot,i)=>selected[slot]=group.ids[i]);
  return selected;
+}
+function advanceHomeOrigins(state){
+ const selected=state.selected.slice();let cursor=state.cursor,changed=0;
+ // At most two positions per fresh visit, with a fair round-robin across eligible tasks.
+ for(let checked=0;checked<12&&changed<2;checked++){
+  const slot=cursor;cursor=(cursor+1)%12;
+  const ids=homeOriginGroups.find(g=>g.slots.includes(slot)).ids;
+  const start=ids.indexOf(selected[slot]);
+  for(let offset=1;offset<ids.length;offset++){
+   const candidate=ids[(start+offset)%ids.length];
+   if(!selected.includes(candidate)){selected[slot]=candidate;changed++;break;}
+  }
+ }
+ return {...state,selected,cursor};
+}
+function nextHomeOriginState(saved,now){
+ const valid=saved&&saved.version===2&&Array.isArray(saved.selected)&&saved.selected.length===12&&
+  new Set(saved.selected).size===12&&Number.isInteger(saved.cursor)&&saved.cursor>=0&&saved.cursor<12&&
+  Number.isFinite(saved.updatedAt)&&saved.updatedAt>=0&&saved.updatedAt<=now&&
+  saved.selected.every((id,slot)=>homeOriginGroups.find(g=>g.slots.includes(slot)).ids.includes(id));
+ if(!valid)return {version:2,selected:homeOriginBaseline(),cursor:0,updatedAt:now};
+ if(now-saved.updatedAt<homeOriginRefreshMs)return saved;
+ // No catch-up for missed days: a long absence still changes only two positions.
+ return {...advanceHomeOrigins(saved),updatedAt:now};
 }
 (()=>{
  const root=document.querySelector('.origin-options');if(!root)return;
@@ -1450,24 +1481,20 @@ function homeOriginSelection(turn){
   button.querySelector('img').src='https://www.google.com/s2/favicons?sz=64&domain_url=https://'+domain;
   templates.set(id,button);
  }
- let turn=0;
+ let state=nextHomeOriginState(null,Date.now());
  try{
-  const saved=Number(sessionStorage.getItem('badilak_home_origins_v1'));
-  if(sessionStorage.getItem('badilak_home_origins_v1')!==null&&Number.isSafeInteger(saved)&&saved>=0)turn=saved;
-  else {const previous=Number(localStorage.getItem('badilak_home_origins_last_v1'));turn=Number.isSafeInteger(previous)&&previous>=0?(previous+1)%100000:0;}
-  // Remove only keys retired by the explicitly rejected example selector.
-  sessionStorage.removeItem('badilak_conversation_example_v1');localStorage.removeItem('badilak_conversation_last_v1');
- }catch{}
+  state=nextHomeOriginState(JSON.parse(localStorage.getItem('badilak_home_origins_v2')),Date.now());
+  localStorage.setItem('badilak_home_origins_v2',JSON.stringify(state));
+  sessionStorage.removeItem('badilak_home_origins_v1');localStorage.removeItem('badilak_home_origins_last_v1');
+ }catch{} // Blocked/malformed storage: a stable, usable baseline.
  function render(){
-  const buttons=homeOriginSelection(turn).map(id=>{
+  const buttons=state.selected.map(id=>{
    const button=templates.get(id).cloneNode(true);
    button.setAttribute('onclick','chooseOrigin(this.dataset.origin,this)');
    button.setAttribute('aria-pressed',originFilter===id?'true':'false');
    return button;
   });
   root.replaceChildren(...buttons);
-  try{sessionStorage.setItem('badilak_home_origins_v1',String(turn));localStorage.setItem('badilak_home_origins_last_v1',String(turn));}catch{}
  }
- window.badilakHomeOrigins={enter(){turn=(turn+1)%100000;render();}};
  render();
 })();
