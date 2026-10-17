@@ -1450,8 +1450,8 @@ function homeOriginBaseline(){
 }
 function advanceHomeOrigins(state){
  const selected=state.selected.slice();let cursor=state.cursor,changed=0;
- // At most two positions, with a fair round-robin across eligible tasks.
- for(let checked=0;checked<12&&changed<2;checked++){
+ // At most three positions, with a fair round-robin across eligible tasks.
+ for(let checked=0;checked<12&&changed<3;checked++){
   const slot=cursor;cursor=(cursor+1)%12;
   const ids=homeOriginGroups.find(g=>g.slots.includes(slot)).ids;
   const start=ids.indexOf(selected[slot]);
@@ -1469,7 +1469,7 @@ function nextHomeOriginState(saved,now){
   saved.selected.every((id,slot)=>homeOriginGroups.find(g=>g.slots.includes(slot)).ids.includes(id));
  if(!valid)return {version:2,selected:homeOriginBaseline(),cursor:0,updatedAt:now};
  if(now-saved.updatedAt<homeOriginRefreshMs)return saved;
- // A long absence still changes only two positions.
+ // A long absence still changes only three positions.
  return {...advanceHomeOrigins(saved),updatedAt:now};
 }
 // Only visible time outside home counts; no timer or persistent browsing history.

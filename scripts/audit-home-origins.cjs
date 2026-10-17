@@ -16,12 +16,12 @@ assert.equal(JSON.stringify(now.nextHomeOriginState(state,startTime+day-1)),init
 for(let n=1;n<=100;n++){
  const previous=state;state=now.nextHomeOriginState(state,startTime+n*day);
  assert.equal(state.selected.length,12);assert.equal(new Set(state.selected).size,12);
- assert.equal(state.selected.filter((id,i)=>id!==previous.selected[i]).length,2,'exactly two changed slots');
+ assert.equal(state.selected.filter((id,i)=>id!==previous.selected[i]).length,3,'exactly three changed slots');
  for(const id of state.selected){seen.add(id);const route=vm.runInContext('originRouteMap',now)[id];assert.ok(route,id);assert.ok(items.some(x=>now.matchesDirectoryOrigin(x,id)&&(route.cat==='all'||route.cat===x.cat)&&(route.sub==='all'||route.sub===x.sub)),id+' nonempty route');}
  assert.equal(JSON.stringify(now.nextHomeOriginState(state,startTime+n*day+1)),JSON.stringify(state),'repeat stable');
 }
 for(const id of ['adobeexpress','wix','smallpdf','upwork','ebay','chatgpt','claude','gemini','kimi','deepseek','wikipedia','kindle'])assert.ok(seen.has(id),id+' eventually exposed');
-const longGap=now.nextHomeOriginState(state,startTime+500*day);assert.equal(longGap.selected.filter((id,i)=>id!==state.selected[i]).length,2,'no catch-up after long absence');
+const longGap=now.nextHomeOriginState(state,startTime+500*day);assert.equal(longGap.selected.filter((id,i)=>id!==state.selected[i]).length,3,'no catch-up after long absence');
 for(const invalid of [{},{...state,selected:['bogus']},{...state,updatedAt:startTime+9999*day}])assert.equal(JSON.stringify(now.nextHomeOriginState(invalid,startTime)),initial,'invalid state reset');
 assert.doesNotMatch(read('index.html'),/conversationExampleChoice|مثال المحادثة/);
 assert.doesNotMatch(app,/setConversationExample|initializeConversationExample/);
