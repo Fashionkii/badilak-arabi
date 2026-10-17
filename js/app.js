@@ -372,7 +372,7 @@ function chooseOrigin(v,el){
  renderCards();
  goDirectoryResults();
 }
-function originContextLabel(id){if(id==='claude'||id==='gemini')return 'مهام عربية لمستخدمي '+originName(id);return id==='youtube'?'محتوى عربي على YouTube':'خيارات في مجال '+originName(id)}
+function originContextLabel(id){if(['claude','gemini','kimi','deepseek'].includes(id))return 'مهام عربية لمستخدمي '+originName(id);return id==='youtube'?'محتوى عربي على YouTube':'خيارات في مجال '+originName(id)}
 
 
 function setLearningPath(type='all',field='all'){
@@ -471,7 +471,7 @@ const learningDisplaySummaries={
 function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}
 
 function originFitNoteText(origin){
- if(origin==='claude'||origin==='gemini')return 'ابدأ بمهمة محادثة أو كتابة بالعربية. هذه خيارات لاستكشاف المهمة أو جزء منها، وليست بدائل كاملة لـ'+originName(origin)+' أو مقارنة موثقة بكل ميزاته. افتح المعلومات لتعرف الفرق بين مساعد جاهز، ونموذج للتطوير، وحل للمؤسسات.';
+ if(['claude','gemini','kimi','deepseek'].includes(origin))return 'ابدأ بمهمة محادثة أو كتابة بالعربية. هذه خيارات لاستكشاف المهمة أو جزء منها، وليست بدائل كاملة لـ'+originName(origin)+' أو مقارنة موثقة بكل ميزاته. افتح المعلومات لتعرف الفرق بين مساعد جاهز، ونموذج للتطوير، وحل للمؤسسات.';
  if(origin==='chatgpt')return 'محادثة جاهزة، أم نموذج لتطوير تطبيق، أم خدمة للمؤسسة؟ هذه الخيارات ليست بدائل متطابقة. جرّب مهمتك أولًا؛ قد تكفيك أداة مكمّلة دون نقل عملك.';
  return origin==='canva'
   ? 'محرر تصميم، وعروض تقديمية، وخط عربي: اختر بحسب المهمة. قد تحتاج أداة مكمّلة فقط؛ جرّب مشروعًا واحدًا قبل نقل عملك. ترتيب العرض ليس تقييمًا للأفضل.'
@@ -1419,30 +1419,55 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
 // The index renders when its panel is first opened.
 
 
-const conversationExamples={chatgpt:{name:'ChatGPT',domain:'chatgpt.com'},claude:{name:'Claude',domain:'claude.ai'},gemini:{name:'Gemini',domain:'gemini.google.com'}};
-function setConversationExample(id){
- const example=conversationExamples[id],button=document.getElementById('conversationExample');
- if(!example||!button)return;
- button.dataset.origin=id;
- button.setAttribute('aria-pressed',originFilter===id?'true':'false');
- button.querySelector('.origin-name').textContent=example.name;
- const image=button.querySelector('img');
- image.hidden=false;image.parentElement.classList.remove('logo-unavailable');
- image.src='https://www.google.com/s2/favicons?sz=64&domain_url=https://'+example.domain;
- document.getElementById('conversationExampleChoice').value=id;
- try{sessionStorage.setItem('badilak_conversation_example_v1',id)}catch{}
+// Stable task groups, renewed on a deliberate home visit; no timer or extra selector.
+const homeOriginGroups=[
+ {slots:[0],ids:['chatgpt','claude','gemini','kimi','deepseek']},
+ {slots:[1],ids:['canva']},
+ {slots:[2],ids:['drive']},
+ {slots:[3,9],ids:['coursera','udemy','wikipedia','scholar','jstor']},
+ {slots:[4,5,6,7],ids:['fiverr','shopify','acrobat','teams']},
+ {slots:[8],ids:['spotify','netflix','kindle','youtube']},
+ {slots:[10,11],ids:['amazon','jumia']}
+];
+const homeOriginExtras={
+ claude:['claude.ai','خيارات المحادثة'],gemini:['gemini.google.com','خيارات المحادثة'],
+ kimi:['www.kimi.com','خيارات المحادثة'],deepseek:['www.deepseek.com','خيارات المحادثة'],
+ wikipedia:['www.wikipedia.org','موسوعات ومعرفة'],scholar:['scholar.google.com','بحث ومصادر'],jstor:['www.jstor.org','بحث ومصادر'],
+ netflix:['www.netflix.com','أفلام ودراما'],kindle:['www.amazon.com','كتب وقراءة'],youtube:['www.youtube.com','محتوى عربي للأطفال']
+};
+function homeOriginSelection(turn){
+ const selected=[];
+ for(const group of homeOriginGroups)group.slots.forEach((slot,i)=>selected[slot]=group.ids[(turn+i)%group.ids.length]);
+ return selected;
 }
-function initializeConversationExample(){
- let id='chatgpt';
+(()=>{
+ const root=document.querySelector('.origin-options');if(!root)return;
+ const templates=new Map([...root.querySelectorAll('[data-origin]')].map(button=>[button.dataset.origin,button.cloneNode(true)]));
+ for(const [id,[domain,intent]] of Object.entries(homeOriginExtras)){
+  const button=templates.get('chatgpt').cloneNode(true);
+  button.dataset.origin=id;button.querySelector('.origin-name').textContent=originName(id);
+  button.querySelector('.origin-intent').textContent=intent;
+  button.querySelector('img').src='https://www.google.com/s2/favicons?sz=64&domain_url=https://'+domain;
+  templates.set(id,button);
+ }
+ let turn=0;
  try{
-  const saved=sessionStorage.getItem('badilak_conversation_example_v1');
-  if(conversationExamples[saved])id=saved;
-  else{
-   const keys=Object.keys(conversationExamples),last=localStorage.getItem('badilak_conversation_last_v1');
-   id=keys[(keys.indexOf(last)+1)%keys.length];
-   localStorage.setItem('badilak_conversation_last_v1',id);
-  }
- }catch{} // Storage blocked: keep the ordinary, usable ChatGPT example.
- setConversationExample(id);
-}
-initializeConversationExample();
+  const saved=Number(sessionStorage.getItem('badilak_home_origins_v1'));
+  if(sessionStorage.getItem('badilak_home_origins_v1')!==null&&Number.isSafeInteger(saved)&&saved>=0)turn=saved;
+  else {const previous=Number(localStorage.getItem('badilak_home_origins_last_v1'));turn=Number.isSafeInteger(previous)&&previous>=0?(previous+1)%100000:0;}
+  // Remove only keys retired by the explicitly rejected example selector.
+  sessionStorage.removeItem('badilak_conversation_example_v1');localStorage.removeItem('badilak_conversation_last_v1');
+ }catch{}
+ function render(){
+  const buttons=homeOriginSelection(turn).map(id=>{
+   const button=templates.get(id).cloneNode(true);
+   button.setAttribute('onclick','chooseOrigin(this.dataset.origin,this)');
+   button.setAttribute('aria-pressed',originFilter===id?'true':'false');
+   return button;
+  });
+  root.replaceChildren(...buttons);
+  try{sessionStorage.setItem('badilak_home_origins_v1',String(turn));localStorage.setItem('badilak_home_origins_last_v1',String(turn));}catch{}
+ }
+ window.badilakHomeOrigins={enter(){turn=(turn+1)%100000;render();}};
+ render();
+})();

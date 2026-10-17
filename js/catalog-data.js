@@ -56,6 +56,8 @@ const originRouteMap={
   chatgpt:{cat:'tech',sub:'ai'},
   claude:{cat:'tech',sub:'ai'},
   gemini:{cat:'tech',sub:'ai'},
+  kimi:{cat:'tech',sub:'ai'},
+  deepseek:{cat:'tech',sub:'ai'},
   canva:{cat:'create',sub:'design'},
   drive:{cat:'tech',sub:'infra'},
   coursera:{cat:'learn',sub:'courses'},
@@ -77,7 +79,7 @@ const originRouteMap={
 };
 // Shared task discovery only; this is not a claim of feature parity.
 function matchesDirectoryOrigin(item,origin){
- return item.origin.includes(origin==='claude'||origin==='gemini'?'chatgpt':origin);
+ return item.origin.includes(['claude','gemini','kimi','deepseek'].includes(origin)?'chatgpt':origin);
 }
 const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
 const subfilterMap={
