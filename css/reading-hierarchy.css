@@ -203,3 +203,9 @@ body:not(.guided-discovery) .next-actions a:hover {box-shadow:none;transform:non
 .practical-trial-prompt {margin:10px 0;padding:12px 16px;border-inline-start:3px solid var(--reading-accent);background:var(--reading-purpose);font-size:14px;line-height:1.9;user-select:text;}
 #directoryReorder {margin-block:0 12px;}
 #directoryReorder[hidden] {display:none!important;}
+
+/* Put the proposed practical task first, without changing the card grid. */
+.practical-trial {border-inline-start:3px solid var(--reading-accent);margin-block:16px;background:#f6f8f3;}
+.practical-trial-steps {padding-inline-start:24px;margin:12px 0;}
+.practical-trial-steps li {margin-block:10px;line-height:1.9;}
+.trial-available {display:inline-block;font-size:12px;padding:3px 7px;border:1px solid #c6d8c9;border-radius:6px;background:#eef5ed;color:#234b3b;}
