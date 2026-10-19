@@ -10,7 +10,7 @@ body.cosmic-theme::before {
   inset:0;
   z-index:-1;
   pointer-events:none;
-  opacity:.24!important;
+  opacity:.12!important;
   background:linear-gradient(90deg,rgba(3,13,22,.08),rgba(3,13,22,.18)),url('/images/brand/approved-sky-20261014-1600.webp') center/cover no-repeat;
 }
 body.cosmic-theme main#top::before { display:none!important; }
@@ -550,13 +550,13 @@ body.cosmic-theme.guided-discovery #directory .catalog-grid {grid-template-colum
 /* A stable compact preview; complete descriptions and cautions stay in details. */
 body.cosmic-theme.guided-discovery #directory .catalog-grid>.item {
  display:flex!important;flex-direction:column!important;grid-row:auto!important;
- min-height:300px!important;min-width:0!important;padding:16px!important;gap:0!important;
+ min-height:270px!important;min-width:0!important;padding:14px!important;gap:0!important;
  background:#fffefa!important;border:1px solid #d9e5dc!important;border-radius:16px!important;box-shadow:none!important;
 }
 body.cosmic-theme.guided-discovery #directory .catalog-grid>.item::before {content:none!important;}
 body.cosmic-theme.guided-discovery #directory .catalog-grid .item-identity {
  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
- gap:12px!important;height:auto!important;min-height:60px!important;max-height:none!important;margin:0 0 4px!important;padding:0!important;
+ gap:10px!important;height:auto!important;min-height:50px!important;max-height:none!important;margin:0 0 4px!important;padding:0!important;
 }
 body.cosmic-theme.guided-discovery #directory .catalog-grid .item-logo {width:48px!important;height:48px!important;min-width:48px!important;flex:0 0 48px!important;margin:0!important;}
 body.cosmic-theme.guided-discovery #directory .catalog-grid .item-name {font-size:17px!important;line-height:1.5!important;width:auto!important;min-height:0!important;min-width:0!important;max-height:none!important;overflow-wrap:anywhere;}
@@ -704,4 +704,18 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .footer-links {font-size
 @media(min-width:1024px) {
  body.cosmic-theme.guided-discovery[data-journey="home"] main#top {padding-block:18px!important;}
  body.cosmic-theme.guided-discovery[data-journey="home"] .origin-option {height:auto!important;min-height:92px!important;}
+}
+
+/* 19 October: quieter navigation hierarchy; every category and action remains available. */
+body.cosmic-theme.guided-discovery #directory .journey-result-head {gap:6px;margin-bottom:12px;}
+body.cosmic-theme.guided-discovery #directory .local-nav {margin-block:0 10px!important;}
+body.cosmic-theme.guided-discovery #directory .local-nav-inner {padding-block:8px!important;gap:8px;}
+body.cosmic-theme.guided-discovery #directory .directory-refine-bar {margin-block:0 8px!important;min-height:0!important;}
+/* The result title, breadcrumb and live count already describe the active filters. */
+body.cosmic-theme.guided-discovery #directory .directory-active-context {position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;}
+body.cosmic-theme.guided-discovery #directory #directoryRefineSub {padding:6px 10px!important;margin-block:6px!important;}
+body.cosmic-theme.guided-discovery #directory #directoryReorder {width:auto!important;min-height:40px!important;padding:7px 14px!important;margin:0 0 10px!important;background:#f7faf8!important;color:#334d44!important;border-color:#ccd9d3!important;}
+body.cosmic-theme.guided-discovery #directory .origin-fit-note {padding:8px 12px!important;margin-bottom:10px!important;}
+@media(min-width:1120px){
+ body.cosmic-theme.guided-discovery #directory .catalog-grid {grid-template-columns:repeat(3,minmax(0,1fr))!important;}
 }

@@ -1,65 +1,32 @@
-/* Load the official form client only when the visitor opens the form. */
-// WebsitePublisher rejects both Vercel origins (403 Origin not allowed).
-// Enable only after the receiver accepts the real site and an end-to-end test passes.
-const feedbackUnavailable=true;
-let feedbackClientPromise;
-function getFeedbackClient(){
- if(feedbackClientPromise)return feedbackClientPromise;
- feedbackClientPromise=new Promise((resolve,reject)=>{
-  if(window.WP?.sapi){resolve(window.WP.sapi(28472));return;}
-  const script=document.createElement('script');
-  script.src='https://cdn.websitepublisher.ai/js/sapi-client.js';
-  script.async=true;
-  const fail=()=>{clearTimeout(timer);script.remove();reject(new Error('Form client unavailable'));};
-  const timer=setTimeout(fail,15000);
-  script.onerror=fail;
-  script.onload=()=>{
-   clearTimeout(timer);
-   if(window.WP?.sapi)resolve(window.WP.sapi(28472));else fail();
-  };
-  document.head.appendChild(script);
- }).catch(error=>{feedbackClientPromise=null;throw error;});
- return feedbackClientPromise;
+/* No external SDK, cookies or message storage. Disabled until delivery is verified. */
+function feedbackEndpoint(){
+ const config=window.badilakFeedbackConfig;
+ if(!config?.enabled)return '';
+ try{const url=new URL(config.endpoint);return url.origin==='https://formspree.io'&&/^\/f\/[a-zA-Z0-9]+$/.test(url.pathname)&&!url.search&&!url.hash?url.href:'';}catch{return '';}
 }
 function openFeedback(kind){
- const dialog=document.getElementById('feedbackDialog');
- const field=document.getElementById('feedbackKind');
- const title=document.getElementById('feedbackTitle');
- field.value=kind||'ترشيح';
- title.textContent=field.value==='تصحيح'?'صحّح معلومة':'رشّح اكتشافًا';
- document.getElementById('feedbackStatus').textContent='';
- dialog.showModal();
- if(feedbackUnavailable){
-  dialog.querySelectorAll('input,textarea').forEach(input=>input.disabled=true);
-  document.getElementById('feedbackSubmit').disabled=true;
-  document.getElementById('feedbackStatus').textContent='الإرسال متوقف مؤقتًا لحين استكمال إعداد خدمة الاستقبال. لا تُرسل أي بيانات من هذا النموذج حاليًا.';
-  dialog.querySelector('.feedback-close').focus();
-  return;
- }
- dialog.querySelector('input[name="subject"]').focus();
- getFeedbackClient().catch(()=>{}); // Submission displays any connection failure without losing the draft.
+ const dialog=document.getElementById('feedbackDialog'),field=document.getElementById('feedbackKind');
+ field.value=kind||'ترشيح';document.getElementById('feedbackTitle').textContent=field.value==='تصحيح'?'صحّح معلومة':'رشّح اكتشافًا';
+ const enabled=!!feedbackEndpoint();
+ dialog.querySelectorAll('input,textarea').forEach(input=>input.disabled=!enabled);
+ document.getElementById('feedbackSubmit').disabled=!enabled;
+ document.getElementById('feedbackStatus').textContent=enabled?'':'الإرسال متوقف مؤقتًا لحين استكمال إعداد خدمة الاستقبال. لا تُرسل أي بيانات من هذا النموذج حاليًا.';
+ dialog.showModal();(enabled?dialog.querySelector('input[name="subject"]'):dialog.querySelector('.feedback-close')).focus();
 }
 async function submitDirectoryFeedback(event){
- event.preventDefault();
- const form=event.currentTarget;
- const status=document.getElementById('feedbackStatus');
- const submit=document.getElementById('feedbackSubmit');
- if(feedbackUnavailable||submit.disabled||!form.reportValidity())return;
+ event.preventDefault();const endpoint=feedbackEndpoint(),form=event.currentTarget;
+ const status=document.getElementById('feedbackStatus'),submit=document.getElementById('feedbackSubmit');
+ if(!endpoint||submit.disabled||!form.reportValidity())return;
  const fields=Object.fromEntries(new FormData(form).entries());
- submit.disabled=true;
- form.setAttribute('aria-busy','true');
- status.textContent='جارٍ الإرسال…';
+ if(fields.website)return;
+ const payload={kind:fields.kind,subject:fields.subject,url:fields.url,note:fields.note,_gotcha:fields.website};
+ submit.disabled=true;form.setAttribute('aria-busy','true');status.textContent='جارٍ الإرسال…';
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
  try{
-  const client=await getFeedbackClient();
-  const result=await client.submitForm('directory_feedback',fields);
-  if(!result.ok||result.data?.success!==true)throw new Error('Submission not confirmed');
-  status.textContent='تم استلام رسالتك للمراجعة. شكرًا لمساعدتك في تحسين الدليل.';
-  form.reset();
-  document.getElementById('feedbackKind').value=fields.kind||'ترشيح';
+  const response=await fetch(endpoint,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
+  const result=await response.json();if(!response.ok||result.ok!==true)throw Error('Submission not confirmed');
+  status.textContent='تم قبول رسالتك للمراجعة. شكرًا لمساعدتك في تحسين الدليل.';form.reset();document.getElementById('feedbackKind').value=fields.kind||'ترشيح';
  }catch{
   status.textContent='لم نتمكن من تأكيد الاستلام. احتفظنا بما كتبته؛ تحقّق من الاتصال وحاول مرة أخرى.';
- }finally{
-  submit.disabled=false;
-  form.removeAttribute('aria-busy');
- }
+ }finally{clearTimeout(timer);submit.disabled=false;form.removeAttribute('aria-busy');}
 }
