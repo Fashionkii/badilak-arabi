@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, follow">
 <meta name="description" content="معاينة منفصلة لمسار الرئيسية والدليل والتفاصيل بعروض شاشة مختلفة.">
 <link rel="canonical" href="https://badilak-arabi.vercel.app/lab/ui-review">
-<title>معاينة الواجهة — بديلك عربي</title>
+<title>تجربة التصميم والحركة — بديلك عربي</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#e4eae6;color:#183e37;font:16px/1.7 system-ui,sans-serif}
 header{padding:12px 20px;background:#fffefa;border-bottom:1px solid #c7d4cd;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -19,9 +19,10 @@ iframe{display:block;width:100%;height:calc(100vh - 190px);min-height:560px;bord
 </head>
 <body>
 <header>
- <div><h1>معاينة الواجهة</h1><p>نسخة منفصلة للمراجعة. العرض الضيق يحاكي مساحة شاشة الهاتف، ولا يحل محل تجربة جهاز حقيقي.</p></div>
+ <div><h1>تجربة التصميم والحركة</h1><p>قارن الشكلين على نفس المحتوى. العرض الضيق يحاكي مساحة شاشة الهاتف، ولا يحل محل تجربة جهاز حقيقي.</p></div>
  <nav aria-label="صفحة المعاينة"><a href="/" target="site-preview">الرئيسية</a><a href="/#directory" target="site-preview">الدليل</a><a href="/discover/karnak" target="site-preview">تفاصيل كرنك</a></nav>
  <div class="sizes" aria-label="عرض المعاينة"><button data-width="390" aria-pressed="true">هاتف 390</button><button data-width="320" aria-pressed="false">هاتف 320</button><button data-width="1180" aria-pressed="false">كمبيوتر</button></div>
+ <div class="sizes" aria-label="مقارنة التصميم"><button id="designToggle" aria-pressed="true">التصميم التجريبي</button><button id="motionToggle" aria-pressed="true">الحركة مفعلة</button></div>
 </header>
 <main><div class="frame-wrap"><iframe name="site-preview" title="الموقع داخل المعاينة" src="/"></iframe></div></main>
 <script>
@@ -29,6 +30,16 @@ document.querySelectorAll('[data-width]').forEach(button=>button.addEventListene
  document.querySelector('.frame-wrap').style.width=button.dataset.width+'px';
  document.querySelectorAll('[data-width]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
 }));
+const frame=document.querySelector('iframe');
+const design=document.getElementById('designToggle'),motion=document.getElementById('motionToggle');
+function syncPreview(){frame.contentWindow.postMessage({type:'badilak-design-preview',enabled:design.getAttribute('aria-pressed')==='true',motion:motion.getAttribute('aria-pressed')==='true'},location.origin);}
+for(const button of [design,motion])button.addEventListener('click',()=>{
+ const enabled=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(enabled));
+ button.textContent=button===design?(enabled?'التصميم التجريبي':'التصميم الحالي'):(enabled?'الحركة مفعلة':'الحركة متوقفة');
+ syncPreview();
+});
+window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='badilak-design-ready')syncPreview();});
+frame.addEventListener('load',syncPreview);
 </script>
 </body>
 </html>
