@@ -89,10 +89,10 @@ function matchesDirectoryOrigin(item,origin){
  if(originTaskMatches[origin])return originTaskMatches[origin].includes(item.id);
  return item.origin.includes(['claude','gemini','kimi','deepseek'].includes(origin)?'chatgpt':origin);
 }
-const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'تسوّق وشراء',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
+const categoryNames={all:'كل الاكتشافات',work:'شغلك ومشروعك',shopping:'التسوّق',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'كتب وصوت وترفيه',tech:'تقنية وذكاء اصطناعي'};
 const subfilterMap={
  work:[['all','الكل'],['management','إدارة العمل'],['services','خدمات ومستقلين'],['commerce','متجر وبيع']],
- shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','بيع وشراء بين الناس'],['specialized','متاجر متخصصة']],
+ shopping:[['all','الكل'],['marketplaces','متاجر وأسواق'],['classifieds','إعلانات مبوبة'],['specialized','متاجر متخصصة']],
  learn:[['all','الكل'],['courses','كورس أو مهارة'],['research','بحث ومصادر'],['encyclopedias','موسوعات ومعرفة'],['islamic','مصادر إسلامية'],['language','لغة ومعاجم']],
  create:[['all','الكل'],['writing','كتابة ومحتوى'],['design','تصميم'],['audio','صوت']],
  culture:[['all','الكل'],['books','كتب وقراءة'],['drama','أفلام ودراما'],['kids','للأطفال'],['games','ألعاب'],['podcasts','بودكاست وصوت']],
