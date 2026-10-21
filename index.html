@@ -43,6 +43,7 @@
 <script src="/js/commercial-links.js" defer></script>
 <script src="/js/catalog-data.js" defer></script>
 <script src="/js/detail-renderers.js" defer></script>
+<script src="/js/directory-search.js" defer></script>
 <script src="/js/route-seo.js" defer></script>
 <script src="/js/outbound-choice.js" defer></script>
 <script src="/js/app.js" defer></script>
@@ -214,13 +215,11 @@
     <span class="directory-refine-label">المعروض الآن</span>
     <div class="active-filter-pills" id="directoryActiveFilters"><span class="active-filter-pill is-muted">كل الاكتشافات</span></div>
    </div>
-   <div class="directory-refine-triggers" aria-label="تصفية النتائج">
-    <button type="button" data-refine-trigger="search" aria-expanded="false" aria-controls="directoryRefineSearch" onclick="toggleDirectoryRefine('search',this)">⌕ ابحث</button>
-   </div>
   </div>
 
-  <div class="directory-refine-panel" id="directoryRefineSearch" hidden>
-   <div class="search"><span class="search-mark">⌕</span><input id="searchInput" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
+  <div class="directory-refine-panel" id="directoryRefineSearch">
+   <label class="directory-search-label" for="searchInput">ابحث في الدليل</label>
+   <div class="search"><span class="search-mark" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
   </div>
 
   <div class="directory-refine-panel" id="directoryRefineCategory" role="group" aria-label="ماذا تبحث عنه؟">

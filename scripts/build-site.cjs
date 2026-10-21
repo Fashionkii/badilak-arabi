@@ -97,6 +97,10 @@ function standalonePage(page,content){
 // Prioritize the hero asset; the header has its own compact wordmark.
 const home=bundleStyles(source).replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/wordmark-main-20261016-dots-640.webp" imagesrcset="/images/brand/wordmark-main-20261016-dots-640.webp 640w, /images/brand/wordmark-main-20261016-dots-1080.webp 1080w" imagesizes="(max-width:760px) 320px, (max-width:1023px) 440px, 340px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
+// Review controls exist only on isolated preview deployments, never production.
+if(process.env.VERCEL_ENV==='preview'){
+ write('lab/ui-review.html',fs.readFileSync(path.join(root,'preview/ui-review.html'),'utf8'));
+}
 const hubSource=fs.readFileSync(path.join(root,'guides.html'),'utf8');
 // Describe the actual reading list, in its visible order; no ratings or invented dates.
 const guideList=[...hubSource.matchAll(/<a class="card" href="(\/guides\/[a-z0-9-]+)">[\s\S]*?<h3>([^<]+)<\/h3>/g)];

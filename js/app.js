@@ -97,20 +97,8 @@ function go(id){
 function categoryLabel(v){return categoryNames[v]||v}
 
 function closeDirectoryRefiners(){
- // Categories and their subchoices remain visible; only search is collapsible.
- document.getElementById('directoryRefineSearch')?.setAttribute('hidden','');
- document.querySelectorAll('[data-refine-trigger]').forEach(b=>b.setAttribute('aria-expanded','false'));
-}
-function toggleDirectoryRefine(kind,btn){
- const map={search:'directoryRefineSearch'};
- const panel=document.getElementById(map[kind]);if(!panel)return;
- const opening=panel.hasAttribute('hidden');
- closeDirectoryRefiners();
- if(opening){
-  panel.removeAttribute('hidden');
-  if(btn)btn.setAttribute('aria-expanded','true');
-  if(kind==='search')setTimeout(()=>document.getElementById('searchInput')?.focus(),30);
- }
+ // Search remains visible when the visitor changes category or returns to results.
+ document.getElementById('directoryRefineSearch')?.removeAttribute('hidden');
 }
 function updateDirectoryRefineUI(){
  const root=document.getElementById('directoryActiveFilters');if(!root)return;
@@ -484,9 +472,8 @@ function renderCards(){
  initializedJourneyPanels.add('directory');
  window.badilakJourney?.updateTitle();
  updateDirectoryRefineUI();
- const q=norm(document.getElementById('searchInput').value);
- const list=items.filter(x=>directoryMatchesContext(x)&&
-   (!q||norm([x.name,x.value,x.creator,x.availability,x.arabRelation,x.type].join(' ')).includes(q)));
+ const q=document.getElementById('searchInput').value.trim();
+ const list=searchDirectoryItems(items.filter(directoryMatchesContext),q);
  const reorder=document.getElementById('directoryReorder');
  if(reorder)reorder.hidden=!!q||!directoryVisit||list.length<2;
  let context=[];
@@ -501,7 +488,7 @@ function renderCards(){
  const root=document.getElementById('catalogGrid');
  const more=document.getElementById('directoryMore');
  if(!list.length){
-   root.innerHTML='<div class="empty">لم نجد نتيجة موثقة مطابقة الآن. جرّب توسيع البحث. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
+   root.innerHTML='<div class="empty">لم تظهر نتائج بهذه العبارة ضمن التصفية الحالية. جرّب كلمة أخرى أو اعرض الكل. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
    if(more)more.innerHTML='';
    updateDirectoryContinue();
    return;

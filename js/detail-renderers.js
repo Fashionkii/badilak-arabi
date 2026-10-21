@@ -775,7 +775,7 @@ const trialDecisionComplements={
  "bayut": "تحقق من بلد الإتاحة وهوية المعلن وشروط التعامل؛ إن تضمن العرض رسومًا أو سياسة إلغاء أو ضمانًا، فاطلب توثيقها قبل الالتزام.",
  "sowt": "راجع بلد الإتاحة ونوع الوصول، وهل المحتوى كامل أم مقتطف، قبل الاشتراك أو التحميل.",
  "thmanyah": "راجع بلد الإتاحة ونوع الوصول، وهل المحتوى كامل أم مقتطف، قبل الاشتراك أو التحميل.",
- "hindawi": "راجع بلد الإتاحة ونوع الوصول، وهل المحتوى كامل أم مقتطف، قبل الاشتراك أو التحميل.",
+ "hindawi": "راجع إتاحة العنوان وبيانات الطبعة والترجمة وحقوق إعادة الاستخدام، وميّز بين إنشاء حساب ودفع اشتراك.",
  "abjjad": "تحقق أيضًا مما إذا كان المتاح هو المحتوى الكامل أم عينة فقط قبل الاشتراك أو التحميل.",
  "ithra": "إذا اخترت محتوى رقميًا بدل الحضور، راجع بلد الإتاحة ونوع الوصول واكتمال المحتوى قبل الاشتراك أو التحميل.",
  "arabency": "افتح المراجع الأصلية قبل الاعتماد على معلومة متغيرة أو حساسة.",
@@ -786,21 +786,76 @@ const trialDecisionComplements={
 function trialDecisionText(x,decision){
  return decision+(trialDecisionComplements[x.id]?" "+trialDecisionComplements[x.id]:"");
 }
+// Editorial preparation dates only. See the 18 and 19 October trial notes.
+// Karnak predates these batches; no exact preparation date is asserted.
+const practicalTrialPreparedOn={
+ almaany:'19 أكتوبر 2026',
+ dubaifuture:'19 أكتوبر 2026',
+ kezakoo:'19 أكتوبر 2026',
+ telmidtice:'19 أكتوبر 2026',
+ dhawwi:'18 أكتوبر 2026',
+ taqreer:'18 أكتوبر 2026',
+ arabicdesign:'18 أكتوبر 2026',
+ midaad:'18 أكتوبر 2026',
+ fanar:'18 أكتوبر 2026',
+ munsit:'18 أكتوبر 2026',
+ faseeh:'18 أكتوبر 2026',
+ wuilt:'18 أكتوبر 2026',
+ salla:'18 أكتوبر 2026',
+ khamsat:'18 أكتوبر 2026',
+ mostaql:'18 أكتوبر 2026',
+ edraak:'18 أكتوبر 2026',
+ hsoub:'18 أكتوبر 2026',
+ hindawi:'18 أكتوبر 2026',
+ zotero:'18 أكتوبر 2026',
+ sowt:'18 أكتوبر 2026',
+ opensooq:'18 أكتوبر 2026',
+ qdl:'18 أكتوبر 2026',
+ abjjad:'18 أكتوبر 2026',
+ marefa:'18 أكتوبر 2026',
+ arabency:'18 أكتوبر 2026',
+ dorar:'18 أكتوبر 2026',
+ shamela:'18 أكتوبر 2026',
+ shamaa:'18 أكتوبر 2026',
+ mandumah:'18 أكتوبر 2026',
+ openalex:'18 أكتوبر 2026',
+ thmanyah:'18 أكتوبر 2026',
+ ithra:'18 أكتوبر 2026',
+ edlal:'18 أكتوبر 2026',
+ tadarab:'18 أكتوبر 2026',
+ gomycode:'18 أكتوبر 2026',
+ mawdoo3:'18 أكتوبر 2026',
+ wuzzuf:'18 أكتوبر 2026',
+ bayt:'18 أكتوبر 2026',
+ nafezly:'18 أكتوبر 2026',
+ qoyod:'18 أكتوبر 2026',
+ daftra:'18 أكتوبر 2026',
+ zid:'18 أكتوبر 2026',
+ expandcart:'18 أكتوبر 2026',
+ bosta:'18 أكتوبر 2026',
+ podeo:'18 أكتوبر 2026',
+ arabiaweather:'18 أكتوبر 2026',
+ noon:'18 أكتوبر 2026',
+ mumzworld:'18 أكتوبر 2026',
+ fresh:'18 أكتوبر 2026',
+ bayut:'18 أكتوبر 2026',
+ dabchy:'18 أكتوبر 2026'
+};
 function practicalTrialMarkup(x){
  if(x.id!=='karnak'){
   const trial=practicalTrials[x.id];if(!trial)return '';
   const [title,prepare,run,check,decision,source]=trial;
-  return `<details class="detail-task-comparison practical-trial" open>
+  return `<details class="detail-task-comparison practical-trial">
    <summary><span><strong>جرّبه على مهمتك</strong><small>${title}</small></span></summary>
    <div class="task-comparison-body">
     <p class="task-comparison-intro">تمرين مقترح لتقييم الملاءمة بنفسك؛ ليس نتيجة اختبار أجريناه. راجع الإتاحة والتكلفة قبل البدء، ولا تحتاج إلى شراء شيء لإتمام مرحلة المقارنة.</p>
     <ol class="practical-trial-steps"><li><b>جهّز:</b> ${prepare}</li><li><b>جرّب:</b> ${run}</li><li><b>راجع النتيجة:</b> ${check}</li></ol>
     <p class="task-comparison-check"><b>قرارك بعد التجربة:</b> ${trialDecisionText(x,decision)}</p>
-    <p class="task-comparison-evidence"><a href="${source}" target="_blank" rel="noopener noreferrer">المصدر الرسمي</a> · إعداد التمرين: 18 أكتوبر 2026. خطوات التمرين من إعداد بديلك عربي؛ الإتاحة قد تختلف حسب الحساب والبلد.</p>
+    <p class="task-comparison-evidence"><a href="${source}" target="_blank" rel="noopener noreferrer">المصدر الرسمي</a> · ${practicalTrialPreparedOn[x.id]?`إعداد التمرين: ${practicalTrialPreparedOn[x.id]}. `:''}خطوات التمرين من إعداد بديلك عربي؛ تاريخ الإعداد لا يعني إعادة التحقق من المورد. الإتاحة قد تختلف حسب الحساب والبلد.</p>
    </div>
   </details>`;
  }
- return `<details class="detail-task-comparison practical-trial" open>
+ return `<details class="detail-task-comparison practical-trial">
   <summary><span><strong>جرّبه على مهمتك</strong><small>تمرين قصير: تلخيص وصياغة بالمصرية</small></span></summary>
   <div class="task-comparison-body">
    <p class="task-comparison-intro">هذا تمرين مقترح، وليس نتيجة اختبار أجريناه لكرنك. وصف المساعد لنفسه لا يثبت قدراته أو يحصره في التاريخ المصري.</p>
@@ -824,14 +879,14 @@ function directoryDetailMarkup(x,standalone=false){
   <div class="detail-overview">
    <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h1 class="quick-title">${x.name}</h1>${countryBadgeMarkup(x)}</div>
    <p class="quick-purpose">${x.value}</p>
-   ${practicalTrialMarkup(x)}
    ${decisionPanelMarkup(x)}
    <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
-   ${editorialGuideLinkMarkup(x.id,true)}
-   ${renderSections(x,sections)}
-   <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة: '+x.reviewed:''}</span></div>
+   <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة للمورد: '+x.reviewed:''}</span></div>
    ${commercialDisclosureMarkup(x.id)}
    ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
+   ${practicalTrialMarkup(x)}
+   ${editorialGuideLinkMarkup(x.id,true)}
+   ${renderSections(x,sections)}
    ${directoryDiscoveryMarkup(x,standalone)}
   </div>`;
  // A service title is h1; the sections below it are h2, with their existing visual size.
