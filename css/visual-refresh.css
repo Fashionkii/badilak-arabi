@@ -43,11 +43,9 @@ body.guided-discovery .footer { border-top-color:var(--line)!important; }
   border-color:var(--line)!important;
 }
 /* Keep the useful service descriptors and the main site's category icons/geometry. */
-.guided-discovery .portal-btn { background:#EDF4EE!important; border-color:var(--line)!important; }
+
 .guided-discovery .origin-option:hover,
-.guided-discovery .origin-option[aria-pressed="true"],
-.guided-discovery .portal-btn:hover,
-.guided-discovery .portal-btn[aria-current] {
+.guided-discovery .origin-option[aria-pressed="true"] {
   background:#EDF4EE!important;
   border-color:var(--deep)!important;
 }
@@ -110,7 +108,6 @@ body:not(.guided-discovery) article { background:#FFFFFF; border-color:var(--car
 #directory .card-key-limit { margin:0 0 8px; padding:6px 8px; color:var(--sunrise-dark); background:#FAF6EF; border-radius:8px; font-size:.75rem; line-height:1.65; text-align:center; }
 #directory .origin-fit-note { margin:0 0 16px; color:var(--muted); font-size:.8125rem; line-height:1.7; }
 @media(max-width:760px) {
-
 
   body.guided-discovery .intro .intro-heading h1.art-title.art-title--brand { gap:10px; }
   #directory .catalog-grid>.item,

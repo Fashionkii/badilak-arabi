@@ -11,8 +11,7 @@ body{background:#f7f8f3}
 .article-cover>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 .article-cover figcaption{padding:9px 14px;font-size:.68rem;line-height:1.8;color:#68746f;overflow-wrap:anywhere}
 .article-cover figcaption a{color:#173f3d;text-underline-offset:3px}
-.article-fields{padding:16px;background:#fffdf8;border:1px solid #d5dfd5;border-radius:14px;margin-bottom:24px}
-.article-fields>div{display:flex;gap:12px;flex-wrap:wrap}.article-fields dt{font-weight:700}.article-fields dd{margin:0}
+
 .card .guide-cover{width:calc(100% + 40px);max-width:none;aspect-ratio:16/9;height:auto;object-fit:cover;display:block;margin:-19px -20px 14px;border-radius:15px 15px 0 0}
 .card{overflow:hidden;display:flex;flex-direction:column}
 .card .go{margin-top:auto;padding-top:10px}

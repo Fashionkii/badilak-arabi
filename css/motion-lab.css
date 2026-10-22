@@ -42,8 +42,8 @@ body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-explo
  background:var(--ml-paper)!important;border:1px solid #f7eddb!important;border-top:3px solid #ba985c!important;
  border-radius:24px!important;padding:26px!important;box-shadow:0 24px 60px #00000020!important;
 }
-body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-heading {text-align:start!important;margin-bottom:22px!important;}
-body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-heading h2 {font-size:24px!important;line-height:1.6!important;color:var(--ml-ink)!important;max-width:38ch;text-align:start!important;}
+body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-heading {text-align:center!important;margin-bottom:22px!important;}
+body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-heading h2 {font-size:24px!important;line-height:1.6!important;color:var(--ml-ink)!important;max-width:38ch;margin-inline:auto!important;text-align:center!important;}
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-hint {display:block;margin-top:8px!important;color:#52675b!important;font-size:14px!important;line-height:1.9;}
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-options {gap:10px!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;}
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-option {
@@ -167,9 +167,3 @@ body.motion-lab :is(.origin-option,.home-route,.intro-link,#directory .filter,#d
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] :is(.origin-option,.home-route,.intro-link):hover {transform:none!important;}
  body.motion-lab *,body.motion-lab *::before,body.motion-lab *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
 }
-html[data-preview-motion="off"] body.motion-lab {--ml-time:0s;--ml-color:0s;}
-html[data-preview-motion="off"] body.motion-lab *,
-html[data-preview-motion="off"] body.motion-lab *::before,
-html[data-preview-motion="off"] body.motion-lab *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
-html[data-preview-motion="off"] body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid>.item:hover,
-html[data-preview-motion="off"] body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] :is(.origin-option,.home-route,.intro-link):hover {transform:none!important;}

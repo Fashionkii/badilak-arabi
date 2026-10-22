@@ -73,7 +73,7 @@ body.cosmic-theme .standalone-main {
 body.cosmic-theme main#top>section[data-journey-panel]:not(#start):not(.ad-demo-wrap):not(.commercial-demo-wrap) { padding-block:24px!important; }
 body.cosmic-theme :is(#journeyResultTitle,.journey-back,.detail-breadcrumb,.detail-breadcrumb a),
 body.cosmic-theme #directory :is(#stateLine,.directory-refine-label,.origin-fit-note) { color:#f6efdf!important; }
-body.cosmic-theme #learning .learning-folded-head .learning-group-title { color:var(--deep)!important; }
+
 body.cosmic-theme #learning :is(.learning-toolbar,.learning-folded-head) { background:#f7f9f5!important; }
 /* Opaque shared surfaces keep the approved sky outside reading and chart areas. */
 body.cosmic-theme.guided-discovery main#top>:is(#learning,#competitionIndex) {
@@ -147,7 +147,7 @@ body.cosmic-theme .brand-lockup:focus-visible { outline-color:#efcb82!important;
   .intro .cosmic-logo { width:min(320px,88vw); }
   body.cosmic-theme .directory-refine-bar { flex-direction:column!important;align-items:stretch!important;gap:12px!important; }
   body.cosmic-theme .directory-active-context { min-width:0;max-width:100%; }
-  body.cosmic-theme .directory-refine-triggers { flex-wrap:wrap!important;justify-content:flex-start!important; }
+
   body.cosmic-theme:not(.guided-discovery) main.wrap { border-radius:16px; margin-block:16px; }
   body.cosmic-theme:not(.guided-discovery) main.wrap { padding-inline:16px; }
 }
@@ -193,7 +193,7 @@ body.cosmic-theme #directory #directoryRefineCategory {
  body.cosmic-theme #directory .journey-result-head {gap:4px;margin-bottom:12px;}
  body.cosmic-theme #directory #journeyResultTitle {font-size:26px;}
  body.cosmic-theme #directory .directory-refine-bar {display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center!important;gap:8px!important;padding-block:0;}
- body.cosmic-theme #directory .directory-refine-triggers {justify-self:end;}
+
  body.cosmic-theme #directory .directory-refine-bar:has(.directory-active-context[hidden]) {grid-template-columns:1fr;}
  body.cosmic-theme #directory .active-filter-pills {gap:4px;}
 }
@@ -267,21 +267,12 @@ body.cosmic-theme.guided-discovery :is(.commercial-demo-wrap,.ad-demo-wrap) :is(
   body.cosmic-theme.guided-discovery :is(.ad-demo-wrap,.commercial-demo-wrap) {padding:12px!important;}
 }
 
-
 /* Homepage controls share a stable icon column and comfortable edge spacing. */
-body.cosmic-theme.guided-discovery .intro .portal-icon-btn {
-  display:grid!important;grid-template-columns:24px minmax(0,1fr)!important;
-  align-items:center!important;justify-content:stretch!important;
-  height:auto!important;min-height:56px!important;padding:12px 14px!important;
-  text-align:start!important;
-}
-body.cosmic-theme.guided-discovery .intro .portal-field-icon {width:24px;height:24px;justify-self:center;}
-body.cosmic-theme.guided-discovery .intro .portal-field-label {min-width:0;}
+
 body.cosmic-theme.guided-discovery .intro .origin-option:focus-visible {outline-offset:2px!important;}
 @media(max-width:760px) {
   body.cosmic-theme.guided-discovery .intro .origin-explorer {padding:16px 10px!important;border-radius:12px!important;}
-  body.cosmic-theme.guided-discovery .intro .portal-icon-btn {grid-template-columns:20px minmax(0,1fr)!important;padding:10px!important;}
-  body.cosmic-theme.guided-discovery .intro .portal-field-icon {width:20px;height:20px;}
+
 }
 /* One short choice before a directory destination; no delay or auto-redirect. */
 .outbound-dialog {
@@ -354,12 +345,7 @@ body.cosmic-theme.guided-discovery[data-journey="home"] .home-route--learning .h
  background:#e5edf3;border-color:#cedde7;color:#365b7c;
 }
 body.cosmic-theme.guided-discovery[data-journey="home"] .home-route-art>svg{width:34px;height:34px;}
-body.cosmic-theme.guided-discovery[data-journey="home"] .home-route-art--image{
- width:56px;flex-basis:56px;background:#e1ecea;overflow:hidden;
-}
-body.cosmic-theme.guided-discovery[data-journey="home"] .home-route-art--image img{
- width:52px;height:38px;max-width:100%;object-fit:contain;display:block;
-}
+
 body.cosmic-theme.guided-discovery[data-journey="home"] .home-route-copy{
  display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;
  text-align:start;
@@ -503,8 +489,7 @@ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-
  flex:none!important;min-width:0!important;width:auto!important;
  scroll-snap-align:none!important;
 }
-body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-arrow,
-body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-more-wrap{
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-more-wrap {
  display:none!important;
 }
 @media(max-width:900px){
@@ -517,7 +502,6 @@ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-
   grid-template-columns:minmax(0,1fr)!important;
  }
 }
-
 
 /* Selected lab improvements on the production baseline. Keep reading surfaces,
    full detail copy/cautions, external-link choices and all reserved ad examples. */
