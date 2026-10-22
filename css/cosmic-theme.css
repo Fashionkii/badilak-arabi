@@ -45,6 +45,17 @@ body.cosmic-theme .journey-menu>summary,
 body.cosmic-theme :is(.toplinks,.hubnav)>a {
   color:#f6efdf!important;
 }
+/* Read uses the shared navigation typography, with only a small size/color emphasis. */
+body.cosmic-theme .navigation>a[href="/guides"] {
+  color:#fff!important;
+  font-size:15px!important;
+  font-weight:400!important;
+  line-height:1.8!important;
+  text-shadow:none;
+}
+@media(max-width:760px) {
+  body.cosmic-theme .navigation>a[href="/guides"] {font-size:13px!important;}
+}
 body.cosmic-theme .navigation>a[aria-current],
 body.cosmic-theme :is(.toplinks,.hubnav)>a.active { border-bottom-color:#dfbf7e!important; }
 body.cosmic-theme .journey-menu>div a { color:var(--deep)!important; }
