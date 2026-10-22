@@ -41,11 +41,12 @@ const json=value=>JSON.stringify(value).replace(/</g,'\\u003c');
 const oldOrigin='https://badilak-arabi.vercel.app';
 const cosmicStyles=fs.readFileSync(path.join(root,'css/cosmic-theme.css'),'utf8');
 const readingStyles=fs.readFileSync(path.join(root,'css/reading-hierarchy.css'),'utf8');
+const motionStyles=fs.readFileSync(path.join(root,'css/motion-lab.css'),'utf8');
 // Keep the established request/cascade profile; the theme adds no blocking request.
-fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles+'\n'+readingStyles);
+fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles);
 // Standalone pages keep every rule/order but reduce three blocking requests to one.
 const siteStyles=['fonts.css','app.css','visual-refresh.css'];
-fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteStyles.map(file=>fs.readFileSync(path.join(root,'css',file),'utf8')).join('\n')+'\n'+cosmicStyles+'\n'+readingStyles);
+fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteStyles.map(file=>fs.readFileSync(path.join(root,'css',file),'utf8')).join('\n')+'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles);
 const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts\.css">\s*<link rel="stylesheet" href="\/css\/app\.css">\s*<link rel="stylesheet" href="\/css\/visual-refresh\.css">/,'<link rel="stylesheet" href="/css/site-bundle.css">');
 function prepare(html){
  html=html.split(oldOrigin).join(origin);
@@ -53,6 +54,8 @@ function prepare(html){
  if(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/.test(html))html=html.replace(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/g,'/images/social/badilak-share-20261016-dots.jpg').replace('<meta property="og:image:height" content="670">','<meta property="og:image:height" content="630">').replace(/(<meta property="og:image:alt" content=")[^"]*(">)/,'$1بديلك عربي — دليلك للبدائل العربية$2');
  html=html.replace('</head>','<link rel="icon" href="/favicon.ico?v=20261016" sizes="16x16 32x32 48x48">\n<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/wordmark-icon-20261016-32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/wordmark-icon-20261016-180.png">\n</head>');
  html=html.replace(/<body([^>]*)>/,(_,attrs)=>'<body'+(/class="/.test(attrs)?attrs.replace(/class="([^"]*)"/,'class="$1 cosmic-theme"'):' class="cosmic-theme"'+attrs)+'>');
+ // Reviewed visual layer: enable in every build without the preview comparison script.
+ html=html.replace('<body class="guided-discovery','<body class="guided-discovery motion-lab');
  // Editorial body/copy stay intact; only the shared header gets the supplied identity.
  html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<picture><img class="cosmic-logo" src="/images/brand/wordmark-header-20261016-dots-320.webp" srcset="/images/brand/wordmark-header-20261016-dots-320.webp 320w, /images/brand/wordmark-header-20261016-dots-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="1829" height="408" alt="بديلك عربي" decoding="async"></picture>$2');
  html=html.replace(/<meta\s+name=["']robots["'][^>]*>\s*/gi,'');
