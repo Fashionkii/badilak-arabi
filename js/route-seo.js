@@ -77,6 +77,11 @@
   if(!plainClick(event)||typeof openDirectory!=='function')return true;
   event.preventDefault();openDirectory(id);return false;
  };
+ // Category controls keep their current filtering behavior; modified clicks use the real URL.
+ root.badilakFilterCategory=(event,id,control)=>{
+  if(!plainClick(event)||typeof setFilter!=='function')return true;
+  event.preventDefault();setFilter(id,control);return false;
+ };
  // Keep head metadata consistent when the existing UI changes the URL without reloading.
  for(const method of ['pushState','replaceState']){
   const original=history[method];

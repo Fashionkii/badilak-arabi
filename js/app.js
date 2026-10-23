@@ -118,7 +118,12 @@ function updateDirectoryRefineUI(){
 
  const hasSub=filter!=='all'&&Array.isArray(subfilterMap[filter])&&subfilterMap[filter].length>1;
  const subPanel=document.getElementById('directoryRefineSub');if(subPanel)subPanel.hidden=!hasSub;
- document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+ document.querySelectorAll('[data-filter]').forEach(b=>{
+  const selected=b.dataset.filter===filter;
+  if(b.tagName==='A'){
+   if(selected)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');
+  }else b.setAttribute('aria-pressed',String(selected));
+ });
  document.querySelectorAll('[data-subfilter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.subfilter===subfilter)));
 }
 function goDirectoryResults(){
