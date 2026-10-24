@@ -184,7 +184,23 @@ body.cosmic-theme:not(.guided-discovery) :is(.next-actions,.related)>a {border:1
 body.cosmic-theme:not(.guided-discovery) .next-actions>a:first-child {background:var(--sp-forest)!important;border-color:var(--sp-forest)!important;color:var(--sp-paper)!important;}
 
 /* Secondary pages and feedback retain their content and existing affordances. */
-body.cosmic-theme.guided-discovery :is(#guides,#knowledge,#updates,#nominate) :is(.section-head,.fold-card,.knowledge-card,.update-card,.guide-card) {border-radius:20px!important;}
+body.cosmic-theme.guided-discovery :is(#guides,#knowledge,#updates) .section-head {border-radius:22px!important;background:var(--sp-paper)!important;padding:24px!important;}
+body.cosmic-theme.guided-discovery :is(#guides,#knowledge,#updates) .section-title {font-size:clamp(27px,3vw,36px)!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery :is(#guides,#knowledge,#updates) .section-human-note {font-size:15px!important;line-height:1.9!important;color:var(--sp-muted)!important;}
+body.cosmic-theme.guided-discovery :is(#guides .guides,#knowledge .discovery-shelf,#updates .monitor-grid) {gap:20px!important;}
+body.cosmic-theme.guided-discovery #guides .guides.frame-soft {padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;}
+body.cosmic-theme.guided-discovery :is(#guides .guide,#knowledge .discovery-card,#updates .monitor-card) {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:22px!important;box-shadow:var(--sp-shadow)!important;min-height:0!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery :is(#guides .guide,#updates .monitor-card) {padding:22px!important;}
+body.cosmic-theme.guided-discovery :is(#guides .guide,#knowledge .discovery-card,#updates .monitor-card) h3 {font-size:21px!important;line-height:1.75!important;min-height:0!important;margin:12px 0!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery :is(#guides .guide,#knowledge .discovery-card,#updates .monitor-card) p {font-size:16px!important;line-height:1.9!important;display:block!important;-webkit-line-clamp:unset!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin-bottom:18px!important;color:var(--sp-muted)!important;}
+body.cosmic-theme.guided-discovery :is(#guides .guide-intent,#knowledge .discovery-kind,#knowledge .discovery-country,#updates .monitor-country,#updates .monitor-status,#updates time) {font-size:13px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #guides .guide>a {display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 16px!important;background:var(--sp-forest)!important;color:var(--sp-paper)!important;border:1px solid var(--sp-forest)!important;border-radius:12px!important;font-size:14px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #knowledge .discovery-body {padding:20px!important;}
+body.cosmic-theme.guided-discovery #knowledge .discovery-visual {background:var(--sp-mint)!important;border-bottom:1px solid var(--sp-line)!important;}
+body.cosmic-theme.guided-discovery :is(#guides,#knowledge) .section-fold-toggle {min-width:44px;min-height:44px;border-radius:50%;}
+body.cosmic-theme.guided-discovery .section-continue-actions>button {min-height:44px!important;font-size:14px!important;line-height:1.8!important;border-radius:12px!important;}
+body.cosmic-theme.guided-discovery .section-continue-copy strong {font-size:17px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery .section-continue-copy span {font-size:14px!important;line-height:1.9!important;}
 body.cosmic-theme.guided-discovery #nominate {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:24px!important;padding:32px!important;color:var(--sp-ink)!important;}
 body.cosmic-theme.guided-discovery #nominate p {font-size:17px!important;line-height:1.9!important;color:var(--sp-muted)!important;}
 body.cosmic-theme.guided-discovery #nominate .nominate-actions button {min-height:50px!important;border-radius:12px!important;font-size:15px!important;}
