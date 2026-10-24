@@ -58,7 +58,7 @@ body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-optio
 }
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-logo {grid-column:1;grid-row:1/3;width:38px!important;height:38px!important;margin:0!important;border:1px solid #e5ece5!important;background:#f4f7f1!important;border-radius:12px!important;}
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-logo img {width:26px!important;height:26px!important;}
-body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-name {grid-column:2;grid-row:1;font-size:13px!important;line-height:1.5!important;text-align:start!important;overflow-wrap:anywhere;color:#193f35!important;}
+body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-name {grid-column:2;grid-row:1;font-size:13px!important;line-height:1.5!important;text-align:right!important;overflow-wrap:anywhere;color:#193f35!important;}
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-intent {grid-column:2;grid-row:2;color:#53675c!important;font-size:12px!important;line-height:1.6!important;text-align:start!important;white-space:normal!important;}
 body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-option[aria-pressed="true"] {border-color:#30654f!important;background:#eaf3ed!important;box-shadow:0 0 0 2px #30654f22!important;}
 
@@ -162,9 +162,10 @@ body.motion-lab :is(.origin-option,.home-route,.intro-link,#directory .filter,#d
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-heading h2 {font-size:22px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-hint {font-size:14px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-options {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;}
- body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-option {grid-template-columns:32px minmax(0,1fr)!important;min-height:92px!important;padding:12px 9px!important;gap:3px 8px!important;}
- body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-logo {width:32px!important;height:36px!important;border-radius:10px!important;}
+ body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-option {display:flex!important;flex-direction:column!important;justify-content:center!important;text-align:center!important;min-height:114px!important;padding:12px 9px!important;gap:5px!important;}
+ body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-logo {width:36px!important;height:36px!important;border-radius:10px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-logo img {width:24px!important;height:24px!important;}
+ body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] :is(.origin-name,.origin-intent) {text-align:center!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .home-route-grid {gap:12px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .home-route {min-height:216px!important;padding:20px 16px!important;gap:16px!important;border-radius:18px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .home-route-copy strong {font-size:21px!important;}
