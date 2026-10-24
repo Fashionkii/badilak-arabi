@@ -121,6 +121,7 @@ body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-progress-tabs>but
 body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-tabs>button.active {background:var(--sp-forest)!important;border-color:var(--sp-forest)!important;color:#fffdf7!important;}
 body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-tab-copy,.arab-more-card)>b,body.cosmic-theme.guided-discovery #competitionIndex .arab-more-card b {font-size:17px!important;line-height:1.7!important;}
 body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-tab-copy,.arab-more-card) small {font-size:13px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-more-card>span:last-child {display:grid;gap:4px;text-align:start;}
 body.cosmic-theme.guided-discovery #competitionIndex .arab-observer-layout {gap:20px!important;margin-top:22px!important;}
 body.cosmic-theme.guided-discovery #competitionIndex .arab-observer-main {border:1px solid var(--sp-line)!important;border-radius:20px!important;background:var(--sp-white)!important;padding:22px!important;box-shadow:none!important;}
 body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-head {gap:14px!important;flex-wrap:wrap;padding-bottom:16px!important;}
@@ -206,7 +207,10 @@ body.cosmic-theme.guided-discovery #nominate .nominate-actions button {min-heigh
  body.cosmic-theme.motion-lab .detail-overview .detail-facts {grid-template-columns:minmax(0,1fr)!important;}
  body.cosmic-theme.motion-lab .detail-overview :is(.detail-section,.quick-purpose,.decision-panel) {padding:16px!important;}
  body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-observer-main,.arab-observer-insight) {padding:18px 14px!important;}
- body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-title-wrap {flex-wrap:wrap;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-head {grid-template-columns:minmax(0,1fr)!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-metric-copy,.arab-metric-title-wrap,.arab-metric-scale) {min-width:0;max-width:100%;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-title-wrap {flex-wrap:wrap!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-scale {white-space:normal!important;overflow-wrap:anywhere;}
  body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row {padding:10px!important;}
  body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-country b {font-size:14px!important;}
  body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-value {font-size:14px!important;}
@@ -227,7 +231,7 @@ body.cosmic-theme.guided-discovery #nominate .nominate-actions button {min-heigh
  body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row {grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;}
  body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-country {grid-column:1;grid-row:1;}
  body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-value {grid-column:2;grid-row:1;}
- body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row>:nth-child(2) {grid-column:1/-1;grid-row:2;width:100%;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row>:nth-child(2):not(.arab-progress-value) {grid-column:1/-1;grid-row:2;width:100%;}
  body.cosmic-theme.guided-discovery #nominate {padding:24px 16px!important;}
 }
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
