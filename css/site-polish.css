@@ -1,0 +1,242 @@
+/* Site-wide continuation of the approved home palette, 24 October 2026.
+   Appended to both existing style bundles. No runtime dependency or new request.
+   The home layout and all data, content, routes and commercial slots are preserved. */
+body.cosmic-theme {
+ --sp-paper:#fffdf7;--sp-white:#fff;--sp-forest:#194b3e;--sp-ink:#193f35;
+ --sp-muted:#53675c;--sp-mint:#eaf1e9;--sp-line:#d5e1d6;--sp-brass:#d8b775;
+ --sp-warm:#faf2e3;--sp-focus:#9b7331;--sp-radius:22px;
+ --sp-shadow:0 2px 4px #102c2210,0 16px 36px #00000016;
+ --sp-speed:180ms;--sp-ease:cubic-bezier(.2,.75,.25,1);
+}
+body.cosmic-theme:not([data-journey="home"]) :is(.site-header,.top) {background:#081e25!important;border-bottom:1px solid #45645d!important;box-shadow:0 6px 24px #00000012!important;}
+body.cosmic-theme:not([data-journey="home"]) :is(.navigation,.toplinks,.hubnav)>a {min-height:44px;align-items:center;text-underline-offset:7px;}
+body.cosmic-theme:not([data-journey="home"]) :is(.toplinks,.hubnav)>a {display:inline-flex;font-size:14px;line-height:1.7;}
+body.cosmic-theme:not([data-journey="home"]) :is(a,button,input,select,textarea,summary):focus-visible {outline:3px solid var(--sp-focus)!important;outline-offset:3px!important;}
+body.cosmic-theme :is(.modal,.feedback-dialog,#outboundDialog) :is(a,button,input,textarea,summary):focus-visible {outline:3px solid var(--sp-focus)!important;outline-offset:3px!important;}
+body.cosmic-theme:not([data-journey="home"]) :is(.navigation,.toplinks,.hubnav)>a:focus-visible {outline-color:#e6c895!important;}
+body.cosmic-theme:not([data-journey="home"]) :is(.footer,footer) {border-top:1px solid #3c5753!important;background:#081e25!important;}
+body.cosmic-theme:not([data-journey="home"]) :is(.footer-links,.policy-links) {font-size:14px!important;line-height:2!important;}
+body.cosmic-theme:not([data-journey="home"]) :is(.footer-links,.policy-links)>a {display:inline-flex;align-items:center;min-height:44px;}
+
+/* Directory: calm controls, a clear card header and a complete readable summary. */
+body.cosmic-theme.guided-discovery #directory .journey-result-head {align-items:center!important;text-align:center;gap:12px!important;margin-bottom:24px!important;}
+body.cosmic-theme.guided-discovery #directory #journeyResultTitle {font-size:clamp(26px,3vw,36px)!important;line-height:1.6!important;text-align:center!important;}
+body.cosmic-theme.guided-discovery #directory .journey-back {min-height:44px;padding:8px 14px;border:1px solid #647d70;border-radius:12px;background:#102e2d!important;font-size:14px;}
+body.cosmic-theme.guided-discovery #directory .local-nav-inner {border-radius:14px!important;border-color:var(--sp-line)!important;padding:10px 16px!important;}
+body.cosmic-theme.guided-discovery #directory .crumbs {font-size:14px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #directory #directoryRefineSearch {margin-block:22px!important;}
+body.cosmic-theme.guided-discovery #directory .directory-search-label {text-align:center;font-size:18px!important;margin-bottom:12px;}
+body.cosmic-theme.guided-discovery #directory #directoryRefineSearch .search {margin-inline:auto;max-width:820px!important;min-height:64px!important;border-radius:18px!important;border-color:#d5dfca!important;}
+body.cosmic-theme.guided-discovery #directory #directoryRefineCategory .filters {justify-content:center!important;gap:9px!important;}
+body.cosmic-theme.guided-discovery #directory #directoryRefineCategory .filter {min-height:46px!important;border-radius:12px!important;padding:10px 14px!important;font-size:14px!important;border-color:var(--sp-line)!important;box-shadow:none!important;}
+body.cosmic-theme.guided-discovery #directory #directoryRefineCategory .filter:is(.active,[aria-current="page"],[aria-pressed="true"]) {background:var(--sp-forest)!important;color:var(--sp-paper)!important;border-color:var(--sp-brass)!important;}
+body.cosmic-theme.guided-discovery #directory :is(#stateLine,.origin-fit-note) {font-size:14px!important;line-height:1.9!important;}
+body.cosmic-theme.guided-discovery #directory #directoryReorder {min-height:44px!important;border-radius:12px!important;font-size:13px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid {gap:24px!important;}
+body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid>.item {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:var(--sp-radius)!important;padding:20px!important;box-shadow:var(--sp-shadow)!important;}
+body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid .item-identity {min-height:86px!important;height:auto!important;max-height:none!important;background:var(--sp-mint)!important;border:1px solid #dce7d9;border-radius:16px;padding:16px 12px!important;gap:14px!important;margin-bottom:12px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .item-logo {width:50px!important;height:50px!important;min-width:50px!important;border-radius:14px!important;padding:6px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .item-name {font-size:19px!important;line-height:1.65!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .country-badge {font-size:12px!important;line-height:1.6!important;background:#f4f6ee!important;border-color:#e1e5d7!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .comparison-strip {min-height:32px!important;height:auto!important;max-height:none!important;font-size:13px!important;line-height:1.8!important;margin-block:6px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .origin-mini {font-size:12px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-fit {font-size:13px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-summary {min-height:64px!important;height:auto!important;max-height:none!important;margin:8px 0 16px!important;overflow:visible!important;}
+body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid .card-purpose {background:transparent!important;padding:0 6px!important;border:0!important;color:var(--sp-muted)!important;font-size:16px!important;line-height:1.9!important;white-space:normal!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-info-actions {gap:10px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid :is(.more-btn,.card-read-link) {min-height:48px!important;height:auto!important;font-size:14px!important;line-height:1.7!important;border-radius:12px!important;padding:10px!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-guide-slot {min-height:48px!important;height:auto!important;max-height:none!important;}
+body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid .more-btn {background:var(--sp-forest)!important;border-color:var(--sp-forest)!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .card-read-link {color:#6e5432!important;background:var(--sp-warm)!important;border:1px solid #e3d3b6!important;}
+body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid .destination-link {min-height:54px!important;height:auto!important;max-height:none!important;border-radius:12px!important;margin-top:8px!important;background:#f0f5ed!important;border-color:#dce5d7!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .destination-label {font-size:14px!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery #directory .catalog-grid .destination-label small {font-size:12px!important;}
+body.cosmic-theme.guided-discovery :is(.load-more-btn,.learning-more-btn) {min-height:48px!important;border-radius:14px!important;padding:12px 24px!important;background:var(--sp-forest)!important;color:var(--sp-paper)!important;border:1px solid #597a60!important;}
+
+/* Learning retains all four resource groups, with spacious readable cards. */
+body.cosmic-theme.guided-discovery main#top>#learning {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:26px!important;padding:32px 28px!important;box-shadow:var(--sp-shadow)!important;}
+body.cosmic-theme.guided-discovery #learning .section-head {padding:8px 0 24px!important;margin-bottom:18px!important;border-bottom:1px solid var(--sp-line);}
+body.cosmic-theme.guided-discovery #learning .section-head h2 {font-size:clamp(26px,3vw,36px)!important;line-height:1.6!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #learning .section-human-note {font-size:15px!important;line-height:1.8!important;margin-top:12px!important;color:var(--sp-muted)!important;}
+body.cosmic-theme.guided-discovery #learning .learning-toolbar {padding:18px!important;border:1px solid var(--sp-line)!important;border-radius:20px!important;box-shadow:none!important;background:var(--sp-mint)!important;gap:14px!important;}
+body.cosmic-theme.guided-discovery #learning .learning-types {gap:8px!important;flex-wrap:wrap!important;}
+body.cosmic-theme.guided-discovery #learning .learning-types>button {border:1px solid #cad8ca!important;border-radius:12px!important;min-height:46px!important;font-size:14px!important;line-height:1.7!important;padding:10px 12px!important;box-shadow:none!important;background:var(--sp-white)!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #learning .learning-types>button.active {background:var(--sp-forest)!important;color:var(--sp-paper)!important;border-color:var(--sp-forest)!important;}
+body.cosmic-theme.guided-discovery #learning :is(#learningSearch,#learningField) {min-height:52px!important;font-size:16px!important;line-height:1.7!important;border:1px solid #bdcebf!important;border-radius:12px!important;background:var(--sp-white)!important;color:var(--sp-ink)!important;padding:12px 14px!important;}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track {grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important;}
+body.cosmic-theme.guided-discovery #learning .learning-group {margin-block:32px!important;}
+body.cosmic-theme.guided-discovery #learning .learning-group-title {font-size:23px!important;line-height:1.7!important;margin-block:0 22px!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #learning #learningGroups .learning-card {background:var(--sp-white)!important;border:1px solid var(--sp-line)!important;border-radius:22px!important;padding:24px 20px 20px!important;box-shadow:0 4px 16px #173f3d0a!important;min-height:320px!important;height:auto!important;max-height:none!important;}
+body.cosmic-theme.guided-discovery #learning .learning-logo {width:64px!important;height:64px!important;border-radius:18px!important;padding:8px!important;border:1px solid #d9e4d6!important;background:#f4f7ef!important;box-shadow:none!important;}
+body.cosmic-theme.guided-discovery #learning .learning-card>h3 {font-size:20px!important;line-height:1.7!important;margin-block:14px 10px!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #learning .learning-card .learning-focus {white-space:normal!important;overflow:visible!important;text-overflow:clip!important;font-size:15px!important;line-height:1.9!important;min-height:58px!important;height:auto!important;max-height:none!important;margin:12px 0 18px!important;padding:0!important;color:var(--sp-muted)!important;}
+body.cosmic-theme.guided-discovery #learning :is(.country-badge,.learning-vendor-note) {font-size:12px!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery #learning .learning-card-actions :is(button,.card-read-link) {min-height:48px!important;border-radius:12px!important;font-size:14px!important;line-height:1.7!important;padding:10px!important;}
+body.cosmic-theme.guided-discovery #learning .learning-card-actions button {background:var(--sp-forest)!important;border-color:var(--sp-forest)!important;}
+body.cosmic-theme.guided-discovery #learning .learning-card-actions .card-read-link {background:var(--sp-warm)!important;color:#6e5432!important;border-color:#e3d3b6!important;}
+
+/* The same information hierarchy for direct pages and both kinds of detail dialog. */
+body.cosmic-theme.motion-lab :is(.standalone-detail,.modal-card,.policy-page,.feedback-dialog,#outboundDialog) {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:24px!important;box-shadow:var(--sp-shadow)!important;}
+body.cosmic-theme .standalone-main {max-width:980px!important;}
+body.cosmic-theme.motion-lab .standalone-detail {padding:32px!important;}
+body.cosmic-theme .detail-breadcrumb {font-size:14px!important;line-height:1.9!important;padding:10px 2px 20px!important;}
+body.cosmic-theme.motion-lab .modal-card {max-height:calc(100dvh - 40px)!important;}
+body.cosmic-theme.motion-lab .modal-head {background:var(--sp-mint)!important;border-bottom:1px solid var(--sp-line)!important;padding:14px 22px!important;font-size:16px!important;}
+body.cosmic-theme.motion-lab .modal-head .close {min-height:44px;min-width:44px;border-radius:12px;background:#fffdf7;border:1px solid #bdcebf;color:var(--sp-ink);}
+body.cosmic-theme.motion-lab .modal-body {padding:28px!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-identity {padding:8px 0 20px!important;gap:14px!important;border-bottom:1px solid var(--sp-line);margin-bottom:20px!important;}
+body.cosmic-theme.motion-lab .detail-overview .quick-title {font-size:clamp(25px,3vw,34px)!important;line-height:1.65!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-logo {border:1px solid #d4e1d1!important;border-radius:18px!important;background:var(--sp-white)!important;padding:8px!important;}
+body.cosmic-theme.motion-lab .detail-overview>.quick-purpose {background:var(--sp-mint)!important;border-radius:16px!important;padding:20px!important;font-size:17px!important;line-height:1.95!important;}
+body.cosmic-theme.motion-lab .detail-overview>.decision-panel {border-radius:16px!important;padding:20px!important;background:var(--sp-warm)!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-facts {gap:12px!important;margin-block:22px!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-fact {background:#f6f8f1!important;border:1px solid #dfe6d9!important;border-radius:14px!important;padding:16px!important;min-width:0;}
+body.cosmic-theme.motion-lab .detail-overview .detail-fact small {font-size:14px!important;line-height:1.8!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-fact strong {font-size:16px!important;line-height:1.9!important;overflow-wrap:anywhere;}
+body.cosmic-theme.motion-lab .detail-overview>.destination-link {background:var(--sp-forest)!important;color:var(--sp-paper)!important;border:1px solid var(--sp-forest)!important;border-radius:14px!important;min-height:58px!important;height:auto!important;padding:14px 18px!important;}
+body.cosmic-theme.motion-lab .detail-overview>.destination-link :is(bdi,small,.outbound-key) {color:var(--sp-paper)!important;}
+body.cosmic-theme.motion-lab .detail-overview :is(.detail-section,.detail-task-comparison,.practical-trial) {border-radius:16px!important;margin-block:20px!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-section {padding:20px!important;background:var(--sp-white)!important;border:1px solid var(--sp-line)!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-section :is(h2,h4) {font-size:18px!important;line-height:1.7!important;margin-bottom:12px!important;}
+body.cosmic-theme.motion-lab .detail-overview .detail-section>div {font-size:16px!important;line-height:1.95!important;}
+body.cosmic-theme.motion-lab .detail-overview :is(.practical-trial,.detail-task-comparison)>summary {min-height:56px;padding:16px 20px!important;}
+body.cosmic-theme.motion-lab .detail-overview :is(.practical-trial,.detail-task-comparison)>summary strong {font-size:16px!important;}
+body.cosmic-theme .feedback-dialog {padding:24px!important;max-width:min(620px,calc(100vw - 28px));}
+body.cosmic-theme .feedback-dialog :is(input:not([type="hidden"]),textarea) {font-size:16px!important;padding:12px!important;border:1px solid #b8cbbd!important;border-radius:12px!important;background:#fff!important;}
+body.cosmic-theme .feedback-dialog :is(.primary,.secondary,.feedback-close) {min-height:46px!important;border-radius:12px!important;}
+body.cosmic-theme .policy-page {padding:36px!important;}
+body.cosmic-theme .policy-page h1 {font-size:clamp(27px,3vw,36px)!important;line-height:1.7!important;text-align:center;margin-bottom:18px;}
+body.cosmic-theme .policy-page h2 {font-size:21px!important;line-height:1.8!important;border-top:1px solid var(--sp-line);padding-top:22px;margin-top:28px;}
+body.cosmic-theme .policy-page :is(p,li) {font-size:17px!important;line-height:1.95!important;}
+body.cosmic-theme .policy-page .policy-updated {font-size:14px!important;color:var(--sp-muted)!important;text-align:center;}
+body.cosmic-theme .not-found nav {display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+body.cosmic-theme .not-found nav a {display:inline-flex;align-items:center;min-height:48px;padding:12px 20px;border:1px solid var(--sp-line);border-radius:12px;background:var(--sp-mint);}
+
+/* Observatory: increase legibility without changing the chart scale or data. */
+body.cosmic-theme.guided-discovery main#top>#competitionIndex {background:var(--sp-paper)!important;border-radius:26px!important;padding:32px 28px!important;border:1px solid var(--sp-line)!important;box-shadow:var(--sp-shadow)!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .competition-head {padding-bottom:24px!important;margin-bottom:22px!important;border-bottom:1px solid var(--sp-line);}
+body.cosmic-theme.guided-discovery #competitionIndex #competitionTitle {font-size:clamp(28px,3vw,38px)!important;line-height:1.6!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .competition-head p {font-size:15px!important;line-height:1.9!important;color:var(--sp-muted)!important;}
+body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-progress-tabs>button,.arab-more-card) {background:var(--sp-mint)!important;border:1px solid var(--sp-line)!important;border-radius:18px!important;min-height:92px!important;padding:16px!important;box-shadow:none!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-tabs>button.active {background:var(--sp-forest)!important;border-color:var(--sp-forest)!important;color:#fffdf7!important;}
+body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-tab-copy,.arab-more-card)>b,body.cosmic-theme.guided-discovery #competitionIndex .arab-more-card b {font-size:17px!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-tab-copy,.arab-more-card) small {font-size:13px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-observer-layout {gap:20px!important;margin-top:22px!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-observer-main {border:1px solid var(--sp-line)!important;border-radius:20px!important;background:var(--sp-white)!important;padding:22px!important;box-shadow:none!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-head {gap:14px!important;flex-wrap:wrap;padding-bottom:16px!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-title-wrap strong {font-size:19px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-metric-why,.arab-metric-scale) {font-size:14px!important;line-height:1.85!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row {min-height:66px!important;padding:12px!important;margin-block:10px!important;border:1px solid #dce5d9!important;border-radius:12px!important;background:#f5f8f0!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row.is-first {background:#fbf4e6!important;border-color:#e2d4b8!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-country b {font-size:15px!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-value {font-size:15px!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-source {font-size:13px!important;line-height:1.9!important;padding-top:18px!important;gap:8px!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-country-more {font-size:14px!important;min-height:46px!important;border-radius:12px!important;padding:10px 16px!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-observer-insight {background:var(--sp-mint)!important;border:1px solid var(--sp-line)!important;border-radius:20px!important;padding:22px!important;box-shadow:none!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-insight-head h3 {font-size:24px!important;line-height:1.7!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-insight-summary {font-size:15px!important;line-height:1.9!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-insight-point b {font-size:15px!important;line-height:1.8!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-insight-point small {font-size:13px!important;line-height:1.9!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-insight-quote {font-size:14px!important;line-height:1.9!important;border-radius:12px!important;padding:14px!important;background:#dce9db!important;}
+body.cosmic-theme.guided-discovery #competitionIndex .arab-extra-metrics>button {border-radius:12px!important;padding:14px!important;min-height:64px!important;font-size:14px!important;}
+
+/* Reading hub: cards on the sky; articles retain a quiet continuous paper surface. */
+body.cosmic-theme:not(.guided-discovery):has(.group) main.wrap {background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;max-width:1180px;width:calc(100% - 40px);}
+body.cosmic-theme:not(.guided-discovery):has(.group) .hero {padding:36px 12px 42px!important;}
+body.cosmic-theme:not(.guided-discovery):has(.group) .hero h1 {color:#faf3e5!important;font-size:clamp(28px,4vw,42px)!important;line-height:1.7!important;}
+body.cosmic-theme:not(.guided-discovery) .group-head {border-bottom:1px solid #4c695f;padding-bottom:20px;margin-bottom:24px;gap:24px;}
+body.cosmic-theme:not(.guided-discovery) .group-head h2 {color:#faf3e5!important;font-size:27px!important;line-height:1.7!important;}
+body.cosmic-theme:not(.guided-discovery) .group-head p {color:#cfdbd1!important;font-size:15px!important;line-height:1.9!important;}
+body.cosmic-theme:not(.guided-discovery) .group>.grid {gap:22px!important;}
+body.cosmic-theme:not(.guided-discovery) .group .card {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:22px!important;padding:20px!important;box-shadow:var(--sp-shadow)!important;}
+body.cosmic-theme:not(.guided-discovery) .group .guide-cover {border-radius:14px!important;}
+body.cosmic-theme:not(.guided-discovery) .group .tag {font-size:13px!important;line-height:1.7!important;color:#76582e!important;margin-top:16px;}
+body.cosmic-theme:not(.guided-discovery) .group .card h3 {font-size:21px!important;line-height:1.75!important;margin:10px 0!important;color:var(--sp-ink)!important;}
+body.cosmic-theme:not(.guided-discovery) .group .card p {font-size:16px!important;line-height:1.9!important;color:var(--sp-muted)!important;}
+body.cosmic-theme:not(.guided-discovery) .group .go {font-size:14px!important;line-height:1.8!important;border-top:1px solid var(--sp-line);padding-top:14px;}
+body.cosmic-theme:not(.guided-discovery) .method {background:var(--sp-mint)!important;border:1px solid var(--sp-line)!important;border-radius:20px!important;padding:26px!important;font-size:16px;line-height:1.9;}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) main.wrap {background:var(--sp-paper)!important;max-width:980px;width:calc(100% - 40px);padding-inline:40px!important;border-radius:26px!important;box-shadow:var(--sp-shadow)!important;}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) .hero {text-align:center;padding:38px 0 24px!important;}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) h1 {font-size:clamp(29px,3.6vw,42px)!important;line-height:1.65!important;max-width:28ch;margin:18px auto!important;color:var(--sp-ink)!important;text-wrap:balance;}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) .lead {font-size:18px!important;line-height:1.9!important;margin-inline:auto;max-width:66ch;}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) .stamp {justify-content:center;font-size:13px!important;line-height:1.8;gap:10px 16px;}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) .kicker {font-size:13px!important;line-height:1.8;padding:6px 14px;background:var(--sp-warm)!important;border-color:#e4d3b4!important;color:#76582e!important;}
+body.cosmic-theme:not(.guided-discovery) .article-cover {border-radius:18px!important;}
+body.cosmic-theme:not(.guided-discovery) .quick-answer {background:var(--sp-mint)!important;border:1px solid #cadcc9!important;border-radius:20px!important;padding:26px!important;}
+body.cosmic-theme:not(.guided-discovery) .quick-answer h2 {font-size:24px!important;line-height:1.7!important;}
+body.cosmic-theme:not(.guided-discovery) .quick-answer li {font-size:17px!important;line-height:1.95!important;}
+body.cosmic-theme:not(.guided-discovery) .jumpbar {flex-wrap:wrap!important;overflow:visible!important;gap:8px!important;padding:16px 0!important;}
+body.cosmic-theme:not(.guided-discovery) .jumpbar a {background:#f3f5ed!important;border:1px solid var(--sp-line)!important;border-radius:10px!important;font-size:14px!important;line-height:1.8!important;white-space:normal!important;}
+body.cosmic-theme:not(.guided-discovery) .guide-shell>article {padding:4px 0 20px!important;}
+body.cosmic-theme:not(.guided-discovery) .guide-shell article :is(p,li) {font-size:17px!important;line-height:2!important;}
+body.cosmic-theme:not(.guided-discovery) .guide-shell article h2 {font-size:25px!important;line-height:1.75!important;margin-block:36px 16px!important;}
+body.cosmic-theme:not(.guided-discovery) .guide-shell article h3 {font-size:18px!important;line-height:1.8!important;}
+body.cosmic-theme:not(.guided-discovery) :is(.human-question,.note,.lens,.decision) {padding:20px!important;border-radius:14px!important;}
+body.cosmic-theme:not(.guided-discovery) :is(.check b,.check span,.lens p,.lens b) {font-size:16px!important;line-height:1.9!important;}
+body.cosmic-theme:not(.guided-discovery) .source-list {gap:10px!important;}
+body.cosmic-theme:not(.guided-discovery) .source-card {background:#f3f7ee!important;border:1px solid var(--sp-line)!important;border-radius:14px!important;padding:18px!important;gap:12px!important;}
+body.cosmic-theme:not(.guided-discovery) .source-title {font-size:16px!important;line-height:1.8!important;}
+body.cosmic-theme:not(.guided-discovery) :is(.source-meta,.source-open) {font-size:13px!important;line-height:1.9!important;}
+body.cosmic-theme:not(.guided-discovery) .next {border-top:1px solid var(--sp-line)!important;padding:26px 0!important;}
+body.cosmic-theme:not(.guided-discovery) :is(.next-actions,.related) {gap:12px!important;}
+body.cosmic-theme:not(.guided-discovery) :is(.next-actions,.related)>a {border:1px solid var(--sp-line)!important;border-radius:14px!important;background:var(--sp-mint)!important;padding:16px!important;font-size:15px!important;line-height:1.9!important;min-height:52px!important;}
+body.cosmic-theme:not(.guided-discovery) .next-actions>a:first-child {background:var(--sp-forest)!important;border-color:var(--sp-forest)!important;color:var(--sp-paper)!important;}
+
+/* Secondary pages and feedback retain their content and existing affordances. */
+body.cosmic-theme.guided-discovery :is(#guides,#knowledge,#updates,#nominate) :is(.section-head,.fold-card,.knowledge-card,.update-card,.guide-card) {border-radius:20px!important;}
+body.cosmic-theme.guided-discovery #nominate {background:var(--sp-paper)!important;border:1px solid var(--sp-line)!important;border-radius:24px!important;padding:32px!important;color:var(--sp-ink)!important;}
+body.cosmic-theme.guided-discovery #nominate p {font-size:17px!important;line-height:1.9!important;color:var(--sp-muted)!important;}
+body.cosmic-theme.guided-discovery #nominate .nominate-actions button {min-height:50px!important;border-radius:12px!important;font-size:15px!important;}
+
+@media(max-width:1000px) {
+ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track {grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-observer-layout {grid-template-columns:minmax(0,1fr)!important;}
+}
+@media(max-width:760px) {
+ body.cosmic-theme.guided-discovery main#top>:is(#learning,#competitionIndex) {padding:24px 16px!important;border-radius:20px!important;}
+ body.cosmic-theme.guided-discovery #directory .catalog-grid {gap:18px!important;}
+ body.cosmic-theme.guided-discovery.motion-lab #directory .catalog-grid>.item {padding:18px!important;}
+ body.cosmic-theme.guided-discovery #directory .catalog-grid .item-name {font-size:19px!important;}
+ body.cosmic-theme.guided-discovery #directory #directoryRefineCategory .filter {font-size:13px!important;padding:9px 11px!important;}
+ body.cosmic-theme.guided-discovery #learning .learning-toolbar {padding:12px!important;}
+ body.cosmic-theme.guided-discovery #learning .learning-types>button {font-size:13px!important;}
+ body.cosmic-theme.motion-lab :is(.standalone-detail,.policy-page) {padding:22px 16px!important;border-radius:20px!important;}
+ body.cosmic-theme.motion-lab .modal-card {max-height:calc(100dvh - 24px)!important;border-radius:20px!important;}
+ body.cosmic-theme.motion-lab .modal-body {padding:20px 16px!important;}
+ body.cosmic-theme.motion-lab .detail-overview .detail-facts {grid-template-columns:minmax(0,1fr)!important;}
+ body.cosmic-theme.motion-lab .detail-overview :is(.detail-section,.quick-purpose,.decision-panel) {padding:16px!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-observer-main,.arab-observer-insight) {padding:18px 14px!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-metric-title-wrap {flex-wrap:wrap;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row {padding:10px!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-country b {font-size:14px!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-value {font-size:14px!important;}
+ body.cosmic-theme:not(.guided-discovery):has(.guide-shell) main.wrap {width:calc(100% - 24px);padding-inline:18px!important;border-radius:20px!important;}
+ body.cosmic-theme:not(.guided-discovery) .quick-answer {padding:20px 18px!important;border-radius:16px!important;}
+ body.cosmic-theme:not(.guided-discovery):has(.group) main.wrap {width:calc(100% - 28px);}
+ body.cosmic-theme:not(.guided-discovery) .group-head h2 {font-size:25px!important;}
+ body.cosmic-theme:not(.guided-discovery) .group .card {padding:18px!important;}
+ body.cosmic-theme:not(.guided-discovery) .group-head {gap:8px;}
+ body.cosmic-theme:not(.guided-discovery) :is(.toplinks,.hubnav)>a {font-size:13px!important;}
+}
+@media(max-width:540px) {
+ body.cosmic-theme.guided-discovery #learning #learningGroups .learning-carousel-track {grid-template-columns:minmax(0,1fr)!important;}
+ body.cosmic-theme.guided-discovery #learning .learning-types {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+ body.cosmic-theme.guided-discovery #learning .learning-types>button:first-child {grid-column:1/-1;}
+ body.cosmic-theme.guided-discovery #learning .learning-card {min-height:0!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-progress-tabs>button,.arab-more-card) {padding:12px!important;min-height:88px!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row {grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-country {grid-column:1;grid-row:1;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-value {grid-column:2;grid-row:1;}
+ body.cosmic-theme.guided-discovery #competitionIndex .arab-progress-row>:nth-child(2) {grid-column:1/-1;grid-row:2;width:100%;}
+ body.cosmic-theme.guided-discovery #nominate {padding:24px 16px!important;}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+ body.cosmic-theme :is(.group .card,.learning-card,.arab-progress-row.has-directory,.source-card) {transition:transform var(--sp-speed) var(--sp-ease),box-shadow var(--sp-speed),border-color var(--sp-speed)!important;}
+ body.cosmic-theme :is(.group .card,.learning-card):hover {transform:translateY(-3px)!important;border-color:#86a28b!important;box-shadow:0 14px 32px #183f3218!important;}
+ body.cosmic-theme :is(.source-card,.arab-progress-row.has-directory):hover {border-color:#86a28b!important;}
+}
+@media(prefers-reduced-motion:reduce) {
+ body.cosmic-theme {--sp-speed:0s;}
+ body.cosmic-theme *,body.cosmic-theme *::before,body.cosmic-theme *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+ body.cosmic-theme :is(.group .card,.learning-card,.source-card,.arab-progress-row.has-directory):hover {transform:none!important;}
+}
