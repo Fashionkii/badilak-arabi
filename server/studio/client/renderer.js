@@ -49,7 +49,7 @@
   }
   function design(template, project) {
     const c = project.copy[project.lang], ar = project.lang === 'ar';
-    const images = [], boxes = [], frames = [];
+    const images = [], boxes = [], frames = [], textGroups = [];
     const forest = '#194B3E', ink = '#193F35';
     let background = `<defs><linearGradient id="paper" x2="1" y2="1"><stop stop-color="#FFFDF7"/><stop offset="1" stop-color="#F3F6EE"/></linearGradient><filter id="soft" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#194B3E" flood-opacity=".085"/></filter></defs><rect width="1080" height="1350" fill="url(#paper)"/><path d="M0 170Q540 210 1080 170V0H0Z" fill="#FFF"/><path d="M0 228Q84 238 123 376Q33 340 0 290Z" fill="#EAF1E9" opacity=".75"/><path d="M1080 195Q996 223 958 346Q1051 304 1080 261Z" fill="#E6EEDF" opacity=".75"/><path d="M0 1165Q94 1210 151 1350H0Z" fill="#E4EDDF" opacity=".65"/><path d="M1080 1165Q986 1205 926 1350H1080Z" fill="#E4EDDF" opacity=".65"/><path d="M20 205Q98 343 187 347M1070 1130Q1001 1151 947 1200" fill="none" stroke="#D8B775" stroke-width="1.3" opacity=".75"/>`;
     function frame(x, y, w, h, r = 24, fill = '#FFFEF9') {
@@ -63,8 +63,9 @@
       images.push({ id, asset, custom: project.images[id], x, y, w, h, r, fit, focus });
     }
     picture('logo', 'logo', 401, 20, 278, 151, 0);
-    box('title', c.title, 70, 195, 940, 148, 59 * project.scales.title, 700, ink, 2);
-    box('subtitle', c.subtitle, 78, 339, 924, 74, 30 * project.scales.descriptions, 400, ink, 2);
+    box('title', c.title, 70, 202, 940, 212, 59 * project.scales.title, 700, ink, 2);
+    box('subtitle', c.subtitle, 78, 202, 924, 212, 30 * project.scales.descriptions, 400, ink, 2);
+    textGroups.push({ pairs: [['title', 'subtitle']], y: 202, h: 212, gap: 20 });
     const horizontal = template.layout === 'wide';
     if (!horizontal) {
       const sceneLeft = template.layout === 'scene-left';
@@ -80,8 +81,9 @@
           box('number' + i, ar ? ['١', '٢', '٣'][i] : String(i + 1), cardX + 88, y + 7, 30, 34, 23, 700);
           picture('icon' + i, template.icons[i], cardX + 18, y + 48, 170, 145, 12);
         } else picture('icon' + i, template.icons[i], cardX + 16, y + 26, 174, 157, 12);
-        box('name' + i, card[0], cardX + 204, y + 18, 281, 114, (template.kind === 'steps' ? (ar ? 37 : 33) : (ar ? 48 : 42)) * project.scales.names, 700, ink, 2, ar ? 'right' : 'left');
-        box('description' + i, card[1], cardX + 204, y + 133, 281, 74, 30 * project.scales.descriptions, 400, ink, 2, ar ? 'right' : 'left');
+        box('name' + i, card[0], cardX + 204, y + 16, 284, 178, (template.kind === 'steps' ? (ar ? 37 : 33) : (ar ? 48 : 42)) * project.scales.names, 700, ink, 2, ar ? 'right' : 'left');
+        box('description' + i, card[1], cardX + 204, y + 16, 284, 178, 30 * project.scales.descriptions, 400, ink, 2, ar ? 'right' : 'left');
+        textGroups.push({ pairs: [['name' + i, 'description' + i]], y: y + 16, h: 178, gap: 16 });
       });
     } else {
       frame(52, 430, 976, 345);
@@ -90,19 +92,22 @@
         const x = 52 + (2 - i) * 332;
         frame(x, 798, 312, 292, 23);
         picture('icon' + i, template.icons[i], x + 71, 816, 170, 132, 12);
-        box('name' + i, card[0], x + 18, 954, 276, 68, 36 * project.scales.names, 700, ink, 2);
-        box('description' + i, card[1], x + 18, 1018, 276, 68, 26 * project.scales.descriptions, 400, ink, 2);
+        box('name' + i, card[0], x + 18, 956, 276, 118, 36 * project.scales.names, 700, ink, 2);
+        box('description' + i, card[1], x + 18, 956, 276, 118, 26 * project.scales.descriptions, 400, ink, 2);
       });
+      textGroups.push({ pairs: [0, 1, 2].map(i => ['name' + i, 'description' + i]), y: 956, h: 118, gap: 16 });
     }
     box('footer', c.footer, 66, 1110, 948, 62, 24, 400, '#345E4F', 2);
     background += `<rect x="148" y="1193" width="784" height="94" rx="31" fill="${forest}" filter="url(#soft)"/><circle cx="873" cy="1240" r="28" fill="#D8B775"/><path d="M866 1229L878 1240L866 1251" fill="none" stroke="${forest}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
-    box('cta', c.cta, 178, 1206, 635, 64, 36, 700, '#FFFDF7', 1);
-    return { background, images, boxes, frames };
+    box('cta', c.cta, 178, 1208, 635, 64, 36, 700, '#FFFDF7', 1);
+    return { background, images, boxes, frames, textGroups };
   }
   function wrap(ctx, box) {
+    ctx.save();
     ctx.font = `${box.weight} ${box.size}px StudioFont`;
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left'; ctx.direction = box.ar ? 'rtl' : 'ltr';
     const result = [];
-    for (const paragraph of String(box.value).split('\n')) {
+    for (const paragraph of String(box.value).trim() ? String(box.value).split('\n') : []) {
       const words = paragraph.split(/\s+/).filter(Boolean);
       let line = '';
       for (const word of words) {
@@ -111,13 +116,42 @@
       }
       result.push(line);
     }
-    const lineHeight = box.size * (box.id.startsWith('name') ? 1.16 : 1.22);
-    const overflow = result.length > box.maxLines || result.length * lineHeight > box.h + 3 || result.some(line => ctx.measureText(line).width > box.w + 1);
-    const top = box.y + Math.max(0, (box.h - result.length * lineHeight) / 2);
-    return { lines: result, lineHeight, baseline: top + box.size * .91, overflow };
+    const metrics = result.map(line => ctx.measureText(line));
+    let lineHeight = box.size * (box.id.startsWith('name') ? 1.16 : 1.22);
+    // Measure visible glyphs, including Arabic dots and marks, in the actual font.
+    for (let i = 1; i < metrics.length; i++) lineHeight = Math.max(lineHeight, metrics[i - 1].actualBoundingBoxDescent + metrics[i].actualBoundingBoxAscent + 4);
+    const visible = metrics.map((m, i) => ({ top: i * lineHeight - m.actualBoundingBoxAscent, bottom: i * lineHeight + m.actualBoundingBoxDescent })).filter((m, i) => result[i].trim());
+    const offsetTop = visible.length ? Math.min(...visible.map(m => m.top)) : 0;
+    const offsetBottom = visible.length ? Math.max(...visible.map(m => m.bottom)) : 0;
+    const inkHeight = offsetBottom - offsetTop;
+    const inkTop = box.y + Math.max(0, (box.h - inkHeight) / 2);
+    const overflow = result.length > box.maxLines || inkHeight > box.h + 1 || metrics.some(m => m.width > box.w + 1);
+    ctx.restore();
+    return { lines: result, lineHeight, baseline: inkTop - offsetTop, inkTop, inkBottom: inkTop + inkHeight, inkHeight, overflow };
   }
   function textLayout(ctx, d) {
-    return d.boxes.map(box => ({ ...box, ...wrap(ctx, box) }));
+    const text = d.boxes.map(box => ({ ...box, ...wrap(ctx, box) }));
+    const byId = new Map(text.map(box => [box.id, box]));
+    function place(box, top, group, tooTall) {
+      box.baseline += top - box.inkTop;
+      box.inkTop = top; box.inkBottom = top + box.inkHeight;
+      box.overflow ||= tooTall || top < group.y - 1 || box.inkBottom > group.y + group.h + 1;
+    }
+    for (const group of d.textGroups || []) {
+      const pairs = group.pairs.map(ids => ids.map(id => byId.get(id)));
+      const headingHeight = Math.max(...pairs.map(([heading]) => heading.inkHeight));
+      const detailHeight = Math.max(...pairs.map(([, detail]) => detail.inkHeight));
+      const gap = headingHeight && detailHeight ? group.gap : 0;
+      const height = headingHeight + gap + detailHeight;
+      const top = group.y + Math.max(0, (group.h - height) / 2);
+      // Wide cards share the same heading bottom and description top. Side cards
+      // center each related pair together, regardless of line count or font scale.
+      for (const [heading, detail] of pairs) {
+        place(heading, top + headingHeight - heading.inkHeight, group, height > group.h + 1);
+        place(detail, top + headingHeight + gap, group, height > group.h + 1);
+      }
+    }
+    return text;
   }
   function sourceRect(im, bitmap) {
     const sw = bitmap.width || bitmap.naturalWidth, sh = bitmap.height || bitmap.naturalHeight;

@@ -23,6 +23,40 @@ module.exports = (async () => {
     if (loginResult.status() !== 200) throw new Error('Browser login: ' + loginResult.status() + ' ' + await loginResult.text() + '; origin=' + (await loginResult.request().allHeaders()).origin);
     await waitReady();
     assert.equal(await page.locator('#templateSelect option').count(), 10);
+    const spacing = await page.evaluate(async () => {
+      const { templates } = await (await fetch('/admin/studio?action=bootstrap')).json();
+      const R = window.StudioRenderer, ctx = document.createElement('canvas').getContext('2d');
+      const issues = []; let cases = 0;
+      for (const t of templates) for (const lang of ['ar', 'en']) {
+        const p = R.defaults(t); p.lang = lang;
+        for (const title of [.9, 1, 1.08]) for (const names of [.9, 1, 1.08]) for (const descriptions of [.9, 1, 1.08]) {
+          cases++; p.scales = { title, names, descriptions };
+          const text = R.textLayout(ctx, R.design(t, p)), byId = Object.fromEntries(text.map(b => [b.id, b]));
+          const check = (ok, reason) => { if (!ok) issues.push({ template: t.id, lang, scales: { ...p.scales }, reason }); };
+          check(text.every(b => !b.overflow), 'Default copy must fit throughout the available scale range.');
+          for (const [a, b, gap] of [['title', 'subtitle', 20], ...[0, 1, 2].map(i => ['name' + i, 'description' + i, 16])]) {
+            check(Math.abs(byId[b].inkTop - byId[a].inkBottom - gap) < 1, a + ': keep related text together.');
+          }
+          check(byId.title.inkTop >= 202 && byId.subtitle.inkBottom <= 415, 'Header clear of logo and artwork.');
+          if (t.layout === 'wide') {
+            check([1, 2].every(i => Math.abs(byId['description' + i].inkTop - byId.description0.inkTop) < 1), 'Wide card descriptions align.');
+            check([0, 1, 2].every(i => byId['name' + i].inkTop >= 956 && byId['description' + i].inkBottom <= 1075), 'Wide card padding.');
+          } else for (let i = 0; i < 3; i++) {
+            const y = 430 + i * 225, heading = byId['name' + i], detail = byId['description' + i];
+            check(heading.inkTop >= y + 16 && detail.inkBottom <= y + 195, 'Side card padding.');
+            check(Math.abs((heading.inkTop + detail.inkBottom) / 2 - (y + 105)) < 1, 'Center the complete card text group.');
+          }
+          check(!byId.signature, 'No personal signature.');
+        }
+        p.scales = { title: 1, names: 1, descriptions: 1 };
+        p.copy[lang].subtitle = ''; p.copy[lang].cards[0][1] = '';
+        const empty = R.textLayout(ctx, R.design(t, p));
+        if (empty.some(b => !Number.isFinite(b.baseline) || b.overflow)) issues.push({ template: t.id, lang, reason: 'Optional empty descriptions remain valid.' });
+      }
+      return { cases, issues };
+    });
+    fs.writeFileSync(path.join(out, 'spacing.json'), JSON.stringify(spacing, null, 2));
+    assert.deepEqual(spacing.issues, []);
     for (const id of ['learning', 'business', 'reading', 'research', 'fit', 'create', 'presentation', 'tech', 'shopping', 'discovery']) {
       await page.locator('#templateSelect').selectOption(id);
       await page.waitForFunction(id => document.querySelector('#templateSelect').value === id && !document.querySelector('#exportPng').disabled, id);
@@ -30,6 +64,18 @@ module.exports = (async () => {
       for (const lang of ['ar', 'en']) {
         await page.locator(lang === 'ar' ? '#langAr' : '#langEn').click(); await waitReady();
         await page.locator('#preview').screenshot({ path: path.join(out, id + '-' + lang + '-preview.png') });
+        const exportFile = await saveDownload('#exportPng', id + '-' + lang + '-export.png');
+        const differingPixels = await page.evaluate(async src => {
+          const im = new Image(); im.src = src; await im.decode();
+          const canvas = document.createElement('canvas'); canvas.width = im.width; canvas.height = im.height;
+          const ctx = canvas.getContext('2d'); ctx.drawImage(im, 0, 0);
+          const actual = ctx.getImageData(0, 0, im.width, im.height).data;
+          const expected = document.querySelector('#preview').getContext('2d').getImageData(0, 0, im.width, im.height).data;
+          let differing = 0;
+          for (let i = 0; i < actual.length; i++) if (actual[i] !== expected[i]) differing++;
+          return differing;
+        }, 'data:image/png;base64,' + fs.readFileSync(exportFile).toString('base64'));
+        assert.equal(differingPixels, 0, id + '/' + lang + ': exported PNG matches the preview pixels.');
       }
       await page.locator('#langAr').click(); await waitReady();
     }
@@ -61,6 +107,15 @@ module.exports = (async () => {
     await page.locator('#sceneUpload').setInputFiles(path.join(__dirname, '../server/studio/assets/fit-scene.webp')); await waitReady();
     await page.locator('#restoreImages').click(); await waitReady();
     await page.locator('#tab-settings').click(); await page.locator('#exportScale').selectOption('2');
+    for (let i = 0; i < 3; i++) {
+      await page.locator('#scaleFields input').nth(i).fill('1.08'); await waitReady();
+    }
+    const scaledPreview = await page.locator('#preview').evaluate(canvas => canvas.toDataURL('image/png'));
+    await page.screenshot({ path: path.join(out, 'studio-max-scale.png'), fullPage: true });
+    for (let i = 0; i < 3; i++) {
+      await page.locator('#scaleFields input').nth(i).fill('1'); await waitReady();
+    }
+    assert.notEqual(await page.locator('#preview').evaluate(canvas => canvas.toDataURL('image/png')), scaledPreview, 'Scale controls update the actual image.');
     const png = fs.readFileSync(await saveDownload('#exportPng', 'export-2x.png')); assert.equal(png.readUInt32BE(16), 2160); assert.equal(png.readUInt32BE(20), 2700);
     const svgFile = await saveDownload('#exportSvg', 'export.svg'), svg = fs.readFileSync(svgFile, 'utf8'); assert.ok(svg.includes('data:font/woff2;base64')); assert.ok(svg.includes(edited));
     assert.equal(await page.evaluate(svg => new DOMParser().parseFromString(svg, 'image/svg+xml').querySelectorAll('parsererror').length, svg), 0);
@@ -79,7 +134,7 @@ module.exports = (async () => {
     await page.locator('#logout').click(); await page.locator('#loginForm').waitFor();
     assert.equal(await page.evaluate(async () => (await fetch('/admin/studio?action=bootstrap')).status), 401);
     assert.deepEqual(errors, []);
-    fs.writeFileSync(path.join(out, 'audit.json'), JSON.stringify({ ok: true, templates: 10, visualPreviews: 20, checks: ['login', 'template selection', 'imported template persists on reload', 'draft restore', 'AR/EN', 'pending preview blocks exports', 'overflow block', 'image upload', 'PNG 2x', 'SVG with fonts', 'editable offline HTML', 'mobile layout', 'logout'], pageErrors: errors }, null, 2));
+    fs.writeFileSync(path.join(out, 'audit.json'), JSON.stringify({ ok: true, templates: 10, visualPreviews: 20, pngExports: 20, spacingCases: spacing.cases, checks: ['login', 'template selection', 'imported template persists on reload', 'draft restore', 'AR/EN', '540 font-scale combinations', 'empty optional copy', 'PNG matches preview', 'scale controls', 'pending preview blocks exports', 'overflow block', 'image upload', 'PNG 2x', 'SVG with fonts', 'editable offline HTML', 'mobile layout', 'logout'], pageErrors: errors }, null, 2));
     console.log(JSON.stringify({ ok: true, output: out, pageErrors: errors }));
   } catch (error) {
     await page.screenshot({ path: path.join(out, 'failure.png'), fullPage: true }).catch(() => {});
