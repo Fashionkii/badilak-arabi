@@ -97,8 +97,6 @@
     box('footer', c.footer, 66, 1110, 948, 62, 24, 400, '#345E4F', 2);
     background += `<rect x="148" y="1193" width="784" height="94" rx="31" fill="${forest}" filter="url(#soft)"/><circle cx="873" cy="1240" r="28" fill="#D8B775"/><path d="M866 1229L878 1240L866 1251" fill="none" stroke="${forest}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
     box('cta', c.cta, 178, 1206, 635, 64, 36, 700, '#FFFDF7', 1);
-    box('signature', 'Fattoh', 26, 1300, 120, 34, 20, 400, '#87978D', 1, 'left');
-    boxes[boxes.length - 1].ar = false;
     return { background, images, boxes, frames };
   }
   function wrap(ctx, box) {
