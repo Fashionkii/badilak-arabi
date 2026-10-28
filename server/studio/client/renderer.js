@@ -74,11 +74,12 @@
       c.cards.forEach((card, i) => {
         const y = 430 + i * 225;
         frame(cardX, y, 512, 210, 23, template.kind === 'steps' && i === 2 ? '#FCF5E8' : '#FFFEF9');
-        picture('icon' + i, template.icons[i], cardX + 16, y + 26, 174, 157, 12);
         if (template.kind === 'steps') {
-          background += `<circle cx="${cardX + 188}" cy="${y + 32}" r="19" fill="${i === 2 ? '#D8B775' : '#EAF1E9'}"/>`;
-          box('number' + i, ar ? ['١', '٢', '٣'][i] : String(i + 1), cardX + 173, y + 14, 30, 34, 23, 700);
-        }
+          // A dedicated row keeps each number clear of the raster icon.
+          background += `<circle cx="${cardX + 103}" cy="${y + 24}" r="16" fill="${i === 2 ? '#D8B775' : '#EAF1E9'}"/>`;
+          box('number' + i, ar ? ['١', '٢', '٣'][i] : String(i + 1), cardX + 88, y + 7, 30, 34, 23, 700);
+          picture('icon' + i, template.icons[i], cardX + 18, y + 48, 170, 145, 12);
+        } else picture('icon' + i, template.icons[i], cardX + 16, y + 26, 174, 157, 12);
         box('name' + i, card[0], cardX + 204, y + 18, 281, 114, (template.kind === 'steps' ? (ar ? 37 : 33) : (ar ? 48 : 42)) * project.scales.names, 700, ink, 2, ar ? 'right' : 'left');
         box('description' + i, card[1], cardX + 204, y + 133, 281, 74, 30 * project.scales.descriptions, 400, ink, 2, ar ? 'right' : 'left');
       });

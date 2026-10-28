@@ -27,9 +27,28 @@ module.exports = (async () => {
       await page.locator('#templateSelect').selectOption(id);
       await page.waitForFunction(id => document.querySelector('#templateSelect').value === id && !document.querySelector('#exportPng').disabled, id);
       await page.waitForFunction(() => !document.querySelector('#fitMessage').textContent);
+      for (const lang of ['ar', 'en']) {
+        await page.locator(lang === 'ar' ? '#langAr' : '#langEn').click(); await waitReady();
+        await page.locator('#preview').screenshot({ path: path.join(out, id + '-' + lang + '-preview.png') });
+      }
+      await page.locator('#langAr').click(); await waitReady();
     }
+    const templates = JSON.parse(fs.readFileSync(path.join(__dirname, '../server/studio/templates.json'), 'utf8')).templates;
+    const imported = require('../server/studio/client/renderer.js').defaults(templates.find(t => t.id === 'create'));
+    imported.copy.ar.title = 'محتوى قابل للتعديل';
+    await page.locator('#projectInput').setInputFiles({ name: 'review-project.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ project: imported })) });
+    await page.waitForFunction(() => document.querySelector('#templateSelect').value === 'create' && !document.querySelector('#exportPng').disabled);
+    await page.reload(); await waitReady();
+    assert.equal(await page.locator('#templateSelect').inputValue(), 'create');
+    assert.equal(await page.locator('#textFields textarea').first().inputValue(), imported.copy.ar.title);
     await page.locator('#templateSelect').selectOption('learning'); await waitReady();
     const title = page.locator('#textFields textarea').first(), edited = 'تعلّم بالعربية وابدأ من هدفك';
+    assert.equal(await page.evaluate(() => {
+      const field = document.querySelector('#textFields textarea');
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+      return ['exportPng', 'exportSvg', 'exportHtml'].every(id => document.getElementById(id).disabled);
+    }), true, 'Exports stay blocked until the updated preview has been checked.');
+    await waitReady();
     await title.fill(edited); await waitReady();
     await page.waitForFunction(() => document.querySelector('#draftState').textContent.includes('تم الحفظ'));
     await page.reload(); await waitReady(); assert.equal(await page.locator('#templateSelect').inputValue(), 'learning'); assert.equal(await page.locator('#textFields textarea').first().inputValue(), edited);
@@ -60,7 +79,7 @@ module.exports = (async () => {
     await page.locator('#logout').click(); await page.locator('#loginForm').waitFor();
     assert.equal(await page.evaluate(async () => (await fetch('/admin/studio?action=bootstrap')).status), 401);
     assert.deepEqual(errors, []);
-    fs.writeFileSync(path.join(out, 'audit.json'), JSON.stringify({ ok: true, templates: 10, checks: ['login', 'template selection', 'draft restore', 'AR/EN', 'overflow block', 'image upload', 'PNG 2x', 'SVG with fonts', 'editable offline HTML', 'mobile layout', 'logout'], pageErrors: errors }, null, 2));
+    fs.writeFileSync(path.join(out, 'audit.json'), JSON.stringify({ ok: true, templates: 10, visualPreviews: 20, checks: ['login', 'template selection', 'imported template persists on reload', 'draft restore', 'AR/EN', 'pending preview blocks exports', 'overflow block', 'image upload', 'PNG 2x', 'SVG with fonts', 'editable offline HTML', 'mobile layout', 'logout'], pageErrors: errors }, null, 2));
     console.log(JSON.stringify({ ok: true, output: out, pageErrors: errors }));
   } catch (error) {
     await page.screenshot({ path: path.join(out, 'failure.png'), fullPage: true }).catch(() => {});

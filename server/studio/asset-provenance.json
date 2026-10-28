@@ -1,0 +1,342 @@
+{
+  "revision": "2026-10-28-art-correction",
+  "assets": {
+    "learning-icon0": {
+      "source": "generated_images/exec-d7701291-82d8-4ca6-8603-3534ef5baf8d.png",
+      "sourceSha256": "036cfb0ee3ad8ad4f260648145f88dbd9679b147ce3fe9ddc1b17456a3136b7c",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        75,
+        458,
+        326,
+        650
+      ],
+      "outputSha256": "60b49c04296c9f319cdc0ebc93f4cc83f632b58266f09023034425768dc10124"
+    },
+    "learning-icon1": {
+      "source": "generated_images/exec-d7701291-82d8-4ca6-8603-3534ef5baf8d.png",
+      "sourceSha256": "036cfb0ee3ad8ad4f260648145f88dbd9679b147ce3fe9ddc1b17456a3136b7c",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        73,
+        693,
+        325,
+        888
+      ],
+      "outputSha256": "675fc24a311c6cfddc62558ce32834155b26c07d412f7e468a9990d9967dba95"
+    },
+    "learning-icon2": {
+      "source": "generated_images/exec-d7701291-82d8-4ca6-8603-3534ef5baf8d.png",
+      "sourceSha256": "036cfb0ee3ad8ad4f260648145f88dbd9679b147ce3fe9ddc1b17456a3136b7c",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        73,
+        928,
+        330,
+        1103
+      ],
+      "outputSha256": "21cfd8ff65e4705b2c3139f78dc63b6fb665ac923afef49fc6563d948feb64c5"
+    },
+    "business-icon0": {
+      "source": "generated_images/exec-c40f762d-21a9-409e-a79e-f7e5e3ae2b91.png",
+      "sourceSha256": "97d3dbf01f2e97af9fdf2af48d6cc07460d376866ec54dea44d6509ae8dffdb3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        613,
+        476,
+        814,
+        676
+      ],
+      "outputSha256": "c580e553388bd77b61529c0036a81ea17e5355f02b6ebf0110b75bb98d0a12c7"
+    },
+    "business-icon1": {
+      "source": "generated_images/exec-c40f762d-21a9-409e-a79e-f7e5e3ae2b91.png",
+      "sourceSha256": "97d3dbf01f2e97af9fdf2af48d6cc07460d376866ec54dea44d6509ae8dffdb3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        611,
+        711,
+        837,
+        906
+      ],
+      "outputSha256": "ae785727170d99d3cbb758f473fd06e752c1c62e8fd8fe21e64d00c299610b6f"
+    },
+    "business-icon2": {
+      "source": "generated_images/exec-c40f762d-21a9-409e-a79e-f7e5e3ae2b91.png",
+      "sourceSha256": "97d3dbf01f2e97af9fdf2af48d6cc07460d376866ec54dea44d6509ae8dffdb3",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        623,
+        947,
+        849,
+        1130
+      ],
+      "outputSha256": "8959a704619cc35dab92857fa42bb2bdd7bb8bca1fb2bafb67ca035d776f3631"
+    },
+    "research-icon0": {
+      "source": "generated_images/exec-f304d905-df0f-4783-8e6b-b000563167fe.png",
+      "sourceSha256": "95d37088b0fee28f40af090577ec568a4fc2d1831ee529f920bd9c1b4b0489c9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        69,
+        464,
+        348,
+        650
+      ],
+      "outputSha256": "6bacf8e95523c37e3589312c860876515ee4947dcb8668d3e603d59cd4439f24"
+    },
+    "research-icon1": {
+      "source": "generated_images/exec-f304d905-df0f-4783-8e6b-b000563167fe.png",
+      "sourceSha256": "95d37088b0fee28f40af090577ec568a4fc2d1831ee529f920bd9c1b4b0489c9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        62,
+        698,
+        315,
+        888
+      ],
+      "outputSha256": "1b7b43073cce6a083d6929fe2cc42ad439dffb9ee7470f94e5a12dd2e12b1a65"
+    },
+    "research-icon2": {
+      "source": "generated_images/exec-f304d905-df0f-4783-8e6b-b000563167fe.png",
+      "sourceSha256": "95d37088b0fee28f40af090577ec568a4fc2d1831ee529f920bd9c1b4b0489c9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        68,
+        929,
+        345,
+        1122
+      ],
+      "outputSha256": "532bc842610d241b619f92c8ccd9335222b8ca88f0d159685eb84947217fb4f0"
+    },
+    "culture-icon0": {
+      "source": "upload/Arabic platform names typography update-4.png",
+      "sourceSha256": "ad498a0ea9eed680eb0348efd81d5337a28b65fca4efeef5011c55c5e0126edd",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        68,
+        561,
+        306,
+        749
+      ],
+      "outputSha256": "662b956b5ade177055cdf1afa8a9d509719f2ed1743a1579741dce80c267a720"
+    },
+    "culture-icon1": {
+      "source": "upload/Arabic platform names typography update-4.png",
+      "sourceSha256": "ad498a0ea9eed680eb0348efd81d5337a28b65fca4efeef5011c55c5e0126edd",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        63,
+        789,
+        327,
+        962
+      ],
+      "outputSha256": "4068ba2b7492a8556ca29e1a8df3eeef6a0aac7ffc1759022db749a88593f7b2"
+    },
+    "culture-icon2": {
+      "source": "upload/Arabic platform names typography update-4.png",
+      "sourceSha256": "ad498a0ea9eed680eb0348efd81d5337a28b65fca4efeef5011c55c5e0126edd",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        92,
+        995,
+        323,
+        1173
+      ],
+      "outputSha256": "68f849aecaf7e45bd72174fba3acfed87e8f8b182c80566c7becf2874be3e7fe"
+    },
+    "fit-icon0": {
+      "source": "upload/Finding the right fit for you(2).png",
+      "sourceSha256": "92c543304d545915c2cf79f8e3450c0316b24526ad170183056b471b4982ef84",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        807,
+        866,
+        1027,
+        1055
+      ],
+      "outputSha256": "871355c9f1b3f37e0ef695e32c67ff65846e80965e85f54325285d3cd0500021"
+    },
+    "fit-icon1": {
+      "source": "upload/Finding the right fit for you(2).png",
+      "sourceSha256": "92c543304d545915c2cf79f8e3450c0316b24526ad170183056b471b4982ef84",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        468,
+        866,
+        669,
+        1053
+      ],
+      "outputSha256": "a8ebf2a47233b7151481dbd439f3dd54340d9268682e7c32b0ce696c2d7a33e9"
+    },
+    "fit-icon2": {
+      "source": "upload/Finding the right fit for you(2).png",
+      "sourceSha256": "92c543304d545915c2cf79f8e3450c0316b24526ad170183056b471b4982ef84",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        117,
+        867,
+        308,
+        1057
+      ],
+      "outputSha256": "f8132fd0160a6d8bc4ad517a59f790399a86eed3f4a8eebc355e273c6b383220"
+    },
+    "presentation-icon0": {
+      "source": "generated_images/exec-e5a74b9a-3168-46ed-b963-79e3ca90b18c.png",
+      "sourceSha256": "f723d36bee8b21a63181e0ce6ef0e4db3bb52a9612099bb36ee16d8218398a8d",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        820,
+        888,
+        1008,
+        1050
+      ],
+      "outputSha256": "33a0619d8641d496e4edf180f3350875be8e4a4624d0f739936736b7388c8481"
+    },
+    "presentation-icon1": {
+      "source": "generated_images/exec-e5a74b9a-3168-46ed-b963-79e3ca90b18c.png",
+      "sourceSha256": "f723d36bee8b21a63181e0ce6ef0e4db3bb52a9612099bb36ee16d8218398a8d",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        454,
+        900,
+        663,
+        1048
+      ],
+      "outputSha256": "6bceb6c4b9eef5b38be3181ae15788a644bd46423b2c1faa89770931f0e2c44d"
+    },
+    "presentation-icon2": {
+      "source": "generated_images/exec-e5a74b9a-3168-46ed-b963-79e3ca90b18c.png",
+      "sourceSha256": "f723d36bee8b21a63181e0ce6ef0e4db3bb52a9612099bb36ee16d8218398a8d",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        128,
+        895,
+        339,
+        1049
+      ],
+      "outputSha256": "fcb20384ffadafadcfebfd5beaa941d4007ddd2a724bc326047456da99108b9c"
+    },
+    "choice-icon0": {
+      "source": "generated_images/exec-a0341529-102d-4001-8ef2-174aa1208da9.png",
+      "sourceSha256": "3f5d1487d13e7c78cc4e750eb58654f5f87a08132686850f9c6de9984395a5b4",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        823,
+        913,
+        974,
+        1080
+      ],
+      "outputSha256": "0589872b38d1999753c2fc427454ceb52a8d3c96208a2bb8a36cc98b0e783fd2"
+    },
+    "choice-icon1": {
+      "source": "generated_images/exec-a0341529-102d-4001-8ef2-174aa1208da9.png",
+      "sourceSha256": "3f5d1487d13e7c78cc4e750eb58654f5f87a08132686850f9c6de9984395a5b4",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        480,
+        917,
+        657,
+        1080
+      ],
+      "excludeSourceBadge": [
+        150,
+        0,
+        177,
+        104
+      ],
+      "outputSha256": "8e5013b960b2afe67f05edd67a21dd53689d3c24cc0fd73e0f3104aedd3bb313"
+    },
+    "choice-icon2": {
+      "source": "generated_images/exec-a0341529-102d-4001-8ef2-174aa1208da9.png",
+      "sourceSha256": "3f5d1487d13e7c78cc4e750eb58654f5f87a08132686850f9c6de9984395a5b4",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "crop": [
+        128,
+        913,
+        304,
+        1080
+      ],
+      "excludeSourceBadge": [
+        166,
+        38,
+        176,
+        108
+      ],
+      "outputSha256": "f1bd7e6edfb30cfb68e1f38839b75a03235a18b862236116088254bd133d5fce"
+    },
+    "logo": {
+      "source": "badilak-arabi-studio/images/brand/wordmark-main-20261016-dots-1080.webp",
+      "sourceSha256": "a7f489e352329ff31c855e9a8a14d2f5f53582eab8c09d7f5e81d4479097f41e",
+      "sourceSize": [
+        1080,
+        631
+      ],
+      "operation": "Original wordmark, unchanged geometry; white background, forest ink, gold foliage. Negative-space dots all white.",
+      "outputSha256": "fc4343b820326960513d031c2b957152318c06e2cc9bdc327927c3dcabe760d3"
+    }
+  }
+}

@@ -20,6 +20,12 @@ const loadBitmap = src => src.startsWith('data:image/svg+xml;charset=utf-8,') ? 
     const p = R.defaults(t); p.lang = lang;
     const c = native.createCanvas(R.W, R.H), ctx = c.getContext('2d');
     const report = await R.draw(ctx, t, p, resolveAsset, loadBitmap);
+    if (t.kind === 'steps') for (let i = 0; i < 3; i++) {
+      const number = report.design.boxes.find(b => b.id === 'number' + i);
+      const icon = report.design.images.find(im => im.id === 'icon' + i);
+      assert.ok(number.y + number.h < icon.y, 'Step numbers must have their own clear space above icons.');
+    }
+    if (t.id === 'shopping') assert.equal(report.design.images.find(im => im.id === 'scene').fit, 'contain', 'Show the whole store illustration.');
     if (report.overflow.length) issues.push({ template: t.id, lang, fields: report.overflow.map(x => ({ id: x.id, value: x.value, lines: x.lines })) });
     const png = c.toBuffer('image/png');
     assert.equal(png.readUInt32BE(16), 1080); assert.equal(png.readUInt32BE(20), 1350);

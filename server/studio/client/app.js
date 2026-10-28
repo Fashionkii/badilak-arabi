@@ -63,6 +63,8 @@
   }
   async function render() {
     const current = ++sequence, snapshot = clone(project), t = template();
+    lastReport = null;
+    for (const id of ['exportPng', 'exportSvg', 'exportHtml']) $(id).disabled = true;
     try {
       await document.fonts.ready;
       const temporary = document.createElement('canvas'); temporary.width = R.W; temporary.height = R.H;
@@ -127,7 +129,8 @@
     const value = JSON.parse(raw), candidate = R.normalize(value.project || value, bootstrap.templates);
     for (const src of Object.values(candidate.images)) { const im = await bitmap(src); if (im.naturalWidth * im.naturalHeight > 24 * 1024 * 1024) throw new Error('صورة داخل الملف كبيرة جدًا.'); }
     project = candidate; selected = project.template;
-    history = []; future = []; lastSnapshot = clone(project); fields(); await saveNow(); render(); toast('تم فتح المشروع.');
+    history = []; future = []; lastSnapshot = clone(project); fields(); await saveNow();
+    await draft('put', '__selected__', selected); render(); toast('تم فتح المشروع.');
   }
   function copyExample() {
     const c = project.copy[project.lang];
