@@ -1,0 +1,71 @@
+'use strict';
+const { test, before, after } = require('node:test');
+const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
+const http = require('node:http');
+const fs = require('node:fs');
+const path = require('node:path');
+const auth = require('../server/studio/auth.cjs');
+const handler = require('../api/studio');
+const salt = '1234567890abcdef1234567890abcdef';
+const user = { username: 'testadmin', role: 'admin', passwordHash: `scrypt:${salt}:${crypto.scryptSync('local-test-password', salt, 64).toString('hex')}` };
+let server, base, cookie, csrf;
+before(async () => {
+  process.env.STUDIO_ADMIN_USERS = JSON.stringify([user]);
+  process.env.STUDIO_SESSION_SECRET = 'testing-only-session-key-with-at-least-forty-three-characters';
+  delete process.env.STUDIO_AUTOMATION_TOKEN;
+  server = http.createServer(handler); await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  base = `http://127.0.0.1:${server.address().port}`;
+});
+after(() => new Promise(resolve => server.close(resolve)));
+const request = (suffix = '', init = {}) => fetch(base + '/admin/studio' + suffix, init);
+test('studio protection and full authenticated workflow', async () => {
+  let r = await request(); assert.equal(r.status, 200); const login = await r.text();
+  assert.match(login, /loginForm/); assert.doesNotMatch(login, /templateSelect|app\.js/);
+  for (const name of ['app.js', 'renderer.js', 'learning-scene.webp', 'shell.txt']) { r = await request('?asset=' + name); assert.equal(r.status, 401, name); assert.match(r.headers.get('cache-control'), /no-store/); }
+  assert.equal((await request('?action=bootstrap')).status, 401);
+  assert.equal((await request('?asset=..%2Fauth.cjs')).status, 404);
+  assert.equal((await request('?asset=login.js')).status, 200);
+  assert.equal((await request('?action=login', { method: 'POST', headers: { Origin: 'https://attacker.invalid', 'Content-Type': 'application/json' }, body: '{}' })).status, 403);
+  r = await request('?action=login', { method: 'POST', headers: { Origin: base, 'Content-Type': 'application/json' }, body: JSON.stringify({ username: user.username, password: 'wrong' }) }); assert.equal(r.status, 401);
+  r = await request('?action=login', { method: 'POST', headers: { Origin: base, 'Content-Type': 'application/json' }, body: JSON.stringify({ username: user.username, password: 'local-test-password' }) });
+  assert.equal(r.status, 200); const fullCookie = r.headers.get('set-cookie'); assert.match(fullCookie, /HttpOnly/); assert.match(fullCookie, /SameSite=Strict/); cookie = fullCookie.split(';')[0];
+  r = await request('?action=bootstrap', { headers: { Cookie: cookie } }); assert.equal(r.status, 200);
+  const b = await r.json(); csrf = b.session.csrf; assert.equal(b.aiConnected, false); assert.equal(b.templates.length, 10); assert.ok(!JSON.stringify(b).includes('passwordHash'));
+  const sections = new Set(b.templates.map(t => t.section)); assert.equal(sections.size, 7);
+  r = await request('', { headers: { Cookie: cookie } }); assert.match(await r.text(), /templateSelect/); assert.match(r.headers.get('content-security-policy'), /frame-ancestors 'none'/);
+  assert.equal((await request('?asset=learning-scene.webp', { headers: { Cookie: cookie } })).status, 200);
+  const project = { template: 'learning', lang: 'ar', copy: { title: 'عنوان', subtitle: 'وصف', footer: 'مرجع', cta: 'استكشف' }, cards: Array.from({ length: 3 }, (_, i) => ({ name: String(i), description: 'وظيفة' })) };
+  assert.equal((await request('?action=validate', { method: 'POST', headers: { Cookie: cookie, Origin: base, 'Content-Type': 'application/json' }, body: JSON.stringify(project) })).status, 403);
+  r = await request('?action=validate', { method: 'POST', headers: { Cookie: cookie, Origin: base, 'X-Studio-CSRF': csrf, 'Content-Type': 'application/json' }, body: JSON.stringify(project) }); assert.equal(r.status, 200); assert.deepEqual((await r.json()).design, project);
+  r = await request('?action=validate', { method: 'POST', headers: { Cookie: cookie, Origin: base, 'X-Studio-CSRF': csrf, 'Content-Type': 'application/json' }, body: JSON.stringify({ ...project, template: '../../secrets' }) }); assert.equal(r.status, 400);
+  r = await request('?action=logout', { method: 'POST', headers: { Cookie: cookie, Origin: base, 'X-Studio-CSRF': csrf, 'Content-Type': 'application/json' }, body: '{}' }); assert.equal(r.status, 200); assert.match(r.headers.get('set-cookie'), /Max-Age=0/);
+});
+test('tampered, expired and revoked sessions fail closed', () => {
+  const config = auth.settings(), now = 1000000000000, { token } = auth.createSession(user, config, now);
+  const req = { headers: { cookie: 'badilak_studio_dev=' + token } };
+  assert.ok(auth.verifySession(req, config, now));
+  assert.equal(auth.verifySession({ headers: { cookie: 'badilak_studio_dev=' + token + 'x' } }, config, now), null);
+  assert.equal(auth.verifySession(req, config, now + 9 * 3600 * 1000), null);
+  assert.equal(auth.verifySession(req, { ...config, users: [] }, now), null);
+  assert.equal(auth.verifySession(req, { ...config, ready: false }, now), null);
+  assert.match(auth.sessionCookie({ headers: { 'x-forwarded-proto': 'https' } }, token), /^__Host-/);
+  assert.match(auth.sessionCookie({ headers: { 'x-forwarded-proto': 'https' } }, token), /; Secure/);
+  assert.equal(auth.automationAllowed({ headers: { authorization: 'Bearer anything' } }), false);
+});
+test('untrusted projects cannot change layouts, fetch remote images or escape text', () => {
+  const renderer = require('../server/studio/client/renderer.js');
+  const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../server/studio/templates.json'), 'utf8'));
+  const original = renderer.defaults(data.templates[1]);
+  assert.throws(() => renderer.normalize({ ...original, images: { scene: 'https://attacker.invalid/image.png' } }, data.templates));
+  assert.throws(() => renderer.normalize({ ...original, template: '__proto__' }, data.templates));
+  const adjusted = renderer.normalize({ ...original, layout: 'anything', scales: { title: 10 } }, data.templates);
+  assert.equal(adjusted.scales.title, 1.08); assert.equal(adjusted.layout, undefined);
+  assert.equal(renderer.escape('<script>"&'), '&lt;script&gt;&quot;&amp;');
+});
+test('private source and art never appear in static output', () => {
+  const out = path.join(__dirname, '../dist');
+  for (const name of ['server', 'api', 'admin', 'templates.json']) assert.equal(fs.existsSync(path.join(out, name)), false, name);
+  const index = fs.readFileSync(path.join(out, 'index.html'), 'utf8'); assert.match(index, /href="\/admin\/studio" rel="nofollow"/);
+  assert.match(index, /noindex, follow/);
+});

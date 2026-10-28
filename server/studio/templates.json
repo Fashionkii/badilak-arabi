@@ -1,0 +1,713 @@
+{
+  "version": 1,
+  "rulesVersion": "2026-10-28-white-logo",
+  "assets": {
+    "learning-scene": {
+      "file": "learning-scene.webp",
+      "width": 454,
+      "height": 667
+    },
+    "learning-icon0": {
+      "file": "learning-icon0.webp",
+      "width": 235,
+      "height": 171
+    },
+    "learning-icon1": {
+      "file": "learning-icon1.webp",
+      "width": 235,
+      "height": 182
+    },
+    "learning-icon2": {
+      "file": "learning-icon2.webp",
+      "width": 237,
+      "height": 159
+    },
+    "logo": {
+      "file": "logo.webp",
+      "width": 317,
+      "height": 154
+    },
+    "business-scene": {
+      "file": "business-scene.webp",
+      "width": 539,
+      "height": 681
+    },
+    "business-icon0": {
+      "file": "business-icon0.webp",
+      "width": 191,
+      "height": 180
+    },
+    "business-icon1": {
+      "file": "business-icon1.webp",
+      "width": 220,
+      "height": 175
+    },
+    "business-icon2": {
+      "file": "business-icon2.webp",
+      "width": 212,
+      "height": 161
+    },
+    "research-scene": {
+      "file": "research-scene.webp",
+      "width": 456,
+      "height": 687
+    },
+    "research-icon0": {
+      "file": "research-icon0.webp",
+      "width": 255,
+      "height": 182
+    },
+    "research-icon1": {
+      "file": "research-icon1.webp",
+      "width": 243,
+      "height": 176
+    },
+    "research-icon2": {
+      "file": "research-icon2.webp",
+      "width": 250,
+      "height": 176
+    },
+    "culture-scene": {
+      "file": "culture-scene.webp",
+      "width": 463,
+      "height": 634
+    },
+    "culture-icon0": {
+      "file": "culture-icon0.webp",
+      "width": 236,
+      "height": 182
+    },
+    "culture-icon1": {
+      "file": "culture-icon1.webp",
+      "width": 250,
+      "height": 176
+    },
+    "culture-icon2": {
+      "file": "culture-icon2.webp",
+      "width": 251,
+      "height": 175
+    },
+    "fit-scene": {
+      "file": "fit-scene.webp",
+      "width": 905,
+      "height": 308
+    },
+    "fit-icon0": {
+      "file": "fit-icon0.webp",
+      "width": 215,
+      "height": 170
+    },
+    "fit-icon1": {
+      "file": "fit-icon1.webp",
+      "width": 204,
+      "height": 160
+    },
+    "fit-icon2": {
+      "file": "fit-icon2.webp",
+      "width": 217,
+      "height": 172
+    },
+    "presentation-scene": {
+      "file": "presentation-scene.webp",
+      "width": 1050,
+      "height": 417
+    },
+    "presentation-icon0": {
+      "file": "presentation-icon0.webp",
+      "width": 195,
+      "height": 158
+    },
+    "presentation-icon1": {
+      "file": "presentation-icon1.webp",
+      "width": 215,
+      "height": 146
+    },
+    "presentation-icon2": {
+      "file": "presentation-icon2.webp",
+      "width": 230,
+      "height": 170
+    },
+    "choice-scene": {
+      "file": "choice-scene.webp",
+      "width": 1086,
+      "height": 1448
+    },
+    "choice-icon0": {
+      "file": "choice-icon0.webp",
+      "width": 142,
+      "height": 136
+    },
+    "choice-icon1": {
+      "file": "choice-icon1.webp",
+      "width": 181,
+      "height": 138
+    },
+    "choice-icon2": {
+      "file": "choice-icon2.webp",
+      "width": 183,
+      "height": 142
+    }
+  },
+  "templates": [
+    {
+      "id": "discovery",
+      "label": "التعريف بالدليل",
+      "section": "البراند",
+      "layout": "scene-right",
+      "scene": "choice-scene",
+      "icons": [
+        "choice-icon0",
+        "choice-icon1",
+        "choice-icon2"
+      ],
+      "kind": "steps",
+      "description": "خطوات خفيفة لتعريف الزائر بوظيفة الدليل.",
+      "copy": {
+        "ar": {
+          "title": "حيرة الاختيار؟",
+          "subtitle": "خيارات عربية للتعلّم والعمل والقراءة",
+          "cards": [
+            [
+              "حدّد احتياجك",
+              "ماذا تريد إنجازه؟"
+            ],
+            [
+              "استكشف الخيارات",
+              "تعرّف على وظيفة كل خيار"
+            ],
+            [
+              "اختر ما يناسبك",
+              "ابدأ بما يخدم هدفك"
+            ]
+          ],
+          "footer": "منصة لاكتشاف البدائل العربية",
+          "cta": "استكشف الدليل"
+        },
+        "en": {
+          "title": "Not sure what to choose?",
+          "subtitle": "Arabic options for learning, work and reading",
+          "cards": [
+            [
+              "Define your need",
+              "What do you want to do?"
+            ],
+            [
+              "Explore options",
+              "See what each option offers"
+            ],
+            [
+              "Choose what fits",
+              "Start with your goal"
+            ]
+          ],
+          "footer": "Discover Arabic alternatives",
+          "cta": "Explore the directory"
+        }
+      }
+    },
+    {
+      "id": "learning",
+      "label": "منصات التعلّم",
+      "section": "تعلّم وبحث",
+      "layout": "scene-right",
+      "scene": "learning-scene",
+      "icons": [
+        "learning-icon0",
+        "learning-icon1",
+        "learning-icon2"
+      ],
+      "kind": "options",
+      "description": "مشهد تعلّم بجانب ثلاث بطاقات؛ شعار ثابت على الأبيض.",
+      "copy": {
+        "ar": {
+          "title": "تريد تعلّم مهارة جديدة؟",
+          "subtitle": "حدّد هدفك، ثم اختر ما يناسبك",
+          "cards": [
+            [
+              "إدراك",
+              "تعلّم بالعربية"
+            ],
+            [
+              "ينفع",
+              "مهارات للعمل"
+            ],
+            [
+              "المنتور",
+              "تعلّم مع خبراء"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف دليل التعلّم"
+        },
+        "en": {
+          "title": "Want to learn a new skill?",
+          "subtitle": "Define your goal, then explore your options",
+          "cards": [
+            [
+              "Edraak",
+              "Learn in Arabic"
+            ],
+            [
+              "Yanfaa",
+              "Skills for work"
+            ],
+            [
+              "almentor",
+              "Learn with experts"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore learning options"
+        }
+      }
+    },
+    {
+      "id": "business",
+      "label": "إطلاق متجر",
+      "section": "شغلك ومشروعك",
+      "layout": "scene-left",
+      "scene": "business-scene",
+      "icons": [
+        "business-icon0",
+        "business-icon1",
+        "business-icon2"
+      ],
+      "kind": "options",
+      "description": "مشهد المشروع يسارًا وبطاقات الأدوات يمينًا.",
+      "copy": {
+        "ar": {
+          "title": "تجهّز لمتجر إلكتروني؟",
+          "subtitle": "خدمات لمشروعك، ومنصة لمتجرك، وإدارة لأعمالك",
+          "cards": [
+            [
+              "خمسات",
+              "خدمات لمشروعك"
+            ],
+            [
+              "سلة",
+              "إنشاء متجر"
+            ],
+            [
+              "دفترة",
+              "إدارة أعمالك"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف خيارات مشروعك"
+        },
+        "en": {
+          "title": "Planning an online store?",
+          "subtitle": "Services, store platforms and business tools",
+          "cards": [
+            [
+              "Khamsat",
+              "Services for your business"
+            ],
+            [
+              "Salla",
+              "Build an online store"
+            ],
+            [
+              "Daftra",
+              "Manage your business"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore business options"
+        }
+      }
+    },
+    {
+      "id": "reading",
+      "label": "القراءة والاستماع",
+      "section": "كتب وصوت وترفيه",
+      "layout": "scene-right",
+      "scene": "culture-scene",
+      "icons": [
+        "culture-icon0",
+        "culture-icon1",
+        "culture-icon2"
+      ],
+      "kind": "options",
+      "description": "مشهد قراءة دافئ، مع وصف وظيفة كل خيار.",
+      "copy": {
+        "ar": {
+          "title": "تقرأ أم تستمع؟",
+          "subtitle": "كتب وبودكاست، اختر ما يناسبك",
+          "cards": [
+            [
+              "أبجد",
+              "كتب للقراءة والاستماع"
+            ],
+            [
+              "هنداوي",
+              "كتب عربية مجانية"
+            ],
+            [
+              "صوت",
+              "بودكاست وحكايات"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف القراءة والاستماع"
+        },
+        "en": {
+          "title": "Read or listen?",
+          "subtitle": "Books and podcasts in Arabic",
+          "cards": [
+            [
+              "Abjjad",
+              "Read and listen to books"
+            ],
+            [
+              "Hindawi",
+              "Free Arabic books"
+            ],
+            [
+              "Sowt",
+              "Podcasts and stories"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore reading and listening"
+        }
+      }
+    },
+    {
+      "id": "research",
+      "label": "مصادر البحث",
+      "section": "تعلّم وبحث",
+      "layout": "scene-right",
+      "scene": "research-scene",
+      "icons": [
+        "research-icon0",
+        "research-icon1",
+        "research-icon2"
+      ],
+      "kind": "options",
+      "description": "مصادر مختلفة بحسب نوع المادة؛ أسماء طويلة قابلة للالتفاف.",
+      "copy": {
+        "ar": {
+          "title": "تبحث عن مصادر لبحثك؟",
+          "subtitle": "دراسات ورسائل جامعية ووثائق تاريخية",
+          "cards": [
+            [
+              "شمعة",
+              "دراسات تربوية"
+            ],
+            [
+              "دار المنظومة",
+              "رسائل ودراسات"
+            ],
+            [
+              "مكتبة قطر الرقمية",
+              "وثائق تاريخية"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف مصادر البحث"
+        },
+        "en": {
+          "title": "Looking for research sources?",
+          "subtitle": "Studies, theses and historical documents",
+          "cards": [
+            [
+              "Shamaa",
+              "Educational studies"
+            ],
+            [
+              "Dar Almandumah",
+              "Theses and studies"
+            ],
+            [
+              "Qatar Digital Library",
+              "Historical documents"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore research sources"
+        }
+      }
+    },
+    {
+      "id": "fit",
+      "label": "اختيار يناسبك",
+      "section": "البراند",
+      "layout": "wide",
+      "scene": "fit-scene",
+      "icons": [
+        "fit-icon0",
+        "fit-icon1",
+        "fit-icon2"
+      ],
+      "kind": "options",
+      "description": "تكوين قائم على المنتجات وثلاثة معايير للاختيار.",
+      "copy": {
+        "ar": {
+          "title": "ليس كل خيار مناسبًا لك",
+          "subtitle": "ابدأ بما تحتاجه فعلًا",
+          "cards": [
+            [
+              "هدفك",
+              "ماذا تريد إنجازه؟"
+            ],
+            [
+              "ميزانيتك",
+              "ما التكلفة المناسبة لك؟"
+            ],
+            [
+              "وقتك",
+              "كم من الوقت لديك؟"
+            ]
+          ],
+          "footer": "اكتشف خياراتك العربية مع بديلك عربي",
+          "cta": "استكشف ما يناسبك"
+        },
+        "en": {
+          "title": "Find the right fit for you",
+          "subtitle": "Start with what you actually need",
+          "cards": [
+            [
+              "Your goal",
+              "What do you want to do?"
+            ],
+            [
+              "Your budget",
+              "What cost suits you?"
+            ],
+            [
+              "Your time",
+              "How much time do you have?"
+            ]
+          ],
+          "footer": "Discover Arabic options with Badilak Arabi",
+          "cta": "Explore your options"
+        }
+      }
+    },
+    {
+      "id": "create",
+      "label": "أدوات صناعة المحتوى",
+      "section": "تصميم ومحتوى",
+      "layout": "wide",
+      "scene": "presentation-scene",
+      "icons": [
+        "presentation-icon2",
+        "presentation-icon0",
+        "culture-icon2"
+      ],
+      "kind": "options",
+      "description": "مشهد أفقي وبطاقات سفلية للأدوات ووظائفها.",
+      "copy": {
+        "ar": {
+          "title": "تصنع محتوى بالعربية؟",
+          "subtitle": "أدوات للتصميم والعرض والتفريغ الصوتي",
+          "cards": [
+            [
+              "ضوّي",
+              "تصميم بالعربية"
+            ],
+            [
+              "taqreer.ai",
+              "عروض تقديمية"
+            ],
+            [
+              "منصت",
+              "تحويل الكلام إلى نص"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف أدوات المحتوى"
+        },
+        "en": {
+          "title": "Creating content in Arabic?",
+          "subtitle": "Tools for design, slides and transcription",
+          "cards": [
+            [
+              "Dhawwi",
+              "Design in Arabic"
+            ],
+            [
+              "taqreer.ai",
+              "Presentations"
+            ],
+            [
+              "Munsit",
+              "Speech to text"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore content tools"
+        }
+      }
+    },
+    {
+      "id": "presentation",
+      "label": "تجهيز العرض",
+      "section": "تصميم ومحتوى",
+      "layout": "wide",
+      "scene": "presentation-scene",
+      "icons": [
+        "presentation-icon0",
+        "presentation-icon1",
+        "presentation-icon2"
+      ],
+      "kind": "options",
+      "description": "قالب تدريبي خفيف يشرح خطوة عملية للزائر الجديد.",
+      "copy": {
+        "ar": {
+          "title": "تجهّز عرضًا تقديميًا؟",
+          "subtitle": "وضّح فكرتك قبل أن تبدأ",
+          "cards": [
+            [
+              "الهدف",
+              "ماذا تريد أن يفهموا؟"
+            ],
+            [
+              "الجمهور",
+              "لمن تقدّم العرض؟"
+            ],
+            [
+              "النقاط",
+              "ما أهم ما تريد قوله؟"
+            ]
+          ],
+          "footer": "taqreer.ai — اكتشفه في دليل بديلك عربي",
+          "cta": "استكشف أداة العروض"
+        },
+        "en": {
+          "title": "Preparing a presentation?",
+          "subtitle": "Clarify your idea before you start",
+          "cards": [
+            [
+              "The goal",
+              "What should they understand?"
+            ],
+            [
+              "The audience",
+              "Who is your presentation for?"
+            ],
+            [
+              "The key points",
+              "What do you want to say?"
+            ]
+          ],
+          "footer": "Discover taqreer.ai in Badilak Arabi",
+          "cta": "Explore the presentation tool"
+        }
+      }
+    },
+    {
+      "id": "tech",
+      "label": "التقنية بالعربية",
+      "section": "تقنية وذكاء اصطناعي",
+      "layout": "wide",
+      "scene": "fit-scene",
+      "icons": [
+        "business-icon0",
+        "learning-icon2",
+        "learning-icon0"
+      ],
+      "kind": "options",
+      "description": "قالب تقني قائم على الأدوات؛ راجع إتاحة كل مورد قبل النشر.",
+      "copy": {
+        "ar": {
+          "title": "تستكشف الذكاء الاصطناعي بالعربية؟",
+          "subtitle": "تعرّف على أمثلة من المساعدات والنماذج",
+          "cards": [
+            [
+              "كرنك",
+              "مساعد محادثة مصري"
+            ],
+            [
+              "فنار",
+              "نموذج ذكاء اصطناعي"
+            ],
+            [
+              "Falcon Arabic",
+              "نموذج للغة العربية"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف خيارات التقنية"
+        },
+        "en": {
+          "title": "Exploring Arabic AI?",
+          "subtitle": "Discover examples of assistants and models",
+          "cards": [
+            [
+              "Karnak",
+              "Egyptian chat assistant"
+            ],
+            [
+              "Fanar",
+              "AI model"
+            ],
+            [
+              "Falcon Arabic",
+              "Arabic language model"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore technology options"
+        }
+      }
+    },
+    {
+      "id": "shopping",
+      "label": "تسوّق بحسب احتياجك",
+      "section": "التسوّق",
+      "layout": "wide",
+      "scene": "business-icon1",
+      "icons": [
+        "business-icon1",
+        "fit-icon1",
+        "choice-icon1"
+      ],
+      "kind": "options",
+      "description": "عرض للمنتجات والخيارات؛ لا يتضمن أسعارًا أو وعودًا بالشراء.",
+      "copy": {
+        "ar": {
+          "title": "تبحث عن خيارات للتسوّق؟",
+          "subtitle": "ابدأ بنوع المنتج وطريقة الشراء المناسبة لك",
+          "cards": [
+            [
+              "نون",
+              "متجر إلكتروني"
+            ],
+            [
+              "Mumzworld",
+              "للأم والأطفال"
+            ],
+            [
+              "السوق المفتوح",
+              "بيع وشراء محلي"
+            ]
+          ],
+          "footer": "أمثلة من دليل بديلك عربي",
+          "cta": "استكشف خيارات التسوّق"
+        },
+        "en": {
+          "title": "Exploring shopping options?",
+          "subtitle": "Start with your needs and preferred way to buy",
+          "cards": [
+            [
+              "Noon",
+              "Online marketplace"
+            ],
+            [
+              "Mumzworld",
+              "For mothers and children"
+            ],
+            [
+              "OpenSooq",
+              "Local buying and selling"
+            ]
+          ],
+          "footer": "Examples from the Badilak Arabi directory",
+          "cta": "Explore shopping options"
+        }
+      }
+    }
+  ]
+}

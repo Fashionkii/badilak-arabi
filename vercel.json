@@ -10,6 +10,19 @@
           "value": "noindex, follow"
         }
       ]
+    },
+    {
+      "source": "/admin(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -230,5 +243,21 @@
     }
   ],
   "buildCommand": "node scripts/build-site.cjs",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/api/studio"
+    },
+    {
+      "source": "/admin/studio",
+      "destination": "/api/studio"
+    }
+  ],
+  "functions": {
+    "api/studio.js": {
+      "includeFiles": "server/studio/**",
+      "maxDuration": 10
+    }
+  }
 }
