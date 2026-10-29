@@ -18,73 +18,31 @@ function directoryBatchSize(){
  // Wider discovery batches; precise lookups remain deliberately smaller.
  return specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
-// Rotation is fixed within a visit. Search, history return and "more" keep their order.
-const directoryRotationKey='badilak_directory_rotation_v2';
-function directoryVisitState(){
- try{
-  const saved=JSON.parse(sessionStorage.getItem(directoryRotationKey));
-  if(saved&&Number.isSafeInteger(saved.seed)&&saved.seed>=0&&saved.seed<4294967296&&typeof saved.wide==='boolean')return saved;
-  const state={seed:Math.floor(Math.random()*4294967296),wide:!window.matchMedia('(max-width:760px)').matches};
-  sessionStorage.setItem(directoryRotationKey,JSON.stringify(state));return state;
- }catch{return null}
-}
-let directoryVisit=directoryVisitState();
-function directoryMatchesContext(x){
- return (filter==='all'||x.cat===filter)&&(subfilter==='all'||x.sub===subfilter)&&
-  (!originFilter||matchesDirectoryOrigin(x,originFilter))&&
-  (!countryFilter||countryInfoHasCode(itemCountryMap[x.id],countryFilter));
-}
+// Stable topic/name order. Familiar-service rotation on the homepage is independent.
+const discoveryCategoryOrder=['work','learn','tech','create','culture','shopping'];
+function discoveryPrimaryCategory(e){return e.directory?.cat||e.learningContexts?.[0]?.[0]||'learn';}
 function orderDirectoryDiscoveryCards(list,search){
- if(!directoryVisit||search||list.length<2)return list;
- let seed=directoryVisit.seed^0x9e3779b9;
- for(const char of [filter,subfilter,originFilter||'',countryFilter||'',discoveryPurpose,discoveryType,discoveryField].join('|'))seed=Math.imul(seed^char.charCodeAt(0),16777619);
- const random=()=>{seed=(seed+0x6d2b79f5)|0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};
- const ordered=list.slice();
- if(subfilter!=='all'||originFilter||countryFilter||list.length<6){
-  // Small, precise result sets rotate as a whole; membership never changes.
-  for(let i=ordered.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[ordered[i],ordered[j]]=[ordered[j],ordered[i]];}
- }else{
-  // Keep familiar anchors in broad browsing; refresh two desktop / one mobile slots.
-  const pageSize=directoryVisit.wide?6:3;
-  const pool=Array.from({length:Math.max(0,list.length-pageSize)},(_,i)=>pageSize+i);
-  if(!pool.length){if(random()<0.5)[ordered[4],ordered[5]]=[ordered[5],ordered[4]];}
-  else for(let i=0,slots=Math.min(directoryVisit.wide?2:1,pool.length);i<slots;i++){
-   const candidate=pool.splice(Math.floor(random()*pool.length),1)[0],slot=pageSize-slots+i;
-   [ordered[slot],ordered[candidate]]=[ordered[candidate],ordered[slot]];
-  }
- }
- return ordered;
+ if(search)return list;
+ return list.slice().sort((a,b)=>discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(a))-discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(b))||(a.directory?.name||a.learning.name).localeCompare(b.directory?.name||b.learning.name,'ar')||a.id.localeCompare(b.id));
 }
-function beginDirectoryDiscoveryVisit(render=true){
- if(!directoryVisit||(document.getElementById('searchInput')?.value||'').trim())return;
- const current=discoveryIndex.filter(discoveryMatchesContext);if(current.length<2)return;
- const visible=directoryVisit.wide?6:3;
- const start=orderDirectoryDiscoveryCards(current,'').slice(0,visible).map(x=>x.id);
- // Try deterministic successive seeds. Restore the old state if none changes the visible order.
- const previous=directoryVisit;
- for(let n=1;n<=64;n++){
-  directoryVisit={seed:(previous.seed+n)>>>0,wide:previous.wide};
-  if(orderDirectoryDiscoveryCards(current,'').slice(0,visible).some((x,i)=>x.id!==start[i]))break;
-  directoryVisit=previous;
- }
- try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
- if(render&&initializedJourneyPanels.has('directory')){resetDirectoryLimit();renderCards();}
+function beginDirectoryDiscoveryVisit(){} // Compatibility for existing navigation/history calls.
+window.badilakDirectoryRotation={capture:()=>null,restore(){},enter:beginDirectoryDiscoveryVisit};
+function discoveryResultGroups(list,q){
+ if(q||discoveryPurpose!=='all'||discoveryType!=='all'||discoveryField!=='all'||countryFilter||originFilter)return null;
+ if(discoveryPath!=='all')return [{id:'use',name:'خيارات تساعدك على التنفيذ',entries:list.filter(e=>!e.learn||e.use)},{id:'learn',name:'تعلّم ما يساعدك على التطبيق',entries:list.filter(e=>e.learn&&!e.use)}].filter(g=>g.entries.length);
+ if(filter!=='all')return null;
+ return discoveryCategoryOrder.map(cat=>({id:cat,name:categoryNames[cat],entries:list.filter(e=>discoveryPrimaryCategory(e)===cat)})).filter(g=>g.entries.length);
 }
-function reshuffleDirectory(){
- beginDirectoryDiscoveryVisit();
- window.badilakJourney?.remember();
- const status=document.getElementById('stateLine');
- if(status)status.textContent+=' · تغيّر ترتيب العرض فقط';
-}
-window.badilakDirectoryRotation={
- enter:beginDirectoryDiscoveryVisit,
- capture:()=>directoryVisit?{seed:directoryVisit.seed,wide:directoryVisit.wide}:null,
- restore(state){
-  if(!state||!Number.isSafeInteger(state.seed)||state.seed<0||state.seed>=4294967296||typeof state.wide!=='boolean')return;
-  directoryVisit={seed:state.seed,wide:state.wide};
-  try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit))}catch{}
+function visibleDiscoveryGroups(groups,limit){
+ const visible=groups.map(g=>({...g,shown:[]}));
+ let remaining=limit;
+ for(let i=0;remaining>0;i++){
+  let added=false;
+  for(const group of visible){if(group.entries[i]&&remaining>0){group.shown.push(group.entries[i]);remaining--;added=true;}}
+  if(!added)break;
  }
-};
+ return visible.filter(g=>g.shown.length);
+}
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
 function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
 function resetLearningLimit(){learningVisible={platform:4,resource:4,channel:4,reciter:4}}
@@ -163,15 +121,22 @@ function setDirectoryFilter(v){
  renderCards();
 }
 // Each explicit filter choice is a restorable step; keep the directory route on “all”.
+function discoveryLocation(){
+ const params=new URLSearchParams();
+ if(discoveryPath!=='all')params.set('path',discoveryPath);
+ if(subfilter!=='all')params.set('sub',subfilter);
+ if(discoveryPurpose!=='all')params.set('purpose',discoveryPurpose);
+ if(discoveryType!=='all')params.set('type',discoveryType);
+ if(discoveryField!=='all')params.set('field',discoveryField);
+ return (filter==='all'?'/':'/category/'+encodeURIComponent(filter))+(params.size?'?'+params.toString():'')+(filter==='all'?'#directory':'');
+}
 function rememberDirectorySelection(){
- if(!originFilter&&!countryFilter){
-  const url=filter==='all'?'/#directory':'/category/'+encodeURIComponent(filter)+(subfilter==='all'?'':'?sub='+encodeURIComponent(subfilter));
-  if(location.pathname+location.search+location.hash!==url)history.pushState({},'',url);
- }
+ if(!originFilter&&!countryFilter){const url=discoveryLocation();if(location.pathname+location.search+location.hash!==url)history.pushState({},'',url);}
  window.badilakJourney?.remember();
 }
 function setFilter(v,el){
  window.badilakJourney?.remember();
+ discoveryPath='all';
  filter=v;
  subfilter='all';
  if(originFilter){
@@ -317,7 +282,7 @@ function updateDirectoryActionLabel(){
  const homeBtn=document.getElementById('directoryHomeBtn');
  if(!btn)return;
  const q=document.getElementById('searchInput')?.value.trim()||'';
- const hasAny=!!countryFilter||filter!=='all'||subfilter!=='all'||!!originFilter||!!q;
+ const hasAny=discoveryPath!=='all'||discoveryPurpose!=='all'||!!countryFilter||filter!=='all'||subfilter!=='all'||!!originFilter||!!q;
  const hasInner=!!countryFilter||subfilter!=='all'||!!originFilter||!!q;
 
  if(homeBtn)homeBtn.hidden=!hasAny;
@@ -486,12 +451,9 @@ function renderCards(){
  const q=document.getElementById('searchInput').value.trim();
  const list=searchDiscoveryEntries(discoveryIndex.filter(discoveryMatchesContext),q);
  const newsRoot=document.getElementById('directoryRelatedNews');
- const newsItems=q?badilakNews.filter(n=>list.some(e=>e.id===n.related)):[];
- newsRoot.hidden=!newsItems.length;
- newsRoot.innerHTML=newsItems.length?'<h2>خبر يرتبط بما تبحث عنه</h2>'+newsItems.map(n=>`<p><a href="/news/${n.id}">${discoveryEscape(n.title)}</a></p>`).join(''):'';
- const reorder=document.getElementById('directoryReorder');
- if(reorder)reorder.hidden=!!q||!directoryVisit||list.length<2;
+ newsRoot.innerHTML=discoveryEditorialMarkup(list);newsRoot.hidden=!newsRoot.innerHTML;
  let context=[];
+ if(discoveryPaths[discoveryPath])context.push(discoveryPaths[discoveryPath].name);
  if(discoveryPurpose!=='all')context.push(discoveryPurpose==='learn'?'أتعلّم وأطبّق':'أستخدم وأنجز');
  if(discoveryType!=='all')context.push(discoveryTypeNames[discoveryType]);
  if(discoveryField!=='all')context.push(discoveryFieldNames[discoveryField]);
@@ -499,11 +461,14 @@ function renderCards(){
  if(subfilter!=='all') context.push(subcategoryLabel(filter,subfilter));
  if(originFilter) context.push(originContextLabel(originFilter));
  if(countryFilter) context.push(arabProgressCountryNames[countryFilter]||countryFilter);
- const shown=orderDirectoryDiscoveryCards(list,q).slice(0,directoryVisible);
+ const ordered=orderDirectoryDiscoveryCards(list,q),groups=discoveryResultGroups(ordered,q);
+ const shownGroups=groups?visibleDiscoveryGroups(groups,directoryVisible):null;
+ const shown=shownGroups?shownGroups.flatMap(g=>g.shown):ordered.slice(0,directoryVisible);
  const fitNote=document.getElementById('originFitNote');
  if(fitNote){fitNote.hidden=!originFilter;fitNote.textContent=originFitNoteText(originFilter);}
- document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length}${context.length?' · '+context.join(' · '):' · كل الدليل'}`;
+ document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length} بطاقة${context.length?' · '+context.join(' · '):' · كل الاكتشافات'}`;
  const root=document.getElementById('catalogGrid');
+ root.classList.toggle('is-grouped',!!shownGroups);
  const more=document.getElementById('directoryMore');
  if(!list.length){
    root.innerHTML='<div class="empty">لم تظهر نتائج بهذه العبارة ضمن التصفية الحالية. جرّب كلمة أخرى أو اعرض الكل. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
@@ -511,7 +476,7 @@ function renderCards(){
    updateDirectoryContinue();
    return;
  }
- root.innerHTML=shown.map(discoveryCardMarkup).join('');
+ root.innerHTML=shownGroups?shownGroups.map(g=>`<section class="catalog-group" aria-labelledby="catalog-group-${g.id}"><div class="catalog-group-head"><h3 id="catalog-group-${g.id}">${g.name}</h3>${discoveryPath==='all'?`<a href="/category/${g.id}" onclick="return badilakFilterCategory(event,'${g.id}',this)">عرض المجال (${g.entries.length}) ←</a>`:''}</div><div class="catalog-group-items">${g.shown.map(discoveryCardMarkup).join('')}</div></section>`).join(''):shown.map(discoveryCardMarkup).join('');
  if(more){
    const remaining=list.length-shown.length;
    const moreLabel=originFilter ? 'بدائل أكثر لهذا الاختيار +' : subfilter!=='all' ? 'المزيد من '+subcategoryLabel(filter,subfilter)+' +' : filter!=='all' ? 'المزيد من '+categoryLabel(filter)+' +' : 'اكتشافات أكثر +';
@@ -813,6 +778,7 @@ function showLearningNote(id){
    <p class="quick-purpose">${x.focus}</p>
    ${learningDecisionPanelMarkup(x)}
    <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
+   ${discoveryPairs[x.id]?`<details class="paired-resource-details"><summary>معلومات المنصة والتجربة العملية</summary>${directoryDetailMarkup(items.find(item=>item.id===discoveryPairs[x.id])).replace(/<h1 class="quick-title"/,'<h3 class="quick-title"').replace('</h1>','</h3>')}</details>`:''}
    ${learningGuideLinkMarkup(x.id,true)}
    ${learningCommercialDisclosureMarkup(x)}
    <button class="destination-link" onclick="openLearningExternal('${x.id}')"><span class="destination-label"><bdi>${isReciter?'افتح القناة الرسمية':isChannel?'افتح القناة والدروس':x.type==='resource'?'افتح المصدر التعليمي':'اذهب إلى المنصة'}</bdi><small>${x.url.replace('https://','')}</small></span><span class="outbound-key">↗</span></button>
@@ -981,14 +947,25 @@ function applyShareableRoute(){
     subfilter=requestedSub;buildSubfilters();updateDirectoryCrumb();renderCards();
    }
   }
+  restoreDiscoveryQuery();
   return;
  }
  if(document.getElementById('detailModal')?.classList.contains('show'))closeModal({route:false});
  if(location.pathname==='/'){
   filter='all';subfilter='all';originFilter=null;countryFilter=null;
   document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));
+  restoreDiscoveryQuery();
   if(document.body.dataset.journey==='directory'){buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();resetDirectoryLimit();renderCards();}
  }
+}
+function restoreDiscoveryQuery(){
+ const p=new URLSearchParams(location.search);
+ discoveryPath=Object.hasOwn(discoveryPaths,p.get('path'))?p.get('path'):'all';
+ discoveryPurpose=['use','learn'].includes(p.get('purpose'))?p.get('purpose'):'all';
+ discoveryType=Object.hasOwn(discoveryTypeNames,p.get('type'))?p.get('type'):'all';
+ discoveryField=Object.hasOwn(discoveryFieldNames,p.get('field'))?p.get('field'):'all';
+ if(discoveryPath!=='all'){filter='all';subfilter='all';}
+ if(document.body.dataset.journey==='directory')renderCards();
 }
 applyShareableRoute();
 window.addEventListener('popstate',()=>applyShareableRoute());
@@ -1298,7 +1275,7 @@ let currentArabMetric='innovation';
 let arabCountryVisible=3;
 
 function directoryCountryCount(code){
- return Object.values(itemCountryMap).filter(v=>countryInfoHasCode(v,code)).length;
+ return discoveryIndex.filter(e=>discoveryCountryMatches(e,code)).length;
 }
 function openCountryDirectory(code,country){
  window.badilakJourney?.remember();
@@ -1312,7 +1289,7 @@ function openCountryDirectory(code,country){
  buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();resetDirectoryLimit();closeDirectoryRefiners();renderCards();goDirectoryResults();
 }
 // Homepage: two different datasets with explicitly different meanings.
-// Counts come only from the curated service directory; observatory values come
+// Counts use the same combined discovery entries as the destination; observatory values come
 // from WIPO GII 2026, never from a homemade cross-metric average.
 function renderHomeCountryOverview(){
  const summary=document.getElementById('homeInventorySummary');
@@ -1320,20 +1297,17 @@ function renderHomeCountryOverview(){
  const observer=document.getElementById('homeObserverMini');
  if(!summary||!top||!observer)return;
  const arabCodes=new Set(['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy']);
- const totalArab=items.filter(item=>{
-  const info=itemCountryMap[item.id];
-  return info&&[...arabCodes].some(code=>countryInfoHasCode(info,code));
- }).length;
+ const totalArab=discoveryIndex.filter(e=>[...arabCodes].some(code=>discoveryCountryMatches(e,code))).length;
  const priority=['eg','sa','ae','jo','bh','qa','ma','om','kw','tn','dz','iq','lb','sy'];
  const topRows=priority.map((code,i)=>({
   code,name:arabProgressCountryNames[code],
   count:directoryCountryCount(code),priority:i
  })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,6);
- summary.innerHTML=`<span><b>${items.length}</b> منتجًا وخدمةً في الدليل</span><span><b>${totalArab}</b> منها مرتبطة بدول عربية بحسب بياناتنا</span>`;
+ summary.innerHTML=`<span><b>${discoveryIndex.length}</b> بطاقة لأدوات ومصادر تعلّم</span><span><b>${totalArab}</b> منها مرتبطة بدول عربية بحسب بياناتنا</span>`;
  top.innerHTML=topRows.map(({code,name,count})=>`
-  <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} منتجًا أو خدمةً مرتبطة بـ${name} في الدليل">
+  <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} بطاقة مرتبطة بـ${name} في اكتشف">
    <span class="home-country-identity"><img src="/images/flags/${code}.png" width="28" height="19" alt=""><strong>${name}</strong></span>
-   <span class="home-country-count">${count} <small>منتجًا وخدمةً</small></span>
+   <span class="home-country-count">${count} <small>بطاقة</small></span>
    <span class="home-country-go" aria-hidden="true">↖</span>
   </button>`).join('');
  const ten=[...arabProgressData.innovation.rows].sort((a,b)=>a[2]-b[2]).slice(0,10);

@@ -7,7 +7,7 @@
  const routeView=()=>/^\/(category|discover)\//.test(location.pathname)?'directory':location.hash.slice(1)||'home';
  function updateTitle(){
   const title=document.getElementById('journeyResultTitle');if(!title)return;
-  title.textContent=originFilter?originContextLabel(originFilter):countryFilter?'اكتشافات من '+(arabProgressCountryNames[countryFilter]||countryFilter):subfilter!=='all'?subcategoryLabel(filter,subfilter):filter!=='all'?categoryLabel(filter):discoveryPurpose==='learn'?'تعلّم خطوة، ثم طبّقها':discoveryPurpose==='use'?'ابحث عمّا يساعدك على الإنجاز':'أداة تنجز بها، أو مصدر تتعلّم منه';
+  title.textContent=discoveryPaths[discoveryPath]?discoveryPaths[discoveryPath].name:originFilter?originContextLabel(originFilter):countryFilter?'اكتشافات من '+(arabProgressCountryNames[countryFilter]||countryFilter):subfilter!=='all'?subcategoryLabel(filter,subfilter):filter!=='all'?categoryLabel(filter):discoveryPurpose==='learn'?'تعلّم خطوة، ثم طبّقها':discoveryPurpose==='use'?'ابحث عمّا يساعدك على الإنجاز':'أداة تنجز بها، أو مصدر تتعلّم منه';
  }
  function snapshot(){return {view,discovery:window.badilakDiscoveryMemory?.capture(),y:window.scrollY};}
  function remember(){
@@ -33,7 +33,7 @@
   }
   document.querySelectorAll('.navigation > a').forEach(a=>{
    const target=a.getAttribute('href');
-   if(target==='#'+(view==='home'?'top':view)&&!(view==='directory'&&discoveryPurpose==='learn')||target==='#learning'&&view==='directory'&&discoveryPurpose==='learn')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+   if(target==='#'+(view==='home'?'top':view))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
   });
   document.querySelectorAll('.journey-menu').forEach(menu=>menu.open=false);
   // A genuine section-to-directory visit may rotate discovery cards.
@@ -47,7 +47,7 @@
   if(options.history!==false&&!restoring){
    const current=location.pathname+location.search+location.hash;
    const alreadyRouted=current!==lastUrl&&/^\/category\//.test(location.pathname)&&view==='directory';
-   const url=alreadyRouted?current:view==='directory'&&/^\/category\//.test(location.pathname)?current:'/'+location.search+(view==='home'?'':'#'+view);
+   const url=view==='directory'?discoveryLocation():view==='home'?'/':'/#'+view;
    const state={...history.state,journey:snapshot()};
    // Preserve the route already pushed by the catalog. Other panels get an ordinary history entry.
    if(alreadyRouted||previous===view)history.replaceState(state,'',url);else history.pushState(state,'',url);

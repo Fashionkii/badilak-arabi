@@ -4,7 +4,7 @@ const base='79d225842d6e802cadfff563bca704182232bd69';
 const read=f=>fs.readFileSync(f,'utf8'),old=f=>execFileSync('git',['show',base+':'+f],{encoding:'utf8'});
 const load=reader=>{const c=vm.createContext({window:{},URL});for(const f of ['js/catalog-data.js','js/detail-renderers.js','js/directory-search.js'])vm.runInContext(reader(f),c);return c;};
 const before=load(old),now=load(read),get=(code,c=now)=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',c));
-for(const f of ['js/discovery-index.js','js/news-data.js'])vm.runInContext(read(f),now);
+for(const f of ['js/discovery-paths.js','js/discovery-index.js','js/news-data.js'])vm.runInContext(read(f),now);
 vm.runInContext("let filter='all',subfilter='all',originFilter=null,countryFilter=null;function countryInfoHasCode(info,code){return countryEntries(info).some(v=>v&&v[0]===code);}",now);
 const existing=get('items',before),current=get('items');assert.equal(current.length,98);assert.equal(get('learning').length,36);assert.equal(get('discoveryIndex').length,125);
 for(const item of existing){const next=current.find(x=>x.id===item.id);if(item.id==='falcon'){assert.equal(next.modules.length,item.modules.length+1);next.modules=next.modules.slice(0,-1);}assert.deepEqual(next,item,item.id+' original source record');}

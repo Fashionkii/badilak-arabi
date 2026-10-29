@@ -1,0 +1,26 @@
+{
+  "home": ["ecommerce-platform", "jais-3-release", "learning-platform"],
+  "guides": {
+    "khamsat-fiverr": {"category":"work","resources":["khamsat","khamsat-blog"]},
+    "mostaql-upwork": {"category":"work","resources":["mostaql","nafezly","forlanso"]},
+    "wuzzuf-linkedin": {"category":"work","resources":["wuzzuf","bayt"]},
+    "business-software": {"category":"work","resources":["daftra","qoyod","daftra-hub","qoyod-academy"]},
+    "payment-gateway": {"category":"work","resources":["paymob","fawry","thawani","myfatoorah"]},
+    "ecommerce-platform": {"category":"work","resources":["salla","zid","wuilt","expandcart","salla-academy"]},
+    "create-online-academy": {"category":"work","resources":["manasatna"]},
+    "arabic-ai": {"category":"tech","resources":["karnak","fanar","falcon","arabicai","chat-egypt","jais-3"]},
+    "arabic-pdf": {"category":"work","resources":["midaad"]},
+    "arabic-design": {"category":"create","resources":["dhawwi","taqreer","arabicdesign","makram"]},
+    "arabic-voice-ai": {"category":"create","resources":["faseeh"]},
+    "munsit-otter": {"category":"create","resources":["munsit"]},
+    "almaany-translate": {"category":"learn","resources":["almaany"]},
+    "learning-platform": {"category":"learn","resources":["yanfaa","edraak","rwaq","almentor","hsoub","gomycode","edlal","tadarab","bibf","misk-skills","dff-academy","cnfepd-learning"]},
+    "arabic-research": {"category":"learn","resources":["shamaa","mandumah","openalex","zotero","qdl","qdl-youtube"]},
+    "islamic-sources": {"category":"learn","resources":["dorar","tafsircenter","shamela"]},
+    "reading": {"category":"culture","resources":["hindawi","abjjad","ithra"]},
+    "anghami-spotify": {"category":"culture","resources":["anghami","sowt","thmanyah"]},
+    "shopping": {"category":"shopping","resources":["noon","opensooq","fresh","mumzworld","snoonu","boutiqaat","dabchy","ouedkniss","miswag"]},
+    "hudhud-googlemaps": {"category":"tech","resources":["hudhud"]},
+    "arab-progress": {"category":"observer","resources":[]}
+  }
+}

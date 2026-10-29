@@ -11,7 +11,7 @@
    return {
     version:1,journeyView:window.badilakJourney?.view,filter,subfilter,originFilter,countryFilter,directoryVisible,
     directoryRotation:window.badilakDirectoryRotation?.capture(),
-    discoveryPurpose,discoveryType,discoveryField,
+    discoveryPurpose,discoveryType,discoveryField,discoveryPath,
     search:value('searchInput'),learningType,learningSearch:value('learningSearch'),learningField:value('learningField'),
     sections:{...learningSectionOpen},
     carousels:types.map(type=>{
@@ -31,6 +31,7 @@
    countryFilter=Object.hasOwn(arabProgressCountryNames,state.countryFilter)?state.countryFilter:null;
    directoryVisible=Math.max(1,count(state.directoryVisible,discoveryIndex.length,directoryBatchSize()));
    window.badilakDirectoryRotation?.restore(state.directoryRotation);
+   discoveryPath=Object.hasOwn(discoveryPaths,state.discoveryPath)?state.discoveryPath:'all';
    discoveryPurpose=['all','use','learn'].includes(state.discoveryPurpose)?state.discoveryPurpose:state.journeyView==='learning'?'learn':'all';
    discoveryType=types.includes(state.discoveryType)?state.discoveryType:state.journeyView==='learning'&&types.includes(state.learningType)?state.learningType:'all';
    discoveryField=Object.hasOwn(discoveryFieldNames,state.discoveryField)?state.discoveryField:state.journeyView==='learning'&&Object.hasOwn(discoveryFieldNames,state.learningField)?state.learningField:'all';

@@ -44,8 +44,11 @@
 <script src="/js/catalog-data.js" defer></script>
 <script src="/js/detail-renderers.js" defer></script>
 <script src="/js/directory-search.js" defer></script>
+<script src="/js/discovery-paths.js" defer></script>
 <script src="/js/discovery-index.js" defer></script>
 <script src="/js/news-data.js" defer></script>
+<script src="/js/editorial-index.js" defer></script>
+<script src="/js/editorial-ui.js" defer></script>
 <script src="/js/route-seo.js" defer></script>
 <script src="/js/outbound-choice.js" defer></script>
 <script src="/js/app.js" defer></script>
@@ -71,9 +74,7 @@
   <nav class="navigation" aria-label="التنقل الرئيسي">
    <a href="#top" onclick="resetAllAndHome();return false;">الرئيسية</a>
    <a href="#directory" onclick="resetDirectory();return false;">اكتشف</a>
-   <a href="#learning" onclick="resetLearning();return false;">التعلّم</a>
-   <a href="/news">الأخبار</a>
-      <a href="/guides">اقرأ</a>
+   <a href="/guides">اقرأ</a>
    <a href="#competitionIndex">المرصد</a>
    <details class="journey-menu"><summary>المزيد</summary><div>
     <a href="#guides">قبل ما تدفع</a>
@@ -92,9 +93,9 @@
  <div class="intro-copy">
   <p class="intro-promise">ابدأ من حاجتك. قارن الخيارات العربية. ثم اختر ما يناسبك.</p>
   <div class="intro-support">
-   <a class="intro-link" href="#directory">تصفّح الدليل <span aria-hidden="true">←</span></a>
+   <a class="intro-link" href="#directory">اكتشف ما يناسبك <span aria-hidden="true">←</span></a>
   </div>
-  <p class="intro-note">تعرّف على الخدمة، راجع مصدرها، ثم قرّر.</p>
+  <p class="intro-note">أدوات ومصادر تعلّم، مع معلومات تساعدك على الاختيار.</p>
  </div>
  </div>
  <aside class="origin-explorer">
@@ -117,7 +118,7 @@
 
 
 <section class="portal home-pathways" aria-label="أقسام بديلك عربي">
- <div class="portal-heading home-pathways-heading"><h2>اكتشف بديلك عربي</h2><p>اختر ما تحتاجه: خدمة، تعلّم، قراءة أو مؤشرات عربية.</p></div>
+ <div class="portal-heading home-pathways-heading"><h2>اكتشف بديلك عربي</h2><p>ابحث عن خيار، اقرأ ما يفيد قرارك، وتابع المؤشرات العربية.</p></div>
  <nav class="home-route-grid" aria-label="انتقل إلى قسم">
   <a class="home-route home-route--directory" href="#directory">
    <span class="home-route-art home-route-art--story" aria-hidden="true"><svg class="home-mini-scene" viewBox="0 0 108 62" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,17 +129,7 @@
 <path d="M12 47h37" stroke="#a5c1b7" stroke-width="2.2" stroke-linecap="round"/>
 <g class="story-accent"><circle cx="75" cy="38" r="14" fill="#eef6f0" stroke="#35695c" stroke-width="2.3"/><circle cx="73" cy="36" r="6.5" stroke="#35695c" stroke-width="2"/><path d="m79 42 11 10" stroke="#35695c" stroke-width="3.5" stroke-linecap="round"/></g>
 </svg></span>
-   <span class="home-route-copy"><strong>الدليل</strong><small>اكتشف أدوات ومنصات عربية تناسب حاجتك.</small></span>
-   <span class="home-route-arrow" aria-hidden="true">↖</span>
-  </a>
-  <a class="home-route home-route--learning" href="#learning">
-   <span class="home-route-art home-route-art--story" aria-hidden="true"><svg class="home-mini-scene" viewBox="0 0 108 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="4" y="7" width="81" height="46" rx="7" fill="#fffdf7" stroke="#759c8e" stroke-width="2"/><rect x="4" y="7" width="81" height="8" rx="5" fill="#e4f1e9"/>
-<rect x="12" y="21" width="43" height="25" rx="5" fill="#dcece2"/><circle cx="34" cy="33" r="9" fill="#fffdf7" stroke="#97b6a9"/><path class="story-accent" d="m32 29 7 4-7 4z" fill="#bd9250"/>
-<path d="M62 24h15M62 31h12M62 38h9" stroke="#73988a" stroke-width="3" stroke-linecap="round"/><path d="M12 50h64" stroke="#9fb9ac" stroke-width="2" stroke-linecap="round"/>
-<rect x="77" y="37" width="28" height="21" rx="5" fill="#fff6e8" stroke="#ba945d"/><path d="m84 47 4 4 9-9" stroke="#a77c42" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
-   <span class="home-route-copy"><strong>تعلّم</strong><small>قنوات يوتيوب، كورسات ومصادر عملية.</small></span>
+   <span class="home-route-copy"><strong>اكتشف</strong><small>أدوات ومصادر تعلّم مرتبطة بما تحتاجه.</small></span>
    <span class="home-route-arrow" aria-hidden="true">↖</span>
   </a>
   <a class="home-route home-route--reading" href="/guides">
@@ -150,7 +141,7 @@
 <path d="M82 24h14M82 31h8" stroke="#669183" stroke-width="2.4" stroke-linecap="round"/>
 <path class="story-accent" d="m84 39 4 4 9-9" stroke="#a47a3c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg></span>
-   <span class="home-route-copy"><strong>اقرأ</strong><small>مقالات ومقارنات تساعدك قبل الاختيار.</small></span>
+   <span class="home-route-copy"><strong>اقرأ</strong><small>مقالات وأخبار تساعدك على الفهم والاختيار.</small></span>
    <span class="home-route-arrow" aria-hidden="true">↖</span>
   </a>
   <a class="home-route home-route--observatory" href="#competitionIndex">
@@ -167,6 +158,7 @@
   </a>
  </nav>
 </section>
+<!-- HOME_EDITORIAL -->
 <section class="home-country-overview" aria-labelledby="homeCountriesTitle">
  <div class="home-overview-panel home-count-panel">
   <div class="home-panel-title">
@@ -209,8 +201,8 @@
  </div>
  <div class="local-nav">
   <div class="wrap local-nav-inner">
-   <div class="crumbs"><button onclick="resetAllAndHome()">الرئيسية</button><span>‹</span><button onclick="resetDirectory()">الدليل</button><span id="directoryCrumbWrap" style="display:none">‹ <span class="current" id="directoryCrumb"></span></span></div>
-   <div class="return-actions"><button id="directoryHomeBtn" hidden onclick="resetDirectory()" title="العودة إلى الدليل بكل أقسامه">كل الدليل</button><button id="directoryContextBtn" hidden class="primary" onclick="clearDirectoryContext()" title="إزالة الفلاتر الداخلية مع البقاء داخل القسم الحالي">عرض الكل</button></div>
+   <div class="crumbs"><button onclick="resetAllAndHome()">الرئيسية</button><span>‹</span><button onclick="resetDirectory()">اكتشف</button><span id="directoryCrumbWrap" style="display:none">‹ <span class="current" id="directoryCrumb"></span></span></div>
+   <div class="return-actions"><button id="directoryHomeBtn" hidden onclick="resetDirectory()" title="العودة إلى كل الاكتشافات">كل الاكتشافات</button><button id="directoryContextBtn" hidden class="primary" onclick="clearDirectoryContext()" title="إزالة الفلاتر الداخلية مع البقاء داخل القسم الحالي">عرض الكل</button></div>
   </div>
  </div>
  <div class="catalog-shell frame-plain">
@@ -226,6 +218,8 @@
    <div class="search"><span class="search-mark" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
   </div>
 
+  <div class="discovery-path-control"><label for="discoveryPath">ابدأ بحاجة محددة</label><select id="discoveryPath" onchange="openDiscoveryPath(this.value)"><option value="all">كل الاحتياجات</option><!-- DISCOVERY_PATH_OPTIONS --></select></div>
+  <p class="discovery-path-description" id="discoveryPathDescription" hidden></p>
   <div class="discovery-purpose" role="group" aria-label="هدفك من البحث">
    <button type="button" data-discovery-purpose="all" aria-pressed="true" onclick="setDiscoveryFilter('purpose','all')">الكل</button>
    <button type="button" data-discovery-purpose="use" aria-pressed="false" onclick="setDiscoveryFilter('purpose','use')">أستخدم وأنجز</button>
@@ -254,10 +248,10 @@
   <div class="directory-results-anchor" id="directoryResultsStart"></div>
   <div class="directory-state" id="stateLine" role="status" aria-live="polite"></div>
   <p id="originFitNote" class="origin-fit-note" hidden>خيارات تؤدي المهمة نفسها أو جزءًا منها؛ ترتيب العرض ليس تقييمًا للأفضل.</p>
-  <button type="button" id="directoryReorder" class="more-btn" hidden onclick="reshuffleDirectory()" title="يغيّر الترتيب فقط، دون إضافة خدمات أو تقييمها">غيّر ترتيب العرض</button>
+  <p class="discovery-order-note">النتائج منظّمة حسب المجال، ثم أبجديًا داخل المجموعة؛ ترتيبها ليس تقييمًا للجودة.</p>
   <div class="catalog-grid" id="catalogGrid"></div>
   <div class="load-more-wrap" id="directoryMore"></div>
-  <div class="discovery-related" id="directoryRelatedNews" hidden></div>
+  <section class="discovery-editorial" id="directoryRelatedNews" aria-label="قراءة مرتبطة" hidden></section>
   <div class="section-continue" id="directoryContinue"></div>
  <div id="routeIndex" hidden></div>
  </div>
@@ -412,9 +406,9 @@
  <div class="wrap">
   <div class="section-head"><div><h2 class="section-title">أدوات ومنصات راجعناها</h2><p class="section-human-note">سعر، إتاحة، قيد أو معلومة جديدة — نراجع ما قد يغيّر اختيارك.</p></div></div>
   <div class="monitor-grid">
-   <button class="monitor-card" onclick="openDetail('midaad')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">description</span></span><span class="monitor-status">مراجعة حديثة</span></div><h3>مِداد: تحرير PDF وOCR بالعربية</h3><span class="monitor-country"><img src="/images/flags/sa.png" alt="">السعودية · السوق/التسعير</span><p>يدعم الموقع تحرير النص العربي والتحويل وOCR؛ اختبر ملفك الفعلي وراجع حدود الخطة قبل الاعتماد.</p><time>17 سبتمبر 2026</time></button>
-   <button class="monitor-card" onclick="openDetail('taqreer')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">slideshow</span></span><span class="monitor-status">ادعاء يحتاج سياق</span></div><h3>taqreer.ai: عروض عربية بالذكاء الاصطناعي</h3><span class="monitor-country"><img src="/images/flags/us.png" alt="">الولايات المتحدة</span><p>ينشئ عروضًا بالعربية بالذكاء الاصطناعي؛ راجع حدود الخطة المجانية والتصدير قبل الاعتماد.</p><time>17 سبتمبر 2026</time></button>
-   <button class="monitor-card" onclick="openDetail('aamenn')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">shield</span></span><span class="monitor-status">قيد التحقق</span></div><h3>Aamenn: راجع الشروط قبل الشراء</h3><span class="monitor-country"><img src="/images/flags/eg.png" alt="">مصر · فريق/إطلاق</span><p>تحقق من السعر وسياسة الاسترجاع والتفاصيل الفنية من المصدر قبل اتخاذ قرار الشراء.</p><time>14 سبتمبر 2026</time></button>
+   <button class="monitor-card" onclick="openDetail('midaad')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">description</span></span><span class="monitor-status">مراجعة حديثة</span></div><h3>مِداد: تحرير PDF وOCR بالعربية</h3><span class="monitor-country"><img src="/images/flags/sa.png" alt="">السعودية · السوق/التسعير</span><p>يدعم الموقع تحرير النص العربي والتحويل وOCR؛ اختبر ملفك الفعلي وراجع حدود الخطة قبل الاعتماد.</p><time data-review-resource="midaad">17 سبتمبر 2026</time></button>
+   <button class="monitor-card" onclick="openDetail('taqreer')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">slideshow</span></span><span class="monitor-status">ادعاء يحتاج سياق</span></div><h3>taqreer.ai: عروض عربية بالذكاء الاصطناعي</h3><span class="monitor-country"><img src="/images/flags/us.png" alt="">الولايات المتحدة</span><p>ينشئ عروضًا بالعربية بالذكاء الاصطناعي؛ راجع حدود الخطة المجانية والتصدير قبل الاعتماد.</p><time data-review-resource="taqreer">17 سبتمبر 2026</time></button>
+   <button class="monitor-card" onclick="openDetail('aamenn')"><div class="monitor-top"><span class="monitor-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">shield</span></span><span class="monitor-status">قيد التحقق</span></div><h3>Aamenn: راجع الشروط قبل الشراء</h3><span class="monitor-country"><img src="/images/flags/eg.png" alt="">مصر · فريق/إطلاق</span><p>تحقق من السعر وسياسة الاسترجاع والتفاصيل الفنية من المصدر قبل اتخاذ قرار الشراء.</p><time data-review-resource="aamenn">14 سبتمبر 2026</time></button>
   </div>
   <div class="section-continue">
    <div class="section-continue-copy"><strong>بعد المراجعة</strong><span>عد إلى الدليل، أو ساعدنا في الإضافة والتصحيح. <a class="quiet-read-link" href="/guides">مركز القراءة ←</a></span></div>
