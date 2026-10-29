@@ -16,6 +16,12 @@ assert.equal(get('Object.keys(discoveryPairs).length'),9);
 for(const [learningId,id] of Object.entries(get('discoveryPairs'))){assert.equal(get(`discoveryIndex.filter(e=>e.id===${JSON.stringify(id)}).length`),1);assert.equal(get(`discoveryIndex.find(e=>e.id===${JSON.stringify(id)}).learning.id`),learningId);}
 for(const entry of [...current,...get('learning')]){const expected=get(`discoveryPairs[${JSON.stringify(entry.id)}]||${JSON.stringify(entry.id)}`);assert(get(`searchDiscoveryEntries(discoveryIndex,${JSON.stringify(entry.name)}).some(e=>e.id===${JSON.stringify(expected)})`),'Search preserves '+entry.id);}
 vm.runInContext("discoveryPurpose='learn'",now);assert.equal(get('discoveryIndex.filter(discoveryMatchesContext).length'),36);
+const typeMarkup=read('index.html').match(/<select\b[^>]*\bid="discoveryType"[^>]*>([\s\S]*?)<\/select>/)?.[1]||'';
+const optionValues=Array.from(typeMarkup.matchAll(/<option\b[^>]*\bvalue="([^"]+)"[^>]*>/g),m=>m[1]);
+assert.deepEqual(optionValues,['all','platform','resource','channel','reciter'],'Every learning format must be selectable in the interface');
+vm.runInContext("discoveryType='platform'",now);
+assert(get('discoveryIndex.filter(discoveryMatchesContext).length')>0,'Learning platforms remain discoverable');
+assert(get("discoveryIndex.filter(discoveryMatchesContext).every(e=>e.learning.type==='platform')"));
 vm.runInContext("discoveryType='reciter'",now);assert.equal(get('discoveryIndex.filter(discoveryMatchesContext).length'),6);assert(get("discoveryIndex.filter(discoveryMatchesContext).every(e=>e.learning.fields.includes('quran')&&!e.categories.includes('culture'))"));
 vm.runInContext("resetDiscoveryFilters();filter='work'",now);assert(get("discoveryIndex.filter(discoveryMatchesContext).some(e=>e.id==='manasatna')"));vm.runInContext("discoveryPurpose='learn'",now);assert(!get("discoveryIndex.filter(discoveryMatchesContext).some(e=>e.id==='manasatna')"));
 vm.runInContext("resetDiscoveryFilters();filter='all'",now);
