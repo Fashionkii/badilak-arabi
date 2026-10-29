@@ -21,8 +21,15 @@ vm.runInContext("resetDiscoveryFilters();filter='work'",now);assert(get("discove
 vm.runInContext("resetDiscoveryFilters();filter='all'",now);
 for(const origin of ['canva','chatgpt','youtube','coursera','shopify']){vm.runInContext('originFilter='+JSON.stringify(origin),now);assert.deepEqual(get('discoveryIndex.filter(discoveryMatchesContext).map(e=>e.id)').sort(),get('items.filter(x=>matchesDirectoryOrigin(x,'+JSON.stringify(origin)+')).map(x=>x.id)').sort());}
 for(const x of existing){assert.equal(now.practicalTrialMarkup(x),before.practicalTrialMarkup(x));assert.equal(now.directoryDiscoveryMarkup(x),before.directoryDiscoveryMarkup(x));assert.equal(now.directoryCardMarkup(x),before.directoryCardMarkup(x));}
-for(const f of execFileSync('git',['ls-tree','-r','--name-only',base],{encoding:'utf8'}).split('\n').filter(f=>/^(api\/|private\/|studio\/|images\/brand\/|css\/(cosmic-theme|site-polish|reading-hierarchy)|js\/(commercial-links|outbound-choice|feedback|smart-return)|site.config.json|vercel.json|guides\/)/.test(f))){assert.equal(read(f),old(f),f+' protected');}
+for(const f of execFileSync('git',['ls-tree','-r','--name-only',base],{encoding:'utf8'}).split('\n').filter(f=>/^(api\/|private\/|studio\/|images\/brand\/|css\/(cosmic-theme|site-polish|reading-hierarchy)|js\/(commercial-links|outbound-choice|feedback|smart-return)|site.config.json|vercel.json|guides\/)/.test(f))){assert.equal(f==='js/smart-return.js'?read(f).replace("x.pathname==='/guides'||x.pathname==='/news'||/^\\/(guides|news)\\/[^/]+$/.test(x.pathname)","x.pathname==='/guides'||/^\\/guides\\/[^/]+$/.test(x.pathname)"):read(f),old(f),f+' protected');}
 const beforeHtml=old('index.html'),afterHtml=read('index.html');const ads=s=>[...s.matchAll(/<section class="(?:commercial-demo-wrap|ad-demo-wrap)[\s\S]*?<\/section>/g)].map(x=>x[0].replace(/ data-journey-panel="[^"]*"/g,''));assert.deepEqual(ads(afterHtml),ads(beforeHtml));
 for(const n of get('badilakNews')){assert(n.eventDate<n.published);assert(current.some(x=>x.id===n.related));const html=read('dist/news/'+n.id+'.html');assert(html.includes('ما الذي لم نتحقق منه؟'));assert(html.includes('/discover/'+n.related));assert(!html.includes('تطبيق المحاكاة'));}
 assert.equal((read('guides/create-online-academy.html').match(/<h1>/g)||[]).length,1);
 console.log('PASS: 134 original records → 125 display entries; 9 pairs; all 36 learning records/actions, 6 reciters, 52 trials, name/origin search, 3 reserved ads, 20 old guides and protected identity/settings preserved.');
+
+const internalLine=read('js/smart-return.js').split('\n').find(x=>x.includes('const isInternal='));
+const nav=vm.createContext({URL,location:{href:'https://badilak-arabi.vercel.app/#directory',origin:'https://badilak-arabi.vercel.app'}});
+vm.runInContext(internalLine,nav);
+for(const url of ['/news','/news/jais-3-release','/guides','/guides/create-online-academy','/'])assert(vm.runInContext('isInternal('+JSON.stringify(url)+')',nav));
+assert(!vm.runInContext("isInternal('https://example.org/news')",nav));
+console.log('PASS: news detours use the existing same-origin navigation memory.');

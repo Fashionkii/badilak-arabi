@@ -36,3 +36,5 @@ body.cosmic-theme div.news-article,body.cosmic-theme div.news-article h1,body.co
 body.cosmic-theme article.news-article{padding:28px;border:1px solid #d7e1da;border-radius:20px;background:#fffdf8;color:#173f3d}
 body.cosmic-theme #directoryRelatedNews,body.cosmic-theme #directoryRelatedNews h2,body.cosmic-theme #directoryRelatedNews a{color:#fffdf8}
 @media(max-width:600px){body.cosmic-theme article.news-article{padding:20px}}
+
+.news-card h2 a{display:block}
