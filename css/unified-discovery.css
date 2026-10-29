@@ -27,3 +27,12 @@
 .news-source-kind{font-size:13px;color:#526d62}
 @media(max-width:600px){.news-list{grid-template-columns:1fr}.news-card{padding:20px}.learning-refinements{gap:10px}.discovery-purpose button{padding:8px 12px}}
 .learning-refinements[hidden],.discovery-related[hidden]{display:none!important}
+body.cosmic-theme .discovery-purpose{justify-content:center}
+body.cosmic-theme .discovery-purpose button{background:#fffdf8;color:#173f3d;border-color:#cad8d1}
+body.cosmic-theme .discovery-purpose [aria-pressed="true"]{background:#173f3d;color:#fffdf8}
+body.cosmic-theme .learning-refinements{max-width:810px;margin-inline:auto}
+body.cosmic-theme .learning-refinements label{color:#fffdf8}
+body.cosmic-theme div.news-article,body.cosmic-theme div.news-article h1,body.cosmic-theme div.news-article .news-source-kind{color:#fffdf8}
+body.cosmic-theme article.news-article{padding:28px;border:1px solid #d7e1da;border-radius:20px;background:#fffdf8;color:#173f3d}
+body.cosmic-theme #directoryRelatedNews,body.cosmic-theme #directoryRelatedNews h2,body.cosmic-theme #directoryRelatedNews a{color:#fffdf8}
+@media(max-width:600px){body.cosmic-theme article.news-article{padding:20px}}
