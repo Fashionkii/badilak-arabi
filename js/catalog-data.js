@@ -316,3 +316,132 @@ const learningGuideMap={
  'tadarab-learning':['/guides/learning-platform','كيف تقيّم المنصة قبل الاشتراك؟'],
  'gomycode-learning':['/guides/learning-platform','مسار تقني أم مكتبة دورات؟']
 };
+
+// Reviewed content batch, 29 October 2026. Existing records retain their dates.
+items.push(...[
+  {
+    "id": "manasatna",
+    "name": "منصتنا — Manasatna",
+    "logo": "material:school",
+    "type": "إدارة أكاديمية",
+    "cat": "work",
+    "sub": "commerce",
+    "origin": [],
+    "value": "منصة للمدرّس وصاحب الأكاديمية لإنشاء مساحة تعليمية باسمه وإدارة الدروس والطلاب والامتحانات.",
+    "arabRelation": "منتج يعرّف نفسه بأنه مصري ويخاطب المعلمين والأكاديميات بالعربية",
+    "creator": "Todi Digital Services، بحسب شروط الخدمة؛ يصف الموقع المنتج بأنه صُنع في مصر.",
+    "availability": "خدمة باشتراك؛ راجع الخطة وحدود الطلاب والتخزين والمشاهدة قبل التسجيل.",
+    "price": "راجع الباقات الحالية وحدود الاستخدام الإضافي",
+    "verified": "مراجعة صفحات الجهة المشغّلة؛ ليست تجربة مستقلة",
+    "reviewed": "29 أكتوبر 2026",
+    "limit": "لم نختبر لوحة الحساب أو الدفع. راجع تصدير البيانات، وصلاحيات المساعدين، وسياسة بيانات الطلاب قبل نقل نشاطك.",
+    "url": "https://manasatna.com/",
+    "domain": "manasatna.com",
+    "modules": [
+      [
+        "لمن تناسب؟",
+        "لمن يقدّم محتوى تعليميًا ويدير طلابًا، وليست مكتبة دورات للمتعلّم الباحث عن كورس."
+      ],
+      [
+        "ما الذي أُعلن؟",
+        "إدارة دروس وامتحانات وحضور ومتابعة للطلاب، وفق وصف المنتج. راجع ما تتضمنه خطتك."
+      ],
+      [
+        "الخصوصية والاحتفاظ",
+        "تقول السياسة إن البيانات تبقى بعد انتهاء الاشتراك إلى أن يُطلب حذفها. راجع شروط الحذف وبيانات الأطفال والمعالجات الخارجية."
+      ],
+      [
+        "مصادر التحقق المحفوظة",
+        "<a href=\"https://manasatna.com/\" target=\"_blank\" rel=\"noopener noreferrer\">وصف المنتج</a> · <a href=\"https://manasatna.com/pricing\" target=\"_blank\" rel=\"noopener noreferrer\">الباقات وحدود الاستخدام</a> · <a href=\"https://manasatna.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">سياسة الخصوصية</a> · <a href=\"https://manasatna.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">الشروط والجهة المشغّلة</a>"
+      ]
+    ]
+  },
+  {
+    "id": "zenhr",
+    "name": "زين إتش آر — ZenHR",
+    "logo": "material:groups",
+    "type": "موارد بشرية ورواتب",
+    "cat": "work",
+    "sub": "management",
+    "origin": [],
+    "value": "نظام إقليمي لإدارة شؤون الموظفين والحضور والرواتب، مناسب للمقارنة عند تنظيم أعمال فريق أو شركة.",
+    "arabRelation": "خدمة إقليمية موجّهة لأسواق الشرق الأوسط وشمال أفريقيا",
+    "creator": "ZenHR؛ تصف الشركة خدمتها بأنها مخصّصة لأسواق المنطقة، وتعلن وجود فريق محلي في القاهرة.",
+    "availability": "تواصل مع الشركة لمراجعة الوحدات المتاحة ومتطلبات التنفيذ في بلدك.",
+    "price": "راجع عرض السعر والوحدات والخدمات المشمولة",
+    "verified": "مراجعة صفحات الشركة وإعلانها عن السوق المصري؛ ليست تجربة مستقلة",
+    "reviewed": "29 أكتوبر 2026",
+    "limit": "لم نختبر حسابًا أو دورة رواتب فعلية. لا يعني التوطين المعلن ضمان الامتثال؛ تحقق من نطاق الخدمة وبيانات الموظفين والتكلفة قبل التعاقد.",
+    "url": "https://www.zenhr.com/",
+    "domain": "zenhr.com",
+    "modules": [
+      [
+        "الاستخدام الأساسي",
+        "إدارة شؤون الموظفين والوقت والرواتب، وفق وصف الشركة. ليست بديلًا متطابقًا لكل وظائف نظام محاسبي."
+      ],
+      [
+        "تحديث السوق المصري",
+        "أعلنت الشركة توسيع حضورها بفريق في القاهرة ضمن فعالية 20 أكتوبر 2026. هذا توسع لخدمة قائمة، وليس تاريخ إطلاق المنتج."
+      ],
+      [
+        "مصادر التحقق المحفوظة",
+        "<a href=\"https://www.zenhr.com/en/about\" target=\"_blank\" rel=\"noopener noreferrer\">التعريف بالخدمة</a> · <a href=\"https://www.zenhr.com/en/by-cairo\" target=\"_blank\" rel=\"noopener noreferrer\">إعلان فريق القاهرة</a> · <a href=\"https://www.zenhr.com/en/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">سياسة الخصوصية</a>"
+      ]
+    ]
+  },
+  {
+    "id": "jais-3",
+    "name": "جيس 3 — Jais 3",
+    "logo": "material:psychology",
+    "type": "نماذج عربية للمطورين",
+    "cat": "tech",
+    "sub": "ai",
+    "origin": [],
+    "value": "عائلة نماذج لغوية موجهة للعربية، مع إصدار منفصل للتعرف على الكلام. مدخل للمطور والباحث الذي يريد بناء تطبيق أو اختبار نموذج.",
+    "arabRelation": "تطوير موجّه للعربية تقوده جهات بحثية وتقنية في الإمارات",
+    "creator": "معهد نماذج الأساس بجامعة محمد بن زايد للذكاء الاصطناعي وInception42، بالتعاون مع Cerebras، بحسب إعلان الإطلاق.",
+    "availability": "تتوفر روابط للنماذج وطلب الوصول إلى API. راجع طريقة الوصول وترخيص الإصدار الذي ستستخدمه.",
+    "price": "راجع ترخيص الإصدار وتكلفة التشغيل أو الخدمة",
+    "verified": "مراجعة صفحة المشروع وإعلان الجامعة وروابط النماذج؛ ليست تجربة مستقلة",
+    "reviewed": "29 أكتوبر 2026",
+    "limit": "توفر الأوزان لا يعني تشغيلًا مجانيًا أو مناسبًا لكل جهاز. لم نختبر تطبيق المحادثة أو API، ولا نعمم تقييمات المطور على كل مهمة.",
+    "url": "https://ifm.ai/jais/ar/",
+    "domain": "ifm.ai",
+    "modules": [
+      [
+        "الإصدار والنطاق",
+        "أُعلن Jais 3 في 15 أكتوبر 2026. افصل بين النماذج اللغوية وJais Speech للتعرف على الكلام؛ ليست كل القدرات في نموذج واحد."
+      ],
+      [
+        "قبل أن تبدأ",
+        "حدد المهمة والإصدار وموارد التشغيل أو حدود API. إعلانات الوكلاء وتجارب العرض لا تثبت وجود سير عمل جاهز بنفس الوظائف لكل مستخدم."
+      ],
+      [
+        "مصادر التحقق المحفوظة",
+        "<a href=\"https://ifm.ai/jais/ar/\" target=\"_blank\" rel=\"noopener noreferrer\">صفحة المشروع العربية</a> · <a href=\"https://mbzuai.ac.ae/news-events/news/mbzuais-institute-foundation-models-inception42-launch-jais-3-arabic-native-ai\" target=\"_blank\" rel=\"noopener noreferrer\">إعلان الجامعة بتاريخ 15 أكتوبر</a> · <a href=\"https://huggingface.co/collections/IFM/jais-3\" target=\"_blank\" rel=\"noopener noreferrer\">مجموعة النماذج الرسمية</a>"
+      ]
+    ]
+  }
+]);
+items.find(x=>x.id==="falcon").modules.push(...[
+  [
+    "إصدارات أخرى من عائلة Falcon — أكتوبر 2026",
+    "أعلن TII في 6 أكتوبر نماذج منفصلة: Falcon-Emirati للهجة الإماراتية، وFalcon-ASR للتعرف على الكلام، وFalcon-OCR-Arabic لاستخراج النص من الصور والمستندات. هذه إصدارات أخرى، وليست إضافة تلقائية لقدرات Falcon Arabic المعروض هنا. مراجعة الإعلان: 29 أكتوبر 2026. <a href=\"https://www.tii.ae/news/tii-launches-falcon-emirati-alongside-new-arabic-ai-models-speech-and-visual-text\" target=\"_blank\" rel=\"noopener noreferrer\">إعلان المطور</a>"
+  ]
+]);
+Object.assign(itemCountryMap,{
+  "manasatna": [
+    "eg",
+    "مصر · هوية المنتج المعلنة في موقعه وشروطه"
+  ],
+  "jais-3": [
+    "ae",
+    "الإمارات · جهات التطوير المعلنة"
+  ]
+});
+Object.assign(relatedGuideMap,{
+  "manasatna": [
+    "/guides/create-online-academy",
+    "كيف تختار منصة تعليمية باسمك؟"
+  ]
+});

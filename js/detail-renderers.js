@@ -887,6 +887,8 @@ function directoryDetailMarkup(x,standalone=false){
    ${practicalTrialMarkup(x)}
    ${editorialGuideLinkMarkup(x.id,true)}
    ${renderSections(x,sections)}
+   ${contextualLearningMarkup(x.id,standalone)}
+   ${relatedNewsMarkup(x.id)}
    ${directoryDiscoveryMarkup(x,standalone)}
   </div>`;
  // A service title is h1; the sections below it are h2, with their existing visual size.

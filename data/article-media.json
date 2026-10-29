@@ -300,6 +300,21 @@
         0.5
       ],
       "customFields": {}
+    },
+    "create-online-academy": {
+      "socialTitle": "منصتك التعليمية: اختبر قبل الاشتراك",
+      "alt": "شرح باستخدام حاسوب في جلسة تعلّم",
+      "photo": "/images/articles/learning-platform-photo.webp",
+      "source": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&q=85&fit=max",
+      "credit": "Unsplash",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "sourceFile": "photo-1516321318423-f06f85e504b3",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
     }
   }
 }

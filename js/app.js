@@ -37,7 +37,7 @@ function directoryMatchesContext(x){
 function orderDirectoryDiscoveryCards(list,search){
  if(!directoryVisit||search||list.length<2)return list;
  let seed=directoryVisit.seed^0x9e3779b9;
- for(const char of [filter,subfilter,originFilter||'',countryFilter||''].join('|'))seed=Math.imul(seed^char.charCodeAt(0),16777619);
+ for(const char of [filter,subfilter,originFilter||'',countryFilter||'',discoveryPurpose,discoveryType,discoveryField].join('|'))seed=Math.imul(seed^char.charCodeAt(0),16777619);
  const random=()=>{seed=(seed+0x6d2b79f5)|0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};
  const ordered=list.slice();
  if(subfilter!=='all'||originFilter||countryFilter||list.length<6){
@@ -57,7 +57,7 @@ function orderDirectoryDiscoveryCards(list,search){
 }
 function beginDirectoryDiscoveryVisit(render=true){
  if(!directoryVisit||(document.getElementById('searchInput')?.value||'').trim())return;
- const current=items.filter(directoryMatchesContext);if(current.length<2)return;
+ const current=discoveryIndex.filter(discoveryMatchesContext);if(current.length<2)return;
  const visible=directoryVisit.wide?6:3;
  const start=orderDirectoryDiscoveryCards(current,'').slice(0,visible).map(x=>x.id);
  // Try deterministic successive seeds. Restore the old state if none changes the visible order.
@@ -148,6 +148,7 @@ function openDirectory(cat,options={}){
  if(options.scroll!==false)goDirectoryResults();
 }
 function setDirectoryFilter(v){
+ resetDiscoveryFilters();
  filter=v;
  subfilter='all';
  originFilter=null;
@@ -236,6 +237,7 @@ function updateDirectoryCrumb(){
 }
 function resetAllAndHome(){
  window.badilakJourney?.remember();
+ resetDiscoveryFilters();
  if(!window.badilakJourney&&location.pathname!=='/')history.replaceState({},'','/');
  // Directory state
  filter='all';
@@ -275,6 +277,7 @@ function resetAllAndHome(){
 
 function resetDirectory(){
  window.badilakJourney?.remember();
+ resetDiscoveryFilters();
  if(/^\/category\//.test(location.pathname))history.replaceState({},'','/');
  filter='all';subfilter='all';originFilter=null;countryFilter=null;
  document.getElementById('searchInput').value='';
@@ -283,6 +286,7 @@ function resetDirectory(){
  buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();resetDirectoryLimit();closeDirectoryRefiners();renderCards();go('directory')
 }
 function showAllDirectory(){
+ resetDiscoveryFilters();
  // Keep only the current TOP-LEVEL section.
  // Clear internal subsection, familiar-tool filter, and text search.
  originFilter=null;
@@ -339,6 +343,7 @@ function toggleOriginOptions(btn){
 }
 function chooseOrigin(v,el){
  window.badilakJourney?.remember();
+ resetDiscoveryFilters();
  countryFilter=null;
  const same=originFilter===v;
  document.querySelectorAll('[data-origin]').forEach(b=>b.setAttribute('aria-pressed','false'));
@@ -475,13 +480,21 @@ function originFitNoteText(origin){
 
 function renderCards(){
  initializedJourneyPanels.add('directory');
+ syncDiscoveryControls();
  window.badilakJourney?.updateTitle();
  updateDirectoryRefineUI();
  const q=document.getElementById('searchInput').value.trim();
- const list=searchDirectoryItems(items.filter(directoryMatchesContext),q);
+ const list=searchDiscoveryEntries(discoveryIndex.filter(discoveryMatchesContext),q);
+ const newsRoot=document.getElementById('directoryRelatedNews');
+ const newsItems=q?badilakNews.filter(n=>list.some(e=>e.id===n.related)):[];
+ newsRoot.hidden=!newsItems.length;
+ newsRoot.innerHTML=newsItems.length?'<h2>خبر يرتبط بما تبحث عنه</h2>'+newsItems.map(n=>`<p><a href="/news/${n.id}">${discoveryEscape(n.title)}</a></p>`).join(''):'';
  const reorder=document.getElementById('directoryReorder');
  if(reorder)reorder.hidden=!!q||!directoryVisit||list.length<2;
  let context=[];
+ if(discoveryPurpose!=='all')context.push(discoveryPurpose==='learn'?'أتعلّم وأطبّق':'أستخدم وأنجز');
+ if(discoveryType!=='all')context.push(discoveryTypeNames[discoveryType]);
+ if(discoveryField!=='all')context.push(discoveryFieldNames[discoveryField]);
  if(filter!=='all') context.push(categoryLabel(filter));
  if(subfilter!=='all') context.push(subcategoryLabel(filter,subfilter));
  if(originFilter) context.push(originContextLabel(originFilter));
@@ -498,7 +511,7 @@ function renderCards(){
    updateDirectoryContinue();
    return;
  }
- root.innerHTML=shown.map(x=>directoryCardMarkup(x,originFilter)).join('');
+ root.innerHTML=shown.map(discoveryCardMarkup).join('');
  if(more){
    const remaining=list.length-shown.length;
    const moreLabel=originFilter ? 'بدائل أكثر لهذا الاختيار +' : subfilter!=='all' ? 'المزيد من '+subcategoryLabel(filter,subfilter)+' +' : filter!=='all' ? 'المزيد من '+categoryLabel(filter)+' +' : 'اكتشافات أكثر +';
@@ -690,6 +703,7 @@ function learningDecisionPanelMarkup(x){
 
 function openDiscoveryGroup(cat,sub='all'){
  window.badilakJourney?.remember();
+ resetDiscoveryFilters();
  closeModal({route:false});
  if(/^\/discover\//.test(location.pathname)){
   const path=sub==='all'?'/category/'+encodeURIComponent(cat):'/';
@@ -904,7 +918,9 @@ function closeModal(options={}){
  const returningDetail=activeDetail;
  // Comparisons can open a resource absent from the underlying results. Return to
  // the card that opened the dialog, even when history recreates its DOM element.
- const returningItemId=detailReturnFocus?.closest('[data-item-id]')?.dataset.itemId||returningDetail?.id;
+ const returningCard=detailReturnFocus?.closest('[data-item-id],[data-learning-id]');
+ const returningItemId=returningCard?.dataset.itemId||returningCard?.dataset.learningId||returningDetail?.id;
+ const returningAttribute=returningCard?.hasAttribute('data-learning-id')?'data-learning-id':'data-item-id';
  const returnControl=detailReturnFocus?.matches('.more-btn')?'.more-btn':detailReturnFocus?.matches('.destination-link')?'.destination-link':'.item-identity';
  activeDetail=null;
  modal.close();
@@ -918,7 +934,7 @@ function closeModal(options={}){
   if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1){
    // The history adapter recreates cards; focus their new element after restoration.
    window.addEventListener('popstate',()=>requestAnimationFrame(()=>{
-    if(returningDetail?.kind==='directory')document.querySelector(`[data-item-id="${returningItemId}"] ${returnControl}`)?.focus({preventScroll:true});
+    document.querySelector(`[${returningAttribute}="${returningItemId}"] ${returnControl}`)?.focus({preventScroll:true});
    }),{once:true});
    history.back();
   }
@@ -1287,6 +1303,7 @@ function directoryCountryCount(code){
 function openCountryDirectory(code,country){
  window.badilakJourney?.remember();
  if(!directoryCountryCount(code))return;
+ resetDiscoveryFilters();
  countryFilter=code;
  filter='all';subfilter='all';originFilter=null;
  const search=document.getElementById('searchInput');if(search)search.value='';

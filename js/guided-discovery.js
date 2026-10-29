@@ -3,11 +3,11 @@
  const panels=[...document.querySelectorAll('main > section')];
  const views=new Set(['home','directory','learning','competitionIndex','guides','knowledge','updates','nominate']);
  let view='home',lastUrl=location.pathname+location.search+location.hash,restoring=false;
- const normalize=id=>id==='top'||id==='start'?'home':id;
- const routeView=()=>/^\/(category|discover)\//.test(location.pathname)?'directory':normalize(location.hash.slice(1))||'home';
+ const normalize=id=>id==='top'||id==='start'?'home':id==='learning'?'directory':id;
+ const routeView=()=>/^\/(category|discover)\//.test(location.pathname)?'directory':location.hash.slice(1)||'home';
  function updateTitle(){
   const title=document.getElementById('journeyResultTitle');if(!title)return;
-  title.textContent=originFilter?originContextLabel(originFilter):countryFilter?'اكتشافات من '+(arabProgressCountryNames[countryFilter]||countryFilter):subfilter!=='all'?subcategoryLabel(filter,subfilter):filter!=='all'?categoryLabel(filter):'اكتشف حسب حاجتك';
+  title.textContent=originFilter?originContextLabel(originFilter):countryFilter?'اكتشافات من '+(arabProgressCountryNames[countryFilter]||countryFilter):subfilter!=='all'?subcategoryLabel(filter,subfilter):filter!=='all'?categoryLabel(filter):discoveryPurpose==='learn'?'تعلّم خطوة، ثم طبّقها':discoveryPurpose==='use'?'ابحث عمّا يساعدك على الإنجاز':'أداة تنجز بها، أو مصدر تتعلّم منه';
  }
  function snapshot(){return {view,discovery:window.badilakDiscoveryMemory?.capture(),y:window.scrollY};}
  function remember(){
@@ -16,12 +16,14 @@
  }
  function show(id,options={}){
   const next=normalize(id);if(!views.has(next))return false;
+  if(id==='learning')enterUnifiedLearning();
   const previous=view;
   view=next;
   document.body.dataset.journey=view;
   panels.forEach(panel=>{
    const visible=panel.id==='start'?view==='home':panel.id?panel.id===view:
-    (panel.classList.contains('commercial-demo-wrap')||panel.classList.contains('ad-demo-end'))?view==='directory':view==='learning';
+    panel.dataset.journeyPanel?panel.dataset.journeyPanel===view:
+    (panel.classList.contains('commercial-demo-wrap')||panel.classList.contains('ad-demo-end'))?view==='directory':false;
    panel.hidden=!visible;
    // Preserve the static panel identity used before JavaScript loads.
   });
@@ -31,7 +33,7 @@
   }
   document.querySelectorAll('.navigation > a').forEach(a=>{
    const target=a.getAttribute('href');
-   if(target==='#'+(view==='home'?'top':view))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+   if(target==='#'+(view==='home'?'top':view)&&!(view==='directory'&&discoveryPurpose==='learn')||target==='#learning'&&view==='directory'&&discoveryPurpose==='learn')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
   });
   document.querySelectorAll('.journey-menu').forEach(menu=>menu.open=false);
   // A genuine section-to-directory visit may rotate discovery cards.
@@ -77,7 +79,7 @@
  document.addEventListener('click',e=>{
   if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
   const a=e.target.closest('a[href^="#"]');if(!a||a.hasAttribute('onclick'))return;
-  const id=normalize(a.hash.slice(1));if(!views.has(id))return;
+  const id=a.hash.slice(1);if(!views.has(normalize(id)))return;
   e.preventDefault();remember();show(id);
  });
  window.addEventListener('hashchange',()=>{const next=routeView();if(views.has(next)&&next!==view)show(next,{history:false});});
@@ -86,5 +88,12 @@
  // Defer until discovery-memory and smart-return have registered their own restoration.
  document.addEventListener('DOMContentLoaded',()=>{
   if(!restoreHistory())remember();
+  const learningId=new URLSearchParams(location.search).get('learn');
+  if(learning.some(x=>x.id===learningId)){
+   show('learning',{history:false,focus:false});
+   document.getElementById('journeyResultTitle').tabIndex=-1;
+   document.getElementById('journeyResultTitle').focus({preventScroll:true});
+   showLearningNote(learningId);
+  }
  });
 })();

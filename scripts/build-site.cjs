@@ -19,6 +19,8 @@ context.document={readyState:'loading',addEventListener(){}};
 vm.runInContext(fs.readFileSync(path.join(root,'js/commercial-links.js'),'utf8'),context);
 delete context.document;
 vm.runInContext(fs.readFileSync(path.join(root,'js/detail-renderers.js'),'utf8'),context);
+vm.runInContext(fs.readFileSync(path.join(root,'js/discovery-index.js'),'utf8'),context);
+vm.runInContext(fs.readFileSync(path.join(root,'js/news-data.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'js/route-seo.js'),'utf8'),context);
 const {items,categoryNames}=vm.runInContext('({items,categoryNames})',context);
 const seo=context.badilakSEO;
@@ -42,7 +44,7 @@ const oldOrigin='https://badilak-arabi.vercel.app';
 const cosmicStyles=fs.readFileSync(path.join(root,'css/cosmic-theme.css'),'utf8');
 const readingStyles=fs.readFileSync(path.join(root,'css/reading-hierarchy.css'),'utf8');
 const motionStyles=fs.readFileSync(path.join(root,'css/motion-lab.css'),'utf8');
-const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'utf8');
+const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/unified-discovery.css'),'utf8');
 // Keep the established request/cascade profile; the theme adds no blocking request.
 fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles+'\n'+sitePolishStyles);
 // Standalone pages keep every rule/order but reduce three blocking requests to one.
@@ -73,6 +75,7 @@ function prepare(html){
  return html;
 }
 function setPageHead(html,page){
+ if(page.kind==='news-article')html=html.replace('<meta property="og:type" content="website">','<meta property="og:type" content="article">');
  if(page.kind==='category'||page.kind==='item')html=html.replace('data-journey="home"','data-journey="directory"');
  if(page.kind==='item')html=html.replace('<body class="guided-discovery"','<body class="guided-discovery lock"');
  html=html.replace(/<title>[\s\S]*?<\/title>/,'<title>'+escape(page.title)+'</title>');
@@ -118,6 +121,21 @@ for(const x of items){
  const html=standalonePage(page,trail+'<article class="standalone-detail">'+seo.staticItem(x)+'</article>');
  write('discover/'+x.id+'.html',html);
 }
+// News has its own publication/event/review dates, never a replacement for catalog review dates.
+const news=vm.runInContext('badilakNews',context);
+const newsTitle='أخبار تساعدك على الاختيار';
+const newsDescription='تغييرات موثقة في الأدوات والمصادر العربية: ما الذي تغيّر، ولمن يهم، وما الخطوة التالية؟';
+const newsHub={kind:'news',title:newsTitle+' — بديلك عربي',description:newsDescription,url:origin+'/news',schema:{'@context':'https://schema.org','@type':'CollectionPage',name:newsTitle,url:origin+'/news',inLanguage:'ar',mainEntity:{'@type':'ItemList',numberOfItems:news.length,itemListElement:news.map((n,i)=>({'@type':'ListItem',position:i+1,name:n.title,url:origin+'/news/'+n.id}))}}};
+write('news.html',standalonePage(newsHub,`<div class="news-article"><h1>${newsTitle}</h1><p>${newsDescription}</p><p class="news-source-kind">نفرّق بين إعلان الجهة ونتيجة الاختبار، وبين تاريخ الحدث وتاريخ مراجعتنا له.</p></div><div class="news-list">${news.map(n=>`<article class="news-card"><span class="news-source-kind">إعلان الجهة</span><h2><a href="/news/${n.id}">${escape(n.title)}</a></h2><p>${escape(n.audience)}</p><small class="news-date">الحدث: <time datetime="${n.eventDate}">${n.eventLabel}</time> · مراجعة المصدر: <time datetime="${n.reviewed}">${n.reviewLabel}</time></small><a class="more-btn" href="/news/${n.id}">ما الذي تغيّر؟ ←</a></article>`).join('')}</div>`));
+for(const n of news){
+ const resource=items.find(x=>x.id===n.related);
+ if(!resource)throw new Error('News refers to a missing resource: '+n.id);
+ const page={kind:'news-article',title:n.title+' — بديلك عربي',description:n.audience,url:origin+'/news/'+n.id,schema:{'@context':'https://schema.org','@type':'NewsArticle',headline:n.title,description:n.audience,datePublished:n.published,dateModified:n.reviewed,inLanguage:'ar',url:origin+'/news/'+n.id,citation:n.source,author:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'},publisher:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'}}};
+ const trail='<nav class="detail-breadcrumb" aria-label="مسار الصفحة"><a href="/">الرئيسية</a><span aria-hidden="true"> / </span><a href="/news">الأخبار</a></nav>';
+ const sections=[['ما الذي تغيّر؟',n.change],['لمن قد يهم؟',n.audience],['ما الذي لم نتحقق منه؟',n.limits],['ما الخطوة المناسبة؟',n.action]];
+ write('news/'+n.id+'.html',standalonePage(page,trail+`<article class="news-article"><p class="news-source-kind">إعلان الجهة · مراجعة تحريرية للمصدر</p><h1>${escape(n.title)}</h1><div class="news-date"><span>تاريخ الحدث: <time datetime="${n.eventDate}">${n.eventLabel}</time></span><br><span>النشر ومراجعة المصدر: <time datetime="${n.published}">${n.reviewLabel}</time></span></div>${sections.map(([title,copy])=>`<section><h2>${title}</h2><p>${escape(copy)}</p></section>`).join('')}<div class="news-actions"><a href="${escape(n.source)}" target="_blank" rel="noopener noreferrer">اقرأ إعلان الجهة ↗</a><a href="/discover/${n.related}">افتح بطاقة ${escape(resource.name)} ←</a></div><p class="news-source-kind">الروابط هنا للتوثيق، وليست روابط عمولة. الخبر لا يمثّل تقييمًا مستقلًا لجودة المنتج.</p></article>`));
+}
+
 for(const slug of ['privacy','disclosure']){
  const entry=JSON.parse(fs.readFileSync(path.join(root,'data',slug+'.json'),'utf8'));
  const page={kind:'policy',title:entry.title+' — بديلك عربي',description:entry.description,url:origin+'/'+slug,schema:{'@context':'https://schema.org','@type':'WebPage',name:entry.title,url:origin+'/'+slug,inLanguage:'ar'}};
@@ -128,7 +146,7 @@ for(const id of seo.categories()){
  let html=setPageHead(prepare(source),page);
  html=html.replace('<div id="routeIndex" hidden></div>','<div id="routeIndex">'+seo.categoryIndex(id)+'</div>');
  html=html.replace(/(<div[^>]+id="catalogGrid"[^>]*>)[\s\S]*?<\/div>/,'$1'+seo.staticCards(id)+'</div>');
- html=html.replace('<h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>','<h1 id="journeyResultTitle">'+escape(categoryNames[id])+'</h1>');
+ html=html.replace('<h2 id="journeyResultTitle">أداة تنجز بها، أو مصدر تتعلّم منه</h2>','<h1 id="journeyResultTitle">'+escape(categoryNames[id])+'</h1>');
  write('category/'+id+'.html',html);
 }
 write('404.html',prepare(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/site-bundle.css"></head><body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>${standaloneHeader}<main class="standalone-main wrap" id="content"><article class="policy-page not-found"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><nav aria-label="متابعة التصفح"><a href="/">الرئيسية</a><a href="/guides">مركز القراءة</a></nav></article></main>${standaloneFooter}</body></html>`));

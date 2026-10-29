@@ -5,6 +5,7 @@ const {withoutRetiredShelf}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
 const canonical=new Set();
+const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).rewrites||[];
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
  assert.match(html,/<meta name="robots" content="noindex,[^"]*">/,file);
@@ -17,7 +18,7 @@ for(const file of files){
  for(const match of html.matchAll(/(?:href|src)="(\/[^"\s]*)"/g)){
   const url=match[1].split(/[?#]/)[0];if(url==='/')continue;
   const target=path.join(out,url);
-  assert.ok(fs.existsSync(target)||fs.existsSync(target+'.html'),'Broken local path: '+file+' -> '+url);
+  assert.ok(fs.existsSync(target)||fs.existsSync(target+'.html')||runtimeRoutes.some(r=>r.source===url&&fs.existsSync(path.join(root,r.destination+'.js'))),'Broken local path: '+file+' -> '+url);
  }
  if(file.startsWith('discover/')){
   assert.match(html,/<article class="standalone-detail">\s*<div class="detail-overview">[\s\S]*?<h1 class="quick-title"/,file);

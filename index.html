@@ -44,6 +44,8 @@
 <script src="/js/catalog-data.js" defer></script>
 <script src="/js/detail-renderers.js" defer></script>
 <script src="/js/directory-search.js" defer></script>
+<script src="/js/discovery-index.js" defer></script>
+<script src="/js/news-data.js" defer></script>
 <script src="/js/route-seo.js" defer></script>
 <script src="/js/outbound-choice.js" defer></script>
 <script src="/js/app.js" defer></script>
@@ -68,9 +70,10 @@
   </a>
   <nav class="navigation" aria-label="التنقل الرئيسي">
    <a href="#top" onclick="resetAllAndHome();return false;">الرئيسية</a>
-   <a href="#directory" onclick="resetDirectory();return false;">الدليل</a>
+   <a href="#directory" onclick="resetDirectory();return false;">اكتشف</a>
    <a href="#learning" onclick="resetLearning();return false;">التعلّم</a>
-   <a href="/guides">اقرأ</a>
+   <a href="/news">الأخبار</a>
+      <a href="/guides">اقرأ</a>
    <a href="#competitionIndex">المرصد</a>
    <details class="journey-menu"><summary>المزيد</summary><div>
     <a href="#guides">قبل ما تدفع</a>
@@ -198,7 +201,7 @@
 <section class="section wrap" id="directory" data-journey-panel="directory">
  <div class="journey-result-head">
   <button class="journey-back" type="button" onclick="badilakJourney.home()">→ غيّر اختيارك</button>
-  <h2 id="journeyResultTitle">اكتشف حسب حاجتك</h2>
+  <h2 id="journeyResultTitle">أداة تنجز بها، أو مصدر تتعلّم منه</h2>
  </div>
  <div class="section-head">
   <div><h2 class="section-title">اكتشف حسب حاجتك</h2></div>
@@ -219,10 +222,19 @@
   </div>
 
   <div class="directory-refine-panel" id="directoryRefineSearch">
-   <label class="directory-search-label" for="searchInput">ابحث في الدليل</label>
+   <label class="directory-search-label" for="searchInput">ابحث عن أداة أو مصدر تعلّم</label>
    <div class="search"><span class="search-mark" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
   </div>
 
+  <div class="discovery-purpose" role="group" aria-label="هدفك من البحث">
+   <button type="button" data-discovery-purpose="all" aria-pressed="true" onclick="setDiscoveryFilter('purpose','all')">الكل</button>
+   <button type="button" data-discovery-purpose="use" aria-pressed="false" onclick="setDiscoveryFilter('purpose','use')">أستخدم وأنجز</button>
+   <button type="button" data-discovery-purpose="learn" aria-pressed="false" onclick="setDiscoveryFilter('purpose','learn')">أتعلّم وأطبّق</button>
+  </div>
+  <div class="learning-refinements" id="learningRefinements" hidden>
+   <label for="discoveryType">نوع المصدر<select id="discoveryType" onchange="setDiscoveryFilter('type',this.value)"><option value="all">كل الأنواع</option value="platform">منصة كورسات</option><option value="resource">دروس ومقالات عملية</option><option value="channel">قناة تعليمية</option><option value="reciter">قناة تلاوة</option></select></label>
+   <label for="discoveryField">مجال التعلّم<select id="discoveryField" onchange="setDiscoveryFilter('field',this.value)"><option value="all">كل المجالات</option><option value="languages">إنجليزي ولغات</option><option value="tech">برمجة وتقنية</option><option value="design">تصميم ومونتاج</option><option value="business">إدارة وتسويق</option><option value="skills">مهارات متنوعة</option><option value="knowledge">معرفة وعلوم</option><option value="quran">قرآن وتلاوة</option></select></label>
+  </div>
   <div class="directory-refine-panel" id="directoryRefineCategory" role="group" aria-label="ماذا تبحث عنه؟">
    <div class="filters">
     <button class="filter active" data-filter="all" onclick="setFilter('all',this)" aria-pressed="true"><svg class="directory-category-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>الكل</span></button>
@@ -245,6 +257,7 @@
   <button type="button" id="directoryReorder" class="more-btn" hidden onclick="reshuffleDirectory()" title="يغيّر الترتيب فقط، دون إضافة خدمات أو تقييمها">غيّر ترتيب العرض</button>
   <div class="catalog-grid" id="catalogGrid"></div>
   <div class="load-more-wrap" id="directoryMore"></div>
+  <div class="discovery-related" id="directoryRelatedNews" hidden></div>
   <div class="section-continue" id="directoryContinue"></div>
  <div id="routeIndex" hidden></div>
  </div>
@@ -297,7 +310,7 @@
 </section>
 
 
-<section class="ad-demo-wrap wrap" data-journey-panel="learning" aria-label="معاينة مساحة إعلانية">
+<section class="ad-demo-wrap wrap" data-journey-panel="directory" aria-label="معاينة مساحة إعلانية">
   <div class="ad-demo-head"><span class="ad-demo-label">إعلان</span><span class="ad-demo-lab">معاينة المختبر</span></div>
   <a class="ad-demo ad-demo-display" href="https://salla.com/" target="_blank" rel="noopener noreferrer" data-demo-ad="adsense-responsive">
     <span class="ad-demo-brand"><img src="https://www.google.com/s2/favicons?sz=256&domain_url=https://salla.com" alt=""><bdi>سلة</bdi></span>
