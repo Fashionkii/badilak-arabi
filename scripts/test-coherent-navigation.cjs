@@ -20,11 +20,13 @@ assert.equal(get('discoveryIndex.filter(discoveryMatchesContext).length'),get("d
 assert.equal(get('discoveryIndex.filter(discoveryMatchesContext).length'),29);
 const app=read('js/app.js');vm.runInContext(app.slice(app.indexOf('const discoveryCategoryOrder='),app.indexOf('function beginDirectoryDiscoveryVisit')),c);
 assert.deepEqual(get("orderDirectoryDiscoveryCards(discoveryIndex,'').map(e=>e.id)"),get("orderDirectoryDiscoveryCards(discoveryIndex.slice().reverse(),'').map(e=>e.id)"),'Stable independent of incoming order');
+vm.runInContext(app.slice(app.indexOf('function visibleDiscoveryGroups'),app.indexOf('function resetDirectoryLimit')),c);
+assert.deepEqual(get("visibleDiscoveryGroups(['work','learn','tech','create','culture','shopping'].map(id=>({id,entries:discoveryIndex.filter(e=>discoveryPrimaryCategory(e)===id)})),18).map(g=>g.shown.length)"),[3,3,3,3,3,3],'Three visible entries per broad category');
 vm.runInContext(app.match(/const learningDisplaySummaries=\{[\s\S]*?\n\};/)[0]+"function learningGuideLinkMarkup(id,detail=false){return guideLinkMarkup(learningGuideMap[id],detail)}",c);
 vm.runInContext("resetDiscoveryFilters();discoveryPurpose='learn'",c);
 const edraak=vm.runInContext("discoveryCardMarkup(discoveryIndex.find(e=>e.id==='edraak'))",c);
 assert.match(edraak,/onclick="showLearningNote\('edraak-learning'\)"/);assert(!edraak.includes("onclick=\"openDetail('edraak')"));
-const rows=get('badilakEditorial.rows');assert.equal(rows.length,23);assert.equal(rows.filter(r=>r.type==='article').length,21);
+const rows=get('badilakEditorial.rows');assert.equal(rows.length,27);assert.equal(rows.filter(r=>r.type==='article').length,21);
 for(const row of rows){for(const id of row.resources)assert(get(`discoveryIndex.some(e=>e.id===${JSON.stringify(id)}||e.learning?.id===${JSON.stringify(id)})`),'Orphan editorial relation: '+id);}
 for(const file of fs.readdirSync('dist',{recursive:true}).filter(f=>f.endsWith('.html')&&f!=='404.html')){
  const html=read('dist/'+file);
@@ -37,8 +39,8 @@ for(const file of fs.readdirSync('dist',{recursive:true}).filter(f=>f.endsWith('
 }
 const home=read('dist/index.html').split('id="directory"')[0];
 assert.equal((home.match(/class="editorial-card(?: editorial-card--feature)?"/g)||[]).length,3);
-assert.match(home,/data-editorial-type="news"/);assert.match(home,/data-editorial-type="article"/);
+assert.match(home,/data-editorial-type="news"[\s\S]*?<img class="editorial-cover"/);assert.match(home,/data-editorial-type="article"/);
 for(const id of get('badilakEditorial.home'))assert(home.includes(rows.find(r=>r.id===id).url));
 for(const id of ['midaad','taqreer','aamenn']){const date=get(`items.find(x=>x.id==='${id}').reviewed`);assert(read('dist/index.html').includes(`data-review-resource="${id}">آخر مراجعة للمورد: ${date}`));}
-for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`datetime="${row.published}"`));assert(html.includes('href="/guides?type=news"'));}
-console.log('PASS: one navigation across published pages; 21 articles + 2 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');
+for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`datetime="${row.published}"`));assert(html.includes('href="/guides?type=news"'));assert(html.includes('class="news-cover"'));assert(row.image&&row.imageAlt);}
+console.log('PASS: one navigation across published pages; 21 articles + 6 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');

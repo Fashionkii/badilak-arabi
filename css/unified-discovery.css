@@ -151,3 +151,6 @@ body.cosmic-theme article.news-article h2{font-size:22px;line-height:1.75;margin
  .discovery-path-control select{min-width:0;width:100%}
 }
 @media(prefers-reduced-motion:reduce){.editorial-card{transition:none}}
+
+/* Editorial news photographs are illustrative and credited. */
+.news-cover{margin:20px 0 18px}.news-cover img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:16px}.news-cover figcaption{font-size:12px;line-height:1.8;color:#526d62;margin-top:8px}.home-editorial-grid .editorial-card:not(.editorial-card--feature) .editorial-cover{max-height:180px;object-fit:cover}

@@ -81,7 +81,11 @@ function prepare(html){
  return html;
 }
 function setPageHead(html,page){
- if(page.kind==='news-article')html=html.replace('<meta property="og:type" content="website">','<meta property="og:type" content="article">');
+ if(page.kind==='news-article'){
+  html=html.replace('<meta property="og:type" content="website">','<meta property="og:type" content="article">');
+  for(const tag of ['og:image','twitter:image'])html=html.replace(new RegExp('(<meta (?:property|name)="'+tag+'" content=")[^"]*(">)'),(_,a,b)=>a+escape(page.image)+b);
+  html=html.replace(/(<meta property="og:image:alt" content=")[^"]*(">)/,(_,a,b)=>a+escape(page.imageAlt)+b);
+ }
  if(page.kind==='category'||page.kind==='item')html=html.replace('data-journey="home"','data-journey="directory"');
  if(page.kind==='item')html=html.replace('<body class="guided-discovery"','<body class="guided-discovery lock"');
  html=html.replace(/<title>[\s\S]*?<\/title>/,'<title>'+escape(page.title)+'</title>');
@@ -97,7 +101,7 @@ function setPageHead(html,page){
 function write(file,html){fs.mkdirSync(path.dirname(path.join(out,file)),{recursive:true});fs.writeFileSync(path.join(out,file),html);}
 const editorial=context.badilakEditorial;
 const editorialCard=(row,options)=>context.editorialCardMarkup(row,options);
-const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map((id,i)=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{feature:i===0,image:i===0});}).join('')}</div></section>`;
+const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map((id,i)=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{feature:i===0,image:i===0||row.type==='news'});}).join('')}</div></section>`;
 const paths=vm.runInContext('discoveryPaths',context);
 const source=fs.readFileSync(path.join(root,'index.html'),'utf8').replace('<!-- HOME_EDITORIAL -->',homeEditorial).replace('<!-- DISCOVERY_PATH_OPTIONS -->',Object.entries(paths).map(([id,p])=>`<option value="${id}">${escape(p.name)}</option>`).join('')).replace(/<time data-review-resource="([^"]+)">[^<]*<\/time>/g,(_,id)=>{const x=items.find(x=>x.id===id);if(!x?.reviewed)throw new Error('Missing review date: '+id);return `<time data-review-resource="${id}">آخر مراجعة للمورد: ${escape(x.reviewed)}</time>`;});
 // Standalone routes reuse the site's header, footer, fonts and detail renderer.
@@ -158,11 +162,13 @@ for(const x of items){
 const news=vm.runInContext('badilakNews',context);
 for(const n of news){
  const resource=items.find(x=>x.id===n.related);
- if(!resource)throw new Error('News refers to a missing resource: '+n.id);
- const page={kind:'news-article',title:n.title+' — بديلك عربي',description:n.audience,url:origin+'/news/'+n.id,schema:{'@context':'https://schema.org','@type':'NewsArticle',headline:n.title,description:n.audience,datePublished:n.published,dateModified:n.reviewed,inLanguage:'ar',url:origin+'/news/'+n.id,citation:n.source,author:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'},publisher:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'}}};
+ if(n.related&&!resource)throw new Error('News refers to a missing resource: '+n.id);
+ const image=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json'),'utf8')).articles[n.imageArticle];
+ if(!image)throw new Error('News image metadata missing: '+n.id);
+ const page={kind:'news-article',title:n.title+' — بديلك عربي',description:n.audience,url:origin+'/news/'+n.id,image:origin+'/images/articles/'+n.imageArticle+'-social.jpg',imageAlt:image.alt,schema:{'@context':'https://schema.org','@type':'NewsArticle',headline:n.title,description:n.audience,datePublished:n.published,dateModified:n.reviewed,inLanguage:'ar',url:origin+'/news/'+n.id,citation:n.source,author:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'},publisher:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'}}};
  const trail='<nav class="detail-breadcrumb" aria-label="مسار الصفحة"><a href="/">الرئيسية</a><span aria-hidden="true"> / </span><a href="/guides">اقرأ</a><span aria-hidden="true"> / </span><a href="/guides?type=news">الأخبار</a></nav>';
  const sections=[['ما الذي تغيّر؟',n.change],['لمن قد يهم؟',n.audience],['ما الذي لم نتحقق منه؟',n.limits],['ما الخطوة المناسبة؟',n.action]];
- write('news/'+n.id+'.html',standalonePage(page,trail+`<article class="news-article"><p class="news-source-kind">إعلان الجهة · مراجعة تحريرية للمصدر</p><h1>${escape(n.title)}</h1><div class="news-date"><span>تاريخ الحدث: <time datetime="${n.eventDate}">${n.eventLabel}</time></span><br><span>النشر: <time datetime="${n.published}">${context.editorialDate(n.published)}</time> · مراجعة المصدر: <time datetime="${n.reviewed}">${context.editorialDate(n.reviewed)}</time></span></div>${sections.map(([title,copy])=>`<section><h2>${title}</h2><p>${escape(copy)}</p></section>`).join('')}<div class="news-actions"><a href="${escape(n.source)}" target="_blank" rel="noopener noreferrer">اقرأ إعلان الجهة ↗</a><a href="/discover/${n.related}">افتح بطاقة ${escape(resource.name)} ←</a><a href="/?path=ai#directory">خيارات ومقالات في نفس الموضوع ←</a></div><p class="news-source-kind">الروابط هنا للتوثيق، وليست روابط عمولة. الخبر لا يمثّل تقييمًا مستقلًا لجودة المنتج.</p></article>`));
+ write('news/'+n.id+'.html',standalonePage(page,trail+`<article class="news-article"><p class="news-source-kind">إعلان الجهة · مراجعة تحريرية للمصدر</p><h1>${escape(n.title)}</h1><figure class="news-cover"><img src="/images/articles/${escape(n.imageArticle)}-cover.webp" alt="${escape(image.alt)}" width="1200" height="675"><figcaption>صورة تعبيرية: <a href="${escape(image.source)}" target="_blank" rel="noopener noreferrer">Unsplash</a></figcaption></figure><div class="news-date"><span>تاريخ الحدث: <time datetime="${n.eventDate}">${n.eventLabel}</time></span><br><span>النشر: <time datetime="${n.published}">${context.editorialDate(n.published)}</time> · مراجعة المصدر: <time datetime="${n.reviewed}">${context.editorialDate(n.reviewed)}</time></span></div>${sections.map(([title,copy])=>`<section><h2>${title}</h2><p>${escape(copy)}</p></section>`).join('')}<div class="news-actions"><a href="${escape(n.source)}" target="_blank" rel="noopener noreferrer">اقرأ إعلان الجهة ↗</a>${resource?`<a href="/discover/${n.related}">افتح بطاقة ${escape(resource.name)} ←</a>`:''}<a href="/?path=${n.path||'ai'}#directory">خيارات ومقالات في نفس الموضوع ←</a></div><p class="news-source-kind">الروابط هنا للتوثيق، وليست روابط عمولة. الخبر لا يمثّل تقييمًا مستقلًا لجودة المنتج.</p></article>`));
 }
 
 for(const slug of ['privacy','disclosure']){

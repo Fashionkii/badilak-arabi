@@ -5,7 +5,7 @@ function countryInfoHasCode(info,code){
  return countryEntries(info).some(v=>v&&v[0]===code);
 }
 let filter='all',subfilter='all',originFilter=null,countryFilter=null,learningType='all';
-let directoryVisible=window.matchMedia('(max-width:760px)').matches?6:window.matchMedia('(max-width:1023px)').matches?8:12;
+let directoryVisible=18;
 let learningVisible={platform:4,channel:4,reciter:4};
 const learningSectionOpen={channel:false,reciter:false};
 const learningCarouselIndex={platform:0,resource:0,channel:0,reciter:0};
@@ -15,8 +15,9 @@ function directoryBatchSize(){
  const tablet=!mobile&&window.matchMedia('(max-width:1023px)').matches;
  const specific=subfilter!=='all'||!!originFilter||!!countryFilter||
   !!(document.getElementById('searchInput')?.value||'').trim();
- // Wider discovery batches; precise lookups remain deliberately smaller.
- return specific?(mobile?4:6):(mobile?6:tablet?8:12);
+ // Show up to three resources in each of the six broad discovery categories.
+ const broad=filter==='all'&&discoveryPath==='all'&&discoveryPurpose==='all'&&discoveryType==='all'&&discoveryField==='all'&&!specific;
+ return broad?18:specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
 // Stable topic/name order. Familiar-service rotation on the homepage is independent.
 const discoveryCategoryOrder=['work','learn','tech','create','culture','shopping'];
