@@ -29,13 +29,13 @@
    subfilter=(subfilterMap[filter]||[]).some(([id])=>id===state.subfilter)?state.subfilter:'all';
    originFilter=Object.hasOwn(originRouteMap,state.originFilter)?state.originFilter:null;
    countryFilter=Object.hasOwn(arabProgressCountryNames,state.countryFilter)?state.countryFilter:null;
-   directoryVisible=Math.max(1,count(state.directoryVisible,discoveryIndex.length,directoryBatchSize()));
    window.badilakDirectoryRotation?.restore(state.directoryRotation);
    discoveryPath=Object.hasOwn(discoveryPaths,state.discoveryPath)?state.discoveryPath:'all';
    discoveryPurpose=['all','use','learn'].includes(state.discoveryPurpose)?state.discoveryPurpose:state.journeyView==='learning'?'learn':'all';
    discoveryType=types.includes(state.discoveryType)?state.discoveryType:state.journeyView==='learning'&&types.includes(state.learningType)?state.learningType:'all';
    discoveryField=Object.hasOwn(discoveryFieldNames,state.discoveryField)?state.discoveryField:state.journeyView==='learning'&&Object.hasOwn(discoveryFieldNames,state.learningField)?state.learningField:'all';
    byId('searchInput').value=text(state.journeyView==='learning'&&!state.discoveryPurpose?state.learningSearch:state.search);
+   directoryVisible=Math.max(directoryBatchSize(),count(state.directoryVisible,discoveryIndex.length,directoryBatchSize()));
    document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===filter));
    document.querySelectorAll('[data-origin]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.origin===originFilter)));
    buildSubfilters();updateDirectoryCrumb();updateDirectoryActionLabel();renderCards();
