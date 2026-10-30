@@ -72,7 +72,7 @@ function setDiscoveryFilter(key,value){
  const allowed={purpose:['all','use','learn'],type:['all',...Object.keys(discoveryTypeNames)],field:['all',...Object.keys(discoveryFieldNames)]};
  if(!allowed[key]?.includes(value))return;
  window.badilakJourney?.remember();
- if(key==='purpose'){discoveryPurpose=value;if(value!=='learn'){discoveryType='all';discoveryField='all';}}
+ if(key==='purpose'){if(value==='learn')document.getElementById('discoveryRefinements').open=true;discoveryPurpose=value;if(value!=='learn'){discoveryType='all';discoveryField='all';}}
  if(key==='type')discoveryType=value;
  if(key==='field')discoveryField=value;
  resetDirectoryLimit();renderCards();rememberDirectorySelection();

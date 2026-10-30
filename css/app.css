@@ -3117,7 +3117,7 @@ main#top>section{position:relative;z-index:1}
 .origin-options:not(.is-expanded) .origin-option:nth-child(n+13){display:none}
 .origin-options .origin-option{display:flex!important}
 .fold-card:not(.is-open)>.section-fold-toggle::after{content:'اقرأ'!important}
-.item{align-self:start!important;height:auto!important;min-height:0!important}
+.item:not(.unified-resource-card){align-self:start!important;height:auto!important;min-height:0!important}
 .item-identity{padding-bottom:5px!important}
 .country-badge-slot{height:22px!important;min-height:22px!important;max-height:22px!important;margin:0 0 5px!important}
 .comparison-strip{height:23px!important;min-height:23px!important;margin:1px 0 6px!important}

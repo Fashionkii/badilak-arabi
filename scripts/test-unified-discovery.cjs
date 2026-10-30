@@ -26,7 +26,18 @@ vm.runInContext("discoveryType='reciter'",now);assert.equal(get('discoveryIndex.
 vm.runInContext("resetDiscoveryFilters();filter='work'",now);assert(get("discoveryIndex.filter(discoveryMatchesContext).some(e=>e.id==='manasatna')"));vm.runInContext("discoveryPurpose='learn'",now);assert(!get("discoveryIndex.filter(discoveryMatchesContext).some(e=>e.id==='manasatna')"));
 vm.runInContext("resetDiscoveryFilters();filter='all'",now);
 for(const origin of ['canva','chatgpt','youtube','coursera','shopify']){vm.runInContext('originFilter='+JSON.stringify(origin),now);assert.deepEqual(get('discoveryIndex.filter(discoveryMatchesContext).map(e=>e.id)').sort(),get('items.filter(x=>matchesDirectoryOrigin(x,'+JSON.stringify(origin)+')).map(x=>x.id)').sort());}
-for(const x of existing){assert.equal(now.practicalTrialMarkup(x),before.practicalTrialMarkup(x));assert.equal(now.directoryDiscoveryMarkup(x),before.directoryDiscoveryMarkup(x));assert.equal(now.directoryCardMarkup(x),before.directoryCardMarkup(x));}
+// Only the reviewed icon transport changed: normalize those exact SVGs back to the
+// previous ligature markup, keeping all surrounding card copy, links and actions exact.
+const currentSymbols=get('localMaterialSymbols');
+function previousIconMarkup(html){
+ for(const name of Object.keys(currentSymbols)){
+  const svg=now.materialSymbolMarkup(name);
+  if(name==='language')html=html.replaceAll('country-badge-neutral">'+svg,'country-badge-neutral"><span class="material-symbols-outlined country-neutral-icon" aria-hidden="true">language</span>');
+  html=html.replaceAll(svg,`<span class="material-symbols-outlined">${name}</span>`);
+ }
+ return html;
+}
+for(const x of existing){assert.equal(now.practicalTrialMarkup(x),before.practicalTrialMarkup(x));assert.equal(now.directoryDiscoveryMarkup(x),before.directoryDiscoveryMarkup(x));assert.equal(previousIconMarkup(now.directoryCardMarkup(x)),before.directoryCardMarkup(x));}
 for(const f of execFileSync('git',['ls-tree','-r','--name-only',base],{encoding:'utf8'}).split('\n').filter(f=>/^(api\/|private\/|studio\/|images\/brand\/|css\/(cosmic-theme|site-polish|reading-hierarchy)|js\/(commercial-links|outbound-choice|feedback|smart-return)|site.config.json|vercel.json|guides\/)/.test(f))){assert.equal(f==='js/smart-return.js'?read(f).replace("x.pathname==='/guides'||x.pathname==='/news'||/^\\/(guides|news)\\/[^/]+$/.test(x.pathname)","x.pathname==='/guides'||/^\\/guides\\/[^/]+$/.test(x.pathname)"):read(f),old(f),f+' protected');}
 const beforeHtml=old('index.html'),afterHtml=read('index.html');const ads=s=>[...s.matchAll(/<section class="(?:commercial-demo-wrap|ad-demo-wrap)[\s\S]*?<\/section>/g)].map(x=>x[0].replace(/ data-journey-panel="[^"]*"/g,''));assert.deepEqual(ads(afterHtml),ads(beforeHtml));
 for(const n of get('badilakNews')){assert(n.eventDate<n.published);if(n.related)assert(current.some(x=>x.id===n.related));const html=read('dist/news/'+n.id+'.html');assert(html.includes('ما الذي لم نتحقق منه؟'));if(n.related)assert(html.includes('/discover/'+n.related));assert(html.includes('class="news-cover"'));
