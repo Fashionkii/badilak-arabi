@@ -154,3 +154,5 @@ body.cosmic-theme article.news-article h2{font-size:22px;line-height:1.75;margin
 
 /* Editorial news photographs are illustrative and credited. */
 .news-cover{margin:20px 0 18px}.news-cover img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:16px}.news-cover figcaption{font-size:12px;line-height:1.8;color:#526d62;margin-top:8px}.home-editorial-grid .editorial-card:not(.editorial-card--feature) .editorial-cover{max-height:180px;object-fit:cover}
+
+body.cosmic-theme article.news-article .news-lead{font-size:17px;line-height:1.95;color:#36594c;margin:12px 0 16px}.news-cover figcaption a{color:inherit;text-underline-offset:3px}

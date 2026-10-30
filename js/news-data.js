@@ -35,7 +35,25 @@ const badilakNews=[
  audience:'قد يهم المتعلم الذي يبحث عن ممارسة الإنجليزية بما يناسب السياق المصري.',
  limits:'الوصف مستند إلى إعلان المركز، ولم نختبر المنهج أو فاعلية التعلم أو شروط إتاحة التطبيق.',
  action:'تحقق من إتاحة التطبيق وشروطه، ثم جرّب درسًا وقارن ملاءمته لمستواك.',
- source:'https://www.aic.gov.eg/news/'}
+ source:'https://www.aic.gov.eg/news/'},
+ {id:'paymob-partner-onboarding',imageArticle:'payment-gateway',category:'work',path:'store',eventKind:'تحديث التوثيق',sourceKind:'توثيق رسمي',sourceLabel:'اقرأ توثيق Paymob',title:'Paymob توضّح مسار ضم التجار للشركاء: اتفاق معتمد قبل التكامل',eventDate:'2026-10-01',eventLabel:'1 أكتوبر 2026',published:'2026-10-30',reviewed:'2026-10-30',reviewLabel:'30 أكتوبر 2026',related:'paymob',
+ change:'يوضح توثيق Paymob المحدّث في 1 أكتوبر مسار تسجيل التجار من نظام الشريك، بشرط وجود اتفاق شراكة معتمد.',
+ audience:'يهم شركات المنصات والمطورين الذين يبنون تجربة تسجيل للتجار، وليس كل تاجر يريد تفعيل الدفع لمتجره فقط.',
+ limits:'تاريخ المصدر تاريخ تحديث التوثيق وليس تاريخ إطلاق الخدمة. لم ننفذ تكاملًا ولم نتحقق من أهلية شريك بعينه أو تسعيره.',
+ action:'تحقق أولًا من أهلية اتفاق الشراكة، ثم راجع متطلبات التكامل في التوثيق الرسمي.',
+ source:'https://developers.paymob.com/paymob-docs/beyond-payments/partner-onboarding'},
+ {id:'paymob-dashboard-guide',imageArticle:'arab-progress',category:'work',paths:['store','business'],eventKind:'تحديث التوثيق',sourceKind:'توثيق رسمي',sourceLabel:'اقرأ دليل لوحة Paymob',title:'دليل لوحة Paymob: متابعة المدفوعات وأسباب فشل العمليات من مكان واحد',eventDate:'2026-09-30',eventLabel:'30 سبتمبر 2026',published:'2026-10-30',reviewed:'2026-10-30',reviewLabel:'30 أكتوبر 2026',related:'paymob',
+ change:'يشرح دليل Paymob المحدّث في 30 سبتمبر لوحة لعرض المعاملات والمبيعات وأسباب فشل الدفع، مع تصفية حسب القناة والفترة والعملة.',
+ audience:'يهم صاحب المتجر وفريق التشغيل عند متابعة الطلبات والمدفوعات ومراجعة أسباب التعثر.',
+ limits:'هذا تحديث لدليل الاستخدام، وليس دليلًا على أن كل ميزة أُطلقت في ذلك اليوم. لم نختبر حساب تاجر أو إتاحة الوظائف في كل سوق.',
+ action:'راجع الوظائف المتاحة في حسابك، ثم تابع أسباب الفشل قبل تغيير بوابة الدفع أو إعدادات المتجر.',
+ source:'https://developers.paymob.com/paymob-docs/getting-started/new-dashboard'},
+ {id:'thmanyah-radio-guide',imageArticle:'anghami-spotify',category:'culture',path:'reading',eventKind:'تحديث التوثيق',sourceKind:'مركز المساعدة الرسمي',sourceLabel:'اقرأ توضيح ثمانية',title:'راديو ثمانية يوضح الفرق بين الاستماع الأساسي والاشتراك المدفوع',eventDate:'2026-09-16',eventLabel:'16 سبتمبر 2026',published:'2026-10-30',reviewed:'2026-10-30',reviewLabel:'30 أكتوبر 2026',related:'thmanyah',
+ change:'يوضح مركز مساعدة ثمانية، في صفحة محدّثة بتاريخ 16 سبتمبر، إتاحة الاستماع الأساسي ومزايا إضافية للمشتركين، مع الفصل بين راديو ثمانية وتطبيق بث البطولات.',
+ audience:'يهم من يقارن تطبيقات البودكاست والمحتوى الصوتي ويريد معرفة حدود الاشتراك قبل الدفع.',
+ limits:'التاريخ يخص تحديث صفحة المساعدة، وليس إطلاق التطبيق. لم نختبر كل محتوى أو باقة، وقد تختلف الإتاحة وفق الجهاز والتحديثات.',
+ action:'افحص وصف الباقة في التطبيق الرسمي وتأكد من أنها تخص المحتوى الصوتي الذي تريده.',
+ source:'https://ask.thmanyah.com/ما-هو-تطبيق-راديو-ثمانية'}
 ];
 function relatedNewsMarkup(id){
  const rows=badilakNews.filter(n=>n.related===id);if(!rows.length)return '';

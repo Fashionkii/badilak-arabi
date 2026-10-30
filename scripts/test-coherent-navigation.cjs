@@ -26,7 +26,24 @@ vm.runInContext(app.match(/const learningDisplaySummaries=\{[\s\S]*?\n\};/)[0]+"
 vm.runInContext("resetDiscoveryFilters();discoveryPurpose='learn'",c);
 const edraak=vm.runInContext("discoveryCardMarkup(discoveryIndex.find(e=>e.id==='edraak'))",c);
 assert.match(edraak,/onclick="showLearningNote\('edraak-learning'\)"/);assert(!edraak.includes("onclick=\"openDetail('edraak')"));
-const rows=get('badilakEditorial.rows');assert.equal(rows.length,27);assert.equal(rows.filter(r=>r.type==='article').length,21);
+const rows=get('badilakEditorial.rows');assert.equal(rows.length,30);assert.equal(rows.filter(r=>r.type==='article').length,21);
+const newsRows=rows.filter(r=>r.type==='news');
+assert.equal(newsRows.length,9);
+assert.deepEqual(newsRows.map(r=>r.eventDate),newsRows.map(r=>r.eventDate).sort().reverse(),'News ordered by event/source-update date');
+for(const row of newsRows){
+ const html=read('dist'+row.url+'.html');
+ const schema=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+ assert.equal(schema['@type'],'NewsArticle');assert(schema.image[0].endsWith('-cover.webp'));
+ assert(html.indexOf('class="news-date"')<html.indexOf('class="news-cover"'),'Dates visible before cover');
+ if(row.eventKind==='تحديث التوثيق')assert(html.includes('تحديث التوثيق:'));
+ for(const id of row.paths)assert(get(`Boolean(discoveryPaths[${JSON.stringify(id)}])`),'Unknown news path');
+}
+c.document={getElementById:()=>({value:''})};
+vm.runInContext("filter='all';countryFilter=null;originFilter=null;discoveryPath='languages'",c);
+const languageContext=vm.runInContext('discoveryEditorialMarkup([])',c);
+assert(languageContext.includes('/news/loghat-pilot'));assert(languageContext.includes('class="editorial-cover"'));
+vm.runInContext("discoveryPath='reading'",c);assert(vm.runInContext('discoveryEditorialMarkup([])',c).includes('/news/thmanyah-radio-guide'));
+
 for(const row of rows){for(const id of row.resources)assert(get(`discoveryIndex.some(e=>e.id===${JSON.stringify(id)}||e.learning?.id===${JSON.stringify(id)})`),'Orphan editorial relation: '+id);}
 for(const file of fs.readdirSync('dist',{recursive:true}).filter(f=>f.endsWith('.html')&&f!=='404.html')){
  const html=read('dist/'+file);
@@ -43,4 +60,4 @@ assert.match(home,/data-editorial-type="news"[\s\S]*?<img class="editorial-cover
 for(const id of get('badilakEditorial.home'))assert(home.includes(rows.find(r=>r.id===id).url));
 for(const id of ['midaad','taqreer','aamenn']){const date=get(`items.find(x=>x.id==='${id}').reviewed`);assert(read('dist/index.html').includes(`data-review-resource="${id}">آخر مراجعة للمورد: ${date}`));}
 for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`datetime="${row.published}"`));assert(html.includes('href="/guides?type=news"'));assert(html.includes('class="news-cover"'));assert(row.image&&row.imageAlt);}
-console.log('PASS: one navigation across published pages; 21 articles + 6 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');
+console.log('PASS: one navigation across published pages; 21 articles + 9 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');

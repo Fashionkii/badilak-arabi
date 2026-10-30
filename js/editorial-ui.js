@@ -7,7 +7,7 @@ function editorialCardMarkup(row,{feature=false,image=false}={}){
  ${image&&row.image?`<img class="editorial-cover" src="${e(row.image)}" alt="${e(row.imageAlt)}" width="640" height="360" loading="lazy" decoding="async">`:''}
  <div class="editorial-card-body"><p class="editorial-eyebrow"><span>${news?'خبر':'مقال'}</span><span>${editorialCategories[row.category]}</span></p>
  <h3>${e(row.title)}</h3><p class="editorial-summary">${e(row.summary)}</p>
- <p class="editorial-date">${news?'الحدث':'تحديث المقال'}: <time datetime="${news?row.eventDate:row.updated}">${editorialDate(news?row.eventDate:row.updated)}</time>${news?`<span>مراجعة المصدر: <time datetime="${row.updated}">${editorialDate(row.updated)}</time></span>`:''}</p>
+ <p class="editorial-date">${news?e(row.eventKind||'الحدث'):'تحديث المقال'}: <time datetime="${news?row.eventDate:row.updated}">${editorialDate(news?row.eventDate:row.updated)}</time>${news?`<span>مراجعة المصدر: <time datetime="${row.updated}">${editorialDate(row.updated)}</time></span>`:''}</p>
  <span class="editorial-action">${news?'اقرأ ما تغيّر':'اقرأ المقال'} <span aria-hidden="true">←</span></span></div></a></article>`;
 }
 function discoveryEditorialMarkup(entries){
@@ -16,9 +16,10 @@ function discoveryEditorialMarkup(entries){
  const path=typeof discoveryPath==='string'?discoveryPaths[discoveryPath]:null;
  const q=document.getElementById('searchInput')?.value.trim();
  if(!path&&!q&&filter==='all'&&!originFilter&&!countryFilter)return '';
- const matches=badilakEditorial.rows.filter(row=>path?.guides.includes(row.id)||row.resources.some(id=>ids.has(id)));
+ const matches=badilakEditorial.rows.filter(row=>path?.guides.includes(row.id)||row.paths?.includes(discoveryPath)||row.resources.some(id=>ids.has(id)));
  const articles=matches.filter(row=>row.type==='article');
  if(path)articles.sort((a,b)=>(path.guides.includes(a.id)?path.guides.indexOf(a.id):Infinity)-(path.guides.includes(b.id)?path.guides.indexOf(b.id):Infinity));
- const selected=[...articles.slice(0,2),...matches.filter(row=>row.type==='news').slice(0,1)];
- return selected.length?`<div class="editorial-section-head"><div><h2>اقرأ في نفس الموضوع</h2><p>فهم القرار، ومتابعة التغييرات المرتبطة به.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="editorial-context-grid">${selected.map(row=>editorialCardMarkup(row)).join('')}</div>`:'';
+ const news=matches.filter(row=>row.type==='news');
+ const selected=[...articles.slice(0,news.length?2:3),...news.slice(0,Math.max(0,3-Math.min(articles.length,2)))].slice(0,3);
+ return selected.length?`<div class="editorial-section-head"><div><h2>اقرأ في نفس الموضوع</h2><p>فهم القرار، ومتابعة التغييرات المرتبطة به.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="editorial-context-grid">${selected.map(row=>editorialCardMarkup(row,{image:row.type==='news'})).join('')}</div>`:'';
 }

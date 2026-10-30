@@ -11,6 +11,6 @@ module.exports=function(root,news){
   const img=media.articles[id];
   return {id,type:'article',url:'/guides/'+id,title:plain(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1]),summary:plain(schema.description),updated:schema.dateModified||null,image:'/images/articles/'+id+'-thumb.webp',imageAlt:img?.alt||'',...relation};
  });
- for(const n of news)rows.push({id:n.id,type:'news',url:'/news/'+n.id,title:n.title,summary:n.change,category:n.category||'tech',resources:n.related?[n.related]:[],image:'/images/articles/'+n.imageArticle+'-thumb.webp',imageAlt:media.articles[n.imageArticle].alt,eventDate:n.eventDate,published:n.published,updated:n.reviewed});
+ for(const n of news.slice().sort((a,b)=>b.eventDate.localeCompare(a.eventDate)||a.id.localeCompare(b.id)))rows.push({id:n.id,type:'news',url:'/news/'+n.id,title:n.title,summary:n.change,category:n.category||'tech',resources:n.related?[n.related]:[],paths:n.paths||(n.path?[n.path]:[]),eventKind:n.eventKind||'الحدث',image:'/images/articles/'+n.imageArticle+'-thumb.webp',imageAlt:media.articles[n.imageArticle].alt,eventDate:n.eventDate,published:n.published,updated:n.reviewed});
  return {rows,home:relations.home};
 };
