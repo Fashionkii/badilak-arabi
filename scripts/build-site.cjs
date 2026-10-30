@@ -128,6 +128,7 @@ if(process.env.VERCEL_ENV==='preview'){
 // One editorial hub. /news is the same hub with the news filter selected.
 const editorialNames=vm.runInContext('editorialCategories',context);
 function readingHub(newsOnly=false){
+ const count=(n,one,two,many)=>n===0?`لا ${many}`:n===1?one:n===2?two:n<=10?`${n} ${many}`:`${n} ${one.replace(' واحد','')}ًا`;
  const rows=newsOnly?editorial.rows.filter(r=>r.type==='news'):editorial.rows;
  const route=newsOnly?'/news':'/guides';
  const title='اقرأ — مقالات وأخبار تساعدك على الاختيار';
@@ -140,7 +141,7 @@ function readingHub(newsOnly=false){
  const tabs=[['all','الكل'],['article','المقالات'],['news','الأخبار']].map(([id,label])=>`<a href="${id==='news'?'/news':'/guides'+(id==='all'?'':'?type='+id)}" data-reading-type="${id}"${id===(newsOnly?'news':'all')?' aria-current="true"':''}>${label}</a>`).join('');
  const content=fs.readFileSync(path.join(root,'guides.html'),'utf8')
   .replace('{{TYPE_FILTERS}}',tabs).replace('{{TOPIC_OPTIONS}}',Object.entries(editorialNames).map(([id,name])=>`<option value="${id}">${name}</option>`).join(''))
-  .replace('{{READING_COUNT}}',newsOnly?`${rows.length} خبرًا`:`${editorial.rows.filter(r=>r.type==='article').length} مقالًا · ${editorial.rows.filter(r=>r.type==='news').length} خبرًا`)
+  .replace('{{READING_COUNT}}',newsOnly?count(rows.length,'خبر واحد','خبران','أخبار'):`${count(editorial.rows.filter(r=>r.type==='article').length,'مقال واحد','مقالان','مقالات')} · ${count(editorial.rows.filter(r=>r.type==='news').length,'خبر واحد','خبران','أخبار')}`)
   .replace('{{READING_GROUPS}}',groups);
  return standalonePage(page,content);
 }

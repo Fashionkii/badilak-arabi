@@ -3,6 +3,7 @@
  const root=document.getElementById('readingHub');if(!root)return;
  const cards=[...root.querySelectorAll('[data-editorial-type]')],groups=[...root.querySelectorAll('[data-reading-group]')];
  const topic=root.querySelector('#readingTopic'),status=root.querySelector('#readingStatus');
+ function count(n,one,two,many){return n===0?`لا ${many}`:n===1?one:n===2?two:n<=10?`${n} ${many}`:`${n} ${one.replace(' واحد','') }ًا`;}
  function render(){
   const params=new URLSearchParams(location.search),requested=params.get('type')||(location.pathname==='/news'?'news':'all');
   const type=['all','article','news'].includes(requested)?requested:'all';
@@ -17,7 +18,7 @@
   for(const card of cards)card.hidden=!(type==='all'||card.dataset.editorialType===type)||!(category==='all'||card.dataset.editorialCategory===category);
   for(const group of groups)group.hidden=![...group.querySelectorAll('[data-editorial-type]')].some(card=>!card.hidden);
   const visible=cards.filter(card=>!card.hidden),articles=visible.filter(card=>card.dataset.editorialType==='article').length;
-  status.textContent=visible.length?`${articles} مقالًا · ${visible.length-articles} خبرًا`:'لا توجد مواد في هذه التصفية. اختر موضوعًا آخر أو اعرض الكل.';
+  status.textContent=visible.length?`${count(articles,'مقال واحد','مقالان','مقالات')} · ${count(visible.length-articles,'خبر واحد','خبران','أخبار')}`:'لا توجد مواد في هذه التصفية. اختر موضوعًا آخر أو اعرض الكل.';
  }
  function navigate(url){history.pushState({},'',url);render();}
  root.addEventListener('click',event=>{
