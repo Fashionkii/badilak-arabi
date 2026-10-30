@@ -218,13 +218,15 @@
    <div class="search"><span class="search-mark" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
   </div>
 
+  <div class="discovery-primary-controls">
   <div class="discovery-path-control"><label for="discoveryPath">ابدأ بحاجة محددة</label><select id="discoveryPath" onchange="openDiscoveryPath(this.value)"><option value="all">كل الاحتياجات</option><!-- DISCOVERY_PATH_OPTIONS --></select></div>
-  <p class="discovery-path-description" id="discoveryPathDescription" hidden></p>
   <div class="discovery-purpose" role="group" aria-label="هدفك من البحث">
    <button type="button" data-discovery-purpose="all" aria-pressed="true" onclick="setDiscoveryFilter('purpose','all')">الكل</button>
    <button type="button" data-discovery-purpose="use" aria-pressed="false" onclick="setDiscoveryFilter('purpose','use')">أستخدم وأنجز</button>
    <button type="button" data-discovery-purpose="learn" aria-pressed="false" onclick="setDiscoveryFilter('purpose','learn')">أتعلّم وأطبّق</button>
   </div>
+  </div>
+  <p class="discovery-path-description" id="discoveryPathDescription" hidden></p>
   <div class="learning-refinements" id="learningRefinements" hidden>
    <label for="discoveryType">نوع المصدر<select id="discoveryType" aria-label="نوع المصدر" onchange="setDiscoveryFilter('type',this.value)"><option value="all">كل الأنواع</option><option value="platform">منصة كورسات</option><option value="resource">دروس ومقالات عملية</option><option value="channel">قناة تعليمية</option><option value="reciter">قناة تلاوة</option></select></label>
    <label for="discoveryField">مجال التعلّم<select id="discoveryField" aria-label="مجال التعلّم" onchange="setDiscoveryFilter('field',this.value)"><option value="all">كل المجالات</option><option value="languages">إنجليزي ولغات</option><option value="tech">برمجة وتقنية</option><option value="design">تصميم ومونتاج</option><option value="business">إدارة وتسويق</option><option value="skills">مهارات متنوعة</option><option value="knowledge">معرفة وعلوم</option><option value="quran">قرآن وتلاوة</option></select></label>

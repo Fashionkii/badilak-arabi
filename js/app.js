@@ -355,6 +355,11 @@ function updateDirectoryContinue(){
  const root=document.getElementById('directoryContinue');if(!root)return;
  let actions=[];
  const q=document.getElementById('searchInput')?.value.trim()||'';
+ const path=discoveryPaths[discoveryPath];
+ if(path){
+   root.innerHTML=sectionContinueMarkup('وسّع نطاق الاكتشاف','لخيارات إضافية، انتقل إلى المجال الأوسع.',[[`كل ${categoryLabel(path.category)}`,`openDiscoveryGroup('${path.category}','all')`]]);
+   return;
+ }
  if(originFilter){
    actions.push([`كل ${subcategoryLabel(filter,subfilter)||categoryLabel(filter)}`,`openDiscoveryGroup('${filter}','${subfilter}')`]);
    actions.push([`كل ${categoryLabel(filter)}`,`openDiscoveryGroup('${filter}','all')`]);

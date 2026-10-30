@@ -133,7 +133,7 @@ function readingHub(newsOnly=false){
   const entries=editorial.rows.filter(r=>r.category===id);if(!entries.length)return '';
   return `<section class="reading-group" data-reading-group="${id}"${newsOnly&&!entries.some(r=>r.type==='news')?' hidden':''}><h2>${name}</h2><div class="editorial-grid">${entries.map(row=>editorialCard(row,{image:true}).replace('<article ',`<article ${newsOnly&&row.type!=='news'?'hidden ':''}`)).join('')}</div></section>`;
  }).join('');
- const tabs=[['all','الكل'],['article','المقالات'],['news','الأخبار']].map(([id,label])=>`<a href="/guides${id==='all'?'':'?type='+id}" data-reading-type="${id}"${id===(newsOnly?'news':'all')?' aria-current="true"':''}>${label}</a>`).join('');
+ const tabs=[['all','الكل'],['article','المقالات'],['news','الأخبار']].map(([id,label])=>`<a href="${id==='news'?'/news':'/guides'+(id==='all'?'':'?type='+id)}" data-reading-type="${id}"${id===(newsOnly?'news':'all')?' aria-current="true"':''}>${label}</a>`).join('');
  const content=fs.readFileSync(path.join(root,'guides.html'),'utf8')
   .replace('{{TYPE_FILTERS}}',tabs).replace('{{TOPIC_OPTIONS}}',Object.entries(editorialNames).map(([id,name])=>`<option value="${id}">${name}</option>`).join(''))
   .replace('{{READING_COUNT}}',newsOnly?`${rows.length} خبرًا`:`${editorial.rows.filter(r=>r.type==='article').length} مقالًا · ${editorial.rows.filter(r=>r.type==='news').length} خبرًا`)

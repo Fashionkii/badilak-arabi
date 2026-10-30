@@ -17,6 +17,8 @@ function discoveryEditorialMarkup(entries){
  const q=document.getElementById('searchInput')?.value.trim();
  if(!path&&!q&&filter==='all'&&!originFilter&&!countryFilter)return '';
  const matches=badilakEditorial.rows.filter(row=>path?.guides.includes(row.id)||row.resources.some(id=>ids.has(id)));
- const selected=[...matches.filter(row=>row.type==='article').slice(0,2),...matches.filter(row=>row.type==='news').slice(0,1)];
+ const articles=matches.filter(row=>row.type==='article');
+ if(path)articles.sort((a,b)=>(path.guides.includes(a.id)?path.guides.indexOf(a.id):Infinity)-(path.guides.includes(b.id)?path.guides.indexOf(b.id):Infinity));
+ const selected=[...articles.slice(0,2),...matches.filter(row=>row.type==='news').slice(0,1)];
  return selected.length?`<div class="editorial-section-head"><div><h2>اقرأ في نفس الموضوع</h2><p>فهم القرار، ومتابعة التغييرات المرتبطة به.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="editorial-context-grid">${selected.map(row=>editorialCardMarkup(row)).join('')}</div>`:'';
 }
