@@ -45,3 +45,23 @@ async function reviewDirectoryMatrix(){
  output.textContent=JSON.stringify({test:'directory',status:results.every(r=>r.status==='MEASURED')?'MEASURED_ALL_WIDTHS':'INCOMPLETE_OR_FAILED',results},null,2);
 }
 document.getElementById('reviewDirectoryMatrix')?.addEventListener('click',reviewDirectoryMatrix);
+
+/* One-click load-more QA, measured from the actual rendered DOM. */
+async function reviewDirectoryMore(){
+ const doc=frame.contentDocument,win=frame.contentWindow;
+ if(!doc?.querySelector('#directory')){output.textContent=JSON.stringify({test:'loadMore',status:'BLOCKED_NO_DIRECTORY'},null,2);return;}
+ win.badilakJourney?.show?.('directory');
+ await settle();
+ const snapshot=()=>{
+  const cards=[...doc.querySelectorAll('.unified-resource-card')].filter(e=>!!e.getClientRects().length);
+  const ids=cards.map(e=>e.getAttribute('data-item-id')).filter(Boolean);
+  const more=doc.querySelector('#directoryMore .load-more-btn');
+  return {cards:cards.length,uniqueIds:new Set(ids).size,idsMissing:cards.length-ids.length,groups:[...doc.querySelectorAll('.catalog-group')].filter(e=>!!e.getClientRects().length).length,stateLine:doc.getElementById('stateLine')?.textContent?.trim()||null,moreLabel:more?.textContent?.trim()||null};
+ };
+ const before=snapshot(),button=doc.querySelector('#directoryMore .load-more-btn');
+ if(!button){output.textContent=JSON.stringify({test:'loadMore',status:'BLOCKED_NO_BUTTON',before},null,2);return;}
+ button.click();await settle();
+ const after=snapshot();
+ output.textContent=JSON.stringify({test:'loadMore',status:after.cards>before.cards&&after.uniqueIds===after.cards&&after.idsMissing===0?'MEASURED_INCREASE_NO_DUPLICATES':'FAILED_CHECK',before,after,added:after.cards-before.cards},null,2);
+}
+document.getElementById('reviewDirectoryMore')?.addEventListener('click',reviewDirectoryMore);
