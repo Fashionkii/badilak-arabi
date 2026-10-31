@@ -101,7 +101,7 @@ function setPageHead(html,page){
 function write(file,html){fs.mkdirSync(path.dirname(path.join(out,file)),{recursive:true});fs.writeFileSync(path.join(out,file),html);}
 const editorial=context.badilakEditorial;
 const editorialCard=(row,options)=>context.editorialCardMarkup(row,options);
-const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map((id,i)=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{feature:i===0,image:i===0||row.type==='news'});}).join('')}</div></section>`;
+const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map(id=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{image:true});}).join('')}</div></section>`;
 const paths=vm.runInContext('discoveryPaths',context);
 const source=fs.readFileSync(path.join(root,'index.html'),'utf8').replace('<!-- HOME_EDITORIAL -->',homeEditorial).replace('<!-- DISCOVERY_PATH_OPTIONS -->',Object.entries(paths).map(([id,p])=>`<option value="${id}">${escape(p.name)}</option>`).join('')).replace(/<time data-review-resource="([^"]+)">[^<]*<\/time>/g,(_,id)=>{const x=items.find(x=>x.id===id);if(!x?.reviewed)throw new Error('Missing review date: '+id);return `<time data-review-resource="${id}">آخر مراجعة للمورد: ${escape(x.reviewed)}</time>`;});
 // Standalone routes reuse the site's header, footer, fonts and detail renderer.
@@ -124,6 +124,7 @@ write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
 // Review controls exist only on isolated preview deployments, never production.
 if(process.env.VERCEL_ENV==='preview'){
  write('lab/ui-review.html',fs.readFileSync(path.join(root,'preview/ui-review.html'),'utf8'));
+ write('lab/screenshot-checks.js',fs.readFileSync(path.join(root,'preview/screenshot-checks.js'),'utf8'));
 }
 // One editorial hub. /news is the same hub with the news filter selected.
 const editorialNames=vm.runInContext('editorialCategories',context);

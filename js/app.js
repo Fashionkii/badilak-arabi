@@ -19,12 +19,23 @@ function directoryBatchSize(){
  const broad=filter==='all'&&discoveryPath==='all'&&discoveryPurpose==='all'&&discoveryType==='all'&&discoveryField==='all'&&!specific;
  return broad?18:specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
-// Stable topic/name order. Familiar-service rotation on the homepage is independent.
+// Broad entry examples explain different tasks, without quality or paid ranking.
+// Category/search/path views keep their own relevance and alphabetical order.
 const discoveryCategoryOrder=['work','learn','tech','create','culture','shopping'];
+const discoveryPreviewIds={
+ work:['salla','daftra','khamsat-blog'],
+ learn:['edraak','zamerican','shamaa'],
+ tech:['karnak','aamenn','hudhud'],
+ create:['arabicdesign','munsit','makram'],
+ culture:['abjjad','thmanyah','gravity'],
+ shopping:['noon','opensooq','fresh']
+};
 function discoveryPrimaryCategory(e){return e.directory?.cat||e.learningContexts?.[0]?.[0]||'learn';}
 function orderDirectoryDiscoveryCards(list,search){
  if(search)return list;
- return list.slice().sort((a,b)=>discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(a))-discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(b))||(a.directory?.name||a.learning.name).localeCompare(b.directory?.name||b.learning.name,'ar')||a.id.localeCompare(b.id));
+ const preview=filter==='all'&&subfilter==='all'&&discoveryPath==='all'&&discoveryPurpose==='all'&&discoveryType==='all'&&discoveryField==='all'&&!countryFilter&&!originFilter;
+ const rank=e=>{const i=discoveryPreviewIds[discoveryPrimaryCategory(e)]?.indexOf(e.id)??-1;return preview&&i>=0?i:Infinity;};
+ return list.slice().sort((a,b)=>discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(a))-discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(b))||rank(a)-rank(b)||(a.directory?.name||a.learning.name).localeCompare(b.directory?.name||b.learning.name,'ar')||a.id.localeCompare(b.id));
 }
 function beginDirectoryDiscoveryVisit(){} // Compatibility for existing navigation/history calls.
 window.badilakDirectoryRotation={capture:()=>null,restore(){},enter:beginDirectoryDiscoveryVisit};
@@ -69,6 +80,10 @@ function updateDirectoryRefineUI(){
  if(originFilter)bits.push(`<span class="active-filter-pill"><bdi>من ${originContextLabel(originFilter)}</bdi></span>`);
  if(filter!=='all')bits.push(`<span class="active-filter-pill"><bdi>${categoryLabel(filter)}</bdi></span>`);
  if(subfilter!=='all')bits.push(`<span class="active-filter-pill"><bdi>${subcategoryLabel(filter,subfilter)}</bdi></span>`);
+ if(discoveryPaths[discoveryPath])bits.push(`<span class="active-filter-pill">${discoveryEscape(discoveryPaths[discoveryPath].name)}</span>`);
+ if(discoveryPurpose!=='all')bits.push(`<span class="active-filter-pill">${discoveryPurpose==='learn'?'أتعلّم وأطبّق':'أستخدم وأنجز'}</span>`);
+ if(discoveryType!=='all')bits.push(`<span class="active-filter-pill">${discoveryEscape(discoveryTypeNames[discoveryType])}</span>`);
+ if(discoveryField!=='all')bits.push(`<span class="active-filter-pill">${discoveryEscape(discoveryFieldNames[discoveryField])}</span>`);
  const q=document.getElementById('searchInput')?.value.trim()||'';
  if(q)bits.push(`<span class="active-filter-pill search-pill"><bdi>بحث: ${q.replace(/[<>&"]/g,'')}</bdi></span>`);
  const contextWrap=root.closest('.directory-active-context');
@@ -376,7 +391,8 @@ function updateDirectoryContinue(){
  }else{
    actions=[[categoryLabel('tech'),"openDiscoveryGroup('tech','all')"],[categoryLabel('work'),"openDiscoveryGroup('work','all')"],[categoryLabel('learn'),"openDiscoveryGroup('learn','all')"]];
  }
- root.innerHTML=sectionContinueMarkup('تابع من نفس المسار','إذا كنت ما زلت تبحث، جرّب أحد المسارات القريبة.',actions.slice(0,3));
+ const general=filter==='all'&&!originFilter&&!countryFilter&&!q&&discoveryPurpose==='all';
+ root.innerHTML=sectionContinueMarkup(general?'استكشف مجالًا آخر':'تابع الاكتشاف',general?'تصفّح الخيارات ومصادر التعلّم في المجال الذي يهمك.':'إذا كنت ما زلت تبحث، جرّب أحد المسارات القريبة.',actions.slice(0,3));
 }
 function updateLearningContinue(){
  const root=document.getElementById('learningContinue');if(!root)return;
@@ -475,6 +491,8 @@ function renderCards(){
  document.getElementById('stateLine').textContent=`نعرض ${Math.min(shown.length,list.length)} من ${list.length} بطاقة${context.length?' · '+context.join(' · '):' · كل الاكتشافات'}`;
  const root=document.getElementById('catalogGrid');
  root.classList.toggle('is-grouped',!!shownGroups);
+ const orderNote=document.getElementById('discoveryOrderNote');
+ if(orderNote)orderNote.textContent=q?'النتائج مرتبة بحسب مطابقة البحث.':shownGroups&&discoveryPath==='all'?'أمثلة متنوعة لكل مجال، ثم بقية الموارد أبجديًا؛ الظهور هنا ليس تقييمًا أو إعلانًا مدفوعًا.':'الموارد مرتبة أبجديًا داخل كل مجموعة؛ الترتيب ليس تقييمًا للجودة.';
  const more=document.getElementById('directoryMore');
  if(!list.length){
    root.innerHTML='<div class="empty">لم تظهر نتائج بهذه العبارة ضمن التصفية الحالية. جرّب كلمة أخرى أو اعرض الكل. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
@@ -1297,6 +1315,7 @@ function openCountryDirectory(code,country){
 // Homepage: two different datasets with explicitly different meanings.
 // Counts use the same combined discovery entries as the destination; observatory values come
 // from WIPO GII 2026, never from a homemade cross-metric average.
+function cardCountNoun(count){return count%100>=3&&count%100<=10?'بطاقات':'بطاقة';}
 function renderHomeCountryOverview(){
  const summary=document.getElementById('homeInventorySummary');
  const top=document.getElementById('homeCountryTop3');
@@ -1311,9 +1330,9 @@ function renderHomeCountryOverview(){
  })).filter(item=>item.count>0).sort((a,b)=>b.count-a.count||a.priority-b.priority).slice(0,6);
  summary.innerHTML=`<span><b>${discoveryIndex.length}</b> بطاقة لأدوات ومصادر تعلّم</span><span><b>${totalArab}</b> منها مرتبطة بدول عربية بحسب بياناتنا</span>`;
  top.innerHTML=topRows.map(({code,name,count})=>`
-  <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} بطاقة مرتبطة بـ${name} في اكتشف">
+  <button class="home-country-entry" type="button" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض ${count} ${cardCountNoun(count)} مرتبطة بـ${name} في اكتشف">
    <span class="home-country-identity"><img src="/images/flags/${code}.png" width="28" height="19" alt=""><strong>${name}</strong></span>
-   <span class="home-country-count">${count} <small>بطاقة</small></span>
+   <span class="home-country-count">${count} <small>${cardCountNoun(count)}</small></span>
    <span class="home-country-go" aria-hidden="true">↖</span>
   </button>`).join('');
  const ten=[...arabProgressData.innovation.rows].sort((a,b)=>a[2]-b[2]).slice(0,10);
