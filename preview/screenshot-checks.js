@@ -65,3 +65,45 @@ async function reviewDirectoryMore(){
  output.textContent=JSON.stringify({test:'loadMore',status:after.cards>before.cards&&after.uniqueIds===after.cards&&after.idsMissing===0?'MEASURED_INCREASE_NO_DUPLICATES':'FAILED_CHECK',before,after,added:after.cards-before.cards},null,2);
 }
 document.getElementById('reviewDirectoryMore')?.addEventListener('click',reviewDirectoryMore);
+
+
+/* Real cross-document return test: follow an actual directory guide link. */
+async function reviewSmartReturn(){
+ const report={test:'smartReturn',status:'STARTING'};
+ const write=()=>output.textContent=JSON.stringify(report,null,2);
+ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+ const nextLoad=action=>new Promise((resolve,reject)=>{
+  let done=false;const finish=()=>{if(done)return;done=true;clearTimeout(t);frame.removeEventListener('load',finish);resolve();};
+  const t=setTimeout(()=>{if(done)return;done=true;frame.removeEventListener('load',finish);reject(new Error('Frame navigation timed out'));},12000);
+  frame.addEventListener('load',finish);action();
+ });
+ try{
+  let d=frame.contentDocument,w=frame.contentWindow;
+  if(!d.querySelector('#directory'))throw Error('Directory not present');
+  w.badilakJourney?.show?.('directory');
+  await settle();
+  const input=d.getElementById('searchInput');
+  if(!input)throw Error('Search input missing');
+  input.value='دفترة';input.dispatchEvent(new w.Event('input',{bubbles:true}));await settle();
+  const visible=()=>[...d.querySelectorAll('.unified-resource-card')].filter(e=>!!e.getClientRects().length);
+  report.before={path:w.location.pathname,hash:w.location.hash,search:input.value,cards:visible().length,stateLine:d.getElementById('stateLine')?.textContent?.trim()};
+  const link=d.querySelector('.unified-resource-card[data-item-id="daftra"] a.card-read-link[href^="/guides/"]')||d.querySelector('.unified-resource-card a.card-read-link[href^="/guides/"]');
+  if(!link)throw Error('No internal guide link inside a directory resource card');
+  report.articleLink=link.getAttribute('href');
+  await nextLoad(()=>link.click());await pause(450);
+  d=frame.contentDocument;w=frame.contentWindow;
+  const back=d.querySelector('#badilakNavMemory .badilak-smart-back');
+  let stackLength=null,mostRecentSearch=null;
+  try{const stack=JSON.parse(w.sessionStorage.getItem('badilak_nav_stack_v1')||'[]');stackLength=stack.length;mostRecentSearch=stack[stack.length-1]?.discovery?.search||null;}catch{}
+  report.article={path:w.location.pathname,smartBackVisible:!!back,stackLength,mostRecentSearch};
+  if(!back){report.status='FAIL_NO_SMART_BACK';write();return;}
+  await nextLoad(()=>back.click());await pause(450);
+  d=frame.contentDocument;w=frame.contentWindow;await settle();
+  const search=d.getElementById('searchInput')?.value||'';
+  const cards=[...d.querySelectorAll('.unified-resource-card')].filter(e=>!!e.getClientRects().length);
+  report.restored={path:w.location.pathname,hash:w.location.hash,search,cards:cards.length,stateLine:d.getElementById('stateLine')?.textContent?.trim()||null};
+  report.status=search==='دفترة'&&cards.length===report.before.cards?'PASS_SEARCH_RESTORED':'FAIL_SEARCH_NOT_RESTORED';
+ }catch(error){report.status='TEST_ERROR';report.error=String(error);}
+ write();
+}
+document.getElementById('reviewSmartReturn')?.addEventListener('click',reviewSmartReturn);
