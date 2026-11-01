@@ -33,6 +33,7 @@ for(const file of articleFiles){
  const body=s=>withOriginalArticleMediaOrder(s.match(/<body[\s\S]*<\/body>/)[0])
   .replace(/<nav class="toplinks"[^>]*>[\s\S]*?<\/nav>/,'<!-- shared primary navigation -->')
   .replace(/<!-- EDITORIAL_JOURNEY_START -->[\s\S]*?<!-- EDITORIAL_JOURNEY_END -->/g,'')
+  .replace('<body class="cosmic-theme taste-editorial">','<body>')
   .replace('<body class="cosmic-theme">','<body>')
   .replace('<picture><img class="cosmic-logo" src="/images/brand/wordmark-header-20261016-dots-320.webp" srcset="/images/brand/wordmark-header-20261016-dots-320.webp 320w, /images/brand/wordmark-header-20261016-dots-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="1829" height="408" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
   .replace('<picture><img class="cosmic-logo" src="/images/brand/approved-logo-20261014-320.webp" width="1678" height="937" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
