@@ -384,6 +384,10 @@ body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-identity{g
 body.taste-editorial.cosmic-theme.motion-lab .detail-overview .country-badge-slot{justify-content:center!important}
 /* The older combined dialog rule includes an ID and otherwise wins by specificity. */
 body.taste-editorial.cosmic-theme.motion-lab #content .standalone-detail{border:0!important;border-radius:0!important}
+body.taste-editorial.cosmic-theme.motion-lab #detailModal .modal-card{border-radius:4px!important}
+body.taste-editorial.cosmic-theme.motion-lab .modal-head{display:grid!important;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px}
+body.taste-editorial.cosmic-theme.motion-lab .modal-head>strong{grid-column:2;grid-row:1;text-align:center}
+body.taste-editorial.cosmic-theme.motion-lab .modal-head>button{grid-column:3;grid-row:1}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex :is(.arab-tab-copy b,.arab-more-card b,.arab-metric-title-wrap strong){text-align:center!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex .arab-metric-title-wrap strong{flex:1}
 
@@ -415,7 +419,16 @@ body.taste-editorial.cosmic-theme .editorial-action{padding-top:8px;min-height:4
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory #journeyResultTitle{grid-column:1;width:100%}
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .journey-back{grid-column:1}
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid)>.unified-resource-card{padding:16px!important}
- body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-identity{grid-template-columns:40px minmax(0,1fr) 40px;gap:4px 8px!important}
+ body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-identity{grid-template-columns:minmax(0,1fr);gap:8px!important}
+ body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-logo{grid-column:1;grid-row:1}
+ body.taste-editorial.cosmic-theme.motion-lab .detail-overview .quick-title{grid-column:1;grid-row:2;width:100%!important}
+ body.taste-editorial.cosmic-theme.motion-lab .detail-overview .country-badge-slot{grid-column:1;grid-row:3}
  body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-logo{width:40px!important;min-width:40px!important;height:40px!important}
  body.taste-editorial.cosmic-theme.motion-lab .detail-overview .quick-title{font-size:26px!important}
+}
+
+@media(max-width:360px){
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .item-identity{grid-template-columns:32px minmax(0,1fr) 32px;gap:6px!important}
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .item-logo{width:32px!important;height:32px!important;min-width:32px!important;flex-basis:32px!important}
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .item-name{font-size:19px!important;line-height:1.65!important}
 }
