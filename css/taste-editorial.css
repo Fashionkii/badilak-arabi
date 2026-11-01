@@ -207,6 +207,7 @@ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .discov
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory #directoryRefineSearch{margin-top:0!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .directory-search-label{text-align:start!important;color:var(--te-ink)!important;font-size:18px!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory #directoryRefineSearch .search{border:1px solid var(--te-line)!important;border-radius:4px!important;background:#fff!important;max-width:none!important;min-height:56px!important;margin:0!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory #directoryRefineSearch .search{box-shadow:none!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .search input{border:0!important;border-radius:4px!important;background:none!important;min-height:56px!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.discovery-primary-controls,.discovery-path-control,.discovery-purpose){justify-content:flex-start!important;max-width:none!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.discovery-path-control label,.learning-refinements label,.directory-refine-label,.discovery-refinements summary,.discovery-path-description,.discovery-order-note,#stateLine,.origin-fit-note,.catalog-group-head h3){color:var(--te-muted)!important;text-align:start!important}
