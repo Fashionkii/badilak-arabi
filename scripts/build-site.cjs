@@ -80,6 +80,10 @@ function prepare(html){
  });
  // Shared visual layer only: source content, routes, and runtime remain intact.
  html=html.replace(/<body class="([^"]*)"/, '<body class="$1 taste-editorial"');
+ // Light-surface identity: shared wordmark only, leaving social art and favicons intact.
+ html=html.replace(/wordmark-(?:header|main)-20261016-dots-(320|640|1080)\.webp/g,(_,size)=>'wordmark-light-20261101-'+(size==='320'?'320':'640')+'.webp')
+  .replace(/wordmark-light-20261101-640\.webp 640w, \/images\/brand\/wordmark-light-20261101-640\.webp 1080w/g,'wordmark-light-20261101-320.webp 320w, /images/brand/wordmark-light-20261101-640.webp 640w')
+  .replace(/(<img[^>]*class="cosmic-logo"[^>]*?)width="(?:1829|864)" height="(?:408|505)"/g,'$1width="640" height="207"');
  return html;
 }
 function setPageHead(html,page){

@@ -336,3 +336,31 @@ body.taste-editorial .feedback-dialog input[type="url"]{direction:ltr;text-align
  body.taste-editorial.cosmic-theme.motion-lab .detail-overview .quick-purpose{font-size:17px!important}
  body.taste-editorial .guide-shell .quick-answer p{font-size:17px!important;line-height:1.95!important}
 }
+
+/* Light identity and visible hierarchy, approved after reviewing the light canvas. */
+body.taste-editorial.cosmic-theme{--te-line:#b7c8be;--te-surface:#fff;--sp-line:var(--te-line);--reading-line:var(--te-line)}
+body.taste-editorial.cosmic-theme :is(.brand,.brand-lockup){background:transparent!important;padding:0!important}
+body.taste-editorial.cosmic-theme :is(.brand,.brand-lockup) img{width:160px!important;height:auto!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-heading h1.art-title.art-title--brand{width:280px!important;background:transparent!important;padding:0!important}
+body.taste-editorial.cosmic-theme #start .origin-explorer,
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .discovery-controls{border:1px solid var(--te-line)!important}
+body.taste-editorial.cosmic-theme #start .home-route{background:var(--te-surface)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;padding:20px!important}
+body.taste-editorial.cosmic-theme #start .home-overview-panel{background:var(--te-surface)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;padding:24px!important}
+body.taste-editorial.cosmic-theme :is(.editorial-card,.news-card){background:var(--te-surface)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;overflow:hidden}
+body.taste-editorial.cosmic-theme .editorial-card-body{padding:20px!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid)>.item,
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab :is(.guide,.monitor-card,.discovery-card){background:var(--te-surface)!important;border:1px solid var(--te-line)!important}
+body.taste-editorial.cosmic-theme :is(.editorial-card,.news-card):hover,
+body.taste-editorial.cosmic-theme #start .home-route:hover,
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid)>.item:hover{border-color:var(--te-accent)!important}
+body.taste-editorial.cosmic-theme .reading-controls{background:var(--te-tint)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;padding:20px!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex :is(.arab-observer-main,.arab-observer-insight){background:var(--te-surface)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;padding:24px!important;min-width:0}
+body.taste-editorial.cosmic-theme.motion-lab :is(.detail-fact,.decision-panel){border:1px solid var(--te-line)!important}
+@media(max-width:767px){
+ body.taste-editorial.cosmic-theme :is(.brand,.brand-lockup) img{width:140px!important}
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-heading h1.art-title.art-title--brand{width:220px!important}
+ body.taste-editorial.cosmic-theme #start :is(.home-route,.home-overview-panel),
+ body.taste-editorial.cosmic-theme .editorial-card-body,
+ body.taste-editorial.cosmic-theme .reading-controls,
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex :is(.arab-observer-main,.arab-observer-insight){padding:16px!important}
+}
