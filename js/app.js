@@ -19,7 +19,7 @@ function directoryBatchSize(){
  const broad=filter==='all'&&discoveryPath==='all'&&discoveryPurpose==='all'&&discoveryType==='all'&&discoveryField==='all'&&!specific;
  return broad?18:specific?(mobile?4:6):(mobile?6:tablet?8:12);
 }
-// Broad entry examples explain different tasks, without quality or paid ranking.
+// Keep two familiar examples in each broad group; refresh its third slot per visit.
 // Category/search/path views keep their own relevance and alphabetical order.
 const discoveryCategoryOrder=['work','learn','tech','create','culture','shopping'];
 const discoveryPreviewIds={
@@ -31,14 +31,42 @@ const discoveryPreviewIds={
  shopping:['noon','opensooq','fresh']
 };
 function discoveryPrimaryCategory(e){return e.directory?.cat||e.learningContexts?.[0]?.[0]||'learn';}
+const directoryRotationKey='badilak_directory_rotation_v2';
+function validDirectoryVisit(state){return state&&Number.isSafeInteger(state.seed)&&state.seed>=0&&state.seed<4294967296;}
+function directoryVisitState(){
+ try{const state=JSON.parse(sessionStorage.getItem(directoryRotationKey));if(validDirectoryVisit(state))return {seed:state.seed};}catch{}
+ return {seed:0};
+}
+let directoryVisit=directoryVisitState();
+function broadDirectoryDiscovery(search){return !search&&filter==='all'&&subfilter==='all'&&discoveryPath==='all'&&discoveryPurpose==='all'&&discoveryType==='all'&&discoveryField==='all'&&!countryFilter&&!originFilter;}
 function orderDirectoryDiscoveryCards(list,search){
  if(search)return list;
- const preview=filter==='all'&&subfilter==='all'&&discoveryPath==='all'&&discoveryPurpose==='all'&&discoveryType==='all'&&discoveryField==='all'&&!countryFilter&&!originFilter;
+ const preview=broadDirectoryDiscovery(search);
  const rank=e=>{const i=discoveryPreviewIds[discoveryPrimaryCategory(e)]?.indexOf(e.id)??-1;return preview&&i>=0?i:Infinity;};
- return list.slice().sort((a,b)=>discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(a))-discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(b))||rank(a)-rank(b)||(a.directory?.name||a.learning.name).localeCompare(b.directory?.name||b.learning.name,'ar')||a.id.localeCompare(b.id));
+ const byName=(a,b)=>(a.directory?.name||a.learning.name).localeCompare(b.directory?.name||b.learning.name,'ar')||a.id.localeCompare(b.id);
+ const ordered=list.slice().sort((a,b)=>discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(a))-discoveryCategoryOrder.indexOf(discoveryPrimaryCategory(b))||rank(a)-rank(b)||byName(a,b));
+ if(!preview)return ordered;
+ return discoveryCategoryOrder.flatMap(cat=>{
+  const group=ordered.filter(e=>discoveryPrimaryCategory(e)===cat);
+  if(group.length<=3)return group;
+  const pool=group.slice(2),chosen=directoryVisit.seed%pool.length;
+  return [...group.slice(0,2),pool[chosen],...pool.filter((_,i)=>i!==chosen).sort(byName)];
+ });
 }
-function beginDirectoryDiscoveryVisit(){} // Compatibility for existing navigation/history calls.
-window.badilakDirectoryRotation={capture:()=>null,restore(){},enter:beginDirectoryDiscoveryVisit};
+function beginDirectoryDiscoveryVisit(render=true){
+ if(!broadDirectoryDiscovery((document.getElementById('searchInput')?.value||'').trim()))return;
+ directoryVisit={seed:(directoryVisit.seed+1)>>>0};
+ try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit));}catch{}
+ if(render&&initializedJourneyPanels.has('directory')){resetDirectoryLimit();renderCards();}
+}
+window.badilakDirectoryRotation={
+ capture:()=>({...directoryVisit}),enter:beginDirectoryDiscoveryVisit,
+ restore(state){
+  if(!validDirectoryVisit(state))return;
+  directoryVisit={seed:state.seed};
+  try{sessionStorage.setItem(directoryRotationKey,JSON.stringify(directoryVisit));}catch{}
+ }
+};
 function discoveryResultGroups(list,q){
  if(q||discoveryPurpose!=='all'||discoveryType!=='all'||discoveryField!=='all'||countryFilter||originFilter)return null;
  if(discoveryPath!=='all')return [{id:'use',name:'خيارات تساعدك على التنفيذ',entries:list.filter(e=>!e.learn||e.use)},{id:'learn',name:'تعلّم ما يساعدك على التطبيق',entries:list.filter(e=>e.learn&&!e.use)}].filter(g=>g.entries.length);
@@ -492,7 +520,7 @@ function renderCards(){
  const root=document.getElementById('catalogGrid');
  root.classList.toggle('is-grouped',!!shownGroups);
  const orderNote=document.getElementById('discoveryOrderNote');
- if(orderNote)orderNote.textContent=q?'النتائج مرتبة بحسب مطابقة البحث.':shownGroups&&discoveryPath==='all'?'أمثلة متنوعة لكل مجال، ثم بقية الموارد أبجديًا؛ الظهور هنا ليس تقييمًا أو إعلانًا مدفوعًا.':'الموارد مرتبة أبجديًا داخل كل مجموعة؛ الترتيب ليس تقييمًا للجودة.';
+ if(orderNote)orderNote.textContent=q?'النتائج مرتبة بحسب مطابقة البحث.':shownGroups&&discoveryPath==='all'?'مثالان ثابتان ومثال يتجدد عند زيارة جديدة لكل مجال، ثم بقية الموارد أبجديًا؛ الظهور ليس تقييمًا أو إعلانًا مدفوعًا.':'الموارد مرتبة أبجديًا داخل كل مجموعة؛ الترتيب ليس تقييمًا للجودة.';
  const more=document.getElementById('directoryMore');
  if(!list.length){
    root.innerHTML='<div class="empty">لم تظهر نتائج بهذه العبارة ضمن التصفية الحالية. جرّب كلمة أخرى أو اعرض الكل. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
