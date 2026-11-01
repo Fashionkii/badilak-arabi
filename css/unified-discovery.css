@@ -70,7 +70,9 @@ body.cosmic-theme.guided-discovery #directory .unified-resource-card .card-summa
 body.cosmic-theme.guided-discovery #directory .unified-resource-card .card-purpose{padding:0!important}
 body.cosmic-theme.guided-discovery #directory .unified-resource-card .card-primary-actions{margin-top:auto}
 @supports(grid-template-rows:subgrid){
- body.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,#catalogGrid)>.unified-resource-card{display:grid!important;grid-template-rows:subgrid;grid-row:span 4;row-gap:12px}
+ /* The older flat catalog sets grid-row:auto!important. Match that priority so
+    all four card regions retain their own row instead of overlapping. */
+ body.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,#catalogGrid)>.unified-resource-card{display:grid!important;grid-template-rows:subgrid;grid-row:span 4!important;row-gap:12px}
 }
 .paired-resource-details{margin:24px 0;padding-top:16px;border-top:1px solid var(--sp-line)}
 .paired-resource-details>summary{cursor:pointer;min-height:44px;font-size:16px;line-height:1.8;font-weight:700;color:var(--sp-forest)}
