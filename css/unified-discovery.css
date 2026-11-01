@@ -195,7 +195,7 @@ body.cosmic-theme.guided-discovery #directory .local-nav{margin-bottom:8px!impor
 .discovery-controls{padding:16px 20px;border:1px solid #45645d;border-radius:18px;background:#0b292be6;margin-bottom:12px}
 body.cosmic-theme.guided-discovery #directory .discovery-controls #directoryRefineSearch{margin-block:0 12px!important}
 body.cosmic-theme.guided-discovery #directory .discovery-controls .directory-search-label{text-align:start!important;margin-bottom:4px}
-body.cosmic-theme.guided-discovery #directory .discovery-controls .search{max-width:none!important;min-height:48px!important}
+body.cosmic-theme.guided-discovery #directory .discovery-controls #directoryRefineSearch .search{max-width:none!important;width:100%;min-height:48px!important}
 .discovery-controls .discovery-primary-controls{max-width:none;margin:0 0 8px;gap:8px 16px}
 body.cosmic-theme .discovery-controls .discovery-path-control{gap:8px}
 .discovery-controls .discovery-path-control select{min-height:44px;padding-block:8px}

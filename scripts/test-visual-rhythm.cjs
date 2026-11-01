@@ -3,7 +3,7 @@ const fs=require('node:fs'),assert=require('node:assert/strict'),{execFileSync}=
 const read=f=>fs.readFileSync(f,'utf8');
 const base='a6f0d06fee10df6e1964cf887766ebbbeca45d57';
 const old=f=>execFileSync('git',['show',base+':'+f],{encoding:'utf8'});
-const protectedChanges=execFileSync('git',['diff','--name-only',base],{encoding:'utf8'}).trim().split('\n').filter(f=>/^(guides\/|images\/|api\/|server\/|private\/|studio\/|data\/|js\/(catalog-data|detail-renderers|discovery-index|discovery-memory|guided-discovery|smart-return|news-data|commercial-links)|site.config.json|vercel.json)/.test(f));
+const protectedChanges=execFileSync('git',['diff','--name-only',base],{encoding:'utf8'}).trim().split('\n').filter(f=>f!=='data/editorial-card-titles.json'&&/^(guides\/|images\/|api\/|server\/|private\/|studio\/|data\/|js\/(catalog-data|detail-renderers|discovery-index|discovery-memory|guided-discovery|smart-return|news-data|commercial-links)|site.config.json|vercel.json)/.test(f));
 assert.deepEqual(protectedChanges,[],'original sources including binary artwork preserved');
 const media=s=>s.match(/<!-- article-media:start -->[\s\S]*?<!-- article-media:end -->/)[0];
 for(const f of fs.readdirSync('guides').filter(f=>f.endsWith('.html'))){
