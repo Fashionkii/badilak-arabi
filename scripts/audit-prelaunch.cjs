@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutRetiredShelf}=require('./audit-helpers.cjs');
+const {withoutRetiredShelf,withOriginalArticleMediaOrder}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
 const canonical=new Set();
@@ -30,7 +30,7 @@ for(const file of files){
 const articleFiles=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.html'));
 for(const file of articleFiles){
  // The approved global identity replaces only this exact header mark and body class.
- const body=s=>s.match(/<body[\s\S]*<\/body>/)[0]
+ const body=s=>withOriginalArticleMediaOrder(s.match(/<body[\s\S]*<\/body>/)[0])
   .replace(/<nav class="toplinks"[^>]*>[\s\S]*?<\/nav>/,'<!-- shared primary navigation -->')
   .replace(/<!-- EDITORIAL_JOURNEY_START -->[\s\S]*?<!-- EDITORIAL_JOURNEY_END -->/g,'')
   .replace('<body class="cosmic-theme">','<body>')

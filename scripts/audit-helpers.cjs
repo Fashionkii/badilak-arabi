@@ -54,3 +54,12 @@ exports.markupMeaning=html=>({
  words:html.replace(/<[^>]*>/g,' ').trim().split(/\s+/).filter(Boolean).sort(),
  attrs:[...html.matchAll(/(?:href|src|onclick|target|rel)="([^"]*)"/g)].map(x=>x[0]).sort()
 });
+
+// Reverse only the reviewed cover/summary relocation for exact source preservation.
+exports.withOriginalArticleMediaOrder=html=>{
+ const cover=html.match(/<!-- article-media:start -->[\s\S]*?<!-- article-media:end -->/);
+ if(cover)html=html.replace(cover[0],'').replace(/(<section class="hero">[\s\S]*?<\/section>)/,(_,hero)=>hero+cover[0]);
+ const academy=html.match(/<section class="quick-answer" id="step-1" aria-label="خلاصة الدليل">[\s\S]*?<\/section>/);
+ if(academy)html=html.replace(academy[0],'').replace('<article>','<article>'+academy[0].replace('<section class="quick-answer" id="step-1" aria-label="خلاصة الدليل">','<section id="step-1">'));
+ return html;
+};

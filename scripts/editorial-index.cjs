@@ -5,6 +5,7 @@ const plain=s=>s.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&quot;/g,
 module.exports=function(root,news){
  const relations=JSON.parse(fs.readFileSync(path.join(root,'data/editorial-relations.json'),'utf8'));
  const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json'),'utf8'));
+ const cardTitles=JSON.parse(fs.readFileSync(path.join(root,'data/editorial-card-titles.json'),'utf8'));
  const rows=Object.entries(relations.guides).map(([id,relation])=>{
   const html=fs.readFileSync(path.join(root,'guides',id+'.html'),'utf8');
   const schema=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
@@ -12,5 +13,9 @@ module.exports=function(root,news){
   return {id,type:'article',url:'/guides/'+id,title:plain(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1]),summary:plain(schema.description),updated:schema.dateModified||null,image:'/images/articles/'+id+'-thumb.webp',imageAlt:img?.alt||'',...relation};
  });
  for(const n of news.slice().sort((a,b)=>b.eventDate.localeCompare(a.eventDate)||a.id.localeCompare(b.id)))rows.push({id:n.id,type:'news',url:'/news/'+n.id,title:n.title,summary:n.change,category:n.category||'tech',resources:n.related?[n.related]:[],paths:n.paths||(n.path?[n.path]:[]),eventKind:n.eventKind||'الحدث',image:'/images/articles/'+n.imageArticle+'-thumb.webp',imageAlt:media.articles[n.imageArticle].alt,eventDate:n.eventDate,published:n.published,updated:n.reviewed});
+ for(const row of rows){
+  row.cardTitle=cardTitles[row.type==='news'?'news':'articles'][row.id];
+  if(!row.cardTitle)throw new Error('Missing display title: '+row.id);
+ }
  return {rows,home:relations.home};
 };

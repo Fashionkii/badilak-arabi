@@ -1,6 +1,6 @@
 /* Additive controls in the existing theme; no changes to shared identity or hero. */
 /* Only the eleven edited guides use shorter, directly named source links. */
-[data-content-concise] .source-card{display:block;min-height:44px;padding-block:10px}
+body.cosmic-theme:not(.guided-discovery) [data-content-concise] .source-card{display:block;min-height:44px;padding:10px 14px!important}
 .discovery-purpose{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
 .discovery-purpose button{border:1px solid var(--line,#cad8d1);border-radius:999px;background:transparent;color:inherit;padding:9px 16px;font:inherit;font-size:14px;cursor:pointer;min-height:44px}
 .discovery-purpose [aria-pressed="true"]{background:#173f3d;color:#fffdf8;border-color:#173f3d}
@@ -100,7 +100,9 @@ body.cosmic-theme .editorial-card .editorial-date{font-size:12px;line-height:1.9
 .discovery-editorial[hidden],.editorial-card[hidden],.reading-group[hidden]{display:none!important}
 .editorial-context-grid .editorial-card-body{padding:20px}
 .editorial-context-grid .editorial-card h3{font-size:19px}
-body.cosmic-theme.reading-page .standalone-main{max-width:1180px!important}
+body.cosmic-theme.reading-page .standalone-main{max-width:1180px!important;width:min(1180px,calc(100% - 40px))}
+.reading-page .editorial-card-body{padding:20px;gap:10px}
+.reading-page .editorial-cover{aspect-ratio:2/1}
 .editorial-heading{max-width:740px;margin:16px auto 28px;text-align:center}
 body.cosmic-theme .editorial-heading h1{font-size:clamp(26px,3vw,34px);line-height:1.65;color:var(--sp-paper);margin:8px 0 12px}
 body.cosmic-theme .editorial-heading>p{color:#d6e1d8;font-size:16px;line-height:1.9;margin:0}
@@ -185,3 +187,41 @@ body.cosmic-theme.guided-discovery #directory .load-more-btn{font-size:16px!impo
 body.cosmic-theme.guided-discovery #directory .load-more-btn small{font-size:14px!important;line-height:1.8!important;color:#fffdf7!important;opacity:1!important}
 body.cosmic-theme.guided-discovery :is(.commercial-demo-wrap,.ad-demo-wrap){margin-block:32px!important}
 body.cosmic-theme.guided-discovery :is(.commercial-demo-wrap,.ad-demo-wrap)+:is(.commercial-demo-wrap,.ad-demo-wrap){padding-top:24px;border-top:1px solid #45645d}
+
+/* Restore a compact rhythm within each surface; keep the current visual identity. */
+body.cosmic-theme.guided-discovery #directory .journey-result-head{flex-direction:row;justify-content:space-between;flex-wrap:wrap;gap:8px 20px!important;align-items:center!important;text-align:start;margin-bottom:4px!important}
+body.cosmic-theme.guided-discovery #directory #journeyResultTitle{text-align:start!important}
+body.cosmic-theme.guided-discovery #directory .local-nav{margin-bottom:8px!important}
+.discovery-controls{padding:16px 20px;border:1px solid #45645d;border-radius:18px;background:#0b292be6;margin-bottom:12px}
+body.cosmic-theme.guided-discovery #directory .discovery-controls #directoryRefineSearch{margin-block:0 12px!important}
+body.cosmic-theme.guided-discovery #directory .discovery-controls .directory-search-label{text-align:start!important;margin-bottom:4px}
+body.cosmic-theme.guided-discovery #directory .discovery-controls .search{max-width:none!important;min-height:48px!important}
+.discovery-controls .discovery-primary-controls{max-width:none;margin:0 0 8px;gap:8px 16px}
+body.cosmic-theme .discovery-controls .discovery-path-control{gap:8px}
+.discovery-controls .discovery-path-control select{min-height:44px;padding-block:8px}
+.discovery-controls .discovery-purpose{gap:6px}
+.discovery-controls .discovery-purpose button{padding-block:8px}
+.discovery-controls .discovery-refinements{max-width:none;margin-bottom:0;border-bottom:0}
+.discovery-controls .discovery-refinements>summary{min-height:44px;padding-block:6px}
+body.cosmic-theme.guided-discovery #directory .discovery-order-note{max-width:none;text-align:start;margin:4px 0 12px}
+body.cosmic-theme.guided-discovery #directory #stateLine{margin-block:8px!important}
+.catalog-group{margin-block:20px 32px}
+body.cosmic-theme:not(.guided-discovery):has(.guide-shell) .hero{padding:28px 0 20px!important}
+body.cosmic-theme:not(.guided-discovery) .quick-answer{padding:22px!important}
+body.cosmic-theme:not(.guided-discovery) .guide-shell>.article-cover{margin:12px 0 24px}
+body.cosmic-theme:not(.guided-discovery) .guide-shell>.article-cover>img{max-height:320px}
+body.cosmic-theme:not(.guided-discovery) .jumpbar{padding-block:10px!important}
+body.cosmic-theme.guided-discovery #competitionIndex .competition-head{padding-bottom:16px!important;margin-bottom:16px!important}
+body.cosmic-theme.guided-discovery #competitionIndex :is(.arab-progress-tabs>button,.arab-more-card){min-height:76px!important;padding:12px!important}
+@media(max-width:760px){
+ body.cosmic-theme.reading-page .standalone-main{width:calc(100% - 28px)}
+ .reading-page .editorial-card-body{padding:18px}
+ .discovery-controls{padding:14px}
+ .discovery-controls .discovery-primary-controls{gap:8px}
+ body.cosmic-theme .discovery-controls .discovery-path-control{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;width:100%}
+ .discovery-controls .discovery-path-control label{font-size:14px}
+ .discovery-controls .discovery-purpose{width:100%;justify-content:center}
+ body.cosmic-theme.guided-discovery #directory .journey-result-head{align-items:flex-start!important}
+ body.cosmic-theme.guided-discovery #directory #journeyResultTitle{font-size:24px!important;flex:1 1 100%}
+ body.cosmic-theme:not(.guided-discovery) .quick-answer{padding:18px!important}
+}

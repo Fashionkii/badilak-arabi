@@ -137,7 +137,7 @@ function readingHub(newsOnly=false){
  const page={kind:'reading',title:title+' — بديلك عربي',description,url:origin+route,schema:{'@context':'https://schema.org','@type':'CollectionPage',name:title,url:origin+route,inLanguage:'ar',mainEntity:{'@type':'ItemList',numberOfItems:rows.length,itemListElement:rows.map((r,i)=>({'@type':'ListItem',position:i+1,url:origin+r.url,name:r.title}))}}};
  const groups=Object.entries(editorialNames).map(([id,name])=>{
   const entries=editorial.rows.filter(r=>r.category===id);if(!entries.length)return '';
-  return `<section class="reading-group" data-reading-group="${id}"${newsOnly&&!entries.some(r=>r.type==='news')?' hidden':''}><h2>${name}</h2><div class="editorial-grid">${entries.map(row=>editorialCard(row,{image:true}).replace('<article ',`<article ${newsOnly&&row.type!=='news'?'hidden ':''}`)).join('')}</div></section>`;
+  return `<section class="reading-group" data-reading-group="${id}"${newsOnly&&!entries.some(r=>r.type==='news')?' hidden':''}><h2>${name}</h2><div class="editorial-grid">${entries.map(row=>editorialCard(row,{image:true,grouped:true}).replace('<article ',`<article ${newsOnly&&row.type!=='news'?'hidden ':''}`)).join('')}</div></section>`;
  }).join('');
  const tabs=[['all','الكل'],['article','المقالات'],['news','الأخبار']].map(([id,label])=>`<a href="${id==='news'?'/news':'/guides'+(id==='all'?'':'?type='+id)}" data-reading-type="${id}"${id===(newsOnly?'news':'all')?' aria-current="true"':''}>${label}</a>`).join('');
  const content=fs.readFileSync(path.join(root,'guides.html'),'utf8')
@@ -152,7 +152,18 @@ const guides=fs.readdirSync(path.join(root,'guides')).filter(x=>x.endsWith('.htm
 for(const file of guides){
  const id=file.replace('.html',''),matched=Object.entries(paths).filter(([,p])=>p.guides.includes(id));
  const related=matched.length?`<!-- EDITORIAL_JOURNEY_START --><section class="article-journey" aria-label="خيارات وتعلّم في نفس الموضوع"><h2>استكشف وطبّق</h2><p>تابع إلى الأدوات ومصادر التعلّم المرتبطة بهذا الموضوع.</p><div>${matched.map(([key,p])=>`<a href="/?path=${key}#directory">${escape(p.name)} ←</a>`).join('')}</div></section><!-- EDITORIAL_JOURNEY_END -->`:'';
- write('guides/'+file,prepare(fs.readFileSync(path.join(root,'guides',file),'utf8').replace('</main>',related+'</main>')));
+ // Move the existing credited cover after the summary and its navigation in DOM order.
+ // Source articles, full headlines, text, section IDs and media metadata stay intact.
+ let html=fs.readFileSync(path.join(root,'guides',file),'utf8');
+ const cover=html.match(/<!-- article-media:start -->[\s\S]*?<!-- article-media:end -->/);
+ if(id==='create-online-academy'){
+  const summary=html.match(/<section id="step-1">[\s\S]*?<\/section>/);
+  if(!summary)throw new Error('Missing academy summary');
+  html=html.replace(summary[0],'').replace('<nav class="jumpbar"',summary[0].replace('<section id="step-1">','<section class="quick-answer" id="step-1" aria-label="خلاصة الدليل">')+'<nav class="jumpbar"');
+ }
+ if(!cover||!/<section class="quick-answer"/.test(html)||!/<nav class="jumpbar"/.test(html))throw new Error('Missing article summary/cover: '+file);
+ html=html.replace(cover[0],'').replace(/(<nav class="jumpbar"[\s\S]*?<\/nav>)/,(_,nav)=>nav+cover[0]);
+ write('guides/'+file,prepare(html.replace('</main>',related+'</main>')));
 }
 for(const x of items){
  const page=seo.metadata('/discover/'+x.id,origin);

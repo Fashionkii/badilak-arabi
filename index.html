@@ -192,8 +192,8 @@
 
 <section class="section wrap" id="directory" data-journey-panel="directory">
  <div class="journey-result-head">
-  <button class="journey-back" type="button" onclick="badilakJourney.home()">→ غيّر اختيارك</button>
   <h2 id="journeyResultTitle">أداة تنجز بها، أو مصدر تتعلّم منه</h2>
+  <button class="journey-back" type="button" onclick="badilakJourney.home()">→ غيّر اختيارك</button>
  </div>
  <div class="section-head">
   <div><h2 class="section-title">اكتشف حسب حاجتك</h2></div>
@@ -206,8 +206,7 @@
   </div>
  </div>
  <div class="catalog-shell frame-plain">
-
-
+  <div class="discovery-controls">
   <div class="directory-refine-panel" id="directoryRefineSearch">
    <label class="directory-search-label" for="searchInput">ابحث عن أداة أو مصدر تعلّم</label>
    <div class="search"><span class="search-mark" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="اسم منتج، مهمة، بلد، أو مجال…" oninput="resetDirectoryLimit();updateDirectoryActionLabel();renderCards()"></div>
@@ -253,6 +252,7 @@
   </div>
 
   <div class="directory-results-anchor" id="directoryResultsStart"></div>
+  </div>
   <div class="directory-state" id="stateLine" role="status" aria-live="polite"></div>
   <p id="originFitNote" class="origin-fit-note" hidden>خيارات تؤدي المهمة نفسها أو جزءًا منها؛ ترتيب العرض ليس تقييمًا للأفضل.</p>
   <p class="discovery-order-note" id="discoveryOrderNote">مثالان ثابتان ومثال يتجدد عند زيارة جديدة لكل مجال، ثم بقية الموارد أبجديًا؛ الظهور ليس تقييمًا أو إعلانًا مدفوعًا.</p>

@@ -1,0 +1,36 @@
+{
+  "articles": {
+    "khamsat-fiverr": "خمسات أم Fiverr؟",
+    "mostaql-upwork": "مستقل أم Upwork؟",
+    "wuzzuf-linkedin": "WUZZUF أم LinkedIn للبحث عن وظيفة؟",
+    "business-software": "دفترة أم QuickBooks؟",
+    "payment-gateway": "كيف تختار بوابة دفع عربية؟",
+    "ecommerce-platform": "سلة أم Shopify لمتجرك؟",
+    "create-online-academy": "كيف تختار منصة تعليمية باسمك؟",
+    "arabic-pdf": "PDF وOCR عربي: ماذا تختبر؟",
+    "arabic-ai": "كيف تقارن مساعدًا عربيًا بمساعد عالمي؟",
+    "hudhud-googlemaps": "هدهد أم Google Maps داخل السعودية؟",
+    "almaany-translate": "المعاني أم Google Translate؟",
+    "learning-platform": "منصة تعلّم عربية أم كورس عالمي؟",
+    "arabic-research": "البحث الأكاديمي العربي: من أين تبدأ؟",
+    "islamic-sources": "أين تتحقق من حديث أو تفسير؟",
+    "arabic-design": "أداة تصميم عربية أم Canva؟",
+    "arabic-voice-ai": "صوت عربي: فصيح أم ElevenLabs؟",
+    "munsit-otter": "منصت أم Otter للتسجيلات العربية؟",
+    "reading": "أبجد أم Kindle للقراءة العربية؟",
+    "anghami-spotify": "أنغامي أم Spotify؟",
+    "shopping": "نون أم Amazon؟ قارن العرض نفسه",
+    "arab-progress": "كيف تقرأ مؤشرات المرصد؟"
+  },
+  "news": {
+    "jais-3-release": "إعلان جيس 3 وJais Speech",
+    "arabicai-saudi-azure": "Arabic.AI تعلن شراكة عبر Azure السعودية",
+    "falcon-arabic-models": "Falcon يعلن نماذج للهجة والصوت والمستندات",
+    "karnak-chat-pilot": "كرنك شات: إطلاق تجريبي للفصحى والمصرية",
+    "belmasry-pilot": "بالمصري: إطلاق تجريبي لأدوات الصوت والترجمة",
+    "loghat-pilot": "لغات: تطبيق تجريبي للإنجليزية في مصر",
+    "paymob-partner-onboarding": "Paymob: اتفاق شراكة معتمد قبل ضم التجار",
+    "paymob-dashboard-guide": "دليل لوحة Paymob ومتابعة المدفوعات",
+    "thmanyah-radio-guide": "راديو ثمانية: الاستماع الأساسي والاشتراك"
+  }
+}
