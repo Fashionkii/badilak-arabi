@@ -29,6 +29,13 @@ assert.match(edraak,/onclick="showLearningNote\('edraak-learning'\)"/);assert(!e
 const rows=get('badilakEditorial.rows');assert.equal(rows.length,30);assert.equal(rows.filter(r=>r.type==='article').length,21);
 const newsRows=rows.filter(r=>r.type==='news');
 assert.equal(newsRows.length,9);
+for(const n of get('badilakNews').filter(n=>n.related)){
+ const label=n.eventKind||'الحدث';
+ const expected=`${label}: ${n.eventLabel} · مراجعة المصدر: ${n.reviewLabel}`;
+ const dynamic=vm.runInContext(`relatedNewsMarkup(${JSON.stringify(n.related)})`,c);
+ const detail=read('dist/discover/'+n.related+'.html');
+ for(const [surface,html] of [['dynamic',dynamic],['static',detail]])assert(html.includes(expected),`${surface} resource detail keeps the date meaning for ${n.id}`);
+}
 assert.deepEqual(newsRows.map(r=>r.eventDate),newsRows.map(r=>r.eventDate).sort().reverse(),'News ordered by event/source-update date');
 for(const row of newsRows){
  const html=read('dist'+row.url+'.html');
