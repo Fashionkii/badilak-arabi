@@ -291,12 +291,23 @@ body.taste-editorial .guide-shell .quick-answer :is(h2,p){color:var(--te-ink)!im
 body.taste-editorial .guide-shell :is(table,.table-wrap){max-width:100%}
 body.taste-editorial .guide-shell :is(.table-wrap,.table-scroll){overflow-x:auto}
 
+/* Use one padding layer in the feedback dialog; nested legacy padding narrowed fields. */
+body.taste-editorial.cosmic-theme .feedback-dialog{padding:0!important}
+body.taste-editorial .feedback-dialog form{padding:20px}
+body.taste-editorial .feedback-head strong{font:700 24px/1.65 'Cairo',sans-serif}
+body.taste-editorial .feedback-close{flex:0 0 44px;min-width:44px}
+body.taste-editorial .feedback-dialog :is(label,.feedback-privacy,.feedback-status){font-size:14px;line-height:1.85}
+body.taste-editorial .feedback-actions{flex-wrap:wrap}
+body.taste-editorial .feedback-dialog input[type="url"]{direction:ltr;text-align:left}
+
 @media(max-width:1023px){
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start{padding-top:28px!important;gap:24px!important}
  body.taste-editorial.cosmic-theme #start .intro-heading h1.art-title.art-title--brand{width:200px!important}
  body.taste-editorial.cosmic-theme #start .intro-promise{font-size:27px!important}
 }
 @media(max-width:767px){
+ body.taste-editorial :is(section[id],nav[id]){scroll-margin-top:136px}
+ body.taste-editorial .feedback-dialog form{padding:16px}
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start{display:flex!important;flex-direction:column!important;gap:28px!important;padding-top:24px!important}
  body.taste-editorial.cosmic-theme #start>*{width:100%;min-width:0}
  body.taste-editorial.cosmic-theme #start .intro-heading h1.art-title.art-title--brand{width:170px!important;padding:10px!important}
