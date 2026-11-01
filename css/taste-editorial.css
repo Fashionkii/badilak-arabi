@@ -266,6 +266,7 @@ body.taste-editorial.cosmic-theme .news-article>section p{font-size:19px!importa
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #top *,
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab :is(.modal-card,.standalone-main,.site-header,.footer) *{box-shadow:none!important;text-shadow:none!important}
 body.taste-editorial.cosmic-theme #start .intro-brand-panel::before{display:none!important}
+body.taste-editorial.cosmic-theme #start .intro-heading .cosmic-logo{filter:none!important}
 body.taste-editorial.cosmic-theme #start .home-pathways-heading p{color:var(--te-muted)!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .crumbs,
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .crumbs :is(button,span){color:var(--te-muted)!important}
@@ -278,6 +279,9 @@ body.taste-editorial.cosmic-theme.motion-lab .detail-overview :is(.detail-fact,.
 body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-section{background:none!important;border:0!important;border-top:1px solid var(--te-line)!important;padding:24px 0!important}
 body.taste-editorial.cosmic-theme.motion-lab .detail-overview>.destination-link{background:var(--te-accent)!important;color:#fff!important;border-radius:4px!important}
 body.taste-editorial.cosmic-theme.motion-lab .detail-overview>.destination-link :is(small,.outbound-key){color:#fff!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex .arab-progress-tabs>button.active .arab-tab-icon{background:var(--te-tint)!important;color:var(--te-accent)!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex :is(.arab-progress-row,.arab-insight-quote,.arab-country-more){border-radius:4px!important}
+body.taste-editorial .next a{border-radius:4px!important}
 body.taste-editorial.cosmic-theme:not(.guided-discovery) .guide-shell :is(.human-question,.decision){background:var(--te-tint)!important;border-color:var(--te-line)!important;border-radius:4px!important}
 body.taste-editorial.cosmic-theme:not(.guided-discovery) .guide-shell .related a{background:none!important;border:0!important;border-top:1px solid var(--te-line)!important;border-radius:0!important;color:var(--te-accent)!important}
 body.taste-editorial .guide-shell>.quick-answer:not(section){grid-column:1;grid-row:1}
