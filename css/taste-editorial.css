@@ -377,10 +377,15 @@ body.taste-editorial.cosmic-theme :is(.editorial-section-head,.catalog-group-hea
 body.taste-editorial.cosmic-theme :is(.editorial-section-head,.catalog-group-head)>a{justify-self:end;min-height:44px}
 body.taste-editorial.cosmic-theme #start .intro-eyebrow{align-self:center;text-align:center!important}
 body.taste-editorial.cosmic-theme #start .intro-copy{width:100%}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-name{text-align:center!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .journey-back{grid-column:3;justify-self:end}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .catalog-group-head h3{width:100%;text-align:center!important}
 body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-identity{grid-template-columns:56px minmax(0,1fr) 56px;justify-items:center}
 body.taste-editorial.cosmic-theme.motion-lab .detail-overview .country-badge-slot{justify-content:center!important}
+/* The older combined dialog rule includes an ID and otherwise wins by specificity. */
+body.taste-editorial.cosmic-theme.motion-lab #content .standalone-detail{border:0!important;border-radius:0!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex :is(.arab-tab-copy b,.arab-more-card b,.arab-metric-title-wrap strong){text-align:center!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex .arab-metric-title-wrap strong{flex:1}
 
 /* One compact identity, four protected subgrid regions, and quieter secondary actions.
    Do not restore the obsolete seven-row positions or fixed identity heights. */
@@ -397,9 +402,9 @@ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unifie
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-primary-actions{gap:4px!important;padding-top:8px!important;border-color:var(--te-line)!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-info-actions{display:flex!important;flex-wrap:wrap;align-items:center;gap:4px 12px!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn{width:auto!important;min-width:96px;min-height:44px!important;padding:8px 14px!important;font-size:14px!important;line-height:1.8!important}
-body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-guide-slot{width:auto!important;flex:1 1 100px;min-width:0}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-guide-slot{width:auto!important;flex:1 1 100px;min-width:0;min-height:44px!important;margin:0!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-read-link{background:none!important;border:0!important;padding:8px 0!important;font-size:13px!important;line-height:1.8!important;justify-content:flex-start!important}
-body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .destination-link{background:none!important;border:0!important;padding:0!important;min-height:44px!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .destination-link{background:none!important;border:0!important;padding:0!important;margin:0!important;min-height:44px!important;flex:0 0 auto!important}
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .outbound-key{background:none!important;border:0!important;color:var(--te-accent)!important}
 body.taste-editorial.cosmic-theme .editorial-card-body{gap:10px!important}
 body.taste-editorial.cosmic-theme .editorial-card h3{margin:0!important}
@@ -410,6 +415,6 @@ body.taste-editorial.cosmic-theme .editorial-action{padding-top:8px;min-height:4
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .journey-back{grid-column:1}
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid)>.unified-resource-card{padding:16px!important}
  body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-identity{grid-template-columns:40px minmax(0,1fr) 40px;gap:4px 8px!important}
- body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-logo{width:40px;height:40px}
+ body.taste-editorial.cosmic-theme.motion-lab .detail-overview .detail-logo{width:40px!important;min-width:40px!important;height:40px!important}
  body.taste-editorial.cosmic-theme.motion-lab .detail-overview .quick-title{font-size:26px!important}
 }
