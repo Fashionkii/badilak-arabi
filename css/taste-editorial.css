@@ -408,6 +408,7 @@ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unifie
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .outbound-key{background:none!important;border:0!important;color:var(--te-accent)!important}
 body.taste-editorial.cosmic-theme .editorial-card-body{gap:10px!important}
 body.taste-editorial.cosmic-theme .editorial-card h3{margin:0!important}
+body.taste-editorial.cosmic-theme .guide-shell :is(.check>b,.lens>b){display:block;text-align:center!important}
 body.taste-editorial.cosmic-theme .editorial-action{padding-top:8px;min-height:44px}
 @media(max-width:767px){
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .journey-result-head{grid-template-columns:minmax(0,1fr)}
