@@ -1,4 +1,14 @@
 /* Shared pure presentation: the initial HTML and interactive details use identical content. */
+// Scoped editorial pass: user requested at least half of each content type.
+// Original records, dates, links and remaining presentation stay authoritative.
+const contentClarity={"cards":["salla-academy","expandcart","bayt","daftra","zenhr","aafia","forlanso","qoyod","midaad","daftra-hub","manasatna","wuilt","expensya","qriib","wuzzuf","edraak","hsoub","dff-academy","alef","marefa","almentor","tadarab","droosonline","saad-ghamdi-official","arabiaweather","kamkalima-learning","maher-official","tafsircenter","alafasy-official","qdl","newton-learning","yanfaa","cnfepd-learning","gomycode","khan-arabi","telmidtice","zotero","aamenn","jais-3","fanar","hudhud","arabicai","benefit","emushrif","lezzoo","superqi","unifonic","dhawwi","munsit","makram","taqreer","abjjad","akhdar-youtube","thmanyah","spacetoonyt","sowt","hindawi","gravity","opensooq","bayut","snoonu","floward","miswag","ouedkniss","mumzworld","salla","khamsat-blog","zamerican","shamaa","karnak","arabicdesign","noon","fresh","paymob"],"articles":["payment-gateway","ecommerce-platform","business-software","learning-platform","arabic-ai","arabic-design","arabic-research","reading","shopping","islamic-sources","create-online-academy"],"news":["jais-3-release","karnak-chat-pilot","loghat-pilot","paymob-dashboard-guide","thmanyah-radio-guide"]};
+function conciseResource(id){return contentClarity.cards.includes(typeof discoveryPairs!=='undefined'&&discoveryPairs[id]||id);}
+function conciseEditorial(id,type){return contentClarity[type==='news'?'news':'articles'].includes(id);}
+function conciseFact(label,value){
+ const text=String(value||'').replace(/<[^>]*>/g,'').trim();
+ return label!=='آخر مراجعة'&&!/^راجع (?:شروط الإتاحة في الموقع|السعر الحالي في الموقع)[.؟]?$/.test(text);
+}
+
 function logoInitials(label=''){
  const parts=String(label).replace(/[^\p{L}\p{N}\s]/gu,' ').trim().split(/\s+/).filter(Boolean);
  return (parts.slice(0,2).map(x=>x[0]).join('')||'•').toUpperCase();
@@ -131,6 +141,14 @@ function genericFacts(x){
 function renderSections(x,extra=[]){
  const normal=(x.modules||[]).map(([t,p])=>[t,p]);
  const merged=[...extra,...normal];
+ if(conciseResource(x.id)){
+  const sources=merged.filter(([t])=>t.includes('مصادر')||t==='الدليل المتاح');
+  const sections=merged.filter(([t])=>!t.includes('مصادر')&&t!=='الدليل المتاح').map(([t,p])=>{
+   if(t==='الواجهة والمخرجات')return `<p class="detail-language"><b>اللغة:</b> ${p.replace(/ · لا ينطبق عليها تقييم جودة توليد العربية/g,'')}</p>`;
+   return `<section class="detail-section"><h4>${t}</h4><div>${p}</div></section>`;
+  }).join('');
+  return sections+`<section class="detail-section"><h4>المصادر</h4>${sources.map(([,p])=>`<p>${p}</p>`).join('')}${x.reviewed?`<p class="news-date">مراجعة المعلومات: ${x.reviewed}</p>`:''}</section>`;
+ }
  return merged.map(([t,p])=>`<section class="detail-section"><h4>${t}</h4><div>${p}</div></section>`).join('');
 }
 
@@ -182,6 +200,7 @@ function decisionNoteFor(x){
 
 function decisionPanelMarkup(x){
  const n=decisionNoteFor(x);if(!n)return '';
+ if(conciseResource(x.id))return `<section class="decision-panel"><p class="decision-alert-text">${n.alert}</p>${n.source?`<div class="decision-source">${n.source}</div>`:''}</section>`;
  return `<section class="decision-panel">
   <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong><em>${n.type||'معلومة قرار'}</em></div>
   <p class="decision-alert-text">${n.alert}</p>
@@ -882,7 +901,7 @@ function directoryDetailMarkup(x,standalone=false){
  const special=specialDetails(x);
  // Keep every distinct fact; do not repeat the overview verbatim under a second label.
  const normalized=value=>String(value||'').replace(/\s+/g,' ').trim();
- const facts=(special?.facts||genericFacts(x)).filter(([,value])=>normalized(value)!==normalized(x.value));
+ const facts=(special?.facts||genericFacts(x)).filter(([label,value])=>normalized(value)!==normalized(x.value)&&(!conciseResource(x.id)||conciseFact(label,value)));
  const sections=special?.sections||[];
  const destination=resolveCommercialLink(x.id,x.url);
  let markup=`
@@ -891,7 +910,7 @@ function directoryDetailMarkup(x,standalone=false){
    <p class="quick-purpose">${x.value}</p>
    ${decisionPanelMarkup(x)}
    <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
-   <div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة للمورد: '+x.reviewed:''}</span></div>
+   ${conciseResource(x.id)?'':`<div class="detail-source-line"><span>${x.verified||''}</span><span>${x.reviewed?'آخر مراجعة للمورد: '+x.reviewed:''}</span></div>`}
    ${commercialDisclosureMarkup(x.id)}
    ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
    ${practicalTrialMarkup(x)}

@@ -64,4 +64,4 @@ if(process.argv[2]){
  }
  const ad=s=>s.match(/<a class="ad-demo ad-demo-display"[\s\S]*?<\/a>/)[0];assert.equal(ad(before),ad(after),'Salla reserved ad');
 }
-console.log(`PASS: ${files.length} HTML files; noindex, unique canonicals, JSON-LD, local links, static details, ${articleFiles.length} unchanged article bodies, prelaunch robots/sitemap and protected baseline data.`);
+console.log(`PASS: ${files.length} HTML files; noindex, unique canonicals, JSON-LD, local links, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);

@@ -31,7 +31,7 @@ const newsRows=rows.filter(r=>r.type==='news');
 assert.equal(newsRows.length,9);
 for(const n of get('badilakNews').filter(n=>n.related)){
  const label=n.eventKind||'الحدث';
- const expected=`${label}: ${n.eventLabel} · مراجعة المصدر: ${n.reviewLabel}`;
+ const expected=`${label}: ${n.eventLabel}${get(`conciseResource(${JSON.stringify(n.related)})`)?'':` · مراجعة المصدر: ${n.reviewLabel}`}`;
  const dynamic=vm.runInContext(`relatedNewsMarkup(${JSON.stringify(n.related)})`,c);
  const detail=read('dist/discover/'+n.related+'.html');
  for(const [surface,html] of [['dynamic',dynamic],['static',detail]])assert(html.includes(expected),`${surface} resource detail keeps the date meaning for ${n.id}`);
@@ -66,5 +66,5 @@ assert.equal((home.match(/class="editorial-card(?: editorial-card--feature)?"/g)
 assert.match(home,/data-editorial-type="news"[\s\S]*?<img class="editorial-cover"/);assert.match(home,/data-editorial-type="article"/);
 for(const id of get('badilakEditorial.home'))assert(home.includes(rows.find(r=>r.id===id).url));
 for(const id of ['midaad','taqreer','aamenn']){const date=get(`items.find(x=>x.id==='${id}').reviewed`);assert(read('dist/index.html').includes(`data-review-resource="${id}">آخر مراجعة للمورد: ${date}`));}
-for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`datetime="${row.published}"`));assert(html.includes('href="/guides?type=news"'));assert(html.includes('class="news-cover"'));assert(row.image&&row.imageAlt);}
+for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`\"datePublished\":\"${row.published}\"`));assert(html.includes('href="/guides?type=news"'));assert(html.includes('class="news-cover"'));assert(row.image&&row.imageAlt);}
 console.log('PASS: one navigation across published pages; 21 articles + 9 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');

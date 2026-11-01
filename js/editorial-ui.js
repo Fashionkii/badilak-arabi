@@ -2,12 +2,12 @@
 const editorialCategories={work:'شغلك ومشروعك',tech:'تقنية وذكاء اصطناعي',learn:'تعلّم وبحث',create:'تصميم ومحتوى',culture:'قراءة واستماع',shopping:'التسوّق',observer:'المرصد'};
 function editorialDate(value){return value?new Intl.DateTimeFormat('ar-EG',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(value+'T12:00:00Z')):'';}
 function editorialCardMarkup(row,{feature=false,image=false}={}){
- const e=discoveryEscape,news=row.type==='news';
+ const e=discoveryEscape,news=row.type==='news',concise=conciseEditorial(row.id,row.type);
  return `<article class="editorial-card${feature?' editorial-card--feature':''}" data-editorial-type="${row.type}" data-editorial-category="${row.category}"><a href="${row.url}" class="editorial-card-link">
  ${image&&row.image?`<img class="editorial-cover" src="${e(row.image)}" alt="${e(row.imageAlt)}" width="640" height="360" loading="lazy" decoding="async">`:''}
  <div class="editorial-card-body"><p class="editorial-eyebrow"><span>${news?'خبر':'مقال'}</span><span>${editorialCategories[row.category]}</span></p>
  <h3>${e(row.title)}</h3><p class="editorial-summary">${e(row.summary)}</p>
- <p class="editorial-date">${news?e(row.eventKind||'الحدث'):'تحديث المقال'}: <time datetime="${news?row.eventDate:row.updated}">${editorialDate(news?row.eventDate:row.updated)}</time>${news?`<span>مراجعة المصدر: <time datetime="${row.updated}">${editorialDate(row.updated)}</time></span>`:''}</p>
+ ${concise?news?`<p class="editorial-date">${e(row.eventKind||'الحدث')}: <time datetime="${row.eventDate}">${editorialDate(row.eventDate)}</time></p>`:'':`<p class="editorial-date">${news?e(row.eventKind||'الحدث'):'تحديث المقال'}: <time datetime="${news?row.eventDate:row.updated}">${editorialDate(news?row.eventDate:row.updated)}</time>${news?`<span>مراجعة المصدر: <time datetime="${row.updated}">${editorialDate(row.updated)}</time></span>`:''}</p>`}
  <span class="editorial-action">${news?'اقرأ ما تغيّر':'اقرأ المقال'} <span aria-hidden="true">←</span></span></div></a></article>`;
 }
 function discoveryEditorialMarkup(entries){

@@ -96,6 +96,7 @@ function contextualLearningMarkup(id,standalone=false){
 }
 function discoveryCardMarkup(e){
  const x=e.directory,l=e.learning,learn=!!l&&(discoveryPurpose==='learn'||!e.use),source=learn?l:x||l;
+ const concise=conciseResource(e.id);
  const name=source.name,logo=source.logo;
  const action=learn||!x?`showLearningNote('${l.id}')`:`openDetail('${x.id}')`;
  const href=learn||!x?`/?learn=${l.id}#learning`:`/discover/${x.id}`;
@@ -104,15 +105,15 @@ function discoveryCardMarkup(e){
  const comparison=x?directoryComparison(x,originFilter):{};
  const context=(learn||!x)?(l.type==='resource'?'محتوى تعليمي من الجهة نفسها':l.type==='reciter'?'القناة الرسمية للقارئ':'تعلّم خطوة، ثم طبّقها'):comparison.reference?`إذا كنت تستخدم <bdi>${originName(comparison.reference)}</bdi>`:'';
  const guide=learn||!x?learningGuideLinkMarkup(l.id):editorialGuideLinkMarkup(x.id);
- const info=learn||!x?'معلومات وخطوة تطبيق':hasPracticalTrial(x)?'معلومات وتجربة':'معلومات';
+ const info=concise?'التفاصيل':learn||!x?'معلومات وخطوة تطبيق':hasPracticalTrial(x)?'معلومات وتجربة':'معلومات';
  const destination=learn||!x?`openLearningExternal('${l.id}')`:`openExternal('${x.id}')`;
  const domain=learn||!x?new URL(l.url).hostname:x.domain;
- return `<article class="item unified-resource-card" data-item-id="${e.id}"${l?` data-learning-id="${l.id}"`:''}>
+ return `<article class="item unified-resource-card${concise?' content-concise':''}" data-item-id="${e.id}"${l?` data-learning-id="${l.id}"`:''}>
  <div class="resource-head"><a class="item-identity" href="${href}" onclick="${click}">${logoMarkup(logo,'item-logo',name)}<span class="item-name">${discoveryEscape(name)}</span></a>
  <div class="resource-meta">${countryBadgeMarkup(source,learn||!x?learningCountryMap:itemCountryMap)}<span class="discovery-kind">${discoveryEscape(l?discoveryTypeNames[l.type]:x.type)}</span></div></div>
- <div class="resource-context">${context?`<p>${context}</p>`:''}${comparison.fit&&!learn?`<p class="card-fit">${comparison.fit}</p>`:''}</div>
+ <div class="resource-context">${context&&!(concise&&context==='تعلّم خطوة، ثم طبّقها')?`<p>${context}</p>`:''}${comparison.fit&&!learn?`<p class="card-fit">${comparison.fit}</p>`:''}</div>
  <div class="card-summary"><p class="card-purpose">${discoveryEscape(summary)}</p></div>
  <div class="card-primary-actions"><div class="card-info-actions${guide?'':' is-single'}"><button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="${action}" aria-label="${info} عن ${discoveryEscape(name)}">${info}</button>${guide?`<div class="card-guide-slot">${guide}</div>`:''}</div>
- <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="${destination}"><span class="destination-label"><bdi>${learn||!x?l.type==='reciter'?'افتح قناة التلاوة':'افتح المصدر':discoveryEscape(name)}</bdi><small>${discoveryEscape(domain)}</small></span><span class="outbound-key">↗</span></button></div></article>`;
+ <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="${destination}"><span class="destination-label"><bdi>${concise?(learn||!x?l.type==='reciter'?'افتح القناة':'افتح المصدر':'زيارة الموقع'):learn||!x?l.type==='reciter'?'افتح قناة التلاوة':'افتح المصدر':discoveryEscape(name)}</bdi><small>${discoveryEscape(domain)}</small></span><span class="outbound-key">↗</span></button></div></article>`;
 }
 function openDiscoveryLearning(event,id){if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return true;event.preventDefault();showLearningNote(id);return false;}

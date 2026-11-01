@@ -711,6 +711,7 @@ const learningActions={
 };
 function learningDecisionPanelMarkup(x){
  const n=learningDecisionNoteFor(x);if(!n)return '';
+ if(conciseResource(x.id))return `<section class="decision-panel"><p class="decision-alert-text">${n.alert}</p><p>${learningActions[x.id]||n.action}</p></section>`;
  return `<section class="decision-panel">
   <div class="decision-panel-head"><strong>مهم قبل الاختيار</strong></div>
   <p class="decision-alert-text">${n.alert}</p>
@@ -829,7 +830,7 @@ function showLearningNote(id){
    <div class="detail-identity">${logoMarkup(x.logo,'detail-logo',x.name)}<h3 class="quick-title">${x.name}</h3>${countryBadgeMarkup(x,learningCountryMap)}</div>
    <p class="quick-purpose">${x.focus}</p>
    ${learningDecisionPanelMarkup(x)}
-   <div class="detail-facts">${facts.map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
+   <div class="detail-facts">${facts.filter(([label,value])=>!conciseResource(x.id)||(value!==x.focus&&conciseFact(label,value))).map(([l,v])=>detailFact(l,v)).join('')}</div>    ${geoContextMarkup(x.id)}
    ${discoveryPairs[x.id]?`<details class="paired-resource-details"><summary>معلومات المنصة والتجربة العملية</summary>${directoryDetailMarkup(items.find(item=>item.id===discoveryPairs[x.id])).replace(/<h1 class="quick-title"/,'<h3 class="quick-title"').replace('</h1>','</h3>')}</details>`:''}
    ${learningGuideLinkMarkup(x.id,true)}
    ${learningCommercialDisclosureMarkup(x)}

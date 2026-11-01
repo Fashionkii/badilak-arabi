@@ -1,4 +1,6 @@
 /* Additive controls in the existing theme; no changes to shared identity or hero. */
+/* Only the eleven edited guides use shorter, directly named source links. */
+[data-content-concise] .source-card{display:block;min-height:44px;padding-block:10px}
 .discovery-purpose{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
 .discovery-purpose button{border:1px solid var(--line,#cad8d1);border-radius:999px;background:transparent;color:inherit;padding:9px 16px;font:inherit;font-size:14px;cursor:pointer;min-height:44px}
 .discovery-purpose [aria-pressed="true"]{background:#173f3d;color:#fffdf8;border-color:#173f3d}

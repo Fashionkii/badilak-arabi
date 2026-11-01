@@ -57,5 +57,5 @@ const badilakNews=[
 ];
 function relatedNewsMarkup(id){
  const rows=badilakNews.filter(n=>n.related===id);if(!rows.length)return '';
- return '<section class="discovery-related"><h2>تغيير مرتبط بهذا المورد</h2>'+rows.map(n=>`<p><a href="/news/${n.id}">${discoveryEscape(n.title)}</a><small class="news-date">${discoveryEscape(n.eventKind||'الحدث')}: ${n.eventLabel} · مراجعة المصدر: ${n.reviewLabel}</small></p>`).join('')+'</section>';
+ return '<section class="discovery-related"><h2>تغيير مرتبط بهذا المورد</h2>'+rows.map(n=>`<p><a href="/news/${n.id}">${discoveryEscape(n.title)}</a><small class="news-date">${discoveryEscape(n.eventKind||'الحدث')}: ${n.eventLabel}${conciseResource(id)?'':` · مراجعة المصدر: ${n.reviewLabel}`}</small></p>`).join('')+'</section>';
 }
