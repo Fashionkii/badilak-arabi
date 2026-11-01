@@ -98,7 +98,17 @@ function setPageHead(html,page){
  html=html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/,'<script type="application/ld+json">'+json(page.schema)+'</script>');
  return html;
 }
-function write(file,html){fs.mkdirSync(path.dirname(path.join(out,file)),{recursive:true});fs.writeFileSync(path.join(out,file),html);}
+// Taste trial: visual treatment of exactly two existing pages, on preview only.
+// The published site's content, metadata and remaining pages stay byte-identical.
+const tastePages={'guides/business-software.html':'taste-article','news/jais-3-release.html':'taste-news'};
+function write(file,html){
+ if(process.env.VERCEL_ENV==='preview'&&tastePages[file]){
+  html=html.replace(/<body class="([^"]*)"/,'<body class="$1 taste-editorial '+tastePages[file]+'"')
+   .replace('</head>','<link rel="stylesheet" href="/css/taste-editorial.css">\n</head>');
+  fs.copyFileSync(path.join(root,'preview/taste-editorial.css'),path.join(out,'css/taste-editorial.css'));
+ }
+ fs.mkdirSync(path.dirname(path.join(out,file)),{recursive:true});fs.writeFileSync(path.join(out,file),html);
+}
 const editorial=context.badilakEditorial;
 const editorialCard=(row,options)=>context.editorialCardMarkup(row,options);
 const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map(id=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{image:true});}).join('')}</div></section>`;
