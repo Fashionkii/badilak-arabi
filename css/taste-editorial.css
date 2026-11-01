@@ -364,3 +364,4 @@ body.taste-editorial.cosmic-theme.motion-lab :is(.detail-fact,.decision-panel){b
  body.taste-editorial.cosmic-theme .reading-controls,
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex :is(.arab-observer-main,.arab-observer-insight){padding:16px!important}
 }
+body.taste-editorial.cosmic-theme.guided-discovery #start .intro-heading .cosmic-logo{aspect-ratio:640/207!important;height:auto!important;border-radius:0!important}
