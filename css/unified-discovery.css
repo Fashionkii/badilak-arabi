@@ -73,6 +73,9 @@ body.cosmic-theme.guided-discovery #directory .unified-resource-card .card-prima
  /* The older flat catalog sets grid-row:auto!important. Match that priority so
     all four card regions retain their own row instead of overlapping. */
  body.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,#catalogGrid)>.unified-resource-card{display:grid!important;grid-template-rows:subgrid;grid-row:span 4!important;row-gap:12px}
+ /* The previous seven-region card assigned summary/actions to rows 5 and 7.
+    Unified cards have four regions; place their children in document order. */
+ body.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,#catalogGrid)>.unified-resource-card>*{grid-row:auto!important;grid-column:auto!important}
 }
 .paired-resource-details{margin:24px 0;padding-top:16px;border-top:1px solid var(--sp-line)}
 .paired-resource-details>summary{cursor:pointer;min-height:44px;font-size:16px;line-height:1.8;font-weight:700;color:var(--sp-forest)}
