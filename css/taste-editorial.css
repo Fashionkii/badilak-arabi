@@ -432,3 +432,21 @@ body.taste-editorial.cosmic-theme .editorial-action{padding-top:8px;min-height:4
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .item-logo{width:32px!important;height:32px!important;min-width:32px!important;flex-basis:32px!important}
  body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .item-name{font-size:19px!important;line-height:1.65!important}
 }
+
+
+/* Verified visual review, 2 November 2026: mixed reading cards size to content.
+   News photos remain; a short text card must not inherit a neighbour's height. */
+body.taste-editorial.cosmic-theme .editorial-context-grid{align-items:start}
+body.taste-editorial.cosmic-theme .editorial-context-grid .editorial-card-link{height:auto}
+body.taste-editorial.cosmic-theme .editorial-section-head{gap:4px;margin-bottom:20px;justify-items:center}
+body.taste-editorial.cosmic-theme .editorial-section-head>div{width:100%}
+body.taste-editorial.cosmic-theme .editorial-section-head h2{margin:0 0 4px}
+body.taste-editorial.cosmic-theme .editorial-section-head p{text-align:center}
+body.taste-editorial.cosmic-theme .editorial-section-head>a{justify-self:center}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .destination-link{justify-content:center!important;gap:8px!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .destination-label{justify-content:flex-start!important;width:auto!important;flex:0 1 auto!important;gap:8px!important}
+/* This explicitly tagged demo navigation has no social account destinations. */
+body.taste-editorial .badilak-social-links[aria-label="منصات التواصل — روابط تجريبية"]{display:none!important}
+@media(min-width:768px){
+ body.taste-editorial.cosmic-theme:not(.guided-discovery):has(.guide-shell) h1.long-editorial-title{font-size:clamp(32px,3vw,42px)!important;line-height:1.5!important}
+}

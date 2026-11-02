@@ -33,6 +33,8 @@ for(const file of articleFiles){
  const body=s=>withOriginalArticleMediaOrder(s.match(/<body[\s\S]*<\/body>/)[0])
   .replace(/<nav class="toplinks"[^>]*>[\s\S]*?<\/nav>/,'<!-- shared primary navigation -->')
   .replace(/<!-- EDITORIAL_JOURNEY_START -->[\s\S]*?<!-- EDITORIAL_JOURNEY_END -->/g,'')
+  // Ignore only the visual title marker; keep comparing the complete original text/DOM.
+  .replace('<h1 class="long-editorial-title">','<h1>')
   .replace('<body class="cosmic-theme taste-editorial">','<body>')
   .replace('<body class="cosmic-theme">','<body>')
   .replace('<picture><img class="cosmic-logo" src="/images/brand/wordmark-light-20261101-320.webp" srcset="/images/brand/wordmark-light-20261101-320.webp 320w, /images/brand/wordmark-light-20261101-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="640" height="207" alt="بديلك عربي" decoding="async"></picture>','بديلك عربي')
