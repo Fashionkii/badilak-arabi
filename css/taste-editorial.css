@@ -437,10 +437,13 @@ body.taste-editorial.cosmic-theme .editorial-action{padding-top:8px;min-height:4
 }
 
 /* Keep each familiar-service row aligned even when names or intent labels wrap. */
-body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-option{display:grid!important;grid-template-columns:minmax(0,1fr);grid-template-rows:36px minmax(42px,auto) 1fr;align-content:start!important;align-items:start!important;justify-items:center!important;height:auto!important}
-body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-logo{grid-row:1;align-self:center;justify-self:center}
-body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-name{grid-row:2;line-height:21px!important;min-width:0;width:100%;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere}
-body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-intent{grid-row:3;align-self:start;text-align:center}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-option{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:36px minmax(42px,auto) 1fr;align-content:start!important;align-items:start!important;justify-items:center!important;height:auto!important}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-logo{grid-column:1;grid-row:1;align-self:center;justify-self:center}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-name{grid-column:1;grid-row:2;line-height:21px!important;min-width:0;width:100%;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-intent{grid-column:1;grid-row:3;align-self:start;text-align:center}
+@media(max-width:360px){
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-options{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
 
 /* Finish the existing light theme on nomination and article continuation controls. */
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #nominate h2.section-title{font-family:'Cairo',Tahoma,sans-serif!important}
