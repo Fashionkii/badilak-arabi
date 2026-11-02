@@ -27,9 +27,13 @@ function directorySearchScore(item,query){
  const country=countryEntries(itemCountryMap[item.id]).map(entry=>entry[1]).join(' ');
  const category=normalizeDirectorySearch(categoryNames[item.cat]);
  if(q===category)return 30;
+ // Use the same recorded task relationships as the familiar-service buttons.
+ // Matching a service name does not claim equivalence with that service.
+ const origins=[...new Set([...(item.origin||[]),...Object.keys(originRouteMap)
+  .filter(origin=>matchesDirectoryOrigin(item,origin))])].map(originName);
  const text=normalizeDirectorySearch([item.name,item.value,item.creator,item.availability,
   item.arabRelation,item.type,subcategoryLabel(item.cat,item.sub),
-  country,...(directorySearchKeywords[item.id]||[])].join(' '));
+  country,...origins,...(directorySearchKeywords[item.id]||[])].join(' '));
  const words=text.split(' ');
  if(!q.split(' ').every(word=>name.includes(word)||words.some(candidate=>candidate.startsWith(word))))return 0;
  // Rank relevance only; preserve catalog order for equal scores.
