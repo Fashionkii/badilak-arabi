@@ -507,9 +507,9 @@ body.taste-editorial.cosmic-theme .reading-group .editorial-grid:has(>.editorial
 /* The third fact uses the full row only in dialogs with exactly three facts. */
 body.taste-editorial.cosmic-theme.motion-lab #detailModal .detail-facts>.detail-fact:nth-child(3):last-child{grid-column:1/-1}
 
-/* At high zoom the free end of the logo row keeps history off the search and results. */
-@media(max-width:767px) and (max-height:420px){
- body.taste-editorial.cosmic-theme.guided-discovery #badilakNavMemory{inset:10px auto auto 16px}
+/* Use the free end of the logo row in short viewports, overriding the directory's fixed bottom offset. */
+@media(max-width:767px) and (max-height:480px){
+ body.taste-editorial.cosmic-theme.guided-discovery #badilakNavMemory{inset:10px auto auto 16px!important}
 }
 
 /* The explanatory context remains available below the chart on smaller screens. */
