@@ -159,17 +159,17 @@ body.taste-editorial.cosmic-theme #start .intro-promise{color:var(--te-ink)!impo
 body.taste-editorial.cosmic-theme #start .intro-link{background:var(--te-accent)!important;color:#fff!important;border:1px solid var(--te-accent)!important;border-radius:4px!important;padding:12px 22px!important;min-height:48px;display:inline-flex;align-items:center}
 body.taste-editorial.cosmic-theme #start .intro-note{font-size:15px!important;line-height:1.9!important;max-width:45ch;margin-top:16px}
 body.taste-editorial.cosmic-theme #start .origin-explorer{background:var(--te-tint)!important;border:0!important;border-radius:4px!important;padding:24px!important;min-width:0}
-body.taste-editorial.cosmic-theme #start .origin-heading{text-align:center!important;align-items:center!important;gap:12px!important;margin-bottom:20px!important}
+body.taste-editorial.cosmic-theme #start .origin-heading{text-align:center!important;align-items:center!important;gap:8px!important;margin-bottom:16px!important}
 body.taste-editorial.cosmic-theme #start .origin-heading h2{font-size:23px!important;line-height:1.7!important;color:var(--te-ink)!important}
 body.taste-editorial.cosmic-theme #start .origin-hint{font-size:15px!important;line-height:1.8!important}
 body.taste-editorial.cosmic-theme #start .origin-options{gap:8px!important}
-body.taste-editorial.cosmic-theme #start .origin-option{background:var(--te-canvas)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;min-height:100px!important;padding:12px 8px!important;transform:none!important;gap:5px!important}
+body.taste-editorial.cosmic-theme #start .origin-option{background:var(--te-canvas)!important;border:1px solid var(--te-line)!important;border-radius:4px!important;min-height:92px!important;padding:8px!important;transform:none!important;gap:4px!important}
 body.taste-editorial.cosmic-theme #start .origin-option:hover{border-color:var(--te-accent)!important;background:#fff!important}
 body.taste-editorial.cosmic-theme #start .origin-option[aria-pressed="true"]{outline:2px solid var(--te-accent);outline-offset:-2px}
 body.taste-editorial.cosmic-theme #start .origin-name{font-size:14px!important;color:var(--te-ink)!important}
 body.taste-editorial.cosmic-theme #start .origin-intent{font-size:12px!important;color:var(--te-muted)!important}
 body.taste-editorial.cosmic-theme #start :is(.origin-logo,.origin-logo img){width:28px!important;height:28px!important;border:0!important;border-radius:4px!important;background:none!important;padding:0!important}
-body.taste-editorial.cosmic-theme #start>.home-pathways{border:0!important;border-top:1px solid var(--te-line)!important;background:none!important;border-radius:0!important;margin-top:16px!important;padding:32px 0 0!important}
+body.taste-editorial.cosmic-theme #start>.home-pathways{border:0!important;border-top:1px solid var(--te-line)!important;background:none!important;border-radius:0!important;margin-top:0!important;padding:24px 0 0!important}
 body.taste-editorial.cosmic-theme #start :is(.home-pathways-heading,.editorial-section-head){text-align:start!important}
 body.taste-editorial.cosmic-theme #start .home-route{background:none!important;border:0!important;border-bottom:1px solid var(--te-line)!important;border-radius:0!important;padding:20px 0!important;transform:none!important;min-height:100px!important;gap:16px!important}
 body.taste-editorial.cosmic-theme #start .home-route-art{background:none!important;border:0!important;border-radius:0!important;width:88px!important;flex-basis:88px!important}
@@ -475,14 +475,41 @@ body.taste-editorial.cosmic-theme .editorial-section-head>a{justify-self:center}
 /* Keep familiar services compact without changing their common alignment. */
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-option{
  grid-template-rows:32px minmax(21px,auto) auto;
- min-height:94px!important;
 }
+
+/* Keep the home paths compact and give the editorial titles and labels their own scale. */
+body.taste-editorial.cosmic-theme #start .home-route{min-height:96px!important;padding-block:16px!important}
+body.taste-editorial.cosmic-theme :is(.home-editorial,.reading-group) .editorial-eyebrow{font-size:13px}
+body.taste-editorial.cosmic-theme :is(.home-editorial,.reading-group) .editorial-summary{color:var(--te-ink)!important}
 
 /* Count only cards that remain visible after the reading filters. */
 body.taste-editorial.cosmic-theme .reading-group .editorial-grid:has(>.editorial-card:not([hidden])):not(:has(>.editorial-card:not([hidden])~.editorial-card:not([hidden]))){
  grid-template-columns:minmax(0,1fr)!important;
  max-width:680px;
  margin-inline:auto;
+}
+@media(min-width:1024px){
+ /* Two cards take the same tracks as in a full row, centered as a pair. */
+ body.taste-editorial.cosmic-theme .reading-group .editorial-grid:has(>.editorial-card:not([hidden])~.editorial-card:not([hidden])):not(:has(>.editorial-card:not([hidden])~.editorial-card:not([hidden])~.editorial-card:not([hidden]))){
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:calc((100% * 2 - 20px) / 3);
+  margin-inline:auto;
+ }
+}
+
+/* Keep the discovery controls legible and bring the first group closer on wider screens. */
+@media(min-width:768px){
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .journey-result-head{margin-block-end:16px}
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .discovery-controls{padding-block:16px!important}
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .catalog-group-head{margin-block-end:12px}
+}
+
+/* The third fact uses the full row only in dialogs with exactly three facts. */
+body.taste-editorial.cosmic-theme.motion-lab #detailModal .detail-facts>.detail-fact:nth-child(3):last-child{grid-column:1/-1}
+
+/* At high zoom the free end of the logo row keeps history off the search and results. */
+@media(max-width:767px) and (max-height:420px){
+ body.taste-editorial.cosmic-theme.guided-discovery #badilakNavMemory{inset:10px auto auto 16px}
 }
 
 /* The explanatory context remains available below the chart on smaller screens. */
