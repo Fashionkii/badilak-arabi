@@ -84,7 +84,21 @@ function visibleDiscoveryGroups(groups,limit){
  return visible.filter(g=>g.shown.length);
 }
 function resetDirectoryLimit(){directoryVisible=directoryBatchSize()}
-function showMoreDirectory(){directoryVisible+=directoryBatchSize();renderCards()}
+function showMoreDirectory(){
+ const grid=document.getElementById('catalogGrid');
+ const previousIds=new Set([...grid.querySelectorAll('[data-item-id]')].map(card=>card.dataset.itemId));
+ directoryVisible+=directoryBatchSize();
+ renderCards();
+
+ // Grouped results grow in several places. Continue in the last group that received new cards.
+ const added=[...grid.querySelectorAll('[data-item-id]')].filter(card=>!previousIds.has(card.dataset.itemId));
+ const lastGroup=added.at(-1)?.closest('.catalog-group');
+ const firstNewCard=lastGroup?added.find(card=>lastGroup.contains(card)):added[0];
+ if(!firstNewCard)return;
+ firstNewCard.classList.add('directory-more-anchor');
+ firstNewCard.querySelector('.item-identity')?.focus({preventScroll:true});
+ firstNewCard.scrollIntoView({block:'start',behavior:'instant'});
+}
 function resetLearningLimit(){learningVisible={platform:4,resource:4,channel:4,reciter:4}}
 function showMoreLearning(type){enableLearningCarousel(type)}
 
