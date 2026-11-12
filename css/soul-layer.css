@@ -48,18 +48,18 @@ html body.soul.taste-editorial.cosmic-theme #start .intro-link{background:var(--
 html body.soul.taste-editorial.cosmic-theme #start .origin-explorer{background:var(--sl-card)!important;border:1.5px dashed var(--sl-line)!important;border-radius:6px!important}
 /* Global brands recede to stamps; colour returns on intent. */
 html body.soul.taste-editorial.cosmic-theme #start .origin-option{background:transparent!important;border:1px solid var(--sl-line)!important;border-radius:6px!important}
-html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-logo{filter:grayscale(1);opacity:.55;transition:filter .2s,opacity .2s}
-html body.soul.taste-editorial.cosmic-theme #start .origin-option:is(:hover,:focus-visible,[aria-pressed="true"]) .origin-logo{filter:none;opacity:1}
+html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-logo{opacity:.85;transition:opacity .2s}
+html body.soul.taste-editorial.cosmic-theme #start .origin-option:is(:hover,:focus-visible,[aria-pressed="true"]) .origin-logo{opacity:1}
 html body.soul.taste-editorial.cosmic-theme #start .origin-option:is(:hover,[aria-pressed="true"]){border-color:var(--sl-green)!important;background:var(--sl-card)!important}
 html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-name{color:var(--sl-muted)!important}
 
 /* Reading cards: one family of duotone covers in the domain colour. */
 html body.soul.taste-editorial.cosmic-theme :is(.editorial-card,.news-card){background:var(--sl-card)!important;border:1px solid var(--sl-line)!important;border-radius:6px!important}
 html body.soul.taste-editorial.cosmic-theme .editorial-card-link{position:relative;display:block}
-html body.soul.taste-editorial.cosmic-theme .editorial-cover{filter:grayscale(1) contrast(1.15) brightness(1.08)!important}
+html body.soul.taste-editorial.cosmic-theme .editorial-cover{filter:contrast(1.1) brightness(1.05)!important}
 html body.soul.taste-editorial.cosmic-theme .editorial-card-link::before{
  content:"";position:absolute;inset-inline:0;top:0;aspect-ratio:16/9;z-index:1;pointer-events:none;
- background:var(--dom,var(--sl-green));mix-blend-mode:multiply;opacity:.78
+ background:var(--dom,var(--sl-green));mix-blend-mode:multiply;opacity:.55
 }
 html body.soul.taste-editorial.cosmic-theme .editorial-card-link::after{
  content:"";position:absolute;inset-inline:0;top:0;aspect-ratio:16/9;z-index:1;pointer-events:none;
@@ -105,8 +105,24 @@ html body.soul.taste-editorial.cosmic-theme .arab-progress-value{font:700 17px/1
 /* Footer and soft panels follow the paper. */
 html body.soul.taste-editorial.cosmic-theme :is(.frame-soft,.discovery-controls,.reading-controls){background:var(--sl-paper-2)!important;border-color:var(--sl-line)!important}
 
+/* Craft pass (contrast, rhythm, radius scale) + quiet hover lift on cards only.
+   No new colour or font beyond the paper identity above. */
+html body.soul.taste-editorial.cosmic-theme{--sl-muted:#44504a;--te-muted:#44504a}
+html body.soul.taste-editorial.cosmic-theme .editorial-card-body{line-height:1.85!important}
+html body.soul.taste-editorial.cosmic-theme :is(.editorial-card h3,.news-card h2){line-height:1.5!important}
+html body.soul.taste-editorial.cosmic-theme .editorial-card :is(.editorial-eyebrow,.editorial-summary,.editorial-date){line-height:1.75!important}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-purpose{line-height:1.75!important}
+html body.soul.taste-editorial.cosmic-theme :is(.editorial-card,.news-card),
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card,
+html body.soul.taste-editorial.cosmic-theme .home-route{transition:transform .15s,box-shadow .15s!important}
+html body.soul.taste-editorial.cosmic-theme :is(.editorial-card,.news-card):hover,
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card:hover,
+html body.soul.taste-editorial.cosmic-theme .home-route:hover{transform:translateY(-2px)!important;box-shadow:0 8px 20px rgba(60,48,20,.10)!important}
+
 @media (prefers-reduced-motion:reduce){
- html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-logo{transition:none}
+ html body.soul.taste-editorial.cosmic-theme *{transition:none!important}
+ html body.soul.taste-editorial.cosmic-theme :is(.editorial-card,.news-card,.unified-resource-card,.home-route):hover{transform:none!important}
+ html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-logo{transition:none!important}
 }
 @media (max-width:760px){
  html body.soul.taste-editorial.cosmic-theme #start .intro-promise{font-size:30px!important}
