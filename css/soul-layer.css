@@ -1,0 +1,113 @@
+/* Soul layer — «دفتر الاختيار». Visual layer only, loaded last.
+   Changes: warm paper canvas, display type for headings, hand-drawn underline,
+   domain colour as wayfinding, duotone covers over the licensed photos,
+   the "if you use X" bridge leads each card, global brands recede.
+   Protected and untouched: text, data, links, sources, dates, behaviour,
+   reserved ad slots and their disclosures, noindex. Brand wordmark unchanged. */
+
+html body.soul.taste-editorial.cosmic-theme{
+ --sl-paper:#f6f2e8;--sl-paper-2:#efe9da;--sl-card:#fffdf8;
+ --sl-ink:#1b231f;--sl-muted:#4f5a54;--sl-line:#d9cfb9;
+ --sl-green:#194b3e;--sl-gold:#b8862f;
+ --sl-hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6.5C20 2.5 34 8.5 52 5s30-3.5 46 0 16 1 20-1' fill='none' stroke='%23b8862f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+ --te-canvas:var(--sl-paper);--te-ink:var(--sl-ink);--te-muted:var(--sl-muted);--te-line:var(--sl-line);--te-surface:var(--sl-card);
+ background:var(--sl-paper)!important;
+ background-image:radial-gradient(rgba(120,95,40,.06) .6px,transparent .7px)!important;
+ background-size:6px 6px!important;
+}
+html body.soul.taste-editorial.cosmic-theme :is(.site-header,.top,footer,.footer){background:var(--sl-paper)!important}
+
+/* Domain colour = wayfinding, never decoration alone (the label stays). */
+html body.soul :is([data-editorial-category="work"],[aria-labelledby="catalog-group-work"],.reading-group[data-reading-group="work"]){--dom:#1f5f4f}
+html body.soul :is([data-editorial-category="tech"],[aria-labelledby="catalog-group-tech"],.reading-group[data-reading-group="tech"]){--dom:#2d4a7a}
+html body.soul :is([data-editorial-category="learn"],[aria-labelledby="catalog-group-learn"],.reading-group[data-reading-group="learn"]){--dom:#8a5a1c}
+html body.soul :is([data-editorial-category="create"],[aria-labelledby="catalog-group-create"],.reading-group[data-reading-group="create"]){--dom:#a0412d}
+html body.soul :is([data-editorial-category="culture"],[aria-labelledby="catalog-group-culture"],.reading-group[data-reading-group="culture"]){--dom:#6b3f6e}
+html body.soul :is([data-editorial-category="shopping"],[aria-labelledby="catalog-group-shopping"],.reading-group[data-reading-group="shopping"]){--dom:#2f6f78}
+html body.soul :is([data-editorial-category="observer"],.reading-group[data-reading-group="observer"]){--dom:#3a3a36}
+
+/* Display headings with a hand-drawn underline. Card titles keep Cairo. */
+html body.soul.taste-editorial :is(.section-title,.portal-heading h2,.editorial-section-head h2,#competitionTitle,.editorial-heading h1,.reading-group>h2,.origin-heading h2,.catalog-group-head h3,.home-panel-title h2,.section-head h2){
+ font-family:'Marhey','Cairo',Tahoma,sans-serif!important;font-weight:600!important;line-height:1.6!important;
+ display:inline-block;position:relative;padding-bottom:10px!important;
+ background:var(--sl-hand) center bottom / min(180px,70%) 10px no-repeat!important;
+}
+html body.soul.taste-editorial :is(.reading-group>h2,.catalog-group-head h3){background-size:110px 8px!important}
+html body.soul.taste-editorial :is(.reading-group,.catalog-group)>:is(h2,.catalog-group-head){color:var(--dom,var(--sl-ink))!important}
+html body.soul.taste-editorial .catalog-group-head h3{color:var(--dom,var(--sl-ink))!important}
+html body.soul.taste-editorial .editorial-heading h1{font-size:clamp(34px,4.4vw,56px)!important}
+
+/* Home hero: the promise is the headline; the wordmark lives in the masthead only. */
+html body.soul.taste-editorial.cosmic-theme #start .intro-heading picture{display:none!important}
+html body.soul.taste-editorial.cosmic-theme #start .intro-promise{
+ font:600 clamp(30px,3.5vw,46px)/1.6 'Marhey','Cairo',Tahoma,sans-serif!important;color:var(--sl-ink)!important;
+ text-wrap:balance;margin:6px 0 18px!important
+}
+html body.soul.taste-editorial.cosmic-theme #start .intro-eyebrow{color:var(--sl-gold)!important;font-weight:700!important}
+html body.soul.taste-editorial.cosmic-theme #start .intro-link{background:var(--sl-green)!important;color:#fff!important;border-radius:999px!important;padding-inline:26px!important}
+html body.soul.taste-editorial.cosmic-theme #start .origin-explorer{background:var(--sl-card)!important;border:1.5px dashed var(--sl-line)!important;border-radius:6px!important}
+/* Global brands recede to stamps; colour returns on intent. */
+html body.soul.taste-editorial.cosmic-theme #start .origin-option{background:transparent!important;border:1px solid var(--sl-line)!important;border-radius:6px!important}
+html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-logo{filter:grayscale(1);opacity:.55;transition:filter .2s,opacity .2s}
+html body.soul.taste-editorial.cosmic-theme #start .origin-option:is(:hover,:focus-visible,[aria-pressed="true"]) .origin-logo{filter:none;opacity:1}
+html body.soul.taste-editorial.cosmic-theme #start .origin-option:is(:hover,[aria-pressed="true"]){border-color:var(--sl-green)!important;background:var(--sl-card)!important}
+html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-name{color:var(--sl-muted)!important}
+
+/* Reading cards: one family of duotone covers in the domain colour. */
+html body.soul.taste-editorial.cosmic-theme :is(.editorial-card,.news-card){background:var(--sl-card)!important;border:1px solid var(--sl-line)!important;border-radius:6px!important}
+html body.soul.taste-editorial.cosmic-theme .editorial-card-link{position:relative;display:block}
+html body.soul.taste-editorial.cosmic-theme .editorial-cover{filter:grayscale(1) contrast(1.15) brightness(1.08)!important}
+html body.soul.taste-editorial.cosmic-theme .editorial-card-link::before{
+ content:"";position:absolute;inset-inline:0;top:0;aspect-ratio:16/9;z-index:1;pointer-events:none;
+ background:var(--dom,var(--sl-green));mix-blend-mode:multiply;opacity:.78
+}
+html body.soul.taste-editorial.cosmic-theme .editorial-card-link::after{
+ content:"";position:absolute;inset-inline:0;top:0;aspect-ratio:16/9;z-index:1;pointer-events:none;
+ background:linear-gradient(to top,rgba(0,0,0,.22),transparent 55%)
+}
+html body.soul.taste-editorial.cosmic-theme .editorial-eyebrow span:first-child{
+ display:inline-block;color:var(--dom,var(--sl-green))!important;border:1.5px solid currentColor;border-radius:3px;
+ padding:0 8px;font-weight:700;transform:rotate(-2deg)
+}
+html body.soul.taste-editorial.cosmic-theme .editorial-card h3{font-weight:700!important}
+html body.soul.taste-editorial.cosmic-theme .editorial-action{color:var(--dom,var(--sl-green))!important;font-weight:700}
+/* A lone card in a group keeps the normal card width instead of a huge photo. */
+html body.soul.taste-editorial.cosmic-theme .editorial-grid:has(>.editorial-card:only-child){justify-content:center}
+html body.soul.taste-editorial.cosmic-theme .editorial-grid>.editorial-card:only-child{max-width:380px;justify-self:center;width:100%}
+
+/* Discovery cards: the bridge ("if you use X") leads; one quiet action set. */
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card{
+ background:var(--sl-card)!important;border:1px solid var(--sl-line)!important;border-top:4px solid var(--dom,var(--sl-green))!important;border-radius:6px!important
+}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .resource-context p{
+ display:inline-block;margin:0 auto!important;color:var(--sl-ink)!important;font:700 14px/1.8 'Cairo',sans-serif!important;
+ padding:0 4px 4px!important;background:var(--sl-hand) center bottom / 100% 6px no-repeat!important
+}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .country-badge{background:transparent!important;border:0!important;opacity:.8;font-size:12px!important}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .discovery-kind{background:transparent!important;border:1px dashed var(--sl-line)!important;border-radius:3px!important;color:var(--sl-muted)!important}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-purpose{color:var(--sl-ink)!important;font-size:15px!important}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn{
+ background:transparent!important;color:var(--dom,var(--sl-green))!important;border:1.5px solid currentColor!important;border-radius:999px!important;min-height:40px
+}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn:hover{background:var(--dom,var(--sl-green))!important;color:#fff!important}
+html body.soul.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .destination-link{opacity:.85}
+
+/* Section entries on the home page read as index cards. */
+html body.soul.taste-editorial.cosmic-theme .home-route{background:var(--sl-card)!important;border:1px solid var(--sl-line)!important;border-radius:6px!important}
+html body.soul.taste-editorial.cosmic-theme .home-route strong,
+html body.soul.taste-editorial.cosmic-theme .home-route h3{font-family:'Marhey','Cairo',sans-serif!important;font-weight:600!important}
+
+/* Observatory: the rank ruler is the hero of the page. */
+html body.soul.taste-editorial.cosmic-theme .arab-progress-row{min-height:64px!important}
+html body.soul.taste-editorial.cosmic-theme .arab-rank-track{height:14px!important}
+html body.soul.taste-editorial.cosmic-theme .arab-progress-value{font:700 17px/1.6 'Cairo',sans-serif!important}
+
+/* Footer and soft panels follow the paper. */
+html body.soul.taste-editorial.cosmic-theme :is(.frame-soft,.discovery-controls,.reading-controls){background:var(--sl-paper-2)!important;border-color:var(--sl-line)!important}
+
+@media (prefers-reduced-motion:reduce){
+ html body.soul.taste-editorial.cosmic-theme #start .origin-option .origin-logo{transition:none}
+}
+@media (max-width:760px){
+ html body.soul.taste-editorial.cosmic-theme #start .intro-promise{font-size:30px!important}
+}

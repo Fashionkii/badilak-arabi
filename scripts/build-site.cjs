@@ -48,7 +48,7 @@ const oldOrigin='https://badilak-arabi.vercel.app';
 const cosmicStyles=fs.readFileSync(path.join(root,'css/cosmic-theme.css'),'utf8');
 const readingStyles=fs.readFileSync(path.join(root,'css/reading-hierarchy.css'),'utf8');
 const motionStyles=fs.readFileSync(path.join(root,'css/motion-lab.css'),'utf8');
-const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/unified-discovery.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/taste-editorial.css'),'utf8');
+const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/unified-discovery.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/taste-editorial.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/soul-layer.css'),'utf8');
 // Keep the established request/cascade profile; the theme adds no blocking request.
 fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles+'\n'+sitePolishStyles);
 // Standalone pages keep every rule/order but reduce three blocking requests to one.
@@ -79,7 +79,7 @@ function prepare(html){
   return start+json(data)+end;
  });
  // Shared visual layer only: source content, routes, and runtime remain intact.
- html=html.replace(/<body class="([^"]*)"/, '<body class="$1 taste-editorial"');
+ html=html.replace(/<body class="([^"]*)"/, '<body class="$1 taste-editorial soul"');
  // Presentation marker for long article titles; preserve their exact text and metadata.
  if(html.includes('class="guide-shell"'))html=html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, (all,attrs,title)=>{
   const plain=title.replace(/<[^>]*>/g,'').replace(/&[^;]+;/g,'x').trim();
