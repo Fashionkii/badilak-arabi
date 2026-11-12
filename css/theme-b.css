@@ -1,0 +1,107 @@
+/* Theme B — هوية لونية أجرأ. Visual layer only, loaded last, comparison-only.
+   Bold confident colour + type weight carry the personality; no paper texture,
+   no hand-drawn underline, motion stays purposeful (one lift, one underline-grow).
+   Protected and untouched: text, data, links, sources, dates, behaviour,
+   reserved ad slots and their disclosures, noindex. Brand wordmark unchanged. */
+
+html body.theme-b.taste-editorial.cosmic-theme{
+ --tb-canvas:#fffaf3;--tb-surface:#fffefb;--tb-ink:#231d19;--tb-muted:#6f6257;
+ --tb-line:#ecdfc9;--tb-accent:#b8431f;--tb-accent-ink:#fff;
+ --te-canvas:var(--tb-canvas);--te-ink:var(--tb-ink);--te-muted:var(--tb-muted);
+ --te-line:var(--tb-line);--te-surface:var(--tb-surface);--te-accent:var(--tb-accent);
+ background:var(--tb-canvas)!important;
+}
+html body.theme-b.taste-editorial.cosmic-theme :is(.site-header,.top,footer,.footer){background:var(--tb-canvas)!important}
+
+/* Domain colour = wayfinding, bolder and more saturated than the paper direction. */
+html body.theme-b :is([data-editorial-category="work"],[aria-labelledby="catalog-group-work"],.reading-group[data-reading-group="work"]){--dom:#1f6e57}
+html body.theme-b :is([data-editorial-category="tech"],[aria-labelledby="catalog-group-tech"],.reading-group[data-reading-group="tech"]){--dom:#2a4f94}
+html body.theme-b :is([data-editorial-category="learn"],[aria-labelledby="catalog-group-learn"],.reading-group[data-reading-group="learn"]){--dom:#a8650f}
+html body.theme-b :is([data-editorial-category="create"],[aria-labelledby="catalog-group-create"],.reading-group[data-reading-group="create"]){--dom:#b8431f}
+html body.theme-b :is([data-editorial-category="culture"],[aria-labelledby="catalog-group-culture"],.reading-group[data-reading-group="culture"]){--dom:#7a3f84}
+html body.theme-b :is([data-editorial-category="shopping"],[aria-labelledby="catalog-group-shopping"],.reading-group[data-reading-group="shopping"]){--dom:#1f7a86}
+html body.theme-b :is([data-editorial-category="observer"],.reading-group[data-reading-group="observer"]){--dom:#3a3a36}
+
+/* Headings: heavier Cairo, solid colour bar instead of a hand-drawn line. */
+html body.theme-b.taste-editorial :is(.section-title,.portal-heading h2,.editorial-section-head h2,#competitionTitle,.editorial-heading h1,.reading-group>h2,.origin-heading h2,.catalog-group-head h3,.home-panel-title h2,.section-head h2){
+ font-family:'Cairo',Tahoma,sans-serif!important;font-weight:800!important;
+ display:inline-block;position:relative;padding-bottom:12px!important;
+}
+html body.theme-b.taste-editorial :is(.section-title,.portal-heading h2,.editorial-section-head h2,#competitionTitle,.editorial-heading h1,.reading-group>h2,.origin-heading h2,.catalog-group-head h3,.home-panel-title h2,.section-head h2)::after{
+ content:"";position:absolute;inset-inline-start:50%;transform:translateX(-50%);bottom:0;width:48px;height:4px;border-radius:2px;background:var(--dom,var(--tb-accent));
+}
+html body.theme-b.taste-editorial :is(.reading-group,.catalog-group)>:is(h2,.catalog-group-head){color:var(--dom,var(--tb-ink))!important}
+html body.theme-b.taste-editorial .catalog-group-head h3{color:var(--dom,var(--tb-ink))!important}
+html body.theme-b.taste-editorial .editorial-heading h1{font-size:clamp(34px,4.4vw,56px)!important}
+
+/* Home hero: confident weight, no paper artefacts. */
+html body.theme-b.taste-editorial.cosmic-theme #start .intro-promise{
+ font:800 clamp(28px,3.4vw,44px)/1.55 'Cairo',Tahoma,sans-serif!important;color:var(--tb-ink)!important;
+ text-wrap:balance;margin:6px 0 18px!important
+}
+html body.theme-b.taste-editorial.cosmic-theme #start .intro-eyebrow{color:var(--tb-accent)!important;font-weight:800!important}
+html body.theme-b.taste-editorial.cosmic-theme #start .intro-link{
+ background:var(--tb-accent)!important;color:var(--tb-accent-ink)!important;border-radius:10px!important;padding-inline:26px!important;
+ box-shadow:0 6px 18px rgba(184,67,31,.25)!important;transition:transform .15s,box-shadow .15s!important;
+}
+html body.theme-b.taste-editorial.cosmic-theme #start .intro-link:hover{transform:translateY(-2px)!important;box-shadow:0 10px 22px rgba(184,67,31,.32)!important}
+html body.theme-b.taste-editorial.cosmic-theme #start .origin-explorer{background:var(--tb-surface)!important;border:1.5px solid var(--tb-line)!important;border-radius:10px!important}
+html body.theme-b.taste-editorial.cosmic-theme #start .origin-option{background:var(--tb-surface)!important;border:1px solid var(--tb-line)!important;border-radius:10px!important;transition:border-color .15s,transform .15s!important}
+html body.theme-b.taste-editorial.cosmic-theme #start .origin-option:is(:hover,:focus-visible,[aria-pressed="true"]){border-color:var(--tb-accent)!important;transform:translateY(-1px)!important}
+html body.theme-b.taste-editorial.cosmic-theme #start .origin-option .origin-name{color:var(--tb-muted)!important}
+
+/* Reading cards: confident single-colour top bar, no duotone, clean white card. */
+html body.theme-b.taste-editorial.cosmic-theme :is(.editorial-card,.news-card){background:var(--tb-surface)!important;border:1px solid var(--tb-line)!important;border-radius:10px!important;overflow:hidden;transition:transform .15s,box-shadow .15s!important}
+html body.theme-b.taste-editorial.cosmic-theme :is(.editorial-card,.news-card):hover{transform:translateY(-2px)!important;box-shadow:0 10px 24px rgba(35,29,25,.1)!important}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-card-link{position:relative;display:block}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-cover{filter:saturate(1.05)!important}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-card-link::before{
+ content:"";position:absolute;inset-inline:0;top:0;height:4px;z-index:1;pointer-events:none;background:var(--dom,var(--tb-accent));
+}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-eyebrow span:first-child{
+ display:inline-block;color:#fff!important;background:var(--dom,var(--tb-accent))!important;border-radius:4px;
+ padding:2px 9px;font-weight:800;
+}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-card h3{font-weight:800!important}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-action{color:var(--dom,var(--tb-accent))!important;font-weight:800}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-grid:has(>.editorial-card:only-child){justify-content:center}
+html body.theme-b.taste-editorial.cosmic-theme .editorial-grid>.editorial-card:only-child{max-width:380px;justify-self:center;width:100%}
+
+/* Discovery cards: solid colour top border, bold weight, confident CTA fill. */
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card{
+ background:var(--tb-surface)!important;border:1px solid var(--tb-line)!important;border-top:4px solid var(--dom,var(--tb-accent))!important;border-radius:10px!important;
+ transition:transform .15s,box-shadow .15s!important;
+}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card:hover{transform:translateY(-2px)!important;box-shadow:0 10px 22px rgba(35,29,25,.1)!important}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .resource-context p{
+ display:inline-block;margin:0 auto!important;color:var(--tb-ink)!important;font:700 14px/1.8 'Cairo',sans-serif!important;padding:0 4px!important;
+}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .country-badge{opacity:.85;font-size:12px!important}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .discovery-kind{background:var(--tb-canvas)!important;border:1px solid var(--tb-line)!important;border-radius:4px!important;color:var(--tb-muted)!important}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-purpose{color:var(--tb-ink)!important;font-size:15px!important}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn{
+ background:var(--dom,var(--tb-accent))!important;color:#fff!important;border:0!important;border-radius:999px!important;min-height:40px;font-weight:700!important;
+}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn:hover{filter:brightness(.92)}
+html body.theme-b.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .destination-link{opacity:.9}
+
+/* Section entries on the home page. */
+html body.theme-b.taste-editorial.cosmic-theme .home-route{background:var(--tb-surface)!important;border:1px solid var(--tb-line)!important;border-radius:10px!important}
+html body.theme-b.taste-editorial.cosmic-theme .home-route:hover{border-color:var(--tb-accent)!important}
+html body.theme-b.taste-editorial.cosmic-theme .home-route strong,
+html body.theme-b.taste-editorial.cosmic-theme .home-route h3{font-family:'Cairo',sans-serif!important;font-weight:800!important}
+
+/* Observatory. */
+html body.theme-b.taste-editorial.cosmic-theme .arab-progress-row{min-height:64px!important}
+html body.theme-b.taste-editorial.cosmic-theme .arab-rank-track{height:14px!important;border-radius:7px!important}
+html body.theme-b.taste-editorial.cosmic-theme .arab-progress-value{font:800 17px/1.6 'Cairo',sans-serif!important}
+
+/* Footer and soft panels. */
+html body.theme-b.taste-editorial.cosmic-theme :is(.frame-soft,.discovery-controls,.reading-controls){background:var(--tb-canvas)!important;border-color:var(--tb-line)!important}
+
+@media (prefers-reduced-motion:reduce){
+ html body.theme-b.taste-editorial.cosmic-theme *{transition:none!important}
+}
+@media (max-width:760px){
+ html body.theme-b.taste-editorial.cosmic-theme #start .intro-promise{font-size:28px!important}
+}

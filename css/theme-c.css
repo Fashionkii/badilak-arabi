@@ -1,0 +1,48 @@
+/* Theme C — تحسين حرفي على التصميم الحالي. Visual layer only, loaded last, comparison-only.
+   No new colour, no new font. Same teal identity, same structure. Only craft:
+   type scale, line-height, spacing rhythm, contrast, and quiet hover feedback.
+   Protected and untouched: text, data, links, sources, dates, behaviour,
+   reserved ad slots and their disclosures, noindex. Brand wordmark unchanged. */
+
+html body.theme-c.taste-editorial.cosmic-theme{
+ --te-muted:#44524c; /* slightly darker for stronger contrast than #526159 */
+}
+
+/* Headings: tighter, more deliberate rhythm. Same Cairo, same colour. */
+html body.theme-c.taste-editorial :is(.section-title,.portal-heading h2,.editorial-section-head h2,#competitionTitle,.editorial-heading h1,.reading-group>h2,.origin-heading h2,.catalog-group-head h3,.home-panel-title h2,.section-head h2){
+ letter-spacing:-.01em!important;line-height:1.35!important;
+}
+html body.theme-c.taste-editorial .editorial-heading h1{font-size:clamp(32px,4.2vw,52px)!important;line-height:1.3!important}
+
+/* Hero: calmer measure, better optical balance. */
+html body.theme-c.taste-editorial.cosmic-theme #start .intro-promise{
+ font:700 clamp(26px,2.7vw,36px)/1.6 'Cairo',sans-serif!important;max-width:42ch;margin-inline:auto!important;
+}
+html body.theme-c.taste-editorial.cosmic-theme #start .intro-eyebrow{letter-spacing:.02em!important}
+html body.theme-c.taste-editorial.cosmic-theme #start .intro-link{transition:transform .15s,box-shadow .15s!important;box-shadow:0 4px 14px rgba(25,75,62,.18)!important}
+html body.theme-c.taste-editorial.cosmic-theme #start .intro-link:hover{transform:translateY(-1px)!important;box-shadow:0 7px 18px rgba(25,75,62,.24)!important}
+html body.theme-c.taste-editorial.cosmic-theme #start .origin-option{transition:border-color .15s,background .15s!important}
+
+/* Cards: one consistent radius/shadow scale instead of flat borders. */
+html body.theme-c.taste-editorial.cosmic-theme :is(.editorial-card,.news-card){border-radius:8px!important;transition:box-shadow .15s,transform .15s!important}
+html body.theme-c.taste-editorial.cosmic-theme :is(.editorial-card,.news-card):hover{box-shadow:0 8px 20px rgba(23,63,61,.09)!important;transform:translateY(-1px)!important}
+html body.theme-c.taste-editorial.cosmic-theme .editorial-card-body{line-height:1.85!important}
+html body.theme-c.taste-editorial.cosmic-theme :is(.editorial-card h3,.news-card h2){line-height:1.5!important}
+html body.theme-c.taste-editorial.cosmic-theme .editorial-card :is(.editorial-eyebrow,.editorial-summary,.editorial-date){line-height:1.75!important}
+
+/* Directory cards: same structure, firmer spacing and contrast only. */
+html body.theme-c.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card{
+ border-radius:8px!important;transition:box-shadow .15s,transform .15s!important;
+}
+html body.theme-c.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory :is(.catalog-group-items,.catalog-grid,#catalogGrid)>.unified-resource-card:hover{box-shadow:0 8px 20px rgba(23,63,61,.09)!important;transform:translateY(-1px)!important}
+html body.theme-c.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .card-purpose{line-height:1.75!important}
+html body.theme-c.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn{transition:transform .15s!important}
+html body.theme-c.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .unified-resource-card .more-btn:hover{transform:translateY(-1px)!important}
+
+/* Home routes: firmer rhythm. */
+html body.theme-c.taste-editorial.cosmic-theme .home-route{border-radius:8px!important;transition:border-color .15s!important}
+html body.theme-c.taste-editorial.cosmic-theme .home-route-copy small{line-height:1.85!important}
+
+@media (prefers-reduced-motion:reduce){
+ html body.theme-c.taste-editorial.cosmic-theme *{transition:none!important}
+}

@@ -48,7 +48,7 @@ const oldOrigin='https://badilak-arabi.vercel.app';
 const cosmicStyles=fs.readFileSync(path.join(root,'css/cosmic-theme.css'),'utf8');
 const readingStyles=fs.readFileSync(path.join(root,'css/reading-hierarchy.css'),'utf8');
 const motionStyles=fs.readFileSync(path.join(root,'css/motion-lab.css'),'utf8');
-const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/unified-discovery.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/taste-editorial.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/soul-layer.css'),'utf8');
+const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/unified-discovery.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/taste-editorial.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/soul-layer.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/theme-b.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'css/theme-c.css'),'utf8');
 // Keep the established request/cascade profile; the theme adds no blocking request.
 fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles+'\n'+sitePolishStyles);
 // Standalone pages keep every rule/order but reduce three blocking requests to one.
@@ -91,8 +91,29 @@ function prepare(html){
  html=html.replace(/wordmark-(?:header|main)-20261016-dots-(320|640|1080)\.webp/g,(_,size)=>'wordmark-light-20261101-'+(size==='320'?'320':'640')+'.webp')
   .replace(/wordmark-light-20261101-640\.webp 640w, \/images\/brand\/wordmark-light-20261101-640\.webp 1080w/g,'wordmark-light-20261101-320.webp 320w, /images/brand/wordmark-light-20261101-640.webp 640w')
   .replace(/(<img[^>]*class="cosmic-logo"[^>]*?)width="(?:1829|864)" height="(?:408|505)"/g,'$1width="640" height="207"');
+ // PREVIEW-ONLY comparison switcher. Never merges to main; remove this block before any merge.
+ html=html.replace('</body>',PREVIEW_COMPARE_WIDGET+'</body>');
  return html;
 }
+const PREVIEW_COMPARE_WIDGET=`<div id="previewCompare" style="position:fixed;inset-inline-end:14px;bottom:14px;z-index:99999;display:flex;gap:6px;background:#1b231f;padding:8px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.3);font:600 13px/1.4 'Cairo',Tahoma,sans-serif" dir="rtl" aria-label="معاينة مقارنة — لا يصل لـmain">
+<button type="button" data-theme="" style="background:#fff;color:#1b231f;border:0;border-radius:6px;padding:6px 10px;cursor:pointer">الأساسي</button>
+<button type="button" data-theme="soul" style="background:#f6f2e8;color:#1b231f;border:0;border-radius:6px;padding:6px 10px;cursor:pointer">A ورق</button>
+<button type="button" data-theme="theme-b" style="background:#b8431f;color:#fff;border:0;border-radius:6px;padding:6px 10px;cursor:pointer">B جريء</button>
+<button type="button" data-theme="theme-c" style="background:#194b3e;color:#fff;border:0;border-radius:6px;padding:6px 10px;cursor:pointer">C محسّن</button>
+</div>
+<script>(function(){
+var KEY='badilak-preview-theme',CLASSES=['soul','theme-b','theme-c'];
+function apply(name){
+ CLASSES.forEach(function(c){document.body.classList.remove(c)});
+ if(name)document.body.classList.add(name);
+ try{localStorage.setItem(KEY,name||'')}catch(e){}
+}
+var saved=null;try{saved=localStorage.getItem(KEY)}catch(e){}
+if(saved!==null)apply(saved);
+document.getElementById('previewCompare').addEventListener('click',function(e){
+ var btn=e.target.closest('button[data-theme]');if(!btn)return;apply(btn.getAttribute('data-theme'));
+});
+})();</script>`;
 function setPageHead(html,page){
  if(page.kind==='news-article'){
   html=html.replace('<meta property="og:type" content="website">','<meta property="og:type" content="article">');

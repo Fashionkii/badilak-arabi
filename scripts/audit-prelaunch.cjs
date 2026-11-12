@@ -33,6 +33,8 @@ for(const file of articleFiles){
  const body=s=>withOriginalArticleMediaOrder(s.match(/<body[\s\S]*<\/body>/)[0])
   .replace(/<nav class="toplinks"[^>]*>[\s\S]*?<\/nav>/,'<!-- shared primary navigation -->')
   .replace(/<!-- EDITORIAL_JOURNEY_START -->[\s\S]*?<!-- EDITORIAL_JOURNEY_END -->/g,'')
+  // PREVIEW-ONLY comparison switcher (never reaches main); ignore it in this diff.
+  .replace(/<div id="previewCompare"[\s\S]*?<\/script>/,'')
   // Ignore only the visual title marker; keep comparing the complete original text/DOM.
   .replace('<h1 class="long-editorial-title">','<h1>')
   .replace('<body class="cosmic-theme taste-editorial soul">','<body>')
