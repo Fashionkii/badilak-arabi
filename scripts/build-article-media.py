@@ -2,6 +2,7 @@
 """Build licensed article covers and social metadata from data/article-media.json.
 Run: python scripts/build-article-media.py (requires Pillow with RAQM).
 Address label only: python scripts/build-article-media.py --label-only [--only SLUG ...]
+Whole social image for named articles: python scripts/build-article-media.py --social-only --only SLUG [...]
 """
 from pathlib import Path
 import argparse, hashlib, html, io, json, re
@@ -65,6 +66,63 @@ def build_thumbnails():
     hub_path.write_text(hub)
     print(f'Built {len(cards)} reading-list thumbnails; full article covers unchanged.')
 
+def load_photo(item):
+    if item['photo']:
+        photo_path = (ROOT/item['photo'].lstrip('/')).resolve()
+        if not photo_path.is_relative_to(ROOT/'images'): raise ValueError('Photo must be inside images/')
+        photo = Image.open(photo_path).convert('RGB')
+    else:
+        # An automatic, explicit text fallback when a new article has no photo yet.
+        photo = Image.new('RGB', (1200,675), '#e3ece7')
+    focal = item.get('focalPoint', [0.5,0.5])
+    if len(focal)!=2 or any(not isinstance(v,(int,float)) or not 0<=v<=1 for v in focal): raise ValueError('Invalid focalPoint')
+    return photo, focal
+
+def render_social(photo, focal, title, font_path, slug):
+    social = Image.new('RGB', (1200,630), '#fffdf8')
+    social.paste(ImageOps.fit(photo, (540,630), centering=tuple(focal)), (0,0))
+    draw = ImageDraw.Draw(social)
+    draw.rectangle((540,0,556,630), fill='#c79a47')
+    draw.rounded_rectangle((1070,66,1136,132), radius=14, fill='#173f3d')
+    small = ImageFont.truetype(font_path, 28)
+    brand = ImageFont.truetype(font_path, 38)
+    draw.text((1103,94), 'ب', anchor='mm', font=brand, fill='#fffdf8', direction='rtl')
+    draw.text((1048,85), 'بديلك عربي', font=brand, fill='#173f3d', anchor='ra', direction='rtl')
+    size = 54
+    while True:
+        font = ImageFont.truetype(font_path, size)
+        lines = text_lines(draw, title, font, 540)
+        if len(lines)<=3 or size<=34: break
+        size -= 2
+    if len(lines)>3: raise ValueError('Social headline does not fit: '+slug)
+    line_height = int(size*1.55); y = 310 - len(lines)*line_height/2
+    for line in lines:
+        draw.text((1136,y), line, anchor='ra', font=font, fill='#173f3d', direction='rtl'); y+=line_height
+    draw.line((636,490,1136,490), fill='#c9d4ce', width=2)
+    draw.text((1136,525), 'اقرأ قبل أن تختار', anchor='ra', font=small, fill='#68746f', direction='rtl')
+    draw.text((636,580), site_host(), font=ImageFont.truetype(font_path,19), fill='#68746f')
+    return social
+
+def refresh_social_version(slug):
+    """Point the guide's share-image tags at the file's new content hash; nothing else in the page changes."""
+    version = hashlib.sha256((ROOT/'images/articles'/f'{slug}-social.jpg').read_bytes()).hexdigest()[:10]
+    path = ROOT/'guides'/f'{slug}.html'
+    page, count = re.subn(rf'(/images/articles/{slug}-social\.jpg\?v=)[0-9a-f]{{10}}', lambda m: m.group(1)+version, path.read_text())
+    if not count: raise ValueError('No versioned social image reference: '+slug)
+    path.write_text(page)
+
+def rebuild_social(font_path, only):
+    """Redraw whole social images for the named articles from their stored photo and title; covers and copy stay untouched."""
+    articles = json.loads((ROOT/'data/article-media.json').read_text())['articles']
+    if not features.check('raqm'): raise RuntimeError('Pillow must support RAQM for Arabic text.')
+    for slug in only:
+        if not re.fullmatch('[a-z0-9-]+', slug) or slug not in articles: raise ValueError('Unknown article slug: '+slug)
+        item = articles[slug]; title = item['socialTitle'].strip()
+        photo, focal = load_photo(item)
+        save_image(render_social(photo, focal, title, font_path, slug), ROOT/'images/articles'/f'{slug}-social.jpg', 'JPEG', quality=89, optimize=True)
+        refresh_social_version(slug)
+    print(f'Rebuilt {len(only)} social image(s); covers, thumbnails and article copy unchanged.')
+
 def relabel(font_path, only=None):
     """Redraw only the address label on existing social images; artwork, covers and copy stay untouched."""
     host = site_host(); font = ImageFont.truetype(font_path, 19)
@@ -80,11 +138,7 @@ def relabel(font_path, only=None):
             draw.text((636,580), host, font=font, fill='#68746f')
             # Reuse the file's own JPEG tables so the untouched artwork is not recompressed at a new quality.
             save_image(social, social_path, 'JPEG', quality='keep', subsampling='keep', optimize=True)
-        version = hashlib.sha256(social_path.read_bytes()).hexdigest()[:10]
-        path = ROOT/'guides'/f'{slug}.html'
-        page, count = re.subn(rf'(/images/articles/{slug}-social\.jpg\?v=)[0-9a-f]{{10}}', lambda m: m.group(1)+version, path.read_text())
-        if not count: raise ValueError('No versioned social image reference: '+slug)
-        path.write_text(page)
+        refresh_social_version(slug)
     print(f'Relabelled {len(slugs)} social image(s) with {host}; covers, headlines and article copy unchanged.')
 
 def build(font_path):
@@ -98,40 +152,11 @@ def build(font_path):
         page = path.read_text()
         title = item['socialTitle'].strip(); alt = item['alt'].strip()
         if not title or not alt or len(title)>100: raise ValueError('Missing/long title or image description: '+slug)
-        if item['photo']:
-            photo_path = (ROOT/item['photo'].lstrip('/')).resolve()
-            if not photo_path.is_relative_to(ROOT/'images'): raise ValueError('Photo must be inside images/')
-            photo = Image.open(photo_path).convert('RGB')
-        else:
-            # An automatic, explicit text fallback when a new article has no photo yet.
-            photo = Image.new('RGB', (1200,675), '#e3ece7')
-        focal = item.get('focalPoint', [0.5,0.5])
-        if len(focal)!=2 or any(not isinstance(v,(int,float)) or not 0<=v<=1 for v in focal): raise ValueError('Invalid focalPoint')
+        photo, focal = load_photo(item)
         directory = ROOT/'images/articles'; directory.mkdir(exist_ok=True, parents=True)
         cover = ImageOps.fit(photo, (1200,675), centering=tuple(focal))
         save_image(cover, directory/f'{slug}-cover.webp', 'WEBP', quality=83)
-        social = Image.new('RGB', (1200,630), '#fffdf8')
-        social.paste(ImageOps.fit(photo, (540,630), centering=tuple(focal)), (0,0))
-        draw = ImageDraw.Draw(social)
-        draw.rectangle((540,0,556,630), fill='#c79a47')
-        draw.rounded_rectangle((1070,66,1136,132), radius=14, fill='#173f3d')
-        small = ImageFont.truetype(font_path, 28)
-        brand = ImageFont.truetype(font_path, 38)
-        draw.text((1103,94), 'ب', anchor='mm', font=brand, fill='#fffdf8', direction='rtl')
-        draw.text((1048,85), 'بديلك عربي', font=brand, fill='#173f3d', anchor='ra', direction='rtl')
-        size = 54
-        while True:
-            font = ImageFont.truetype(font_path, size)
-            lines = text_lines(draw, title, font, 540)
-            if len(lines)<=3 or size<=34: break
-            size -= 2
-        if len(lines)>3: raise ValueError('Social headline does not fit: '+slug)
-        line_height = int(size*1.55); y = 310 - len(lines)*line_height/2
-        for line in lines:
-            draw.text((1136,y), line, anchor='ra', font=font, fill='#173f3d', direction='rtl'); y+=line_height
-        draw.line((636,490,1136,490), fill='#c9d4ce', width=2)
-        draw.text((1136,525), 'اقرأ قبل أن تختار', anchor='ra', font=small, fill='#68746f', direction='rtl')
-        draw.text((636,580), site_host(), font=ImageFont.truetype(font_path,19), fill='#68746f')
+        social = render_social(photo, focal, title, font_path, slug)
         social_path = directory/f'{slug}-social.jpg'; save_image(social, social_path, 'JPEG', quality=89, optimize=True)
         version = hashlib.sha256(social_path.read_bytes()).hexdigest()[:10]
         social_url = f'{BASE}/images/articles/{slug}-social.jpg?v={version}'
@@ -179,9 +204,14 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--font',default='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
     parser.add_argument('--thumbnails-only', action='store_true')
     parser.add_argument('--label-only', action='store_true')
+    parser.add_argument('--social-only', action='store_true')
     parser.add_argument('--only', nargs='+', metavar='SLUG')
     args=parser.parse_args()
+    if args.label_only and args.social_only: parser.error('Choose one of --label-only and --social-only')
     if args.label_only: relabel(args.font, args.only)
-    elif args.only: parser.error('--only is for --label-only')
+    elif args.social_only:
+        if not args.only: parser.error('--social-only needs --only SLUG so no image is redrawn by accident')
+        rebuild_social(args.font, args.only)
+    elif args.only: parser.error('--only is for --label-only or --social-only')
     elif args.thumbnails_only: build_thumbnails()
     else: build(args.font)
