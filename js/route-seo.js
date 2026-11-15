@@ -53,7 +53,7 @@
  }
  root.badilakSEO={route,metadata,categoryIndex,staticItem,staticCards,categories,escape};
  if(typeof document==='undefined')return;
- const origin=document.querySelector('meta[name="badilak:origin"]')?.content||'https://badilak-arabi.vercel.app';
+ const origin=document.querySelector('meta[name="badilak:origin"]')?.content||location.origin;
  function setMeta(selector,attribute,value){const el=document.querySelector(selector);if(el)el.setAttribute(attribute,value);}
  function sync(){
   const page=metadata(location.pathname,origin);
