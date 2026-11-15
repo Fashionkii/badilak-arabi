@@ -536,3 +536,44 @@ body.taste-editorial .badilak-social-links[aria-label="منصات التواصل
 @media(min-width:768px){
  body.taste-editorial.cosmic-theme:not(.guided-discovery):has(.guide-shell) h1.long-editorial-title{font-size:clamp(32px,3vw,42px)!important;line-height:1.5!important}
 }
+
+/* Calm nature pass, 15 November 2026. Owner brief: natural, restful colour and a steadier eye path,
+   chiefly on the home page. Tones are taken from avocado greens and creams, with the gold already
+   in the wordmark as a small marker. No saturated hue is added. Text, data, order, links, the
+   service tiles' behaviour and the approved card borders are unchanged. */
+body.taste-editorial.cosmic-theme{--te-canvas:#f8f9f3;--te-tint:#eaf0e2;--te-surface:#fffefb;--te-gold:#d4981f}
+
+/* Opening panel: one centred axis from the eyebrow to the note, level with the service panel. */
+body.taste-editorial.cosmic-theme #start .intro-brand-panel{align-items:center!important}
+body.taste-editorial.cosmic-theme #start .intro-copy{align-items:center!important;text-align:center!important;margin-inline:auto!important}
+body.taste-editorial.cosmic-theme #start .intro-note{text-align:center!important;margin-inline:auto!important}
+body.taste-editorial.cosmic-theme #start .intro-eyebrow::before{background:var(--te-gold)!important;height:2px!important}
+@media(min-width:1024px){
+ body.taste-editorial.cosmic-theme #start .intro-brand-panel{align-self:center!important}
+}
+
+/* Chapter headings: the supporting line follows the centred title, with one small shared marker. */
+body.taste-editorial.cosmic-theme #start .home-pathways-heading,
+body.taste-editorial.cosmic-theme #start .home-pathways-heading p{text-align:center!important}
+body.taste-editorial.cosmic-theme #start :is(.home-pathways-heading,.editorial-section-head) h2::after{content:"";display:block;width:32px;height:3px;margin:8px auto 0;background:var(--te-gold)}
+body.taste-editorial.cosmic-theme #start .home-pathways-heading{margin-bottom:24px!important}
+
+/* The three ways in: each card reads along a single axis. */
+@media(min-width:768px){
+ body.taste-editorial.cosmic-theme #start .home-route{align-items:center!important;text-align:center!important;gap:8px!important;padding:24px!important}
+ body.taste-editorial.cosmic-theme #start .home-route-copy{align-items:center;width:100%}
+ body.taste-editorial.cosmic-theme #start .home-route-copy small{text-align:center!important;max-width:32ch}
+}
+@media(max-width:767px){
+ body.taste-editorial.cosmic-theme #start .home-route-copy strong{text-align:start!important}
+}
+
+/* Reading sits on a full-width band of the soft tone, so chapters alternate cream and sage. */
+body.taste-editorial.cosmic-theme #start>.home-pathways{padding-top:40px!important}
+body.taste-editorial.cosmic-theme #start>.home-editorial{margin-block:24px 0!important;padding-block:56px!important;border-image:conic-gradient(var(--te-tint) 0 0) fill 0//0 100vw}
+body.taste-editorial.cosmic-theme #start>.home-country-overview{border-top:0!important;padding-top:24px!important}
+@media(max-width:767px){
+ body.taste-editorial.cosmic-theme #start>.home-pathways{padding-top:32px!important}
+ body.taste-editorial.cosmic-theme #start>.home-editorial{margin-block:12px 0!important;padding-block:40px!important}
+ body.taste-editorial.cosmic-theme #start>.home-country-overview{padding-top:12px!important}
+}
