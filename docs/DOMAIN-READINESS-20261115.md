@@ -18,7 +18,27 @@ changed. Base commit: `91c581febc17878635aef1c66dc923948520bdce`.
 - `js/route-seo.js`: the unused fallback origin is `location.origin` instead of a literal host. All
   140 pages carry the `badilak:origin` meta, so the fallback does not run.
 
-Built output is byte-identical to the base commit except that one line of `js/route-seo.js`.
+Built output is byte-identical to the base commit except that one line of `js/route-seo.js` and the
+share-image correction below.
+
+## Share-image address label (owner-approved follow-up, same day)
+
+The owner approved correcting the address drawn on article share images, including the broken one.
+
+- `scripts/build-article-media.py`: new `--label-only [--only SLUG ...]` mode. It repaints only the
+  address label area of existing `*-social.jpg` files and refreshes the `?v=` value of the three
+  share-image tags in that guide's head. Covers, headlines, thumbnails, figures and article copy are
+  not regenerated. The label text now comes from `site.config.json` (also in the full build), so
+  the drawn address follows the same single setting as every page URL.
+- `images/articles/create-online-academy-social.jpg`: the row of empty glyph boxes is replaced by
+  the readable current address, in the same font and position as the other 20 images. The rest of
+  that image (its heavier headline typeface included) is unchanged in design.
+- `guides/create-online-academy.html`: `?v=` on `og:image`, `og:image:secure_url`, `twitter:image`
+  only (3 lines). Body unchanged.
+
+The other 20 images were not touched: they already show the current address correctly and change
+only at the domain switch. The file is re-saved with its own JPEG tables; outside the label area the
+largest per-pixel difference measured was 7 of 255, on under 0.5% of pixels.
 
 ## Verified
 
@@ -45,15 +65,18 @@ canonical and share image URL would point at a dead host.
 3. `vercel.json`: add as the first entry of `redirects`, with the real domain:
    `{ "source": "/:path*", "has": [{ "type": "host", "value": "badilak-arabi.vercel.app" }], "destination": "https://NEW-DOMAIN/:path*", "permanent": true }`
 4. `server/studio/client/app.js` (offline export home link): replace the literal old origin.
-5. Build, run `audit-prelaunch`, deploy, then check on the public domain: home, one article, one
+5. `python3 scripts/build-article-media.py --label-only` (Pillow with RAQM, DejaVu Sans): redraws
+   the address on all 21 share images from the new setting and refreshes 63 `?v=` values. Look at
+   two or three results before committing. Do not run the script without `--label-only`.
+6. Build, run `audit-prelaunch`, deploy, then check on the public domain: home, one article, one
    discover page, one news item, `/admin/studio` login (a fresh login is needed per host).
+
+Step 5 was rehearsed in a throwaway copy with a new `.com`: 21 images relabelled, 63 head lines
+changed, build and `audit-prelaunch` pass.
 
 ## Known leftovers, owner decision
 
-- 20 of the 21 article share images (`images/articles/*-social.jpg`) have the text
-  `badilak-arabi.vercel.app` drawn into the picture by `scripts/build-article-media.py`. The 21st,
-  `create-online-academy-social.jpg`, shows empty glyph boxes in that position. Re-running that
-  script also re-encodes covers and rewrites guide heads, so changing the label needs its own
-  narrow, reviewed task. This is a visual change and was not made here.
+- `create-online-academy-social.jpg` uses a heavier typeface for its headline, brand and tagline
+  than the other 20 share images. Reported only; not changed.
 - Opening indexing, enabling feedback, adding analytics or a pixel, and any paid plan remain
   separate decisions.

@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 """Build licensed article covers and social metadata from data/article-media.json.
 Run: python scripts/build-article-media.py (requires Pillow with RAQM).
+Address label only: python scripts/build-article-media.py --label-only [--only SLUG ...]
 """
 from pathlib import Path
 import argparse, hashlib, html, io, json, re
+from urllib.parse import urlsplit
 from PIL import Image, ImageDraw, ImageFont, ImageOps, features
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://badilak-arabi.vercel.app'
+# Clear of the tagline above it in every existing social image; holds only the address label.
+LABEL_BOX = (620,576,1150,616)
+
+def site_host():
+    """The address drawn on social images follows site.config.json, like every page URL."""
+    return urlsplit(json.loads((ROOT/'site.config.json').read_text())['canonicalOrigin']).netloc
 
 def escape(value): return html.escape(str(value), quote=True)
 def update_meta(page, key, value, attr='property'):
@@ -57,6 +65,28 @@ def build_thumbnails():
     hub_path.write_text(hub)
     print(f'Built {len(cards)} reading-list thumbnails; full article covers unchanged.')
 
+def relabel(font_path, only=None):
+    """Redraw only the address label on existing social images; artwork, covers and copy stay untouched."""
+    host = site_host(); font = ImageFont.truetype(font_path, 19)
+    slugs = only or list(json.loads((ROOT/'data/article-media.json').read_text())['articles'])
+    for slug in slugs:
+        if not re.fullmatch('[a-z0-9-]+', slug): raise ValueError('Invalid article slug')
+        social_path = ROOT/'images/articles'/f'{slug}-social.jpg'
+        with Image.open(social_path) as social:
+            if social.format!='JPEG' or social.size!=(1200,630): raise ValueError('Unexpected social image: '+slug)
+            draw = ImageDraw.Draw(social)
+            if draw.textlength(host, font=font) > LABEL_BOX[2]-636: raise ValueError('Address label does not fit: '+host)
+            draw.rectangle(LABEL_BOX, fill='#fffdf8')
+            draw.text((636,580), host, font=font, fill='#68746f')
+            # Reuse the file's own JPEG tables so the untouched artwork is not recompressed at a new quality.
+            save_image(social, social_path, 'JPEG', quality='keep', subsampling='keep', optimize=True)
+        version = hashlib.sha256(social_path.read_bytes()).hexdigest()[:10]
+        path = ROOT/'guides'/f'{slug}.html'
+        page, count = re.subn(rf'(/images/articles/{slug}-social\.jpg\?v=)[0-9a-f]{{10}}', lambda m: m.group(1)+version, path.read_text())
+        if not count: raise ValueError('No versioned social image reference: '+slug)
+        path.write_text(page)
+    print(f'Relabelled {len(slugs)} social image(s) with {host}; covers, headlines and article copy unchanged.')
+
 def build(font_path):
     if not features.check('raqm'): raise RuntimeError('Pillow must support RAQM for Arabic text.')
     manifest = json.loads((ROOT/'data/article-media.json').read_text())
@@ -101,7 +131,7 @@ def build(font_path):
             draw.text((1136,y), line, anchor='ra', font=font, fill='#173f3d', direction='rtl'); y+=line_height
         draw.line((636,490,1136,490), fill='#c9d4ce', width=2)
         draw.text((1136,525), 'اقرأ قبل أن تختار', anchor='ra', font=small, fill='#68746f', direction='rtl')
-        draw.text((636,580), 'badilak-arabi.vercel.app', font=ImageFont.truetype(font_path,19), fill='#68746f')
+        draw.text((636,580), site_host(), font=ImageFont.truetype(font_path,19), fill='#68746f')
         social_path = directory/f'{slug}-social.jpg'; save_image(social, social_path, 'JPEG', quality=89, optimize=True)
         version = hashlib.sha256(social_path.read_bytes()).hexdigest()[:10]
         social_url = f'{BASE}/images/articles/{slug}-social.jpg?v={version}'
@@ -148,5 +178,10 @@ def build(font_path):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--font',default='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
     parser.add_argument('--thumbnails-only', action='store_true')
+    parser.add_argument('--label-only', action='store_true')
+    parser.add_argument('--only', nargs='+', metavar='SLUG')
     args=parser.parse_args()
-    build_thumbnails() if args.thumbnails_only else build(args.font)
+    if args.label_only: relabel(args.font, args.only)
+    elif args.only: parser.error('--only is for --label-only')
+    elif args.thumbnails_only: build_thumbnails()
+    else: build(args.font)
