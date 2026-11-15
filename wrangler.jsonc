@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers static-assets deployment of the public site only.
+  // Vercel ignores this file. The admin studio (api/studio.js) is not served here.
+  "name": "badilak-arabi",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    // Same URL shape as the current host: /guides/reading, never /guides/reading/ or .html.
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
