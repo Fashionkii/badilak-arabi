@@ -30,15 +30,22 @@ The owner approved correcting the address drawn on article share images, includi
   share-image tags in that guide's head. Covers, headlines, thumbnails, figures and article copy are
   not regenerated. The label text now comes from `site.config.json` (also in the full build), so
   the drawn address follows the same single setting as every page URL.
-- `images/articles/create-online-academy-social.jpg`: the row of empty glyph boxes is replaced by
-  the readable current address, in the same font and position as the other 20 images. The rest of
-  that image (its heavier headline typeface included) is unchanged in design.
+- `images/articles/create-online-academy-social.jpg`: first the row of empty glyph boxes was
+  replaced by the readable current address. Then, with the owner's approval, the whole image was
+  redrawn from its stored photo and `socialTitle` in the same typeface as the other 20 (it had
+  been produced with a heavier one). The headline text is unchanged; it now breaks after
+  «اختبر» instead of after the colon, as the shared layout rule decides.
+- `scripts/build-article-media.py`: `--social-only --only SLUG [...]` redraws whole share images
+  for named articles only. The drawing code moved into `render_social()` unchanged: a full build
+  with the previous script and with this one gives byte-identical files, and a fresh render here
+  reproduces the other 20 committed share images byte for byte.
 - `guides/create-online-academy.html`: `?v=` on `og:image`, `og:image:secure_url`, `twitter:image`
   only (3 lines). Body unchanged.
 
 The other 20 images were not touched: they already show the current address correctly and change
-only at the domain switch. The file is re-saved with its own JPEG tables; outside the label area the
-largest per-pixel difference measured was 7 of 255, on under 0.5% of pixels.
+only at the domain switch. In `--label-only` mode a file is re-saved with its own JPEG tables;
+in the rehearsal on one image the largest per-pixel difference outside the label area was 7 of 255,
+on under 0.5% of pixels.
 
 ## Verified
 
@@ -76,7 +83,5 @@ changed, build and `audit-prelaunch` pass.
 
 ## Known leftovers, owner decision
 
-- `create-online-academy-social.jpg` uses a heavier typeface for its headline, brand and tagline
-  than the other 20 share images. Reported only; not changed.
 - Opening indexing, enabling feedback, adding analytics or a pixel, and any paid plan remain
   separate decisions.
