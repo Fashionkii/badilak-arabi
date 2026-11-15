@@ -5,6 +5,8 @@ const {withoutRetiredShelf,withOriginalArticleMediaOrder}=require('./audit-helpe
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
 const canonical=new Set();
+const siteOrigin=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8')).canonicalOrigin;
+const onSiteOrigin=value=>value===siteOrigin||value.startsWith(siteOrigin+'/');
 const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).rewrites||[];
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
@@ -12,6 +14,12 @@ for(const file of files){
  if(file==='404.html')continue;
  const url=html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
  assert.ok(url&&!canonical.has(url),'Missing/duplicate canonical: '+file);canonical.add(url);
+ // The preview-only review page is copied as-is; every other page must follow site.config.json.
+ if(!file.startsWith('lab'+path.sep)){
+  assert.equal(html.match(/<meta name="badilak:origin" content="([^"]+)">/)?.[1],siteOrigin,'Origin meta differs from site.config.json: '+file);
+  assert.ok(onSiteOrigin(url),'Canonical is not on the configured origin: '+file);
+  for(const match of html.matchAll(/<meta (?:property|name)="(og:url|og:image|og:image:secure_url|twitter:image)" content="([^"]+)">/g))assert.ok(onSiteOrigin(match[2]),`${match[1]} is not on the configured origin: ${file}`);
+ }
  assert.match(html,/<title>[^<]+<\/title>/,file);
  assert.match(html,/<meta name="description" content="[^"]+">/,file);
  for(const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g))JSON.parse(match[1]);
@@ -50,7 +58,7 @@ assert.ok(!fs.readFileSync(path.join(out,'sitemap.xml'),'utf8').includes('<loc>'
 assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/X-Robots-Tag: noindex, follow/);
 assert.ok(!fs.readFileSync(path.join(out,'robots.txt'),'utf8').includes('Disallow: /'));
 const redirects=fs.readFileSync(path.join(out,'_redirects'),'utf8');
-for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects)assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
+for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects.filter(x=>!x.has))assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
 if(process.argv[2]){
  const ref=process.argv[2];
  for(const file of ['js/catalog-data.js','js/commercial-links.js','js/discovery-memory.js']){

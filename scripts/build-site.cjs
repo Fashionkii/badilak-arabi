@@ -223,7 +223,8 @@ write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http
 write('_headers','/*\n  X-Robots-Tag: noindex, follow\n');
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 // Keep legacy .html aliases too: those deleted files need explicit redirects.
-write('_redirects',vercel.redirects.map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
+// Host-conditional rules are Vercel-only; without their condition they would loop on other hosts.
+write('_redirects',vercel.redirects.filter(x=>!x.has).map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
 // A custom 404 disables the SPA fallback on Cloudflare Pages; no wildcard rewrites.
 // Keep historic artwork in source control, not in the deployed public asset tree.
 // Limit pruning to fixed-name shared brand/social assets; other images can be data-driven.
