@@ -62,6 +62,8 @@ const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts
 const readingNav='<a href="/">الرئيسية</a><a href="/#directory">اكتشف</a><a href="/guides" aria-current="page">اقرأ</a><a href="/#competitionIndex">المرصد</a>';
 function prepare(html){
  html=html.split(oldOrigin).join(origin);
+ // Every font is served from this site, so no page needs an early connection to the Google font host.
+ html=html.replace(/<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*/g,'');
  // The public site can move independently of the studio and its origin-scoped sessions and drafts.
  html=html.replace('href="/admin/studio"','href="'+escape(config.studioOrigin)+'/admin/studio"');
  // Update shared brand previews only; article-specific covers stay intact.
@@ -156,8 +158,9 @@ function readingHub(newsOnly=false){
  const count=(n,one,two,many)=>n===0?`لا ${many}`:n===1?one:n===2?two:n<=10?`${n} ${many}`:`${n} ${one.replace(' واحد','')}ًا`;
  const rows=newsOnly?editorial.rows.filter(r=>r.type==='news'):editorial.rows;
  const route=newsOnly?'/news':'/guides';
- const title='اقرأ — مقالات وأخبار تساعدك على الاختيار';
- const description='مقالات للمقارنة والفهم، وأخبار موثقة عن تغييرات قد تؤثر في اختيارك.';
+ // The news address is its own indexable page, so it needs its own title and description.
+ const title=newsOnly?'الأخبار — تغييرات موثقة قد تؤثر في اختيارك':'اقرأ — مقالات وأخبار تساعدك على الاختيار';
+ const description=newsOnly?'أخبار موثقة بمصادرها عن تغييرات في الأدوات والخدمات العربية، وما يعنيه كل خبر لاختيارك.':'مقالات للمقارنة والفهم، وأخبار موثقة عن تغييرات قد تؤثر في اختيارك.';
  const page={kind:'reading',title:title+' — بديلك عربي',description,url:origin+route,schema:{'@context':'https://schema.org','@type':'CollectionPage',name:title,url:origin+route,inLanguage:'ar',mainEntity:{'@type':'ItemList',numberOfItems:rows.length,itemListElement:rows.map((r,i)=>({'@type':'ListItem',position:i+1,url:origin+r.url,name:r.title}))}}};
  const groups=Object.entries(editorialNames).map(([id,name])=>{
   const entries=editorial.rows.filter(r=>r.category===id);if(!entries.length)return '';

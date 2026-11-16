@@ -20,6 +20,11 @@ function normalizeDirectorySearch(value=''){
   .replace(/[^\p{L}\p{N}]+/gu,' ').trim().replace(/\s+/g,' ')
   .split(' ').map(word=>word.replace(/^ال(?=.{3})/u,'')).join(' ');
 }
+// A record named in Arabic is still found by the Latin name in its own address (salla.com → salla).
+// Generic address parts are left out so that "com" or "www" match nothing.
+function directorySearchHost(url){
+ try{return new URL(url).hostname.split('.').slice(0,-1).filter(part=>!['www','com','co','net','org','gov','edu','app','web'].includes(part)).join(' ');}catch{return '';}
+}
 function directorySearchScore(item,query){
  const q=normalizeDirectorySearch(query);if(!q)return 1;
  const name=normalizeDirectorySearch(item.name);
@@ -33,7 +38,7 @@ function directorySearchScore(item,query){
   .filter(origin=>matchesDirectoryOrigin(item,origin))])].map(originName);
  const text=normalizeDirectorySearch([item.name,item.value,item.creator,item.availability,
   item.arabRelation,item.type,subcategoryLabel(item.cat,item.sub),
-  country,...origins,...(directorySearchKeywords[item.id]||[])].join(' '));
+  country,...origins,...(directorySearchKeywords[item.id]||[]),directorySearchHost(item.url)].join(' '));
  const words=text.split(' ');
  if(!q.split(' ').every(word=>name.includes(word)||words.some(candidate=>candidate.startsWith(word))))return 0;
  // Rank relevance only; preserve catalog order for equal scores.

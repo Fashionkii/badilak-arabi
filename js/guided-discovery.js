@@ -83,6 +83,15 @@
   e.preventDefault();remember();show(id);
  });
  window.addEventListener('hashchange',()=>{const next=routeView();if(views.has(next)&&next!==view)show(next,{history:false});});
+ // The header menu closes like any menu: with Escape, returning focus to its button, or by acting outside it.
+ document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  const menu=document.querySelector('.journey-menu[open]');if(!menu)return;
+  menu.open=false;menu.querySelector('summary')?.focus();
+ });
+ document.addEventListener('pointerdown',e=>{
+  document.querySelectorAll('.journey-menu[open]').forEach(menu=>{if(!menu.contains(e.target))menu.open=false;});
+ });
  document.body.classList.add('guided-discovery');
  show(routeView(),{history:false,focus:false});
  // Defer until discovery-memory and smart-return have registered their own restoration.

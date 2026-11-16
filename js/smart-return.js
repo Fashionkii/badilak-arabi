@@ -140,6 +140,15 @@
   location.href=url;
  };
 
+ // An address opened inside the app keeps its history entry after a reload or a restored tab.
+ // The page then loaded is a plain document with no router: a history step to another address
+ // would change the address bar and leave this content in place, so load that address for real.
+ const loadedPath=location.pathname;
+ window.addEventListener('popstate',()=>{
+  if(window.badilakJourney||document.getElementById('readingHub'))return;
+  if(location.pathname!==loadedPath)location.reload();
+ });
+
  function init(){restoreIfNeeded();renderMemory()}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.addEventListener('pageshow',()=>setTimeout(renderMemory,0));

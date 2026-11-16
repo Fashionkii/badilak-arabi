@@ -607,3 +607,11 @@ body.taste-editorial a.skip:focus{position:static!important;display:block;border
 /* At the end of a page the fixed "top" control covered the last footer link. On pages that carry
    the control, the footer links stop short of its corner. */
 body.taste-editorial:has(.back-to-top) .footer-links{padding-inline-end:56px}
+/* Arriving at /#methodology scrolled the dialog's own title under its fixed heading bar. */
+body.taste-editorial #detailModal #methodology{scroll-margin-top:96px}
+/* Opening an inner view by its address: the count line and the cards arrive with the script.
+   Their space is held, and the page is at least one screen tall, so the note under the count,
+   the continue bar and the footer do not jump during the first frames. */
+body.taste-editorial #stateLine:empty{min-height:27px}
+body.taste-editorial #catalogGrid:empty{min-height:100vh}
+body.taste-editorial main#top{min-height:100vh}

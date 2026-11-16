@@ -10,7 +10,7 @@ function openFeedback(kind){
  const enabled=!!feedbackEndpoint();
  dialog.querySelectorAll('input,textarea').forEach(input=>input.disabled=!enabled);
  document.getElementById('feedbackSubmit').disabled=!enabled;
- document.getElementById('feedbackStatus').textContent=enabled?'':'الإرسال متوقف مؤقتًا لحين استكمال إعداد خدمة الاستقبال. لا تُرسل أي بيانات من هذا النموذج حاليًا.';
+ document.getElementById('feedbackStatus').textContent=enabled?'':'الإرسال من هذا النموذج متوقف مؤقتًا، ولا تُرسل منه أي بيانات. راسلنا مباشرة على contact@badilakarabi.com';
  dialog.showModal();(enabled?dialog.querySelector('input[name="subject"]'):dialog.querySelector('.feedback-close')).focus();
 }
 async function submitDirectoryFeedback(event){

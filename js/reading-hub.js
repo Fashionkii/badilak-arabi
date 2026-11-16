@@ -18,7 +18,9 @@
   for(const card of cards)card.hidden=!(type==='all'||card.dataset.editorialType===type)||!(category==='all'||card.dataset.editorialCategory===category);
   for(const group of groups)group.hidden=![...group.querySelectorAll('[data-editorial-type]')].some(card=>!card.hidden);
   const visible=cards.filter(card=>!card.hidden),articles=visible.filter(card=>card.dataset.editorialType==='article').length;
-  status.textContent=visible.length?`${count(articles,'مقال واحد','مقالان','مقالات')} · ${count(visible.length-articles,'خبر واحد','خبران','أخبار')}`:'لا توجد مواد في هذه التصفية. اختر موضوعًا آخر أو اعرض الكل.';
+  const parts=[type==='news'?'':count(articles,'مقال واحد','مقالان','مقالات'),type==='article'?'':count(visible.length-articles,'خبر واحد','خبران','أخبار')].filter(Boolean);
+  // A single-type view names that type only, as the news address already does without scripts.
+  status.textContent=visible.length?parts.join(' · '):'لا توجد مواد في هذه التصفية. اختر موضوعًا آخر أو اعرض الكل.';
  }
  function navigate(url){history.pushState({},'',url);render();}
  root.addEventListener('click',event=>{
