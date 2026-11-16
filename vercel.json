@@ -27,6 +27,17 @@
   ],
   "redirects": [
     {
+      "source": "/((?!admin|api/).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "badilak-arabi.vercel.app"
+        }
+      ],
+      "destination": "https://badilakarabi.com/$1",
+      "permanent": false
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
