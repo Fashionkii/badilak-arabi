@@ -90,11 +90,21 @@ changed, build and `audit-prelaunch` pass.
 Cloudflare Workers serves `https://badilakarabi.com`. Always Use HTTPS sends HTTP requests
 to the same path and query over HTTPS. The canonical origin, structured data, share URLs and
 21 article image address labels use the new domain. The public footer links to the Vercel studio.
-Old-host forwarding is a separate step; the old URL still serves the public pages.
 
-The entry page embeds the same stylesheet it previously requested separately. This removes an
-extra request from the initial render without changing the rules, and adds the stylesheet bytes
-to each fresh homepage HTML response. Other page templates keep their existing stylesheet delivery.
+Old-host forwarding, added later on 16 November: the first rule in `vercel.json` sends every request
+for `badilak-arabi.vercel.app` to the same path on `badilakarabi.com`, except paths that begin with
+`/admin` or `/api/`, which the studio uses. The rule is host-conditional, so Vercel preview hosts keep
+serving the build, and the Cloudflare `_redirects` writer skips it. It is temporary (`permanent: false`)
+until the owner has confirmed the studio login and a saved draft on the Vercel host; make it permanent
+after that check. Not verified from the development environment: the live redirect and the studio.
+
+The entry page embedded the site stylesheet between 16 November PR #10 and PR #11. It links
+`/css/site-bundle.css` again: the HTML response is about 52 KB instead of 445 KB, the stylesheet is
+cached and shared with the standalone pages, and the sharing metadata head stays about 4 KB, inside
+WhatsApp's documented first 300 KB. A throttled local comparison (three runs each, Chrome, HTTP/1.1)
+gave a first paint of about 1.3 s embedded and 1.0 to 1.6 s linked on a first visit, the same on a
+repeat visit, and 1.0 s embedded against 0.5 s linked when arriving from another page of the site.
+The live network was not measured.
 
 ## Known leftovers, owner decision
 
