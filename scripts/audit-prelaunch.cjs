@@ -5,14 +5,17 @@ const {withoutRetiredShelf,withOriginalArticleMediaOrder}=require('./audit-helpe
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
 const canonical=new Set();
-const {canonicalOrigin:siteOrigin,studioOrigin}=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
+const {canonicalOrigin:siteOrigin,studioOrigin,phase}=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
+const launch=phase==='launch';
 const onSiteOrigin=value=>value===siteOrigin||value.startsWith(siteOrigin+'/');
 const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).rewrites||[];
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
- assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\bclass=["'][^"']*\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published during prelaunch: '+file);
+ assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\bclass=["'][^"']*\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published without a reviewed change: '+file);
  if(file==='index.html')assert.ok(html.includes(`href="${studioOrigin}/admin/studio"`),'Studio link must use the separate studio origin');
- assert.match(html,/<meta name="robots" content="noindex,[^"]*">/,file);
+ // Launch opens every page except the not-found page; prelaunch keeps all of them closed.
+ assert.match(html,launch&&file!=='404.html'?/<meta name="robots" content="index, follow[^"]*">/:/<meta name="robots" content="noindex,[^"]*">/,file);
+ assert.equal((html.match(/<meta name="robots"/g)||[]).length,1,'One robots instruction: '+file);
  if(file==='404.html')continue;
  const url=html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
  assert.ok(url&&!canonical.has(url),'Missing/duplicate canonical: '+file);canonical.add(url);
@@ -56,8 +59,16 @@ for(const file of articleFiles){
  assert.ok(!/<nav class="toplinks"[^>]*>[^]*?<a[^>]+href="\/#learning"/.test(output),'No duplicate learning entrance in article header');
  assert.equal(body(fs.readFileSync(path.join(root,'guides',file),'utf8')),body(fs.readFileSync(path.join(out,'guides',file),'utf8')),'Article changed: '+file);
 }
-assert.ok(!fs.readFileSync(path.join(out,'sitemap.xml'),'utf8').includes('<loc>'),'Prelaunch sitemap must remain empty');
-assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/X-Robots-Tag: noindex, follow/);
+const sitemap=fs.readFileSync(path.join(out,'sitemap.xml'),'utf8'),robots=fs.readFileSync(path.join(out,'robots.txt'),'utf8');
+if(launch){
+ // The sitemap lists exactly the canonical addresses of the published pages, and nothing blocks them.
+ assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]).sort(),[...canonical].sort(),'Sitemap must list every canonical page once');
+ assert.ok(robots.includes('Sitemap: '+siteOrigin+'/sitemap.xml'),'robots.txt must name the sitemap');
+ assert.ok(!fs.existsSync(path.join(out,'_headers'))||!/noindex/i.test(fs.readFileSync(path.join(out,'_headers'),'utf8')),'Launch must not send a noindex header');
+}else{
+ assert.ok(!sitemap.includes('<loc>'),'Prelaunch sitemap must remain empty');
+ assert.match(fs.readFileSync(path.join(out,'_headers'),'utf8'),/X-Robots-Tag: noindex, follow/);
+}
 assert.ok(!fs.readFileSync(path.join(out,'robots.txt'),'utf8').includes('Disallow: /'));
 const redirects=fs.readFileSync(path.join(out,'_redirects'),'utf8');
 for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects.filter(x=>!x.has))assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
@@ -78,4 +89,4 @@ if(process.argv[2]){
  }
  const ad=s=>s.match(/<a class="ad-demo ad-demo-display"[\s\S]*?<\/a>/)[0];assert.equal(ad(before),ad(after),'Salla reserved ad');
 }
-console.log(`PASS: ${files.length} HTML files; noindex, unique canonicals, JSON-LD, local links, no public ad demos or AdSense code, separate studio link, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);
+console.log(`PASS (${phase}): ${files.length} HTML files; ${launch?'indexable pages with a complete sitemap':'noindex'}, unique canonicals, JSON-LD, local links, no public ad demos or AdSense code, separate studio link, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);

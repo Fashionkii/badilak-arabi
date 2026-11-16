@@ -106,6 +106,15 @@ gave a first paint of about 1.3 s embedded and 1.0 to 1.6 s linked on a first vi
 repeat visit, and 1.0 s embedded against 0.5 s linked when arriving from another page of the site.
 The live network was not measured.
 
+## Opening indexing — prepared, owner decision
+
+`site.config.json` accepts `"phase": "launch"`. In that phase the build writes `index, follow` on
+every page except the not-found page, lists the 139 canonical addresses in `sitemap.xml`, names the
+sitemap in `robots.txt`, and stops writing the Cloudflare `X-Robots-Tag: noindex` header file.
+`audit-prelaunch` checks whichever phase is set. With `"phase": "prelaunch"` the output is
+byte-identical to the build before this change. Vercel keeps its own `noindex` header for the old
+host and the studio. Changing the phase is the owner's decision; nothing else opens indexing.
+
 ## Known leftovers, owner decision
 
 - Opening indexing, enabling feedback, adding analytics or a pixel, and any paid plan remain

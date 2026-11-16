@@ -10,8 +10,10 @@ for(const field of ['canonicalOrigin','studioOrigin']){
  const parsedOrigin=new URL(config[field]);
  if(parsedOrigin.protocol!=='https:'||parsedOrigin.origin!==config[field])throw new Error(field+' must be one HTTPS origin without a trailing slash.');
 }
-// Launch requires a deliberate reviewed change; an environment variable cannot open indexing.
-if(config.phase!=='prelaunch')throw new Error('Only prelaunch builds are enabled. Launch needs an explicit reviewed indexing change.');
+// Indexing opens only through the reviewed "phase" value in site.config.json; an environment variable cannot open it.
+if(!['prelaunch','launch'].includes(config.phase))throw new Error('phase must be "prelaunch" or "launch".');
+const launch=config.phase==='launch';
+const robotsMeta=indexable=>'<meta name="robots" content="'+(launch&&indexable?'index':'noindex')+', follow, max-image-preview:large">';
 const origin=config.canonicalOrigin;
 const context=vm.createContext({});
 vm.runInContext(fs.readFileSync(path.join(root,'js/catalog-data.js'),'utf8'),context);
@@ -72,7 +74,7 @@ function prepare(html){
  // Editorial body/copy stay intact; only the shared header gets the supplied identity.
  html=html.replace(/(<a class="brand" href="\/">)بديلك عربي(<\/a>)/g,'$1<picture><img class="cosmic-logo" src="/images/brand/wordmark-header-20261016-dots-320.webp" srcset="/images/brand/wordmark-header-20261016-dots-320.webp 320w, /images/brand/wordmark-header-20261016-dots-640.webp 640w" sizes="(max-width:760px) 132px, 180px" width="1829" height="408" alt="بديلك عربي" decoding="async"></picture>$2');
  html=html.replace(/<meta\s+name=["']robots["'][^>]*>\s*/gi,'');
- html=html.replace(/<head>/i,'<head>\n<meta name="robots" content="noindex, follow, max-image-preview:large">\n<meta name="badilak:origin" content="'+escape(origin)+'">');
+ html=html.replace(/<head>/i,'<head>\n'+robotsMeta(true)+'\n<meta name="badilak:origin" content="'+escape(origin)+'">');
  // Real organization URL; do not invent authors, publication dates or ratings.
  html=html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g,(all,start,body,end)=>{
   const data=JSON.parse(body);
@@ -225,11 +227,19 @@ for(const id of seo.categories()){
  html=html.replace('<h2 id="journeyResultTitle">أداة تنجز بها، أو مصدر تتعلّم منه</h2>','<h1 id="journeyResultTitle">'+escape(categoryNames[id])+'</h1>');
  write('category/'+id+'.html',html);
 }
-write('404.html',prepare(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/site-bundle.css"></head><body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>${standaloneHeader}<main class="standalone-main wrap" id="content"><article class="policy-page not-found"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><nav aria-label="متابعة التصفح"><a href="/">الرئيسية</a><a href="/guides">مركز القراءة</a></nav></article></main>${standaloneFooter}</body></html>`));
+// The not-found page never enters the index, in either phase.
+write('404.html',prepare(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الصفحة غير موجودة — بديلك عربي</title><link rel="stylesheet" href="/css/site-bundle.css"></head><body class="guided-discovery standalone-page"><a class="skip" href="#content">انتقل إلى المحتوى</a>${standaloneHeader}<main class="standalone-main wrap" id="content"><article class="policy-page not-found"><h1>الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح. يمكنك العودة إلى الدليل أو مركز القراءة.</p><nav aria-label="متابعة التصفح"><a href="/">الرئيسية</a><a href="/guides">مركز القراءة</a></nav></article></main>${standaloneFooter}</body></html>`).replace(robotsMeta(true),robotsMeta(false)));
 // Crawlers must be allowed to read noindex. Disallow:/ would hide that instruction.
-write('robots.txt','# Prelaunch: indexing is blocked by X-Robots-Tag and HTML meta tags.\nUser-agent: *\nAllow: /\n');
-write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
-write('_headers','/*\n  X-Robots-Tag: noindex, follow\n');
+if(launch){
+ // Every published page except the not-found page, by its canonical address. No invented dates.
+ const locs=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html')&&x!=='404.html'&&!x.startsWith('lab'+path.sep)).map(file=>fs.readFileSync(path.join(out,file),'utf8').match(/<link rel="canonical" href="([^"]+)">/)?.[1]??(()=>{throw new Error('Missing canonical: '+file);})()).sort();
+ write('robots.txt','User-agent: *\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n');
+ write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+locs.map(loc=>'<url><loc>'+escape(loc)+'</loc></url>').join('\n')+'\n</urlset>\n');
+}else{
+ write('robots.txt','# Prelaunch: indexing is blocked by X-Robots-Tag and HTML meta tags.\nUser-agent: *\nAllow: /\n');
+ write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
+ write('_headers','/*\n  X-Robots-Tag: noindex, follow\n');
+}
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 // Keep legacy .html aliases too: those deleted files need explicit redirects.
 // Host-conditional rules are Vercel-only; without their condition they would loop on other hosts.
@@ -249,4 +259,4 @@ for(const dir of ['images/brand','images/social']){
  }
 }
 console.log(`Excluded ${retiredAssetCount} unreferenced historic brand/social assets (${retiredAssetBytes} bytes) from deployment.`);
-console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. All are noindex; sitemap intentionally empty.`);
+console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. ${launch?'Launch: pages are indexable and listed in the sitemap; the not-found page stays noindex.':'All are noindex; sitemap intentionally empty.'}`);

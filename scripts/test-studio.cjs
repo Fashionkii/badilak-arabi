@@ -66,8 +66,9 @@ test('untrusted projects cannot change layouts, fetch remote images or escape te
 test('private source and art never appear in static output', () => {
   const out = path.join(__dirname, '../dist');
   for (const name of ['server', 'api', 'admin', 'templates.json']) assert.equal(fs.existsSync(path.join(out, name)), false, name);
-  const { studioOrigin } = require('../site.config.json');
+  const { studioOrigin, phase } = require('../site.config.json');
   const index = fs.readFileSync(path.join(out, 'index.html'), 'utf8');
   assert.ok(index.includes(`href="${studioOrigin}/admin/studio" rel="nofollow"`));
-  assert.match(index, /noindex, follow/);
+  // The public home follows the reviewed phase; the studio itself always answers noindex from api/studio.js.
+  assert.match(index, phase === 'launch' ? /<meta name="robots" content="index, follow/ : /noindex, follow/);
 });
