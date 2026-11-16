@@ -21,5 +21,5 @@ function discoveryEditorialMarkup(entries){
  if(path)articles.sort((a,b)=>(path.guides.includes(a.id)?path.guides.indexOf(a.id):Infinity)-(path.guides.includes(b.id)?path.guides.indexOf(b.id):Infinity));
  const news=matches.filter(row=>row.type==='news');
  const selected=[...articles.slice(0,news.length?2:3),...news.slice(0,Math.max(0,3-Math.min(articles.length,2)))].slice(0,3);
- return selected.length?`<div class="editorial-section-head"><div><h2>اقرأ في نفس الموضوع</h2><p>فهم القرار، ومتابعة التغييرات المرتبطة به.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="editorial-context-grid">${selected.map(row=>editorialCardMarkup(row,{image:row.type==='news'})).join('')}</div>`:'';
+ return selected.length?`<div class="editorial-section-head"><div><h2>اقرأ في نفس الموضوع</h2><p>فهم القرار، ومتابعة التغييرات المرتبطة به.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="editorial-context-grid">${selected.map(row=>editorialCardMarkup(row,{image:true})).join('')}</div>`:'';
 }
