@@ -5,11 +5,13 @@ const {withoutRetiredShelf,withOriginalArticleMediaOrder}=require('./audit-helpe
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
 const canonical=new Set();
-const siteOrigin=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8')).canonicalOrigin;
+const {canonicalOrigin:siteOrigin,studioOrigin}=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
 const onSiteOrigin=value=>value===siteOrigin||value.startsWith(siteOrigin+'/');
 const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).rewrites||[];
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
+ assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published during prelaunch: '+file);
+ if(file==='index.html')assert.ok(html.includes(`href="${studioOrigin}/admin/studio"`),'Studio link must use the separate studio origin');
  assert.match(html,/<meta name="robots" content="noindex,[^"]*">/,file);
  if(file==='404.html')continue;
  const url=html.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
@@ -76,4 +78,4 @@ if(process.argv[2]){
  }
  const ad=s=>s.match(/<a class="ad-demo ad-demo-display"[\s\S]*?<\/a>/)[0];assert.equal(ad(before),ad(after),'Salla reserved ad');
 }
-console.log(`PASS: ${files.length} HTML files; noindex, unique canonicals, JSON-LD, local links, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);
+console.log(`PASS: ${files.length} HTML files; noindex, unique canonicals, JSON-LD, local links, no public ad demos or AdSense code, separate studio link, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);
