@@ -2,8 +2,8 @@
 // The approved presentation changes must not silently rewrite catalog information.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {markupMeaning,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage,withPreviousDiscoveryMarkup}=require('./audit-helpers.cjs');
-const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
+const {markupMeaning,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage,withPreviousDiscoveryMarkup}=require('../audit-helpers.cjs');
+const root=path.resolve(__dirname,'../..'),baseline=process.argv[2]||'82edb20896b1c08e901ee478ea1a605c5f0fb174';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
 const context=readFile=>{

@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {markupMeaning}=require('./audit-helpers.cjs');
+const {markupMeaning}=require('../audit-helpers.cjs');
 const base='7b6a03a31755a02184195c8da45dd691a5c79210';
 const read=file=>fs.readFileSync(file,'utf8');
 const old=file=>execFileSync('git',['show',base+':'+file],{encoding:'utf8'});

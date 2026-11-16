@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert/strict'),{execFileSync}=require('child_process');
-const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),base=process.argv[2]||'cc6c772';
+const root=path.resolve(__dirname,'../..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),base=process.argv[2]||'cc6c772';
 const old=p=>execFileSync('git',['show',base+':'+p],{cwd:root,encoding:'utf8'});
 for(const p of ['js/catalog-data.js','js/detail-renderers.js','js/commercial-links.js','js/discovery-memory.js','js/guided-discovery.js','js/smart-return.js','site.config.json','vercel.json'])assert.equal(read(p),old(p),'Protected '+p);
 for(const file of fs.readdirSync(path.join(root,'guides')))assert.equal(read('guides/'+file),old('guides/'+file),'Protected article '+file);

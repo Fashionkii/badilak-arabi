@@ -2,8 +2,8 @@
 // Guard the two reviewed data updates and the active-reference regression.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutRetiredShelf,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('./audit-helpers.cjs');
-const root=path.resolve(__dirname,'..'),baseline=process.argv[2]||'02ff5a758052600710959008aa80c96cf3fd23ba';
+const {withoutRetiredShelf,withoutModalRestoreHandoff,withTextSectionHeadings,withoutDirectoryControlPresentation,withPreviousSharedBrandImage}=require('../audit-helpers.cjs');
+const root=path.resolve(__dirname,'../..'),baseline=process.argv[2]||'02ff5a758052600710959008aa80c96cf3fd23ba';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
 const plain=x=>JSON.parse(JSON.stringify(x));

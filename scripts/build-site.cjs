@@ -247,8 +247,12 @@ if(launch){
 }else{
  write('robots.txt','# Prelaunch: indexing is blocked by X-Robots-Tag and HTML meta tags.\nUser-agent: *\nAllow: /\n');
  write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
- write('_headers','/*\n  X-Robots-Tag: noindex, follow\n');
 }
+// Browser caching on Cloudflare (dist/_headers). A font file never changes under one name, so
+// browsers keep it for a year. Images are sometimes redrawn under the same name, so a week.
+// Pages, styles and scripts keep the host default: stored, and checked with the server each visit.
+const cacheHeaders='/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/images/*\n  Cache-Control: public, max-age=604800\n';
+write('_headers',(launch?'':'/*\n  X-Robots-Tag: noindex, follow\n\n')+cacheHeaders);
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 // Keep legacy .html aliases too: those deleted files need explicit redirects.
 // Host-conditional rules are Vercel-only; without their condition they would loop on other hosts.
@@ -268,4 +272,7 @@ for(const dir of ['images/brand','images/social']){
  }
 }
 console.log(`Excluded ${retiredAssetCount} unreferenced historic brand/social assets (${retiredAssetBytes} bytes) from deployment.`);
+// Last step, after every page is written. It reports its own result and never fails the build.
+try{require('node:child_process').execFileSync(process.execPath,[path.join(__dirname,'localize-logos.cjs')],{stdio:'inherit',timeout:120000});}
+catch(error){console.log('Logos: step skipped ('+error.message+').');}
 console.log(`Built ${items.length} discovery pages, ${seo.categories().length} category pages, ${guides.length} articles. ${launch?'Launch: pages are indexable and listed in the sitemap; the not-found page stays noindex.':'All are noindex; sitemap intentionally empty.'}`);

@@ -2,7 +2,7 @@
 // Regression evidence for the 14 October correction, against the actual prior main.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const root=path.resolve(__dirname,'..'),baseline='df35781d4b0e1e7934972be2894bd1bfd3b82fd2';
+const root=path.resolve(__dirname,'../..'),baseline='df35781d4b0e1e7934972be2894bd1bfd3b82fd2';
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const before=f=>execFileSync('git',['show',baseline+':'+f],{cwd:root,encoding:'utf8'});
 for(const file of ['js/catalog-data.js','guides.html','js/guided-discovery.js','js/discovery-memory.js','js/smart-return.js','js/commercial-links.js','js/feedback.js','site.config.json','vercel.json',...fs.readdirSync(path.join(root,'data')).map(f=>'data/'+f),...fs.readdirSync(path.join(root,'guides')).filter(f=>f.endsWith('.html')).map(f=>'guides/'+f)])assert.equal(read(file),before(file),'Protected content/behavior: '+file);
