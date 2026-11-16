@@ -23,7 +23,9 @@ for(const row of all.filter(x=>x.logo?.startsWith('material:'))){
 const unknown=c.logoMarkup('material:future_unknown','item-logo','خدمة اختبار');
 assert(unknown.includes('logo-fallback'));assert(!unknown.includes('future_unknown'));
 for(const id of ['jais-3','zenhr'])assert(read('dist/discover/'+id+'.html').includes('local-material-symbol'),'Static detail symbol '+id);
-const home=read('dist/index.html').split('</head>')[1].split('id="directory"')[0];
+const [homeHead,homeBody]=read('dist/index.html').split('</head>');
+assert.ok(homeBody&&Buffer.byteLength(homeHead+'</head>')<300_000,'Keep the complete sharing metadata head within the WhatsApp preview limit');
+const home=homeBody.split('<main id="top">')[1].split('id="directory"')[0];
 assert.equal((home.match(/class="editorial-cover"/g)||[]).length,3);
 assert(!home.includes('editorial-card--feature'));
 assert(read('index.html').includes('<details class="discovery-refinements"'));
