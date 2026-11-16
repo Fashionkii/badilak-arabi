@@ -303,18 +303,92 @@
     },
     "create-online-academy": {
       "socialTitle": "منصتك التعليمية: اختبر قبل الاشتراك",
-      "alt": "شرح باستخدام حاسوب في جلسة تعلّم",
-      "photo": "/images/articles/learning-platform-photo.webp",
-      "source": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&q=85&fit=max",
-      "credit": "Unsplash",
-      "license": "Unsplash License",
-      "licenseUrl": "https://unsplash.com/license",
-      "sourceFile": "photo-1516321318423-f06f85e504b3",
+      "alt": "مدرّس أمام حاسوب وكاميرا لتقديم درس عن بُعد",
+      "photo": "/images/articles/create-online-academy-photo.webp",
+      "source": "https://www.pexels.com/photo/photo-of-man-looking-at-the-paper-6326386/",
+      "credit": "Vanessa Garcia / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/",
+      "sourceFile": "pexels-photo-6326386",
       "focalPoint": [
         0.5,
         0.5
       ],
       "customFields": {}
+    }
+  },
+  "news": {
+    "jais-3-release": {
+      "file": "jais-3-arabic-ai-release",
+      "alt": "شفرة برمجية على شاشة حاسوب محمول",
+      "source": "https://www.pexels.com/photo/close-up-of-computer-screen-with-code-displayed-34803966/",
+      "credit": "Daniil Komov / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "falcon-arabic-models": {
+      "file": "falcon-arabic-speech-models",
+      "alt": "مخطط لطيف الصوت على شاشة برنامج للتحرير الصوتي",
+      "source": "https://www.pexels.com/photo/white-and-black-digital-device-displaying-graph-70911/",
+      "credit": "Torsten Dettlaff / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "arabicai-saudi-azure": {
+      "file": "arabic-ai-azure-saudi-data-center",
+      "alt": "رف خوادم بإضاءة زرقاء في مركز بيانات",
+      "source": "https://www.pexels.com/photo/close-up-of-a-blue-server-rack-in-datacenter-37730211/",
+      "credit": "panumas nikhomkhai / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "karnak-chat-pilot": {
+      "file": "karnak-egyptian-arabic-chat",
+      "alt": "شخص يكتب رسالة من هاتف ذكي",
+      "source": "https://www.pexels.com/photo/person-holding-smartphone-3943951/",
+      "credit": "Anna Shvets / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "belmasry-pilot": {
+      "file": "belmasry-arabic-audio-transcription",
+      "alt": "ميكروفون وسماعات ولوحة مزج في استوديو تسجيل",
+      "source": "https://www.pexels.com/photo/an-audio-equipments-inside-the-studio-7586656/",
+      "credit": "Los Muertos Crew / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "loghat-pilot": {
+      "file": "loghat-english-learning-egypt",
+      "alt": "شخص يدوّن ملاحظات إلى جوار كتاب مفتوح",
+      "source": "https://www.pexels.com/photo/close-up-shot-of-a-person-studying-8553892/",
+      "credit": "Polina Tankilevitch / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "paymob-partner-onboarding": {
+      "file": "paymob-merchant-payment-onboarding",
+      "alt": "دفع لا تلامسي بهاتف على جهاز قبول مدفوعات",
+      "source": "https://www.pexels.com/photo/a-person-tapping-the-phone-on-a-payment-terminal-6612717/",
+      "credit": "Pavel Danilyuk / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "paymob-dashboard-guide": {
+      "file": "paymob-transaction-dashboard-guide",
+      "alt": "رسوم بيانية على حاسوب محمول بجوار دفتر",
+      "source": "https://www.pexels.com/photo/a-notebook-beside-a-laptop-with-graphs-6120209/",
+      "credit": "Nataliya Vaitkevich / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
+    },
+    "thmanyah-radio-guide": {
+      "file": "thmanyah-radio-podcast-listening",
+      "alt": "هاتف يعرض مشغّل بودكاست",
+      "source": "https://www.pexels.com/photo/close-up-shot-of-a-cellphone-playing-a-podcast-6686426/",
+      "credit": "cottonbro studio / Pexels",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/legal-pages/license/"
     }
   }
 }
