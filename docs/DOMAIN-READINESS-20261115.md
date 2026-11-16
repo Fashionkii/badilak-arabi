@@ -85,6 +85,17 @@ and assets.
 Step 5 was rehearsed in a throwaway copy with a new `.com`: 21 images relabelled, 63 head lines
 changed, build and `audit-prelaunch` pass.
 
+## Public domain — 16 November 2026
+
+Cloudflare Workers serves `https://badilakarabi.com`. Always Use HTTPS sends HTTP requests
+to the same path and query over HTTPS. The canonical origin, structured data, share URLs and
+21 article image address labels use the new domain. The public footer links to the Vercel studio.
+Old-host forwarding is a separate step; the old URL still serves the public pages.
+
+The entry page embeds the same stylesheet it previously requested separately. This removes an
+extra request from the initial render without changing the rules, and adds the stylesheet bytes
+to each fresh homepage HTML response. Other page templates keep their existing stylesheet delivery.
+
 ## Known leftovers, owner decision
 
 - Opening indexing, enabling feedback, adding analytics or a pixel, and any paid plan remain

@@ -10,7 +10,7 @@ const onSiteOrigin=value=>value===siteOrigin||value.startsWith(siteOrigin+'/');
 const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).rewrites||[];
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
- assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published during prelaunch: '+file);
+ assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\bclass=["'][^"']*\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published during prelaunch: '+file);
  if(file==='index.html')assert.ok(html.includes(`href="${studioOrigin}/admin/studio"`),'Studio link must use the separate studio origin');
  assert.match(html,/<meta name="robots" content="noindex,[^"]*">/,file);
  if(file==='404.html')continue;

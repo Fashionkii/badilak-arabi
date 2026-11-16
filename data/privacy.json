@@ -16,7 +16,7 @@
     },
     {
       "title": "الاستضافة والصور والخدمات الخارجية",
-      "html": "<p>الموقع العام متاح على Vercel وعلى نسخة المعاينة المستضافة في Cloudflare Workers. تستضيف Vercel استوديو الإدارة. تأتي الخطوط النصية من ملفات الموقع نفسه، بينما قد تأتي بعض الشعارات والأعلام والأيقونات والصور من جهات خارجية، منها Google وWebsitePublisher. عند طلب ملف أو إرسال نموذج، تتلقى الجهة التي تخدم الطلب بيانات الاتصال التقنية اللازمة، مثل عنوان IP ونوع المتصفح ووقت الطلب.</p><p>يمكنك مراجعة <a href=\"https://vercel.com/legal/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">خصوصية Vercel</a> و<a href=\"https://www.cloudflare.com/privacypolicy/\" target=\"_blank\" rel=\"noopener noreferrer\">خصوصية Cloudflare</a> و<a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">خصوصية Google</a>. لا يعني عدم طلب اسمك أن كل طلب تقني مجهول الهوية.</p>"
+      "html": "<p>تستضيف Cloudflare Workers الموقع العام على badilakarabi.com. تستضيف Vercel استوديو الإدارة وتخدم عنوان الموقع السابق. تأتي الخطوط النصية من ملفات الموقع نفسه، بينما قد تأتي بعض الشعارات والأعلام والأيقونات والصور من جهات خارجية، منها Google وWebsitePublisher. عند طلب ملف أو إرسال نموذج، تتلقى الجهة التي تخدم الطلب بيانات الاتصال التقنية اللازمة، مثل عنوان IP ونوع المتصفح ووقت الطلب.</p><p>يمكنك مراجعة <a href=\"https://vercel.com/legal/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">خصوصية Vercel</a> و<a href=\"https://www.cloudflare.com/privacypolicy/\" target=\"_blank\" rel=\"noopener noreferrer\">خصوصية Cloudflare</a> و<a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">خصوصية Google</a>. لا يعني عدم طلب اسمك أن كل طلب تقني مجهول الهوية.</p>"
     },
     {
       "title": "التحليلات والإعلانات",
