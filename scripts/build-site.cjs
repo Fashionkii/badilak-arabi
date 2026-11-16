@@ -54,7 +54,8 @@ const sitePolishStyles=fs.readFileSync(path.join(root,'css/site-polish.css'),'ut
 fs.appendFileSync(path.join(out,'css/visual-refresh.css'),'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles+'\n'+sitePolishStyles);
 // Standalone pages keep every rule/order but reduce three blocking requests to one.
 const siteStyles=['fonts.css','app.css','visual-refresh.css'];
-fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteStyles.map(file=>fs.readFileSync(path.join(root,'css',file),'utf8')).join('\n')+'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles+'\n'+sitePolishStyles);
+const siteBundle=siteStyles.map(file=>fs.readFileSync(path.join(root,'css',file),'utf8')).join('\n')+'\n'+cosmicStyles+'\n'+readingStyles+'\n'+motionStyles+'\n'+sitePolishStyles;
+fs.writeFileSync(path.join(out,'css/site-bundle.css'),siteBundle);
 const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts\.css">\s*<link rel="stylesheet" href="\/css\/app\.css">\s*<link rel="stylesheet" href="\/css\/visual-refresh\.css">/,'<link rel="stylesheet" href="/css/site-bundle.css">');
 const readingNav='<a href="/">الرئيسية</a><a href="/#directory">اكتشف</a><a href="/guides" aria-current="page">اقرأ</a><a href="/#competitionIndex">المرصد</a>';
 function prepare(html){
@@ -137,9 +138,12 @@ function standalonePage(page,content){
  const scripts=page.kind==='reading'?'<script src="/js/reading-hub.js" defer></script>':'';
  return setPageHead(prepare(bundleStyles('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page'+(page.kind==='reading'?' reading-page':'')+'"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+header+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+scripts+'<script src="/js/outbound-choice.js" defer></script><script src="/js/smart-return.js" defer></script></body></html>')),page);
 }
-// Prioritize the hero asset; the header has its own compact wordmark.
+// The entry page can paint with the existing cascade in its first response.
+// Keep the shared stylesheet external on inner pages.
 const home=bundleStyles(source).replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/wordmark-main-20261016-dots-640.webp" imagesrcset="/images/brand/wordmark-main-20261016-dots-640.webp 640w, /images/brand/wordmark-main-20261016-dots-1080.webp 1080w" imagesizes="(max-width:1023px) 220px, 330px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
+if (/<\/style/i.test(siteBundle)) throw new Error('The site stylesheet must be safe to embed in HTML.');
+const homeHtml=setPageHead(prepare(home),seo.metadata('/',origin));
+write('index.html',homeHtml.replace('<link rel="stylesheet" href="/css/site-bundle.css">',()=>'<style>\n'+siteBundle+'\n</style>'));
 // Review controls exist only on isolated preview deployments, never production.
 if(process.env.VERCEL_ENV==='preview'){
  write('lab/ui-review.html',fs.readFileSync(path.join(root,'preview/ui-review.html'),'utf8'));

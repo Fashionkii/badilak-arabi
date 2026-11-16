@@ -9,13 +9,13 @@ import argparse, hashlib, html, io, json, re
 from urllib.parse import urlsplit
 from PIL import Image, ImageDraw, ImageFont, ImageOps, features
 ROOT = Path(__file__).resolve().parents[1]
-BASE = 'https://badilak-arabi.vercel.app'
+BASE = json.loads((ROOT/'site.config.json').read_text())['canonicalOrigin']
 # Clear of the tagline above it in every existing social image; holds only the address label.
 LABEL_BOX = (620,576,1150,616)
 
 def site_host():
     """The address drawn on social images follows site.config.json, like every page URL."""
-    return urlsplit(json.loads((ROOT/'site.config.json').read_text())['canonicalOrigin']).netloc
+    return urlsplit(BASE).netloc
 
 def escape(value): return html.escape(str(value), quote=True)
 def update_meta(page, key, value, attr='property'):
