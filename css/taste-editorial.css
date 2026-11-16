@@ -600,3 +600,10 @@ body.taste-editorial.cosmic-theme :is(#catalog-group-tech,.reading-group[data-re
 body.taste-editorial.cosmic-theme :is(#catalog-group-create,.reading-group[data-reading-group="create"]>h2){--te-marker:var(--te-domain-create)}
 body.taste-editorial.cosmic-theme :is(#catalog-group-culture,.reading-group[data-reading-group="culture"]>h2){--te-marker:var(--te-domain-culture)}
 body.taste-editorial.cosmic-theme :is(#catalog-group-shopping,.reading-group[data-reading-group="shopping"]>h2){--te-marker:var(--te-domain-shopping)}
+
+/* Focused, the keyboard skip link sat on the wordmark's corner and hid part of it. It now opens as
+   its own row above the header, so nothing is covered at any width. */
+body.taste-editorial a.skip:focus{position:static!important;display:block;border-radius:0;padding:10px 16px;text-align:center;outline:2px solid #fff!important;outline-offset:-5px!important}
+/* At the end of a page the fixed "top" control covered the last footer link. On pages that carry
+   the control, the footer links stop short of its corner. */
+body.taste-editorial:has(.back-to-top) .footer-links{padding-inline-end:56px}
