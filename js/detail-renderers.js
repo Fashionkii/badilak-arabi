@@ -897,6 +897,13 @@ function practicalTrialMarkup(x){
  </details>`;
 }
 
+// Sourced paragraphs added to short resource pages; each page they rely on is linked under them.
+function sourcedDetailsMarkup(x){
+ if(!x.details?.length)return '';
+ const e=discoveryEscape;
+ const links=(x.detailSources||[]).map(s=>`<a href="${e(s.url)}" target="_blank" rel="noopener noreferrer">${e(s.label)} ↗</a>`).join(' · ');
+ return `<section class="discovery-related sourced-details"><h4>تفاصيل من المصادر</h4>${x.details.map(p=>`<p>${e(p)}</p>`).join('')}${links?`<p class="news-source-kind">مصادر هذه التفاصيل: ${links}</p>`:''}</section>`;
+}
 function directoryDetailMarkup(x,standalone=false){
  const special=specialDetails(x);
  // Keep every distinct fact; do not repeat the overview verbatim under a second label.
@@ -915,7 +922,7 @@ function directoryDetailMarkup(x,standalone=false){
    ${standalone?`<a class="destination-link" href="${destination.url}" target="_blank" rel="${destination.affiliate?'sponsored ':''}noopener noreferrer">`:`<button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')">`}<span class="destination-label"><bdi>افتح ${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span>${standalone?'</a>':'</button>'}
    ${practicalTrialMarkup(x)}
    ${editorialGuideLinkMarkup(x.id,true)}
-   ${renderSections(x,sections)}
+   ${renderSections(x,sections)}${sourcedDetailsMarkup(x)}
    ${contextualLearningMarkup(x.id,standalone)}
    ${relatedNewsMarkup(x.id)}
    ${directoryDiscoveryMarkup(x,standalone)}
