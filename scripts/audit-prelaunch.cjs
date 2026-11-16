@@ -4,7 +4,7 @@ const {execFileSync}=require('node:child_process');
 const {withoutRetiredShelf,withOriginalArticleMediaOrder}=require('./audit-helpers.cjs');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'dist');
 const files=fs.readdirSync(out,{recursive:true}).filter(x=>x.endsWith('.html'));
-const canonical=new Set();
+const canonical=new Set(),titles=new Map();
 const {canonicalOrigin:siteOrigin,studioOrigin,phase}=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
 const launch=phase==='launch';
 const onSiteOrigin=value=>value===siteOrigin||value.startsWith(siteOrigin+'/');
@@ -26,6 +26,10 @@ for(const file of files){
   for(const match of html.matchAll(/<meta (?:property|name)="(og:url|og:image|og:image:secure_url|twitter:image)" content="([^"]+)">/g))assert.ok(onSiteOrigin(match[2]),`${match[1]} is not on the configured origin: ${file}`);
  }
  assert.match(html,/<title>[^<]+<\/title>/,file);
+ // Two indexable addresses with one title look like duplicates in search results.
+ const title=html.match(/<title>([^<]+)<\/title>/)[1];
+ assert.ok(!titles.has(title),'Duplicate page title: '+file+' and '+titles.get(title));titles.set(title,file);
+ assert.doesNotMatch(html,/fonts\.(?:gstatic|googleapis)\.com/,'Fonts are served from this site: '+file);
  assert.match(html,/<meta name="description" content="[^"]+">/,file);
  for(const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g))JSON.parse(match[1]);
  for(const match of html.matchAll(/(?:href|src)="(\/[^"\s]*)"/g)){
@@ -59,6 +63,7 @@ for(const file of articleFiles){
  assert.ok(!/<nav class="toplinks"[^>]*>[^]*?<a[^>]+href="\/#learning"/.test(output),'No duplicate learning entrance in article header');
  assert.equal(body(fs.readFileSync(path.join(root,'guides',file),'utf8')),body(fs.readFileSync(path.join(out,'guides',file),'utf8')),'Article changed: '+file);
 }
+for(const sheet of fs.readdirSync(path.join(out,'css')).filter(x=>x.endsWith('.css')))assert.doesNotMatch(fs.readFileSync(path.join(out,'css',sheet),'utf8'),/fonts\.(?:gstatic|googleapis)\.com/,'Fonts are served from this site: css/'+sheet);
 const sitemap=fs.readFileSync(path.join(out,'sitemap.xml'),'utf8'),robots=fs.readFileSync(path.join(out,'robots.txt'),'utf8');
 if(launch){
  // The sitemap lists exactly the canonical addresses of the published pages, and nothing blocks them.
