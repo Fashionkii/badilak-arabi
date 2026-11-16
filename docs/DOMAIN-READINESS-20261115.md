@@ -62,21 +62,25 @@ mobile rendering (no visual change was made), Meta link previews.
 
 ## Switch steps once the domain serves HTTPS on this project
 
-Do these in order; do not do step 2 before the domain shows a valid certificate, or every
-canonical and share image URL would point at a dead host.
+Serve the public site on the new domain with a valid TLS certificate before changing the public
+origin. Keep the Vercel project online for the studio, while it still handles the studio's sessions
+and assets.
 
 1. In the studio on the old host, export any drafts with "save project". Drafts live in that
    host's browser storage (`badilak_design_studio_v1`) and do not follow the redirect.
-2. `site.config.json`: set `canonicalOrigin` to the new origin (one HTTPS origin, no trailing
-   slash). Keep `"phase": "prelaunch"`.
-3. `vercel.json`: add as the first entry of `redirects`, with the real domain:
-   `{ "source": "/:path*", "has": [{ "type": "host", "value": "badilak-arabi.vercel.app" }], "destination": "https://NEW-DOMAIN/:path*", "permanent": true }`
+2. `site.config.json`: set `canonicalOrigin` to the new public origin (one HTTPS origin, no trailing
+   slash). Retain `studioOrigin` on the Vercel host while the studio runs there, and keep `"phase": "prelaunch"`.
+3. Scope Vercel's old-host redirects to the public page routes with verified equivalents on the new
+   domain. Preserve `/admin`, `/admin/studio`, `/api/studio` and the resources the studio requests
+   on Vercel. Test the redirect set and the studio on a Vercel preview before making redirects permanent.
 4. `server/studio/client/app.js` (offline export home link): replace the literal old origin.
 5. `python3 scripts/build-article-media.py --label-only` (Pillow with RAQM, DejaVu Sans): redraws
    the address on all 21 share images from the new setting and refreshes 63 `?v=` values. Look at
    two or three results before committing. Do not run the script without `--label-only`.
-6. Build, run `audit-prelaunch`, deploy, then check on the public domain: home, one article, one
-   discover page, one news item, `/admin/studio` login (a fresh login is needed per host).
+6. Update the hosting sentence in `data/privacy.json` to match the final public and studio hosts.
+   Build, run `audit-prelaunch`, and deploy. Check the home page, an article, a discover page, a news
+   item and link previews on the public host. Test the footer studio link, the login and access to a
+   saved draft on the Vercel host, and verify a public legacy URL redirects to its counterpart.
 
 Step 5 was rehearsed in a throwaway copy with a new `.com`: 21 images relabelled, 63 head lines
 changed, build and `audit-prelaunch` pass.

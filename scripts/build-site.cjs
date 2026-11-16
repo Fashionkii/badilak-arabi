@@ -6,8 +6,10 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const out=path.join(root,'dist');
 const config=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
-const parsedOrigin=new URL(config.canonicalOrigin);
-if(parsedOrigin.protocol!=='https:'||parsedOrigin.origin!==config.canonicalOrigin)throw new Error('canonicalOrigin must be one HTTPS origin without a trailing slash.');
+for(const field of ['canonicalOrigin','studioOrigin']){
+ const parsedOrigin=new URL(config[field]);
+ if(parsedOrigin.protocol!=='https:'||parsedOrigin.origin!==config[field])throw new Error(field+' must be one HTTPS origin without a trailing slash.');
+}
 // Launch requires a deliberate reviewed change; an environment variable cannot open indexing.
 if(config.phase!=='prelaunch')throw new Error('Only prelaunch builds are enabled. Launch needs an explicit reviewed indexing change.');
 const origin=config.canonicalOrigin;
@@ -39,7 +41,6 @@ fs.mkdirSync(out,{recursive:true});
 const media=JSON.parse(fs.readFileSync(path.join(root,'data/article-media.json'),'utf8'));
 const sourcePhotos=new Set(Object.values(media.articles).map(x=>path.join(root,x.photo)));
 for(const dir of ['css','js','images','guides','fonts'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true,filter:source=>!sourcePhotos.has(source)});
-for(const file of ['index.html'])fs.copyFileSync(path.join(root,file),path.join(out,file));
 fs.writeFileSync(path.join(out,'js/editorial-index.js'),'/* Generated from article metadata and sourced news; edit the original records. */\nconst badilakEditorial='+JSON.stringify(context.badilakEditorial).replace(/</g,'\\u003c')+';\n');
 fs.copyFileSync(path.join(root,'favicon.ico'),path.join(out,'favicon.ico'));
 const escape=seo.escape;
@@ -58,6 +59,8 @@ const bundleStyles=html=>html.replace(/<link rel="stylesheet" href="\/css\/fonts
 const readingNav='<a href="/">الرئيسية</a><a href="/#directory">اكتشف</a><a href="/guides" aria-current="page">اقرأ</a><a href="/#competitionIndex">المرصد</a>';
 function prepare(html){
  html=html.split(oldOrigin).join(origin);
+ // The public site can move independently of the studio and its origin-scoped sessions and drafts.
+ html=html.replace('href="/admin/studio"','href="'+escape(config.studioOrigin)+'/admin/studio"');
  // Update shared brand previews only; article-specific covers stay intact.
  if(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/.test(html))html=html.replace(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/g,'/images/social/badilak-share-20261016-dots.jpg').replace('<meta property="og:image:height" content="670">','<meta property="og:image:height" content="630">').replace(/(<meta property="og:image:alt" content=")[^"]*(">)/,'$1بديلك عربي — دليلك للبدائل العربية$2');
  html=html.replace('</head>','<link rel="icon" href="/favicon.ico?v=20261016" sizes="16x16 32x32 48x48">\n<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/wordmark-icon-20261016-32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/wordmark-icon-20261016-180.png">\n</head>');
@@ -116,7 +119,10 @@ const editorial=context.badilakEditorial;
 const editorialCard=(row,options)=>context.editorialCardMarkup(row,options);
 const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map(id=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{image:true});}).join('')}</div></section>`;
 const paths=vm.runInContext('discoveryPaths',context);
-const source=fs.readFileSync(path.join(root,'index.html'),'utf8').replace('<!-- HOME_EDITORIAL -->',homeEditorial).replace('<!-- DISCOVERY_PATH_OPTIONS -->',Object.entries(paths).map(([id,p])=>`<option value="${id}">${escape(p.name)}</option>`).join('')).replace(/<time data-review-resource="([^"]+)">[^<]*<\/time>/g,(_,id)=>{const x=items.find(x=>x.id===id);if(!x?.reviewed)throw new Error('Missing review date: '+id);return `<time data-review-resource="${id}">آخر مراجعة للمورد: ${escape(x.reviewed)}</time>`;});
+// Keep the reserved examples in source without publishing mock placements or their external assets.
+const source=fs.readFileSync(path.join(root,'index.html'),'utf8')
+ .replace(/<!-- AD_DEMO_START -->[\s\S]*?<!-- AD_DEMO_END -->\r?\n/g,'')
+ .replace('<!-- HOME_EDITORIAL -->',homeEditorial).replace('<!-- DISCOVERY_PATH_OPTIONS -->',Object.entries(paths).map(([id,p])=>`<option value="${id}">${escape(p.name)}</option>`).join('')).replace(/<time data-review-resource="([^"]+)">[^<]*<\/time>/g,(_,id)=>{const x=items.find(x=>x.id===id);if(!x?.reviewed)throw new Error('Missing review date: '+id);return `<time data-review-resource="${id}">آخر مراجعة للمورد: ${escape(x.reviewed)}</time>`;});
 // Standalone routes reuse the site's header, footer, fonts and detail renderer.
 // They do not ship the homepage panels or its application runtime.
 const standaloneLinks=html=>html.replace(/ onclick="[^"]*"/g,'').replace(/href="#/g,'href="/#');
