@@ -577,3 +577,26 @@ body.taste-editorial.cosmic-theme #start>.home-country-overview{border-top:0!imp
  body.taste-editorial.cosmic-theme #start>.home-editorial{margin-block:12px 0!important;padding-block:40px!important}
  body.taste-editorial.cosmic-theme #start>.home-country-overview{padding-top:12px!important}
 }
+
+/* Calm nature pass, second step, 15 November 2026. The owner asked for this to continue on my own
+   judgement. Scope: two legibility defects found by a contrast audit of nine page types, the same
+   single reading axis for the reading hub's opening, and one small natural tone per domain. */
+
+/* The keyboard skip link showed green text on its green box; the footer tagline sat at 1.2:1. */
+body.taste-editorial a.skip{color:#fff!important}
+body.taste-editorial.cosmic-theme :is(footer,.footer) .footer-inner>div:first-child{color:var(--te-muted)!important}
+
+/* Reading hub opening: the label and the lead follow the centred title. */
+body.taste-editorial.cosmic-theme .editorial-heading,
+body.taste-editorial.cosmic-theme .editorial-heading>p{text-align:center!important}
+
+/* Each domain carries one tone from the owner's six nature palettes, as the same short marker the
+   home chapters use. The domain name stays the label; the tone only helps a reader keep their place. */
+body.taste-editorial.cosmic-theme{--te-domain-work:#f57c00;--te-domain-learn:#5b7f49;--te-domain-tech:#58b0e6;--te-domain-create:#ff6bb1;--te-domain-culture:#a80d22;--te-domain-shopping:#f04a20}
+body.taste-editorial.cosmic-theme :is(#directory .catalog-group-head h3,.reading-group>h2)::after{content:"";display:block;width:40px;height:3px;margin:8px auto 0;background:var(--te-marker,var(--te-gold))}
+body.taste-editorial.cosmic-theme :is(#catalog-group-work,.reading-group[data-reading-group="work"]>h2){--te-marker:var(--te-domain-work)}
+body.taste-editorial.cosmic-theme :is(#catalog-group-learn,.reading-group[data-reading-group="learn"]>h2){--te-marker:var(--te-domain-learn)}
+body.taste-editorial.cosmic-theme :is(#catalog-group-tech,.reading-group[data-reading-group="tech"]>h2){--te-marker:var(--te-domain-tech)}
+body.taste-editorial.cosmic-theme :is(#catalog-group-create,.reading-group[data-reading-group="create"]>h2){--te-marker:var(--te-domain-create)}
+body.taste-editorial.cosmic-theme :is(#catalog-group-culture,.reading-group[data-reading-group="culture"]>h2){--te-marker:var(--te-domain-culture)}
+body.taste-editorial.cosmic-theme :is(#catalog-group-shopping,.reading-group[data-reading-group="shopping"]>h2){--te-marker:var(--te-domain-shopping)}
