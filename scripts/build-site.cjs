@@ -138,14 +138,11 @@ function standalonePage(page,content){
  const scripts=page.kind==='reading'?'<script src="/js/reading-hub.js" defer></script>':'';
  return setPageHead(prepare(bundleStyles('<!doctype html><html lang="ar" dir="rtl">'+head+'<body class="guided-discovery standalone-page'+(page.kind==='reading'?' reading-page':'')+'"><a class="skip" href="#content">انتقل إلى المحتوى</a>'+header+'<main class="standalone-main wrap" id="content">'+content+'</main>'+standaloneFooter+scripts+'<script src="/js/outbound-choice.js" defer></script><script src="/js/smart-return.js" defer></script></body></html>')),page);
 }
-// The entry page can paint with the existing cascade in its first response.
-// Keep the shared stylesheet external on inner pages.
+// The entry page requests the same cacheable stylesheet as the standalone pages.
+// Embedding it added the whole stylesheet to every homepage response and never reused it.
 const home=bundleStyles(source).replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/wordmark-main-20261016-dots-640.webp" imagesrcset="/images/brand/wordmark-main-20261016-dots-640.webp 640w, /images/brand/wordmark-main-20261016-dots-1080.webp 1080w" imagesizes="(max-width:1023px) 220px, 330px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-if (/<\/style/i.test(siteBundle)) throw new Error('The site stylesheet must be safe to embed in HTML.');
-const homeHtml=setPageHead(prepare(home),seo.metadata('/',origin));
-// Finish the sharing metadata head before the inline stylesheet so WhatsApp can read it in its first 300 KB.
-write('index.html',homeHtml.replace('<link rel="stylesheet" href="/css/site-bundle.css">\n','')
- .replace(/<body[^>]*>/,bodyTag=>bodyTag+'\n<style>\n'+siteBundle+'\n</style>'));
+// A linked stylesheet also keeps the sharing metadata head far inside WhatsApp's first 300 KB.
+write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
 // Review controls exist only on isolated preview deployments, never production.
 if(process.env.VERCEL_ENV==='preview'){
  write('lab/ui-review.html',fs.readFileSync(path.join(root,'preview/ui-review.html'),'utf8'));
