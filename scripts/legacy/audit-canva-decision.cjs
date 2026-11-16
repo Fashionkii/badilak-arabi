@@ -2,8 +2,8 @@
 // Protect the narrowly scoped Canva decision review and its continuation links.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {withoutReadingHierarchyApp,withoutReadingHierarchyRenderer,withoutCanvaTaskComparisonRenderer,withPreviousDiscoveryMarkup}=require('./audit-helpers.cjs');
-const root=path.resolve(__dirname,'..'),baseline='775c5ae95b03b6db6410851dc8e4ce48f26275b5';
+const {withoutReadingHierarchyApp,withoutReadingHierarchyRenderer,withoutCanvaTaskComparisonRenderer,withPreviousDiscoveryMarkup}=require('../audit-helpers.cjs');
+const root=path.resolve(__dirname,'../..'),baseline='775c5ae95b03b6db6410851dc8e4ce48f26275b5';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
 for(const file of ['index.html','guides.html','js/catalog-data.js','js/detail-renderers.js','js/guided-discovery.js','js/discovery-memory.js','js/smart-return.js','js/commercial-links.js','js/feedback.js','site.config.json','vercel.json','data/privacy.json','data/disclosure.json'])assert.equal(file==='js/detail-renderers.js'?withoutReadingHierarchyRenderer(read(file)):read(file),before(file),'Protected '+file);

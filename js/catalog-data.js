@@ -1,6 +1,11 @@
 /* Curated directory data. Load before app.js; keep source dates and caveats intact. */
+// The build saves service logos on this site and lists them in badilakLocalLogos
+// (scripts/localize-logos.cjs). A domain it could not save keeps the external icon service.
+function siteLogo(domain,size){
+ return globalThis.badilakLocalLogos?.[domain]||`https://www.google.com/s2/favicons?sz=${size}&domain_url=${encodeURIComponent('https://'+domain)}`;
+}
 function officialFavicon(domain){
- return `https://www.google.com/s2/favicons?sz=256&domain_url=${encodeURIComponent('https://'+domain)}`;
+ return siteLogo(domain,256);
 }
 
 const itemCountryMap={

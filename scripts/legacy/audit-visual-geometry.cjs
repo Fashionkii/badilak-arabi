@@ -2,7 +2,7 @@
 // Scope guard for the 2026-10-14 visual repair, independent of older design baselines.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const root=path.resolve(__dirname,'..'),baseline='9f330250b81b4941ae4b9133b6a54894b5385318';
+const root=path.resolve(__dirname,'../..'),baseline='9f330250b81b4941ae4b9133b6a54894b5385318';
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const before=file=>execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'});
 const protectedFiles=execFileSync('git',['ls-tree','-r','--name-only',baseline],{cwd:root,encoding:'utf8'}).trim().split('\n').filter(file=>/^(js\/|data\/|guides\/)/.test(file)||['site.config.json','vercel.json','favicon.ico'].includes(file));

@@ -4,10 +4,19 @@ function feedbackEndpoint(){
  if(!config?.enabled)return '';
  try{const url=new URL(config.endpoint);return url.origin==='https://formspree.io'&&/^\/f\/[a-zA-Z0-9]+$/.test(url.pathname)&&!url.search&&!url.hash?url.href:'';}catch{return '';}
 }
+function feedbackMailLink(email,kind){
+ const correction=kind==='تصحيح';
+ const subject=(correction?'تصحيح معلومة':'ترشيح اكتشاف')+' — بديلك عربي';
+ const body=correction?'رابط الصفحة:\n\nالمعلومة المقصودة:\n\nالمصدر الذي يثبت الصواب:\n':'اسم الأداة أو المصدر:\n\nالرابط الرسمي:\n\nلماذا يستحق الإضافة؟\n';
+ return 'mailto:'+email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
 function openFeedback(kind){
  const dialog=document.getElementById('feedbackDialog'),field=document.getElementById('feedbackKind');
  field.value=kind||'ترشيح';document.getElementById('feedbackTitle').textContent=field.value==='تصحيح'?'صحّح معلومة':'رشّح اكتشافًا';
  const enabled=!!feedbackEndpoint();
+ // While the form is off, a form that looks ready and accepts nothing misleads; open a mail draft instead.
+ const email=window.badilakFeedbackConfig?.contactEmail;
+ if(!enabled&&email){location.href=feedbackMailLink(email,field.value);return;}
  dialog.querySelectorAll('input,textarea').forEach(input=>input.disabled=!enabled);
  document.getElementById('feedbackSubmit').disabled=!enabled;
  document.getElementById('feedbackStatus').textContent=enabled?'':'الإرسال من هذا النموذج متوقف مؤقتًا، ولا تُرسل منه أي بيانات. راسلنا مباشرة على contact@badilakarabi.com';

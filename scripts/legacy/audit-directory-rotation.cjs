@@ -1,8 +1,8 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const app=fs.readFileSync(__dirname+'/../js/app.js','utf8');
+const app=fs.readFileSync(__dirname+'/../../js/app.js','utf8');
 const source=app.slice(app.indexOf('const directoryRotationKey='),app.indexOf('function resetDirectoryLimit'));
-const catalog=vm.runInNewContext(fs.readFileSync(__dirname+'/../js/catalog-data.js','utf8')+';items');
+const catalog=vm.runInNewContext(fs.readFileSync(__dirname+'/../../js/catalog-data.js','utf8')+';items');
 const list=JSON.parse(JSON.stringify(catalog)),original=JSON.stringify(list);
 const ids=a=>Array.from(a,x=>x.id);
 function visit({mobile=false,seed=42,saved,blocked=false}={}){

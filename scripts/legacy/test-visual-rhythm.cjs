@@ -14,7 +14,7 @@ for(const f of fs.readdirSync('guides').filter(f=>f.endsWith('.html'))){
  const h1=s=>s.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1];assert.equal(h1(html),h1(source),f+' full headline');
  for(const m of html.matchAll(/href="#([^"]+)"/g))assert(html.includes(`id="${m[1]}"`),f+' anchor '+m[1]);
 }
-const index=require('./editorial-index.cjs');
+const index=require('../editorial-index.cjs');
 const vm=require('node:vm'),c=vm.createContext({});vm.runInContext(read('js/news-data.js'),c);
 const rows=index(process.cwd(),vm.runInContext('badilakNews',c)).rows;
 assert.equal(rows.length,30);

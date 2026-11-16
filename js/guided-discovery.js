@@ -27,10 +27,6 @@
    panel.hidden=!visible;
    // Preserve the static panel identity used before JavaScript loads.
   });
-  if(view==='knowledge'||view==='guides'){
-   const body=document.getElementById(view+'Body');
-   if(body?.hidden)toggleStaticDisclosure(body.id,document.querySelector('#'+view+' .section-fold-toggle'),'plain');
-  }
   document.querySelectorAll('.navigation > a').forEach(a=>{
    const target=a.getAttribute('href');
    if(target==='#'+(view==='home'?'top':view))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');

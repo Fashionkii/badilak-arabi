@@ -359,10 +359,9 @@
  </div>
 </section>
 
-<section class="section wrap fold-card" id="guides" data-journey-panel="guides">
+<section class="section wrap fold-card is-open" id="guides" data-journey-panel="guides">
  <div class="section-head"><div><h2 class="section-title">قبل ما تدفع</h2><p class="section-human-note">قبل الاشتراك أو نقل عملك، راجع ما قد يغيّر القرار فعلًا.</p></div></div>
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="guidesBody" onclick="toggleStaticDisclosure('guidesBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">إظهار القسم</span></button>
- <div class="section-fold-body" id="guidesBody" hidden>
+ <div class="section-fold-body" id="guidesBody">
 <div class="guides frame-soft">
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">code</span></span><span class="guide-intent">ذكاء اصطناعي</span></div><h3>كيف تقارن مساعدًا عربيًا بمساعد عالمي؟</h3><p>لا تبدأ بسؤال «من الأذكى؟». ابدأ بالعربية واللهجات والسياق والملفات والخصوصية والمهمة التي تريد إنجازها.</p><a href="/guides/arabic-ai">اقرأ الدليل الكامل ←</a></article>
   <article class="guide"><div class="guide-topline"><span class="guide-icon editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">description</span></span><span class="guide-intent">PDF وOCR</span></div><h3>OCR عربي: ماذا تختبر قبل الاشتراك؟</h3><p>دعم كتابة العربية لا يعني تلقائيًا التعرف الضوئي عليها. اختبر ملفك الحقيقي وحدود التصدير قبل الدفع.</p><a href="/guides/arabic-pdf">اقرأ الدليل الكامل ←</a></article>
@@ -393,10 +392,9 @@
 
 
 
-<section class="section wrap fold-card" id="knowledge" data-journey-panel="knowledge">
+<section class="section wrap fold-card is-open" id="knowledge" data-journey-panel="knowledge">
  <div class="section-head"><div><h2 class="section-title">مش بس أدوات</h2><p class="section-human-note">كتب وألعاب وصوت وتجارب عربية لها قيمة مستقلة، حتى من دون مقارنة بمنتج عالمي.</p></div></div>
- <button class="section-fold-toggle" type="button" aria-expanded="false" aria-controls="knowledgeBody" onclick="toggleStaticDisclosure('knowledgeBody',this,'plain')"><span aria-hidden="true">+</span><span class="sr-only">إظهار القسم</span></button>
- <div class="section-fold-body" id="knowledgeBody" hidden>
+ <div class="section-fold-body" id="knowledgeBody">
 <div class="discovery-shelf">
   <button class="discovery-card" onclick="openDetail('gravity')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">sports_esports</span></span></div><div class="discovery-body"><span class="discovery-kind">لعبة عربية</span><span class="discovery-country"><img src="/images/flags/sa.png" alt="">السعودية</span><h3>Gravity Error</h3><p>لعبة ألغاز ومنصات من استوديو سعودي؛ نعرضها هنا كلعبة عربية مستقلة، لا كبديل لمنتج أجنبي.</p></div></button>
   <button class="discovery-card" onclick="openDetail('abjjad')"><div class="discovery-visual vector-visual"><span class="editorial-static-icon" aria-hidden="true"><span class="material-symbols-outlined">menu_book</span></span></div><div class="discovery-body"><span class="discovery-kind">قراءة عربية</span><span class="discovery-country"><img src="/images/flags/jo.png" alt="">الأردن</span><h3>أبجد</h3><p>منصة للكتب العربية الرقمية والصوتية، للقراءة والاستماع.</p></div></button>
@@ -433,7 +431,7 @@
 </section>
 
 <section class="section wrap nominate" id="nominate" data-journey-panel="nominate">
- <div><h2 class="section-title">ساعدنا نكمل الدليل</h2><p class="section-copy">هل تعرف أداة أو مشروعًا عربيًا يستحق الظهور؟ أو وجدت معلومة تحتاج تصحيحًا؟ النموذج متوقف مؤقتًا، ويمكنك مراسلتنا على <a href="mailto:contact@badilakarabi.com">contact@badilakarabi.com</a>.</p></div>
+ <div><h2 class="section-title">ساعدنا نكمل الدليل</h2><p class="section-copy">هل تعرف أداة أو مشروعًا عربيًا يستحق الظهور؟ أو وجدت معلومة تحتاج تصحيحًا؟ الزران يفتحان رسالة بريد جاهزة إلى <a href="mailto:contact@badilakarabi.com">contact@badilakarabi.com</a>.</p></div>
  <div class="nominate-actions"><button onclick="openFeedback('ترشيح')">رشّح اكتشافًا</button><button class="secondary" onclick="openFeedback('تصحيح')">صحّح معلومة</button></div>
 </section>
 
@@ -453,7 +451,7 @@
 
 </main>
 
-<footer class="footer"><div class="wrap footer-inner"><div><strong>بديلك عربي</strong> — اكتشاف · مقارنة · اختيار</div><div class="footer-links"><a href="/guides">اقرأ</a> · <a href="#competitionIndex">المرصد</a> · <a href="#methodology" onclick="openMethodology();return false">منهج الاختيار</a> · <a href="#nominate">التصحيح والترشيح</a> · <a href="/about">من نحن</a> · <a href="/contact">تواصل معنا</a> · <a href="/privacy">الخصوصية</a> · <a href="/disclosure">الإفصاحات التجارية</a> · <a href="/admin/studio" rel="nofollow">دخول الإدارة</a></div></div></footer>
+<footer class="footer"><div class="wrap footer-inner"><div><strong>بديلك عربي</strong> — اكتشاف · مقارنة · اختيار</div><div class="footer-links"><a href="/guides">اقرأ</a> · <a href="#competitionIndex">المرصد</a> · <a href="#methodology" onclick="openMethodology();return false">منهج الاختيار</a> · <a href="#nominate">التصحيح والترشيح</a> · <a href="/about">من نحن</a> · <a href="/contact">تواصل معنا</a> · <a href="/privacy">الخصوصية</a> · <a href="/disclosure">الإفصاحات التجارية</a></div></div></footer>
 
 
 <button class="back-to-top" id="backToTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ أعلى</button>

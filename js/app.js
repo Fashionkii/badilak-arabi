@@ -829,9 +829,27 @@ const fieldNames={
  knowledge:'معرفة وعلوم',
  quran:'قرآن وتلاوة'
 };
+// A dialog without an address of its own (a learning source, the methodology) still takes one
+// step in the browser history, so Back closes it instead of leaving the page. The step records
+// which dialog it was, so Forward and a reload on that step open it again.
+function enterDialogStep(kind,id){
+ if(/^\/discover\//.test(location.pathname))return;
+ const step={kind,id:id||null};
+ if(history.state?.badilakDialog){history.replaceState({...history.state,badilakDialog:step},'');return;}
+ // The step carries the same page snapshot as the entry under it, so either one restores the page.
+ window.badilakJourney?.remember();
+ history.pushState({badilakDialog:step,journey:history.state?.journey},'',location.href);
+}
+function reopenDialogStep(){
+ const step=history.state?.badilakDialog;
+ if(!step||/^\/discover\//.test(location.pathname))return;
+ if(step.kind==='learning'&&learning.some(x=>x.id===step.id))showLearningNote(step.id);
+ else if(step.kind==='methodology')openMethodology();
+}
 function showLearningNote(id){
  const x=learning.find(a=>a.id===id);if(!x)return;
  activeDetail={kind:'learning',id};
+ enterDialogStep('learning',id);
  if(!document.getElementById('detailModal').open)detailReturnFocus=document.activeElement;
  const fields=x.fields.map(f=>fieldNames[f]||f).join(' · ');
  const isChannel=x.type==='channel'||x.type==='reciter';
@@ -910,7 +928,8 @@ function openExternal(id){
 let methodologyReturnFocus=null;
 function openMethodology(){
  activeDetail=null;
- methodologyReturnFocus=document.activeElement;
+ if(!document.getElementById('detailModal').open)methodologyReturnFocus=document.activeElement;
+ enterDialogStep('methodology');
  document.getElementById('modalBody').innerHTML=`
   <div class="detail-overview">
    <h3 class="quick-title" id="methodology">منهج الاختيار</h3>
@@ -956,8 +975,9 @@ function closeModal(options={}){
  // Comparisons can open a resource absent from the underlying results. Return to
  // the card that opened the dialog, even when history recreates its DOM element.
  const returningCard=detailReturnFocus?.closest('[data-item-id],[data-learning-id]');
- const returningItemId=returningCard?.dataset.itemId||returningCard?.dataset.learningId||returningDetail?.id;
+ // A paired card carries both identifiers; the attribute and its value must come from the same one.
  const returningAttribute=returningCard?.hasAttribute('data-learning-id')?'data-learning-id':'data-item-id';
+ const returningItemId=returningCard?(returningAttribute==='data-learning-id'?returningCard.dataset.learningId:returningCard.dataset.itemId):returningDetail?.id;
  const returnControl=detailReturnFocus?.matches('.more-btn')?'.more-btn':detailReturnFocus?.matches('.destination-link')?'.destination-link':'.item-identity';
  activeDetail=null;
  modal.close();
@@ -967,8 +987,9 @@ function closeModal(options={}){
  detailReturnFocus=null;
  if(methodologyReturnFocus?.isConnected)methodologyReturnFocus.focus({preventScroll:true});
  methodologyReturnFocus=null;
- if(options.route!==false&&routedDetail){
-  if(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1){
+ const dialogStep=!routedDetail&&!!routeState?.badilakDialog;
+ if(options.route!==false&&(routedDetail||dialogStep)){
+  if(dialogStep||(routeState&&routeState.badilakDetail&&routeState.returnPath&&history.length>1)){
    // The history adapter recreates cards; focus their new element after restoration.
    window.addEventListener('popstate',()=>requestAnimationFrame(()=>{
     document.querySelector(`[${returningAttribute}="${returningItemId}"] ${returnControl}`)?.focus({preventScroll:true});
@@ -986,7 +1007,11 @@ document.getElementById('detailModal').addEventListener('keydown',event=>{
  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
 });
-document.addEventListener('DOMContentLoaded',()=>{if(location.hash==='#methodology')openMethodology();});
+document.addEventListener('DOMContentLoaded',()=>{
+ // A reload on a dialog step opens that dialog again, after the page under it has been restored.
+ if(history.state?.badilakDialog)setTimeout(reopenDialogStep,0);
+ else if(location.hash==='#methodology')openMethodology();
+});
 
 function ensureJourneyPanel(view){
  if(initializedJourneyPanels.has(view))return;
@@ -1039,7 +1064,7 @@ function restoreDiscoveryQuery(){
  if(document.body.dataset.journey==='directory')renderCards();
 }
 applyShareableRoute();
-window.addEventListener('popstate',()=>applyShareableRoute());
+window.addEventListener('popstate',()=>{applyShareableRoute();reopenDialogStep();});
 
 const backToTop=document.getElementById('backToTop');if(backToTop){const syncBackTop=()=>backToTop.classList.toggle('show',window.scrollY>700);window.addEventListener('scroll',syncBackTop,{passive:true});syncBackTop();}
 
@@ -1150,7 +1175,7 @@ const competitionStories={
 };
 
 function competitionLogo(domain){
- return 'https://www.google.com/s2/favicons?sz=128&domain_url='+encodeURIComponent('https://'+domain);
+ return siteLogo(domain,128);
 }
 function resetCompetition(){
  const btn=document.querySelector('.competition-tab[data-story="shopping"]');
@@ -1561,7 +1586,7 @@ function createHomeOriginVisitClock(){
   const button=templates.get('chatgpt').cloneNode(true);
   button.dataset.origin=id;button.querySelector('.origin-name').textContent=originName(id);
   button.querySelector('.origin-intent').textContent=intent;
-  button.querySelector('img').src='https://www.google.com/s2/favicons?sz=64&domain_url=https://'+domain;
+  button.querySelector('img').src=siteLogo(domain,64);
   templates.set(id,button);
  }
  let state=nextHomeOriginState(null,Date.now());

@@ -2,8 +2,8 @@
 // This presentation change may expose/reorder existing facts, never replace them.
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
-const {markupMeaning,withoutReadingHierarchyApp,withoutReadingHierarchyRenderer,withPreviousDiscoveryMarkup}=require('./audit-helpers.cjs');
-const root=path.resolve(__dirname,'..'),base='f18ed7c9107cc9bd72fadb98ca59b8570d477dcd';
+const {markupMeaning,withoutReadingHierarchyApp,withoutReadingHierarchyRenderer,withPreviousDiscoveryMarkup}=require('../audit-helpers.cjs');
+const root=path.resolve(__dirname,'../..'),base='f18ed7c9107cc9bd72fadb98ca59b8570d477dcd';
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const before=f=>execFileSync('git',['show',base+':'+f],{cwd:root,encoding:'utf8'});
 for(const f of ['index.html','guides.html','js/catalog-data.js','js/guided-discovery.js','js/discovery-memory.js','js/smart-return.js','js/commercial-links.js','js/feedback.js','js/route-seo.js','css/app.css','css/visual-refresh.css','css/cosmic-theme.css','data/privacy.json','data/disclosure.json','data/article-media.json','site.config.json','vercel.json'])assert.equal(read(f),before(f),'Protected '+f);
