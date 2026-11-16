@@ -49,6 +49,12 @@ c.document={getElementById:()=>({value:''})};
 vm.runInContext("filter='all';countryFilter=null;originFilter=null;discoveryPath='languages'",c);
 const languageContext=vm.runInContext('discoveryEditorialMarkup([])',c);
 assert(languageContext.includes('/news/loghat-pilot'));assert(languageContext.includes('class="editorial-cover"'));
+const relatedArticles=[...languageContext.matchAll(/<article[^>]*data-editorial-type="article"[^>]*>[\s\S]*?<\/article>/g)];
+assert(relatedArticles.length,'Language path should include a related article');
+for(const [card] of relatedArticles){
+ const row=rows.find(entry=>card.includes(`href="${entry.url}"`));
+ assert(row&&card.includes(`class="editorial-cover" src="${row.image}"`),'Related articles use their existing thumbnails');
+}
 vm.runInContext("discoveryPath='reading'",c);assert(vm.runInContext('discoveryEditorialMarkup([])',c).includes('/news/thmanyah-radio-guide'));
 
 for(const row of rows){for(const id of row.resources)assert(get(`discoveryIndex.some(e=>e.id===${JSON.stringify(id)}||e.learning?.id===${JSON.stringify(id)})`),'Orphan editorial relation: '+id);}
