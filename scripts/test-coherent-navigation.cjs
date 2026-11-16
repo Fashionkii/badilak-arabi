@@ -29,6 +29,7 @@ assert.match(edraak,/onclick="showLearningNote\('edraak-learning'\)"/);assert(!e
 const rows=get('badilakEditorial.rows');assert.equal(rows.length,30);assert.equal(rows.filter(r=>r.type==='article').length,21);
 const newsRows=rows.filter(r=>r.type==='news');
 assert.equal(newsRows.length,9);
+assert.equal(new Set(rows.map(row=>row.image)).size,rows.length,'Each editorial topic has a distinct thumbnail URL');
 for(const n of get('badilakNews').filter(n=>n.related)){
  const label=n.eventKind||'الحدث';
  const expected=`${label}: ${n.eventLabel}${get(`conciseResource(${JSON.stringify(n.related)})`)?'':` · مراجعة المصدر: ${n.reviewLabel}`}`;
@@ -41,6 +42,10 @@ for(const row of newsRows){
  const html=read('dist'+row.url+'.html');
  const schema=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
  assert.equal(schema['@type'],'NewsArticle');assert(schema.image[0].endsWith('-cover.webp'));
+ const coverUrl=row.image.replace(/-thumb\.webp$/,'-cover.webp');
+ assert.equal(new URL(schema.image[0]).pathname,coverUrl);
+ assert(html.includes(`class="news-cover"><img src="${coverUrl}"`));
+ assert(fs.existsSync('dist'+row.image),'Missing thumbnail: '+row.image);
  assert(html.indexOf('class="news-date"')<html.indexOf('class="news-cover"'),'Dates visible before cover');
  if(row.eventKind==='تحديث التوثيق')assert(html.includes('تحديث التوثيق:'));
  for(const id of row.paths)assert(get(`Boolean(discoveryPaths[${JSON.stringify(id)}])`),'Unknown news path');
