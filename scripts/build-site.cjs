@@ -220,7 +220,7 @@ for(const n of news){
  write('news/'+n.id+'.html',standalonePage(page,trail+`<article class="news-article${concise?' content-concise':''}">${concise?'':`<p class="news-source-kind">${escape(n.sourceKind||'إعلان الجهة')} · مراجعة تحريرية للمصدر</p>`}<h1>${escape(n.title)}</h1><p class="news-lead">${escape(n.change)}</p>${dates}${cover}${details}${sections.filter(([,copy])=>copy!==n.change).map(([title,copy])=>concise?`<p>${escape(copy)}</p>`:`<section><h2>${title}</h2><p>${escape(copy)}</p></section>`).join('')}<div class="news-actions"><a href="${escape(n.source)}" target="_blank" rel="noopener noreferrer">${escape(n.sourceLabel||'اقرأ إعلان الجهة')} ↗</a>${resource?`<a href="/discover/${n.related}">افتح بطاقة ${escape(resource.name)} ←</a>`:''}${journeyLinks}</div>${concise?'':`<p class="news-source-kind">الروابط هنا للتوثيق، وليست روابط عمولة. الخبر لا يمثّل تقييمًا مستقلًا لجودة المنتج.</p>`}</article>`));
 }
 
-for(const slug of ['privacy','disclosure']){
+for(const slug of ['privacy','disclosure','about','contact']){
  const entry=JSON.parse(fs.readFileSync(path.join(root,'data',slug+'.json'),'utf8'));
  const page={kind:'policy',title:entry.title+' — بديلك عربي',description:entry.description,url:origin+'/'+slug,schema:{'@context':'https://schema.org','@type':'WebPage',name:entry.title,url:origin+'/'+slug,inLanguage:'ar'}};
  write(slug+'.html',standalonePage(page,'<article class="policy-page"><h1>'+escape(entry.title)+'</h1><p class="policy-updated">آخر تحديث: '+escape(entry.updated||'8 أكتوبر 2026')+'</p>'+entry.sections.map(x=>'<section><h2>'+escape(x.title)+'</h2>'+x.html+'</section>').join('')+'</article>'));
