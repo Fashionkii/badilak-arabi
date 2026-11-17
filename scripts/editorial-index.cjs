@@ -21,10 +21,6 @@ module.exports=function(root,news){
   row.cardTitle=cardTitles[row.type==='news'?'news':'articles'][row.id];
   if(!row.cardTitle)throw new Error('Missing display title: '+row.id);
  }
- // Homepage reading: the newest two articles and the newest news item, so a new publication appears there without a manual list.
- const date=row=>row.type==='news'?row.eventDate:row.updated||'';
- const byDate=(a,b)=>date(b).localeCompare(date(a))||a.id.localeCompare(b.id);
- const newest=type=>rows.filter(r=>r.type===type).sort(byDate);
- const home=[...newest('article').slice(0,2),...newest('news').slice(0,1)].sort(byDate).map(r=>r.id);
- return {rows,home};
+ // The homepage selection is set in build-site.cjs from homeReadingSelection in js/editorial-ui.js.
+ return {rows,home:[]};
 };
