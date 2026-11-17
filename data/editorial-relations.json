@@ -1,5 +1,4 @@
 {
-  "home": ["ecommerce-platform", "jais-3-release", "learning-platform"],
   "guides": {
     "khamsat-fiverr": {"category":"work","resources":["khamsat","khamsat-blog"]},
     "mostaql-upwork": {"category":"work","resources":["mostaql","nafezly","forlanso"]},

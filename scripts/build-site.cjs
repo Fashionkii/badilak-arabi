@@ -143,7 +143,7 @@ function standalonePage(page,content){
 }
 // The entry page requests the same cacheable stylesheet as the standalone pages.
 // Embedding it added the whole stylesheet to every homepage response and never reused it.
-const home=bundleStyles(source).replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" href="/images/brand/wordmark-main-20261016-dots-640.webp" imagesrcset="/images/brand/wordmark-main-20261016-dots-640.webp 640w, /images/brand/wordmark-main-20261016-dots-1080.webp 1080w" imagesizes="(max-width:1023px) 220px, 330px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+const home=bundleStyles(source).replace(/<link rel="preload"[^>]+as="font"[^>]*>\s*/g,'').replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>','<link rel="preload" as="image" type="image/webp" media="(min-width:761px)" href="/images/brand/wordmark-main-20261016-dots-640.webp" imagesrcset="/images/brand/wordmark-main-20261016-dots-640.webp 640w, /images/brand/wordmark-main-20261016-dots-1080.webp 1080w" imagesizes="(max-width:1023px) 220px, 330px" fetchpriority="high">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 // A linked stylesheet also keeps the sharing metadata head far inside WhatsApp's first 300 KB.
 write('index.html',setPageHead(prepare(home),seo.metadata('/',origin)));
 // Review controls exist only on isolated preview deployments, never production.
