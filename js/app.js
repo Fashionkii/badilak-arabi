@@ -1262,7 +1262,7 @@ const arabProgressData={
   note:'المركز العالمي — الرقم الأقل أفضل',
   sourceLabel:'WIPO · GII 2026',
   sourceUrl:'https://www.wipo.int/web-publications/global-innovation-index-2026/en/gii-2026-results.html',
-  checked:'15 أكتوبر 2026',
+  checked:'17 نوفمبر 2026',
   type:'rank',
   rows:[
    ['ae','الإمارات',25],['sa','السعودية',42],['qa','قطر',47],['ma','المغرب',54],['jo','الأردن',60],['kw','الكويت',62],
