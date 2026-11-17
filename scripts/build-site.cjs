@@ -255,10 +255,9 @@ const cacheHeaders='/fonts/*\n  Cache-Control: public, max-age=31536000, immutab
 // scripts and styles, and a policy needs its own tested pass. HSTS covers this host only.
 const securityHeaders='/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Strict-Transport-Security: max-age=31536000\n'+(launch?'':'  X-Robots-Tag: noindex, follow\n')+'\n';
 write('_headers',securityHeaders+cacheHeaders);
-const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
-// Keep legacy .html aliases too: those deleted files need explicit redirects.
-// Host-conditional rules are Vercel-only; without their condition they would loop on other hosts.
-write('_redirects',vercel.redirects.filter(x=>!x.has).map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
+const redirectRules=JSON.parse(fs.readFileSync(path.join(root,'redirects.json'),'utf8'));
+// Old page addresses from before the /guides structure; keep legacy .html aliases too.
+write('_redirects',redirectRules.map(x=>`${x.source} ${x.destination} ${x.permanent?301:302}`).join('\n')+'\n');
 // A custom 404 disables the SPA fallback on Cloudflare Pages; no wildcard rewrites.
 // Keep historic artwork in source control, not in the deployed public asset tree.
 // Limit pruning to fixed-name shared brand/social assets; other images can be data-driven.

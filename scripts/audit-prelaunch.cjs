@@ -8,7 +8,6 @@ const canonical=new Set(),titles=new Map();
 const {canonicalOrigin:siteOrigin,phase}=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
 const launch=phase==='launch';
 const onSiteOrigin=value=>value===siteOrigin||value.startsWith(siteOrigin+'/');
-const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).rewrites||[];
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
  assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\bclass=["'][^"']*\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published without a reviewed change: '+file);
@@ -36,7 +35,7 @@ for(const file of files){
  for(const match of html.matchAll(/(?:href|src)="(\/[^"\s]*)"/g)){
   const url=match[1].split(/[?#]/)[0];if(url==='/')continue;
   const target=path.join(out,url);
-  assert.ok(fs.existsSync(target)||fs.existsSync(target+'.html')||runtimeRoutes.some(r=>r.source===url&&fs.existsSync(path.join(root,r.destination+'.js'))),'Broken local path: '+file+' -> '+url);
+  assert.ok(fs.existsSync(target)||fs.existsSync(target+'.html'),'Broken local path: '+file+' -> '+url);
  }
  if(file.startsWith('discover/')){
   assert.match(html,/<article class="standalone-detail">\s*<div class="detail-overview">[\s\S]*?<h1 class="quick-title"/,file);
@@ -77,7 +76,7 @@ if(launch){
 }
 assert.ok(!fs.readFileSync(path.join(out,'robots.txt'),'utf8').includes('Disallow: /'));
 const redirects=fs.readFileSync(path.join(out,'_redirects'),'utf8');
-for(const rule of JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8')).redirects.filter(x=>!x.has))assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
+for(const rule of JSON.parse(fs.readFileSync(path.join(root,'redirects.json'),'utf8')))assert.ok(redirects.includes(`${rule.source} ${rule.destination} ${rule.permanent?301:302}\n`),'Missing portable redirect: '+rule.source);
 if(process.argv[2]){
  const ref=process.argv[2];
  for(const file of ['js/catalog-data.js','js/commercial-links.js','js/discovery-memory.js']){
