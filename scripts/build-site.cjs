@@ -252,7 +252,10 @@ if(launch){
 // browsers keep it for a year. Images are sometimes redrawn under the same name, so a week.
 // Pages, styles and scripts keep the host default: stored, and checked with the server each visit.
 const cacheHeaders='/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/images/*\n  Cache-Control: public, max-age=604800\n';
-write('_headers',(launch?'':'/*\n  X-Robots-Tag: noindex, follow\n\n')+cacheHeaders);
+// Security headers for every response. No Content-Security-Policy here: pages carry inline
+// scripts and styles, and a policy needs its own tested pass. HSTS covers this host only.
+const securityHeaders='/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Strict-Transport-Security: max-age=31536000\n'+(launch?'':'  X-Robots-Tag: noindex, follow\n')+'\n';
+write('_headers',securityHeaders+cacheHeaders);
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 // Keep legacy .html aliases too: those deleted files need explicit redirects.
 // Host-conditional rules are Vercel-only; without their condition they would loop on other hosts.
