@@ -1407,12 +1407,31 @@ function renderHomeCountryOverview(){
    <span class="home-country-count">${count} <small>${cardCountNoun(count)}</small></span>
    <span class="home-country-go" aria-hidden="true">↖</span>
   </button>`).join('');
- const ten=[...arabProgressData.innovation.rows].sort((a,b)=>a[2]-b[2]).slice(0,10);
- observer.innerHTML=ten.map(([code,name,rank],i)=>`
+ renderHomeObserver('innovation');
+}
+// Homepage observatory panel: one ranked indicator at a time, rotating with the reading cards
+// so the other indicators reach the homepage too. Category indicators (ITU tiers, GTMI groups)
+// stay in the observatory because a top-ten list would invent an order inside a category.
+const homeObserverMetrics=['innovation','patents','research','ai','digital','services'];
+const homeObserverLabels={innovation:['مؤشر الابتكار','مراكز عالمية بحسب'],patents:['طلبات البراءات','طلبات 2024 بحسب'],research:['الإنتاج العلمي','عدد المنشورات بحسب'],ai:['جاهزية الذكاء الاصطناعي','من 0 إلى 1، الأعلى أفضل، بحسب'],digital:['التطور الرقمي','من 0 إلى 100، الأعلى أفضل، بحسب'],services:['الخدمات الحكومية الإلكترونية','من 0 إلى 1، الأعلى أفضل، بحسب']};
+const homeObserverUnits={rank:'عالميًا',count:'',score:'',score100:''};
+function homeObserverCountWord(n){return {9:'تسع',10:'عشر'}[n]||String(n);}
+function renderHomeObserver(metric){
+ const observer=document.getElementById('homeObserverMini'),d=arabProgressData[metric];
+ if(!observer||!d||!homeObserverLabels[metric])return;
+ const rows=[...d.rows].sort((a,b)=>d.type==='rank'?a[2]-b[2]:b[2]-a[2]).slice(0,10);
+ const [name,lead]=homeObserverLabels[metric];
+ const title=document.getElementById('homeObserverTitle'),source=document.getElementById('homeObserverSource'),cta=document.getElementById('homeObserverCta');
+ if(title)title.textContent=`${rows.length<d.rows.length?'أعلى ':''}${homeObserverCountWord(rows.length)} دول في ${name}`;
+ if(source)source.innerHTML=`${lead} <a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel}</a>، لا متوسطًا لمؤشرات المرصد.`;
+ const open=`renderArabProgress('${metric}');go('competitionIndex');return false`;
+ if(cta)cta.setAttribute('onclick',open);
+ observer.setAttribute('aria-label',`الدول في ${name}`);
+ observer.innerHTML=rows.map(([code,country,value],i)=>`
   <li class="home-observer-country">
    <span class="home-observer-ordinal" aria-label="الترتيب في الدول المختارة ${i+1}">${i+1}</span>
-   <button type="button" class="home-flag-link" onclick="openCountryDirectory('${code}','${name}')" aria-label="اعرض عناصر ${name} في الدليل" title="عناصر ${name} في الدليل"><img src="/images/flags/${code}.png" width="25" height="17" alt=""></button>
-   <a href="#competitionIndex" onclick="renderArabProgress('innovation');go('competitionIndex');return false" class="home-observer-country-link" title="افتح مرصد الابتكار"><b>${name}</b><span>${rank} <small>عالميًا</small></span></a>
+   <button type="button" class="home-flag-link" onclick="openCountryDirectory('${code}','${country}')" aria-label="اعرض عناصر ${country} في الدليل" title="عناصر ${country} في الدليل"><img src="/images/flags/${code}.png" width="25" height="17" alt=""></button>
+   <a href="#competitionIndex" onclick="${open}" class="home-observer-country-link" title="افتح ${name} في المرصد"><b>${country}</b><span>${d.type==='rank'?value:arabMetricValue(d,value)}${homeObserverUnits[d.type]?` <small>${homeObserverUnits[d.type]}</small>`:''}</span></a>
   </li>`).join('');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderHomeCountryOverview,{once:true});
@@ -1632,7 +1651,7 @@ function createHomeOriginVisitClock(){
  function rotateIfAway(now){
   const awayLong=now-state.updatedAt>=homeOriginRefreshMs;
   const browsedElsewhere=Number.isFinite(state.leftAt)&&now-state.leftAt>=homeOriginBrowseMs;
-  if(awayLong||browsedElsewhere)state={version:1,cursor:state.cursor+step(now),updatedAt:now,leftAt:null};
+  if(awayLong||browsedElsewhere)state={version:1,cursor:state.cursor+step(now),turn:(state.turn||0)+1,updatedAt:now,leftAt:null};
   else state={...state,leftAt:null};
   save();
  }
@@ -1642,6 +1661,7 @@ function createHomeOriginVisitClock(){
   rotateIfAway(now);
  }catch{}
  function render(){
+  if(typeof renderHomeObserver==='function')renderHomeObserver(homeObserverMetrics[(Number.isInteger(state.turn)?state.turn:0)%homeObserverMetrics.length]);
   const picked=homeReadingSelection(rows,Date.now(),state.cursor).rows;
   const current=[...grid.querySelectorAll('.editorial-card-link')].map(a=>a.getAttribute('href'));
   if(picked.map(r=>r.url).join()===current.join())return;
@@ -1654,7 +1674,7 @@ function createHomeOriginVisitClock(){
  }
  function advance(){
   const now=Date.now();
-  state={version:1,cursor:state.cursor+step(now),updatedAt:now,leftAt:null};
+  state={version:1,cursor:state.cursor+step(now),turn:(state.turn||0)+1,updatedAt:now,leftAt:null};
   save();render();
  }
  // Leaving the homepage document (to an article, a news item or any other page) starts the browsing clock.
