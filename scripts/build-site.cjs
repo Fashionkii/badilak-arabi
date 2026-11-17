@@ -6,7 +6,8 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const out=path.join(root,'dist');
 const config=JSON.parse(fs.readFileSync(path.join(root,'site.config.json'),'utf8'));
-for(const field of ['canonicalOrigin','studioOrigin']){
+{
+ const field='canonicalOrigin';
  const parsedOrigin=new URL(config[field]);
  if(parsedOrigin.protocol!=='https:'||parsedOrigin.origin!==config[field])throw new Error(field+' must be one HTTPS origin without a trailing slash.');
 }
@@ -64,8 +65,6 @@ function prepare(html){
  html=html.split(oldOrigin).join(origin);
  // Every font is served from this site, so no page needs an early connection to the Google font host.
  html=html.replace(/<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*/g,'');
- // The public site can move independently of the studio and its origin-scoped sessions and drafts.
- html=html.replace('href="/admin/studio"','href="'+escape(config.studioOrigin)+'/admin/studio"');
  // Update shared brand previews only; article-specific covers stay intact.
  if(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/.test(html))html=html.replace(/\/images\/social\/badilak-share-202610(?:12|14)\.jpg/g,'/images/social/badilak-share-20261016-dots.jpg').replace('<meta property="og:image:height" content="670">','<meta property="og:image:height" content="630">').replace(/(<meta property="og:image:alt" content=")[^"]*(">)/,'$1بديلك عربي — دليلك للبدائل العربية$2');
  html=html.replace('</head>','<link rel="icon" href="/favicon.ico?v=20261016" sizes="16x16 32x32 48x48">\n<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/wordmark-icon-20261016-32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/wordmark-icon-20261016-180.png">\n</head>');
