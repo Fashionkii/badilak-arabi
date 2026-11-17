@@ -1612,8 +1612,38 @@ function createHomeOriginVisitClock(){
   state={...advanceHomeOrigins(state),updatedAt:Date.now()};
   try{localStorage.setItem('badilak_home_origins_v2',JSON.stringify(state));}catch{}
   render();
+  window.badilakHomeReading?.advance();
  }
  window.badilakHomeOrigins={navigate};
  document.addEventListener('visibilitychange',()=>visit(currentView,!document.hidden,performance.now()));
+ render();
+})();
+// Homepage reading cards rotate on the same occasions as the service icons above:
+// returning home after browsing, or coming back after a long absence. State stays in this browser.
+(()=>{
+ const grid=document.querySelector('.home-editorial-grid');
+ if(!grid||typeof homeReadingSelection!=='function'||typeof badilakEditorial==='undefined')return;
+ const key='badilak_home_reading_v1',rows=badilakEditorial.rows,now=Date.now();
+ let state={version:1,cursor:0,updatedAt:now};
+ try{
+  const saved=JSON.parse(localStorage.getItem(key));
+  if(saved&&saved.version===1&&Number.isInteger(saved.cursor)&&saved.cursor>=0&&Number.isFinite(saved.updatedAt)&&saved.updatedAt<=now){
+   state=saved;
+   if(now-saved.updatedAt>=homeOriginRefreshMs)state={version:1,cursor:saved.cursor+homeReadingSelection(rows,now,saved.cursor).step,updatedAt:now};
+  }
+  localStorage.setItem(key,JSON.stringify(state));
+ }catch{}
+ function render(){
+  const picked=homeReadingSelection(rows,Date.now(),state.cursor).rows;
+  const current=[...grid.querySelectorAll('.editorial-card-link')].map(a=>a.getAttribute('href'));
+  if(picked.map(r=>r.url).join()===current.join())return;
+  grid.innerHTML=picked.map(row=>editorialCardMarkup(row,{image:true,date:false})).join('');
+ }
+ function advance(){
+  state={version:1,cursor:state.cursor+homeReadingSelection(rows,Date.now(),state.cursor).step,updatedAt:Date.now()};
+  try{localStorage.setItem(key,JSON.stringify(state));}catch{}
+  render();
+ }
+ window.badilakHomeReading={advance};
  render();
 })();

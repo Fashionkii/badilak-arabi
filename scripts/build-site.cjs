@@ -29,6 +29,8 @@ vm.runInContext(fs.readFileSync(path.join(root,'js/discovery-index.js'),'utf8'),
 vm.runInContext(fs.readFileSync(path.join(root,'js/news-data.js'),'utf8'),context);
 context.badilakEditorial=require('./editorial-index.cjs')(root,vm.runInContext('badilakNews',context));
 vm.runInContext(fs.readFileSync(path.join(root,'js/editorial-ui.js'),'utf8'),context);
+// The homepage reading cards a first visit (and a crawler) sees; the browser then rotates them.
+context.badilakEditorial.home=vm.runInContext('homeReadingSelection(badilakEditorial.rows,Date.now(),0).rows.map(r=>r.id)',context);
 vm.runInContext(fs.readFileSync(path.join(root,'js/route-seo.js'),'utf8'),context);
 const {items,categoryNames}=vm.runInContext('({items,categoryNames})',context);
 const seo=context.badilakSEO;
@@ -121,7 +123,7 @@ function setPageHead(html,page){
 function write(file,html){fs.mkdirSync(path.dirname(path.join(out,file)),{recursive:true});fs.writeFileSync(path.join(out,file),html);}
 const editorial=context.badilakEditorial;
 const editorialCard=(row,options)=>context.editorialCardMarkup(row,options);
-const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map(id=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{image:true});}).join('')}</div></section>`;
+const homeEditorial=`<section class="home-editorial" aria-labelledby="homeReadingTitle"><div class="editorial-section-head"><div><h2 id="homeReadingTitle">اقرأ ما يساعدك على الاختيار</h2><p>مقالات عملية وأخبار موثقة، مرتبطة بما تبحث عنه.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="home-editorial-grid">${editorial.home.map(id=>{const row=editorial.rows.find(r=>r.id===id);if(!row)throw new Error('Missing home editorial: '+id);return editorialCard(row,{image:true,date:false});}).join('')}</div></section>`;
 const paths=vm.runInContext('discoveryPaths',context);
 // Keep the reserved examples in source without publishing mock placements or their external assets.
 const source=fs.readFileSync(path.join(root,'index.html'),'utf8')

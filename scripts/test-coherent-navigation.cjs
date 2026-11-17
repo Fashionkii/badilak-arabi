@@ -76,7 +76,15 @@ const home=read('dist/index.html').split('id="directory"')[0];
 assert.equal((home.match(/class="editorial-card(?: editorial-card--feature)?"/g)||[]).length,3);
 assert.match(home,/data-editorial-type="news"[\s\S]*?<img class="editorial-cover"/);assert.match(home,/data-editorial-type="article"/);
 for(const id of get('badilakEditorial.home'))assert(home.includes(rows.find(r=>r.id===id).url));
-{const ids=get('badilakEditorial.home'),articles=rows.filter(r=>r.type==='article').sort((a,b)=>b.updated.localeCompare(a.updated)),news=rows.filter(r=>r.type==='news').sort((a,b)=>b.eventDate.localeCompare(a.eventDate));assert.equal(ids.filter(id=>rows.find(r=>r.id===id).type==='news').length,1,'Homepage shows one news item');assert(ids.includes(articles[0].id),'Homepage shows the newest article');assert(ids.includes(news[0].id),'Homepage shows the newest news');assert(!home.includes('home-route-grid'),'No section cards repeating the main navigation');}
+{const ids=get('badilakEditorial.home'),section=home.slice(home.indexOf('class="home-editorial"'));
+assert.equal(ids.length,3,'Three homepage reading cards');assert(!/class="home-editorial"[\s\S]*?class="editorial-date"[\s\S]*?<\/section>/.test(section.split('</section>')[0]+'</section>'),'Homepage reading cards carry no date');assert(!home.includes('home-route-grid'),'No section cards repeating the main navigation');
+const day=864e5,now=Date.parse('2026-11-18T12:00:00Z'),d=n=>new Date(now-n*day).toISOString().slice(0,10);
+const sample=[{id:'a1',type:'article',updated:d(3)},{id:'a2',type:'article',updated:d(40)},{id:'a3',type:'article',updated:d(400)},{id:'a4',type:'article',updated:d(900)},{id:'n1',type:'news',eventDate:d(20)},{id:'n2',type:'news',eventDate:d(30)},{id:'n3',type:'news',eventDate:d(61)}];
+c.sample=sample;c.now=now;
+const pick=k=>get(`homeReadingSelection(sample,now,${k}).rows.map(r=>r.id)`);
+const seen=new Set();for(let k=0;k<20;k++){const ids=pick(k);assert.equal(ids.length,3);assert.equal(ids[0],'a1','Newest within 14 days keeps the first card');assert(ids.filter(x=>x.startsWith('n')).length<=1,'At most one news card');assert(!ids.includes('n3'),'News older than 60 days stays off the homepage');ids.forEach(x=>seen.add(x));}
+for(const id of ['a2','a3','a4','n1','n2'])assert(seen.has(id),'Rotation reaches '+id);
+c.later=now+20*day;assert.notEqual(get('homeReadingSelection(sample,later,0).rows[0].id'),'skip');assert.equal(get('homeReadingPlan(sample,later).pinned'),null,'No pinned card after 14 days');}
 for(const id of ['midaad','taqreer','aamenn']){const date=get(`items.find(x=>x.id==='${id}').reviewed`);assert(read('dist/index.html').includes(`data-review-resource="${id}">آخر مراجعة للمورد: ${date}`));}
 for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`\"datePublished\":\"${row.published}\"`));assert(html.includes('href="/guides?type=news"'));assert(html.includes('class="news-cover"'));assert(row.image&&row.imageAlt);}
 console.log('PASS: one navigation across published pages; 21 articles + 9 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');
