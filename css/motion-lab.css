@@ -157,6 +157,8 @@ body.motion-lab :is(.origin-option,.home-route,.intro-link,#directory .filter,#d
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .home-route-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;}
 }
 @media(max-width:760px) {
+ /* The header already shows the wordmark on phones; the hero h1 keeps its screen-reader name. */
+ body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .intro .art-title--brand picture {display:none!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .intro.wrap {padding-inline:16px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-explorer {width:100%;padding:24px 16px!important;border-radius:22px!important;}
  body.cosmic-theme.guided-discovery.motion-lab[data-journey="home"] .origin-heading h2 {font-size:22px!important;}
