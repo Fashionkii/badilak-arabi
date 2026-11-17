@@ -1619,31 +1619,48 @@ function createHomeOriginVisitClock(){
  render();
 })();
 // Homepage reading cards rotate on the same occasions as the service icons above:
-// returning home after browsing, or coming back after a long absence. State stays in this browser.
+// returning home after browsing (in this page or on another page of the site, such as an article),
+// or coming back after a long absence. New cards replace the old ones only after their images load.
+// State stays in this browser.
 (()=>{
  const grid=document.querySelector('.home-editorial-grid');
  if(!grid||typeof homeReadingSelection!=='function'||typeof badilakEditorial==='undefined')return;
- const key='badilak_home_reading_v1',rows=badilakEditorial.rows,now=Date.now();
- let state={version:1,cursor:0,updatedAt:now};
+ const key='badilak_home_reading_v1',rows=badilakEditorial.rows;
+ let state={version:1,cursor:0,updatedAt:Date.now(),leftAt:null},pending=0;
+ const save=()=>{try{localStorage.setItem(key,JSON.stringify(state));}catch{}};
+ const step=now=>homeReadingSelection(rows,now,state.cursor).step;
+ function rotateIfAway(now){
+  const awayLong=now-state.updatedAt>=homeOriginRefreshMs;
+  const browsedElsewhere=Number.isFinite(state.leftAt)&&now-state.leftAt>=homeOriginBrowseMs;
+  if(awayLong||browsedElsewhere)state={version:1,cursor:state.cursor+step(now),updatedAt:now,leftAt:null};
+  else state={...state,leftAt:null};
+  save();
+ }
  try{
-  const saved=JSON.parse(localStorage.getItem(key));
-  if(saved&&saved.version===1&&Number.isInteger(saved.cursor)&&saved.cursor>=0&&Number.isFinite(saved.updatedAt)&&saved.updatedAt<=now){
-   state=saved;
-   if(now-saved.updatedAt>=homeOriginRefreshMs)state={version:1,cursor:saved.cursor+homeReadingSelection(rows,now,saved.cursor).step,updatedAt:now};
-  }
-  localStorage.setItem(key,JSON.stringify(state));
+  const saved=JSON.parse(localStorage.getItem(key)),now=Date.now();
+  if(saved&&saved.version===1&&Number.isInteger(saved.cursor)&&saved.cursor>=0&&Number.isFinite(saved.updatedAt)&&saved.updatedAt<=now)state={...saved,leftAt:Number.isFinite(saved.leftAt)&&saved.leftAt<=now?saved.leftAt:null};
+  rotateIfAway(now);
  }catch{}
  function render(){
   const picked=homeReadingSelection(rows,Date.now(),state.cursor).rows;
   const current=[...grid.querySelectorAll('.editorial-card-link')].map(a=>a.getAttribute('href'));
   if(picked.map(r=>r.url).join()===current.join())return;
-  grid.innerHTML=picked.map(row=>editorialCardMarkup(row,{image:true,date:false})).join('');
+  const markup=picked.map(row=>editorialCardMarkup(row,{image:true,date:false}).replace('loading="lazy"','loading="eager"')).join('');
+  const ticket=++pending;
+  // Load the new covers first so the cards never appear with empty image boxes.
+  const images=picked.filter(r=>r.image).map(r=>new Promise(done=>{const img=new Image();img.onload=img.onerror=done;img.src=r.image;}));
+  const timeout=new Promise(done=>setTimeout(done,1500));
+  Promise.race([Promise.all(images),timeout]).then(()=>{if(ticket===pending)grid.innerHTML=markup;});
  }
  function advance(){
-  state={version:1,cursor:state.cursor+homeReadingSelection(rows,Date.now(),state.cursor).step,updatedAt:Date.now()};
-  try{localStorage.setItem(key,JSON.stringify(state));}catch{}
-  render();
+  const now=Date.now();
+  state={version:1,cursor:state.cursor+step(now),updatedAt:now,leftAt:null};
+  save();render();
  }
+ // Leaving the homepage document (to an article, a news item or any other page) starts the browsing clock.
+ addEventListener('pagehide',()=>{state={...state,leftAt:Date.now()};save();});
+ // Coming back with the browser's back button restores the page without running scripts again.
+ addEventListener('pageshow',event=>{if(event.persisted){rotateIfAway(Date.now());render();}});
  window.badilakHomeReading={advance};
  render();
 })();
