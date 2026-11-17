@@ -1,6 +1,5 @@
 {
-  // Cloudflare Workers static-assets deployment of the public site only.
-  // Vercel ignores this file. The admin studio (api/studio.js) is not served here.
+  // Cloudflare Workers static-assets deployment: the only host of the public site.
   "name": "badilak-arabi",
   "compatibility_date": "2026-11-01",
   "assets": {
