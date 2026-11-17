@@ -31,6 +31,21 @@
       ],
       "customFields": {}
     },
+    "shahid-watchit-netflix": {
+      "socialTitle": "شاهد أم WATCH IT أم Netflix؟",
+      "alt": "رسم لثلاث شاشات مشاهدة متجاورة",
+      "photo": "/images/articles/shahid-watchit-netflix-photo.webp",
+      "source": "https://badilakarabi.com/images/articles/shahid-watchit-netflix-cover.webp",
+      "credit": "بديلك عربي",
+      "license": "رسم أصلي",
+      "licenseUrl": "https://badilakarabi.com/about",
+      "sourceFile": "shahid-watchit-netflix-photo",
+      "focalPoint": [
+        0.5,
+        0.5
+      ],
+      "customFields": {}
+    },
     "arab-progress": {
       "socialTitle": "ماذا يقول المؤشر فعلًا؟",
       "alt": "رسم بياني لقراءة البيانات والمؤشرات",
