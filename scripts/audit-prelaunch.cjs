@@ -12,8 +12,8 @@ const runtimeRoutes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'ut
 for(const file of files){
  const html=fs.readFileSync(path.join(out,file),'utf8');
  assert.doesNotMatch(html,/data-demo-(?:ad|commercial)=|\bclass=["'][^"']*\b(?:ad-demo-wrap|commercial-demo-wrap)\b|\badsbygoogle\b|pagead2\.googlesyndication\.com/i,'Ad demo or AdSense code published without a reviewed change: '+file);
- // The studio is reached by its own address only; no public page links to it.
- assert.ok(!html.includes('/admin/studio'),'Public pages must not link to the studio: '+file);
+ // The studio was retired on 17 November 2026; this guards against a link to it coming back.
+ assert.ok(!html.includes('/admin/studio'),'Public pages must not link to the retired studio: '+file);
  // Launch opens every page except the not-found page; prelaunch keeps all of them closed.
  assert.match(html,launch&&file!=='404.html'?/<meta name="robots" content="index, follow[^"]*">/:/<meta name="robots" content="noindex,[^"]*">/,file);
  assert.equal((html.match(/<meta name="robots"/g)||[]).length,1,'One robots instruction: '+file);
@@ -95,4 +95,4 @@ if(process.argv[2]){
  }
  const ad=s=>s.match(/<a class="ad-demo ad-demo-display"[\s\S]*?<\/a>/)[0];assert.equal(ad(before),ad(after),'Salla reserved ad');
 }
-console.log(`PASS (${phase}): ${files.length} HTML files; ${launch?'indexable pages with a complete sitemap':'noindex'}, unique canonicals, JSON-LD, local links, no public ad demos or AdSense code, separate studio link, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);
+console.log(`PASS (${phase}): ${files.length} HTML files; ${launch?'indexable pages with a complete sitemap':'noindex'}, unique canonicals, JSON-LD, local links, no public ad demos or AdSense code, no studio link, static details, ${articleFiles.length} article bodies match their source, prelaunch robots/sitemap and protected baseline data.`);

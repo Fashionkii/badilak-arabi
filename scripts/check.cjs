@@ -9,14 +9,12 @@
    - scripts/legacy/*            compare the site with approved snapshots from October and early
                                  November 2026; see scripts/legacy/README.md.
    - audit-taxonomy.cjs          a report on comparison routes, written before the extra origin
-                                 choices and their shared routes; its findings need review.
-   - audit-studio-browser.cjs,
-     audit-studio-render.cjs     need a running studio server and the canvas package. */
+                                 choices and their shared routes; its findings need review. */
 'use strict';
 const {spawnSync}=require('node:child_process');
 const path=require('node:path');
 const root=path.resolve(__dirname,'..');
-const checks=['audit-prelaunch','audit-category-links','audit-feedback','test-coherent-navigation','test-directory-group-rotation','test-screenshot-corrections','test-studio'];
+const checks=['audit-prelaunch','audit-category-links','audit-feedback','test-coherent-navigation','test-directory-group-rotation','test-screenshot-corrections'];
 const run=name=>spawnSync(process.execPath,[path.join(__dirname,name+'.cjs')],{cwd:root,encoding:'utf8'});
 const build=run('build-site');
 if(build.status!==0){process.stdout.write(build.stdout+build.stderr);console.log('FAIL  build-site');process.exit(1);}
