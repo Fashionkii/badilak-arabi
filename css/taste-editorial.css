@@ -615,3 +615,14 @@ body.taste-editorial #detailModal #methodology{scroll-margin-top:96px}
 body.taste-editorial #stateLine:empty{min-height:27px}
 body.taste-editorial #catalogGrid:empty{min-height:100vh}
 body.taste-editorial main#top{min-height:100vh}
+
+/* Policy pages (about, contact, privacy, disclosure), 17 November 2026: two layers disagreed.
+   This file removed the card's inner padding and pinned it to the right (margin-inline:0 auto),
+   while site-polish.css kept the card's border and background. The text touched the border, the
+   card sat off-centre on desktop, and it touched the header line. Centre it, give it room, keep the card. */
+body.taste-editorial.cosmic-theme.motion-lab .policy-page{max-width:800px!important;margin:40px auto 56px!important;padding:40px 48px 48px!important}
+body.taste-editorial.cosmic-theme.motion-lab .policy-page h2{margin-inline:-48px!important;padding-inline:48px!important}
+@media(max-width:600px){
+ body.taste-editorial.cosmic-theme.motion-lab .policy-page{margin:20px auto 40px!important;padding:28px 20px 36px!important}
+ body.taste-editorial.cosmic-theme.motion-lab .policy-page h2{margin-inline:-20px!important;padding-inline:20px!important}
+}

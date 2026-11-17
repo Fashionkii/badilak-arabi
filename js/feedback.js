@@ -10,6 +10,14 @@ function feedbackMailLink(email,kind){
  const body=correction?'رابط الصفحة:\n\nالمعلومة المقصودة:\n\nالمصدر الذي يثبت الصواب:\n':'اسم الأداة أو المصدر:\n\nالرابط الرسمي:\n\nلماذا يستحق الإضافة؟\n';
  return 'mailto:'+email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
 }
+// For visitors whose device has no mail app set up: copy the address instead of opening a draft.
+function copyContactEmail(button){
+ const email=window.badilakFeedbackConfig?.contactEmail||'contact@badilakarabi.com';
+ const label=button.textContent;
+ const done=ok=>{button.textContent=ok?'نُسخ العنوان':label;if(ok)setTimeout(()=>{button.textContent=label},2500);};
+ if(navigator.clipboard?.writeText){navigator.clipboard.writeText(email).then(()=>done(true),()=>{window.prompt('انسخ العنوان:',email);done(false);});}
+ else{window.prompt('انسخ العنوان:',email);done(false);}
+}
 function openFeedback(kind){
  const dialog=document.getElementById('feedbackDialog'),field=document.getElementById('feedbackKind');
  field.value=kind||'ترشيح';document.getElementById('feedbackTitle').textContent=field.value==='تصحيح'?'صحّح معلومة':'رشّح اكتشافًا';
