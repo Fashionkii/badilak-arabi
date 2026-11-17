@@ -26,7 +26,7 @@ vm.runInContext(app.match(/const learningDisplaySummaries=\{[\s\S]*?\n\};/)[0]+"
 vm.runInContext("resetDiscoveryFilters();discoveryPurpose='learn'",c);
 const edraak=vm.runInContext("discoveryCardMarkup(discoveryIndex.find(e=>e.id==='edraak'))",c);
 assert.match(edraak,/onclick="showLearningNote\('edraak-learning'\)"/);assert(!edraak.includes("onclick=\"openDetail('edraak')"));
-const rows=get('badilakEditorial.rows');assert.equal(rows.length,30);assert.equal(rows.filter(r=>r.type==='article').length,21);
+const rows=get('badilakEditorial.rows');assert.equal(rows.length,31);assert.equal(rows.filter(r=>r.type==='article').length,22);
 const newsRows=rows.filter(r=>r.type==='news');
 assert.equal(newsRows.length,9);
 assert.equal(new Set(rows.map(row=>row.image)).size,rows.length,'Each editorial topic has a distinct thumbnail URL');

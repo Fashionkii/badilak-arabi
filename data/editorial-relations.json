@@ -19,6 +19,7 @@
     "islamic-sources": {"category":"learn","resources":["dorar","tafsircenter","shamela"]},
     "reading": {"category":"culture","resources":["hindawi","abjjad","ithra"]},
     "anghami-spotify": {"category":"culture","resources":["anghami","sowt","thmanyah"]},
+    "shahid-watchit-netflix": {"category":"culture","resources":["shahid","watchit","dubaiplus"]},
     "shopping": {"category":"shopping","resources":["noon","opensooq","fresh","mumzworld","snoonu","boutiqaat","dabchy","ouedkniss","miswag"]},
     "hudhud-googlemaps": {"category":"tech","resources":["hudhud"]},
     "arab-progress": {"category":"observer","resources":[]}
