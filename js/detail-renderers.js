@@ -1200,6 +1200,6 @@ function directoryCardMarkup(x,activeOrigin=null){
      <button class="more-btn" type="button" aria-haspopup="dialog" aria-controls="detailModal" onclick="openDetail('${x.id}')" aria-label="${hasPracticalTrial(x)?'معلومات وتجربة عملية عن':'معلومات عن'} ${x.name}">${hasPracticalTrial(x)?'معلومات وتجربة':'معلومات'}</button>
      ${relatedGuideMap[x.id]?`<div class="card-guide-slot">${editorialGuideLinkMarkup(x.id)}</div>`:''}
     </div>
-    <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')"><span class="destination-label"><bdi>${x.name}</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
+    <button type="button" class="destination-link" aria-haspopup="dialog" aria-controls="outboundDialog" onclick="openExternal('${x.id}')" aria-label="زيارة موقع ${x.name}"><span class="destination-label"><bdi>زيارة الموقع</bdi><small>${x.domain}</small></span><span class="outbound-key">↗</span></button>
    </div>
   </article>`;}

@@ -907,22 +907,12 @@ function openLearningExternal(id){
 }
 
 // Directory exits require a deliberate choice; reuse existing evidence/comparisons.
+// Two choices only (founder, 18 November 2026): go to the site, or keep browsing here first.
 function openExternal(id){
  const x=items.find(a=>a.id===id);if(!x||!x.url||x.url==='#'){alert('لا يتوفر لهذا العنصر رابط رسمي موثق حاليًا.');return}
- const trigger=document.activeElement;
  const r=resolveCommercialLink(id,x.url);
- const hasComparison=relatedDirectoryItems(x).length>0||!!canvaTaskComparisonMarkup(x);
  window.badilakOutbound.open({name:x.name,domain:x.domain,url:r.url,affiliate:r.affiliate,
-  reviewLabel:hasComparison?'راجع البدائل ونقاط قوتها أولًا':'راجع التفاصيل والقيود أولًا',
-  onContinue:()=>document.dispatchEvent(new CustomEvent('badilak:outbound',{detail:{id,kind:r.affiliate?'affiliate':'official'}})),
-  onReview:()=>{
-   if(trigger?.isConnected)trigger.focus({preventScroll:true});
-   openDetail(id);
-   if(hasComparison){
-    const comparison=document.querySelector('#modalBody .detail-task-comparison:not(.practical-trial)');
-    if(comparison){comparison.open=true;comparison.querySelector('summary')?.focus();comparison.scrollIntoView({block:'start',behavior:'instant'});}
-   }
-  }
+  onContinue:()=>document.dispatchEvent(new CustomEvent('badilak:outbound',{detail:{id,kind:r.affiliate?'affiliate':'official'}}))
  });
 }
 let methodologyReturnFocus=null;
@@ -1424,6 +1414,8 @@ function renderHomeObserver(metric){
  const title=document.getElementById('homeObserverTitle'),source=document.getElementById('homeObserverSource'),cta=document.getElementById('homeObserverCta');
  if(title)title.textContent=`${rows.length<d.rows.length?'أعلى ':''}${homeObserverCountWord(rows.length)} دول في ${name}`;
  if(source)source.innerHTML=`${lead} <a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel}</a>، لا متوسطًا لمؤشرات المرصد.`;
+ const why=document.getElementById('homeObserverWhy');
+ if(why)why.textContent=d.why?d.why.replace(/[.؛]?$/,'.'):'';
  const open=`renderArabProgress('${metric}');go('competitionIndex');return false`;
  if(cta)cta.setAttribute('onclick',open);
  observer.setAttribute('aria-label',`الدول في ${name}`);

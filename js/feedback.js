@@ -13,10 +13,10 @@ function feedbackMailLink(email,kind){
 // For visitors whose device has no mail app set up: copy the address instead of opening a draft.
 function copyContactEmail(button){
  const email=window.badilakFeedbackConfig?.contactEmail||'contact@badilakarabi.com';
- const label=button.textContent;
- const done=ok=>{button.textContent=ok?'نُسخ العنوان':label;if(ok)setTimeout(()=>{button.textContent=label},2500);};
- if(navigator.clipboard?.writeText){navigator.clipboard.writeText(email).then(()=>done(true),()=>{window.prompt('انسخ العنوان:',email);done(false);});}
- else{window.prompt('انسخ العنوان:',email);done(false);}
+ const label=button.dataset.label||(button.dataset.label=button.textContent);
+ const done=ok=>{button.textContent=ok?'تم نسخ البريد':label;clearTimeout(button._copyTimer);if(ok)button._copyTimer=setTimeout(()=>{button.textContent=label},2500);};
+ if(navigator.clipboard?.writeText){navigator.clipboard.writeText(email).then(()=>done(true),()=>{window.prompt('انسخ البريد الإلكتروني:',email);done(false);});}
+ else{window.prompt('انسخ البريد الإلكتروني:',email);done(false);}
 }
 function openFeedback(kind){
  const dialog=document.getElementById('feedbackDialog'),field=document.getElementById('feedbackKind');

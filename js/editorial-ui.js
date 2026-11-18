@@ -24,25 +24,26 @@ function discoveryEditorialMarkup(entries){
  return selected.length?`<div class="editorial-section-head"><div><h2>اقرأ في نفس الموضوع</h2><p>فهم القرار، ومتابعة التغييرات المرتبطة به.</p></div><a href="/guides">كل المقالات والأخبار ←</a></div><div class="editorial-context-grid">${selected.map(row=>editorialCardMarkup(row,{image:true})).join('')}</div>`:'';
 }
 
-// Homepage reading: three cards. The newest publication keeps the first card for 14 days.
-// The rest rotate in turn through every article and through news no older than 60 days,
-// with at most one news card at a time. Dates are hidden on these cards, which is why old news stays out.
-const homeReadingPinDays=14,homeReadingNewsDays=60,homeReadingCards=3;
+// Homepage reading: three cards, no fixed card (founder, 18 November 2026). A first visit sees the newest
+// three; each turn moves past every card just shown, so all three change. Every article takes part, news only
+// while no older than 60 days, and at most one news card at a time. Dates are hidden on these cards, which is
+// why old news stays out.
+const homeReadingNewsDays=60,homeReadingCards=3;
 function homeReadingDate(row){return row.type==='news'?row.eventDate:row.updated||'';}
 function homeReadingAgeDays(row,now){const d=homeReadingDate(row);return d?(now-Date.parse(d+'T00:00:00Z'))/864e5:Infinity;}
-function homeReadingPlan(rows,now){
+function homeReadingPool(rows,now){
  const byDate=(a,b)=>homeReadingDate(b).localeCompare(homeReadingDate(a))||a.id.localeCompare(b.id);
- const eligible=rows.filter(r=>r.type==='article'||(r.type==='news'&&homeReadingAgeDays(r,now)<=homeReadingNewsDays)).sort(byDate);
- const pinned=eligible.length&&homeReadingAgeDays(eligible[0],now)<=homeReadingPinDays?eligible[0]:null;
- return {pinned,pool:eligible.filter(r=>r!==pinned)};
+ return rows.filter(r=>r.type==='article'||(r.type==='news'&&homeReadingAgeDays(r,now)<=homeReadingNewsDays)).sort(byDate);
 }
+// step: how many pool positions this selection walked through; the next turn starts after them.
 function homeReadingSelection(rows,now,cursor){
- const {pinned,pool}=homeReadingPlan(rows,now),picked=pinned?[pinned]:[];
- const slots=homeReadingCards-picked.length;
- for(let i=0;i<pool.length&&picked.length<homeReadingCards;i++){
-  const row=pool[((cursor%pool.length)+pool.length+i)%pool.length];
+ const pool=homeReadingPool(rows,now),picked=[];let walked=0;
+ if(!pool.length)return {rows:picked,step:1};
+ const start=((cursor%pool.length)+pool.length)%pool.length;
+ while(walked<pool.length&&picked.length<homeReadingCards){
+  const row=pool[(start+walked)%pool.length];walked++;
   if(row.type==='news'&&picked.some(r=>r.type==='news'))continue;
-  if(!picked.includes(row))picked.push(row);
+  picked.push(row);
  }
- return {rows:picked,step:slots};
+ return {rows:picked,step:walked};
 }

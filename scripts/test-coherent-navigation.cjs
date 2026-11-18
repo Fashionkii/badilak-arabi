@@ -81,10 +81,13 @@ assert.equal(ids.length,3,'Three homepage reading cards');assert(!/class="home-e
 const day=864e5,now=Date.parse('2026-11-18T12:00:00Z'),d=n=>new Date(now-n*day).toISOString().slice(0,10);
 const sample=[{id:'a1',type:'article',updated:d(3)},{id:'a2',type:'article',updated:d(40)},{id:'a3',type:'article',updated:d(400)},{id:'a4',type:'article',updated:d(900)},{id:'n1',type:'news',eventDate:d(20)},{id:'n2',type:'news',eventDate:d(30)},{id:'n3',type:'news',eventDate:d(61)}];
 c.sample=sample;c.now=now;
-const pick=k=>get(`homeReadingSelection(sample,now,${k}).rows.map(r=>r.id)`);
-const seen=new Set();for(let k=0;k<20;k++){const ids=pick(k);assert.equal(ids.length,3);assert.equal(ids[0],'a1','Newest within 14 days keeps the first card');assert(ids.filter(x=>x.startsWith('n')).length<=1,'At most one news card');assert(!ids.includes('n3'),'News older than 60 days stays off the homepage');ids.forEach(x=>seen.add(x));}
-for(const id of ['a2','a3','a4','n1','n2'])assert(seen.has(id),'Rotation reaches '+id);
-c.later=now+20*day;assert.notEqual(get('homeReadingSelection(sample,later,0).rows[0].id'),'skip');assert.equal(get('homeReadingPlan(sample,later).pinned'),null,'No pinned card after 14 days');}
+const pick=k=>get(`homeReadingSelection(sample,now,${k})`);
+assert.deepEqual(pick(0).rows.map(r=>r.id),['a1','n1','a2'],'A first visit sees the newest three, one news card at most');
+const seen=new Set();let cursor=0,previous=null;
+for(let turn=0;turn<12;turn++){const sel=pick(cursor),ids=sel.rows.map(r=>r.id);assert.equal(ids.length,3);assert(ids.filter(x=>x.startsWith('n')).length<=1,'At most one news card');assert(!ids.includes('n3'),'News older than 60 days stays off the homepage');ids.forEach(x=>seen.add(x));previous=ids;cursor+=sel.step;}
+for(const id of ['a1','a2','a3','a4','n1','n2'])assert(seen.has(id),'Rotation reaches '+id);
+c.big=[...Array(12)].map((_,i)=>({id:'b'+i,type:'article',updated:d(2+i*9)})).concat([{id:'m1',type:'news',eventDate:d(5)},{id:'m2',type:'news',eventDate:d(25)},{id:'m3',type:'news',eventDate:d(45)}]);
+{let k=0,prev=null;const all=new Set();for(let turn=0;turn<30;turn++){const sel=get(`homeReadingSelection(big,now,${k})`),ids=sel.rows.map(r=>r.id);if(prev)assert(ids.every(x=>!prev.includes(x)),'Each turn changes every card: '+prev+' -> '+ids);ids.forEach(x=>all.add(x));prev=ids;k+=sel.step;}assert.equal(all.size,15,'Every article and recent news reaches the homepage');}}
 for(const id of ['midaad','taqreer','aamenn']){const date=get(`items.find(x=>x.id==='${id}').reviewed`);assert(read('dist/index.html').includes(`data-review-resource="${id}">آخر مراجعة للمورد: ${date}`));}
 for(const row of rows.filter(r=>r.type==='news')){const html=read('dist'+row.url+'.html');assert(html.includes(`datetime="${row.eventDate}"`));assert(html.includes(`\"datePublished\":\"${row.published}\"`));assert(html.includes('href="/guides?type=news"'));assert(html.includes('class="news-cover"'));assert(row.image&&row.imageAlt);}
 console.log('PASS: one navigation across published pages; 21 articles + 9 news; 3 home previews; store and recitation journeys; direct paired learning; platform and country counts; stable order; source-derived review dates.');
