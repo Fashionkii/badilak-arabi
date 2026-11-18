@@ -1633,7 +1633,14 @@ function createHomeOriginVisitClock(){
   render();
   window.badilakHomeReading?.advance();
  }
- window.badilakHomeOrigins={navigate};
+ // Used when the visitor comes back from another page of the site after browsing,
+ // so the icons, reading cards and observatory panel always change together.
+ function advance(){
+  state={...advanceHomeOrigins(state),updatedAt:Date.now()};
+  try{localStorage.setItem('badilak_home_origins_v2',JSON.stringify(state));}catch{}
+  render();
+ }
+ window.badilakHomeOrigins={navigate,advance};
  document.addEventListener('visibilitychange',()=>visit(currentView,!document.hidden,performance.now()));
  render();
 })();
@@ -1648,17 +1655,21 @@ function createHomeOriginVisitClock(){
  let state={version:1,cursor:0,updatedAt:Date.now(),leftAt:null},pending=0;
  const save=()=>{try{localStorage.setItem(key,JSON.stringify(state));}catch{}};
  const step=now=>homeReadingSelection(rows,now,state.cursor).step;
- function rotateIfAway(now){
+ // Returns true when the cards turned. iconsChecked: the icons already applied the 30-minute rule on this page load.
+ function rotateIfAway(now,iconsChecked){
   const awayLong=now-state.updatedAt>=homeOriginRefreshMs;
   const browsedElsewhere=Number.isFinite(state.leftAt)&&now-state.leftAt>=homeOriginBrowseMs;
-  if(awayLong||browsedElsewhere)state={version:1,cursor:state.cursor+step(now),turn:(state.turn||0)+1,updatedAt:now,leftAt:null};
-  else state={...state,leftAt:null};
+  const turn=awayLong||browsedElsewhere;
+  state=turn?{version:1,cursor:state.cursor+step(now),turn:(state.turn||0)+1,updatedAt:now,leftAt:null}:{...state,leftAt:null};
   save();
+  // Keep the service icons in step: they change at the same moments as the cards and the observatory panel.
+  if(turn&&!(iconsChecked&&awayLong))window.badilakHomeOrigins?.advance?.();
+  return turn;
  }
  try{
   const saved=JSON.parse(localStorage.getItem(key)),now=Date.now();
   if(saved&&saved.version===1&&Number.isInteger(saved.cursor)&&saved.cursor>=0&&Number.isFinite(saved.updatedAt)&&saved.updatedAt<=now)state={...saved,leftAt:Number.isFinite(saved.leftAt)&&saved.leftAt<=now?saved.leftAt:null};
-  rotateIfAway(now);
+  rotateIfAway(now,true);
  }catch{}
  function render(){
   if(typeof renderHomeObserver==='function')renderHomeObserver(homeObserverMetrics[(Number.isInteger(state.turn)?state.turn:0)%homeObserverMetrics.length]);
@@ -1680,7 +1691,7 @@ function createHomeOriginVisitClock(){
  // Leaving the homepage document (to an article, a news item or any other page) starts the browsing clock.
  addEventListener('pagehide',()=>{state={...state,leftAt:Date.now()};save();});
  // Coming back with the browser's back button restores the page without running scripts again.
- addEventListener('pageshow',event=>{if(event.persisted){rotateIfAway(Date.now());render();}});
+ addEventListener('pageshow',event=>{if(event.persisted){rotateIfAway(Date.now(),false);render();}});
  window.badilakHomeReading={advance};
  render();
 })();
