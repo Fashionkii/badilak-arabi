@@ -816,6 +816,7 @@ function openDetail(id,options={}){
  const x=items.find(a=>a.id===id);if(!x)return;
  if(options.route!==false){window.badilakJourney?.remember();syncDetailRoute(id);}
  activeDetail={kind:'directory',id};
+ setDetailModalLabel('التفاصيل والمصادر');
  if(!document.getElementById('detailModal').open)detailReturnFocus=document.activeElement;
  document.getElementById('modalBody').innerHTML=directoryDetailMarkup(x);
  showDetailDialog()
@@ -849,6 +850,7 @@ function reopenDialogStep(){
 function showLearningNote(id){
  const x=learning.find(a=>a.id===id);if(!x)return;
  activeDetail={kind:'learning',id};
+ setDetailModalLabel('التفاصيل والمصادر');
  enterDialogStep('learning',id);
  if(!document.getElementById('detailModal').open)detailReturnFocus=document.activeElement;
  const fields=x.fields.map(f=>fieldNames[f]||f).join(' · ');
@@ -915,11 +917,14 @@ function openExternal(id){
   onContinue:()=>document.dispatchEvent(new CustomEvent('badilak:outbound',{detail:{id,kind:r.affiliate?'affiliate':'official'}}))
  });
 }
+// The shared window's header names its content: a service's details, or the site's method.
+function setDetailModalLabel(label){const m=document.getElementById('detailModal');if(!m)return;m.setAttribute('aria-label',label);const s=m.querySelector('.modal-head>strong');if(s)s.textContent=label;}
 let methodologyReturnFocus=null;
 function openMethodology(){
  activeDetail=null;
  if(!document.getElementById('detailModal').open)methodologyReturnFocus=document.activeElement;
  enterDialogStep('methodology');
+ setDetailModalLabel('عن بديلك عربي');
  document.getElementById('modalBody').innerHTML=`
   <div class="detail-overview">
    <h3 class="quick-title" id="methodology">منهج الاختيار</h3>
