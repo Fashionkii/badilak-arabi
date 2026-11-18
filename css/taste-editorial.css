@@ -647,3 +647,23 @@ body.taste-editorial #knowledge .discovery-card:first-child .discovery-kind{colo
 @media(min-width:901px){body.taste-editorial #knowledge .discovery-shelf{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 /* Footer: every link has the same weight; "اقرأ" no longer looks like the current page everywhere. */
 body.taste-editorial .footer-links a[href="/guides"]{font-weight:inherit!important}
+
+/* 18 November 2026 (founder, from full-page screenshots of the live site; "نفذ لو متأكد"):
+   1. Policy pages (about, contact, privacy, disclosure): the page header (title and update date) lines up
+      with the sections under it, which align to the start since 18 November. The 404 page shares the
+      card class and keeps its centered header. */
+body.taste-editorial .policy-page:not(.not-found) :is(h1,.policy-updated){text-align:start!important}
+/* 2–3. Section heads: the title is centered (1 November) and "the section title, its explanation and its link
+   form one centered group" (2 November), but the explanation lines were set to start, so they hung off the
+   centered title. Observatory head, home sections (reviewed tools, before you pay, not just tools, learning)
+   and the suggest/correct section. */
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab :is(.section-human-note,.section-copy),
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #competitionIndex .competition-head p{text-align:center!important;margin-inline:auto!important}
+/* 7. "قبل ما تدفع" and "مش بس أدوات" kept the 24px inner padding of the old folding card (16px on phones),
+   so their cards were narrower than "أدوات ومنصات راجعناها" next to them. Same width now. */
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab main#top>:is(#guides,#knowledge).fold-card{padding-inline:0!important}
+/* 8. Observatory captions were 7–9px: the year under each extra indicator, the edition badge (GII 2026) and
+   the remaining count on "+3 دول". Minimum 12px. */
+body.taste-editorial #competitionIndex :is(.arab-extra-metrics button small,.arab-metric-badge,.arab-country-more small){font-size:12px!important}
+/* 10. The home promise is three sentences; each sits on its own line instead of breaking mid-sentence. */
+body.taste-editorial #start .intro-promise>span{display:block}
