@@ -673,3 +673,5 @@ body.taste-editorial .policy-page .editor-card{display:flex;align-items:center;g
 body.taste-editorial .policy-page .editor-card img{flex:none;width:96px;height:96px;border-radius:50%;object-fit:cover;border:1px solid var(--line,#d9ded6)}
 body.taste-editorial .policy-page .editor-card p{margin:0}
 @media (max-width:520px){body.taste-editorial .policy-page .editor-card{align-items:flex-start;gap:14px}body.taste-editorial .policy-page .editor-card img{width:72px;height:72px}}
+/* 19 Nov 2026: observatory coverage rule under each indicator */
+body.taste-editorial #competitionIndex .arab-progress-source .arab-coverage{flex-basis:100%;font-size:12.5px;line-height:1.9}
