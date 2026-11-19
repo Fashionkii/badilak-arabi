@@ -1485,6 +1485,11 @@ function showMoreArabCountries(){
  arabCountryVisible=Math.min(d.rows.length,arabCountryVisible+3);
  renderArabProgress(currentArabMetric,null);
 }
+function showAllArabCountries(){
+ const d=arabProgressData[currentArabMetric]||arabProgressData.innovation;
+ arabCountryVisible=d.rows.length;
+ renderArabProgress(currentArabMetric,null);
+}
 function arabMetricVisual(d,value){
  if(d.type==='rank'){
   return `<div class="arab-rank-track" aria-hidden="true"><span style="--pos:${Math.min(99,Math.max(1,((value-1)/99)*100))}%"></span></div>`;
@@ -1541,7 +1546,7 @@ function renderArabProgress(metric=currentArabMetric,btn=null){
    <span class="arab-metric-scale">ماذا يقيس؟ · ${d.note}</span>
   </div>
   ${rows}
-  ${remaining>0?`<div class="arab-country-more-wrap"><button type="button" class="arab-country-more" onclick="showMoreArabCountries()">+ ${add} دول <small>${remaining} متبقية</small></button></div>`:''}`;
+  ${remaining>0?`<div class="arab-country-more-wrap"><button type="button" class="arab-country-more" onclick="showMoreArabCountries()">+ ${add} دول <small>${remaining} متبقية</small></button>${remaining>3?`<button type="button" class="arab-country-more" onclick="showAllArabCountries()">اعرض الكل <small>${d.rows.length} دولة</small></button>`:''}</div>`:''}`;
 
  source.innerHTML=`<span>المصدر:</span><a href="${d.sourceUrl}" target="_blank" rel="noopener noreferrer">${d.sourceLabel} ↗</a><span>· آخر تحقق موثق: ${d.checked||'22 سبتمبر 2026'}</span><span>· اضغط دولة لها عناصر لعرضها في الدليل</span>${d.coverage?`<span class="arab-coverage">${d.coverage}${d.absent?.length?` غير واردة في المصدر: ${d.absent.map(c=>arabProgressCountryNames[c]).join('، ')}${d.absentNote?` (${d.absentNote})`:''}.`:''}</span>`:''}`;
  const insight=document.getElementById('arabProgressInsight');
