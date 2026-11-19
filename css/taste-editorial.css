@@ -667,3 +667,9 @@ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab main#top>:is(#guid
 body.taste-editorial #competitionIndex :is(.arab-extra-metrics button small,.arab-metric-badge,.arab-country-more small){font-size:12px!important}
 /* 10. The home promise is three sentences; each sits on its own line instead of breaking mid-sentence. */
 body.taste-editorial #start .intro-promise>span{display:block}
+
+/* 19 November 2026: editor photo beside the name in "من يحرّره" on the about page (founder's request). */
+body.taste-editorial .policy-page .editor-card{display:flex;align-items:center;gap:20px}
+body.taste-editorial .policy-page .editor-card img{flex:none;width:96px;height:96px;border-radius:50%;object-fit:cover;border:1px solid var(--line,#d9ded6)}
+body.taste-editorial .policy-page .editor-card p{margin:0}
+@media (max-width:520px){body.taste-editorial .policy-page .editor-card{align-items:flex-start;gap:14px}body.taste-editorial .policy-page .editor-card img{width:72px;height:72px}}
