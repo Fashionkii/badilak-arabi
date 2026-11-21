@@ -210,7 +210,7 @@ for(const n of news){
  const socialPath='/images/news/'+image.file+'-social.jpg';
  const page={kind:'news-article',title:n.title+' — بديلك عربي',description:n.audience,url:origin+'/news/'+n.id,image:origin+socialPath,imageAlt:image.alt,schema:{'@context':'https://schema.org','@type':'NewsArticle',headline:n.title,description:n.audience,image:[origin+coverPath],datePublished:n.published,dateModified:n.detailsReviewed||n.reviewed,inLanguage:'ar',url:origin+'/news/'+n.id,citation:n.source,author:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'},publisher:{'@type':'Organization',name:'بديلك عربي',url:origin+'/'}}};
  const trail='<nav class="detail-breadcrumb" aria-label="مسار الصفحة"><a href="/">الرئيسية</a><span aria-hidden="true"> / </span><a href="/guides">اقرأ</a><span aria-hidden="true"> / </span><a href="/guides?type=news">الأخبار</a></nav>';
- const sections=[['ما الذي تغيّر؟',n.change],['لمن قد يهم؟',n.audience],['ما الذي لم نتحقق منه؟',n.limits],['ما الخطوة المناسبة؟',n.action]];
+ const sections=[['ما الذي تغيّر؟',n.change],['مَن قد يهمّه الخبر؟',n.audience],['ما الذي لم نتحقق منه؟',n.limits],['ما الخطوة المناسبة؟',n.action]];
  const concise=vm.runInContext(`conciseEditorial(${JSON.stringify(n.id)},'news')`,context);
  const dateLabel=n.eventKind||'الحدث';
  const dates=`<div class="news-date"><span>${escape(dateLabel)}: <time datetime="${n.eventDate}">${context.editorialDate(n.eventDate)}</time></span>${concise?'':`<br><span>النشر: <time datetime="${n.published}">${context.editorialDate(n.published)}</time> · مراجعة المصدر: <time datetime="${n.reviewed}">${context.editorialDate(n.reviewed)}</time></span>`}</div>`;
