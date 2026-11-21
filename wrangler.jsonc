@@ -2,6 +2,7 @@
   // Cloudflare Workers static-assets deployment: the only host of the public site.
   "name": "badilak-arabi",
   "compatibility_date": "2026-11-01",
+  "previews": {},
   "assets": {
     "directory": "./dist",
     // Same URL shape as the current host: /guides/reading, never /guides/reading/ or .html.
