@@ -144,8 +144,9 @@ function updateDirectoryRefineUI(){
 }
 function goDirectoryResults(){
  if(window.badilakJourney?.show('directory'))return;
- const el=document.getElementById('directoryResultsStart')||document.getElementById('catalogGrid')||document.getElementById('directory');
- if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+ const anchor=originFilter==='canva'?'catalogGrid':'directoryResultsStart';
+ const el=document.getElementById(anchor)||document.getElementById('directory');
+ if(el)el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
 }
 
 function syncCategoryRoute(cat){
@@ -536,6 +537,12 @@ function renderCards(){
  const orderNote=document.getElementById('discoveryOrderNote');
  if(orderNote)orderNote.textContent=q?'النتائج مرتبة بحسب مطابقة البحث.':shownGroups&&discoveryPath==='all'?'مثالان ثابتان ومثال يتجدد عند زيارة جديدة لكل مجال، ثم بقية الموارد أبجديًا؛ الظهور ليس تقييمًا أو إعلانًا مدفوعًا.':'الموارد مرتبة أبجديًا داخل كل مجموعة؛ الترتيب ليس تقييمًا للجودة.';
  const more=document.getElementById('directoryMore');
+ const shell=root.parentElement;
+ const controls=shell.querySelector('.discovery-controls');
+ const showCanvaResultsFirst=originFilter==='canva';
+ shell.classList.toggle('is-canva-results',showCanvaResultsFirst);
+ if(showCanvaResultsFirst&&more.nextElementSibling!==controls) more.after(controls);
+ if(!showCanvaResultsFirst&&shell.firstElementChild!==controls) shell.prepend(controls);
  if(!list.length){
    root.innerHTML='<div class="empty">لم تظهر نتائج بهذه العبارة ضمن التصفية الحالية. جرّب كلمة أخرى أو اعرض الكل. <button class="more-btn" onclick="showAllDirectory()">عرض الكل</button></div>';
    if(more)more.innerHTML='';

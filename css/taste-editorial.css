@@ -676,3 +676,65 @@ body.taste-editorial .policy-page .editor-card p{margin:0}
 /* 19 Nov 2026: observatory coverage rule under each indicator */
 body.taste-editorial #competitionIndex .arab-progress-source .arab-coverage{flex-basis:100%;font-size:12.5px;line-height:1.9}
 body.taste-editorial #competitionIndex .arab-country-more-wrap{gap:10px;flex-wrap:wrap}
+
+/* Home introduction and the curated results shown after choosing Canva. */
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-brand-panel {
+ position:relative;
+ isolation:isolate;
+ align-self:stretch!important;
+ justify-content:center;
+ min-width:0;
+ padding:clamp(24px,3vw,48px) clamp(14px,2vw,32px)!important;
+ background:radial-gradient(ellipse at 95% 10%,#fff9e7 0%,transparent 54%),
+            linear-gradient(155deg,var(--te-surface) 20%,var(--te-tint) 100%)!important;
+ border:1px solid var(--te-line)!important;
+ border-block-start:3px solid var(--te-accent)!important;
+ border-radius:4px!important;
+}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-brand-panel::after {
+ content:"";
+ position:absolute;
+ inset-block-start:-3px;
+ inset-inline-start:0;
+ width:24%;
+ height:3px;
+ background:var(--te-gold);
+ pointer-events:none;
+}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-promise {
+ font-size:clamp(29px,3.1vw,46px)!important;
+ font-weight:800!important;
+ line-height:1.46!important;
+ margin-block:22px 20px!important;
+}
+body.taste-editorial.cosmic-theme #start .intro-promise>span:nth-child(2) {
+ color:var(--te-accent);
+}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-explorer {
+ background:var(--te-surface)!important;
+}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .origin-option {
+ background:var(--te-canvas)!important;
+}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .is-canva-results #originFitNote {
+ border-inline-start:3px solid var(--te-gold);
+ padding-block:10px;
+ padding-inline:14px;
+ margin-block:8px 12px;
+ background:var(--te-tint);
+}
+body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .is-canva-results .discovery-controls {
+ margin-block:22px 18px;
+}
+@media (max-width:760px) {
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-promise {
+  font-size:clamp(24px,6.8vw,33px)!important;
+  margin-block:12px 14px!important;
+ }
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-brand-panel {
+  padding-block:18px!important;
+ }
+ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #directory .is-canva-results #originFitNote {
+  font-size:14px;
+ }
+}
