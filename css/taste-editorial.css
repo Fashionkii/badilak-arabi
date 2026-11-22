@@ -702,7 +702,7 @@ body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-bran
  pointer-events:none;
 }
 body.taste-editorial.cosmic-theme.guided-discovery.motion-lab #start .intro-promise {
- font-size:clamp(29px,3.1vw,46px)!important;
+ font-size:clamp(29px,2.65vw,39px)!important;
  font-weight:800!important;
  line-height:1.46!important;
  margin-block:22px 20px!important;
